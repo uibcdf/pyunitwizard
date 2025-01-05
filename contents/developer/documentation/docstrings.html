@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docstrings &mdash; PyUnitWizard 0.12.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=82182cbb" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=61ccb1f1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Admonitions" href="admonitions.html" />
+    <link rel="prev" title="Sphinx" href="sphinx.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PyUnitWizard
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../about/installation.html#last-stable-version">Last stable version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about/installation.html#last-testing-version">Last testing version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../about/installation.html#developing-version-from-the-source-code">Developing version from the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/showcase/index.html">Showcase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../about/showcase/Quick_Guide.html">Quick Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../about/showcase/Quick_Guide.html#import-pyunitwizard-and-choose-the-libraries-you-are-going-to-work-with">Import PyUnitWizard and choose the libraries you are going to work with.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/showcase/Quick_Guide.html#let-s-play-a-bit-with-quantities-and-units">Let’s play a bit with quantities and units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/showcase/Quick_Guide.html#the-default-quantity-form">The default quantity form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/showcase/Quick_Guide.html#the-standards">The standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/showcase/Quick_Guide.html#integrate-pyunitwizard-in-your-library">Integrate PyUnitWizard in your library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Importing.html">Import and configure PyUnitWizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Quantities_and_Units.html">Quantities and Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Dimensionality.html">Dimensionality and Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Convert.html">Convert quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Strings.html">Working with strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Lists_and_arrays.html">Working with lists and arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../user/Lists_and_arrays.html#concatenate">Concatenate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../user/Lists_and_arrays.html#stack">Stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Standardize.html">Standardization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/Check.html">Check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/In_Your_Library.html">PyUnitWizard in your library</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/Introduction.html">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../names_convention.html">Names convention</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../names_convention.html#project-name">Project name</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#github-repo-and-conda-env">GitHub repo and Conda env</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#readme-file-and-documents">README file and documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#package">Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../names_convention.html#modules-classes-methods-variables-and-others-programming-elements">Modules, classes, methods, variables, and others programming elements.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#exceptions">Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#methods-and-functions">Methods and functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#variables-input-arguments-and-parameters">Variables, input arguments and parameters.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#constants">Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../names_convention.html#not-public-methods-and-variables">Not public methods and variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#notimplementedmethoderror">NotImplementedMethodError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#notimplementedclasserror">NotImplementedClassError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#badcallerror">BadCallError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#nostandarderror">NoStandardError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#unknownformerror">UnknownFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html#librarynotfounderror">LibraryNotFoundError</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html">Sphinx</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Docstrings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-a-class">Documenting a class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-a-method">Documenting a method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="admonitions.html">Admonitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="admonitions.html#note">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admonitions.html#did-you-know">Did you know…?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admonitions.html#it-is-suggested">It is suggested…</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admonitions.html#see-also">See also</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admonitions.html#warning">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_user.html">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../autosummary/pyunitwizard.get_form.html">pyunitwizard.get_form</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autosummary/pyunitwizard.get_form.html#pyunitwizard.get_form"><code class="docutils literal notranslate"><span class="pre">get_form()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_developer.html">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_developer.html#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autosummary/pyunitwizard._private.exceptions.NotImplementedMethodError.html">pyunitwizard._private.exceptions.NotImplementedMethodError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autosummary/pyunitwizard._private.exceptions.LibraryNotFoundError.html">pyunitwizard._private.exceptions.LibraryNotFoundError</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PyUnitWizard</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Documentation</a></li>
+      <li class="breadcrumb-item active">Docstrings</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="docstrings">
+<h1>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading"></a></h1>
+<p>A <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/#id4">docstring</a> is a string embedded in a piece of code for the purpose of documenting it.</p>
+<p>Docstrings in BiFrEE are written in <a class="reference internal" href="#"><span class="xref myst">NumPy style</span></a>. Why? Well, BiFrEE’s main developers know there are other docstring styles, but the NumPy’s one is clear, easy to be read, and widely extended.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>When BiFrEE’s web documentation is compiled, <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a> handles the docstrings with the assistance of <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">the Napoleon extension</a>. Have a look to the <a class="reference internal" href="#"><span class="xref myst">sphinx section in this guide</span></a>.</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">It is suggested…</p>
+<p>Although you can find some guidelines to write BiFrEE’s docstrings below, if you are not familiar with the docstrings and the NumPy style you may also check the following webs:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP 257 – Docstring Conventions</a></p></li>
+<li><p><a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc’s documentation</a></p></li>
+<li><p><a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/example.html">Example in numpydoc’s documentation</a></p></li>
+<li><p><a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html">Example in Napoleon’s documentation</a></p></li>
+</ul>
+</div>
+<section id="documenting-a-class">
+<h2>Documenting a class<a class="headerlink" href="#documenting-a-class" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">class</span> <span class="nc">ClassName</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The summary line for a class docstring should fit on one line.</span>
+<span class="sd">    </span>
+<span class="sd">    If the class has public attributes, they may be documented here</span>
+<span class="sd">    in an ``Attributes`` section and follow the same formatting as a</span>
+<span class="sd">    function&#39;s ``Args`` section. Alternatively, attributes may be documented</span>
+<span class="sd">    inline with the attribute&#39;s declaration (see __init__ method below).</span>
+
+<span class="sd">    Properties created with the ``@property`` decorator should be documented</span>
+<span class="sd">    in the property&#39;s getter method.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    attr1 : str</span>
+<span class="sd">        Description of `attr1`.</span>
+<span class="sd">    attr2 : :obj:`int`, optional</span>
+<span class="sd">        Description of `attr2`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+<span class="w">         </span><span class="sd">&quot;&quot;&quot;Example of docstring on the __init__ method.</span>
+
+<span class="sd">        The __init__ method may be documented in either the class level</span>
+<span class="sd">        docstring, or as a docstring on the __init__ method itself.</span>
+
+<span class="sd">        Either form is acceptable, but the two should not be mixed. Choose one</span>
+<span class="sd">        convention to document the __init__ method and be consistent with it.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Do not include the `self` parameter in the ``Parameters`` section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : obj:`list` of :obj:`str`</span>
+<span class="sd">            Description of `A`. Multiple</span>
+<span class="sd">            lines are supported.</span>
+<span class="sd">        b : :obj:`int`, default=14</span>
+<span class="sd">            Description of `B`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+</pre></div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p>Before writting your own docstrings, have a look to <a class="reference external" href="https://github.com/uibcdf/BiFrEE/tree/main/sabueso">BiFrEE’s code</a> and the <a class="reference external" href="https://uibcdf.org/BiFrEE/api.html">API documentation</a>. There you can find useful examples on how the docstrings are written and rendered, and what are the usual conventions adopted in BiFrEE’s docstrings.</p>
+</div>
+</section>
+<section id="documenting-a-method">
+<h2>Documenting a method<a class="headerlink" href="#documenting-a-method" title="Link to this heading"></a></h2>
+<p>Some advices need to be followed to write a methods documentation. But first let’s see an example of the docstring to document a method in BiFrEE’s code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="k">def</span> <span class="nf">method_name</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A short one line description without variable names or the method name</span>
+
+<span class="sd">    Paragraph with detailed explanation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : int</span>
+<span class="sd">        Description of parameter `a`.</span>
+<span class="sd">    b : bool, default=True</span>
+<span class="sd">        Description of input argument `b` (the default is True, which implies ...).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Description of the output int value.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    First example comment.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; 2+2</span>
+<span class="sd">    4</span>
+
+<span class="sd">    Comment explaining the second example.</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; np.add([[1, 2], [3, 4]],</span>
+<span class="sd">    ...        [[5, 6], [7, 8]])</span>
+<span class="sd">    array([[ 6,  8],</span>
+<span class="sd">           [10, 12]])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    :func:`bifree.get`, :func:`bifree.select`</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    Section to include notes.</span>
+
+<span class="sd">    Todo</span>
+<span class="sd">    ----</span>
+
+<span class="sd">    Section to include a todo message.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+
+<span class="sd">    Section to include a warning message.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<section id="about-working-with-magnitudes">
+<h3>About working with magnitudes<a class="headerlink" href="#about-working-with-magnitudes" title="Link to this heading"></a></h3>
+<p>…</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p>Before writting your own docstrings, have a look to <a class="reference external" href="https://github.com/uibcdf/BiFrEE/tree/main/sabueso">BiFrEE’s code</a> and the <a class="reference external" href="https://uibcdf.org/BiFrEE/api.html">API documentation</a>. There you can find useful examples on how the docstrings are written and rendered, and what are the usual conventions adopted in BiFrEE’s docstrings.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+    <a href="https://github.com/uibcdf/pyunitwizard">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sphinx.html" class="btn btn-neutral float-left" title="Sphinx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="admonitions.html" class="btn btn-neutral float-right" title="Admonitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, The Mexico City Childrens&#39; Hospital Federico Gomez, its Unit of Research on Computational Biology and Drug Design, and authors | This project is licensed under the terms of the MIT license. See further details in the source code repository | Project based on the Computational Molecular Science Python Cookiecutter version 1.5.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

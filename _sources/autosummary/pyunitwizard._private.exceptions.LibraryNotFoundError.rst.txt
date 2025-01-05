@@ -1,0 +1,6 @@
+﻿pyunitwizard.\_private.exceptions.LibraryNotFoundError
+======================================================
+
+.. currentmodule:: pyunitwizard._private.exceptions
+
+.. autoexception:: LibraryNotFoundError

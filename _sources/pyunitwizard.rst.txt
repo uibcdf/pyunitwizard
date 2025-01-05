@@ -1,0 +1,54 @@
+pyunitwizard package
+====================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pyunitwizard.configure
+   pyunitwizard.forms
+
+Submodules
+----------
+
+pyunitwizard.constants module
+-----------------------------
+
+.. automodule:: pyunitwizard.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyunitwizard.kernel module
+--------------------------
+
+.. automodule:: pyunitwizard.kernel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyunitwizard.main module
+------------------------
+
+.. automodule:: pyunitwizard.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyunitwizard.parse module
+-------------------------
+
+.. automodule:: pyunitwizard.parse
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard
+   :members:
+   :undoc-members:
+   :show-inheritance:
