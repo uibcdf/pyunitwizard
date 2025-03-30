@@ -1,0 +1,7 @@
+pyunitwizard
+============
+
+.. toctree::
+   :maxdepth: 4
+
+   pyunitwizard

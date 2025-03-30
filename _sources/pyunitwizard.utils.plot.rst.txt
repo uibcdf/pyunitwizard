@@ -1,0 +1,10 @@
+pyunitwizard.utils.plot package
+===============================
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils.plot
+   :members:
+   :show-inheritance:
+   :undoc-members:

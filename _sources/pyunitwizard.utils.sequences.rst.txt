@@ -1,0 +1,45 @@
+pyunitwizard.utils.sequences package
+====================================
+
+Submodules
+----------
+
+pyunitwizard.utils.sequences.concatenate module
+-----------------------------------------------
+
+.. automodule:: pyunitwizard.utils.sequences.concatenate
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.sequences.is\_quantity\_value\_sequence module
+-----------------------------------------------------------------
+
+.. automodule:: pyunitwizard.utils.sequences.is_quantity_value_sequence
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.sequences.is\_sequence module
+------------------------------------------------
+
+.. automodule:: pyunitwizard.utils.sequences.is_sequence
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.sequences.slice module
+-----------------------------------------
+
+.. automodule:: pyunitwizard.utils.sequences.slice
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils.sequences
+   :members:
+   :show-inheritance:
+   :undoc-members:
