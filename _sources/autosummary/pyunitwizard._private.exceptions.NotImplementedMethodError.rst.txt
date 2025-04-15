@@ -1,0 +1,6 @@
+﻿pyunitwizard.\_private.exceptions.NotImplementedMethodError
+===========================================================
+
+.. currentmodule:: pyunitwizard._private.exceptions
+
+.. autoexception:: NotImplementedMethodError

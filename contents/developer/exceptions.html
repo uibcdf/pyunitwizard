@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exceptions &mdash; PyUnitWizard 0.16.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=82182cbb" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=7de89ed4"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Documentation" href="documentation/index.html" />
+    <link rel="prev" title="Names convention" href="names_convention.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyUnitWizard
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/installation.html#last-stable-version">Last stable version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about/installation.html#last-testing-version">Last testing version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about/installation.html#developing-version-from-the-source-code">Developing version from the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about/showcase/index.html">Showcase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/showcase/Quick_Guide.html">Quick Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/showcase/Quick_Guide.html#import-pyunitwizard-and-choose-the-libraries-you-are-going-to-work-with">Import PyUnitWizard and choose the libraries you are going to work with.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/showcase/Quick_Guide.html#let-s-play-a-bit-with-quantities-and-units">Let’s play a bit with quantities and units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/showcase/Quick_Guide.html#the-default-quantity-form">The default quantity form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/showcase/Quick_Guide.html#the-standards">The standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/showcase/Quick_Guide.html#integrate-pyunitwizard-in-your-library">Integrate PyUnitWizard in your library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/Importing.html">Import and configure PyUnitWizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Quantities_and_Units.html">Quantities and Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Dimensionality.html">Dimensionality and Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Convert.html">Convert quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Strings.html">Working with strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Lists_and_arrays.html">Working with lists and arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user/Lists_and_arrays.html#concatenate">Concatenate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user/Lists_and_arrays.html#stack">Stack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Standardize.html">Standardization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/Check.html">Check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/In_Your_Library.html">PyUnitWizard in your library</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/Introduction.html">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="names_convention.html">Names convention</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="names_convention.html#project-name">Project name</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#github-repo-and-conda-env">GitHub repo and Conda env</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#readme-file-and-documents">README file and documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#package">Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="names_convention.html#modules-classes-methods-variables-and-others-programming-elements">Modules, classes, methods, variables, and others programming elements.</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#classes">Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#exceptions">Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#methods-and-functions">Methods and functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#variables-input-arguments-and-parameters">Variables, input arguments and parameters.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#constants">Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="names_convention.html#not-public-methods-and-variables">Not public methods and variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#notimplementedmethoderror">NotImplementedMethodError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notimplementedclasserror">NotImplementedClassError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#badcallerror">BadCallError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nostandarderror">NoStandardError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unknownformerror">UnknownFormError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#librarynotfounderror">LibraryNotFoundError</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/sphinx.html">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/docstrings.html">Docstrings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/docstrings.html#documenting-a-class">Documenting a class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/docstrings.html#documenting-a-method">Documenting a method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/admonitions.html">Admonitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/admonitions.html#note">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/admonitions.html#did-you-know">Did you know…?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/admonitions.html#it-is-suggested">It is suggested…</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/admonitions.html#see-also">See also</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/admonitions.html#warning">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api_user.html">Users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autosummary/pyunitwizard.get_form.html">pyunitwizard.get_form</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autosummary/pyunitwizard.get_form.html#pyunitwizard.get_form"><code class="docutils literal notranslate"><span class="pre">get_form()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_developer.html">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_developer.html#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autosummary/pyunitwizard._private.exceptions.NotImplementedMethodError.html">pyunitwizard._private.exceptions.NotImplementedMethodError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autosummary/pyunitwizard._private.exceptions.LibraryNotFoundError.html">pyunitwizard._private.exceptions.LibraryNotFoundError</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyUnitWizard</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="exceptions">
+<span id="developer-exceptions"></span><h1>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading"></a></h1>
+<p>There is in the directory <code class="docutils literal notranslate"><span class="pre">pyunitwizard/_private_tools</span></code> a module named <code class="docutils literal notranslate"><span class="pre">exceptions.py</span></code> with customized exceptions. Use them timely. And, in case you want to raise a new exception type, please include it here for the others to use it.</p>
+<p>To use a exception you just need to import it and raise it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyunitwizard._private_tools.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NotImplementedMethodError</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">method_to_be_implemented_in_the_future</span><span class="p">():</span>
+    
+    <span class="k">raise</span> <span class="n">NotImplementedMethodError</span>
+</pre></div>
+</div>
+<p>Let’s see the list of customized exceptions in pyunitwizard.</p>
+<section id="notimplementedmethoderror">
+<span id="developer-exceptions-notimplementedmethoderror"></span><h2>NotImplementedMethodError<a class="headerlink" href="#notimplementedmethoderror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">NotImplementedMethodError</span></code> exception is raised when a method has being already defined but its code was not fully implemented yet. Maybe the method was just included in a developing version to be coded in the future. Or maybe the method works already for certain values of the input arguments, but not for others yet.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.NotImplementedMethodError()</span></code></p>
+</div>
+</section>
+<section id="notimplementedclasserror">
+<span id="developer-exceptions-notimplementedclasserror"></span><h2>NotImplementedClassError<a class="headerlink" href="#notimplementedclasserror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">NotImplementedClassError</span></code> exception is raised when a class has being already defined but its code was not fully implemented yet. Maybe the class was just included in a developing version to be coded in the future. Or maybe the class can be instantated already for certain values of the input arguments, but not for others yet.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.NotImplementedClassError()</span></code></p>
+</div>
+</section>
+<section id="badcallerror">
+<span id="developer-exceptions-badcallerror"></span><h2>BadCallError<a class="headerlink" href="#badcallerror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">BadCallError</span></code> is raised when a method was not properly called.</p>
+<p>This exception has an optional input argument: the name of the probable wrong input argument.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.BadCallError()</span></code></p>
+</div>
+</section>
+<section id="nostandarderror">
+<span id="developer-exceptions-nostandarderror"></span><h2>NoStandardError<a class="headerlink" href="#nostandarderror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">NoStandardError</span></code> is raised when a quantity needs to be standardized and there are not enough standards declared.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.NoStandardError()</span></code></p>
+</div>
+</section>
+<section id="unknownformerror">
+<span id="developer-exceptions-unknownformerror"></span><h2>UnknownFormError<a class="headerlink" href="#unknownformerror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">UnknownFormError</span></code> is raised when the quantity has a form not recognized and supported by PyUnitWizard.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.UnknownFormError()</span></code></p>
+</div>
+</section>
+<section id="librarynotfounderror">
+<span id="developer-exceptions-librarynotfounderror"></span><h2>LibraryNotFoundError<a class="headerlink" href="#librarynotfounderror" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LibraryNotFoundError</span></code> is raised when PyUnitWizard fails importing a library not required as dependence.</p>
+<p>This exception has a mandatory input argument: the name of library not found.</p>
+<div class="attention admonition">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pyunitwizard._private_tools.exceptions.LibraryNotFoundError()</span></code></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+    <a href="https://github.com/uibcdf/pyunitwizard">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+    </a>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="names_convention.html" class="btn btn-neutral float-left" title="Names convention" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="documentation/index.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2022, The Mexico City Childrens&#39; Hospital Federico Gomez, its Unit of Research on Computational Biology and Drug Design, and authors | This project is licensed under the terms of the MIT license. See further details in the source code repository | Project based on the Computational Molecular Science Python Cookiecutter version 1.5.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
