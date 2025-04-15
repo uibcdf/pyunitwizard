@@ -1,8 +1,7 @@
 import numpy as np
 from pyunitwizard import quantity, get_unit, get_value
 
-def stack(sequence, axis=0, to_unit=None, to_form=None, value_type='tuple', standardized=False):
-
+def column_stack(sequence, to_unit=None, to_form=None, value_type='tuple', standardized=False):
 
     if to_unit is None:
         output_unit = get_unit(sequence[0][0])
@@ -17,7 +16,7 @@ def stack(sequence, axis=0, to_unit=None, to_form=None, value_type='tuple', stan
             aux_list.append(get_value(aux_quantity, to_unit=output_unit))
         output_value.append(aux_list)
 
-    output_value = np.stack(output_value, axis=axis)
+    output_value = np.column_stack(output_value)
 
     if value_type=='list':
         return quantity(output_value.tolist(), output_unit, form=to_form, standardized=standardized)

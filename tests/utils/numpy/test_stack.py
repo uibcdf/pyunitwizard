@@ -14,4 +14,14 @@ def test_stack_1():
     value = puw.get_value(quantity)
     assert value.shape==(4, 3)
 
+def test_stack_2():
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'openmm.unit'])
+
+    aa = puw.quantity([0,1,2,3,4,5,6,7,8,9], 'nm')
+    bb = puw.quantity([0,1,2,3,4,5,6,7,8,9], 'nm')
+    quantity = puw.utils.numpy.stack([aa,bb], axis=1, value_type='numpy.ndarray')
+    value = puw.get_value(quantity)
+    assert value.shape==(10, 2)
+
 
