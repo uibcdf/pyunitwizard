@@ -32,10 +32,13 @@ docs:
   dependencies: &docs_dependencies
     - *production_dependencies
     - sphinx
-    - sphinx_rtd_theme
+    - pydata-sphinx-theme
     - sphinxcontrib-bibtex
     - sphinx-remove-toctrees
     - sphinx-copybutton
+    - sphinx-design
+    - sphinx-favicon
+    - sphinx-tabs
     - myst-nb
     - openmm
     - unyt

@@ -1,6 +1,5 @@
 channels:
 - conda-forge
-- default
 dependencies:
 - python
 - pint
@@ -11,10 +10,13 @@ dependencies:
 - openmm
 - unyt
 - sphinx
-- sphinx_rtd_theme
+- pydata-sphinx-theme
 - sphinxcontrib-bibtex
 - sphinx-remove-toctrees
 - sphinx-copybutton
+- sphinx-design
+- sphinx-favicon
+- sphinx-tabs
 - myst-nb
 - jupyterlab
 - pyyaml

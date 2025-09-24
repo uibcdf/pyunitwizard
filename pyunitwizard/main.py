@@ -642,6 +642,14 @@ def convert(quantity_or_unit: Any,
 
     return output
 
+def to_string(quantity_or_unit: Any, 
+              to_unit: Optional[str]=None, 
+              parser:  Optional[str]=None) -> str:
+    """
+    """
+
+    return convert(quantity_or_unit, to_unit=to_unit, to_form='string', parser=parser, to_type='quantity')
+
 def _standard_units_lstsq(solution: np.ndarray, standards: dict) -> str:
     """ Auxiliary function for get_standard_units.
         Returns standard units by using least squares method.
