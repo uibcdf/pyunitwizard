@@ -1,0 +1,21 @@
+pyunitwizard.utils package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pyunitwizard.utils.matplotlib
+   pyunitwizard.utils.numpy
+   pyunitwizard.utils.plot
+   pyunitwizard.utils.sequences
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:

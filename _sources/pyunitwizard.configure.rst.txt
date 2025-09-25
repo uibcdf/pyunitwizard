@@ -1,0 +1,21 @@
+pyunitwizard.configure package
+==============================
+
+Submodules
+----------
+
+pyunitwizard.configure.configure module
+---------------------------------------
+
+.. automodule:: pyunitwizard.configure.configure
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.configure
+   :members:
+   :show-inheritance:
+   :undoc-members:

@@ -1,0 +1,53 @@
+pyunitwizard.utils.numpy package
+================================
+
+Submodules
+----------
+
+pyunitwizard.utils.numpy.column\_stack module
+---------------------------------------------
+
+.. automodule:: pyunitwizard.utils.numpy.column_stack
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.numpy.hstack module
+--------------------------------------
+
+.. automodule:: pyunitwizard.utils.numpy.hstack
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.numpy.repeat module
+--------------------------------------
+
+.. automodule:: pyunitwizard.utils.numpy.repeat
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.numpy.stack module
+-------------------------------------
+
+.. automodule:: pyunitwizard.utils.numpy.stack
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.utils.numpy.vstack module
+--------------------------------------
+
+.. automodule:: pyunitwizard.utils.numpy.vstack
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils.numpy
+   :members:
+   :show-inheritance:
+   :undoc-members:

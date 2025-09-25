@@ -1,0 +1,10 @@
+pyunitwizard.utils.matplotlib package
+=====================================
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils.matplotlib
+   :members:
+   :show-inheritance:
+   :undoc-members:
