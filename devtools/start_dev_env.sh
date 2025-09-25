@@ -3,13 +3,13 @@
 set -euo pipefail
 
 # ------------------------------------------------------------------------------
-# MolSysMT development bootstrap with activation switch & flexible path discovery
+# PyUnitWizard development bootstrap with activation switch & flexible path discovery
 # - Creates/updates an environment from development_env.yaml
-# - Installs MolSysMT in editable mode (no deps)
+# - Installs PyUnitWizard in editable mode (no deps)
 # - Optional Jupyter kernel registration
 # - Supports overriding Python version
 # - Auto-discovers development_env.yaml regardless of current working directory:
-#     * parent-of-repo, repo root, molsysmt/, or devtools/
+#     * parent-of-repo, repo root, pyunitwizard/, or devtools/
 #
 # Usage examples:
 #   bash devtools/start_dev.sh --mode print
@@ -21,7 +21,7 @@ set -euo pipefail
 # - By default the script reads Python version from the YAML; --python overrides it.
 # ------------------------------------------------------------------------------
 
-ENV_NAME="molsysmt"
+ENV_NAME="pyunitwizard"
 MODE="print"                    # 'print' (default) or 'persist'
 PYTHON_VERSION=""
 REGISTER_KERNEL=${REGISTER_KERNEL:-"1"}
@@ -45,11 +45,11 @@ Options:
       Override Python version (e.g. 3.11, 3.12). If omitted, YAML decides.
 
   --env-name <name>
-      Environment name (default: molsysmt)
+      Environment name (default: pyunitwizard)
 
   --env-yaml <path>
       Path to the YAML file. If omitted, the script auto-discovers it
-      (works when called from parent-of-repo, repo root, molsysmt/, or devtools/).
+      (works when called from parent-of-repo, repo root, pyunitwizard/, or devtools/).
 
   --no-kernel
       Skip Jupyter kernel registration (same as REGISTER_KERNEL=0)
@@ -112,14 +112,14 @@ REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
 # --- Auto-discover ENV_YAML ----------------------------------------------------
 # Candidate locations from *current working directory*
 CWD_CANDIDATES=(
-  "molsysmt/devtools/conda-envs/development_env.yaml"
+  "pyunitwizard/devtools/conda-envs/development_env.yaml"
   "devtools/conda-envs/development_env.yaml"
   "conda-envs/development_env.yaml"
 )
 
 # Candidate locations from the *script location* (most robust)
 SCRIPT_CANDIDATES=(
-  "${REPO_ROOT}/molsysmt/devtools/conda-envs/development_env.yaml"
+  "${REPO_ROOT}/pyunitwizard/devtools/conda-envs/development_env.yaml"
   "${SCRIPT_DIR}/conda-envs/development_env.yaml"
   "${REPO_ROOT}/devtools/conda-envs/development_env.yaml"
 )
@@ -211,13 +211,13 @@ else
 fi
 
 # --- Editable install -----------------------------------------------------------
-echo "[setup] Installing MolSysMT in editable mode (no deps)..."
+echo "[setup] Installing PyUnitWizard in editable mode (no deps)..."
 ${RUN} python -m pip install --no-deps --editable .
 
 # --- Optional kernel registration ----------------------------------------------
 if [[ "${REGISTER_KERNEL}" == "1" ]]; then
-  echo "[setup] Registering Jupyter kernel 'Python (molsysmt)'..."
-  ${RUN} python -m ipykernel install --user --name "${ENV_NAME}" --display-name "Python (molsysmt)"
+  echo "[setup] Registering Jupyter kernel 'Python (pyunitwizard)'..."
+  ${RUN} python -m ipykernel install --user --name "${ENV_NAME}" --display-name "Python (pyunitwizard)"
 fi
 
 # --- Diagnostics ----------------------------------------------------------------
