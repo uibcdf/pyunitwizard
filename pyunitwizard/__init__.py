@@ -6,6 +6,10 @@ Quantities and units assistant
 # versioningit
 from ._version import __version__
 
+def __print_version__():
+    print("PyUnitWizard version " + __version__)
+
+
 # Add imports here
 from .main import unit, quantity, get_form, is_quantity, is_unit
 from .main import get_value, get_unit, get_value_and_unit, change_value
