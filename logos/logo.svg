@@ -2,9 +2,9 @@
 <svg
    version="1.1"
    id="svg2"
-   viewBox="0 0 3169.9501 601.19286"
+   viewBox="0 0 3276.2494 601.19286"
    height="16.966999cm"
-   width="89.462997cm"
+   width="92.462997cm"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="logo.svg"
    inkscape:export-filename="logo.png"
@@ -28,7 +28,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:window-height="1043"
      id="namedview40"
      showgrid="false"
      fit-margin-top="1.5"
@@ -36,10 +36,10 @@
      fit-margin-right="1.5"
      fit-margin-bottom="1.5"
      inkscape:zoom="0.36388287"
-     inkscape:cx="1621.4009"
-     inkscape:cy="410.84649"
-     inkscape:window-x="0"
-     inkscape:window-y="32"
+     inkscape:cx="2283.7019"
+     inkscape:cy="413.59463"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g71262"
      inkscape:pagecheckerboard="0"
@@ -87,8 +87,8 @@
     <rect
        x="222.60136"
        y="77.493637"
-       width="3360.3381"
-       height="849.75836"
+       width="3497.1028"
+       height="684.68878"
        id="rect3341" />
     <linearGradient
        id="linearGradient5816"
@@ -147,7 +147,7 @@
        fy="751.98877"
        r="52.525475"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.4001391,0,0,1.4001391,2187.6466,-484.46167)" />
+       gradientTransform="matrix(1.4001391,0,0,1.4001391,2273.8966,-463.83667)" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient57616"
@@ -158,7 +158,7 @@
        fy="452.91687"
        r="53.149605"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.4024753,0,0,1.4024753,-637.9825,-160.64864)" />
+       gradientTransform="matrix(1.4024753,0,0,1.4024753,-576.1075,-151.27364)" />
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient60818"
@@ -169,7 +169,7 @@
        fy="440.59293"
        r="52.525475"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.4028729,0,0,1.4028729,-2147.272,186.19692)" />
+       gradientTransform="matrix(1.4028729,0,0,1.4028729,-2091.022,193.69692)" />
   </defs>
   <metadata
      id="metadata7">
@@ -191,33 +191,34 @@
          id="g71262">
         <circle
            r="73.66568"
-           cy="474.55609"
-           cx="974.95239"
+           cy="483.93109"
+           cx="1036.8274"
            id="path4164-6-7-5-3-0"
            style="fill:url(#radialGradient57620);fill-opacity:1;stroke:none;stroke-width:1.73929;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <circle
            r="73.686562"
-           cy="804.29272"
-           cx="1285.7051"
+           cy="811.79272"
+           cx="1341.9551"
            id="path4164-6-7-5-3-7"
            style="fill:url(#radialGradient60820);fill-opacity:1;stroke:none;stroke-width:1.75115;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <ellipse
-           cy="568.42719"
-           cx="2285.9412"
+           cy="589.05219"
+           cx="2372.1912"
            id="path4164-6-7-5-5-92"
            style="fill:url(#radialGradient55610);fill-opacity:1;stroke:none;stroke-width:1.74774;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            rx="73.523842"
            ry="73.542969" />
         <text
            xml:space="preserve"
-           transform="matrix(0.93749996,0,0,0.93749996,-82.92985,294.55905)"
+           transform="matrix(0.93749996,0,0,0.93749996,-73.55485,296.43405)"
            id="text3339"
            style="font-style:normal;font-weight:normal;font-size:529.134px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3341);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><tspan
              x="222.60156"
              y="558.94001"
-             id="tspan386"><tspan
-               dx="0 0 0 0 0 0 0 0 -0.0001373291 0 -0.00012207031 0.00024414062"
-               id="tspan384">PyUnitWizard</tspan></tspan></text>
+             id="tspan340"><tspan
+               dx="0 0 0 0 0 0 0 0 0 0 0 -0.00012207031"
+               style="font-family:'Varela Round';-inkscape-font-specification:'Varela Round'"
+               id="tspan338">PyUnitWizard</tspan></tspan></text>
       </g>
     </g>
   </g>
