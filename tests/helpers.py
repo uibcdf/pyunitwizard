@@ -22,7 +22,7 @@ def loaded_libraries(libraries):
             for library in ['pint', 'openmm.unit', 'unyt']:
                 try:
                     puw.configure.load_library(library)
-                except Exception:
+                except (ImportError, ModuleNotFoundError):
                     continue
         if previous_default_form is not None:
             puw.configure.set_default_form(previous_default_form)
