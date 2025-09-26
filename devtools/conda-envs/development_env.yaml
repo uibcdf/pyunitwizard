@@ -9,6 +9,7 @@ dependencies:
 - codecov
 - openmm
 - unyt
+- astropy
 - sphinx
 - pydata-sphinx-theme
 - sphinxcontrib-bibtex

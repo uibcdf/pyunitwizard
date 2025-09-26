@@ -9,3 +9,4 @@ dependencies:
 - codecov
 - openmm
 - unyt
+- astropy

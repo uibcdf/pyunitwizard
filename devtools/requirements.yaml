@@ -25,6 +25,7 @@ test:
     - codecov
     - openmm
     - unyt
+    - astropy
 
 docs:
   channels: &docs_channels
@@ -42,6 +43,7 @@ docs:
     - myst-nb
     - openmm
     - unyt
+    - astropy
     - jupyterlab
 
 
