@@ -295,12 +295,12 @@ def quantity_to_openmm_unit(quantity: Union[unyt_array, unyt_quantity]):
 
 def unit_to_openmm_unit(unit: unyt_unit):
     """ Transform a unit from unyt to a openmm.unit unit.
-        
+
         Parameters
         -----------
         unit : unyt_unit
             A unit.
-        
+
         Returns
         -------
         openmm_unit.Unit
@@ -311,5 +311,27 @@ def unit_to_openmm_unit(unit: unyt_unit):
     quantity = quantity_to_openmm_unit(1.0*unit)
 
     return get_openmm_unit_unit(quantity)
+
+
+## To astropy.units
+
+def quantity_to_astropy_units(quantity: Union[unyt_array, unyt_quantity]):
+    """ Transform a quantity from unyt to astropy.units."""
+
+    from .api_pint import quantity_to_astropy_units as pint_to_astropy_units
+
+    pint_quantity = quantity.to_pint()
+
+    return pint_to_astropy_units(pint_quantity)
+
+
+def unit_to_astropy_units(unit: unyt_unit):
+    """ Transform a unit from unyt to astropy.units."""
+
+    from .api_astropy_unit import get_unit as get_astropy_unit
+
+    quantity = quantity_to_astropy_units(1.0*unit)
+
+    return get_astropy_unit(quantity)
 
 

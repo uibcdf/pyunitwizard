@@ -8,12 +8,14 @@ import numpy as np
 from importlib.util import find_spec
 from typing import List, Dict, Union
 
-libraries = ['pint', 'openmm.unit', 'unyt']
-parsers   = ['pint', 'openmm.unit', 'unyt']
+libraries = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
+parsers   = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
 _aux_dict_modules = {
-    'pint':'pint',
-    'openmm.unit':'openmm',
-    'unyt': 'unyt'}
+    'pint': 'pint',
+    'openmm.unit': 'openmm',
+    'unyt': 'unyt',
+    'astropy.units': 'astropy',
+}
 
 def reset() -> None:
     """Resets all kernel variables."""

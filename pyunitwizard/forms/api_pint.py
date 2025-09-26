@@ -331,12 +331,12 @@ def quantity_to_unyt(quantity: pint.Quantity):
 
 def unit_to_unyt(unit: pint.Unit):
     """ Transform a unit from a pint unit to a unyt unit.
-        
+
         Parameters
         -----------
         unit : pint.Unit
             A unit.
-        
+
         Returns
         -------
         unyt_array or unyt_quantity
@@ -348,5 +348,28 @@ def unit_to_unyt(unit: pint.Unit):
     quantity = quantity_to_unyt(1.0*unit)
 
     return get_unyt_unit(quantity)
+
+
+## To astropy.units
+
+def quantity_to_astropy_units(quantity: pint.Quantity):
+    """ Transform a quantity from pint to astropy.units."""
+
+    from .api_astropy_unit import make_quantity as make_astropy_quantity
+
+    value = get_value(quantity)
+    unit_name = unit_to_string(get_unit(quantity))
+
+    return make_astropy_quantity(value, unit_name)
+
+
+def unit_to_astropy_units(unit: pint.Unit):
+    """ Transform a unit from pint to astropy.units."""
+
+    from .api_astropy_unit import get_unit as get_astropy_unit
+
+    quantity = quantity_to_astropy_units(1.0*unit)
+
+    return get_astropy_unit(quantity)
 
 

@@ -234,12 +234,12 @@ def quantity_to_pint(quantity: str):
 
 def unit_to_pint(unit: str):
     """ Transform a quantity from a string quantity to a pint quantity.
-        
+
         Parameters
         -----------
         quantity : str
             A quanitity.
-        
+
         Returns
         -------
         pint.Quantity
@@ -259,4 +259,20 @@ def quantity_to_unyt(quantity: str):
 
 def unit_to_unyt(quantity: str):
     raise NotImplementedError
+
+
+## To astropy.units
+
+def quantity_to_astropy_units(quantity: str):
+    from .api_astropy_unit import string_to_quantity as _string_to_quantity
+
+    return _string_to_quantity(quantity)
+
+
+def unit_to_astropy_units(unit: str):
+    from .api_astropy_unit import get_unit as get_astropy_unit
+
+    quantity = quantity_to_astropy_units(unit)
+
+    return get_astropy_unit(quantity)
 

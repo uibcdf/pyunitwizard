@@ -17,7 +17,12 @@ dict_dimensionality={}
 dict_compatibility={}
 
 _base_package = __name__.replace('.base','')
-_forms_apis_modules = {'openmm.unit':'api_openmm_unit', 'pint':'api_pint', 'unyt':'api_unyt'}
+_forms_apis_modules = {
+    'openmm.unit': 'api_openmm_unit',
+    'pint': 'api_pint',
+    'unyt': 'api_unyt',
+    'astropy.units': 'api_astropy_unit',
+}
 
 def load_library(library: str) -> None:
     """ Loads a library. This means that it updates all dictionaries defined above
