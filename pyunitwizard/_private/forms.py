@@ -1,6 +1,6 @@
 from pyunitwizard import kernel
 
-forms = ['openmm.unit', 'pint', 'unyt', 'string']
+forms = ['openmm.unit', 'pint', 'unyt', 'astropy.units', 'string']
 
 def digest_form(form: str) -> str:
     """ Check if the form is correct. 

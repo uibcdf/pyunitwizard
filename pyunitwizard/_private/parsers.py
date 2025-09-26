@@ -1,4 +1,4 @@
-parsers = ['openmm.unit', 'pint', 'unyt']
+parsers = ['openmm.unit', 'pint', 'unyt', 'astropy.units']
 
 def digest_parser(parser: str) -> str:
     """ Check if parser is correct."""

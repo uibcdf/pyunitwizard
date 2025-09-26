@@ -40,7 +40,7 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str]=None) ->
         quantity_or_unit : QuantityOrUnit
             A quanitity or a unit
 
-        parser :  {"unyt", "pint", "openmm.unit"}, optional
+        parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser for string quantities
 
         Returns
@@ -71,7 +71,7 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str]=None) -> boo
         quantity_or_unit : QuantityOrUnit
             A quantity or a unit
 
-        parser :  {"unyt", "pint", "openmm.unit"}, optional
+        parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser for string quantities
 
         Returns
@@ -105,7 +105,7 @@ def get_value(quantity: QuantityLike,
         to_unit : str, optional
             Name of the unit to which the quantity will be converted (i.e kcal/mol).
         
-        parser : {"unyt", "pint", "openmm.unit"}, optional
+        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser to use.
 
         Returns
@@ -132,10 +132,10 @@ def get_unit(quantity: QuantityLike,
         to_unit : str, optional
             Name of the unit to which the quantity will be converted (i.e kcal/mol).
         
-         form : {"unyt", "pint", "openmm.unit", "string"}, optional
+         form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
             If passed the unit will be converted to that form. This is the type that will be returned
 
-        parser : {"unyt", "pint", "openmm.unit"}, optional
+        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser to use.
 
         Returns
@@ -162,7 +162,7 @@ def get_value_and_unit(quantity: QuantityLike,
         to_unit : str, optional
             Name of the unit to which the quantity will be converted (i.e kcal/mol).
         
-        parser : {"unyt", "pint", "openmm.unit"}, optional
+        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser to use.
 
         Returns
@@ -456,10 +456,10 @@ def quantity(value: Union[int, float, ArrayLike],
         unit : UnitLike
             Unit in of the quantity in any of the accepted form.
 
-        form : {"unyt", "pint", "openmm.unit", "string"}, optional
+        form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
             Output form of the quantity.
 
-        parser : {"unyt", "pint", "openmm.unit"}, optional
+        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser to use.
 
         standardized : bool, optional
@@ -508,10 +508,10 @@ def unit(unit: str, form: Optional[str]=None, parser: Optional[str]=None) -> Uni
         unit : str
             Name of the unit (i.e kcal/mol).
         
-        form : {"unyt", "pint", "openmm.unit", "string"}, optional
+        form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
             The form of the unit. This is the type that will be returned
         
-        parser : {"unyt", "pint", "openmm.unit"}, optional
+        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
             The parser to use.
         
         Returns
@@ -535,10 +535,10 @@ def convert(quantity_or_unit: Any,
         to_unit : str, optional
             The unit to convert to.
         
-        to_form : {"unyt", "pint", "openmm.unit", "string"}, optional
+        to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
             The form to convert to.
         
-        parser : {"pint", "openmm.unit"}, optional
+        parser : {"pint", "openmm.unit", "astropy.units"}, optional
             The parser to use if a string is passed.
         
         to_type : {"quantity", "unit", "value"}, optional

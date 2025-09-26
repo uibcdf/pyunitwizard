@@ -1,7 +1,7 @@
 import pyunitwizard as puw
 
 def test_libraries_supported():
-    assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt']
+    assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units']
 
 def test_load_library():
     puw.configure.reset()
@@ -29,6 +29,12 @@ def test_init_openmolecularsystems():
 
 def test_all():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit', 'unyt'])
+    libraries = ['pint', 'openmm.unit', 'unyt']
+    try:
+        import astropy.units  # noqa: F401
+    except Exception:
+        puw.configure.load_library(libraries)
+    else:
+        puw.configure.load_library(libraries + ['astropy.units'])
 
     assert True
