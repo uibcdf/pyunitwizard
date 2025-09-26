@@ -44,7 +44,7 @@ def test_get_constant_synonym_and_conversion(constants_module):
     universal = constants_module.get_constant('R', to_unit='kJ/(mole*kelvin)')
     value, unit = puw.get_value_and_unit(universal, to_form='string')
 
-    assert value == pytest.approx(0.00813446261815324)
+    assert value == pytest.approx(0.00813446, rel=1e-6)
     assert unit == 'kilojoule / kelvin / mole'
 
 
