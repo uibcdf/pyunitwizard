@@ -19,12 +19,15 @@ U_ = ureg.Unit
 form_name = 'pint'
 parser = True
 
-is_form={
-    pint.Quantity:form_name,
-    pint.Unit:form_name,
-    Q_:form_name,
-    U_:form_name,
-    }
+#is_form={
+#    pint.Quantity:form_name,
+#    pint.Unit:form_name,
+#    Q_:form_name,
+#    U_:form_name,
+#    }
+
+def is_form(quantity_or_unit: Any) -> bool:
+    return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 def is_quantity(quantity_or_unit: Any) -> bool:
     """ Check whether a quantity or unit is an pint quantity.

@@ -23,13 +23,12 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
         {"string", "pint", "openmm.unit", "unyt"}
             The form of the quantity
     """
-    try:
-        return dict_is_form[type(quantity_or_unit)]
-    except KeyError:
-        try:
-            return dict_is_form[quantity_or_unit]
-        except KeyError:
-            raise NotImplementedFormError(type(quantity_or_unit))
+
+    for form_name, aux_is_form in dict_is_form.items():
+        if aux_is_form(quantity_or_unit):
+            return form_name
+
+    raise NotImplementedFormError(type(quantity_or_unit))
 
 
 def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str]=None) -> bool:

@@ -10,10 +10,14 @@ except:
 form_name = 'openmm.unit'
 parser = True
 
-is_form={
-    openmm_unit.Quantity:form_name,
-    openmm_unit.Unit:form_name,
-    }
+#is_form={
+#    openmm_unit.Quantity:form_name,
+#    openmm_unit.Unit:form_name,
+#    }
+
+
+def is_form(quantity_or_unit: Any) -> bool:
+    return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 def is_quantity(quantity_or_unit: Any) -> bool:
     """ Check whether a quantity or unit is an openmm quantity.

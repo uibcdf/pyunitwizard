@@ -14,10 +14,13 @@ AstropyUnitBase = astropy_units.UnitBase
 form_name = 'astropy.units'
 parser = True
 
-is_form = {
-    AstropyQuantity: form_name,
-    AstropyUnitBase: form_name,
-}
+#is_form = {
+#    AstropyQuantity: form_name,
+#    AstropyUnitBase: form_name,
+#}
+
+def is_form(quantity_or_unit: Any) -> bool:
+    return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 
 def _to_unit(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) -> AstropyUnitBase:

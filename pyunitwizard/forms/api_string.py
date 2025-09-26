@@ -1,12 +1,17 @@
-from typing import Dict, Union
+from typing import Any, Dict, Union
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 form_name = 'string'
-paser = False
+parser = False
 
-is_form={
-    str:form_name,
-    }
+#is_form={
+#    str:form_name,
+#    }
+
+def is_form(quantity_or_unit: Any) -> bool:
+
+    return isinstance(quantity_or_unit, str)
+
 
 def is_quantity(quantity_or_unit: str) -> bool:
     """ Check whether a string is a quantity.

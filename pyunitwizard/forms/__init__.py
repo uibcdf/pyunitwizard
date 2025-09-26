@@ -36,7 +36,7 @@ def load_library(library: str) -> None:
     from pyunitwizard.kernel import loaded_libraries, loaded_parsers
     api = _import_module('.'+_forms_apis_modules[library], _base_package)
 
-    dict_is_form.update(api.is_form)
+    dict_is_form[library] = api.is_form
     dict_is_unit[library] = api.is_unit
     dict_is_quantity[library] = api.is_quantity
     dict_get_value[library] = api.get_value
@@ -93,7 +93,7 @@ def load_library(library: str) -> None:
 
 api = _import_module('.api_string', _base_package)
 
-dict_is_form.update(api.is_form)
+dict_is_form['string'] = api.is_form
 dict_is_unit['string'] = api.is_unit
 dict_is_quantity['string'] = api.is_quantity
 dict_get_value['string'] = api.get_value
