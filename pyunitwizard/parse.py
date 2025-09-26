@@ -72,8 +72,8 @@ def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
             The parser that will be used.
 
         to_form; str, optional
-            The form of the quantity. Can be pint, openmm.unit or
-            string.
+            The form of the quantity. Can be "pint", "openmm.unit",
+            "unyt", "astropy.units" or "string".
 
         Returns
         -------
@@ -97,17 +97,36 @@ def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
         elif to_form == 'string':
             pint_quantity = _parse_with_pint(string)
             return dict_translate_quantity['pint']['string'](pint_quantity)
-        
+
         elif to_form == 'unyt':
             pint_quantity = _parse_with_pint(string)
             return dict_translate_quantity['pint']['unyt'](pint_quantity)
 
+        elif to_form == 'astropy.units':
+            pint_quantity = _parse_with_pint(string)
+            return dict_translate_quantity['pint']['astropy.units'](pint_quantity)
+
         else:
-            raise NotImplementedParsingError(parser, to_form)
+            raise NotImplementedParserError(parser, to_form)
 
     elif parser == 'openmm.unit':
         raise LibraryWithoutParserError('openmm.unit')
     elif parser == 'unyt':
         raise LibraryWithoutParserError("unyt")
+    elif parser == 'astropy.units':
+        astropy_quantity = dict_translate_quantity['string']['astropy.units'](string)
+
+        if to_form == 'astropy.units':
+            return astropy_quantity
+        elif to_form == 'pint':
+            return dict_translate_quantity['astropy.units']['pint'](astropy_quantity)
+        elif to_form == 'string':
+            return dict_translate_quantity['astropy.units']['string'](astropy_quantity)
+        elif to_form == 'openmm.unit':
+            return dict_translate_quantity['astropy.units']['openmm.unit'](astropy_quantity)
+        elif to_form == 'unyt':
+            return dict_translate_quantity['astropy.units']['unyt'](astropy_quantity)
+        else:
+            raise NotImplementedParserError(parser, to_form)
     else:
-        raise NotImplementedParsingError(parser, to_form)
+        raise NotImplementedParserError(parser, to_form)

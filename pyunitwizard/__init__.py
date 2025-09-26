@@ -41,3 +41,9 @@ try:
 except:
     pass
 
+try:
+    import astropy.units  # noqa: F401
+    configure.load_library('astropy.units')
+except:
+    pass
+
