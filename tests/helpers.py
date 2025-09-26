@@ -5,7 +5,28 @@ import pyunitwizard as puw
 
 @contextmanager
 def loaded_libraries(libraries):
-    """Temporarily load the requested libraries for a test case."""
+    """
+    Context manager to temporarily load the requested libraries for a test case.
+
+    Parameters
+    ----------
+    libraries : list of str
+        List of library names to load temporarily for the duration of the context.
+
+    Behavior
+    --------
+    - Saves the current loaded libraries, default form, and default parser.
+    - Resets the configuration and loads the specified libraries.
+    - After the context, restores the previous configuration.
+    - If no previous libraries were loaded, attempts to load a default set
+      ('pint', 'openmm.unit', 'unyt'), ignoring failures.
+
+    Exceptions
+    ----------
+    - Any exception raised by `puw.configure.load_library` when loading the requested libraries
+      will propagate unless caught internally.
+    - Exceptions when loading default libraries after the context are caught and ignored.
+    """
     previous_libraries = list(puw.configure.get_libraries_loaded())
     previous_default_form = puw.configure.get_default_form()
     previous_default_parser = puw.configure.get_default_parser()
