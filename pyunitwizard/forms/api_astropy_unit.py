@@ -54,8 +54,13 @@ def dimensionality(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) ->
 
     for base, power in zip(decomposed.bases, decomposed.powers):
         key = _dimensions_translator.get(base.to_string())
-        if key is not None:
+
+        try:
             dimensionality_dict[key] += float(power)
+        except:
+            raise ValueError(f"Unrecognized base unit: {base.to_string()} in {unit})
+                             
+        dimensionality_dict[key] += float(power)
 
     return dimensionality_dict
 
