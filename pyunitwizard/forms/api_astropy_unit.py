@@ -57,7 +57,6 @@ def dimensionality(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) ->
         if key is None:
             raise ValueError(f"Unrecognized base unit: {base.to_string()} in {unit}")
         dimensionality_dict[key] += float(power)
-
     return dimensionality_dict
 
 
