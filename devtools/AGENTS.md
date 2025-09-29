@@ -25,7 +25,7 @@ interoperable.
 
 ## Project Overview and Structure
 
-PyUnitWizard provides a unified interface to work with physical units and to
+PyUnitWizard provides a unified interface to work with physical units and
 convert between different unit libraries. Its modular design makes it easy to
 integrate into scientific projects and ensures compatibility across diverse
 workflows.
@@ -39,24 +39,48 @@ The design philosophy is:
 
 The repository is organized into the following main directories and files:
 
-- **AGENTS.md** – Main guidelines for automated agents (this file).
-- **CODE_OF_CONDUCT.md** – Community standards and contribution expectations.
+- **AGENTS.md** – Main guidelines for automated agents (This same file).
+- **CODE_OF_CONDUCT.md** – Community guidelines and expectations.
 - **devtools/** – Development tools and scripts for installing and maintaining the project.
-- **docs/** – Documentation sources to be built with Sphinx.
-- **examples/** – Example integrations showing how to embed PyUnitWizard into other scientific Python libraries.
+- **docs/** – Documentation files to be compiled with sphinx.
+- **examples/** – Directory with example files to embed PyUnitWizard in a third scientific python library.
 - **LICENSE** – License information.
 - **logos/** – Project logos and branding assets.
-- **MANIFEST.in** – Packaging manifest file.
+- **MANIFEST.in** – Manifest file for packaging.
 - **pyproject.toml** – Build system configuration.
-- **pytest.ini** – Pytest configuration.
+- **pytest.ini** – Configuration for pytest.
 - **pyunitwizard/** – Main source code directory containing the core modules.
-- **README.md** – Project overview and quick start guide.
-- **sandbox/** – Experimental code and development notes.
-- **setup.cfg** – Setup tools configuration.
-- **tests/** – Unit and integration tests.
-  
-Additional `AGENTS.md` files may exist in some of these directories with
-specific instructions for automated agents operating there.
+- **README.md** – Main project overview and quick start guide for humans.
+- **sandbox/** – Experimental code and developing notes.
+- **setup.cfg** – Configuration file for setup tools.
+- **tests/** – Unit and integration tests to be run with pytest.
+
+#### devtools/
+
+The `devtools/` directory contains scripts and configuration files to
+facilitate installation, development, maintainance, and deployment of PyUnitWizard.
+It includes tools for setting up development environments, managing dependencies,
+and automating common tasks.
+
+- **broadcast_requirements.py** – Script to synchronize required packages with the files in `conda-build/` and `conda-envs/`.
+- **conda-build/** – Recipes for building conda packages.
+- **conda-envs/** – Conda environment files for development, testing, production, setup...
+- **README.md** – Instructions for using the development tools for humans.
+- **README_pip.md** – Instructions to install PyUnitWizard with pip (this is a temporary file).
+- **requirements.yaml** – Required packages in a format to be read by broadcast\_requirements.py.
+- **start_dev.sh** – Script to set up a development environment with conda.
+
+#### docs/
+
+The `docs/` directory contains the source files for the project documentation.
+It is structured to be built with Sphinx, with the Pydata Sphinx theme and using MyST.
+
+- **api/** – Auto-generated API documentation.
+- **bibliography.bib** – Bibliography file for references in documentation.
+- **clean_api.py** – Script to clean up auto-generated API docs.
+- **conf.py** – Sphinx configuration file.
+- **content/** - Main documentation content in MyST markdown files and jupyter notebooks.
+
 
 ## Coding
 
@@ -64,72 +88,37 @@ This section outlines the coding standards and conventions followed in the PyUni
 
 ### General Conventions For New Contributors
 
-- Keep PRs small and focused.
-- Write code, comments, docs, commits, PRs, and github issues in English.
-- Add tests and docs for any user-visible change.
-- Follow this `AGENTS.md` and existing patterns.
-- Prefer readability over cleverness.
-- Ensure code is clean, readable, and well-organized.
-
 ### Code Style
 
 - Follow PEP 8 style guide for Python code.
-- Use `black` (format), `isort` (imports), `flake8` (lint), `mypy` (types).
-- Keep functions short when possible; avoid deep nesting.
-- Use meaningful names; avoid abbreviations.
-- Run style/type checks before committing.
+- Use `black` for code formatting.
+- Use `isort` for import sorting.
+- Use `flake8` for linting.
+- Use `mypy` for type checking.
+- Ensure code is clean, readable, and well-organized.
+- Avoid deeply nested code and long functions. Break them into smaller, manageable pieces.
+- Use meaningful variable and function names that convey their purpose.
+- Avoid abbreviations in variable names.
 - Maintain a consistent coding style throughout the codebase.
 
 ### Naming Conventions
 
-- Follow PEP 8 naming conventions.
-- Use `snake_case` for functions and variables.
-- Use `PascalCase` for class names.
-- Prefix internal/private functions with `_`.
-- Suffix boolean-returning functions with `_is` or `_has` when util.
-
 ### Docstrings
-
-- NumPy style.
-- Each public symbol must document: Parameters (types), Returns, Raises, Examples (cuando aplique).
 
 ### Type Annotations
 
-- Annotate all public functions (PEP 484).
-- Use `Optional[T]` para nulos.
-- Use `Literal`/`Enum` para valores restringidos.
-
 ### Comments in the code
-
-- Explain **why**, not just **what**.
-- Keep comments current with the code.
-- Prefer brief notes for non-obvious logic.
-- Use comments to clarify complex logic or decisions.
-- Brief comments about what is done by non-obvious code sections are encouraged but should be concise.
-- Avoid obvious comments that do not add value.
-- Tags: `TODO`, `FIXME`, `NOTE`, `WARNING` (with date/author if it is long).
 
 ### Error Handling
 
-- Use custom exception classes defined under exceptions.py for domain-specific errors.
-- Never use bare except: blocks.
-- Always provide informative error messages.
-
 ### Exceptions
-
-- Use custom exception classes defined under exceptions.py for domain-specific errors.
 
 ### Warnings
 
-- Use the `_private/warnings` module to issue warnings for deprecated features or non-critical issues.
-
 ### Logging
 
-- Use the `logging` module for logging.
-
 ### Security and Dependencies
-
-- Only use packages listed in `devtools/conda-envs/development_env.yaml`.
+- Only use packages listed in `requirements.txt` and `dev-requirements.txt`.
 - Keep dependencies up to date and monitor they are available, necessary and pertinence.
 - Avoid using deprecated or unmaintained packages.
 - Regularly check for security vulnerabilities in dependencies using tools like `safety` or `bandit`.
