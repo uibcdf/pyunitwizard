@@ -31,7 +31,7 @@ reStructuredText, and Jupyter notebooks. Key areas:
   documentation.
 - Prefer MyST Markdown (`.md`) for narrative pages and Jupyter notebooks
   (`.ipynb`) for executable tutorials. reStructuredText (`.rst`) is still
-  accepted for sections that need it but avoid it possible.
+  accepted for sections that need it but avoid it if possible.
 - Keep notebooks lightweight: avoid long-running cells, hide credentials, and
   use deterministic seeds when random behavior is required.
 - When editing notebooks, re-run them so outputs match inputs and save the
