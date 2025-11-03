@@ -1,21 +1,26 @@
 # PyUnitWizard
 
-A Python Units Wizard that streamlines work with physical quantities.
+*A Python Units Wizard that streamlines work with physical quantities.*
 
-## What is this AGENTS.md file for?
+---
 
-This file defines how automated agents and human contributors should work with
-the PyUnitWizard repository. It provides an overview of the project — including
-its purpose, description, and structure — and sets the main rules for coding,
-testing, documentation, and contributions to ensure safe and consistent
-collaboration.
+## 1. Purpose of This File
 
-## Purpose of the project
+This file defines how automated agents and human contributors must work with the **PyUnitWizard** repository.  
+It serves as a guide for consistent, transparent, and safe collaboration between humans and automated systems.
 
-PyUnitWizard is a Python library that standardizes and simplifies the use of
-physical units across different unit systems. Its main goal is to act as a
-bridge between popular unit libraries — currently pint, unyt, openmm.unit, and
-astropy.units — enabling seamless conversion between them.
+---
+
+## 2. Project Overview
+
+**PyUnitWizard** is a Python library that standardizes and simplifies the handling of physical units across different unit systems.  
+It acts as a bridge between libraries such as `pint`, `unyt`, `openmm.unit`, and `astropy.units`, allowing seamless conversions and interoperability.
+
+Design principles:
+
+- **Composability:** small, reusable components.
+- **Extensibility:** easy to add new unit systems or APIs.
+- **Robustness:** strict type checking and dimensional consistency.
 
 By integrating PyUnitWizard, scientific libraries can let users choose how
 units are represented and handled without changing their workflows. This
@@ -23,228 +28,231 @@ ensures that outputs can be used as inputs in other tools regardless of the
 unit system, making scientific pipelines compatible, flexible, and
 interoperable.
 
-## Project Overview and Structure
+---
 
-PyUnitWizard provides a unified interface to work with physical units and to
-convert between different unit libraries. Its modular design makes it easy to
-integrate into scientific projects and ensures compatibility across diverse
-workflows.
+## 3. Repository Structure
 
-The design philosophy is:
-- **Composability:** small, reusable components.
-- **Extensibility:** easy to add new unit systems, conversions, or APIs.
-- **Robustness:** strict type checking and dimensional consistency.
+Main directories and files:
 
-### Repository Structure
+| Path | Description |
+|------|--------------|
+| `pyunitwizard/` | Core source code. |
+| `tests/` | Unit and integration tests. |
+| `devtools/` | Environment, build, and maintenance tools. |
+| `docs/` | Documentation sources (Sphinx). |
+| `examples/` | Example integrations showing how to embed PyUnitWizard into other scientific Python libraries. |
+| `sandbox/` | Experimental code and notes. |
+| `logos/` | Branding assets. |
+| `CODE_OF_CONDUCT.md` | Community standards. |
+| `AGENTS.md` | Agent interaction rules (this file). |
+| `README.md` | Quick start and overview. |
+| `LICENSE` | License information. |
+| `MANIFEST.in` | Packaging manifest file. |
+| `pyproject.toml` | Build system configuration. |
+| `pytest.ini` | Pytest configuration. |
+| `setup.cfg` | Setup tools configuration. |
 
-The repository is organized into the following main directories and files:
+Additional `AGENTS.md` files may exist in submodules with specialized instructions.
 
-- **AGENTS.md** – Main guidelines for automated agents (this file).
-- **CODE_OF_CONDUCT.md** – Community standards and contribution expectations.
-- **devtools/** – Development tools and scripts for installing and maintaining the project.
-- **docs/** – Documentation sources to be built with Sphinx.
-- **examples/** – Example integrations showing how to embed PyUnitWizard into other scientific Python libraries.
-- **LICENSE** – License information.
-- **logos/** – Project logos and branding assets.
-- **MANIFEST.in** – Packaging manifest file.
-- **pyproject.toml** – Build system configuration.
-- **pytest.ini** – Pytest configuration.
-- **pyunitwizard/** – Main source code directory containing the core modules.
-- **README.md** – Project overview and quick start guide.
-- **sandbox/** – Experimental code and development notes.
-- **setup.cfg** – Setup tools configuration.
-- **tests/** – Unit and integration tests.
-  
-Additional `AGENTS.md` files may exist in some of these directories with
-specific instructions for automated agents operating there.
+---
 
-## Coding
+## 4. Coding Guidelines
 
-This section outlines the coding standards and conventions followed in the PyUnitWizard project.
+### 4.1 General Conventions
 
-### General Conventions For New Contributors
+- Keep PRs small and focused.  
+- Use English for all code, comments, PRs, issues, and docs.  
+- Always include or update tests and documentation for user-visible changes.  
+- Follow existing patterns and maintain readability.  
+- Avoid unnecessary cleverness — clarity first.  
 
-- Keep PRs small and focused.
-- Write code, comments, docs, commits, PRs, and github issues in English.
-- Add tests and docs for any user-visible change.
-- Follow this `AGENTS.md` and existing patterns.
-- Prefer readability over cleverness.
-- Ensure code is clean, readable, and well-organized.
+### 4.2 Code Style
 
-### Code Style
+- Follow **PEP 8**.  
+- Tools: `black` (formatting), `isort` (imports), `flake8` (linting), `mypy` (type checking).  
+- Prefer short, modular functions.  
+- Use explicit, descriptive names.  
+- Run linting and type checks before committing.
 
-- Follow PEP 8 style guide for Python code.
-- Use `black` (format), `isort` (imports), `flake8` (lint), `mypy` (types).
-- Keep functions short when possible; avoid deep nesting.
-- Use meaningful names; avoid abbreviations.
-- Run style/type checks before committing.
-- Maintain a consistent coding style throughout the codebase.
+### 4.3 Naming
 
-### Naming Conventions
+| Element | Convention | Example |
+|----------|-------------|---------|
+| Variables / functions | `snake_case` | `convert_units()` |
+| Classes | `PascalCase` | `UnitSystem` |
+| Private members | Prefix with `_` | `_parse_symbol()` |
+| Boolean-returning | Suffix `_is` / `_has` | `is_valid()`, `has_units()` |
 
-- Follow PEP 8 naming conventions.
-- Use `snake_case` for functions and variables.
-- Use `PascalCase` for class names.
-- Prefix internal/private functions with `_`.
-- Suffix boolean-returning functions with `_is` or `_has` when util.
+### 4.4 Docstrings
 
-### Docstrings
+- Use **NumPy style**.  
+- Each public symbol must include **Parameters**, **Returns**, **Raises**, and **Examples** when applicable.
 
-- NumPy style.
-- Each public symbol must document: Parameters (types), Returns, Raises, Examples (cuando aplique).
+### 4.5 Type Annotations
 
-### Type Annotations
+- Annotate all public functions (PEP 484).  
+- Use `Optional[T]` for nullable types.  
+- Use `Literal` or `Enum` for restricted values.  
 
-- Annotate all public functions (PEP 484).
-- Use `Optional[T]` para nulos.
-- Use `Literal`/`Enum` para valores restringidos.
+### 4.6 Comments
 
-### Comments in the code
+- Explain *why*, not just *what*.  
+- Keep comments up to date.  
+- Prefer brief, focused notes.  
+- Tags: `TODO`, `FIXME`, `NOTE`, `WARNING` (with author/date if long-term).
 
-- Explain **why**, not just **what**.
-- Keep comments current with the code.
-- Prefer brief notes for non-obvious logic.
-- Use comments to clarify complex logic or decisions.
-- Brief comments about what is done by non-obvious code sections are encouraged but should be concise.
-- Avoid obvious comments that do not add value.
-- Tags: `TODO`, `FIXME`, `NOTE`, `WARNING` (with date/author if it is long).
+### 4.7 Error Handling
 
-### Error Handling
+- Use custom exceptions in `exceptions.py` for domain-specific errors.  
+- Never use bare `except:` clauses.  
+- Provide clear and informative error messages.
 
-- Use custom exception classes defined under exceptions.py for domain-specific errors.
-- Never use bare except: blocks.
-- Always provide informative error messages.
+### 4.8 Logging and Warnings
 
-### Exceptions
+- Use `logging` for runtime messages.  
+- Use `_private/warnings` for non-critical issues or deprecations.
 
-- Use custom exception classes defined under exceptions.py for domain-specific errors.
+### 4.9 Security and Dependencies
 
-### Warnings
+- Use only dependencies listed in `devtools/conda-envs/development_env.yaml`.  
+- Avoid deprecated or unmaintained packages.  
+- Regularly verify that dependencies are **available, necessary, and pertinent**.  
+- Check dependencies periodically using tools such as `safety` or `bandit`.  
+- Never commit secrets, credentials, or environment variables.  
+- Avoid hardcoding sensitive information in code or logs.  
+- Do not report or share secrets, credentials, or environment variables in **issues**, **PRs**, or any communication channel.  
 
-- Use the `_private/warnings` module to issue warnings for deprecated features or non-critical issues.
+---
 
-### Logging
+## 5. Testing Guidelines
 
-- Use the `logging` module for logging.
+- All public functions and modules must have tests under `tests/`.  
+- Use `pytest` for test execution.  
+- Run `pytest tests/` before each PR.  
+- Test both success and failure cases.  
+- Prefer **unit tests** for small functions and **integration tests** for workflows.  
+- Keep tests independent and reproducible.  
 
-### Security and Dependencies
+### 5.1 Test-First Development Mode
 
-- Only use packages listed in `devtools/conda-envs/development_env.yaml`.
-- Keep dependencies up to date and monitor they are available, necessary and pertinence.
-- Avoid using deprecated or unmaintained packages.
-- Regularly check for security vulnerabilities in dependencies using tools like `safety` or `bandit`.
-- Follow best practices for handling sensitive data, such as using environment variables for secrets and avoiding hardcoding them in the codebase.
-- Do not log sensitive information.
-- Do not commit secrets, credentials, environment variables or sensitive information to version control.
-- Do not report secretes, credentials, environment variables or sensitive information in issues or pull requests.
+- **For new features:** write or update unit tests first, then implement the feature until all tests pass (“code to green”).  
+- **For regressions:** add a failing test that reproduces the bug, then fix it.  
+- **For UI or state-based modules:** prefer component tests that validate observable changes.  
 
-## Testing
+---
 
-## Documentation
+## 6. Documentation Guidelines
 
-## Version Control
+- Written in Markdown or MyST (for Sphinx).  
+- Each public module must include examples and docstrings.  
+- Update documentation after API or behavior changes.  
+- Validate generated docs before merging (`make html`).  
+- Do not include private or experimental code in public docs.
 
-## Contribution Guidelines
+---
 
-### Commit Messages
+## 7. Version Control and Contributions
 
-### Pull Request Guidelines
+### 7.1 Commit Messages
 
-#### PR Checklist
+Use the conventional format:
 
-- title: `feat(scope): short description`
-- lint, type check, unit tests - all green before commit
-- diff is small and focused. include a brief summary of what changed and why
-- remove any excessive logs or comments before sending a PR
-- Run pytest tests/ before finalizing a PR.
-- Ensure all new and existing tests pass.
-- Link relevant issues or tasks in the PR description.
-- Title format: [Fix] Short description
-- Include a one-line summary and a "Testing Done" section
+```
+<type>(<scope>): <short description>
+```
 
-## IA Agents Guidelines
-- The user will provide a task.
-- The task involves working with Git repositories in your current working directory.
-- Wait for all terminal commands to be completed (or terminate them) before finishing.
+Examples:
+- `feat(core): add converter for astropy units`
+- `fix(tests): correct numpy array comparison`
+- `docs(readme): improve quick-start example`
 
-### Citation Instructions
+Keep commits atomic, small, and meaningful.
 
-- If you browsed files or used terminal commands, you must add citations to the
-  final response (not the body of the PR message) where relevant. Citations
-  reference file paths and terminal outputs with the following formats:
-  1) `【F:<file_path>†L<line_start>(-L<line_end>)?】`
-  - File path citations must start with `F:`. `file_path` is the exact file
-    path of the file relative to the root of the repository that contains the
-    relevant text.
-  - `line_start` is the 1-indexed start line number of the relevant output
-    within that file.
-  2) `【<chunk_id>†L<line_start>(-L<line_end>)?】`
-  - Where `chunk_id` is the chunk_id of the terminal output, `line_start` and
-    `line_end` are the 1-indexed start and end line numbers of the relevant
-    output within that chunk.
-- Line ends are optional, and if not provided, line end is the same as line
-  start, so only 1 line is cited.
-- Ensure that the line numbers are correct, and that the cited file paths or
-  terminal outputs are directly relevant to the word or clause before the
-  citation.
-- Do not cite completely empty lines inside the chunk, only cite lines that
-  have content.
-- Only cite from file paths and terminal outputs, DO NOT cite from previous pr
-  diffs and comments, nor cite git hashes as chunk ids.
-- Use file path citations that reference any code changes, documentation or
-  files, and use terminal citations only for relevant terminal output.
-- Prefer file citations over terminal citations unless the terminal output is
-  directly relevant to the clauses before the citation, i.e. clauses on test
-  results.
-- For PR creation tasks, use file citations when referring to code changes in
-  the summary section of your final response, and terminal citations in the
-  testing section.
-- For question-answering tasks, you should only use terminal citations if you
-  need to programmatically verify an answer (i.e. counting lines of code).
-  Otherwise, use file citations.
+### 7.2 Pull Requests
 
-### Git Instructions
+- Run all tests before submitting.  
+- Ensure lint/type checks pass.  
+- Keep PRs under 300 lines of diff when possible.  
+- Include context and motivation in the PR body.  
+- Link related issues with `Fixes #<id>` or `Closes #<id>`.  
 
-- Use git to commit your changes.
-- If pre-commit fails, fix issues and retry.
-- Check git status to confirm your commit. You must leave your worktree in a clean state.
-- Only committed code will be evaluated.
-- Do not modify or amend existing commits. Create new commits instead.
+Checklist:
+- ✅ All tests and checks pass.  
+- ✅ Code reviewed or self-reviewed.  
+- ✅ Docs updated if behavior changed.  
+- ✅ No debug or leftover code.  
 
-### Test first mode
-- when adding new features: write or update unit tests first, then code to green
-- prefer component tests for UI state changes
-- for regressions: add a failing test that reproduces the bug, then fix to green
+---
 
-### Programmatic Checks for IA Agents
+## 8. AI Agent Guidelines
 
-### When stuck
-- ask a clarifying question, propose a short plan, or open a draft PR with notes
-- do not push large speculative changes without confirmation
+These rules apply to automated agents (GitHub Actions, Copilot Agents, CI bots, etc.) collaborating on this repository.
 
-### Safety and Permissions
+### 8.1 General Behavior
 
-#### Allowed without prompt
+- Always wait for terminal commands to complete before proceeding.  
+- Do not modify code outside the assigned scope.  
+- Prefer proposing changes via PR rather than direct commits to `main`.  
+- Ask for clarification or open a draft PR if unsure.  
+- Never overwrite human work or documentation without explicit approval.  
+- When stuck, **ask a clarifying question**, propose a short plan, or open a draft PR with notes — do not push large speculative changes without confirmation.  
 
-There is no especific instructions for the AI agents yet in this section.
+### 8.2 Citation Format
 
-#### Ask before doing
+When referencing files or terminal outputs in responses, use the following citation style:
 
-There is no especific instructions for the AI agents yet in this section.
+1. **File citations:** `【F:<path>†L<start>-L<end>】`  
+2. **Terminal citations:** `【<chunk_id>†L<start>-L<end>】`  
 
-- Project overview
-- Build and test commands
-- Code style guidelines
-- Testing instructions
-- Security considerations
+Only cite relevant, contentful lines — never blank lines.
 
-- Commit messages
-- Contribution guidelines
-- Pull request guidelines
-- Se pueden poner otros ficheros AGENTS.md
+If referencing code changes or test results in PR summaries, prefer **file citations**; use terminal citations only when output verification is required.
 
-- Definir convenciones de código.
-- Incluir protocolos de testeo.
+### 8.3 Git Instructions for Agents
 
-- Siempre despues de un cambio, revisar si hay que actualizar la documentación, tests, ejemplos, etc.
-- Siempre despues de un cambio, revisar si hay que actualizar o corregir ficheros AGENTS.md o README.md.
+- Commit using `git` (no untracked changes).  
+- Fix pre-commit issues before retrying.  
+- Do not amend existing commits; create new ones.  
+- Confirm with `git status` before finishing.  
+
+### 8.4 Testing Protocol for Agents
+
+- Follow **test-first** development: add or update tests before writing new code.  
+- For bug fixes, add a failing test first, then implement the fix.  
+- Do not skip tests unless justified in the PR.  
+
+### 8.5 Programmatic Checks for Agents
+
+This section defines automated consistency checks to be performed by AI or CI agents before merging changes.  
+To be extended in future versions, it may include:
+
+- Verification of documentation coverage.  
+- Automatic code style and dependency audits.  
+- Validation of cross-repo synchronization for shared components.  
+
+### 8.6 Safety and Permissions
+
+**Allowed without prompt:**  
+- Running linters, formatters, or test suites.  
+- Generating documentation locally.  
+- Checking dependency status.  
+
+**Ask before doing:**  
+- Committing code or modifying configuration.  
+- Running destructive commands (e.g., deleting branches or files).  
+- Editing documentation or CI pipelines.  
+- Updating build/test commands, contribution guidelines, or security considerations.  
+- Changing commit message conventions or PR workflows.  
+
+---
+
+## 9. Maintenance Reminders
+
+- After any change, verify if documentation, examples, or tests must be updated.  
+- After any change, verify if any `AGENTS.md` or `README.md` need to be updated for consistency.  
+- Regularly review CI configurations for dependency or policy drift.  
+- Keep this file synchronized across UIBCDF projects when possible.  
+
+---
+
+*Last updated: November 2025*
