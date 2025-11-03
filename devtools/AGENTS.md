@@ -12,7 +12,7 @@ This directory hosts development-support tooling: dependency management, Conda
 environment scripts, packaging utilities, and operational guidance.
 
 - `requirements.yaml` is the single source of truth for dependencies across the
-  different profiles (setup, production, tests, docs, development, and
+  different profiles (setup, production, test, docs, development, and
   conda-build).
 
 - `broadcast_requirements.py` propagates updates from `requirements.yaml` into
@@ -53,8 +53,8 @@ environment scripts, packaging utilities, and operational guidance.
 
 - Always report any change to dependencies in the relevant PR.
 
-- Profiles names are `setup`, `production`, `tests`, `docs`, `development`, and
-  `conda-build`. In general, use `development` for day-to-day work, `tests`
+- Profiles names are `setup`, `production`, `test`, `docs`, `development`, and
+  `conda-build`. In general, use `development` for day-to-day work, `test`
   for CI-related tasks, and `docs` for dependencies to build documentation.
 
 ## Python Scripts in devtools
