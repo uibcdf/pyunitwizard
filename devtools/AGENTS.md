@@ -58,7 +58,7 @@ environment scripts, packaging utilities, and operational guidance.
   for CI-related tasks, and `docs` for dependencies to build documentation.
 
 ## Python Scripts in devtools
-- Maintain compatibility with Python >=3.10, matching `pyproject.toml`.
+- Maintain compatibility with Python 3.10–3.12 (>=3.10,<3.13), matching `pyproject.toml`.
 - Use only the standard library and dependencies already declared in the
   development profile. If you need new packages, add them to
   `requirements.yaml` first and rebroadcast.
