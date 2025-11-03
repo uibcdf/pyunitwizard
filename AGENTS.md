@@ -246,3 +246,5 @@ There is no especific instructions for the AI agents yet in this section.
 - Definir convenciones de código.
 - Incluir protocolos de testeo.
 
+- Siempre despues de un cambio, revisar si hay que actualizar la documentación, tests, ejemplos, etc.
+- Siempre despues de un cambio, revisar si hay que actualizar o corregir ficheros AGENTS.md o README.md.
