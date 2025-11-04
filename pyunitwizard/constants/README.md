@@ -9,7 +9,7 @@ through PyUnitWizard's quantity abstraction.
 | Canonical name    | Value (SI)                | Description |
 |-------------------|---------------------------|-------------|
 | `Avogadro`        | `6.02214076e+23 1/mole`   | Avogadro's number. |
-| `Universal gas`   | `8.13446261815324 J/(kelvin*mole)` | Universal (molar) gas constant. |
+| `Universal gas`   | `8.31446261815324 J/(kelvin*mole)` | Universal (molar) gas constant. |
 | `Boltzmann`       | `1.380649e-23 J/kelvin`   | Boltzmann constant. |
 
 Use the canonical names when calling `get_constant()` to avoid ambiguity. The function returns a PyUnitWizard quantity, which can be
