@@ -11,11 +11,29 @@ def __print_version__():
 
 
 # Add imports here
-from .main import unit, quantity, get_form, is_quantity, is_unit
-from .main import get_value, get_unit, get_value_and_unit, change_value
-from .main import convert, to_string
-from .main import get_standard_units, standardize, get_dimensionality
-from .main import are_compatible, are_equal, are_close, check
+from .api import (
+    are_close,
+    are_compatible,
+    are_equal,
+    compatibility,
+    change_value,
+    check,
+    convert,
+    get_dimensionality,
+    get_form,
+    get_standard_units,
+    get_unit,
+    get_value,
+    get_value_and_unit,
+    is_dimensionless,
+    is_quantity,
+    is_unit,
+    quantity,
+    similarity,
+    standardize,
+    to_string,
+    unit,
+)
 from . import configure
 from . import kernel as _kernel
 from . import constants

@@ -1,4 +1,4 @@
-from pyunitwizard.main import is_quantity, get_value
+from pyunitwizard.api import get_value, is_quantity
 from .is_sequence import is_sequence
 
 def is_quantity_value_sequence(item):
