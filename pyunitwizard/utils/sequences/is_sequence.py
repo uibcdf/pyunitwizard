@@ -1,4 +1,8 @@
-from ...main import is_quantity
+"""Helpers to determine whether objects behave like sequences."""
+
+from __future__ import annotations
+
+from ... import is_quantity
 import numpy as np
 
 def is_sequence(item):
