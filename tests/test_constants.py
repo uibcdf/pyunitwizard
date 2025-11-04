@@ -44,7 +44,7 @@ def test_get_constant_synonym_and_conversion(constants_module):
     universal = constants_module.get_constant('R', to_unit='kJ/(mole*kelvin)')
     value, unit = puw.get_value_and_unit(universal, to_form='string')
 
-    assert value == pytest.approx(0.00813446, rel=1e-6)
+    assert value == pytest.approx(0.00831446261815324, rel=1e-6)
     assert unit == 'kilojoule / kelvin / mole'
 
 
@@ -67,4 +67,4 @@ def test_show_constants_lists_synonyms(constants_module):
     registry = constants_module.show_constants()
 
     assert ('Avogadro', 'NA') in registry
-    assert registry[('Universal gas', 'R', 'Molar gas')] == '8.13446261815324 J/(kelvin*mole)'
+    assert registry[('Universal gas', 'R', 'Molar gas')] == '8.31446261815324 J/(kelvin*mole)'

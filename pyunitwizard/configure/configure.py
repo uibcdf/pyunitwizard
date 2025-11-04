@@ -2,7 +2,7 @@ from pyunitwizard import forms
 from pyunitwizard import kernel
 from pyunitwizard._private.forms import digest_form
 from pyunitwizard._private.lists_and_tuples import is_list_or_tuple
-from pyunitwizard.main import convert, get_dimensionality
+from pyunitwizard.api import convert, get_dimensionality
 from pyunitwizard.constants import _constants, _constants_synonyms
 import numpy as np
 from importlib.util import find_spec

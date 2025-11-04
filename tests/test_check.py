@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 import pyunitwizard as puw
-from pyunitwizard.main import is_dimensionless
+from pyunitwizard.api.introspection import is_dimensionless
 
 #### Tests for puw.check() function ####
 
