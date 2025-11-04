@@ -63,6 +63,7 @@ q3 is now a pint quantity expressed in nanometer / picosecond.
 - [openmm.unit](https://github.com/openmm/openmm/tree/master/wrappers/python/simtk/unit)
 - [Pint](https://pint.readthedocs.io/en/stable/)
 - [unyt](https://unyt.readthedocs.io/en/stable/)
+- [astropy.units](https://docs.astropy.org/en/stable/units/)
 
 ## License
 
@@ -71,7 +72,7 @@ This project is under an MIT License. [A copy of the license text is included in
 ### Copyright
 
 Copyright (c) 2021-2022 [The Mexico Children's Hospital Federico Gómez](http://himfg.com.mx/), [its Unit of Research on Computational
-Biology and Drug Design](http://uibcdf.org), and [authors](https://github.com/uibcdf/OpenExplorer/graphs/contributors).
+Biology and Drug Design](http://uibcdf.org), and [authors](https://github.com/uibcdf/pyunitwizard/graphs/contributors).
 
 ## Acknowledgements
 
@@ -80,7 +81,7 @@ Project based on the [Computational Molecular Science Python Cookiecutter](https
 ## Contributors
 
 A complete list of contributors can be found checking [the insights section of this
-repository](https://github.com/uibcdf/OpenExplorer/graphs/contributors).
+repository](https://github.com/uibcdf/pyunitwizard/graphs/contributors).
 
 The main project authors and contributors are:
 
