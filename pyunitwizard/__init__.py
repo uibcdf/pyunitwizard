@@ -6,9 +6,16 @@ from __future__ import annotations
 import sys
 import types
 import warnings
+from importlib.metadata import version, PackageNotFoundError
 
-# versioningit
-from ._version import __version__
+try:
+    __version__ = version("pyunitwizard")
+except PackageNotFoundError:
+    # Package is not installed
+    try:
+        from ._version import __version__
+    except ImportError:
+        __version__ = "0.0.0+unknown"
 
 
 def __print_version__() -> None:
@@ -40,6 +47,7 @@ from .api import (
     standardize,
     to_string,
     unit,
+    context,
 )
 from . import configure
 from . import kernel as _kernel

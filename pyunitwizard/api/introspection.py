@@ -13,6 +13,9 @@ if TYPE_CHECKING:  # pragma: no cover - circular import guard
     from .conversion import convert
 
 
+_TYPE_TO_FORM_CACHE: Dict[type, str] = {}
+
+
 def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     """ Returns the form of a quantity as a string.
 
@@ -27,8 +30,13 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
             The form of the quantity
     """
 
+    obj_type = type(quantity_or_unit)
+    if obj_type in _TYPE_TO_FORM_CACHE:
+        return _TYPE_TO_FORM_CACHE[obj_type]
+
     for form_name, aux_is_form in dict_is_form.items():
         if aux_is_form(quantity_or_unit):
+            _TYPE_TO_FORM_CACHE[obj_type] = form_name
             return form_name
 
     raise NotImplementedFormError(type(quantity_or_unit))

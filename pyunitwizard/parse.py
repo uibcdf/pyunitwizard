@@ -4,6 +4,7 @@ from ._private.parsers import digest_parser
 from .forms import dict_translate_quantity
 import ast
 from typing import Optional
+from functools import lru_cache
 
 def _find_closing_bracket_position(string):
     stack = 0
@@ -60,6 +61,7 @@ def _parse_with_pint(string: str):
     else:
        return dict_translate_quantity['string']['pint'](string)
 
+@lru_cache(maxsize=1024)
 def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
     """ Parses a string and returns a quantity.
 

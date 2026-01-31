@@ -19,6 +19,7 @@ from .comparison import (
 )
 from .standardization import get_standard_units, standardize
 from .validation import check
+from .context import context
 
 __all__ = [
     "are_close",
@@ -42,4 +43,5 @@ __all__ = [
     "standardize",
     "to_string",
     "unit",
+    "context",
 ]
