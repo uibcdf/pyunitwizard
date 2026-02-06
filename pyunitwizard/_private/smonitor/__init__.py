@@ -1,5 +1,5 @@
-"""smonitor runtime for PyUnitWizard (private)."""
+"""smonitor catalog for PyUnitWizard (private)."""
 
-from .runtime import ensure_configured
+from .catalog import CATALOG, PACKAGE_ROOT
 
-__all__ = ["ensure_configured"]
+__all__ = ["CATALOG", "PACKAGE_ROOT"]

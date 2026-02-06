@@ -17,9 +17,10 @@ except PackageNotFoundError:
     except ImportError:
         __version__ = "0.0.0+unknown"
 
-from ._private.smonitor import ensure_configured as _ensure_smonitor_configured
+from smonitor.integrations import ensure_configured as _ensure_smonitor_configured
+from ._private.smonitor import PACKAGE_ROOT as _SMONITOR_PACKAGE_ROOT
 
-_ensure_smonitor_configured()
+_ensure_smonitor_configured(_SMONITOR_PACKAGE_ROOT)
 
 
 def __print_version__() -> None:
