@@ -24,6 +24,7 @@
 
    warnings.md
    logging.md
+   smonitor.md
 
 ```
 
@@ -44,5 +45,4 @@
    documentation/api/index.md
    documentation/web/index.md
 ```
-
 
