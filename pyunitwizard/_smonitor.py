@@ -28,3 +28,6 @@ PROFILES = {
         "show_traceback": True,
     },
 }
+
+CODES = {}
+SIGNALS = {}

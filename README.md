@@ -72,7 +72,9 @@ This project is under an MIT License. [A copy of the license text is included in
 ## smonitor
 
 PyUnitWizard loads smonitor configuration from `_smonitor.py` in the package root
-(`pyunitwizard/_smonitor.py`) to provide structured diagnostics.
+(`pyunitwizard/_smonitor.py`) to provide structured diagnostics. The catalog and
+metadata live in `pyunitwizard/_private/smonitor/catalog.py` and
+`pyunitwizard/_private/smonitor/meta.py`.
 
 ### Copyright
 
