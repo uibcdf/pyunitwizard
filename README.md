@@ -69,6 +69,11 @@ q3 is now a pint quantity expressed in nanometer / picosecond.
 
 This project is under an MIT License. [A copy of the license text is included in this repository](LICENSE).
 
+## smonitor
+
+PyUnitWizard loads smonitor configuration from `_smonitor.py` in the package root
+(`pyunitwizard/_smonitor.py`) to provide structured diagnostics.
+
 ### Copyright
 
 Copyright (c) 2021-2022 [The Mexico Children's Hospital Federico Gómez](http://himfg.com.mx/), [its Unit of Research on Computational

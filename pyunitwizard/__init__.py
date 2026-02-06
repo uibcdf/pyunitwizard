@@ -17,6 +17,10 @@ except PackageNotFoundError:
     except ImportError:
         __version__ = "0.0.0+unknown"
 
+from ._private.smonitor import ensure_configured as _ensure_smonitor_configured
+
+_ensure_smonitor_configured()
+
 
 def __print_version__() -> None:
     print("PyUnitWizard version " + __version__)
@@ -119,4 +123,3 @@ try:
     configure.load_library('astropy.units')
 except:
     pass
-
