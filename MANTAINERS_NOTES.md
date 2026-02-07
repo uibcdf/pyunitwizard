@@ -27,6 +27,18 @@ Where are openmm.unit, unyt or Pint published?
 
 Maybe, if we find different examples of scientific libraries using different unit libraries, we could justify that in a same workflow changing forms is needed.
 
+---
+
+## 🛠️ Development Status & Infrastructure (2026-02-06)
+
+PyUnitWizard has reached a new level of architectural maturity:
+
+1.  **Professional Dependency Management**: Migrated from manual `try...except` blocks to **DepDigest**. Backends like `unyt`, `openmm.unit`, and `astropy.units` are now managed as soft dependencies with runtime enforcement.
+2.  **Telemetry & Traceability**: The entire API surface is instrumented with **SMonitor** (`@signal`). This provides nested execution context (breadcrumbs) which is vital for debugging complex call chains in MolSysMT.
+3.  **Architecture Validation**: The codebase is now compatible with automated AST audits to prevent leaky top-level imports.
+
+---
+
 # ChatGPT summary
 Aquí tienes el resumen actualizado, eliminando la referencia al factor de impacto de **JOSS** y aclarando su indexación:
 
