@@ -45,20 +45,30 @@ puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole', 'K'])
 ## Essential API for Developers
 
 ### 1. Construction
-Always use the factory functions to ensure consistent behavior:
+Always use factory functions. Strings are parsed automatically using the default parser.
 ```python
 q = puw.quantity(10.0, 'nm')
+q_from_str = puw.quantity('10.0 nm') # Implicit parsing
 u = puw.unit('angstroms')
 ```
 
-### 2. Extraction & Coercion
-Avoid manual attribute access (e.g., `.value` or `.unit`). Use the API instead:
+### 2. Extraction & Shortcuts
+Avoid manual attribute access. Use `get_value_and_unit` for efficient unpacking.
 ```python
 val = puw.get_value(q, to_unit='angstroms')
 unit = puw.get_unit(q)
+value, unit = puw.get_value_and_unit(q) # Recommended shortcut
 ```
 
-### 3. Conversion & Standardization
+### 3. Comparison (Science-Aware)
+Never use `==` for quantities. Use the API to handle tolerance and compatibility.
+```python
+if puw.are_compatible(q1, q2):
+    if puw.are_close(q1, q2, rtol=1e-5):
+        ...
+```
+
+### 4. Conversion & Standardization
 Bridge between different formats effortlessly:
 ```python
 # Convert to a specific form and unit
@@ -68,25 +78,26 @@ q_openmm = puw.convert(q, to_unit='nm', to_form='openmm.unit')
 q_std = puw.standardize(q)
 ```
 
-### 4. Validation
+### 5. Introspection & Validation
 Verify inputs without worrying about the underlying backend:
 ```python
-if not puw.check(q, dimensionality={'[L]': 1}):
-    raise ValueError("Expected a length quantity")
+dim = puw.get_dimensionality(q) # Returns e.g. {'[L]': 1}
+if puw.is_dimensionless(q):
+    ...
+
+if not puw.check(q, dimensionality={'[L]': 1}, shape=(3,)):
+    raise ValueError("Expected a 3D length vector")
 ```
 
 ## SMonitor Integration
 
-PyUnitWizard is instrumented with `@smonitor.signal`. All major unit operations (conversion, standardization, validation) appear in the diagnostic breadcrumb trail.
-
-**Conventions:**
-- **Tags**: Functions use tags like `['conversion']`, `['standardization']`, `['validation']`.
-- **Errors**: Unit mismatch errors are emitted through the SMonitor catalog.
+PyUnitWizard is instrumented with `@smonitor.signal`. Traceable tags include:
+- `['construction']`, `['extraction']`, `['comparison']`, `['conversion']`, `['standardization']`, `['validation']`, `['parse']`, `['introspection']`.
 
 ## Required behavior (non-negotiable)
 
 1.  **Lazy Backend Checks**: Do not assume optional backends are installed. Use `puw.is_quantity()` or catch `LibraryNotFoundError`.
-2.  **No Direct Backend Imports**: Avoid importing `pint` or `unyt` directly in your scientific logic. Rely on the `puw` API.
+2.  **No Direct Backend Imports**: Never `import pint` or `import unyt` in your scientific logic. Rely exclusively on the `puw` API.
 3.  **Use Contexts for Tests**: When testing unit-sensitive code, use `puw.context` to ensure a deterministic environment.
 
 ```python
