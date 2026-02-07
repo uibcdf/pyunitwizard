@@ -101,26 +101,17 @@ sys.modules.setdefault("pyunitwizard.main", _create_main_compat_module())
 
 _kernel.initialize()
 
-try:
-    import pint
+# --- Optional Backends Initialization via DepDigest logic ---
+from depdigest import is_installed
+
+if is_installed('pint'):
     configure.load_library('pint')
-except:
-    pass
 
-try:
-    import openmm.unit as openmm_unit
+if is_installed('openmm.unit'):
     configure.load_library('openmm.unit')
-except:
-    pass
 
-try:
-    import unyt
+if is_installed('unyt'):
     configure.load_library('unyt')
-except:
-    pass
 
-try:
-    import astropy.units  # noqa: F401
+if is_installed('astropy.units'):
     configure.load_library('astropy.units')
-except:
-    pass
