@@ -16,6 +16,8 @@ from .conversion import convert
 from .introspection import get_dimensionality
 
 
+from smonitor import signal
+
 def _standard_units_lstsq(solution: np.ndarray, standards: dict) -> Optional[UnitLike]:
     """ Auxiliary function for get_standard_units.
         Returns standard units by using least squares method.
@@ -44,6 +46,7 @@ def _standard_units_lstsq(solution: np.ndarray, standards: dict) -> Optional[Uni
     return None
 
 
+@signal(tags=["standardization"])
 def get_standard_units(
     quantity_or_unit: Optional[QuantityOrUnit] = None,
     dimensionality: Optional[dict] = None,
@@ -137,6 +140,7 @@ def get_standard_units(
     return output
 
 
+@signal(tags=["standardization"])
 def standardize(
     quantity_or_unit: QuantityOrUnit, to_form: Optional[str] = None
 ) -> QuantityOrUnit:

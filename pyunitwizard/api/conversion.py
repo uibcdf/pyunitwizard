@@ -21,6 +21,9 @@ from ..parse import parse as _parse
 from .introspection import get_form, is_unit
 
 
+from smonitor import signal
+
+@signal(tags=["conversion"])
 def convert(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,
@@ -136,6 +139,7 @@ def convert(
     return output
 
 
+@signal(tags=["conversion"])
 def to_string(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,

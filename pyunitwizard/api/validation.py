@@ -11,6 +11,9 @@ from .extraction import get_unit, get_value
 from .introspection import get_dimensionality, is_quantity, is_unit
 
 
+from smonitor import signal
+
+@signal(tags=["validation"])
 def check(
     quantity_or_unit: Any,
     dimensionality: Optional[Dict[str, int]] = None,

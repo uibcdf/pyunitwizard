@@ -14,6 +14,9 @@ from ..forms import dict_make_quantity
 from .introspection import is_quantity, is_unit
 
 
+from smonitor import signal
+
+@signal(tags=["construction"])
 def quantity(
     value: Union[int, float, ArrayLike],
     unit: Optional[UnitLike] = None,
@@ -80,6 +83,7 @@ def quantity(
     return output
 
 
+@signal(tags=["construction"])
 def unit(unit: str, form: Optional[str] = None, parser: Optional[str] = None) -> UnitLike:
     """ Returns a unit.
 

@@ -13,9 +13,11 @@ if TYPE_CHECKING:  # pragma: no cover - circular import guard
     from .conversion import convert
 
 
+from smonitor import signal
+
 _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
 
-
+@signal(tags=["introspection"])
 def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     """ Returns the form of a quantity as a string.
 
@@ -115,6 +117,7 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> b
     return output
 
 
+@signal(tags=["introspection"])
 def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
     """ Returns the dimensionality of the quantity or unit.
 

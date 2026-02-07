@@ -61,7 +61,10 @@ def _parse_with_pint(string: str):
     else:
        return dict_translate_quantity['string']['pint'](string)
 
+from smonitor import signal
+
 @lru_cache(maxsize=1024)
+@signal(tags=["parse"])
 def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
     """ Parses a string and returns a quantity.
 

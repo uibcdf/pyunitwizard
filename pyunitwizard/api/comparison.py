@@ -11,6 +11,8 @@ from ..forms import dict_compatibility
 from .introspection import get_dimensionality, get_form, is_dimensionless, is_quantity, is_unit
 
 
+from smonitor import signal
+
 def similarity(
     quantity_or_unit_1: QuantityOrUnit,
     quantity_or_unit_2: QuantityOrUnit,
@@ -23,6 +25,7 @@ def similarity(
     )
 
 
+@signal(tags=["comparison"])
 def are_close(
     quantity_1: QuantityLike,
     quantity_2: QuantityLike,
@@ -67,6 +70,7 @@ def are_close(
     return False
 
 
+@signal(tags=["comparison"])
 def are_equal(
     quantity_or_unit_1: QuantityOrUnit,
     quantity_or_unit_2: QuantityOrUnit,
@@ -129,6 +133,7 @@ def compatibility(
     return are_compatible(quantity_or_unit_1, quantity_or_unit_2)
 
 
+@signal(tags=["comparison"])
 def are_compatible(
     quantity_or_unit_1: QuantityOrUnit,
     quantity_or_unit_2: QuantityOrUnit,

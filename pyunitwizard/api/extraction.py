@@ -11,6 +11,9 @@ from ..forms import dict_change_value
 from .introspection import get_form
 
 
+from smonitor import signal
+
+@signal(tags=["extraction"])
 def get_value(
     quantity: QuantityLike,
     to_unit: Optional[str] = None,
@@ -44,6 +47,7 @@ def get_value(
     return convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
 
 
+@signal(tags=["extraction"])
 def get_unit(
     quantity: QuantityLike,
     to_form: Optional[str] = None,
@@ -79,6 +83,7 @@ def get_unit(
     return convert(quantity, to_form=to_form, parser=parser, to_type="unit")
 
 
+@signal(tags=["extraction"])
 def get_value_and_unit(
     quantity: QuantityLike,
     to_unit: Optional[str] = None,
