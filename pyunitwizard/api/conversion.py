@@ -24,7 +24,7 @@ from .introspection import get_form, is_unit
 from smonitor import signal
 from depdigest import dep_digest
 
-@signal(tags=["conversion"])
+@signal(tags=["conversion"], exception_level="DEBUG")
 @dep_digest('unyt', when={'to_form': 'unyt'})
 @dep_digest('openmm.unit', when={'to_form': 'openmm.unit'})
 @dep_digest('astropy.units', when={'to_form': 'astropy.units'})
@@ -143,7 +143,7 @@ def convert(
     return output
 
 
-@signal(tags=["conversion"])
+@signal(tags=["conversion"], exception_level="DEBUG")
 def to_string(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,
