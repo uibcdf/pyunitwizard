@@ -64,7 +64,7 @@ def _parse_with_pint(string: str):
 from smonitor import signal
 
 @lru_cache(maxsize=1024)
-@signal(tags=["parse"])
+@signal(tags=["parse"], exception_level="DEBUG")
 def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
     """ Parses a string and returns a quantity.
 

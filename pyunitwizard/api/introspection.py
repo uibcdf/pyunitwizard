@@ -44,6 +44,7 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     raise NotImplementedFormError(type(quantity_or_unit))
 
 
+@signal(tags=["introspection"], exception_level="DEBUG")
 def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> bool:
     """ Check whether an object is a quantity
 
@@ -81,6 +82,7 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
     return output
 
 
+@signal(tags=["introspection"], exception_level="DEBUG")
 def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> bool:
     """ Check whether an object is a unit
 
