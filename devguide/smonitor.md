@@ -13,6 +13,8 @@ PyUnitWizard uses SMonitor as the single diagnostics layer.
 - Emit through catalog entries only.
 - Keep user messages explicit and helpful.
 - Keep URLs in `meta.py` so hints remain consistent.
+- Keep `CODES` and `SIGNALS` wired from `pyunitwizard/_private/smonitor/catalog.py` as the single source of truth.
+- Do not silence emission failures with `except Exception: pass`; use a fallback warning/log instead.
 
 ## Telemetry & Traceability
 

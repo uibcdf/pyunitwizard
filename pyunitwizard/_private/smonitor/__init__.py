@@ -1,5 +1,5 @@
 """smonitor catalog for PyUnitWizard (private)."""
 
-from .catalog import CATALOG, PACKAGE_ROOT, META
+from .catalog import CATALOG, CODES, SIGNALS, PACKAGE_ROOT, META
 
-__all__ = ["CATALOG", "PACKAGE_ROOT", "META"]
+__all__ = ["CATALOG", "CODES", "SIGNALS", "PACKAGE_ROOT", "META"]
