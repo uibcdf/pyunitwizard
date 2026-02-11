@@ -62,7 +62,15 @@ CATALOG = {
             "category": "standards",
             "level": "ERROR",
         },
-    }
+    },
+    "events": {
+        "ProbeMiss": {
+            "code": "PUW-DBG-PROBE-001",
+            "source": "pyunitwizard.debug.probe_miss",
+            "category": "probe",
+            "level": "DEBUG",
+        },
+    },
 }
 
 CODES = {

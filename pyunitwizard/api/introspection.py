@@ -6,6 +6,7 @@ from typing import Dict, Optional, TYPE_CHECKING
 
 from .._private.exceptions import NotImplementedFormError
 from .._private.quantity_or_unit import QuantityOrUnit
+from .._private.smonitor.emitter import emit_probe_miss
 from ..forms import dict_is_form, dict_is_quantity, dict_is_unit, dict_dimensionality
 from .. import kernel
 
@@ -64,6 +65,8 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
 
     from .conversion import convert  # Local import to avoid circular dependency
 
+    probe_input = quantity_or_unit
+
     if isinstance(quantity_or_unit, str):
         try:
             quantity_or_unit = convert(
@@ -71,13 +74,18 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
             )
             output = dict_is_quantity[kernel.default_form](quantity_or_unit)
         except Exception:
+            emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
             return False
     else:
         try:
             form = get_form(quantity_or_unit)
             output = dict_is_quantity[form](quantity_or_unit)
         except Exception:
+            emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
             return False
+
+    if not output:
+        emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
 
     return output
 
@@ -103,18 +111,25 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> b
     from .conversion import convert  # Local import to avoid circular dependency
     from .extraction import get_value
 
+    probe_input = quantity_or_unit
+
     if isinstance(quantity_or_unit, str):
         try:
             quantity_or_unit = convert(quantity_or_unit, parser=parser)
             output = get_value(quantity_or_unit) == 1
         except Exception:
+            emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_unit")
             return False
     else:
         try:
             form = get_form(quantity_or_unit)
             output = dict_is_unit[form](quantity_or_unit)
         except Exception:
+            emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_unit")
             return False
+
+    if not output:
+        emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_unit")
 
     return output
 
