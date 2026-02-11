@@ -1,6 +1,8 @@
 from pyunitwizard.parse import _parse_with_pint, parse
 import numpy as np
 import pyunitwizard as puw
+import pytest
+from pyunitwizard._private.exceptions import LibraryWithoutParserError
 
 from .helpers import loaded_libraries
 
@@ -90,3 +92,13 @@ def test_parse_to_unyt():
         quantity = parse("[[2, 5, 7], [7, 8, 9]] joules", to_form="unyt")
         assert np.allclose(quantity.value, np.array([[2, 5, 7], [7, 8, 9]]))
         assert str(quantity.units) == "J"
+
+
+def test_parse_library_without_parser_has_readable_message():
+    with pytest.raises(LibraryWithoutParserError) as excinfo:
+        parse("1 nm", parser="openmm.unit")
+
+    message = str(excinfo.value)
+    assert isinstance(message, str)
+    assert message.strip() != ""
+    assert "parser" in message.lower()
