@@ -122,6 +122,13 @@ CODES = {
         "dev_message": "No standards defined in '{caller}'.",
         "dev_hint": "Call configure.set_standard_units(). Docs: {doc_url}",
     },
+    "PUW-DBG-PROBE-001": {
+        "title": "Expected probe miss",
+        "user_message": "Input is not a recognized quantity in this probe context.",
+        "user_hint": "No action is required.",
+        "dev_message": "Probe miss in '{caller}' for input '{value}'.",
+        "dev_hint": "This is expected during form/type detection flows.",
+    },
 }
 
 SIGNALS = {
@@ -133,4 +140,5 @@ SIGNALS = {
     "pyunitwizard.error.not_implemented_method": {"extra_required": ["caller"]},
     "pyunitwizard.error.not_implemented_parser": {"extra_required": ["parser", "caller"]},
     "pyunitwizard.error.no_standards": {"extra_required": ["caller"]},
+    "pyunitwizard.debug.probe_miss": {"extra_required": ["value", "caller"]},
 }

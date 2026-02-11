@@ -26,3 +26,16 @@ Key API functions are instrumented with `@smonitor.signal` to ensure that unit m
 - **Parsing**: `parse`.
 - **Introspection**: `get_form`, `get_dimensionality`.
 - **Extraction**: `get_value`, `get_unit`, `get_value_and_unit`.
+
+## Probing Contract
+
+Exploratory checks (`is_quantity`, `is_unit`, and detection paths that parse
+candidate strings) must follow this severity contract:
+
+- Expected probe miss (input is not a quantity/unit): `DEBUG`.
+- Recoverable anomaly with user impact: `WARNING`.
+- Real operation failure: `ERROR`.
+
+For cross-library consistency, expected probe misses should use explicit
+diagnostic codes/tags (for example `PUW-DBG-PROBE-001`) and must not surface
+as actionable errors in `user` profile.
