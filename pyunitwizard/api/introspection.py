@@ -18,7 +18,7 @@ from smonitor import signal
 
 _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
 
-@signal(tags=["introspection"])
+@signal(tags=["introspection"], exception_level="DEBUG")
 def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     """ Returns the form of a quantity as a string.
 
