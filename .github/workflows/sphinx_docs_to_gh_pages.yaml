@@ -12,7 +12,7 @@ jobs:
     name: Sphinx docs to gh-pages
     steps:
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -22,12 +22,12 @@ jobs:
           uname -a
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: 3.12
+          python-version: 3.13
 
       - name: Setup conda env
-        uses: mamba-org/setup-micromamba@v1
+        uses: mamba-org/setup-micromamba@v2
         with:
           environment-file: devtools/conda-envs/docs_env.yaml
           environment-name: docs
@@ -35,10 +35,9 @@ jobs:
             channels:
               - uibcdf
               - conda-forge
-              - defaults
             channel_priority: strict
           create-args: >-
-            python=3.12
+            python=3.13
 
       - name: Info conda
         shell: bash -l {0}
@@ -62,5 +61,5 @@ jobs:
           echo "::endgroup::"
 
       - name: Running the Sphinx to gh-pages Action
-        uses: uibcdf/action-sphinx-docs-to-gh-pages@v2.1.0
+        uses: uibcdf/action-sphinx-docs-to-gh-pages@main
 
