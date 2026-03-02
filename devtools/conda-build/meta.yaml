@@ -6,14 +6,17 @@ source:
 build:
   number: 1
 requirements:
-  build:
-  - python
+  host:
+  - python >=3.11,<3.14
   - pip
-  - setuptools >=61.0
-  - versioningit ~=2.0
+  - setuptools >=68.0
+  - versioningit >=3.0
   run:
-  - python
+  - python >=3.11,<3.14
+  - numpy
   - pint
+  - smonitor
+  - depdigest
 about:
   home: https://uibcdf.org
   license: MIT License

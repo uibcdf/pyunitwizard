@@ -1,7 +1,8 @@
 channels:
+- uibcdf
 - conda-forge
 dependencies:
-- python
+- python >=3.11,<3.14
 - pint
 - pytest
 - pytest-cov
@@ -10,3 +11,5 @@ dependencies:
 - openmm
 - unyt
 - astropy
+- depdigest
+- smonitor
