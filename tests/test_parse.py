@@ -1,8 +1,16 @@
-from pyunitwizard.parse import _parse_with_pint, parse
+from pyunitwizard.parse import (
+    _find_closing_bracket_position,
+    _find_closing_parenthesis_position,
+    _parse_with_pint,
+    parse,
+)
 import numpy as np
 import pyunitwizard as puw
 import pytest
-from pyunitwizard._private.exceptions import LibraryWithoutParserError
+from pyunitwizard._private.exceptions import (
+    ArgumentError,
+    LibraryWithoutParserError,
+)
 
 from .helpers import loaded_libraries
 
@@ -102,3 +110,25 @@ def test_parse_library_without_parser_has_readable_message():
     assert isinstance(message, str)
     assert message.strip() != ""
     assert "parser" in message.lower()
+
+def test_parse_rejects_non_string_input():
+    with pytest.raises(ArgumentError):
+        parse(3.0)  # type: ignore[arg-type]
+
+def test_parse_rejects_invalid_parser_name():
+    with pytest.raises(ValueError):
+        parse("1 nm", parser="unknown")
+
+def test_parse_bracket_helpers_raise_on_unbalanced_input():
+    with pytest.raises(ValueError):
+        _find_closing_bracket_position("[1, 2")
+    with pytest.raises(ValueError):
+        _find_closing_parenthesis_position("(1, 2")
+
+def test_parse_with_astropy_parser_if_available():
+    pytest.importorskip("astropy.units")
+    with loaded_libraries(['pint', 'astropy.units']):
+        quantity = parse("2 meter", parser="astropy.units", to_form="string")
+        assert isinstance(quantity, str)
+        assert "2" in quantity
+        assert "m" in quantity.lower()
