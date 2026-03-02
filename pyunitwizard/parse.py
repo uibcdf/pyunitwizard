@@ -1,4 +1,5 @@
 from ._private.exceptions import *
+from ._private.exceptions import ArgumentError as BadCallError
 from ._private.forms import digest_to_form
 from ._private.parsers import digest_parser
 from .forms import dict_translate_quantity

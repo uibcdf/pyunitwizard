@@ -48,7 +48,9 @@ def is_unit(quantity_or_unit: str) -> bool:
     from pyunitwizard.kernel import default_form, default_parser
     from pyunitwizard import convert as _convert, is_unit as _is_unit
 
-    tmp_quantity_or_unit = _convert(quantity_or_unit, to_form=default_form, parser=default_parser)
+    tmp_quantity_or_unit = _convert(
+        quantity_or_unit, to_form=default_form, parser=default_parser, to_type="unit"
+    )
     return _is_unit(tmp_quantity_or_unit)
 
 def dimensionality(quantity_or_unit: str) -> Dict[str, int]:
@@ -280,4 +282,3 @@ def unit_to_astropy_units(unit: str):
     quantity = quantity_to_astropy_units(unit)
 
     return get_astropy_unit(quantity)
-
