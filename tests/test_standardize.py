@@ -117,3 +117,19 @@ def test_standardize_unyt_quantity():
     quantity = puw.standardize(quantity)
     assert np.allclose(puw.get_value(quantity), [1.0, 2.0])
     assert str(puw.get_unit(quantity)) == "picosecond"
+
+def test_get_standard_units_uses_tentative_base_standards_for_combinations():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm*ps'])
+
+    standard_unit = puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
+    assert standard_unit == 'nm*ps'
+
+def test_standardize_unit_input_returns_standard_unit():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    standardized_unit = puw.standardize(puw.unit('meter', form='pint'))
+    assert puw.get_unit(standardized_unit) == 'nanometer'

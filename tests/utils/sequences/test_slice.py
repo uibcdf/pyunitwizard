@@ -37,3 +37,52 @@ def test_slice_value_type_ndarray_from_list_values():
     value = puw.get_value(sliced)
     assert isinstance(value, np.ndarray)
     assert np.all(value == np.array([0, 1]))
+
+def test_slice_tuple_values_with_indices_and_value_type_tuple():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    item = puw.quantity((0, 1, 2, 3), 'm', 'pint')
+    sliced = puw.utils.sequences.slice(item, indices=[1, 3], value_type='tuple')
+
+    assert np.allclose(puw.get_value(sliced), np.array([1, 3]))
+
+def test_slice_invalid_item_type_raises():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    with pytest.raises(ValueError):
+        puw.utils.sequences.slice(3.14)
+
+def test_slice_invalid_value_type_option_raises():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    item = puw.quantity([0, 1, 2], 'm', 'pint')
+    with pytest.raises(ValueError):
+        puw.utils.sequences.slice(item, value_type='invalid')
+
+def test_slice_with_to_unit_and_to_form_applies_conversion():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    item = puw.quantity([0, 1], 'm', 'pint')
+    sliced = puw.utils.sequences.slice(item, to_unit='cm', to_form='string')
+
+    assert isinstance(sliced, str)
+    assert 'centimeter' in sliced
+
+def test_slice_with_standardized_flag_applies_standardize():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    item = puw.quantity([1.0], 'meter', 'pint')
+    sliced = puw.utils.sequences.slice(item, standardized=True)
+
+    assert puw.get_unit(sliced) == 'nanometer'

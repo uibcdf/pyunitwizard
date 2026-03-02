@@ -13,7 +13,7 @@ from .._private.parsers import digest_parser
 from .._private.quantity_or_unit import QuantityOrUnit, UnitLike
 from .comparison import are_compatible
 from .conversion import convert
-from .introspection import get_dimensionality
+from .introspection import get_dimensionality, is_unit
 
 
 from smonitor import signal
@@ -167,6 +167,9 @@ def standardize(
     """
 
     to_form = digest_form(to_form)
+
+    if is_unit(quantity_or_unit):
+        return get_standard_units(quantity_or_unit, form=to_form)
 
     try:
         output = convert(quantity_or_unit, to_form=to_form)
