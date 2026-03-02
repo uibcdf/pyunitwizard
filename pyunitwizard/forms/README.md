@@ -11,12 +11,12 @@ This directory documents how form adapters integrate with the dispatchers in `py
 
 ### `api_openmm_unit.py`
 - Wraps `openmm.unit` quantities and units, exposing predicate helpers and dimensionality translation into the shared SI basis.【F:pyunitwizard/forms/api_openmm_unit.py†L5-L95】
-- Implements compatibility, quantity creation, conversions, and flags `parser = True` even though the string parser stubs currently raise `LibraryWithoutParserError` placeholders.【F:pyunitwizard/forms/api_openmm_unit.py†L10-L211】
+- Implements compatibility, quantity creation, and conversions. Parsing from raw strings is not supported (`parser = False`) and parser stubs raise `LibraryWithoutParserError` placeholders.【F:pyunitwizard/forms/api_openmm_unit.py†L10-L211】
 - Supplies translators to other forms (via functions such as `quantity_to_pint`, `quantity_to_unyt`, and their `unit_to_*` counterparts) so the dispatcher can bridge OpenMM data.【F:pyunitwizard/forms/api_openmm_unit.py†L215-L350】
 
 ### `api_unyt.py`
 - Adapts Unyt arrays, quantities, and units, reusing Pint conversions to compute dimensionality and compatibility across forms.【F:pyunitwizard/forms/api_unyt.py†L6-L126】
-- Implements creation, value/unit extraction, and conversion helpers; parser stubs raise `LibraryWithoutParserError` because Unyt lacks a native string parser.【F:pyunitwizard/forms/api_unyt.py†L127-L213】
+- Implements creation, value/unit extraction, and conversion helpers; raw string parsing is disabled (`parser = False`) and parser stubs raise `LibraryWithoutParserError` because Unyt lacks a native string parser.【F:pyunitwizard/forms/api_unyt.py†L127-L213】
 - Offers translators to string, Pint, OpenMM, and Astropy modules, ensuring round-trip conversions across the supported ecosystems.【F:pyunitwizard/forms/api_unyt.py†L214-L350】
 
 ### `api_astropy_unit.py`

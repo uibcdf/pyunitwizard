@@ -1,7 +1,7 @@
 # PyUnitWizard
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/) 
+[![](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/) 
 [![Documentation](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml)
 [![CI](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml)
 [![codecov](https://codecov.io/github/uibcdf/PyUnitWizard/graph/badge.svg?token=9ZMA4YZLOR)](https://codecov.io/github/uibcdf/PyUnitWizard)
@@ -75,6 +75,16 @@ PyUnitWizard loads smonitor configuration from `_smonitor.py` in the package roo
 (`pyunitwizard/_smonitor.py`) to provide structured diagnostics. The catalog and
 metadata live in `pyunitwizard/_private/smonitor/catalog.py` and
 `pyunitwizard/_private/smonitor/meta.py` (docs/issues/API URLs used in hints).
+
+## Development roadmap
+
+The consolidation plan toward a stable `1.0.0` line is tracked in:
+
+- `devguide/README.md`
+- `devguide/roadmap.md`
+- `devguide/release_1.0.0_checklist.md`
+
+Current baseline is the `0.17.x` line (the historical `1.0.0` tag was created by mistake and is not used as release baseline).
 
 ### Copyright
 
