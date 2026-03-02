@@ -113,9 +113,13 @@ def compatibility(quantity_or_unit_1: Union[openmm_unit.Quantity, openmm_unit.Un
    
     if is_quantity(quantity_or_unit_1):
         tmp_unit_1 = get_unit(quantity_or_unit_1)
+    else:
+        tmp_unit_1 = quantity_or_unit_1
 
     if is_quantity(quantity_or_unit_2):
         tmp_unit_2 = get_unit(quantity_or_unit_2)
+    else:
+        tmp_unit_2 = quantity_or_unit_2
 
     return tmp_unit_1.is_compatible(tmp_unit_2)
 
