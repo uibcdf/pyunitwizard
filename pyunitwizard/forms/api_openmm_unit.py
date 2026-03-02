@@ -8,7 +8,7 @@ except:
     raise LibraryNotFoundError('openmm')
 
 form_name = 'openmm.unit'
-parser = True
+parser = False
 
 #is_form={
 #    openmm_unit.Quantity:form_name,
@@ -348,4 +348,3 @@ def unit_to_astropy_units(unit: openmm_unit.Unit):
     quantity = quantity_to_astropy_units(1.0*unit)
 
     return get_astropy_unit(quantity)
-

@@ -18,6 +18,18 @@ def test_default_parser():
     puw.configure.load_library(['pint', 'openmm.unit'])
     assert puw.configure.get_default_parser()=='pint'
 
+def test_set_default_parser_normalizes_input_form():
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'openmm.unit'])
+
+    puw.configure.set_default_parser('PINT')
+    assert puw.configure.get_default_parser() == 'pint'
+
+def test_get_parsers_loaded_only_reports_backends_with_parser_support():
+    puw.configure.reset()
+    puw.configure.load_library(['openmm.unit', 'unyt'])
+    assert puw.configure.get_parsers_loaded() == []
+
 def test_init_openmolecularsystems():
     puw.configure.load_library(['pint','openmm.unit'])
     puw.configure.set_default_form('openmm.unit')

@@ -11,7 +11,7 @@ except:
     raise LibraryNotFoundError('unyt')
 
 form_name = 'unyt'
-parser = True
+parser = False
 
 #is_form = {
 #    unyt_array:    form_name,
@@ -108,7 +108,7 @@ def compatibility(quantity_or_unit_1: Union[unyt_array, unyt_quantity, unyt_unit
     if is_quantity(quantity_or_unit_2):
         unit_2 = get_unit(quantity_or_unit_2)
     else:
-        unit_2 = unit_2
+        unit_2 = quantity_or_unit_2
 
     return unit_1.same_dimensions_as(unit_2)
 
@@ -335,5 +335,3 @@ def unit_to_astropy_units(unit: unyt_unit):
     quantity = quantity_to_astropy_units(1.0*unit)
 
     return get_astropy_unit(quantity)
-
-

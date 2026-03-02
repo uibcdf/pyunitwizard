@@ -95,10 +95,15 @@ def load_library(library_names: Union[str, List[str]]):
         kernel.default_form = library_names[0]
 
     if kernel.default_parser is None:
+        fallback_parser = None
         for library_name in library_names:
-            if library_name in parsers:
+            if fallback_parser is None:
+                fallback_parser = library_name
+            if library_name in kernel.loaded_parsers:
                 kernel.default_parser = library_name
                 break
+        if kernel.default_parser is None:
+            kernel.default_parser = fallback_parser
 
 
 def get_default_form() -> str:
@@ -137,11 +142,11 @@ def set_default_parser(parser: str) -> None:
 
         Parameters
         ----------
-        form : str
-            The new default form.
+        parser : str
+            The new default parser.
     """
     form = digest_form(parser)
-    kernel.default_parser = parser
+    kernel.default_parser = form
 
 def get_standard_units() -> Dict[str, Dict[str, int]]:
     """ Returns a nested dictionary where each subdictionary corresponds
