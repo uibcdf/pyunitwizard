@@ -8,7 +8,7 @@ Use this checklist as a hard release gate. All items must be complete before cre
 - [ ] CI matrix is green for Python `3.11`, `3.12`, `3.13`.
 - [ ] Coverage trend is stable or improving in critical API modules.
 - [ ] No flaky tests in release-critical paths.
-- [ ] `.github/workflows/release_gates.yaml` is green for the candidate commit.
+- [ ] `.github/workflows/release_gates.yaml` (manual `workflow_dispatch`) is green for the candidate commit.
 
 ## 2. API and behavior
 

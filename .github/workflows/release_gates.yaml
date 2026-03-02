@@ -2,8 +2,10 @@ name: Release Gates
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [ "main" ]
+
+concurrency:
+  group: release-gates-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tests_and_contracts:
