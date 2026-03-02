@@ -1,0 +1,17 @@
+channels:
+- uibcdf
+- conda-forge
+dependencies:
+- python >=3.11,<3.14
+- setuptools
+- build
+- pint
+- pytest
+- pytest-cov
+- pytest-xdist
+- codecov
+- openmm
+- unyt
+- astropy
+- depdigest
+- smonitor

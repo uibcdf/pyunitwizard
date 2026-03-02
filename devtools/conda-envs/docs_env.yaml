@@ -3,6 +3,7 @@ channels:
 - conda-forge
 dependencies:
 - python >=3.11,<3.14
+- setuptools
 - pint
 - sphinx
 - pydata-sphinx-theme
