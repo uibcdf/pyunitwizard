@@ -97,7 +97,7 @@ jobs:
         cat ./coverage.xml
 
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v4
       with:
         verbose: true
         file: ./coverage.xml
@@ -106,7 +106,6 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Upload test results to Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/test-results-action@v1
       with:
-        report-type: test_results
         token: ${{ secrets.CODECOV_TOKEN }}
