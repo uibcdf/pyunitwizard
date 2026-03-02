@@ -86,3 +86,49 @@ def test_slice_with_standardized_flag_applies_standardize():
     sliced = puw.utils.sequences.slice(item, standardized=True)
 
     assert puw.get_unit(sliced) == 'nanometer'
+
+def test_slice_openmm_list_value_with_indices_and_slice_window():
+
+    puw.configure.reset()
+    puw.configure.load_library(['openmm.unit'])
+    openmm_unit = puw.forms.api_openmm_unit.openmm_unit
+
+    item = puw.quantity([0, 1, 2, 3], openmm_unit.meter, form='openmm.unit')
+    sliced = puw.utils.sequences.slice(item, indices=[0, 2, 3], start=1, stop=3)
+
+    assert puw.get_value(sliced) == [2, 3]
+
+def test_slice_openmm_tuple_value_with_indices_and_slice_window():
+
+    puw.configure.reset()
+    puw.configure.load_library(['openmm.unit'])
+    openmm_unit = puw.forms.api_openmm_unit.openmm_unit
+
+    item = puw.quantity((0, 1, 2, 3), openmm_unit.meter, form='openmm.unit')
+    sliced = puw.utils.sequences.slice(item, indices=[0, 2, 3], start=0, stop=2)
+
+    assert puw.get_value(sliced) == (0, 2)
+
+def test_slice_openmm_set_value_rejects_indices_and_slice_window():
+
+    puw.configure.reset()
+    puw.configure.load_library(['openmm.unit'])
+    openmm_unit = puw.forms.api_openmm_unit.openmm_unit
+
+    item = puw.quantity({0, 1, 2}, openmm_unit.meter, form='openmm.unit')
+    with pytest.raises(ValueError):
+        puw.utils.sequences.slice(item, indices=[0, 1])
+
+    with pytest.raises(ValueError):
+        puw.utils.sequences.slice(item, start=0, stop=1)
+
+def test_slice_value_type_list_option():
+
+    puw.configure.reset()
+    puw.configure.load_library(['openmm.unit'])
+    openmm_unit = puw.forms.api_openmm_unit.openmm_unit
+
+    item = puw.quantity((0, 1, 2), openmm_unit.meter, form='openmm.unit')
+    sliced = puw.utils.sequences.slice(item, value_type='list')
+
+    assert isinstance(puw.get_value(sliced), list)

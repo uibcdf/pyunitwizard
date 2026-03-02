@@ -5,6 +5,7 @@ import openmm.unit as openmm_unit
 import pytest
 import numpy as np
 import unyt
+from pyunitwizard.api.standardization import _standard_units_lstsq
 
 puw.configure.reset()
 puw.configure.load_library(['pint', 'openmm.unit', 'unyt'])
@@ -133,3 +134,24 @@ def test_standardize_unit_input_returns_standard_unit():
 
     standardized_unit = puw.standardize(puw.unit('meter', form='pint'))
     assert puw.get_unit(standardized_unit) == 'nanometer'
+
+def test_get_standard_units_without_args_uses_adimensional_standard():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['radian'])
+
+    standard_unit = puw.get_standard_units(form='string')
+    assert standard_unit == 'radian'
+
+def test_get_standard_units_combination_raises_without_fundamental_standards():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['radian'])
+
+    with pytest.raises(NoStandardsError):
+        puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
+
+def test_standard_units_lstsq_returns_none_when_unsatisfied():
+    solution = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+    standards = {'second': np.array([0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])}
+    assert _standard_units_lstsq(solution, standards) is None
