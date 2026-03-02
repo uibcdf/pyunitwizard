@@ -1,7 +1,7 @@
 # PyUnitWizard
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/) 
+[![](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/) 
 [![Documentation](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml)
 [![CI](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml)
 [![codecov](https://codecov.io/github/uibcdf/PyUnitWizard/graph/badge.svg?token=9ZMA4YZLOR)](https://codecov.io/github/uibcdf/PyUnitWizard)
@@ -23,7 +23,7 @@ in your code to change the form of your quantities with no effort.
 ```ipython
 In [1]: import pyunitwizard as puw
 
-In [2]: puw.configure.load_libraries(['pint', 'openmm.unit'])
+In [2]: puw.configure.load_library(['pint', 'openmm.unit'])
    ...: puw.configure.set_default_form('pint')
    ...: puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
    ...: 
@@ -39,7 +39,7 @@ Out[5]: 2.5
 In [6]: puw.get_unit(q)
 Out[6]: <Unit('nanometer / picosecond')>
 
-In [7]: puw.dimensionality(q)
+In [7]: puw.get_dimensionality(q)
 Out[7]: {'[L]': 1, '[M]': 0, '[T]': -1, '[K]': 0, '[mol]': 0, '[A]': 0, '[Cd]': 0}
 
 In [8]: q2 = puw.convert(q, to_unit='angstroms/femtoseconds', to_form='openmm.unit')

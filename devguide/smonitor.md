@@ -7,6 +7,7 @@ PyUnitWizard uses SMonitor as the single diagnostics layer.
 - `pyunitwizard/_smonitor.py`
 - `pyunitwizard/_private/smonitor/catalog.py`
 - `pyunitwizard/_private/smonitor/meta.py`
+- `pyunitwizard/_private/smonitor/emitter.py`
 
 ## Rules
 
@@ -15,6 +16,8 @@ PyUnitWizard uses SMonitor as the single diagnostics layer.
 - Keep URLs in `meta.py` so hints remain consistent.
 - Keep `CODES` and `SIGNALS` wired from `pyunitwizard/_private/smonitor/catalog.py` as the single source of truth.
 - Do not silence emission failures with `except Exception: pass`; use a fallback warning/log instead.
+- Keep `ensure_configured(PACKAGE_ROOT)` in `pyunitwizard.__init__` so diagnostics are initialized at import time.
+- Use `DiagnosticBundle` helpers (`warn`, `warn_once`, `resolve`) from `emitter.py` for warnings and message resolution.
 
 ## Telemetry & Traceability
 
@@ -28,6 +31,7 @@ Key API functions are instrumented with `@smonitor.signal` to ensure that unit m
 - **Parsing**: `parse`.
 - **Introspection**: `get_form`, `get_dimensionality`.
 - **Extraction**: `get_value`, `get_unit`, `get_value_and_unit`.
+- **Comparison**: `are_close`, `are_equal`, `are_compatible`.
 
 ## Probing Contract
 
@@ -41,3 +45,5 @@ candidate strings) must follow this severity contract:
 For cross-library consistency, expected probe misses should use explicit
 diagnostic codes/tags (for example `PUW-DBG-PROBE-001`) and must not surface
 as actionable errors in `user` profile.
+
+`emit_probe_miss()` in `pyunitwizard/_private/smonitor/emitter.py` is the canonical helper for this path.
