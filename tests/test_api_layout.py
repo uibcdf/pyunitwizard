@@ -9,6 +9,7 @@ API_SYMBOLS = [
     "change_value",
     "check",
     "compatibility",
+    "context",
     "convert",
     "get_dimensionality",
     "get_form",

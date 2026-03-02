@@ -62,6 +62,14 @@ def test_get_standard_units_dimensionality():
     unit = puw.unit("nanometer", form="pint")
     assert standard_unit == unit
 
+def test_get_standard_units_adimensional_from_dimensionality_only():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['radian'])
+
+    standard_unit = puw.get_standard_units(dimensionality={}, form='string')
+    assert standard_unit == "radian"
+
 
 ### Tests for standardize ###
 

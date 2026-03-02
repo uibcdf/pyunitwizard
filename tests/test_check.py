@@ -74,6 +74,25 @@ def test_check_multiple():
     quantity = puw.quantity([0,0,0], 'nm/ps')
     assert puw.check(quantity, dimensionality={'[L]':1, '[T]':-1}, value_type=np.ndarray, shape=(3,))
 
+def test_check_unit_constraints():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    unit = puw.unit('nm')
+    assert puw.check(unit, unit='nm')
+    assert puw.check(unit, dimensionality={'[L]': 1})
+    assert not puw.check(unit, dimensionality={'[T]': 1})
+    assert not puw.check(unit, unit='ps')
+
+def test_check_dtype_name_on_scalar_quantity_returns_false():
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    quantity = puw.quantity(3.0, 'nm')
+    assert not puw.check(quantity, dtype_name='float64')
+
 @pytest.fixture
 def pint_quantity():
 

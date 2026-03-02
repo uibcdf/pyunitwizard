@@ -97,7 +97,7 @@ def get_standard_units(
             raise NoStandardsError
 
         for standard_unit, _ in kernel.adimensional_standards.items():
-            if are_compatible(quantity_or_unit, standard_unit):
+            if quantity_or_unit is None or are_compatible(quantity_or_unit, standard_unit):
                 output = standard_unit
                 break
 

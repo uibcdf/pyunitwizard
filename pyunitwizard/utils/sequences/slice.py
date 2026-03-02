@@ -1,7 +1,9 @@
 from .is_sequence import is_sequence
+from .is_sequence import is_sequence_of_quantities
 from .is_quantity_value_sequence import is_quantity_value_sequence
 from .concatenate import concatenate
 from numpy import ndarray
+import numpy as np
 
 def slice(item, indices=None, start=None, stop=None, step=None, to_unit=None, to_form=None, value_type=None,
           standardized=False):
@@ -18,7 +20,7 @@ def slice(item, indices=None, start=None, stop=None, step=None, to_unit=None, to
             elif isinstance(value, list):
                 value = [value[ii] for ii in indices]
             elif isinstance(value, tuple):
-                value = (value[ii] for ii in indices)
+                value = tuple(value[ii] for ii in indices)
             else:
                 raise ValueError('Invalid value type')
 
@@ -38,7 +40,7 @@ def slice(item, indices=None, start=None, stop=None, step=None, to_unit=None, to
             elif value_type == 'tuple':
                 value = tuple(value)
             elif value_type == 'ndarray':
-                value = ndarray(value)
+                value = np.asarray(value)
             else:
                 raise ValueError('Invalid value_type')
 
@@ -63,4 +65,3 @@ def slice(item, indices=None, start=None, stop=None, step=None, to_unit=None, to
         item = standardize(item)
 
     return item
-
