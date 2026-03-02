@@ -20,3 +20,6 @@ def test_api_unyt_unit_translation_helpers():
 
     openmm_unit = puw.forms.api_unyt.unit_to_openmm_unit(unit)
     assert "nm" in str(openmm_unit).lower() or "nanometer" in str(openmm_unit).lower()
+
+    astropy_unit = puw.forms.api_unyt.unit_to_astropy_units(unit)
+    assert "nm" in str(astropy_unit).lower() or "nanometer" in str(astropy_unit).lower()
