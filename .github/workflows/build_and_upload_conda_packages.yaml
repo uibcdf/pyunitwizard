@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false  # do not cancel all in-progress jobs if any job variation fails
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13"]
 
     steps:
       
@@ -61,4 +61,3 @@ jobs:
           platform_osx-arm64: true
           platform_win-64: true
           token: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}
-
