@@ -112,9 +112,13 @@ def compatibility(quantity_or_unit_1: Union[pint.Quantity, pint.Unit],
     """
     if is_quantity(quantity_or_unit_1):
         tmp_unit_1 = get_unit(quantity_or_unit_1)
+    else:
+        tmp_unit_1 = quantity_or_unit_1
 
     if is_quantity(quantity_or_unit_2):
         tmp_unit_2 = get_unit(quantity_or_unit_2)
+    else:
+        tmp_unit_2 = quantity_or_unit_2
 
     return tmp_unit_1.is_compatible_with(tmp_unit_2)
 
@@ -374,5 +378,4 @@ def unit_to_astropy_units(unit: pint.Unit):
     quantity = quantity_to_astropy_units(1.0*unit)
 
     return get_astropy_unit(quantity)
-
 
