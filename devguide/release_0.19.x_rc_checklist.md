@@ -6,6 +6,14 @@ tagging `1.0.0`.
 All sections must be complete at least once during RC, and the "RC close"
 section must be complete on the candidate commit that will lead to `1.0.0`.
 
+## Status snapshot at `0.19.1` (2026-03-03)
+
+- RC checkpoint tag published: `0.19.1`.
+- Full test suite on local Python `3.13`: `252 passed`.
+- Ecosystem integration smoke tests for `argdigest`, `depdigest`, `smonitor`: green.
+- Local sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`): green when repos are present.
+- Remaining work toward RC close: CI/release-gates continuity over time, sustained incident tracking, and final release-owner go/no-go.
+
 ## 1. RC entry (open the stability window)
 
 - [ ] Confirm baseline policy: Python `3.11`, `3.12`, `3.13` supported.

@@ -14,10 +14,11 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active release-candidate line: `0.19.x` (RC window before `1.0.0`).
+- Current RC tag checkpoint: `0.19.1`.
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test/coverage snapshot (2026-03-03): `243 passed`, total coverage `96%`.
+- Current local test snapshot (2026-03-03): `252 passed` (full `pytest` suite).
 
 ## Coordination scope
 

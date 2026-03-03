@@ -52,6 +52,16 @@ line to a stable `1.0.0` release.
 - Complete deprecation contract for `pyunitwizard.main` (warning semantics and migration path).
 - Keep this line open for a stability observation window before `1.0.0`.
 
+### Current checkpoint (2026-03-03)
+
+- Tag `0.19.1` created from `main` as RC checkpoint.
+- Full suite baseline at checkpoint: `252 passed` on local Python `3.13`.
+- Integration smoke coverage includes:
+  - sibling repo import precedence and contract checks,
+  - DepDigest contract/dependency assertions,
+  - ArgDigest + PyUnitWizard pipeline checks (success and failure paths),
+  - SMonitor catalog/probe diagnostic assertions.
+
 ### Exit criteria
 
 - Integration smoke checks green across the target ecosystem.
