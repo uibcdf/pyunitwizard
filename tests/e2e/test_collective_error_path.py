@@ -33,6 +33,7 @@ def _prepend_paths(paths: list[Path]):
 @contextmanager
 def _force_fresh_imports(packages: list[str]):
     removed = {}
+    before_keys = set(sys.modules)
     try:
         for package in packages:
             for key in list(sys.modules):
@@ -40,6 +41,11 @@ def _force_fresh_imports(packages: list[str]):
                     removed[key] = sys.modules.pop(key)
         yield
     finally:
+        # Drop modules loaded during the context for tracked packages.
+        for package in packages:
+            for key in list(sys.modules):
+                if (key == package or key.startswith(f"{package}.")) and key not in before_keys:
+                    sys.modules.pop(key, None)
         sys.modules.update(removed)
 
 

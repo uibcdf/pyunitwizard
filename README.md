@@ -114,6 +114,8 @@ PyUnitWizard is in pre-1.0 stabilization. The `0.19.x` line is treated as the
 release-candidate (RC) window before the stable `1.0.0` tag.
 Current release planning and milestones are tracked in `devguide/`.
 
+PyUnitWizard aims to become a units interoperability layer for Scientific Python.
+
 ## Ecosystem
 
 PyUnitWizard is part of the current UIBCDF interoperability stack:

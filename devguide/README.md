@@ -21,6 +21,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
 - Current local test snapshot (2026-03-03): `263 passed` (full `pytest` suite).
+- Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 
 ## Coordination scope
 
