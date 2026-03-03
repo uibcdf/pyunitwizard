@@ -35,6 +35,16 @@ def test_get_value_openmm(openmm_quantity):
 def test_get_value_unyt(unyt_quantity):
     assert puw.get_value(unyt_quantity) == 2.5
 
+def test_get_value_standardized_ignores_to_unit():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+
+    quantity = puw.quantity(1.0, 'meter')
+    value = puw.get_value(quantity, to_unit='meter', standardized=True)
+
+    assert value == pytest.approx(1e9)
+
 #### Tests for get unit ####
 
 def test_get_unit_pint(pint_unit_registry, pint_quantity):
@@ -51,6 +61,16 @@ def test_get_unit_unyt(unyt_quantity):
     unit = puw.get_unit(unyt_quantity)
     assert isinstance(unit, unyt.Unit)
     assert str(unit) == "nm/ps"
+
+def test_get_unit_standardized_path():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+
+    quantity = puw.quantity(1.0, 'meter')
+    unit = puw.get_unit(quantity, to_form='string', standardized=True)
+
+    assert unit == 'nanometer'
 
 #### Tests for get value and unit ####
 
@@ -75,6 +95,22 @@ def test_get_value_and_unit_unyt(unyt_quantity):
     assert isinstance(unit, unyt.Unit)
     assert str(unit) == "nm/ps"
     assert value == value_true
+
+def test_get_value_and_unit_standardized_ignores_to_unit():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+
+    quantity = puw.quantity(1.0, 'meter')
+    value, unit = puw.get_value_and_unit(
+        quantity,
+        to_unit='meter',
+        to_form='string',
+        standardized=True,
+    )
+
+    assert value == pytest.approx(1e9)
+    assert unit == 'nanometer'
 
 #### Tests for get dimensionality ####
 
