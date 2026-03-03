@@ -91,3 +91,4 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - Backend-to-catalog exception translation evidence covered by `tests/test_exception_translation_contract.py`.
 - Performance baseline refreshed in `devguide/performance_baseline_0.19.x.json` using `devtools/benchmarks/conversion_baseline.py`.
 - Cross-repo alignment mapping consolidated in `devguide/molsyssuite_collective_alignment.md`.
+- Cross-repo handoff artifact prepared in `devguide/collective_evidence_pack_0.19.1.md`.
