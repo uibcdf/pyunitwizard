@@ -1,6 +1,6 @@
 # Roadmap to 1.0.0
 
-This roadmap defines the stabilization path from the current `0.17.x` line to a stable `1.0.0` release.
+This roadmap defines the stabilization path from the current `0.18.x` line to a stable `1.0.0` release.
 
 ## Release stages
 
@@ -30,12 +30,14 @@ This roadmap defines the stabilization path from the current `0.17.x` line to a 
 - Freeze public API surface and semantics for the stable line.
 - Add explicit contract tests for exported symbols and key invariants.
 - Remove ambiguity in parser capability and configuration behavior.
+- Keep `release_gates` checks reproducible for Python `3.11`, `3.12`, `3.13`.
 
 ### Exit criteria
 
 - Public exports and error contracts documented and tested.
 - No planned breaking API change before `1.0.0`.
 - Deprecation policy documented for any remaining legacy aliases.
+- Manual `.github/workflows/release_gates.yaml` green on candidate commits.
 
 ## 0.19.x - Ecosystem validation
 

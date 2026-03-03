@@ -5,12 +5,13 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Documents
 
 - `smonitor.md`: diagnostics and instrumentation rules.
-- `roadmap.md`: staged path from `0.17.x` to stable `1.0.0`.
+- `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 
 ## Current baseline
 
-- Active stabilization line: `0.17.x`.
+- Active stabilization line: `0.18.x`.
+- Latest tags on the line: `0.18.1`, `0.18.2`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
 
