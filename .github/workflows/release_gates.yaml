@@ -128,5 +128,4 @@ jobs:
       - name: Build docs
         shell: bash -l {0}
         run: |
-          python -m pip install "setuptools<81"
           make -C docs html
