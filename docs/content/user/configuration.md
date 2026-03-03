@@ -6,6 +6,17 @@ configuration, not as per-call business logic.
 A reliable integration starts with one centralized initialization path. That
 single decision removes a large amount of hidden runtime drift.
 
+## Configuration precedence
+
+When resolving a configuration module, PyUnitWizard uses:
+
+1. runtime override (explicit argument),
+2. environment variable (`PYUNITWIZARD_CONFIG`),
+3. auto-discovered file (`<root_package>._pyunitwizard`).
+
+This contract is exposed by `puw.configure.resolve_config_module(...)` and
+follows the ecosystem precedence rule `runtime > env > file`.
+
 ## Core controls
 
 - `load_library(...)`: register backend adapters.
@@ -13,6 +24,8 @@ single decision removes a large amount of hidden runtime drift.
 - `set_default_parser(...)`: define parser for string inputs.
 - `set_standard_units(...)`: define normalization targets.
 - `reset()`: clear mutable configuration (useful in tests).
+- `resolve_config_module(...)`: resolve config module path with
+  `runtime > env > file` precedence.
 
 ## Recommended baseline
 

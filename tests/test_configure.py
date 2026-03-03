@@ -1,4 +1,5 @@
 import pyunitwizard as puw
+from pyunitwizard.configure import configure as configure_module
 
 def test_libraries_supported():
     assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units']
@@ -99,3 +100,46 @@ def test_all():
         puw.configure.load_library(libraries + ['astropy.units'])
 
     assert True
+
+
+def test_resolve_config_module_runtime_over_env_and_file(monkeypatch):
+    monkeypatch.setenv("PYUNITWIZARD_CONFIG", "env.config")
+    monkeypatch.setattr(configure_module, "find_spec", lambda _: object())
+
+    output = puw.configure.resolve_config_module(
+        config="runtime.config",
+        root_package="mylib",
+    )
+
+    assert output == "runtime.config"
+
+
+def test_resolve_config_module_env_over_file(monkeypatch):
+    monkeypatch.setenv("PYUNITWIZARD_CONFIG", "env.config")
+    monkeypatch.setattr(configure_module, "find_spec", lambda _: object())
+
+    output = puw.configure.resolve_config_module(root_package="mylib")
+
+    assert output == "env.config"
+
+
+def test_resolve_config_module_file_fallback(monkeypatch):
+    monkeypatch.delenv("PYUNITWIZARD_CONFIG", raising=False)
+    monkeypatch.setattr(
+        configure_module,
+        "find_spec",
+        lambda module_path: object() if module_path == "mylib._pyunitwizard" else None,
+    )
+
+    output = puw.configure.resolve_config_module(root_package="mylib")
+
+    assert output == "mylib._pyunitwizard"
+
+
+def test_resolve_config_module_none_when_no_candidate(monkeypatch):
+    monkeypatch.delenv("PYUNITWIZARD_CONFIG", raising=False)
+    monkeypatch.setattr(configure_module, "find_spec", lambda _: None)
+
+    output = puw.configure.resolve_config_module(root_package="mylib")
+
+    assert output is None

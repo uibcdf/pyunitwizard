@@ -13,6 +13,8 @@ Use explicit compatibility and dimensionality checks before conversion-sensitive
 ## 3. Stable defaults
 
 Configure parser/form/standards once and avoid ad-hoc runtime reconfiguration.
+If a config-module resolver is used, enforce explicit precedence:
+`runtime > env > file`.
 
 ## 4. Backend isolation
 

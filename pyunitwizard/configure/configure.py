@@ -5,8 +5,9 @@ from pyunitwizard._private.lists_and_tuples import is_list_or_tuple
 from pyunitwizard.api import convert, get_dimensionality
 from pyunitwizard.constants import _constants, _constants_synonyms
 import numpy as np
+import os
 from importlib.util import find_spec
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Optional
 
 libraries = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
 parsers   = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
@@ -16,6 +17,41 @@ _aux_dict_modules = {
     'unyt': 'unyt',
     'astropy.units': 'astropy',
 }
+
+def resolve_config_module(
+    config: Optional[str] = None,
+    root_package: Optional[str] = None,
+    env_var: str = "PYUNITWIZARD_CONFIG",
+) -> Optional[str]:
+    """Resolve configuration module using ``runtime > env > file`` precedence.
+
+    Parameters
+    ----------
+    config : str, optional
+        Explicit runtime configuration module path.
+    root_package : str, optional
+        Root package name used to probe ``<root_package>._pyunitwizard``.
+    env_var : str, default="PYUNITWIZARD_CONFIG"
+        Environment variable name used for config-module discovery.
+
+    Returns
+    -------
+    str or None
+        Resolved module path, or ``None`` when no candidate is found.
+    """
+    if config:
+        return config
+
+    from_env = os.getenv(env_var)
+    if from_env:
+        return from_env
+
+    if root_package:
+        module_path = f"{root_package}._pyunitwizard"
+        if find_spec(module_path) is not None:
+            return module_path
+
+    return None
 
 def reset() -> None:
     """Reset runtime configuration state to defaults.
