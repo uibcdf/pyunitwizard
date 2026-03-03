@@ -75,6 +75,8 @@ PyUnitWizard head reference for this pack: `fd62f3e`
 - Cross-library integration smoke:
   `tests/integration/test_ecosystem_smoke.py`
   `tests/integration/test_local_sibling_repos.py`
+- Shared collective error-path E2E module:
+  `tests/e2e/test_collective_error_path.py`
 
 ## 3. Collective E2E target scenario (must be validated across repos)
 
