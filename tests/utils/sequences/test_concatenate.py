@@ -4,6 +4,7 @@ import pytest
 import openmm.unit as openmm_unit
 import unyt
 import numpy as np
+from collections import deque
 
 def test_concatenate_1():
     puw.configure.reset()
@@ -45,3 +46,35 @@ def test_concatenate_nested_sequences_and_error_branch():
         puw.utils.sequences.concatenate(nested, value_type='invalid')
 
 
+@pytest.mark.parametrize('value_type', ['list', 'tuple'])
+def test_concatenate_nested_sequence_value_types(value_type):
+    puw.configure.reset()
+    puw.configure.load_library('pint')
+
+    nested = [
+        [puw.quantity(1, 'meter')],
+        [puw.quantity(2, 'meter')],
+    ]
+    concatenated = puw.utils.sequences.concatenate(nested, value_type=value_type)
+    value = puw.get_value(concatenated)
+
+    assert np.array_equal(value, np.array([1, 2]))
+
+
+def test_concatenate_flat_invalid_value_type_raises_value_error():
+    puw.configure.reset()
+    puw.configure.load_library('pint')
+
+    sequence = [puw.quantity(1, 'meter'), puw.quantity(2, 'meter')]
+    with pytest.raises(ValueError):
+        puw.utils.sequences.concatenate(sequence, value_type='invalid')
+
+
+def test_concatenate_with_deque_hits_non_builtin_sequence_branch():
+    puw.configure.reset()
+    puw.configure.load_library('pint')
+
+    sequence = deque([puw.quantity(1, 'meter'), puw.quantity(2, 'meter')])
+    concatenated = puw.utils.sequences.concatenate(sequence, to_unit='meter', value_type='tuple')
+
+    assert np.array_equal(puw.get_value(concatenated), np.array([1, 2]))

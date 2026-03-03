@@ -64,8 +64,48 @@ def test_api_string_openmm_conversion_paths_raise_expected_error():
             puw.forms.api_string.unit_to_openmm_unit("meter")
 
 
+def test_api_string_openmm_bridge_return_paths_with_monkeypatch(monkeypatch):
+    with loaded_libraries(["openmm.unit"]):
+        openmm_unit = pytest.importorskip("openmm.unit")
+
+        def _fake_string_to_quantity(_):
+            return 1.0 * openmm_unit.meter
+
+        monkeypatch.setattr(
+            puw.forms.api_openmm_unit,
+            "string_to_quantity",
+            _fake_string_to_quantity,
+        )
+
+        quantity = puw.forms.api_string.quantity_to_openmm_unit("meter")
+        unit = puw.forms.api_string.unit_to_openmm_unit("meter")
+
+        assert str(quantity.unit) == "meter"
+        assert str(unit) == "meter"
+
+
 def test_api_string_unyt_stubs_raise_not_implemented():
     with pytest.raises(NotImplementedError):
         puw.forms.api_string.quantity_to_unyt("1 meter")
     with pytest.raises(NotImplementedError):
         puw.forms.api_string.unit_to_unyt("meter")
+
+
+def test_api_string_pint_bridge_functions():
+    with loaded_libraries(["pint"]):
+        quantity = puw.forms.api_string.quantity_to_pint("2 meter")
+        unit = puw.forms.api_string.unit_to_pint("meter")
+
+        assert puw.forms.api_pint.get_value(quantity) == 2
+        assert str(unit) == "meter"
+
+
+def test_api_string_astropy_bridge_functions():
+    pytest.importorskip("astropy.units")
+
+    with loaded_libraries(["pint", "astropy.units"]):
+        quantity = puw.forms.api_string.quantity_to_astropy_units("2 meter")
+        unit = puw.forms.api_string.unit_to_astropy_units("1 meter")
+
+        assert puw.forms.api_astropy_unit.get_value(quantity) == 2
+        assert puw.forms.api_astropy_unit.unit_to_string(unit) == "m"
