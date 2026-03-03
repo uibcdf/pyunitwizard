@@ -47,7 +47,7 @@ When updating, follow this protocol:
 
 Date: `2026-03-03`
 PyUnitWizard tag baseline: `0.19.1`
-PyUnitWizard head reference for this pack: `5303f10`
+PyUnitWizard head reference for this pack: `fd62f3e`
 
 ## 1. Local quality baseline (PyUnitWizard)
 
@@ -119,3 +119,9 @@ Use these entries to avoid decision drift:
 - `collective evidence links`:
 - `open blockers`:
 - `resolution plan`:
+
+## 7. Sibling reference anchors (2026-03-03)
+
+- `smonitor`: `cabb2d0` (adds `devguide/collective_evidence_pack.md`)
+- `depdigest`: `d0f93b4` (adds `devguide/collective_evidence_pack.md`)
+- `argdigest`: `a207058` (adds `devguide/collective_evidence_pack.md`)
