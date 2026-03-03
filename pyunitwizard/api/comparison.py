@@ -18,7 +18,29 @@ def similarity(
     quantity_or_unit_2: QuantityOrUnit,
     relative_tolerance: float = 1e-08,
 ) -> bool:
-    """Alias for :func:`are_close` using ``relative_tolerance`` as ``rtol``."""
+    """Compare two quantities using relative tolerance semantics.
+
+    Parameters
+    ----------
+    quantity_or_unit_1 : QuantityOrUnit
+        First quantity or unit to compare.
+    quantity_or_unit_2 : QuantityOrUnit
+        Second quantity or unit to compare.
+    relative_tolerance : float, default=1e-8
+        Relative tolerance used internally as ``rtol`` in :func:`are_close`.
+
+    Returns
+    -------
+    bool
+        ``True`` when values are close within tolerance and units are compatible.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> a = puw.quantity(1.0, "nanometer")
+    >>> b = puw.quantity(10.0, "angstrom")
+    >>> puw.similarity(a, b)
+    """
 
     return are_close(
         quantity_or_unit_1, quantity_or_unit_2, rtol=relative_tolerance
@@ -128,7 +150,25 @@ def are_equal(
 def compatibility(
     quantity_or_unit_1: QuantityOrUnit, quantity_or_unit_2: QuantityOrUnit
 ) -> bool:
-    """Alias for :func:`are_compatible`."""
+    """Check whether two quantities or units are dimensionally compatible.
+
+    Parameters
+    ----------
+    quantity_or_unit_1 : QuantityOrUnit
+        First quantity or unit.
+    quantity_or_unit_2 : QuantityOrUnit
+        Second quantity or unit.
+
+    Returns
+    -------
+    bool
+        ``True`` when both inputs are compatible for conversion/comparison.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.compatibility("1 nm", "10 angstrom")
+    """
 
     return are_compatible(quantity_or_unit_1, quantity_or_unit_2)
 

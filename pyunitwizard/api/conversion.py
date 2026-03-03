@@ -35,28 +35,38 @@ def convert(
     parser: Optional[str] = None,
     to_type: Optional[str] = "quantity",
 ) -> Union[QuantityOrUnit, float, np.ndarray]:
-    """ Converts a quantity or unit to a different unit and/or to a different
-        form and/or type.
+    """Convert a quantity or unit across unit systems, forms, and output types.
 
-        Parameters
-        ----------
-        to_unit : str, optional
-            The unit to convert to.
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Input quantity or unit to convert. It can be any supported runtime form,
+        including strings when a compatible parser is configured.
+    to_unit : str, optional
+        Target unit. When provided, the quantity is converted to this unit before
+        returning.
+    to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
+        Target backend form. If omitted, the input form is preserved.
+    parser : {"pint", "openmm.unit", "astropy.units"}, optional
+        Parser used when `quantity_or_unit` or `to_unit` is provided as a string.
+    to_type : {"quantity", "unit", "value"}, optional, default="quantity"
+        Output type to return.
 
-        to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
-            The form to convert to.
+    Returns
+    -------
+    QuantityOrUnit or float or numpy.ndarray
+        Converted object in the requested unit/form/type.
 
-        parser : {"pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use if a string is passed.
+    Raises
+    ------
+    BadCallError
+        If `to_type` is not one of ``"quantity"``, ``"unit"``, or ``"value"``.
 
-        to_type : {"quantity", "unit", "value"}, optional
-            The type to convert to.
-
-        Returns
-        -------
-        QuantityOrUnit or ArrayLike or float
-            The converted quantity or unit. If to_type is passed the return value can
-            be a float or a numpy array.
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> q = puw.quantity(1.0, "nanometer")
+    >>> puw.convert(q, to_unit="angstrom")
     """
 
     output = None
@@ -149,7 +159,28 @@ def to_string(
     to_unit: Optional[str] = None,
     parser: Optional[str] = None,
 ) -> str:
-    """Return a quantity converted to the string form."""
+    """Return a quantity or unit converted to string form.
+
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Input quantity or unit to convert.
+    to_unit : str, optional
+        Target unit expressed as string.
+    parser : {"pint", "openmm.unit", "astropy.units"}, optional
+        Parser used when string inputs require explicit parsing.
+
+    Returns
+    -------
+    str
+        Quantity or unit represented in string form.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> q = puw.quantity(1.0, "nanometer")
+    >>> puw.to_string(q, to_unit="angstrom")
+    """
 
     return convert(
         quantity_or_unit,

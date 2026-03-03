@@ -136,17 +136,27 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> b
 
 @signal(tags=["introspection"])
 def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
-    """ Returns the dimensionality of the quantity or unit.
+    """Return dimensional exponents for a quantity or unit.
 
-        Parmeters
-        ---------
-        quantity_or_unit : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ----------
+    quantity_or_unit : QuantityOrUnit
+        Quantity or unit to inspect. String values are parsed when possible.
 
-        Returns
-        -------
-        dict
-            A dictionary with the dimensionality of the unit.
+    Returns
+    -------
+    dict
+        Mapping of fundamental dimensions to integer exponents.
+
+    Raises
+    ------
+    NotImplementedFormError
+        If the input form is not supported by current runtime adapters.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.get_dimensionality("1 nanometer")
     """
 
     from .conversion import convert

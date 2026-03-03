@@ -18,7 +18,18 @@ _aux_dict_modules = {
 }
 
 def reset() -> None:
-    """Resets all kernel variables."""
+    """Reset runtime configuration state to defaults.
+
+    Returns
+    -------
+    None
+        This function mutates global runtime configuration in place.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.reset()
+    """
     kernel.loaded_libraries = []
     kernel.loaded_parsers = []
     kernel.default_form=None
@@ -30,53 +41,83 @@ def reset() -> None:
     kernel.tentative_base_standards = {}
 
 def get_libraries_loaded() -> List[str]:
-    """ Returns loaded libraries.
+    """Return currently loaded backend libraries.
 
-        Returns
-        -------
-        list of str
-            A list with the loaded libraries.
+    Returns
+    -------
+    list of str
+        Loaded library identifiers.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_libraries_loaded()
     """
     return kernel.loaded_libraries
 
 def get_libraries_supported() -> List[str]:
-    """ Returns supported libraries.
+    """Return backend libraries supported by this installation.
 
-        Returns
-        -------
-        list of str
-            A list with the loaded libraries. 
+    Returns
+    -------
+    list of str
+        Supported library identifiers.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_libraries_supported()
     """
     return libraries
 
 def get_parsers_loaded() -> List[str]:
-    """ Returns loaded parsers.
+    """Return currently loaded parsers.
 
-        Returns
-        -------
-        list of str
-            A list with the loaded parsers. 
+    Returns
+    -------
+    list of str
+        Loaded parser identifiers.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_parsers_loaded()
     """
     return kernel.loaded_parsers
 
 def get_parsers_supported() -> List[str]:
-    """ Returns supported parsers.
+    """Return parser backends supported by this installation.
 
-        Returns
-        -------
-        list of str
-            A list with the supported parsers. 
+    Returns
+    -------
+    list of str
+        Supported parser identifiers.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_parsers_supported()
     """
     return parsers
 
 
 def load_library(library_names: Union[str, List[str]]):
-    """ Loads library or libraries.
+    """Load one or more backend libraries into runtime configuration.
 
-        Parameters
-        ----------
-        library : str, list of str
-            Name of the library or list with the name of the libraries.
+    Parameters
+    ----------
+    library_names : str or list of str
+        Library name or list of library names to load.
+
+    Returns
+    -------
+    None
+        Loaded libraries are registered in global runtime state.
+
+    Raises
+    ------
+    TypeError
+        If `library_names` is not a string or a list/tuple of strings.
     """
     if not is_list_or_tuple(library_names):
         if isinstance(library_names, str):
@@ -107,66 +148,99 @@ def load_library(library_names: Union[str, List[str]]):
 
 
 def get_default_form() -> str:
-    """ Returns the default form of the quantities and units.
+    """Return the configured default form for quantities and units.
 
-        Returns
-        -------
-        str
-            The default form.
+    Returns
+    -------
+    str
+        Default runtime form.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_default_form()
     """
     return kernel.default_form
 
 def set_default_form(form: str) -> None:
-    """ Sets the default form of the quantities and units.
+    """Set the default form for quantities and units.
 
-        Parameters
-        ----------
-        form : str
-            The new default form.
+    Parameters
+    ----------
+    form : str
+        New default form identifier.
+
+    Returns
+    -------
+    None
+        Runtime default form is updated in place.
     """
     form = digest_form(form)
     kernel.default_form = form
 
 def get_default_parser() -> str:
-    """ Returns the default parser.
+    """Return the configured default parser.
 
-        Returns
-        -------
-        str
-            The default form.
+    Returns
+    -------
+    str
+        Default parser identifier.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_default_parser()
     """
     return kernel.default_parser
 
 def set_default_parser(parser: str) -> None:
-    """ Sets the default form of the quantities and units.
+    """Set the default parser for string quantities.
 
-        Parameters
-        ----------
-        parser : str
-            The new default parser.
+    Parameters
+    ----------
+    parser : str
+        New default parser identifier.
+
+    Returns
+    -------
+    None
+        Runtime default parser is updated in place.
     """
     form = digest_form(parser)
     kernel.default_parser = form
 
 def get_standard_units() -> Dict[str, Dict[str, int]]:
-    """ Returns a nested dictionary where each subdictionary corresponds
-        to the dimensionality of the standard units set in the
-        configuration.
+    """Return configured standard units mapped to dimensionality definitions.
 
-        Returns
-        -------
-        dict
-            Dictionary with standard units. 
+    Returns
+    -------
+    dict
+        Dictionary keyed by standard unit string with dimensionality mappings.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.get_standard_units()
     """
     return kernel.standards
 
 def set_standard_units(standard_units: List[str]) -> None:
-    """ Sets the standard units.
+    """Configure project standard units used by standardization helpers.
 
-        Parameters
-        ----------
-        standard_units : list of str
-            List with the standard units
+    Parameters
+    ----------
+    standard_units : list of str
+        Standard unit names used as normalization references.
+
+    Returns
+    -------
+    None
+        Runtime standard-unit maps are rebuilt in place.
+
+    Raises
+    ------
+    ValueError
+        If `standard_units` is neither a string nor list/tuple.
     """
 
     kernel.standards={}
@@ -236,6 +310,22 @@ def set_standard_units(standard_units: List[str]) -> None:
                         already[jj]=1
 
 def add_constant(constant_name, value, unit) -> None:
+    """Register a runtime constant.
+
+    Parameters
+    ----------
+    constant_name : str
+        Constant identifier.
+    value : float or int
+        Numeric constant value.
+    unit : str
+        Unit associated with the constant value.
+
+    Returns
+    -------
+    None
+        Constant mapping is updated in global constants registry.
+    """
 
     _constants[constant_name]=[value, unit]
     pass

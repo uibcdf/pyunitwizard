@@ -125,7 +125,26 @@ def get_value_and_unit(
 
 
 def change_value(quantity: QuantityLike, value: Union[np.ndarray, float, int]) -> QuantityLike:
-    """Return the quantity with a new value preserving its unit."""
+    """Return a quantity with a replaced value while preserving unit and form.
+
+    Parameters
+    ----------
+    quantity : QuantityLike
+        Input quantity.
+    value : numpy.ndarray or float or int
+        New numeric value to assign.
+
+    Returns
+    -------
+    QuantityLike
+        Quantity with updated value and original unit.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> q = puw.quantity(1.0, "nanometer")
+    >>> puw.change_value(q, 2.0)
+    """
 
     form = get_form(quantity)
     return dict_change_value[form](quantity, value)
