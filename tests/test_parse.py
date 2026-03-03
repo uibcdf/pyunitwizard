@@ -10,6 +10,7 @@ import pytest
 from pyunitwizard._private.exceptions import (
     ArgumentError,
     LibraryWithoutParserError,
+    NotImplementedParserError,
 )
 
 from .helpers import loaded_libraries
@@ -125,6 +126,11 @@ def test_parse_bracket_helpers_raise_on_unbalanced_input():
     with pytest.raises(ValueError):
         _find_closing_parenthesis_position("(1, 2")
 
+def test_parse_parenthesis_helper_handles_nested_parentheses():
+    text = "((1, 2), (3, 4)) meters"
+    idx = _find_closing_parenthesis_position(text)
+    assert idx == text.index(") meters")
+
 def test_parse_with_astropy_parser_if_available():
     pytest.importorskip("astropy.units")
     with loaded_libraries(['pint', 'astropy.units']):
@@ -132,3 +138,46 @@ def test_parse_with_astropy_parser_if_available():
         assert isinstance(quantity, str)
         assert "2" in quantity
         assert "m" in quantity.lower()
+
+
+def test_parse_with_unyt_parser_raises_library_without_parser():
+    with pytest.raises(LibraryWithoutParserError):
+        parse("1 nm", parser="unyt")
+
+
+def test_parse_with_astropy_parser_to_multiple_forms_if_available():
+    pytest.importorskip("astropy.units")
+    with loaded_libraries(['pint', 'openmm.unit', 'unyt', 'astropy.units']):
+        q_pint = parse("2 meter", parser="astropy.units", to_form="pint")
+        assert puw.get_form(q_pint) == "pint"
+
+        q_openmm = parse("2 meter", parser="astropy.units", to_form="openmm.unit")
+        assert puw.get_form(q_openmm) == "openmm.unit"
+
+        q_unyt = parse("2 meter", parser="astropy.units", to_form="unyt")
+        assert puw.get_form(q_unyt) == "unyt"
+
+
+def test_parse_raises_not_implemented_for_pint_with_unknown_to_form(monkeypatch):
+    monkeypatch.setattr("pyunitwizard.parse.digest_parser", lambda parser: "pint")
+    monkeypatch.setattr("pyunitwizard.parse.digest_to_form", lambda to_form: "unknown")
+
+    with pytest.raises(NotImplementedParserError):
+        parse("1 meter", parser="pint")
+
+
+def test_parse_raises_not_implemented_for_astropy_with_unknown_to_form(monkeypatch):
+    pytest.importorskip("astropy.units")
+    monkeypatch.setattr("pyunitwizard.parse.digest_parser", lambda parser: "astropy.units")
+    monkeypatch.setattr("pyunitwizard.parse.digest_to_form", lambda to_form: "unknown")
+
+    with pytest.raises(NotImplementedParserError):
+        parse("1 meter", parser="astropy.units")
+
+
+def test_parse_raises_not_implemented_for_unknown_parser_branch(monkeypatch):
+    monkeypatch.setattr("pyunitwizard.parse.digest_parser", lambda parser: "unknown-parser")
+    monkeypatch.setattr("pyunitwizard.parse.digest_to_form", lambda to_form: "pint")
+
+    with pytest.raises(NotImplementedParserError):
+        parse("1 meter", parser="pint")
