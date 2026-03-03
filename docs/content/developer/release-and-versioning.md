@@ -7,6 +7,7 @@ PyUnitWizard tags use numeric versions without `v` prefix.
 Current path is tracked in:
 
 - `devguide/roadmap.md`
+- `devguide/compatibility_matrix.md`
 - `devguide/release_0.19.x_rc_checklist.md`
 - `devguide/release_1.0.0_checklist.md`
 
@@ -23,6 +24,7 @@ Current policy:
 2. `make -C docs html` passes.
 3. `release_gates` workflow is green for candidate commit.
 4. Docs reflect actual runtime and supported Python versions.
+5. Performance baseline snapshot is refreshed for the RC line.
 
 ## Practical release flow
 

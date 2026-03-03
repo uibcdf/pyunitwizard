@@ -14,6 +14,14 @@ pytest -q
 pytest --cov=pyunitwizard --cov-report=term-missing
 ```
 
+## Performance baseline command
+
+```bash
+python devtools/benchmarks/conversion_baseline.py
+```
+
+Store RC snapshots under `devguide/` and compare candidate tags for regressions.
+
 ## Release-critical areas
 
 - `api/*` public behavior and edge branches.

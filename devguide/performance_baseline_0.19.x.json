@@ -1,0 +1,28 @@
+{
+  "generated_at_utc": "2026-03-03T21:10:50.892911+00:00",
+  "iterations": 5000,
+  "python": "3.13",
+  "repeats": 5,
+  "results": {
+    "convert_nm_to_angstrom": {
+      "max_seconds": 0.00014303984502330423,
+      "median_seconds": 0.00014194426937028765,
+      "min_seconds": 0.00013973681037314237
+    },
+    "get_form_quantity": {
+      "max_seconds": 4.311219556257128e-06,
+      "median_seconds": 3.907246189191938e-06,
+      "min_seconds": 3.87197220697999e-06
+    },
+    "is_quantity_quantity": {
+      "max_seconds": 9.863111795857548e-06,
+      "median_seconds": 9.295139415189623e-06,
+      "min_seconds": 9.003468602895736e-06
+    },
+    "parse_string_quantity": {
+      "max_seconds": 6.913501303642988e-05,
+      "median_seconds": 6.722848019562662e-05,
+      "min_seconds": 6.635561059229076e-05
+    }
+  }
+}

@@ -20,8 +20,9 @@ standards used in this repository.
 7. [Deprecation and Support](deprecation-and-support.md): lifecycle rules for compatibility-sensitive changes.
 8. [SMonitor Integration](smonitor.md): diagnostics contract and emission guidance.
 9. [Editorial Guide](editorial-guide.md): documentation style and maintenance standards.
-10. [Release and Versioning](release-and-versioning.md): release flow and tag policy.
-11. [Contributor Checklist](contributor-checklist.md): final pre-PR/pre-release verification.
+10. [Compatibility Matrix](compatibility-matrix.md): minimum validated sibling-library versions.
+11. [Release and Versioning](release-and-versioning.md): release flow and tag policy.
+12. [Contributor Checklist](contributor-checklist.md): final pre-PR/pre-release verification.
 
 ## Canonical References
 
@@ -54,6 +55,7 @@ api-stability.md
 deprecation-and-support.md
 smonitor.md
 editorial-guide.md
+compatibility-matrix.md
 release-and-versioning.md
 contributor-checklist.md
 intro/index.rst
