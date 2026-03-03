@@ -36,10 +36,32 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - [ ] `pyunitwizard.main` deprecation contract is documented and test-backed.
 - [ ] Release notes draft includes any migration notes and compatibility statements.
 
-## 5. RC close (go/no-go to 1.0.0 candidate)
+## 5. Collective 1.0 alignment during RC (ecosystem-wide checklist)
+
+- [ ] Unified configuration contract documented and validated with the same precedence used across sibling libraries (`runtime > env > file`).
+- [ ] All critical public API functions are instrumented with `@smonitor.signal`.
+- [ ] Optional dependency policy is aligned with DepDigest governance for heavy/optional backends.
+- [ ] User/dev diagnostics expose stable `CODE` and actionable `hint` semantics.
+- [ ] Compatibility matrix defines minimum supported versions for `argdigest`, `depdigest`, and `smonitor`.
+- [ ] SMonitor profile consistency (`user`, `dev`, `qa`, `agent`) is validated from the PyUnitWizard consumer side.
+- [ ] SMonitor traceability tags used by PyUnitWizard are aligned with cross-library failure categories.
+- [ ] DepDigest audit path is validated against PyUnitWizard dependency declarations.
+- [ ] ArgDigest integration confirms unit error mapping from PyUnitWizard into contract-layer errors with caller context.
+- [ ] PyUnitWizard kernel isolation behavior is explicitly validated and documented.
+- [ ] Third-party/backend exceptions are translated into PyUnitWizard cataloged exception hierarchy.
+- [ ] Fundamental dimensions (`[L]`, `[M]`, `[T]`, `[K]`, `[mol]`, `[A]`, `[Cd]`) are treated as a locked serialization contract.
+- [ ] Performance baseline exists for conversion/introspection hot paths and is tracked for regressions.
+
+## 6. RC close (go/no-go to 1.0.0 candidate)
 
 - [ ] No high-severity open issues in core public APIs.
 - [ ] No open blocker incidents from ecosystem validation.
 - [ ] `devguide/release_1.0.0_checklist.md` is fully actionable and current.
 - [ ] Release owner explicitly approves closing RC window.
 
+## 7. Contingency decision: extend RC to `0.20.x` if needed
+
+- [ ] If blocker items remain unresolved at planned RC close, open `0.20.x` as the next RC window instead of forcing `1.0.0`.
+- [ ] Preserve no-breaking-change policy when moving from `0.19.x` RC to `0.20.x` RC.
+- [ ] Publish explicit carry-over scope (`pending`, `blocked`, `deferred`) before creating the first `0.20.x` tag.
+- [ ] Keep `1.0.0` gated by completion of this checklist and `devguide/release_1.0.0_checklist.md`.

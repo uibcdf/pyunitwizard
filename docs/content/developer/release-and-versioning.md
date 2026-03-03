@@ -14,6 +14,8 @@ Current policy:
 
 - `0.19.x` is the RC line used to observe stability in real usage.
 - `1.0.0` is created only after the RC window closes without blocker issues.
+- If blocker items remain open at RC close, open `0.20.x` as an RC extension
+  window instead of forcing `1.0.0`.
 
 ## Pre-release checks
 
