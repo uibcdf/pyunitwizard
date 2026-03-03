@@ -45,13 +45,23 @@ This roadmap defines the stabilization path from the current `0.18.x` line to a 
 
 - Validate real integration scenarios with `argdigest`, `depdigest`, and `smonitor`.
 - Run cross-repo smoke tests in clean environments.
+- Run local-sibling smoke tests when `../argdigest`, `../depdigest`, and `../smonitor` are available.
 - Collect and triage integrator feedback (blocking vs non-blocking).
+- Complete deprecation contract for `pyunitwizard.main` (warning semantics and migration path).
 
 ### Exit criteria
 
 - Integration smoke checks green across the target ecosystem.
+- Local sibling smoke test is passing in development workspaces and skip-safe in CI.
 - No blocker incidents open in diagnostics flows.
+- `pyunitwizard.main` deprecation policy is documented for pre-`1.0.0` and validated by tests.
 - Release checklist for `1.0.0` fully actionable.
+
+### Deprecation policy for `pyunitwizard.main`
+
+- `0.18.x`: keep compatibility alias and emit `DeprecationWarning` on attribute access.
+- `0.19.x`: keep alias without behavior changes, enforce warning/attribute contract by tests.
+- `1.0.0`: keep alias only if no downstream blocker remains; otherwise drop in next minor after stable with migration notes.
 
 ## 1.0.0 - Stable release
 

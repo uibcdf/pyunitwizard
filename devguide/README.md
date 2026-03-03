@@ -11,10 +11,10 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active stabilization line: `0.18.x`.
-- Latest tags on the line: `0.18.1`, `0.18.2`.
+- Latest tags on the line: `0.18.1`, `0.18.2`, `0.18.3`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test/coverage snapshot (2026-03-03): `234 passed`, total coverage `95%`.
+- Current local test/coverage snapshot (2026-03-03): `243 passed`, total coverage `96%`.
 
 ## Coordination scope
 

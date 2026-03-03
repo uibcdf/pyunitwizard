@@ -14,6 +14,7 @@ Use this checklist as a hard release gate. All items must be complete before cre
 
 - [ ] Public API exports are frozen and covered by contract tests.
 - [ ] Parser/default configuration behavior is deterministic and documented.
+- [ ] Legacy `pyunitwizard.main` deprecation contract is tested and documented.
 - [ ] No open blockers in conversion, standardization, parsing, or compatibility workflows.
 
 ## 3. Diagnostics and observability
@@ -27,6 +28,7 @@ Use this checklist as a hard release gate. All items must be complete before cre
 - [ ] Integration smoke checks passed with `argdigest`.
 - [ ] Integration smoke checks passed with `depdigest`.
 - [ ] Integration smoke checks passed with `smonitor`.
+- [ ] Local sibling smoke test (`../argdigest`, `../depdigest`, `../smonitor`) is green when repos are present.
 - [ ] Cross-repo compatibility notes are updated in each devguide as needed.
 
 ## 5. Packaging and release
