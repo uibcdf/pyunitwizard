@@ -1,16 +1,53 @@
-# Collective Evidence Pack (`0.19.1`)
+# Collective Evidence Pack
 
-This pack is the handoff artifact for cross-repo validation with:
+This document is the handoff artifact for cross-repo validation with:
 - `../smonitor`
 - `../depdigest`
 - `../argdigest`
 
-It is designed to be mirrored/adapted in sibling repositories so the collective
-closure can be decided from comparable evidence.
+It is designed to be mirrored/adapted in sibling repositories so collective
+closure can be decided from comparable evidence without ambiguity.
+
+## What this is
+
+`collective_evidence_pack.md` is the canonical checkpoint record for:
+- current PyUnitWizard local evidence,
+- required cross-library E2E evidence,
+- pending closures that cannot be completed from this repository alone.
+
+This file is intentionally self-contained so a maintainer can understand:
+- what has already been demonstrated,
+- what remains pending,
+- how to report status in a compatible format across all sibling repos.
+
+## How to use this file
+
+Use this file in three moments:
+
+1. Before tagging a new RC checkpoint (`0.19.x`):
+- refresh local evidence and references (tests, docs, performance baseline).
+
+2. During cross-repo synchronization:
+- copy the shared status template into sibling repositories,
+- compare local statuses and identify collective blockers.
+
+3. At go/no-go discussions:
+- use the decision placeholders at the bottom to capture owner, date,
+  evidence links, and blocker resolution plan.
+
+## How to update this file
+
+When updating, follow this protocol:
+
+1. Update the checkpoint metadata (`Date`, `tag baseline`, `head reference`).
+2. Refresh local quality numbers from current runs.
+3. Keep only evidence that is reproducible and present in-repo.
+4. Never mark collective closure from local-only evidence.
+5. If scope changes, update pending closures and decision placeholders.
 
 Date: `2026-03-03`
 PyUnitWizard tag baseline: `0.19.1`
-PyUnitWizard head reference for this pack: `df57d25`
+PyUnitWizard head reference for this pack: `5303f10`
 
 ## 1. Local quality baseline (PyUnitWizard)
 
