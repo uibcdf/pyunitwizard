@@ -23,6 +23,21 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Current local test snapshot (2026-03-03): `263 passed` (full `pytest` suite).
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 
+## RC checkpoint summary (2026-03-03)
+
+Completed in `0.19.x`:
+- Public-contract hardening and cross-library smoke coverage are in place.
+- Shared collective E2E scenario is implemented in all four library repos.
+- Collective test execution policy is now explicit: tests run in library repos
+  with CI, while `molsyssuite` remains coordination-only.
+
+Pending before `1.0.0` go/no-go:
+- sustain CI matrix continuity (`ubuntu`/`macos`, Python `3.11`/`3.12`/`3.13`);
+- run and track `release_gates` on candidate commits during the RC window;
+- close remaining collective finality items (traceability tag alignment and
+  end-to-end evidence closure across the four libraries);
+- complete release-owner go/no-go signoff with no open blockers/high-severity incidents.
+
 ## Coordination scope
 
 PyUnitWizard must stay aligned with:

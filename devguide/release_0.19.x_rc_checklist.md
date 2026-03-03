@@ -12,6 +12,7 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - Full test suite on local Python `3.13`: `263 passed`.
 - Ecosystem integration smoke tests for `argdigest`, `depdigest`, `smonitor`: green.
 - Local sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`): green when repos are present.
+- Collective test execution policy documented (library CI repos only; no dedicated test suite in `molsyssuite`).
 - Remaining work toward RC close: CI/release-gates continuity over time, sustained incident tracking, and final release-owner go/no-go.
 
 ## 1. RC entry (open the stability window)
