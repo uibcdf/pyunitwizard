@@ -1,10 +1,10 @@
 
 .. _Introduction developer:
 
-Introduction
-============
+Developer Introduction
+======================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    Introduction.md

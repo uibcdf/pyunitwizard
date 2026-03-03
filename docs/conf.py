@@ -127,7 +127,19 @@ gettext_compact = False
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', '**.ipynb_checkpoints']
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store',
+    '**.ipynb_checkpoints',
+    'index.ipynb',
+    'jupyter_execute/**',
+    'AGENTS.md',
+    'README.md',
+    'content/developer/intro/databases/**',
+    'content/developer/documentation/docstrings.ipynb',
+    'content/developer/documentation/admonitions.ipynb',
+]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'default'
@@ -153,7 +165,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/uibcdf/elasnetmt",
+            "url": "https://github.com/uibcdf/pyunitwizard",
             "icon": "fa-brands fa-github",
         },
     ],
@@ -163,7 +175,7 @@ html_theme_options = {
 
 html_context = {
     "github_user": "uibcdf",
-    "github_repo": "elasnetmt",
+    "github_repo": "pyunitwizard",
     "github_version": "main",
     "doc_path": "docs",
 }
@@ -255,4 +267,3 @@ texinfo_documents = [
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
-

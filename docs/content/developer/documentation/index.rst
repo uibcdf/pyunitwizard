@@ -1,12 +1,12 @@
 
 .. _Documentation:
 
-Documentation
-============
+Documentation Practices
+=======================
 
 .. toctree::
    :maxdepth: 2
 
    sphinx.md
-   docstrings.ipynb
-   admonitions.ipynb
+   docstrings.md
+   admonitions.md

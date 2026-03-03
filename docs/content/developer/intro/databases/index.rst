@@ -7,5 +7,5 @@ Databases
 .. toctree::
    :maxdepth: 2
 
-   UniProt.md
-   ChEMBL.md
+   uniprot.md
+   chembl.md
