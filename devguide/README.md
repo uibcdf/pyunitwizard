@@ -9,6 +9,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
 - `release_0.19.x_rc_checklist.md`: operational checklist for RC stability window management.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
+- `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `performance_baseline_0.19.x.json`: current RC performance baseline snapshot.
 
 ## Current baseline
