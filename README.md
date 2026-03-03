@@ -1,105 +1,125 @@
 # PyUnitWizard
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/) 
-[![Documentation](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/sphinx_docs_to_gh_pages.yaml)
-[![CI](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml/badge.svg)](https://github.com/uibcdf/PyUnitWizard/actions/workflows/CI.yaml)
-[![codecov](https://codecov.io/github/uibcdf/PyUnitWizard/graph/badge.svg?token=9ZMA4YZLOR)](https://codecov.io/github/uibcdf/PyUnitWizard)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/)
+[![CI](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml/badge.svg)](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml)
+[![Documentation](https://github.com/uibcdf/pyunitwizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://github.com/uibcdf/pyunitwizard/actions/workflows/sphinx_docs_to_gh_pages.yaml)
+[![codecov](https://codecov.io/github/uibcdf/pyunitwizard/graph/badge.svg?token=9ZMA4YZLOR)](https://codecov.io/github/uibcdf/pyunitwizard)
 [![Install with conda](https://img.shields.io/badge/Install%20with-conda-brightgreen.svg)](https://conda.anaconda.org/uibcdf/pyunitwizard)
 
+*A Python Units Wizard that streamlines work with physical quantities.*
 
-There are several Python libraries to work with physical quantities in the
-market, such as pint, unyt or openmm.unit. Imagine that your project or
-workflow requires the interaction with more than one of these tools, or that
-you are not sure if you will work with a different quantities library in the
-future. Wouldn't having a unique API to work with different forms of physical
-quantities be a relief? PyUnitWizard just does that. It is the wizard you need
-in your code to change the form of your quantities with no effort.
+## Overview
 
-## Example
+**PyUnitWizard** is a compatibility layer for working with physical quantities
+across multiple unit libraries through one consistent API.
 
-```ipython
-In [1]: import pyunitwizard as puw
+It is designed for scientific Python projects that need to:
+- accept heterogeneous quantity inputs,
+- convert and compare quantities deterministically,
+- keep stable unit contracts at API boundaries.
 
-In [2]: puw.configure.load_library(['pint', 'openmm.unit'])
-   ...: puw.configure.set_default_form('pint')
-   ...: puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
-   ...: 
+## Why adopt PyUnitWizard
 
-In [3]: q = puw.quantity(2.5, 'nanometers/picoseconds')
+- One public API for quantity construction, conversion, validation, and normalization.
+- Easier interoperability between libraries that use different unit backends.
+- Explicit dimensional checks and compatibility checks in integration code.
+- Stable unit behavior that is easier to test and document.
 
-In [4]: puw.get_form(q)
-Out[4]: 'pint'
+## Installation
 
-In [5]: puw.get_value(q)
-Out[5]: 2.5
+Recommended:
 
-In [6]: puw.get_unit(q)
-Out[6]: <Unit('nanometer / picosecond')>
-
-In [7]: puw.get_dimensionality(q)
-Out[7]: {'[L]': 1, '[M]': 0, '[T]': -1, '[K]': 0, '[mol]': 0, '[A]': 0, '[Cd]': 0}
-
-In [8]: q2 = puw.convert(q, to_unit='angstroms/femtoseconds', to_form='openmm.unit')
-
-In [9]: print(q2)
-0.025000000000000005 A/fs
-
-In [10]: puw.get_form(q2)
-Out[10]: 'openmm.unit'
-
-In [11]: puw.compatibility(q, q2)
-Out[11]: True
-
-In [12]: q3 = puw.standardize(q2)
-
-In [13]: print('q3 is now a {} quantity expressed in {}.'.format(puw.get_form(q3), puw.get_unit(q3)))
-q3 is now a pint quantity expressed in nanometer / picosecond.
+```bash
+conda install -c uibcdf pyunitwizard
 ```
 
-## Units Python libraries
-- [openmm.unit](https://github.com/openmm/openmm/tree/master/wrappers/python/simtk/unit)
-- [Pint](https://pint.readthedocs.io/en/stable/)
-- [unyt](https://unyt.readthedocs.io/en/stable/)
-- [astropy.units](https://docs.astropy.org/en/stable/units/)
+Alternative:
+
+```bash
+pip install pyunitwizard
+```
+
+## Quick start
+
+```python
+import pyunitwizard as puw
+
+puw.configure.reset()
+puw.configure.load_library(["pint"])
+puw.configure.set_default_form("pint")
+puw.configure.set_default_parser("pint")
+puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
+
+distance = puw.quantity(1.0, "nanometer")
+distance_angstrom = puw.convert(distance, to_unit="angstrom")
+
+print(puw.to_string(distance_angstrom))
+print(puw.are_compatible(distance, distance_angstrom))
+```
+
+## Core capabilities
+
+- Quantity and unit construction: `quantity`, `unit`
+- Conversion and formatting: `convert`, `to_string`
+- Validation and comparison: `check`, `are_compatible`, `are_close`, `are_equal`
+- Introspection and extraction: `get_form`, `get_dimensionality`, `get_value`, `get_unit`
+- Standardization: `standardize`, `get_standard_units`
+- Runtime configuration: `pyunitwizard.configure.*`
+
+## Backend support
+
+PyUnitWizard supports interoperation with:
+- `pint`
+- `openmm.unit`
+- `unyt`
+- `astropy.units`
+- `string` form
+
+Runtime loading of available backends/parsers is handled via configuration.
+
+## Diagnostics (SMonitor)
+
+PyUnitWizard integrates with **SMonitor** for structured diagnostics.
+Runtime SMonitor configuration is loaded from:
+- `pyunitwizard/_smonitor.py`
+- `pyunitwizard/_private/smonitor/catalog.py`
+- `pyunitwizard/_private/smonitor/meta.py`
+
+## Documentation
+
+- Website: https://www.uibcdf.org/pyunitwizard
+- User guide: `docs/content/user/`
+- Developer guide: `docs/content/developer/`
+- API reference: `docs/api/`
+- Consolidation roadmap: `devguide/roadmap.md`
+
+## Development
+
+Run tests:
+
+```bash
+pytest -q
+```
+
+Build docs:
+
+```bash
+make -C docs html
+```
+
+## Status
+
+PyUnitWizard is in pre-1.0 stabilization toward a stable `1.0.0` line.
+Current release planning and milestones are tracked in `devguide/`.
+
+## Ecosystem
+
+PyUnitWizard is part of the current UIBCDF interoperability stack:
+- [ArgDigest](https://github.com/uibcdf/argdigest)
+- [DepDigest](https://github.com/uibcdf/depdigest)
+- [SMonitor](https://github.com/uibcdf/smonitor)
 
 ## License
 
-This project is under an MIT License. [A copy of the license text is included in this repository](LICENSE).
-
-## smonitor
-
-PyUnitWizard loads smonitor configuration from `_smonitor.py` in the package root
-(`pyunitwizard/_smonitor.py`) to provide structured diagnostics. The catalog and
-metadata live in `pyunitwizard/_private/smonitor/catalog.py` and
-`pyunitwizard/_private/smonitor/meta.py` (docs/issues/API URLs used in hints).
-
-## Development roadmap
-
-The consolidation plan toward a stable `1.0.0` line is tracked in:
-
-- `devguide/README.md`
-- `devguide/roadmap.md`
-- `devguide/release_1.0.0_checklist.md`
-
-Current baseline is the `0.18.x` line (the historical `1.0.0` tag was created by mistake and is not used as release baseline).
-
-### Copyright
-
-Copyright (c) 2021-2022 [The Mexico Children's Hospital Federico Gómez](http://himfg.com.mx/), [its Unit of Research on Computational
-Biology and Drug Design](http://uibcdf.org), and [authors](https://github.com/uibcdf/pyunitwizard/graphs/contributors).
-
-## Acknowledgements
-
-Project based on the [Computational Molecular Science Python Cookiecutter](https://github.com/molssi/cookiecutter-cms) version 1.5.
-
-## Contributors
-
-A complete list of contributors can be found checking [the insights section of this
-repository](https://github.com/uibcdf/pyunitwizard/graphs/contributors).
-
-The main project authors and contributors are:
-
-- Daniel Ibarrola Sánchez
-- Liliana M. Moreno Vargas
-- Diego Prada Gracia
+MIT. See [LICENSE](LICENSE).
