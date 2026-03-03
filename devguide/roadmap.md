@@ -58,6 +58,7 @@ line to a stable `1.0.0` release.
 - No blocker incidents open in diagnostics flows.
 - `pyunitwizard.main` deprecation policy is documented for pre-`1.0.0` and validated by tests.
 - Release checklist for `1.0.0` fully actionable.
+- RC closure checks in `devguide/release_0.19.x_rc_checklist.md` are complete.
 
 ### Deprecation policy for `pyunitwizard.main`
 

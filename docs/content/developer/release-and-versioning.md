@@ -7,6 +7,7 @@ PyUnitWizard tags use numeric versions without `v` prefix.
 Current path is tracked in:
 
 - `devguide/roadmap.md`
+- `devguide/release_0.19.x_rc_checklist.md`
 - `devguide/release_1.0.0_checklist.md`
 
 Current policy:

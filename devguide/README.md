@@ -6,6 +6,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
+- `release_0.19.x_rc_checklist.md`: operational checklist for RC stability window management.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 
 ## Current baseline
