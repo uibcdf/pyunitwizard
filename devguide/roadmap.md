@@ -1,12 +1,13 @@
 # Roadmap to 1.0.0
 
-This roadmap defines the stabilization path from the current `0.18.x` line to a stable `1.0.0` release.
+This roadmap defines the stabilization path from the `0.19.x` release-candidate
+line to a stable `1.0.0` release.
 
 ## Release stages
 
 1. `0.17.x` - Hardening and correctness
 2. `0.18.x` - API freeze and contract tests
-3. `0.19.x` - Ecosystem validation (ArgDigest/DepDigest/SMonitor)
+3. `0.19.x` - Release candidate (ecosystem validation and stability window)
 4. `1.0.0` - Stable release
 
 ## 0.17.x - Hardening and correctness
@@ -39,7 +40,7 @@ This roadmap defines the stabilization path from the current `0.18.x` line to a 
 - Deprecation policy documented for any remaining legacy aliases.
 - Manual `.github/workflows/release_gates.yaml` green on candidate commits.
 
-## 0.19.x - Ecosystem validation
+## 0.19.x - Release candidate
 
 ### Objectives
 
@@ -48,6 +49,7 @@ This roadmap defines the stabilization path from the current `0.18.x` line to a 
 - Run local-sibling smoke tests when `../argdigest`, `../depdigest`, and `../smonitor` are available.
 - Collect and triage integrator feedback (blocking vs non-blocking).
 - Complete deprecation contract for `pyunitwizard.main` (warning semantics and migration path).
+- Keep this line open for a stability observation window before `1.0.0`.
 
 ### Exit criteria
 

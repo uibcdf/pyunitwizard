@@ -9,6 +9,11 @@ Current path is tracked in:
 - `devguide/roadmap.md`
 - `devguide/release_1.0.0_checklist.md`
 
+Current policy:
+
+- `0.19.x` is the RC line used to observe stability in real usage.
+- `1.0.0` is created only after the RC window closes without blocker issues.
+
 ## Pre-release checks
 
 1. `pytest -q` passes.

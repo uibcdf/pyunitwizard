@@ -4,7 +4,9 @@ PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.18.1`).
 
 ## Baseline policy
 
-- Pre-1.0 releases follow incremental stabilization (`0.18.x`, `0.19.x`, ...).
+- Pre-1.0 releases follow incremental stabilization.
+- `0.19.x` is the formal release-candidate (RC) line and should remain open as a
+  stability window before `1.0.0`.
 - `1.0.0` is the stable milestone.
 - If a tag was created by mistake, do not rewrite history; continue with the
   next correct numeric tag.
