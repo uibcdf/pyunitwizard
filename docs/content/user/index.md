@@ -1,46 +1,78 @@
-# User guide
+# User
 
-## Quickstart guide
-If you are wondering what can MolSysMT do for you, have a look to [the "Quickstart guide" of the "Showcase" section](../showcase/quickstart.ipynb) for a first contact with the tool. We hope you find it useful!
+PyUnitWizard appears in two very different contexts, and each context needs a
+clear reading path.
 
-## Sections
+Some readers are maintainers evaluating whether to integrate PyUnitWizard in a
+scientific library. Others are scientists using a library that already embeds
+PyUnitWizard and just want reliable, predictable behavior in their scripts.
 
-::::{grid} 3
+This section is written for both profiles. Pick the route that matches your
+role first, then skim the other route so you understand the full contract
+between library maintainers and library users.
 
-:::{grid-item-card} Introduction
-:columns: 4
-:link: intro/index.html
-Have a look to the Introduction section to familiarize yourself with the philosophy of MolSysMT.
-:::
+## Route A: Library Integrators
 
-:::{grid-item-card} Tools
-:columns: 4
-:link: tools/index.html
-MolSysMT includes a large tools set to operate with molecular systems. They are categorized
-according to their purpose and functionality: basic tools, building tools, topology
-tools, structure tools, ...
-:::
+Go to [Library Integrators](library-integrators.md).
 
+In this route you will learn how to:
+- configure PyUnitWizard once and keep runtime deterministic,
+- normalize and validate quantities at API boundaries,
+- standardize outputs so downstream tools receive consistent units.
 
-:::{grid-item-card} Cookbook
-:columns: 4
-:link: cookbook/index.html
-Some recipes and examples on how to deal with specific situations can be found in the following sections.
-:::
+## Route B: End Users of Integrating Libraries
 
-::::
+Go to [End Users](end-users.md).
 
-```{eval-rst}
-.. toctree::
-   :hidden:
+In this route you will learn how to:
+- reason about quantity parsing, conversion, and compatibility in day-to-day scripts,
+- diagnose common failures quickly,
+- communicate reproducible unit issues to library maintainers.
 
-   intro/index.md
-   tools/index.md
-   cookbook/index.md
+Both routes converge on the same objective: unit-safe workflows across
+scientific Python libraries without hidden assumptions.
+
+## Public API Map
+
+When you need complete function-level reference:
+- [Users API Reference](../../api/users/api_user.rst)
+- [Developers API Reference](../../api/developers/api_developers.rst)
+
+## Notebook Route
+
+If you prefer notebook-first learning, follow this practical sequence:
+1. [Importing.ipynb](Importing.ipynb)
+2. [Quantities_and_Units.ipynb](Quantities_and_Units.ipynb)
+3. [Convert.ipynb](Convert.ipynb)
+4. [Dimensionality.ipynb](Dimensionality.ipynb)
+5. [In_Your_Library.ipynb](In_Your_Library.ipynb)
+
+## Notebook Reference
+
+```{toctree}
+:maxdepth: 1
+:hidden:
+
+library-integrators.md
+end-users.md
+what-pyunitwizard-solves.md
+adoption-story.md
+backend-coverage.md
+quickstart.md
+mini-library-walkthrough.md
+configuration.md
+integrating-your-library.md
+troubleshooting.md
+production-checklist.md
+faq.md
+Importing.ipynb
+Quantities_and_Units.ipynb
+Convert.ipynb
+Strings.ipynb
+Dimensionality.ipynb
+Check.ipynb
+Similarity.ipynb
+Standardize.ipynb
+Lists_and_arrays.ipynb
+In_Your_Library.ipynb
 ```
-
-## AI Assistants
-
-Experimental AI chatbots trained to help you work with MolSysMT are available in the following link: [AI Assistants](../ai_assistants.md).
-Let us know your experience!
-

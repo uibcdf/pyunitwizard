@@ -1,36 +1,23 @@
 # Installation
 
-## Last stable version
+PyUnitWizard can be installed with conda or pip.
 
-There is no stable version yet
-
-## Last testing version
-
-If you want to work with the last testing version, the installation command is the following:
+## Basic installation
 
 ```bash
-conda install -c uibcdf/label/dev pytunitwizard
+conda install -c uibcdf pyunitwizard
 ```
 
-To uninstall this library:
+or:
 
 ```bash
-conda remove pyunitwizard
+pip install pyunitwizard
 ```
 
-## Developing version from the source code
-
-The raw code fully alive can be installed from this github repo as follows:
+## Install from source
 
 ```bash
-git clone https://github.com/uibcdf/PyUnitWizard.git
-cd PyUnitWizard
-python setup.py develop
+git clone https://github.com/uibcdf/pyunitwizard.git
+cd pyunitwizard
+pip install -e .
 ```
-
-In this case, do the following to uninstall it:
-
-```bash
-pip uninstall pyunitwizard
-```
-
