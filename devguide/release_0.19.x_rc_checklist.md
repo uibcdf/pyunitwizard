@@ -51,12 +51,12 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - [x] Optional dependency policy is aligned with DepDigest governance for heavy/optional backends.
 - [x] User/dev diagnostics expose stable `CODE` and actionable `hint` semantics.
 - [x] Compatibility matrix defines minimum supported versions for `argdigest`, `depdigest`, and `smonitor`.
-- [ ] SMonitor profile consistency (`user`, `dev`, `qa`, `agent`) is validated from the PyUnitWizard consumer side.
+- [x] SMonitor profile consistency (`user`, `dev`, `qa`, `agent`) is validated from the PyUnitWizard consumer side.
 - [ ] SMonitor traceability tags used by PyUnitWizard are aligned with cross-library failure categories.
 - [x] DepDigest audit path is validated against PyUnitWizard dependency declarations.
 - [x] ArgDigest integration confirms unit error mapping from PyUnitWizard into contract-layer errors with caller context.
 - [x] PyUnitWizard kernel isolation behavior is explicitly validated and documented.
-- [ ] Third-party/backend exceptions are translated into PyUnitWizard cataloged exception hierarchy.
+- [x] Third-party/backend exceptions are translated into PyUnitWizard cataloged exception hierarchy.
 - [x] Fundamental dimensions (`[L]`, `[M]`, `[T]`, `[K]`, `[mol]`, `[A]`, `[Cd]`) are treated as a locked serialization contract.
 - [ ] Performance baseline exists for conversion/introspection hot paths and is tracked for regressions.
 
@@ -87,3 +87,5 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - SMonitor code/hint contract evidence covered by `tests/test_smonitor_catalog_contract.py`.
 - Fundamental dimensions serialization contract evidence covered by `tests/test_kernel_contract.py`.
 - Kernel isolation/restoration evidence covered by `tests/test_context.py` (including restoration after exception).
+- SMonitor profile contract evidence covered by `tests/test_smonitor_profiles_contract.py`.
+- Backend-to-catalog exception translation evidence covered by `tests/test_exception_translation_contract.py`.
