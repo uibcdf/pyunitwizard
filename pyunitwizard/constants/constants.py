@@ -38,6 +38,8 @@ def get_constant(constant_name: str,
         Constant quantity in the requested unit/form.
     """
 
+    from pyunitwizard.api import quantity, convert
+
     if constant_name in _constants_synonyms:
         constant_name = _constants_synonyms[constant_name]
 

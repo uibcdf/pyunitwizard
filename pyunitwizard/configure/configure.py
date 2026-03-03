@@ -48,8 +48,11 @@ def resolve_config_module(
 
     if root_package:
         module_path = f"{root_package}._pyunitwizard"
-        if find_spec(module_path) is not None:
-            return module_path
+        try:
+            if find_spec(module_path) is not None:
+                return module_path
+        except ModuleNotFoundError:
+            return None
 
     return None
 

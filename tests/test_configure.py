@@ -1,5 +1,8 @@
 import pyunitwizard as puw
-from pyunitwizard.configure import configure as configure_module
+from pathlib import Path
+import os
+import sys
+import importlib
 
 def test_libraries_supported():
     assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units']
@@ -102,44 +105,83 @@ def test_all():
     assert True
 
 
-def test_resolve_config_module_runtime_over_env_and_file(monkeypatch):
-    monkeypatch.setenv("PYUNITWIZARD_CONFIG", "env.config")
-    monkeypatch.setattr(configure_module, "find_spec", lambda _: object())
+def _create_pkg_with_pyw_config(tmp_path: Path, package_name: str) -> None:
+    pkg_dir = tmp_path / package_name
+    pkg_dir.mkdir()
+    (pkg_dir / "__init__.py").write_text("", encoding="utf-8")
+    (pkg_dir / "_pyunitwizard.py").write_text("FLAG = True\n", encoding="utf-8")
 
-    output = puw.configure.resolve_config_module(
-        config="runtime.config",
-        root_package="mylib",
-    )
+
+def test_resolve_config_module_runtime_over_env_and_file(tmp_path):
+    _create_pkg_with_pyw_config(tmp_path, "mylib")
+
+    previous = os.environ.get("PYUNITWIZARD_CONFIG")
+    os.environ["PYUNITWIZARD_CONFIG"] = "env.config"
+    sys.path.insert(0, str(tmp_path))
+    importlib.invalidate_caches()
+
+    try:
+        output = puw.configure.resolve_config_module(
+            config="runtime.config",
+            root_package="mylib",
+        )
+    finally:
+        sys.path.remove(str(tmp_path))
+        importlib.invalidate_caches()
+        if previous is None:
+            os.environ.pop("PYUNITWIZARD_CONFIG", None)
+        else:
+            os.environ["PYUNITWIZARD_CONFIG"] = previous
 
     assert output == "runtime.config"
 
 
-def test_resolve_config_module_env_over_file(monkeypatch):
-    monkeypatch.setenv("PYUNITWIZARD_CONFIG", "env.config")
-    monkeypatch.setattr(configure_module, "find_spec", lambda _: object())
+def test_resolve_config_module_env_over_file(tmp_path):
+    _create_pkg_with_pyw_config(tmp_path, "mylib")
+    previous = os.environ.get("PYUNITWIZARD_CONFIG")
+    os.environ["PYUNITWIZARD_CONFIG"] = "env.config"
+    sys.path.insert(0, str(tmp_path))
+    importlib.invalidate_caches()
 
-    output = puw.configure.resolve_config_module(root_package="mylib")
+    try:
+        output = puw.configure.resolve_config_module(root_package="mylib")
+    finally:
+        sys.path.remove(str(tmp_path))
+        importlib.invalidate_caches()
+        if previous is None:
+            os.environ.pop("PYUNITWIZARD_CONFIG", None)
+        else:
+            os.environ["PYUNITWIZARD_CONFIG"] = previous
 
     assert output == "env.config"
 
 
-def test_resolve_config_module_file_fallback(monkeypatch):
-    monkeypatch.delenv("PYUNITWIZARD_CONFIG", raising=False)
-    monkeypatch.setattr(
-        configure_module,
-        "find_spec",
-        lambda module_path: object() if module_path == "mylib._pyunitwizard" else None,
-    )
+def test_resolve_config_module_file_fallback(tmp_path):
+    _create_pkg_with_pyw_config(tmp_path, "mylib")
+    previous = os.environ.get("PYUNITWIZARD_CONFIG")
+    os.environ.pop("PYUNITWIZARD_CONFIG", None)
+    sys.path.insert(0, str(tmp_path))
+    importlib.invalidate_caches()
 
-    output = puw.configure.resolve_config_module(root_package="mylib")
+    try:
+        output = puw.configure.resolve_config_module(root_package="mylib")
+    finally:
+        sys.path.remove(str(tmp_path))
+        importlib.invalidate_caches()
+        if previous is not None:
+            os.environ["PYUNITWIZARD_CONFIG"] = previous
 
     assert output == "mylib._pyunitwizard"
 
 
-def test_resolve_config_module_none_when_no_candidate(monkeypatch):
-    monkeypatch.delenv("PYUNITWIZARD_CONFIG", raising=False)
-    monkeypatch.setattr(configure_module, "find_spec", lambda _: None)
+def test_resolve_config_module_none_when_no_candidate():
+    previous = os.environ.get("PYUNITWIZARD_CONFIG")
+    os.environ.pop("PYUNITWIZARD_CONFIG", None)
 
-    output = puw.configure.resolve_config_module(root_package="mylib")
+    try:
+        output = puw.configure.resolve_config_module(root_package="mylib_that_does_not_exist")
+    finally:
+        if previous is not None:
+            os.environ["PYUNITWIZARD_CONFIG"] = previous
 
     assert output is None
