@@ -6,6 +6,7 @@ import pytest
 import numpy as np
 import unyt
 from pyunitwizard.api.standardization import _standard_units_lstsq
+import pyunitwizard.api.standardization as standardization_module
 
 puw.configure.reset()
 puw.configure.load_library(['pint', 'openmm.unit', 'unyt'])
@@ -155,3 +156,57 @@ def test_standard_units_lstsq_returns_none_when_unsatisfied():
     solution = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
     standards = {'second': np.array([0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])}
     assert _standard_units_lstsq(solution, standards) is None
+
+
+def test_get_standard_units_combination_uses_tentative_base_when_fundamental_lstsq_fails(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    original_lstsq = standardization_module._standard_units_lstsq
+    calls = {"n": 0}
+
+    def fake_lstsq(solution, standards):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return None
+        return original_lstsq(solution, standards)
+
+    monkeypatch.setattr(standardization_module, "_standard_units_lstsq", fake_lstsq)
+
+    standard_unit = puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
+    assert standard_unit == 'nanometer * picosecond'
+    assert calls["n"] >= 2
+
+
+def test_get_standard_units_raises_when_all_lstsq_strategies_fail(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    monkeypatch.setattr(standardization_module, "_standard_units_lstsq", lambda *_args, **_kwargs: None)
+
+    with pytest.raises(NoStandardsError):
+        puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
+
+
+def test_standardize_fallback_except_path_when_initial_convert_fails(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+
+    quantity = puw.quantity(1.0, "meter", form="pint")
+    original_convert = standardization_module.convert
+    calls = {"n": 0}
+
+    def flaky_convert(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise RuntimeError("force standardize fallback")
+        return original_convert(*args, **kwargs)
+
+    monkeypatch.setattr(standardization_module, "convert", flaky_convert)
+
+    standardized = puw.standardize(quantity)
+    assert puw.get_unit(standardized) == "nanometer"
+    assert np.allclose(puw.get_value(standardized), 1e9)

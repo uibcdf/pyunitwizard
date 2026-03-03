@@ -33,6 +33,7 @@ def test_check_value_type():
 
     quantity = puw.quantity(np.array([1.5, 2.0]), 's')
     assert puw.check(quantity, value_type=np.ndarray)
+    assert not puw.check(quantity, value_type=list)
     
 def test_check_unit():
 
@@ -44,6 +45,7 @@ def test_check_unit():
 
     quantity = puw.quantity(np.array([1.5, 2.0]), 's')
     assert puw.check(quantity, unit='s')
+    assert not puw.check(quantity, unit='m')
 
 def test_check_dimensionality():
     
@@ -73,6 +75,7 @@ def test_check_multiple():
 
     quantity = puw.quantity([0,0,0], 'nm/ps')
     assert puw.check(quantity, dimensionality={'[L]':1, '[T]':-1}, value_type=np.ndarray, shape=(3,))
+    assert not puw.check(quantity, shape=(2,))
 
 def test_check_unit_constraints():
 
