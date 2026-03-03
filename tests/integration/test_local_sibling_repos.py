@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import importlib
-import importlib.util
 import sys
 from contextlib import contextmanager
 from pathlib import Path
@@ -31,33 +30,31 @@ def _prepend_paths(paths: list[Path]):
         sys.path[:] = original
 
 
-def _load_local_package_alias(repo_path: Path, package_name: str, alias: str):
-    package_init = repo_path / package_name / "__init__.py"
-    spec = importlib.util.spec_from_file_location(
-        alias,
-        package_init,
-        submodule_search_locations=[str(repo_path / package_name)],
-    )
-    module = importlib.util.module_from_spec(spec)
-    assert spec is not None
-    assert spec.loader is not None
-    sys.modules[alias] = module
-    spec.loader.exec_module(module)
-    return module
+@contextmanager
+def _force_fresh_imports(packages: list[str]):
+    removed = {}
+    try:
+        for package in packages:
+            for key in list(sys.modules):
+                if key == package or key.startswith(f"{package}."):
+                    removed[key] = sys.modules.pop(key)
+        yield
+    finally:
+        sys.modules.update(removed)
 
 
 @pytest.mark.skipif(not _siblings_available(), reason="Sibling repos are not available in this environment")
 def test_local_sibling_import_precedence_and_basic_contracts():
-    argdigest_local = _load_local_package_alias(SIBLING_ARGDIGEST, "argdigest", "argdigest_local")
-    depdigest_local = _load_local_package_alias(SIBLING_DEPDIGEST, "depdigest", "depdigest_local")
-    smonitor_local = _load_local_package_alias(SIBLING_SMONITOR, "smonitor", "smonitor_local")
-
-    assert str(Path(argdigest_local.__file__).resolve()).startswith(str(SIBLING_ARGDIGEST.resolve()))
-    assert str(Path(depdigest_local.__file__).resolve()).startswith(str(SIBLING_DEPDIGEST.resolve()))
-    assert str(Path(smonitor_local.__file__).resolve()).startswith(str(SIBLING_SMONITOR.resolve()))
-
-    with _prepend_paths([SIBLING_ARGDIGEST, SIBLING_DEPDIGEST, SIBLING_SMONITOR]):
+    with _prepend_paths([SIBLING_ARGDIGEST, SIBLING_DEPDIGEST, SIBLING_SMONITOR]), _force_fresh_imports(
+        ["argdigest", "depdigest", "smonitor"]
+    ):
+        argdigest = importlib.import_module("argdigest")
         depdigest = importlib.import_module("depdigest")
+        smonitor = importlib.import_module("smonitor")
+
+        assert str(Path(argdigest.__file__).resolve()).startswith(str(SIBLING_ARGDIGEST.resolve()))
+        assert str(Path(depdigest.__file__).resolve()).startswith(str(SIBLING_DEPDIGEST.resolve()))
+        assert str(Path(smonitor.__file__).resolve()).startswith(str(SIBLING_SMONITOR.resolve()))
 
     payload = depdigest.get_info("pyunitwizard", format="dict")
     assert payload["module_path"] == "pyunitwizard"
