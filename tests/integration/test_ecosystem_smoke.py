@@ -22,6 +22,20 @@ def test_depdigest_can_introspect_pyunitwizard_contract():
     assert "dependencies" in payload
 
 
+def test_depdigest_reports_expected_runtime_dependencies():
+    depdigest = pytest.importorskip("depdigest")
+
+    payload = depdigest.get_info("pyunitwizard", format="dict")
+    dependencies = payload["dependencies"]
+
+    libraries = {item["library"] for item in dependencies}
+    assert {"numpy", "pint", "unyt", "openmm.unit", "astropy.units"}.issubset(libraries)
+
+    type_by_library = {item["library"]: item["type"] for item in dependencies}
+    assert type_by_library["numpy"] == "hard"
+    assert type_by_library["pint"] == "hard"
+
+
 def test_argdigest_pyunitwizard_rule_pipeline_smoke():
     argdigest = pytest.importorskip("argdigest")
     puw_support = pytest.importorskip("argdigest.contrib.pyunitwizard_support")
@@ -49,3 +63,32 @@ def test_argdigest_pyunitwizard_rule_pipeline_smoke():
     distance_bad = puw.quantity(1.0, "ps")
     with pytest.raises(argdigest.DigestValueError):
         _accept_distance(distance_bad)
+
+
+def test_argdigest_pyunitwizard_standardize_and_convert_pipeline():
+    argdigest = pytest.importorskip("argdigest")
+    puw_support = pytest.importorskip("argdigest.contrib.pyunitwizard_support")
+
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_default_form("pint")
+    puw.configure.set_default_parser("pint")
+    puw.configure.set_standard_units(["nanometer", "picosecond", "kilocalorie", "mole"])
+
+    @argdigest.arg_digest.map(
+        distance={
+            "kind": "quantity",
+            "rules": [
+                puw_support.is_quantity(),
+                puw_support.standardize(),
+                puw_support.convert("angstrom", to_form="pint"),
+            ],
+        }
+    )
+    def _normalize_distance(distance):
+        return distance
+
+    out = _normalize_distance(puw.quantity(1.0, "nanometer", form="pint"))
+    assert puw.get_form(out) == "pint"
+    assert puw.get_unit(out) == "angstrom"
+    assert puw.get_value(out) == 10.0
