@@ -3,9 +3,9 @@ channels:
 - conda-forge
 dependencies:
 - python >=3.11,<3.14
-- setuptools <81
+- setuptools
 - pint
-- sphinx <9
+- sphinx
 - pydata-sphinx-theme
 - sphinxcontrib-bibtex
 - sphinx-remove-toctrees
