@@ -30,3 +30,9 @@ PyUnitWizard must stay aligned with:
 - `argdigest`: argument normalization and API contract integration.
 - `depdigest`: optional dependency governance and runtime loading.
 - `smonitor`: diagnostics catalog, severity semantics, and traceability.
+
+Collective testing policy:
+- cross-library E2E tests belong to library repos with CI (including
+  duplicated scenarios when needed for coverage and ownership clarity).
+- `molsyssuite` is used for coordination artifacts/checklists, not as a test
+  execution repository.

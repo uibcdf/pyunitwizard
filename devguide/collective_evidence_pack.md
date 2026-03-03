@@ -92,6 +92,14 @@ Minimum acceptance evidence:
 - captured output/events (or artifact) with stable code + hint,
 - per-library references to test/commit proving the path.
 
+Execution policy:
+- shared/collective tests must run inside library repos with CI (`pyunitwizard`,
+  `argdigest`, `depdigest`, `smonitor`).
+- `molsyssuite` is coordination-only for this workflow (runbook, checklist,
+  captured evidence), not a test host.
+- when useful for resilience, duplicate collective E2E tests across libraries
+  instead of centralizing them in `molsyssuite`.
+
 ## 4. Shared status template (copy to sibling repos)
 
 Use this exact block when reporting progress:

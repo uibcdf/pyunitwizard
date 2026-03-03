@@ -46,6 +46,12 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 
 ## 5. Collective 1.0 alignment during RC (ecosystem-wide checklist)
 
+Execution policy for collective tests:
+- collective E2E/contract tests run in library repositories with CI support
+  (`pyunitwizard`, `argdigest`, `depdigest`, `smonitor`).
+- `molsyssuite` remains documentation/coordination only (no dedicated test
+  suite at this stage).
+
 - [x] Unified configuration contract documented and validated with the same precedence used across sibling libraries (`runtime > env > file`).
 - [x] All critical public API functions are instrumented with `@smonitor.signal`.
 - [x] Optional dependency policy is aligned with DepDigest governance for heavy/optional backends.
