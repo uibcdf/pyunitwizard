@@ -17,6 +17,18 @@ parser = False
 
 
 def is_form(quantity_or_unit: Any) -> bool:
+    """Check whether an object belongs to OpenMM form.
+
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Candidate object.
+
+    Returns
+    -------
+    bool
+        ``True`` if the object is an OpenMM quantity or unit.
+    """
     return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 def is_quantity(quantity_or_unit: Any) -> bool:
@@ -140,6 +152,10 @@ def make_quantity(value: Union[int, float, ArrayLike],
         -------
         openmm_unit.Quantity
             The quantity.
+
+        Examples
+        --------
+        >>> make_quantity(1.0, openmm_unit.nanometer)
     """
 
     return openmm_unit.Quantity(value, unit)
@@ -179,6 +195,20 @@ def get_unit(quantity: openmm_unit.Quantity) -> openmm_unit.Unit:
 
 def change_value(quantity: openmm_unit.Quantity,
                  value: Union[int, float, ArrayLike]) -> openmm_unit.Quantity:
+    """Return an OpenMM quantity with updated value and same unit.
+
+    Parameters
+    ----------
+    quantity : openmm.unit.Quantity
+        Input quantity.
+    value : int or float or ArrayLike
+        New numeric value.
+
+    Returns
+    -------
+    openmm.unit.Quantity
+        Quantity with replaced value.
+    """
 
     return make_quantity(value, get_unit(quantity))
 
@@ -207,10 +237,44 @@ def convert(quantity: openmm_unit.Quantity,
 ## Parser
 
 def string_to_quantity(string):
+    """Raise parser error for OpenMM string quantities.
+
+    Parameters
+    ----------
+    string : str
+        Input string quantity.
+
+    Returns
+    -------
+    openmm.unit.Quantity
+        This function never returns.
+
+    Raises
+    ------
+    LibraryWithoutParserError
+        OpenMM backend has no native string parser in this layer.
+    """
 
     raise LibraryWithoutParserError('openmm.unit')
 
 def string_to_unit(string):
+    """Raise parser error for OpenMM string units.
+
+    Parameters
+    ----------
+    string : str
+        Input string unit.
+
+    Returns
+    -------
+    openmm.unit.Unit
+        This function never returns.
+
+    Raises
+    ------
+    LibraryWithoutParserError
+        OpenMM backend has no native string parser in this layer.
+    """
 
     raise LibraryWithoutParserError('openmm.unit')
 
@@ -335,7 +399,18 @@ def unit_to_unyt(unit: openmm_unit.Unit):
 ## To astropy.units
 
 def quantity_to_astropy_units(quantity: openmm_unit.Quantity):
-    """ Transform a quantity from openmm.unit to astropy.units."""
+    """Transform an OpenMM quantity into an Astropy quantity.
+
+    Parameters
+    ----------
+    quantity : openmm.unit.Quantity
+        Input quantity in OpenMM form.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Converted quantity in Astropy form.
+    """
 
     from .api_pint import quantity_to_astropy_units as pint_to_astropy_units
 
@@ -345,7 +420,18 @@ def quantity_to_astropy_units(quantity: openmm_unit.Quantity):
 
 
 def unit_to_astropy_units(unit: openmm_unit.Unit):
-    """ Transform a unit from openmm.unit to astropy.units."""
+    """Transform an OpenMM unit into an Astropy unit.
+
+    Parameters
+    ----------
+    unit : openmm.unit.Unit
+        Input unit in OpenMM form.
+
+    Returns
+    -------
+    astropy.units.UnitBase
+        Converted unit in Astropy form.
+    """
 
     from .api_astropy_unit import get_unit as get_astropy_unit
 

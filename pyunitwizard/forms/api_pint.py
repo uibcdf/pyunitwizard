@@ -27,6 +27,18 @@ parser = True
 #    }
 
 def is_form(quantity_or_unit: Any) -> bool:
+    """Check whether an object belongs to pint form.
+
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Candidate object.
+
+    Returns
+    -------
+    bool
+        ``True`` if the object is a pint quantity or unit.
+    """
     return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 def is_quantity(quantity_or_unit: Any) -> bool:
@@ -138,6 +150,10 @@ def make_quantity(value: Union[float, int, ArrayLike],
         -------
         pint.Quantity
             The quantity.
+
+        Examples
+        --------
+        >>> make_quantity(1.0, "nanometer")
     """
 
     return Q_(value, unit)
@@ -174,6 +190,20 @@ def get_unit(quantity: pint.Quantity) -> pint.Unit:
 
 def change_value(quantity: pint.Quantity,
                  value: Union[int, float, ArrayLike]) -> pint.Quantity:
+    """Return a pint quantity with updated value and preserved unit.
+
+    Parameters
+    ----------
+    quantity : pint.Quantity
+        Input quantity.
+    value : int or float or ArrayLike
+        New numeric value.
+
+    Returns
+    -------
+    pint.Quantity
+        Quantity with replaced magnitude and same unit.
+    """
 
     return make_quantity(value, get_unit(quantity))
 
@@ -360,7 +390,18 @@ def unit_to_unyt(unit: pint.Unit):
 ## To astropy.units
 
 def quantity_to_astropy_units(quantity: pint.Quantity):
-    """ Transform a quantity from pint to astropy.units."""
+    """Transform a pint quantity into an Astropy quantity.
+
+    Parameters
+    ----------
+    quantity : pint.Quantity
+        Input quantity in pint form.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Converted quantity in Astropy form.
+    """
 
     from .api_astropy_unit import make_quantity as make_astropy_quantity
 
@@ -371,11 +412,21 @@ def quantity_to_astropy_units(quantity: pint.Quantity):
 
 
 def unit_to_astropy_units(unit: pint.Unit):
-    """ Transform a unit from pint to astropy.units."""
+    """Transform a pint unit into an Astropy unit.
+
+    Parameters
+    ----------
+    unit : pint.Unit
+        Input unit in pint form.
+
+    Returns
+    -------
+    astropy.units.UnitBase
+        Converted unit in Astropy form.
+    """
 
     from .api_astropy_unit import get_unit as get_astropy_unit
 
     quantity = quantity_to_astropy_units(1.0*unit)
 
     return get_astropy_unit(quantity)
-

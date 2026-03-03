@@ -20,6 +20,18 @@ parser = False
 #}
 
 def is_form(quantity_or_unit: Any) -> bool:
+    """Check whether an object belongs to unyt form.
+
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Candidate object.
+
+    Returns
+    -------
+    bool
+        ``True`` if the object is a unyt quantity or unit.
+    """
     return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
 def is_quantity(quantity_or_unit: Any) -> bool:
@@ -128,6 +140,10 @@ def make_quantity(value: Union[int, float, ArrayLike],
         -------
         unyt_array or unyt_quantity
             The quantity.
+
+        Examples
+        --------
+        >>> make_quantity(1.0, "nm")
     """ 
     if isinstance(value, (int, float)):
         return unyt_quantity(value, unit)
@@ -168,6 +184,20 @@ def get_unit(quantity: Union[unyt_array,
 
 def change_value(quantity: Union[unyt_quantity, unyt_array],
                  value: Union[int, float, ArrayLike]) -> Union[unyt_array, unyt_quantity]:
+    """Return a unyt quantity with updated value and preserved unit.
+
+    Parameters
+    ----------
+    quantity : unyt.unyt_array or unyt.unyt_quantity
+        Input quantity.
+    value : int or float or ArrayLike
+        New numeric value.
+
+    Returns
+    -------
+    unyt.unyt_array or unyt.unyt_quantity
+        Quantity with replaced value and same unit.
+    """
 
     return make_quantity(value, get_unit(quantity))
 
@@ -194,10 +224,44 @@ def convert(quantity: Union[unyt_array, unyt_quantity],
 ## Parser
 
 def string_to_quantity(string):
+    """Raise parser error for unyt string quantities.
+
+    Parameters
+    ----------
+    string : str
+        Input quantity string.
+
+    Returns
+    -------
+    unyt.unyt_quantity
+        This function never returns.
+
+    Raises
+    ------
+    LibraryWithoutParserError
+        Unyt backend has no parser in this layer.
+    """
 
     raise LibraryWithoutParserError("Unyt library has no string parser")
 
 def string_to_unit(string):
+    """Raise parser error for unyt string units.
+
+    Parameters
+    ----------
+    string : str
+        Input unit string.
+
+    Returns
+    -------
+    unyt.Unit
+        This function never returns.
+
+    Raises
+    ------
+    LibraryWithoutParserError
+        Unyt backend has no parser in this layer.
+    """
 
     raise LibraryWithoutParserError("Unyt library has no string parser")
 
@@ -318,7 +382,18 @@ def unit_to_openmm_unit(unit: unyt_unit):
 ## To astropy.units
 
 def quantity_to_astropy_units(quantity: Union[unyt_array, unyt_quantity]):
-    """ Transform a quantity from unyt to astropy.units."""
+    """Transform a unyt quantity into an Astropy quantity.
+
+    Parameters
+    ----------
+    quantity : unyt.unyt_array or unyt.unyt_quantity
+        Input quantity in unyt form.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Converted quantity in Astropy form.
+    """
 
     from .api_pint import quantity_to_astropy_units as pint_to_astropy_units
 
@@ -328,7 +403,18 @@ def quantity_to_astropy_units(quantity: Union[unyt_array, unyt_quantity]):
 
 
 def unit_to_astropy_units(unit: unyt_unit):
-    """ Transform a unit from unyt to astropy.units."""
+    """Transform a unyt unit into an Astropy unit.
+
+    Parameters
+    ----------
+    unit : unyt.Unit
+        Input unit in unyt form.
+
+    Returns
+    -------
+    astropy.units.UnitBase
+        Converted unit in Astropy form.
+    """
 
     from .api_astropy_unit import get_unit as get_astropy_unit
 

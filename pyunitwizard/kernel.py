@@ -1,4 +1,16 @@
 def initialize() -> None:
+    """Initialize global runtime state containers.
+
+    Returns
+    -------
+    None
+        Global runtime variables are reset in place.
+
+    Examples
+    --------
+    >>> import pyunitwizard.kernel as kernel
+    >>> kernel.initialize()
+    """
 
     global loaded_libraries
     global loaded_parsers
@@ -22,4 +34,3 @@ def initialize() -> None:
 
 
 order_fundamental_units = ['[L]', '[M]', '[T]', '[K]', '[mol]', '[A]', '[Cd]']
-

@@ -31,7 +31,12 @@ def load_library(library: str) -> None:
         Parameters
         ----------
         library : str
-            Name of the libraries.
+            Name of the library backend to load.
+
+        Returns
+        -------
+        None
+            Internal forms dispatch dictionaries are updated in place.
     """
     from pyunitwizard.kernel import loaded_libraries, loaded_parsers
     api = _import_module('.'+_forms_apis_modules[library], _base_package)
@@ -107,4 +112,3 @@ dict_dimensionality['string'] = api.dimensionality
 dict_compatibility['string'] = api.compatibility
 
 del(api)
-

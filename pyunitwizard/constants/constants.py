@@ -19,6 +19,24 @@ def get_constant(constant_name: str,
                 to_unit:  Optional[str]=None,
                 to_form: Optional[str]=None,
                 standardized: Optional[bool]=False)-> QuantityLike:
+    """Return a predefined physical constant as a quantity.
+
+    Parameters
+    ----------
+    constant_name : str
+        Constant name or supported synonym.
+    to_unit : str, optional
+        Target unit for conversion.
+    to_form : str, optional
+        Target backend form for returned quantity.
+    standardized : bool, optional
+        Whether the returned quantity should be standardized.
+
+    Returns
+    -------
+    QuantityLike
+        Constant quantity in the requested unit/form.
+    """
 
     if constant_name in _constants_synonyms:
         constant_name = _constants_synonyms[constant_name]
@@ -37,6 +55,17 @@ def get_constant(constant_name: str,
         raise ValueError
 
 def show_constants()-> dict:
+    """Return available constants and synonyms as display strings.
+
+    Returns
+    -------
+    dict
+        Mapping from tuple of accepted names to ``\"value unit\"`` strings.
+
+    Examples
+    --------
+    >>> show_constants()
+    """
 
     output = {}
 
@@ -49,4 +78,3 @@ def show_constants()-> dict:
         output[tuple(names)]=value
 
     return output
-

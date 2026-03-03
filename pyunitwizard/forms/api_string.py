@@ -9,6 +9,18 @@ parser = False
 #    }
 
 def is_form(quantity_or_unit: Any) -> bool:
+    """Check whether an object belongs to the ``string`` form.
+
+    Parameters
+    ----------
+    quantity_or_unit : Any
+        Candidate object.
+
+    Returns
+    -------
+    bool
+        ``True`` when the object is a Python string.
+    """
 
     return isinstance(quantity_or_unit, str)
 
@@ -114,6 +126,10 @@ def make_quantity(value: Union[int, float, ArrayLike],
         -------
         str
             The quantity.
+
+        Examples
+        --------
+        >>> make_quantity(1.0, "nanometer")
     """
     from pyunitwizard.kernel import default_form, default_parser
     from pyunitwizard import convert as _convert, quantity as _quantity
@@ -162,6 +178,20 @@ def get_unit(quantity: str) -> str:
 
 def change_value(quantity: str,
                  value: Union[int, float, ArrayLike]) -> str:
+    """Return a string quantity with updated value and preserved unit.
+
+    Parameters
+    ----------
+    quantity : str
+        Input quantity in string form.
+    value : int or float or ArrayLike
+        New numeric value.
+
+    Returns
+    -------
+    str
+        Quantity with replaced value and original unit.
+    """
 
     return make_quantity(value, get_unit(quantity))
 
@@ -203,6 +233,18 @@ def convert(quantity: str, unit_name: str) -> str:
 ## To openmm.unit
 
 def quantity_to_openmm_unit(quantity: str):
+    """Convert a string quantity into an OpenMM quantity.
+
+    Parameters
+    ----------
+    quantity : str
+        Quantity in string form.
+
+    Returns
+    -------
+    openmm.unit.Quantity
+        Quantity represented in OpenMM units.
+    """
 
     # This function will raise an error.
     from .api_openmm_unit import string_to_quantity as string_to_openmm_unit_quantity
@@ -212,6 +254,18 @@ def quantity_to_openmm_unit(quantity: str):
     return tmp_quantity_or_unit
 
 def unit_to_openmm_unit(unit: str):
+    """Convert a string unit into an OpenMM unit.
+
+    Parameters
+    ----------
+    unit : str
+        Unit name in string form.
+
+    Returns
+    -------
+    openmm.unit.Unit
+        Unit represented in OpenMM backend.
+    """
 
     from .api_openmm_unit import get_unit as get_openmm_unit_unit
 
@@ -262,21 +316,69 @@ def unit_to_pint(unit: str):
 ## To unyt
 
 def quantity_to_unyt(quantity: str):
+    """Convert a string quantity into a unyt quantity.
+
+    Parameters
+    ----------
+    quantity : str
+        Quantity in string form.
+
+    Returns
+    -------
+    unyt.unyt_array or unyt.unyt_quantity
+        Quantity represented in unyt backend.
+    """
     raise NotImplementedError
 
 def unit_to_unyt(quantity: str):
+    """Convert a string unit into a unyt unit.
+
+    Parameters
+    ----------
+    quantity : str
+        Unit name in string form.
+
+    Returns
+    -------
+    unyt.Unit
+        Unit represented in unyt backend.
+    """
     raise NotImplementedError
 
 
 ## To astropy.units
 
 def quantity_to_astropy_units(quantity: str):
+    """Convert a string quantity into an Astropy quantity.
+
+    Parameters
+    ----------
+    quantity : str
+        Quantity in string form.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Quantity represented in Astropy backend.
+    """
     from .api_astropy_unit import string_to_quantity as _string_to_quantity
 
     return _string_to_quantity(quantity)
 
 
 def unit_to_astropy_units(unit: str):
+    """Convert a string unit into an Astropy unit.
+
+    Parameters
+    ----------
+    unit : str
+        Unit name in string form.
+
+    Returns
+    -------
+    astropy.units.UnitBase
+        Unit represented in Astropy backend.
+    """
     from .api_astropy_unit import get_unit as get_astropy_unit
 
     quantity = quantity_to_astropy_units(unit)
