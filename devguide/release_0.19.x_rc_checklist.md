@@ -9,7 +9,7 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 ## Status snapshot at `0.19.1` (2026-03-03)
 
 - RC checkpoint tag published: `0.19.1`.
-- Full test suite on local Python `3.13`: `252 passed`.
+- Full test suite on local Python `3.13`: `263 passed`.
 - Ecosystem integration smoke tests for `argdigest`, `depdigest`, `smonitor`: green.
 - Local sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`): green when repos are present.
 - Remaining work toward RC close: CI/release-gates continuity over time, sustained incident tracking, and final release-owner go/no-go.
@@ -58,7 +58,7 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - [x] PyUnitWizard kernel isolation behavior is explicitly validated and documented.
 - [x] Third-party/backend exceptions are translated into PyUnitWizard cataloged exception hierarchy.
 - [x] Fundamental dimensions (`[L]`, `[M]`, `[T]`, `[K]`, `[mol]`, `[A]`, `[Cd]`) are treated as a locked serialization contract.
-- [ ] Performance baseline exists for conversion/introspection hot paths and is tracked for regressions.
+- [x] Performance baseline exists for conversion/introspection hot paths and is tracked for regressions.
 
 ## 6. RC close (go/no-go to 1.0.0 candidate)
 
@@ -76,7 +76,7 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 
 ## Evidence log (2026-03-03)
 
-- Local quality baseline: `pytest -q` -> `252 passed` on Python `3.13`.
+- Local quality baseline: `pytest -q` -> `263 passed` on Python `3.13`.
 - RC checkpoint tag published: `0.19.1`.
 - Integration evidence:
   - `tests/integration/test_ecosystem_smoke.py` (ArgDigest/DepDigest/SMonitor smoke and pipeline checks).
@@ -89,3 +89,4 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - Kernel isolation/restoration evidence covered by `tests/test_context.py` (including restoration after exception).
 - SMonitor profile contract evidence covered by `tests/test_smonitor_profiles_contract.py`.
 - Backend-to-catalog exception translation evidence covered by `tests/test_exception_translation_contract.py`.
+- Performance baseline refreshed in `devguide/performance_baseline_0.19.x.json` using `devtools/benchmarks/conversion_baseline.py`.
