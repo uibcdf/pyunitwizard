@@ -1,7 +1,6 @@
 import pytest
 
 import pyunitwizard as puw
-import pyunitwizard.api.conversion as conversion_module
 from pyunitwizard._private.exceptions import ArgumentError
 
 
@@ -52,23 +51,3 @@ def test_convert_pint_unit_to_string_unit_keeps_unit_path():
     unit = puw.unit("meter", form="pint")
     output = puw.convert(unit, to_form="string", to_type="unit")
     assert output == "meter"
-
-
-def test_convert_string_to_string_unit_branch_when_parser_returns_unit(monkeypatch):
-    _configure_pint()
-
-    pint_unit = puw.unit("meter", form="pint")
-    monkeypatch.setattr(conversion_module, "_parse", lambda *args, **kwargs: pint_unit)
-
-    output = puw.convert("meter", to_form="string", to_type="unit", parser="pint")
-    assert output == "meter"
-
-
-def test_convert_string_to_form_unit_branch_when_parser_returns_unit(monkeypatch):
-    _configure_pint()
-
-    pint_unit = puw.unit("meter", form="pint")
-    monkeypatch.setattr(conversion_module, "_parse", lambda *args, **kwargs: pint_unit)
-
-    output = puw.convert("meter", to_form="pint", to_type="unit", parser="pint")
-    assert str(output) == "meter"

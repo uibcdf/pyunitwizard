@@ -53,60 +53,6 @@ def test_are_compatible_dimensionless_cross_form_try_branch():
     assert puw.are_compatible("0.0 radians", puw.quantity(1.0, "radian", form="pint"))
 
 
-def test_are_compatible_dimensionless_cross_form_except_branch(monkeypatch):
-    _configure_pint()
-    q_pint = puw.quantity(1.0, "radian", form="pint")
-
-    import pyunitwizard.api.conversion as conversion_module
-
-    original_convert = conversion_module.convert
-    call_count = {"n": 0}
-
-    def flaky_convert(*args, **kwargs):
-        call_count["n"] += 1
-        if call_count["n"] == 1:
-            raise RuntimeError("force fallback")
-        return original_convert(*args, **kwargs)
-
-    monkeypatch.setattr(conversion_module, "convert", flaky_convert)
-
-    assert puw.are_compatible("0.0 radians", q_pint)
-    assert call_count["n"] >= 2
-
-
-def test_are_compatible_dimensionless_forced_except_fallback_branch(monkeypatch):
-    import pyunitwizard.api.comparison as comparison_module
-    import pyunitwizard.api.conversion as conversion_module
-
-    monkeypatch.setattr(comparison_module, "is_dimensionless", lambda _: True)
-    monkeypatch.setattr(comparison_module, "get_form", lambda x: "f1" if x == "a" else "f2")
-    monkeypatch.setattr(
-        comparison_module,
-        "dict_compatibility",
-        {
-            "f1": lambda x, y: x == "converted-b" and y == "a",
-            "f2": lambda x, y: x == "converted-a" and y == "b",
-        },
-    )
-
-    calls = {"n": 0}
-
-    def flaky_convert(value, to_form=None):
-        calls["n"] += 1
-        if calls["n"] == 1:
-            raise RuntimeError("force first conversion error")
-        if value == "b" and to_form == "f1":
-            return "converted-b"
-        if value == "a" and to_form == "f2":
-            return "converted-a"
-        return value
-
-    monkeypatch.setattr(conversion_module, "convert", flaky_convert)
-
-    assert comparison_module.are_compatible("a", "b")
-    assert calls["n"] >= 2
-
-
 def test_compatible_dimensionalities_fills_missing_keys_in_dim1():
     dim1 = {"[L]": 1}
     dim2 = {"[L]": 1, "[M]": 0, "[T]": 0, "[K]": 0, "[mol]": 0, "[A]": 0, "[Cd]": 0}

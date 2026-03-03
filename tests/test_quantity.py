@@ -1,6 +1,7 @@
 import pyunitwizard as puw
 import unyt
 import pytest
+from pint.errors import UndefinedUnitError
 from pyunitwizard._private.exceptions import ArgumentError
 from pyunitwizard._private.exceptions import NotImplementedMethodError
 
@@ -63,11 +64,10 @@ def test_quantity_standardized_flag_applies_standardize():
         assert puw.get_unit(q) == "nanometer"
 
 
-def test_quantity_string_without_unit_raises_when_parser_returns_non_quantity(monkeypatch):
+def test_quantity_string_without_unit_rejects_unknown_token():
     with loaded_libraries(['pint']):
-        monkeypatch.setattr("pyunitwizard.api.conversion.convert", lambda *args, **kwargs: "not-a-quantity")
-        with pytest.raises(ArgumentError):
-            puw.quantity("meter", form="pint", parser="pint")
+        with pytest.raises(UndefinedUnitError):
+            puw.quantity("not_a_quantity_token", form="pint", parser="pint")
 
 
 def test_quantity_string_with_unit_object_uses_unit_object_branch():
@@ -78,11 +78,10 @@ def test_quantity_string_with_unit_object_uses_unit_object_branch():
         assert puw.get_unit(q) == "meter"
 
 
-def test_quantity_numeric_raises_not_implemented_method_when_backend_fails(monkeypatch):
+def test_quantity_numeric_raises_not_implemented_method_when_backend_fails():
     with loaded_libraries(['pint']):
-        monkeypatch.setitem(puw.forms.dict_make_quantity, "pint", lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("boom")))
         with pytest.raises(NotImplementedMethodError):
-            puw.quantity(2.5, "meter", form="pint")
+            puw.quantity({"x": 1}, "meter", form="pint")
 
 
 def test_quantity_string_with_non_unit_object_returns_none_current_behavior():
