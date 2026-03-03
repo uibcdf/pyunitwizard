@@ -9,12 +9,11 @@ import warnings
 from importlib.metadata import version, PackageNotFoundError
 
 try:
-    __version__ = version("pyunitwizard")
-except PackageNotFoundError:
-    # Package is not installed
+    from ._version import __version__
+except ImportError:
     try:
-        from ._version import __version__
-    except ImportError:
+        __version__ = version("pyunitwizard")
+    except PackageNotFoundError:
         __version__ = "0.0.0+unknown"
 
 from smonitor.integrations import ensure_configured as _ensure_smonitor_configured

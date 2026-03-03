@@ -82,7 +82,7 @@ The consolidation plan toward a stable `1.0.0` line is tracked in:
 - `devguide/roadmap.md`
 - `devguide/release_1.0.0_checklist.md`
 
-Current baseline is the `0.17.x` line (the historical `1.0.0` tag was created by mistake and is not used as release baseline).
+Current baseline is the `0.18.x` line (the historical `1.0.0` tag was created by mistake and is not used as release baseline).
 
 ### Copyright
 
