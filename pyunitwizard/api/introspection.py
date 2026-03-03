@@ -175,6 +175,7 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
     return dim
 
 
+@signal(tags=["introspection"])
 def is_dimensionless(quantity_or_unit: QuantityOrUnit) -> bool:
     """ Check wheter a quantity or unit is dimensionless.
 

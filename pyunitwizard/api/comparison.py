@@ -13,6 +13,7 @@ from .introspection import get_dimensionality, get_form, is_dimensionless, is_qu
 
 from smonitor import signal
 
+@signal(tags=["comparison"])
 def similarity(
     quantity_or_unit_1: QuantityOrUnit,
     quantity_or_unit_2: QuantityOrUnit,
@@ -147,6 +148,7 @@ def are_equal(
     return False
 
 
+@signal(tags=["comparison"])
 def compatibility(
     quantity_or_unit_1: QuantityOrUnit, quantity_or_unit_2: QuantityOrUnit
 ) -> bool:

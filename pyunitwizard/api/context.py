@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 from contextlib import contextmanager
-from typing import Optional, List, Any
+from typing import Optional, List
 from .. import kernel
 from ..configure import configure
+from smonitor import signal
 
+@signal(tags=["context"])
 @contextmanager
 def context(
     default_form: Optional[str] = None,

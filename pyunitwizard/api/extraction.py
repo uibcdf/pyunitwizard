@@ -124,6 +124,7 @@ def get_value_and_unit(
     return value, unit
 
 
+@signal(tags=["extraction"])
 def change_value(quantity: QuantityLike, value: Union[np.ndarray, float, int]) -> QuantityLike:
     """Return a quantity with a replaced value while preserving unit and form.
 
