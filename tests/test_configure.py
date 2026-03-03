@@ -3,10 +3,22 @@ import pyunitwizard as puw
 def test_libraries_supported():
     assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units']
 
+def test_parsers_supported():
+    assert puw.configure.get_parsers_supported() == ['pint', 'openmm.unit', 'unyt', 'astropy.units']
+
 def test_load_library():
     puw.configure.reset()
     puw.configure.load_library(['pint', 'openmm.unit'])
     assert puw.configure.get_libraries_loaded()==['pint', 'openmm.unit']
+
+def test_load_library_rejects_non_string_or_sequence():
+    puw.configure.reset()
+    try:
+        puw.configure.load_library(3.14)
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("Expected TypeError when loading a non-string scalar")
 
 def test_default_form():
     puw.configure.reset()
@@ -24,6 +36,43 @@ def test_set_default_parser_normalizes_input_form():
 
     puw.configure.set_default_parser('PINT')
     assert puw.configure.get_default_parser() == 'pint'
+
+def test_set_standard_units_accepts_single_string():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units('nm')
+    assert 'nm' in puw.configure.get_standard_units()
+
+def test_set_standard_units_rejects_non_list_tuple_or_string():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    try:
+        puw.configure.set_standard_units(10)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Expected ValueError for invalid standard_units type")
+
+def test_set_standard_units_tie_candidate_path_with_combination_units():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm*ps', 'm*s'])
+    # Ensure combination standards are still registered and no crash on tie path.
+    standards = puw.configure.get_standard_units()
+    assert 'nm*ps' in standards
+    assert 'm*s' in standards
+
+def test_add_constant_registers_new_constant():
+    from pyunitwizard.configure import configure as configure_module
+    from pyunitwizard.constants import _constants
+
+    constant_name = 'TestConstantConfigure'
+    if constant_name in _constants:
+        del _constants[constant_name]
+
+    configure_module.add_constant(constant_name, 42.0, 'meter')
+    assert _constants[constant_name] == [42.0, 'meter']
+    del _constants[constant_name]
 
 def test_get_parsers_loaded_only_reports_backends_with_parser_support():
     puw.configure.reset()

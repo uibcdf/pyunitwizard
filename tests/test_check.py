@@ -157,7 +157,10 @@ def unyt_unit():
 
 #### Tests for puw.is_unit ####
 def test_is_unit_str():
-    pass
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    assert puw.is_unit('meter')
 
 def test_is_unit_quantity(pint_quantity, 
         openmm_quantity,unyt_quantity):
@@ -193,7 +196,10 @@ def test_is_unit_unyt(unyt_unit):
 #### Tests for puw.is_quantity ####
 
 def test_is_quantity_str():
-    pass
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    assert puw.is_quantity('1 meter')
 
 def test_is_quantity_pint_quantity(pint_quantity):
 
@@ -236,3 +242,12 @@ def test_is_dimensionless(pint_quantity):
     assert is_dimensionless(quantity)
 
     assert not is_dimensionless(pint_quantity)
+
+
+def test_get_dimensionality_from_unit_string_path():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    dim = puw.get_dimensionality('meter')
+    assert isinstance(dim, dict)
+    assert dim.get('[L]') == 1
