@@ -118,13 +118,12 @@ def get_standard_units(
             if np.allclose(solution, dim_array):
                 return standard_units
 
-        if output is None:
-            if len(kernel.dimensional_fundamental_standards) == 0:
-                raise NoStandardsError
+        if len(kernel.dimensional_fundamental_standards) == 0:
+            raise NoStandardsError
 
-            output = _standard_units_lstsq(
-                solution, kernel.dimensional_fundamental_standards
-            )
+        output = _standard_units_lstsq(
+            solution, kernel.dimensional_fundamental_standards
+        )
 
         if output is None:
             if len(kernel.tentative_base_standards) == 0:

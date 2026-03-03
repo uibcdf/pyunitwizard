@@ -210,3 +210,27 @@ def test_standardize_fallback_except_path_when_initial_convert_fails(monkeypatch
     standardized = puw.standardize(quantity)
     assert puw.get_unit(standardized) == "nanometer"
     assert np.allclose(puw.get_value(standardized), 1e9)
+
+
+def test_get_standard_units_adimensional_raises_if_no_compatible_standard(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['radian'])
+
+    monkeypatch.setattr(standardization_module, "are_compatible", lambda *_args, **_kwargs: False)
+
+    quantity = puw.quantity(1.0, "radian", form="pint")
+    with pytest.raises(NoStandardsError):
+        puw.get_standard_units(quantity)
+
+
+def test_get_standard_units_combination_raises_when_no_tentative_base_after_lstsq_failure(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    monkeypatch.setattr(standardization_module, "_standard_units_lstsq", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(standardization_module.kernel, "tentative_base_standards", {})
+
+    with pytest.raises(NoStandardsError):
+        puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
