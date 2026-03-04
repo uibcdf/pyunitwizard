@@ -1,4 +1,15 @@
 
+# Historical conceptual note
+
+This document is retained as historical conceptual material.
+
+The consolidated and actively curated version of its forward-looking ideas is:
+`devguide/interop_future_directions.md`.
+
+Operational planning remains in:
+- `devguide/roadmap.md`
+- `devguide/release_0.21.x_rc_checklist.md`
+
 # Toward a Units Interoperability Layer for Scientific Python
 
 ## Motivation

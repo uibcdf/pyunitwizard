@@ -6,6 +6,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
+- `interop_future_directions.md`: consolidated long-term interoperability ideas (conceptual, non-operational).
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
 - `release_0.21.x_rc_checklist.md`: active RC checklist for consolidation before `1.0.0`.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.

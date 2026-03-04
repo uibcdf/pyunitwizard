@@ -1,5 +1,9 @@
 # Future Coverage Expansion for PyUnitWizard
 
+Historical note:
+- This file is kept as an idea log.
+- Curated future direction now lives in `devguide/interop_future_directions.md`.
+
 This document outlines the roadmap for extending PyUnitWizard's interoperability with specialized Python libraries for physical quantities.
 
 ## 1. SymPy (Physics)
