@@ -76,3 +76,34 @@ def test_get_quantity_column_invalid_value_type():
     )
     with pytest.raises(ValueError):
         puw.utils.pandas.get_quantity_column(dataframe, "x", value_type="invalid")
+
+
+def test_setup_pandas_adds_dataframe_accessor():
+    configure_libraries()
+    puw.utils.pandas.setup_pandas(enable=False)
+
+    dataframe = puw.utils.pandas.dataframe_from_quantities(
+        {"x": puw.quantity([1.0, 2.0], "meter")}
+    )
+
+    puw.utils.pandas.setup_pandas(enable=True)
+    q = dataframe.puw.get_quantity("x")
+    assert puw.get_unit(q, to_form="string") == "meter"
+    np.testing.assert_allclose(puw.get_value(q), np.array([1.0, 2.0]))
+
+    puw.utils.pandas.setup_pandas(enable=False)
+    assert not hasattr(pd.DataFrame, "puw")
+
+
+def test_pandas_context_temporarily_registers_accessor():
+    configure_libraries()
+    puw.utils.pandas.setup_pandas(enable=False)
+    assert not hasattr(pd.DataFrame, "puw")
+
+    dataframe = pd.DataFrame({"a": [1.0, 2.0]})
+    with puw.utils.pandas.pandas_context():
+        assert hasattr(pd.DataFrame, "puw")
+        dataframe.puw.set_quantity("distance", puw.quantity([1.0, 2.0], "meter"), to_unit="centimeter")
+        assert dataframe.attrs["pyunitwizard_units"]["distance"] == "centimeter"
+
+    assert not hasattr(pd.DataFrame, "puw")
