@@ -21,6 +21,12 @@ validation.
 Use these showcases as blueprints. Start with the one closest to your current
 need, then continue through the full [User](../user/index.md) route.
 
+Note on notebook status:
+- Markdown showcases above are the maintained canonical path for RC/stable
+  behavior.
+- Notebook showcases remain useful for exploration, but some are legacy and may
+  preserve historical wording/style.
+
 ```{toctree}
 :maxdepth: 1
 :hidden:

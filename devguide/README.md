@@ -53,12 +53,12 @@ Completed in `0.19.x`:
 - Cross-backend frontend matrix coverage exists for mixed backend pairs across
   NumPy/Pandas/Matplotlib integration surfaces.
 
-Pending before `1.0.0` go/no-go:
-- sustain CI matrix continuity (`ubuntu`/`macos`, Python `3.11`/`3.12`/`3.13`);
-- run and track `release_gates` on candidate commits during the RC window;
-- close remaining collective finality items (traceability tag alignment and
-  end-to-end evidence closure across the four libraries);
-- complete release-owner go/no-go signoff with no open blockers/high-severity incidents.
+Current RC-close status before `1.0.0` go/no-go:
+- CI matrix continuity evidence is recorded (see `stability_monitoring_0.21.x.md`);
+- release-gates evidence is recorded, including blocker/fix closure;
+- ecosystem collective validation evidence is recorded
+  (see `ecosystem_validation_0.21.x.md`);
+- remaining step: release-owner explicit RC-close approval.
 
 Route update:
 - `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).

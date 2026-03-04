@@ -47,6 +47,12 @@ If you prefer notebook-first learning, follow this practical sequence:
 4. [Dimensionality.ipynb](Dimensionality.ipynb)
 5. [In_Your_Library.ipynb](In_Your_Library.ipynb)
 
+Notebook note:
+- The Markdown route (`library-integrators.md`, `end-users.md`, and linked
+  guides) is the maintained canonical route for RC/stable behavior.
+- Notebooks are kept for hands-on exploration and may include historical
+  narrative fragments.
+
 ## Notebook Reference
 
 ```{toctree}
