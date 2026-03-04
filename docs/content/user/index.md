@@ -58,6 +58,7 @@ end-users.md
 what-pyunitwizard-solves.md
 adoption-story.md
 backend-coverage.md
+numpy-pandas-matplotlib.md
 quickstart.md
 mini-library-walkthrough.md
 configuration.md

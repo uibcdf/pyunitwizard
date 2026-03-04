@@ -17,7 +17,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 - Active release-candidate line (planned/final): `0.21.x`.
 - `0.19.3` remains the historical checkpoint tag from the earlier pre-RC phase.
-- Current head relative to tag: `0.19.3-15-g7f1b43d` (post-tag hardening in `main`).
+- Current head relative to tag: run `git describe --tags --always` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).

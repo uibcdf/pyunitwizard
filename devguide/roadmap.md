@@ -56,7 +56,7 @@ checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 ### Current checkpoint (2026-03-04)
 
 - Tag `0.19.3` created from `main` as RC checkpoint.
-- Current head after RC checkpoint: `0.19.3-15-g7f1b43d`.
+- Current head after RC checkpoint: run `git describe --tags --always`.
 - Full suite baseline at current checkpoint: `356 passed` on local Python `3.13`
   (`pytest -q tests --ignore=tests/test_import.py`).
 - Integration smoke coverage includes:

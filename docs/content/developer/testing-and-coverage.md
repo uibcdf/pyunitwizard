@@ -5,7 +5,7 @@ PyUnitWizard is integration infrastructure. Tests should prioritize behavioral c
 ## Minimum local test command
 
 ```bash
-pytest -q
+conda run -n molsyssuite@uibcdf_3.13 pytest -q tests --ignore=tests/test_import.py
 ```
 
 ## Coverage command
@@ -28,6 +28,11 @@ Store RC snapshots under `devguide/` and compare candidate tags for regressions.
 - parser/default configuration behavior.
 - standardization and compatibility semantics.
 - integration smoke with `argdigest`, `depdigest`, and `smonitor`.
+- frontend interoperability bridges:
+  - `tests/utils/numpy/test_transparent_bridge.py`
+  - `tests/utils/pandas/test_workflows.py`
+  - `tests/utils/matplotlib/test_complex_layouts.py`
+  - `tests/integration/test_frontend_cross_backend_matrix.py`
 
 ## Quality target
 

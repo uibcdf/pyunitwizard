@@ -13,10 +13,10 @@ Current path is tracked in:
 
 Current policy:
 
-- `0.19.x` is the RC line used to observe stability in real usage.
-- `1.0.0` is created only after the RC window closes without blocker issues.
-- If blocker items remain open at RC close, open `0.20.x` as an RC extension
-  window instead of forcing `1.0.0`.
+- `0.19.x` is a historical checkpoint line.
+- `0.20.x` is interoperability expansion (NumPy/Pandas/Matplotlib hardening).
+- `0.21.x` is the active RC consolidation line.
+- `1.0.0` is created only after the `0.21.x` RC closure criteria are met.
 
 ## Pre-release checks
 

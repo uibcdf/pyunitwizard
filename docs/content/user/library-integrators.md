@@ -21,10 +21,11 @@ A practical way to adopt it is incremental:
 4. [Mini Library Walkthrough](mini-library-walkthrough.md)
 5. [Configuration](configuration.md)
 6. [Backend Coverage and Expectations](backend-coverage.md)
-7. [Integrating Your Library](integrating-your-library.md)
-8. [Troubleshooting](troubleshooting.md)
-9. [Production Checklist](production-checklist.md)
-10. [FAQ](faq.md)
+7. [NumPy, Pandas, and Matplotlib Interoperability](numpy-pandas-matplotlib.md)
+8. [Integrating Your Library](integrating-your-library.md)
+9. [Troubleshooting](troubleshooting.md)
+10. [Production Checklist](production-checklist.md)
+11. [FAQ](faq.md)
 
 Notebook companion for this route:
 - [In_Your_Library.ipynb](In_Your_Library.ipynb)

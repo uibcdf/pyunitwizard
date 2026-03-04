@@ -118,6 +118,9 @@ puw.utils.numpy.setup_numpy(enable=True)
 result = np.mean(puw.quantity([1.0, 2.0, 3.0], "meter"))
 ```
 
+Explicit NumPy wrappers are also available in `puw.utils.numpy`
+(`mean`, `sum`, `std`, `var`, `dot`, `linalg_norm`, `trapz`).
+
 Pandas interoperability helpers:
 - Keep using standard `pandas` imports.
 - Optional transparent accessor for DataFrames: `df.puw.*`.
@@ -133,6 +136,12 @@ df = puw.utils.pandas.dataframe_from_quantities(
 )
 q = df.puw.get_quantity("length")
 ```
+
+Matplotlib coverage highlights:
+- transparent bridge for supported quantity backends;
+- mixed-backend plotting on compatible axes;
+- advanced layout scenarios (shared axes, twin axes, multi-series overlays)
+  covered by tests.
 
 ## Diagnostics (SMonitor)
 
