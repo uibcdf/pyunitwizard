@@ -34,6 +34,9 @@ unless explicitly promoted to roadmap.
 - Keep defining a stable minimum protocol for quantity behavior
   (value extraction, unit extraction, compatibility, conversion).
 - Use this as the basis for backend onboarding and conformance tests.
+- Keep the protocol split explicit:
+  - core mandatory behavior (minimal interoperable contract),
+  - optional extensions (array/broadcasting/pandas/frontends).
 
 2. Canonical dimensional model stewardship
 - Maintain locked dimensional semantics across backends.
@@ -43,8 +46,12 @@ unless explicitly promoted to roadmap.
 - Expand backend-independent tests from contract checks to stronger
   conformance criteria.
 - Keep optional backend support gated by explicit test evidence.
+- Treat conformance suites as versioned compatibility evidence:
+  - per-backend pass criteria,
+  - cross-backend equivalence criteria,
+  - regression stability criteria over release lines.
 
-4. Serialization contract
+4. Serialization contract (post-1.0 candidate)
 - Evaluate a canonical serialization/deserialization API for quantities
   (`value`, `unit`, `dimensionality`, `form`) for JSON/YAML/data pipelines.
 - Treat schema stability as a versioned contract once introduced.
@@ -58,11 +65,15 @@ unless explicitly promoted to roadmap.
 - Continue tracking conversion/introspection baselines by release line.
 - Evaluate caching/lazy mechanisms only when they preserve determinism and
   diagnostic clarity.
+- Candidate mechanisms to evaluate with benchmarks:
+  - lazy conversion paths,
+  - zero-copy extraction where feasible,
+  - dimensionality caching with correctness guards.
 
 7. Optional advanced domains
 - Symbolic physics (`sympy`) for formula-level dimensional reasoning.
-- Uncertainty-aware ecosystems (candidate research area).
-- Data-model integration patterns (`pydantic`) for API payloads/contracts.
+- Data-model integration patterns (`pydantic`) for API payload/contracts.
+- Uncertainty-aware ecosystems (exploratory; no active commitment).
 
 ## Prioritization criteria
 
@@ -71,6 +82,8 @@ Promote an idea from this document to active roadmap only if:
 - contract behavior can be tested reproducibly,
 - maintenance cost is acceptable for core maintainers,
 - it does not destabilize the `1.0.0` compatibility target.
+- for optional integrations (`sympy`, `pydantic`, uncertainty tooling):
+  - there is a clear maintainer owner and explicit support level.
 
 ## Non-goals
 
