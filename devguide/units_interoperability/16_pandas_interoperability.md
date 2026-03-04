@@ -31,6 +31,11 @@ by tests in `tests/utils/pandas/test_frame_contract.py`.
 The current contract is intentionally explicit: standard pandas workflows are
 preserved, and users call PyUnitWizard only at the conversion boundaries.
 
+Transparent mode is also available:
+- `pyunitwizard.utils.pandas.setup_pandas(enable=True)` injects `DataFrame.puw`.
+- `df.puw.get_quantity(...)` and `df.puw.set_quantity(...)` provide explicit
+  quantity round-trip at table boundaries while keeping normal pandas usage.
+
 ## Benefits
 
 - safer data science workflows

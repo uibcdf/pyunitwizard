@@ -60,5 +60,7 @@ Pandas interoperability is implemented as an additive layer:
 - `add_quantity_column(...)` appends/updates one column from a quantity and keeps unit metadata synchronized.
 - `get_quantity_column(...)` reconstructs a quantity from a DataFrame column using metadata or an explicit `unit_name`.
 - `get_units_map(...)` returns the units metadata dictionary.
+- `setup_pandas(enable=True)` injects an optional transparent accessor (`DataFrame.puw`).
+- `pandas_context()` enables that accessor only inside a context manager.
 
-These helpers keep standard pandas imports/workflows intact (`import pandas as pd`) and use `pyunitwizard.utils.pandas` only for explicit quantity boundaries.
+These helpers keep standard pandas imports/workflows intact (`import pandas as pd`) and allow either explicit boundary calls or transparent `df.puw.*` usage.
