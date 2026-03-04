@@ -105,6 +105,18 @@ import pyunitwizard as puw
 puw.utils.matplotlib.setup_matplotlib()
 ```
 
+NumPy transparent integration:
+- Keep using standard `numpy` imports.
+- Enable quantity-aware dispatch for common operations with:
+
+```python
+import numpy as np
+import pyunitwizard as puw
+
+puw.utils.numpy.setup_numpy(enable=True)
+result = np.mean(puw.quantity([1.0, 2.0, 3.0], "meter"))
+```
+
 Pandas interoperability helpers:
 - Keep using standard `pandas` imports.
 - Optional transparent accessor for DataFrames: `df.puw.*`.

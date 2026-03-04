@@ -38,6 +38,12 @@ Unit inference relies on the first quantity in the first sequence argument. Vali
 - Conversion when `to_unit` or `to_form` is provided.
 - Failure cases for mismatched units or unsupported `value_type` values.
 
+Transparent NumPy mode is available through:
+- `setup_numpy(enable=True)` to patch selected NumPy calls (`np.mean`, `np.sum`,
+  `np.linalg.norm`, `np.trapezoid`) so quantity inputs dispatch through
+  PyUnitWizard wrappers.
+- `numpy_context()` for temporary patching in a context manager.
+
 ### `utils.sequences`
 
 Sequence utilities provide validation helpers (e.g., `is_sequence`, `is_quantity_value_sequence`) and slice/concatenate operations that should preserve quantity ordering. When building new helpers:
