@@ -1,0 +1,33 @@
+# Other Quantities Libraries
+
+Working list of quantity/unit libraries to evaluate for potential future
+support in PyUnitWizard. This is exploratory inventory, not a commitment.
+
+- [astropy](http://www.astropy.org/astropy-tutorials/Quantities.html)
+- [sympy](https://docs.sympy.org/latest/modules/physics/units/philosophy.html)
+- [pint](https://pint.readthedocs.io/en/latest/)
+- [forallpeople](https://github.com/connorferster/forallpeople)
+- [unyt](https://github.com/yt-project/unyt)
+- [python-measurement](https://github.com/coddingtonbear/python-measurement)
+- [Unum](https://bitbucket.org/kiv/unum/)
+- [scipp](https://scipp.github.io/reference/units.html)
+- [magnitude](http://juanreyero.com/open/magnitude/)
+- [python3-physics](https://github.com/TheGrum/python3-physics)
+- [ScientificPython.Scientific.Physics.PhysicalQuantities](https://github.com/ScientificPython/ScientificPython)
+- [numericalunits](https://github.com/sbyrnes321/numericalunits)
+- [buckingham](https://github.com/mdipierro/buckingham)
+- [units (adonohue)](https://bitbucket.org/adonohue/units/)
+- [quantities](https://pythonhosted.org/quantities/user/tutorial.html)
+- [physical-quantities](https://github.com/hplgit/physical-quantities)
+- [brian](https://brian2.readthedocs.io/en/stable/user/units.html)
+- [quantiphy](https://github.com/KenKundert/quantiphy)
+- [parampy](https://github.com/matthewwardrop/python-parampy/blob/master/parampy/quantities.pyx)
+- [pynbody](https://github.com/pynbody/pynbody)
+- [python-units](https://pypi.org/project/python-units/)
+- [pyansys-units](https://github.com/ansys/pyansys-units/tree/main)
+- [natu](https://github.com/kdavies4/natu)
+- [misu](https://github.com/cjrh/misu)
+- [units (IAMconsortium)](https://github.com/IAMconsortium/units)
+- [physunits](https://github.com/pacosalces/physunits)
+- [openscm-units](https://github.com/openscm/openscm-units)
+- [pysics](https://bitbucket.org/Phicem/pysics)
