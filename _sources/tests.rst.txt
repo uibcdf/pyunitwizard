@@ -1,0 +1,245 @@
+tests package
+=============
+
+Submodules
+----------
+
+tests.helpers module
+--------------------
+
+.. automodule:: tests.helpers
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_api\_layout module
+------------------------------
+
+.. automodule:: tests.test_api_layout
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_are\_close module
+-----------------------------
+
+.. automodule:: tests.test_are_close
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_are\_compatible module
+----------------------------------
+
+.. automodule:: tests.test_are_compatible
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_are\_equal module
+-----------------------------
+
+.. automodule:: tests.test_are_equal
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_change\_value module
+--------------------------------
+
+.. automodule:: tests.test_change_value
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_check module
+------------------------
+
+.. automodule:: tests.test_check
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_comparison\_branches module
+---------------------------------------
+
+.. automodule:: tests.test_comparison_branches
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_configure module
+----------------------------
+
+.. automodule:: tests.test_configure
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_constants module
+----------------------------
+
+.. automodule:: tests.test_constants
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_context module
+--------------------------
+
+.. automodule:: tests.test_context
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_conversion\_branches module
+---------------------------------------
+
+.. automodule:: tests.test_conversion_branches
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_depdigest\_contract module
+--------------------------------------
+
+.. automodule:: tests.test_depdigest_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_exception\_translation\_contract module
+---------------------------------------------------
+
+.. automodule:: tests.test_exception_translation_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_frontend\_transparent\_mode\_contract module
+--------------------------------------------------------
+
+.. automodule:: tests.test_frontend_transparent_mode_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_get module
+----------------------
+
+.. automodule:: tests.test_get
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_get\_form module
+----------------------------
+
+.. automodule:: tests.test_get_form
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_import module
+-------------------------
+
+.. automodule:: tests.test_import
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_introspection\_probe module
+---------------------------------------
+
+.. automodule:: tests.test_introspection_probe
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_kernel\_contract module
+-----------------------------------
+
+.. automodule:: tests.test_kernel_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_metadata\_and\_webs module
+--------------------------------------
+
+.. automodule:: tests.test_metadata_and_webs
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_minimum\_quantity\_protocol\_contract module
+--------------------------------------------------------
+
+.. automodule:: tests.test_minimum_quantity_protocol_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_parse module
+------------------------
+
+.. automodule:: tests.test_parse
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_private\_support\_utils module
+------------------------------------------
+
+.. automodule:: tests.test_private_support_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_quantity module
+---------------------------
+
+.. automodule:: tests.test_quantity
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_smonitor\_catalog\_contract module
+----------------------------------------------
+
+.. automodule:: tests.test_smonitor_catalog_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_smonitor\_profiles\_contract module
+-----------------------------------------------
+
+.. automodule:: tests.test_smonitor_profiles_contract
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_standardize module
+------------------------------
+
+.. automodule:: tests.test_standardize
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+tests.test\_unit module
+-----------------------
+
+.. automodule:: tests.test_unit
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: tests
+   :members:
+   :show-inheritance:
+   :undoc-members:

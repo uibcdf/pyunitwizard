@@ -1,0 +1,1423 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="_static/favicon-16x16.png" sizes="16x16" rel="icon" type="image/png">
+    <link href="_static/favicon-124x124.png" sizes="124x124" rel="icon" type="image/png">
+    <link href="_static/favicon-128x128.png" sizes="128x128" rel="icon" type="image/png">
+    <link href="_static/favicon-192x192.png" sizes="192x192" rel="icon" type="image/png">
+    <link href="_static/icon.svg" rel="icon" type="image/svg+xml">
+  
+    <title>pyunitwizard package – PyUnitWizard 0.21.1</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_tabs.css?v=f45e19d3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=6081af2d"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyunitwizard';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.21.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.21.1 documentation - Home"/>
+    <img src="_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.21.1 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.api.html">pyunitwizard.api package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.configure.html">pyunitwizard.configure package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.constants.html">pyunitwizard.constants package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.forms.html">pyunitwizard.forms package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyunitwizard.utils.html">pyunitwizard.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.matplotlib.html">pyunitwizard.utils.matplotlib package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.numpy.html">pyunitwizard.utils.numpy package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.pandas.html">pyunitwizard.utils.pandas package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.plot.html">pyunitwizard.utils.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.sequences.html">pyunitwizard.utils.sequences package</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyunitwizard package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyunitwizard-package">
+<h1>pyunitwizard package<a class="headerlink" href="#pyunitwizard-package" title="Link to this heading">#</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.api.html">pyunitwizard.api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.comparison">pyunitwizard.api.comparison module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.comparison.are_close"><code class="docutils literal notranslate"><span class="pre">are_close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.comparison.are_compatible"><code class="docutils literal notranslate"><span class="pre">are_compatible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.comparison.are_equal"><code class="docutils literal notranslate"><span class="pre">are_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.comparison.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.comparison.similarity"><code class="docutils literal notranslate"><span class="pre">similarity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.construction">pyunitwizard.api.construction module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.construction.quantity"><code class="docutils literal notranslate"><span class="pre">quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.construction.unit"><code class="docutils literal notranslate"><span class="pre">unit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.context">pyunitwizard.api.context module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.context.context"><code class="docutils literal notranslate"><span class="pre">context()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.conversion">pyunitwizard.api.conversion module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.conversion.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.conversion.to_string"><code class="docutils literal notranslate"><span class="pre">to_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.extraction">pyunitwizard.api.extraction module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.extraction.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.extraction.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.extraction.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.extraction.get_value_and_unit"><code class="docutils literal notranslate"><span class="pre">get_value_and_unit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.introspection">pyunitwizard.api.introspection module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.introspection.get_dimensionality"><code class="docutils literal notranslate"><span class="pre">get_dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.introspection.get_form"><code class="docutils literal notranslate"><span class="pre">get_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.introspection.is_dimensionless"><code class="docutils literal notranslate"><span class="pre">is_dimensionless()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.introspection.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.introspection.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.standardization">pyunitwizard.api.standardization module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.standardization.get_standard_units"><code class="docutils literal notranslate"><span class="pre">get_standard_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.standardization.standardize"><code class="docutils literal notranslate"><span class="pre">standardize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api.validation">pyunitwizard.api.validation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.validation.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.api.html#module-pyunitwizard.api">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.are_close"><code class="docutils literal notranslate"><span class="pre">are_close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.are_compatible"><code class="docutils literal notranslate"><span class="pre">are_compatible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.are_equal"><code class="docutils literal notranslate"><span class="pre">are_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.context"><code class="docutils literal notranslate"><span class="pre">context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_dimensionality"><code class="docutils literal notranslate"><span class="pre">get_dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_form"><code class="docutils literal notranslate"><span class="pre">get_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_standard_units"><code class="docutils literal notranslate"><span class="pre">get_standard_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.get_value_and_unit"><code class="docutils literal notranslate"><span class="pre">get_value_and_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.is_dimensionless"><code class="docutils literal notranslate"><span class="pre">is_dimensionless()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.quantity"><code class="docutils literal notranslate"><span class="pre">quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.similarity"><code class="docutils literal notranslate"><span class="pre">similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.standardize"><code class="docutils literal notranslate"><span class="pre">standardize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.to_string"><code class="docutils literal notranslate"><span class="pre">to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.api.html#pyunitwizard.api.unit"><code class="docutils literal notranslate"><span class="pre">unit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.configure.html">pyunitwizard.configure package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.configure.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.configure.html#module-pyunitwizard.configure.configure">pyunitwizard.configure.configure module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.add_constant"><code class="docutils literal notranslate"><span class="pre">add_constant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_default_form"><code class="docutils literal notranslate"><span class="pre">get_default_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_default_parser"><code class="docutils literal notranslate"><span class="pre">get_default_parser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_libraries_loaded"><code class="docutils literal notranslate"><span class="pre">get_libraries_loaded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_libraries_supported"><code class="docutils literal notranslate"><span class="pre">get_libraries_supported()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_parsers_loaded"><code class="docutils literal notranslate"><span class="pre">get_parsers_loaded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_parsers_supported"><code class="docutils literal notranslate"><span class="pre">get_parsers_supported()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.get_standard_units"><code class="docutils literal notranslate"><span class="pre">get_standard_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.load_library"><code class="docutils literal notranslate"><span class="pre">load_library()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.reset"><code class="docutils literal notranslate"><span class="pre">reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.resolve_config_module"><code class="docutils literal notranslate"><span class="pre">resolve_config_module()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.set_default_form"><code class="docutils literal notranslate"><span class="pre">set_default_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.set_default_parser"><code class="docutils literal notranslate"><span class="pre">set_default_parser()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.configure.html#pyunitwizard.configure.configure.set_standard_units"><code class="docutils literal notranslate"><span class="pre">set_standard_units()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.configure.html#module-pyunitwizard.configure">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.constants.html">pyunitwizard.constants package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.constants.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.constants.html#module-pyunitwizard.constants.constants">pyunitwizard.constants.constants module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.constants.html#pyunitwizard.constants.constants.get_constant"><code class="docutils literal notranslate"><span class="pre">get_constant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.constants.html#pyunitwizard.constants.constants.show_constants"><code class="docutils literal notranslate"><span class="pre">show_constants()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.constants.html#module-pyunitwizard.constants">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.forms.html">pyunitwizard.forms package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.api_astropy_unit">pyunitwizard.forms.api_astropy_unit module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.is_form"><code class="docutils literal notranslate"><span class="pre">is_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.quantity_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">quantity_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.quantity_to_pint"><code class="docutils literal notranslate"><span class="pre">quantity_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.quantity_to_string"><code class="docutils literal notranslate"><span class="pre">quantity_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.quantity_to_unyt"><code class="docutils literal notranslate"><span class="pre">quantity_to_unyt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.string_to_quantity"><code class="docutils literal notranslate"><span class="pre">string_to_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.string_to_unit"><code class="docutils literal notranslate"><span class="pre">string_to_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.unit_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">unit_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.unit_to_pint"><code class="docutils literal notranslate"><span class="pre">unit_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.unit_to_string"><code class="docutils literal notranslate"><span class="pre">unit_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_astropy_unit.unit_to_unyt"><code class="docutils literal notranslate"><span class="pre">unit_to_unyt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.api_openmm_unit">pyunitwizard.forms.api_openmm_unit module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.is_form"><code class="docutils literal notranslate"><span class="pre">is_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.quantity_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">quantity_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.quantity_to_pint"><code class="docutils literal notranslate"><span class="pre">quantity_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.quantity_to_string"><code class="docutils literal notranslate"><span class="pre">quantity_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.quantity_to_unyt"><code class="docutils literal notranslate"><span class="pre">quantity_to_unyt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.string_to_quantity"><code class="docutils literal notranslate"><span class="pre">string_to_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.string_to_unit"><code class="docutils literal notranslate"><span class="pre">string_to_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.unit_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">unit_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.unit_to_pint"><code class="docutils literal notranslate"><span class="pre">unit_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.unit_to_string"><code class="docutils literal notranslate"><span class="pre">unit_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_openmm_unit.unit_to_unyt"><code class="docutils literal notranslate"><span class="pre">unit_to_unyt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard-forms-api-physipy-module">pyunitwizard.forms.api_physipy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.api_pint">pyunitwizard.forms.api_pint module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.is_form"><code class="docutils literal notranslate"><span class="pre">is_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">quantity_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">quantity_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_physipy"><code class="docutils literal notranslate"><span class="pre">quantity_to_physipy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_quantities"><code class="docutils literal notranslate"><span class="pre">quantity_to_quantities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_string"><code class="docutils literal notranslate"><span class="pre">quantity_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.quantity_to_unyt"><code class="docutils literal notranslate"><span class="pre">quantity_to_unyt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.string_to_quantity"><code class="docutils literal notranslate"><span class="pre">string_to_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.string_to_unit"><code class="docutils literal notranslate"><span class="pre">string_to_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">unit_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">unit_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_physipy"><code class="docutils literal notranslate"><span class="pre">unit_to_physipy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_quantities"><code class="docutils literal notranslate"><span class="pre">unit_to_quantities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_string"><code class="docutils literal notranslate"><span class="pre">unit_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_pint.unit_to_unyt"><code class="docutils literal notranslate"><span class="pre">unit_to_unyt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard-forms-api-quantities-module">pyunitwizard.forms.api_quantities module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.api_string">pyunitwizard.forms.api_string module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.is_form"><code class="docutils literal notranslate"><span class="pre">is_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">quantity_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">quantity_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_physipy"><code class="docutils literal notranslate"><span class="pre">quantity_to_physipy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_pint"><code class="docutils literal notranslate"><span class="pre">quantity_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_quantities"><code class="docutils literal notranslate"><span class="pre">quantity_to_quantities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.quantity_to_unyt"><code class="docutils literal notranslate"><span class="pre">quantity_to_unyt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">unit_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">unit_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_physipy"><code class="docutils literal notranslate"><span class="pre">unit_to_physipy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_pint"><code class="docutils literal notranslate"><span class="pre">unit_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_quantities"><code class="docutils literal notranslate"><span class="pre">unit_to_quantities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_string.unit_to_unyt"><code class="docutils literal notranslate"><span class="pre">unit_to_unyt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.api_unyt">pyunitwizard.forms.api_unyt module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.is_form"><code class="docutils literal notranslate"><span class="pre">is_form()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.quantity_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">quantity_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.quantity_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">quantity_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.quantity_to_pint"><code class="docutils literal notranslate"><span class="pre">quantity_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.quantity_to_string"><code class="docutils literal notranslate"><span class="pre">quantity_to_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.string_to_quantity"><code class="docutils literal notranslate"><span class="pre">string_to_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.string_to_unit"><code class="docutils literal notranslate"><span class="pre">string_to_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.unit_to_astropy_units"><code class="docutils literal notranslate"><span class="pre">unit_to_astropy_units()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.unit_to_openmm_unit"><code class="docutils literal notranslate"><span class="pre">unit_to_openmm_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.unit_to_pint"><code class="docutils literal notranslate"><span class="pre">unit_to_pint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.api_unyt.unit_to_string"><code class="docutils literal notranslate"><span class="pre">unit_to_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms.template_api_form">pyunitwizard.forms.template_api_form module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.dimensionality"><code class="docutils literal notranslate"><span class="pre">dimensionality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.make_quantity"><code class="docutils literal notranslate"><span class="pre">make_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.string_to_quantity"><code class="docutils literal notranslate"><span class="pre">string_to_quantity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.template_api_form.to_string"><code class="docutils literal notranslate"><span class="pre">to_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.forms.html#module-pyunitwizard.forms">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.forms.html#pyunitwizard.forms.load_library"><code class="docutils literal notranslate"><span class="pre">load_library()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyunitwizard.utils.html">pyunitwizard.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.utils.matplotlib.html">pyunitwizard.utils.matplotlib package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.matplotlib.html#module-pyunitwizard.utils.matplotlib">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.utils.numpy.html">pyunitwizard.utils.numpy package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.column_stack">pyunitwizard.utils.numpy.column_stack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.hstack">pyunitwizard.utils.numpy.hstack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.ops">pyunitwizard.utils.numpy.ops module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.repeat">pyunitwizard.utils.numpy.repeat module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.stack">pyunitwizard.utils.numpy.stack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy.vstack">pyunitwizard.utils.numpy.vstack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.numpy.html#module-pyunitwizard.utils.numpy">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.utils.pandas.html">pyunitwizard.utils.pandas package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.pandas.html#module-pyunitwizard.utils.pandas">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.utils.plot.html">pyunitwizard.utils.plot package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.plot.html#module-pyunitwizard.utils.plot">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyunitwizard.utils.sequences.html">pyunitwizard.utils.sequences package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#module-pyunitwizard.utils.sequences.concatenate">pyunitwizard.utils.sequences.concatenate module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#module-pyunitwizard.utils.sequences.is_quantity_value_sequence">pyunitwizard.utils.sequences.is_quantity_value_sequence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#module-pyunitwizard.utils.sequences.is_sequence">pyunitwizard.utils.sequences.is_sequence module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#module-pyunitwizard.utils.sequences.slice">pyunitwizard.utils.sequences.slice module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyunitwizard.utils.sequences.html#module-pyunitwizard.utils.sequences">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyunitwizard.utils.html#module-pyunitwizard.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyunitwizard.kernel">
+<span id="pyunitwizard-kernel-module"></span><h2>pyunitwizard.kernel module<a class="headerlink" href="#module-pyunitwizard.kernel" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.kernel.initialize">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.kernel.</span></span><span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/kernel.html#initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.kernel.initialize" title="Link to this definition">#</a></dt>
+<dd><p>Initialize global runtime state containers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Global runtime variables are reset in place.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard.kernel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">kernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-pyunitwizard.parse">
+<span id="pyunitwizard-parse-module"></span><h2>pyunitwizard.parse module<a class="headerlink" href="#module-pyunitwizard.parse" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.parse.parse">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.parse.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/parse.html#parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.parse.parse" title="Link to this definition">#</a></dt>
+<dd><p>Parses a string and returns a quantity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<em>str</em>) – A string quantity.</p></li>
+<li><p><strong>parser</strong> (<em>str</em>) – The parser that will be used.</p></li>
+<li><p><strong>str</strong> (<em>to_form;</em>) – The form of the quantity. Can be “pint”, “openmm.unit”,
+“unyt”, “astropy.units” or “string”.</p></li>
+<li><p><strong>optional</strong> – The form of the quantity. Can be “pint”, “openmm.unit”,
+“unyt”, “astropy.units” or “string”.</p></li>
+<li><p><strong>to_form</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A quantity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantityLike</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyunitwizard">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyunitwizard" title="Link to this heading">#</a></h2>
+<p>PyUnitWizard
+Quantities and units assistant.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.are_close">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">are_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/comparison.html#are_close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.are_close" title="Link to this definition">#</a></dt>
+<dd><p>Compares whether two quantities are similiar within a specified tolerance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit_1</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>quantity_or_unit_2</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>relative_tolerance</strong> (<em>float</em>) – The relative tolerance to compare the quantities.</p></li>
+<li><p><strong>quantity_1</strong> (<em>QuantityLike</em>)</p></li>
+<li><p><strong>quantity_2</strong> (<em>QuantityLike</em>)</p></li>
+<li><p><strong>rtol</strong> (<em>float</em>)</p></li>
+<li><p><strong>atol</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the quantities or units are similar.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.are_compatible">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">are_compatible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/comparison.html#are_compatible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.are_compatible" title="Link to this definition">#</a></dt>
+<dd><p>Check whether two quantities or units are compatible.
+This means that they have the same dimensionalities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit_1</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>quantity_or_unit_2</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the quantities or units are compatible.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.are_equal">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">are_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">same_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/comparison.html#are_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.are_equal" title="Link to this definition">#</a></dt>
+<dd><p>Compares whether two quantities are similiar within a specified tolerance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit_1</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>quantity_or_unit_2</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>relative_tolerance</strong> (<em>float</em>) – The relative tolerance to compare the quantities.</p></li>
+<li><p><strong>same_form</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the quantities or units are similar.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.change_value">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">change_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/extraction.html#change_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.change_value" title="Link to this definition">#</a></dt>
+<dd><p>Return a quantity with a replaced value while preserving unit and form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity</strong> (<em>QuantityLike</em>) – Input quantity.</p></li>
+<li><p><strong>value</strong> (<em>numpy.ndarray</em><em> or </em><em>float</em><em> or </em><em>int</em>) – New numeric value to assign.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Quantity with updated value and original unit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantityLike</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;nanometer&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">change_value</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.check">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensionality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/validation.html#check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.check" title="Link to this definition">#</a></dt>
+<dd><p>Check if a quantity or unit has the specified dimensionality,
+value_type, shape, unit or data type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>Any</em>) – A quantity or unit object. If any other object is passed False will be returned.</p></li>
+<li><p><strong>dimensionality</strong> (<em>dict</em>) – A dictionary specifying the dimensionality of the quantity or unit.</p></li>
+<li><p><strong>value_type</strong> (<em>Any</em>) – The type of the quantity. Can be int, float, np.ndarray.</p></li>
+<li><p><strong>shape</strong> (<em>tuple</em><em> of </em><em>int</em>) – For non scalar quantities. A tuple with the shape of the array.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Name of the unit.</p></li>
+<li><p><strong>dtype_name</strong> (<em>str</em>) – For non scalar quantities. The dtype of the array (i.e float64).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the quantity or unit has the specified parameters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.compatibility">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">compatibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/comparison.html#compatibility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.compatibility" title="Link to this definition">#</a></dt>
+<dd><p>Check whether two quantities or units are dimensionally compatible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit_1</strong> (<em>QuantityOrUnit</em>) – First quantity or unit.</p></li>
+<li><p><strong>quantity_or_unit_2</strong> (<em>QuantityOrUnit</em>) – Second quantity or unit.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when both inputs are compatible for conversion/comparison.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">compatibility</span><span class="p">(</span><span class="s2">&quot;1 nm&quot;</span><span class="p">,</span> <span class="s2">&quot;10 angstrom&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.context">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standard_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/context.html#context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.context" title="Link to this definition">#</a></dt>
+<dd><p>Context manager to temporarily change PyUnitWizard configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_form</strong> (<em>str</em><em>, </em><em>optional</em>) – Temporary default form.</p></li>
+<li><p><strong>default_parser</strong> (<em>str</em><em>, </em><em>optional</em>) – Temporary default parser.</p></li>
+<li><p><strong>standard_units</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Temporary standard units.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">puw</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">default_form</span><span class="o">=</span><span class="s1">&#39;pint&#39;</span><span class="p">,</span> <span class="n">standard_units</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="s1">&#39;ps&#39;</span><span class="p">]):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">q</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">standardize</span><span class="p">(</span><span class="n">input_q</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.convert">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quantity'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/conversion.html#convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.convert" title="Link to this definition">#</a></dt>
+<dd><p>Convert a quantity or unit across unit systems, forms, and output types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>Any</em>) – Input quantity or unit to convert. It can be any supported runtime form,
+including strings when a compatible parser is configured.</p></li>
+<li><p><strong>to_unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Target unit. When provided, the quantity is converted to this unit before
+returning.</p></li>
+<li><p><strong>to_form</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;</em><em>, </em><em>&quot;string&quot;}</em><em>, </em><em>optional</em>) – Target backend form. If omitted, the input form is preserved.</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – Parser used when <cite>quantity_or_unit</cite> or <cite>to_unit</cite> is provided as a string.</p></li>
+<li><p><strong>to_type</strong> (<em>{&quot;quantity&quot;</em><em>, </em><em>&quot;unit&quot;</em><em>, </em><em>&quot;value&quot;}</em><em>, </em><em>optional</em><em>, </em><em>default=&quot;quantity&quot;</em>) – Output type to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Converted object in the requested unit/form/type.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantityOrUnit or float or numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>BadCallError</strong> – If <cite>to_type</cite> is not one of <code class="docutils literal notranslate"><span class="pre">&quot;quantity&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;unit&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;value&quot;</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;nanometer&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s2">&quot;angstrom&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_dimensionality">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_dimensionality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/introspection.html#get_dimensionality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_dimensionality" title="Link to this definition">#</a></dt>
+<dd><p>Return dimensional exponents for a quantity or unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – Quantity or unit to inspect. String values are parsed when possible.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapping of fundamental dimensions to integer exponents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedFormError</strong> – If the input form is not supported by current runtime adapters.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">get_dimensionality</span><span class="p">(</span><span class="s2">&quot;1 nanometer&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_form">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/introspection.html#get_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_form" title="Link to this definition">#</a></dt>
+<dd><p>Returns the form of a quantity as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – A quanitity or a unit</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The form of the quantity</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>{“string”, “pint”, “openmm.unit”, “unyt”}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_standard_units">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_standard_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensionality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/standardization.html#get_standard_units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_standard_units" title="Link to this definition">#</a></dt>
+<dd><p>Returns standard unit of the quantity or unit passed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>Any</em>) – A quantity or unit</p></li>
+<li><p><strong>dimensionality</strong> (<em>dict</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>form</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>parser</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The standard unit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NoStandardsError</strong> – If no standard units were defined.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_unit">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/extraction.html#get_unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_unit" title="Link to this definition">#</a></dt>
+<dd><p>Returns the unit of a quantity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to_unit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Name of the unit to which the quantity will be converted (i.e kcal/mol).</p>
+<dl class="simple">
+<dt>form<span class="classifier">{“unyt”, “pint”, “openmm.unit”, “astropy.units”, “string”}, optional</span></dt><dd><p>If passed the unit will be converted to that form. This is the type that will be returned</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser to use.</p></li>
+<li><p><strong>quantity</strong> (<em>QuantityLike</em>)</p></li>
+<li><p><strong>to_form</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>standardized</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The unit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>UnitLike</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_value">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/extraction.html#get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_value" title="Link to this definition">#</a></dt>
+<dd><p>Returns the value of a quantity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to_unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the unit to which the quantity will be converted (i.e kcal/mol).</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser to use.</p></li>
+<li><p><strong>quantity</strong> (<em>QuantityLike</em>)</p></li>
+<li><p><strong>standardized</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array with the quantity value or a a float or an int if it’s a scalar.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray or float or int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.get_value_and_unit">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">get_value_and_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/extraction.html#get_value_and_unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.get_value_and_unit" title="Link to this definition">#</a></dt>
+<dd><p>Returns the value and unit of a quantity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to_unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the unit to which the quantity will be converted (i.e kcal/mol).</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser to use.</p></li>
+<li><p><strong>quantity</strong> (<em>QuantityLike</em>)</p></li>
+<li><p><strong>to_form</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>standardized</strong> (<em>bool</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>np.ndarray or float or int</em></p></li>
+<li><p><em>UnitLike</em> – The value and unit of the input quantity.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Tuple</em>[<em>ndarray</em> | float | int, <em>UnitLike</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.is_dimensionless">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">is_dimensionless</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/introspection.html#is_dimensionless"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.is_dimensionless" title="Link to this definition">#</a></dt>
+<dd><p>Check wheter a quantity or unit is dimensionless.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether the quantity or unit is dimensionless.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.is_quantity">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">is_quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/introspection.html#is_quantity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.is_quantity" title="Link to this definition">#</a></dt>
+<dd><p>Check whether an object is a quantity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – A quanitity or a unit</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser for string quantities</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>False if it’s not a quantity</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.is_unit">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">is_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/introspection.html#is_unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.is_unit" title="Link to this definition">#</a></dt>
+<dd><p>Check whether an object is a unit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – A quantity or a unit</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser for string quantities</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>False if it’s not a unit</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.quantity">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">quantity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standardized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/construction.html#quantity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.quantity" title="Link to this definition">#</a></dt>
+<dd><p>Returns a quantity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em><em>, </em><em>float</em><em> or </em><em>arraylike</em>) – The value of the quantity. Can be a scalar or an array like type.</p></li>
+<li><p><strong>unit</strong> (<em>UnitLike</em>) – Unit in of the quantity in any of the accepted form.</p></li>
+<li><p><strong>form</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;</em><em>, </em><em>&quot;string&quot;}</em><em>, </em><em>optional</em>) – Output form of the quantity.</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser to use.</p></li>
+<li><p><strong>standardized</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return a standardized quantity, default=False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The quantity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantityLike</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.similarity">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity_or_unit_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/comparison.html#similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.similarity" title="Link to this definition">#</a></dt>
+<dd><p>Compare two quantities using relative tolerance semantics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit_1</strong> (<em>QuantityOrUnit</em>) – First quantity or unit to compare.</p></li>
+<li><p><strong>quantity_or_unit_2</strong> (<em>QuantityOrUnit</em>) – Second quantity or unit to compare.</p></li>
+<li><p><strong>relative_tolerance</strong> (<em>float</em><em>, </em><em>default=1e-8</em>) – Relative tolerance used internally as <code class="docutils literal notranslate"><span class="pre">rtol</span></code> in <a class="reference internal" href="#pyunitwizard.are_close" title="pyunitwizard.are_close"><code class="xref py py-func docutils literal notranslate"><span class="pre">are_close()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when values are close within tolerance and units are compatible.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;nanometer&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;angstrom&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.standardize">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">standardize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/standardization.html#standardize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.standardize" title="Link to this definition">#</a></dt>
+<dd><p>Concert a quantity or unit to standard units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>QuantityOrUnit</em>) – The quantity or a unit that will be converted.</p></li>
+<li><p><strong>to_form</strong> (<em>str</em><em>, </em><em>optional.</em>) – The form to transform to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The quantity ot unit converted to standard units.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>QuantityOrUnit</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NoStandardsError</strong> – If no standard units were defined.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.to_string">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity_or_unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/conversion.html#to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.to_string" title="Link to this definition">#</a></dt>
+<dd><p>Return a quantity or unit converted to string form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quantity_or_unit</strong> (<em>Any</em>) – Input quantity or unit to convert.</p></li>
+<li><p><strong>to_unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Target unit expressed as string.</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – Parser used when string inputs require explicit parsing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Quantity or unit represented in string form.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;nanometer&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">puw</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s2">&quot;angstrom&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyunitwizard.unit">
+<span class="sig-prename descclassname"><span class="pre">pyunitwizard.</span></span><span class="sig-name descname"><span class="pre">unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyunitwizard/api/construction.html#unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyunitwizard.unit" title="Link to this definition">#</a></dt>
+<dd><p>Returns a unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit</strong> (<em>str</em>) – Name of the unit (i.e kcal/mol).</p></li>
+<li><p><strong>form</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;</em><em>, </em><em>&quot;string&quot;}</em><em>, </em><em>optional</em>) – The form of the unit. This is the type that will be returned</p></li>
+<li><p><strong>parser</strong> (<em>{&quot;unyt&quot;</em><em>, </em><em>&quot;pint&quot;</em><em>, </em><em>&quot;openmm.unit&quot;</em><em>, </em><em>&quot;astropy.units&quot;}</em><em>, </em><em>optional</em>) – The parser to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The unit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unitlike</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyunitwizard.kernel">pyunitwizard.kernel module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.kernel.initialize"><code class="docutils literal notranslate"><span class="pre">initialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyunitwizard.parse">pyunitwizard.parse module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.parse.parse"><code class="docutils literal notranslate"><span class="pre">parse()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyunitwizard">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.are_close"><code class="docutils literal notranslate"><span class="pre">are_close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.are_compatible"><code class="docutils literal notranslate"><span class="pre">are_compatible()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.are_equal"><code class="docutils literal notranslate"><span class="pre">are_equal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.change_value"><code class="docutils literal notranslate"><span class="pre">change_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.check"><code class="docutils literal notranslate"><span class="pre">check()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.compatibility"><code class="docutils literal notranslate"><span class="pre">compatibility()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.context"><code class="docutils literal notranslate"><span class="pre">context()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_dimensionality"><code class="docutils literal notranslate"><span class="pre">get_dimensionality()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_form"><code class="docutils literal notranslate"><span class="pre">get_form()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_standard_units"><code class="docutils literal notranslate"><span class="pre">get_standard_units()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_unit"><code class="docutils literal notranslate"><span class="pre">get_unit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_value"><code class="docutils literal notranslate"><span class="pre">get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.get_value_and_unit"><code class="docutils literal notranslate"><span class="pre">get_value_and_unit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.is_dimensionless"><code class="docutils literal notranslate"><span class="pre">is_dimensionless()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.is_quantity"><code class="docutils literal notranslate"><span class="pre">is_quantity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.is_unit"><code class="docutils literal notranslate"><span class="pre">is_unit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.quantity"><code class="docutils literal notranslate"><span class="pre">quantity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.similarity"><code class="docutils literal notranslate"><span class="pre">similarity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.standardize"><code class="docutils literal notranslate"><span class="pre">standardize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.to_string"><code class="docutils literal notranslate"><span class="pre">to_string()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyunitwizard.unit"><code class="docutils literal notranslate"><span class="pre">unit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2025, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+	with a structure based on the
+	<a href="https://github.com/MolSSI/cookiecutter-cms">Computational Molecular Science
+		Python Cookiecutter</a> version 1.5
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

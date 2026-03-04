@@ -1,0 +1,10 @@
+pyunitwizard.utils.pandas package
+=================================
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.utils.pandas
+   :members:
+   :show-inheritance:
+   :undoc-members:

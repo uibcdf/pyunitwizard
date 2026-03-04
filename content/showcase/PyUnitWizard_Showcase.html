@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-16x16.png" sizes="16x16" rel="icon" type="image/png">
+    <link href="../../_static/favicon-124x124.png" sizes="124x124" rel="icon" type="image/png">
+    <link href="../../_static/favicon-128x128.png" sizes="128x128" rel="icon" type="image/png">
+    <link href="../../_static/favicon-192x192.png" sizes="192x192" rel="icon" type="image/png">
+    <link href="../../_static/icon.svg" rel="icon" type="image/svg+xml">
+  
+    <title>PyUnitWizard Showcase: A Cross-Library Tour – PyUnitWizard 0.21.1</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_tabs.css?v=f45e19d3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=6081af2d"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/showcase/PyUnitWizard_Showcase';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="User" href="../user/index.html" />
+    <link rel="prev" title="Quick Guide" href="Configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.21.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.21.1 documentation - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.21.1 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="library-integration-contract.html">Library Integration Contract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scientific-script-workflow.html">Scientific Script Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qa-ci-regression-gates.html">QA and CI Regression Gates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quick_Guide.html">Quick Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Configuration.html">Quick Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PyUnitWizard Showcase: A Cross-Library Tour</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Showcase</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">PyUnitWizard Showcase: A Cross-Library Tour</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="pyunitwizard-showcase-a-cross-library-tour">
+<h1>PyUnitWizard Showcase: A Cross-Library Tour<a class="headerlink" href="#pyunitwizard-showcase-a-cross-library-tour" title="Link to this heading">#</a></h1>
+<p>Welcome to the PyUnitWizard showcase! This notebook walks you through the essentials of the library so you can work comfortably with physical quantities across different Python unit systems. Whether you prefer Pint, OpenMM units, unyt, or Astropy units, PyUnitWizard gives you a single API to inspect, convert, and compare them.</p>
+<section id="what-you-will-learn">
+<h2>What you will learn<a class="headerlink" href="#what-you-will-learn" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>How to configure PyUnitWizard for the unit libraries you already use.</p></li>
+<li><p>How to create and inspect quantities in the default unit system.</p></li>
+<li><p>How to convert values, units, and whole quantities across forms.</p></li>
+<li><p>How to keep calculations consistent with dimensional analysis and standardized units.</p></li>
+<li><p>How to work with NumPy arrays, parse textual quantities, and access built-in constants.</p></li>
+</ul>
+</section>
+<section id="before-you-start">
+<h2>Before you start<a class="headerlink" href="#before-you-start" title="Link to this heading">#</a></h2>
+<p>PyUnitWizard itself is lightweight, but you will want to install the unit libraries you plan to interoperate with. A typical environment created with <code class="docutils literal notranslate"><span class="pre">pip</span></code> may look like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyunitwizard<span class="w"> </span>pint<span class="w"> </span>openmm<span class="w"> </span>unyt<span class="w"> </span>astropy
+</pre></div>
+</div>
+<p>Once the packages are available, we can import PyUnitWizard and NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puw</span><span class="o">.</span><span class="n">__print_version__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyUnitWizard version 0.16.0+1.g927d49b.dirty
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-libraries-and-setting-defaults">
+<h2>Loading libraries and setting defaults<a class="headerlink" href="#loading-libraries-and-setting-defaults" title="Link to this heading">#</a></h2>
+<p>PyUnitWizard can talk to several backends, but it only enables what you load explicitly. The <code class="docutils literal notranslate"><span class="pre">configure</span></code> module lets you explore what is supported and make the choices that fit your project.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">supported_libs</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_libraries_supported</span><span class="p">()</span>
+<span class="n">supported_parsers</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_parsers_supported</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Supported libraries:&#39;</span><span class="p">,</span> <span class="n">supported_libs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Supported parsers:&#39;</span><span class="p">,</span> <span class="n">supported_parsers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Supported libraries: [&#39;pint&#39;, &#39;openmm.unit&#39;, &#39;unyt&#39;, &#39;astropy.units&#39;]
+Supported parsers: [&#39;pint&#39;, &#39;openmm.unit&#39;, &#39;unyt&#39;, &#39;astropy.units&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start from a clean slate for reproducibility in this notebook</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="c1"># Load all available libraries so we can demonstrate conversions among them</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">load_library</span><span class="p">([</span><span class="s1">&#39;pint&#39;</span><span class="p">,</span> <span class="s1">&#39;openmm.unit&#39;</span><span class="p">,</span> <span class="s1">&#39;unyt&#39;</span><span class="p">,</span> <span class="s1">&#39;astropy.units&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loaded libraries:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_libraries_loaded</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded libraries: [&#39;pint&#39;, &#39;openmm.unit&#39;, &#39;unyt&#39;, &#39;astropy.units&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose Pint as the default form for new quantities</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_default_form</span><span class="p">(</span><span class="s1">&#39;pint&#39;</span><span class="p">)</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_default_parser</span><span class="p">(</span><span class="s1">&#39;pint&#39;</span><span class="p">)</span>
+
+<span class="c1"># Pick a consistent set of standard units for later comparisons</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_standard_units</span><span class="p">([</span><span class="s1">&#39;nanometer&#39;</span><span class="p">,</span> <span class="s1">&#39;picosecond&#39;</span><span class="p">,</span> <span class="s1">&#39;kcal/mol&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default form:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_default_form</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default parser:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_default_parser</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standards:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_standard_units</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Default form: pint
+Default parser: pint
+Standards: {&#39;nanometer&#39;: {&#39;[L]&#39;: 1, &#39;[M]&#39;: 0, &#39;[T]&#39;: 0, &#39;[K]&#39;: 0, &#39;[mol]&#39;: 0, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}, &#39;picosecond&#39;: {&#39;[L]&#39;: 0, &#39;[M]&#39;: 0, &#39;[T]&#39;: 1, &#39;[K]&#39;: 0, &#39;[mol]&#39;: 0, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}, &#39;kcal/mol&#39;: {&#39;[L]&#39;: 2, &#39;[M]&#39;: 1, &#39;[T]&#39;: -2, &#39;[K]&#39;: 0, &#39;[mol]&#39;: -1, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}, &#39;kelvin&#39;: {&#39;[L]&#39;: 0, &#39;[M]&#39;: 0, &#39;[T]&#39;: 0, &#39;[K]&#39;: 1, &#39;[mol]&#39;: 0, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-and-inspecting-quantities">
+<h2>Creating and inspecting quantities<a class="headerlink" href="#creating-and-inspecting-quantities" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">quantity</span></code> constructor produces an object in the default form (Pint in our configuration). PyUnitWizard keeps track of both value and unit metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;nanometers&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Form:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_form</span><span class="p">(</span><span class="n">distance</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Value:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">distance</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="n">distance</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5 nanometer
+Form: pint
+Value: 2.5
+Unit: nanometer
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can obtain the value and unit separately in different forms. For instance, converting the value to ångströms while requesting the unit in OpenMM notation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value_angstrom</span><span class="p">,</span> <span class="n">unit_openmm</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_value_and_unit</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s1">&#39;openmm.unit&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Value in Å:&#39;</span><span class="p">,</span> <span class="n">value_angstrom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit in OpenMM form:&#39;</span><span class="p">,</span> <span class="n">unit_openmm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value in Å: 25.0
+Unit in OpenMM form: angstrom
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-across-forms-and-units">
+<h2>Converting across forms and units<a class="headerlink" href="#converting-across-forms-and-units" title="Link to this heading">#</a></h2>
+<p>Quantities can be translated into any loaded library or expressed with different units. The <code class="docutils literal notranslate"><span class="pre">convert</span></code> helper drives both operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distance_openmm</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s1">&#39;openmm.unit&#39;</span><span class="p">)</span>
+<span class="n">distance_picometers</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s1">&#39;picometer&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;As an OpenMM quantity:&#39;</span><span class="p">,</span> <span class="n">distance_openmm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In picometers:&#39;</span><span class="p">,</span> <span class="n">distance_picometers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Form after conversion:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_form</span><span class="p">(</span><span class="n">distance_openmm</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>As an OpenMM quantity: 2.5 nm
+In picometers: 2500.0000000000005 picometer
+Form after conversion: openmm.unit
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dimensional-analysis-and-compatibility-checks">
+<h2>Dimensional analysis and compatibility checks<a class="headerlink" href="#dimensional-analysis-and-compatibility-checks" title="Link to this heading">#</a></h2>
+<p>PyUnitWizard can read the dimensionality of a quantity and tell you whether two objects are compatible or close within tolerances.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;meter/second&#39;</span><span class="p">)</span>
+<span class="n">acceleration</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;meter/second**2&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Speed dimensionality:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_dimensionality</span><span class="p">(</span><span class="n">speed</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Acceleration dimensionality:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_dimensionality</span><span class="p">(</span><span class="n">acceleration</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Are speed and acceleration compatible?&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">are_compatible</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Speed dimensionality: {&#39;[L]&#39;: 1, &#39;[M]&#39;: 0, &#39;[T]&#39;: -1, &#39;[K]&#39;: 0, &#39;[mol]&#39;: 0, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}
+Acceleration dimensionality: {&#39;[L]&#39;: 1, &#39;[M]&#39;: 0, &#39;[T]&#39;: -2, &#39;[K]&#39;: 0, &#39;[mol]&#39;: 0, &#39;[A]&#39;: 0, &#39;[Cd]&#39;: 0}
+Are speed and acceleration compatible? False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_mph</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s1">&#39;mile/hour&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converted speed:&#39;</span><span class="p">,</span> <span class="n">speed_mph</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Are the two speed representations close?&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">are_close</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">speed_mph</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted speed: 11.184681460272012 mile / hour
+Are the two speed representations close? True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-arrays-of-values">
+<h2>Working with arrays of values<a class="headerlink" href="#working-with-arrays-of-values" title="Link to this heading">#</a></h2>
+<p>Under the hood PyUnitWizard can store NumPy arrays. This is convenient when your simulation or experiment delivers vectorized data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trajectory</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s1">&#39;micrometers&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trajectory values:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">trajectory</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Converted to nanometers:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="s1">&#39;nanometer&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trajectory values: [0.   0.25 0.5  0.75 1.  ]
+Converted to nanometers: [   0.  250.  500.  750. 1000.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standardize the array so it follows the project-wide conventions</span>
+<span class="n">trajectory_std</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">standardize</span><span class="p">(</span><span class="n">trajectory</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standardized trajectory unit:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="n">trajectory_std</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Values in standards:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">trajectory_std</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standardized trajectory unit: nanometer
+Values in standards: [   0.  250.  500.  750. 1000.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parsing-from-strings-and-manipulating-units">
+<h2>Parsing from strings and manipulating units<a class="headerlink" href="#parsing-from-strings-and-manipulating-units" title="Link to this heading">#</a></h2>
+<p>When ingesting data from configuration files or user input, quantities often arrive as strings. Use the default parser (or specify one) to turn them into rich objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">string_quantity</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;42 kilocalorie/mole&#39;</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s1">&#39;pint&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsed quantity:&#39;</span><span class="p">,</span> <span class="n">string_quantity</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is it recognized as a quantity?&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">is_quantity</span><span class="p">(</span><span class="n">string_quantity</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parsed quantity: 42.0 kilocalorie / mole
+Is it recognized as a quantity? True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can also inspect plain units without attaching a value</span>
+<span class="n">force_unit</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">unit</span><span class="p">(</span><span class="s1">&#39;kilojoule/(nanometer*mole)&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="s1">&#39;pint&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit object:&#39;</span><span class="p">,</span> <span class="n">force_unit</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is it a unit?&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">is_unit</span><span class="p">(</span><span class="n">force_unit</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unit object: kilojoule / mole / nanometer
+Is it a unit? True
+</pre></div>
+</div>
+</div>
+</div>
+<p>If a value needs to be updated while keeping all metadata intact, <code class="docutils literal notranslate"><span class="pre">change_value</span></code> does the job.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">updated_distance</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">change_value</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Updated distance:&#39;</span><span class="p">,</span> <span class="n">updated_distance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Updated distance: 3.1 nanometer
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="maintaining-consistency-with-standards">
+<h2>Maintaining consistency with standards<a class="headerlink" href="#maintaining-consistency-with-standards" title="Link to this heading">#</a></h2>
+<p>In collaborative settings it is common to enforce a canonical representation for reporting. <code class="docutils literal notranslate"><span class="pre">standardize</span></code> converts any compatible quantity to the configured standard units and default form.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energy</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">quantity</span><span class="p">(</span><span class="o">-</span><span class="mf">12.5</span><span class="p">,</span> <span class="s1">&#39;kilojoule/mole&#39;</span><span class="p">)</span>
+<span class="n">energy_std</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">standardize</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original energy:&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standardized energy:&#39;</span><span class="p">,</span> <span class="n">energy_std</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;As a string:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">energy_std</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original energy: -12.5 kilojoule / mole
+Standardized energy: -2.987571701720841 kilocalorie / mole
+As a string: -2.987571701720841 kilocalorie / mole
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">check</span></code> helper raises an informative error if a quantity does not match an expected dimensionality. It is a lightweight guard for functions that demand specific units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">puw</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">dimensionality</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;[L]&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;[T]&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Speed passes the dimensionality check.&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check failed:&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Speed passes the dimensionality check.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">puw</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">acceleration</span><span class="p">,</span> <span class="n">dimensionality</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;[L]&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;[T]&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">})</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Acceleration check result:&#39;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="accessing-physical-constants">
+<h2>Accessing physical constants<a class="headerlink" href="#accessing-physical-constants" title="Link to this heading">#</a></h2>
+<p>PyUnitWizard bundles a few frequently used physical constants. They are expressed as regular quantities, so you can convert them like any other value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="n">constants_catalog</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">show_constants</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">names</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">constants_catalog</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avogadro, NA -&gt; 6.02214076e+23 1/mole
+Universal gas, R, Molar gas -&gt; 8.13446261815324 J/(kelvin*mole)
+Boltzmann, KB -&gt; 1.380649e-23 J/kelvin
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avogadro_entry</span> <span class="o">=</span> <span class="n">constants_catalog</span><span class="p">[(</span><span class="s1">&#39;Avogadro&#39;</span><span class="p">,</span> <span class="s1">&#39;NA&#39;</span><span class="p">)]</span>
+<span class="n">avogadro</span> <span class="o">=</span> <span class="n">puw</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">avogadro_entry</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="s1">&#39;pint&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Avogadro constant:&#39;</span><span class="p">,</span> <span class="n">avogadro</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unit form:&#39;</span><span class="p">,</span> <span class="n">puw</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="n">avogadro</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Avogadro constant: 6.02214076e+23 / mole
+Unit form: 1 / mole
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Configure PyUnitWizard once and reuse the same API with multiple unit toolkits.</p></li>
+<li><p>Generate quantities from numbers, arrays, or strings and interrogate their form, value, and dimensionality.</p></li>
+<li><p>Convert seamlessly across forms, enforce project-wide standards, and validate inputs with helper checks.</p></li>
+<li><p>Tap into bundled constants or extend the approach for your own domain-specific catalog.</p></li>
+</ul>
+<p>You now have a tour of the core features that make PyUnitWizard a flexible companion when juggling different unit systems.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Configuration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quick Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../user/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">User</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-you-will-learn">What you will learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">Before you start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-libraries-and-setting-defaults">Loading libraries and setting defaults</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-inspecting-quantities">Creating and inspecting quantities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-across-forms-and-units">Converting across forms and units</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensional-analysis-and-compatibility-checks">Dimensional analysis and compatibility checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-arrays-of-values">Working with arrays of values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing-from-strings-and-manipulating-units">Parsing from strings and manipulating units</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maintaining-consistency-with-standards">Maintaining consistency with standards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-physical-constants">Accessing physical constants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2025, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+	with a structure based on the
+	<a href="https://github.com/MolSSI/cookiecutter-cms">Computational Molecular Science
+		Python Cookiecutter</a> version 1.5
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+pyunitwizard.api package
+========================
+
+Submodules
+----------
+
+pyunitwizard.api.comparison module
+----------------------------------
+
+.. automodule:: pyunitwizard.api.comparison
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.construction module
+------------------------------------
+
+.. automodule:: pyunitwizard.api.construction
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.context module
+-------------------------------
+
+.. automodule:: pyunitwizard.api.context
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.conversion module
+----------------------------------
+
+.. automodule:: pyunitwizard.api.conversion
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.extraction module
+----------------------------------
+
+.. automodule:: pyunitwizard.api.extraction
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.introspection module
+-------------------------------------
+
+.. automodule:: pyunitwizard.api.introspection
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.standardization module
+---------------------------------------
+
+.. automodule:: pyunitwizard.api.standardization
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+pyunitwizard.api.validation module
+----------------------------------
+
+.. automodule:: pyunitwizard.api.validation
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.api
+   :members:
+   :show-inheritance:
+   :undoc-members:

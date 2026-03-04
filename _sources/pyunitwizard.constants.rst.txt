@@ -1,0 +1,21 @@
+pyunitwizard.constants package
+==============================
+
+Submodules
+----------
+
+pyunitwizard.constants.constants module
+---------------------------------------
+
+.. automodule:: pyunitwizard.constants.constants
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: pyunitwizard.constants
+   :members:
+   :show-inheritance:
+   :undoc-members:
