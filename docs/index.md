@@ -31,7 +31,8 @@ conda install -c uibcdf pyunitwizard
 ## Use it
 
 PyUnitWizard provides a unified API to work with physical quantities across
-different unit libraries (for example Pint, unyt, OpenMM units, and Astropy units).
+different unit libraries (for example Pint, unyt, OpenMM units, Astropy units,
+physipy, and quantities).
 
 ```python
 import pyunitwizard as puw

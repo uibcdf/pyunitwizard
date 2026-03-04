@@ -4,7 +4,7 @@ You are in the right place if you maintain a scientific library and need a
 single, explicit units contract at your public API boundaries.
 
 PyUnitWizard is most useful when your users pass quantities in mixed forms
-(strings, Pint, unyt, OpenMM, Astropy) and you want your library internals to
+(strings, Pint, unyt, OpenMM, Astropy, physipy, quantities) and you want your library internals to
 remain unit-agnostic.
 
 A practical way to adopt it is incremental:

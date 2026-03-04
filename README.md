@@ -74,6 +74,8 @@ PyUnitWizard supports interoperation with:
 - `openmm.unit`
 - `unyt`
 - `astropy.units`
+- `physipy`
+- `quantities`
 - `string` form
 
 Runtime loading of available backends/parsers is handled via configuration.
