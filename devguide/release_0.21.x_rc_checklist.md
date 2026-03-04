@@ -17,10 +17,10 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 ## 2. Stability monitoring during RC
 
-- [ ] Keep CI matrix green on Ubuntu and macOS for supported Python versions.
-- [ ] Run `.github/workflows/release_gates.yaml` on candidate commits.
-- [ ] Track flaky tests and close or quarantine with explicit issue links.
-- [ ] Record blocker vs non-blocker incidents for conversion/parser/config paths.
+- [x] Keep CI matrix green on Ubuntu and macOS for supported Python versions.
+- [x] Run `.github/workflows/release_gates.yaml` on candidate commits.
+- [x] Track flaky tests and close or quarantine with explicit issue links.
+- [x] Record blocker vs non-blocker incidents for conversion/parser/config paths.
 
 ## 3. Ecosystem validation during RC
 
