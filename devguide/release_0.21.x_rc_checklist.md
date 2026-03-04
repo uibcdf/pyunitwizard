@@ -40,7 +40,7 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 ## 5. RC close (go/no-go to `1.0.0`)
 
-- [ ] No high-severity open issues in core public APIs.
-- [ ] No open blocker incidents from ecosystem validation.
-- [ ] `devguide/release_1.0.0_checklist.md` is fully actionable and current.
+- [x] No high-severity open issues in core public APIs.
+- [x] No open blocker incidents from ecosystem validation.
+- [x] `devguide/release_1.0.0_checklist.md` is fully actionable and current.
 - [ ] Release owner explicitly approves closing RC window.
