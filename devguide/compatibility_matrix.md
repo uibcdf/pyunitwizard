@@ -1,7 +1,8 @@
 # Sibling Compatibility Matrix
 
-This matrix defines the minimum sibling-library versions validated for the
-PyUnitWizard `0.19.x` release-candidate window.
+This matrix defines the minimum sibling-library versions validated through the
+`0.19.x` historical checkpoint and carried into the current pre-`1.0.0` path
+(`0.20.x` expansion, `0.21.x` RC consolidation).
 
 | Component | Minimum Version | Role |
 |---|---:|---|

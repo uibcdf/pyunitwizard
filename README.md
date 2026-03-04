@@ -175,8 +175,9 @@ make -C docs html
 
 ## Status
 
-PyUnitWizard is in pre-1.0 stabilization. The `0.19.x` line is treated as the
-release-candidate (RC) window before the stable `1.0.0` tag.
+PyUnitWizard is in pre-1.0 stabilization. The `0.19.x` line is treated as a
+historical checkpoint, `0.20.x` as interoperability expansion, and `0.21.x` as
+the RC consolidation window before the stable `1.0.0` tag.
 Current release planning and milestones are tracked in `devguide/`.
 
 PyUnitWizard aims to become a units interoperability layer for Scientific Python.

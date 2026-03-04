@@ -11,7 +11,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
-- `performance_baseline_0.19.x.json`: current RC performance baseline snapshot.
+- `performance_baseline_0.19.x.json`: historical baseline snapshot from `0.19.x`.
+- `performance_baseline_0.20.x.json`: interoperability expansion baseline snapshot.
 
 ## Current baseline
 

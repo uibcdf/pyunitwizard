@@ -1,5 +1,9 @@
 # Collective Evidence Pack
 
+Historical note: this pack was started during the `0.19.x` phase. Keep it as
+evidence history and update references when preparing the active `0.21.x` RC
+closure.
+
 This document is the handoff artifact for cross-repo validation with:
 - `../smonitor`
 - `../depdigest`
