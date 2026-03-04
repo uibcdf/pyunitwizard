@@ -81,8 +81,7 @@ def convert(
         raise BadCallError("to_type")
 
     if isinstance(to_unit, str):
-        to_unit = _parse(to_unit, parser=parser, to_form=to_form)
-        to_unit = dict_get_unit[to_form](to_unit)
+        to_unit = _parse_unit_string(to_unit, parser=parser, to_form=to_form)
 
     if form_in == "string":
         if to_form == "string":
@@ -194,3 +193,16 @@ def to_string(
 
 
 __all__ = ["convert", "to_string"]
+def _parse_unit_string(unit_string: str, parser: str, to_form: str):
+    """Parse a unit string robustly across parsers.
+
+    Some parsers (notably astropy) require a numeric prefix to parse a
+    quantity-like string. We first try the raw unit string and then fallback to
+    a ``"1 <unit>"`` quantity form to extract the unit token.
+    """
+    try:
+        candidate = _parse(unit_string, parser=parser, to_form=to_form)
+    except Exception:
+        candidate = _parse(f"1 {unit_string}", parser=parser, to_form=to_form)
+
+    return dict_get_unit[to_form](candidate)

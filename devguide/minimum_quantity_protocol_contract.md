@@ -42,6 +42,10 @@ A quantity handled by PyUnitWizard must support, through public API:
 - Core API calls must preserve or transform units explicitly; they must not
   discard units silently.
 
+4. Unit-string robustness across parsers
+- `to_unit` accepts canonical unit strings (for example, `"meter"`) even when
+  the active parser requires quantity-like strings internally.
+
 ## Out of scope for this minimum contract
 
 - Full parity of semantics across all backend-native edge cases.
@@ -57,3 +61,4 @@ Those belong to separate contracts and extension guides.
 - Known deviations are documented with explicit scope.
 - Current contract evidence module:
   - `tests/test_minimum_quantity_protocol_contract.py`
+  - `tests/test_conversion_branches.py` (unit-string conversion regression path)

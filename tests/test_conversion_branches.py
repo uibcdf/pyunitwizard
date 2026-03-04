@@ -51,3 +51,28 @@ def test_convert_pint_unit_to_string_unit_keeps_unit_path():
     unit = puw.unit("meter", form="pint")
     output = puw.convert(unit, to_form="string", to_type="unit")
     assert output == "meter"
+
+
+def test_convert_to_unit_string_without_numeric_prefix_works_with_astropy_default_parser():
+    pytest.importorskip("astropy.units")
+
+    puw.configure.reset()
+    puw.configure.load_library(["astropy.units", "pint"])
+
+    quantity = puw.quantity([1.0, 2.0], "meter", form="pint", parser="pint")
+    converted = puw.convert(quantity, to_form="pint", to_unit="centimeter")
+
+    assert puw.get_unit(converted, to_form="string") == "centimeter"
+    assert puw.get_value(converted).tolist() == [100.0, 200.0]
+
+
+def test_get_value_to_unit_string_without_numeric_prefix_works_with_astropy_default_parser():
+    pytest.importorskip("astropy.units")
+
+    puw.configure.reset()
+    puw.configure.load_library(["astropy.units", "pint"])
+
+    quantity = puw.quantity([100.0, 200.0], "centimeter", form="pint", parser="pint")
+    values_in_meter = puw.get_value(quantity, to_unit="meter")
+
+    assert values_in_meter.tolist() == [1.0, 2.0]
