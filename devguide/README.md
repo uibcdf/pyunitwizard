@@ -16,6 +16,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_0.21.x_notes_draft.md`: draft release notes for RC scope, risks, compatibility, and migration guidance.
 - `docs_api_alignment_0.21.x.md`: evidence that user/API docs match shipped behavior in the active RC line.
 - `stability_monitoring_0.21.x.md`: CI matrix and release-gates incident ledger for RC stability tracking.
+- `ecosystem_validation_0.21.x.md`: integration smoke and sibling-repo validation evidence for RC.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.

@@ -24,11 +24,11 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 ## 3. Ecosystem validation during RC
 
-- [ ] Validate integration smoke checks with `argdigest`.
-- [ ] Validate integration smoke checks with `depdigest`.
-- [ ] Validate integration smoke checks with `smonitor`.
-- [ ] Validate local-sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`) when repos are available.
-- [ ] Confirm no unresolved cross-repo contract drift is open.
+- [x] Validate integration smoke checks with `argdigest`.
+- [x] Validate integration smoke checks with `depdigest`.
+- [x] Validate integration smoke checks with `smonitor`.
+- [x] Validate local-sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`) when repos are available.
+- [x] Confirm no unresolved cross-repo contract drift is open.
 
 ## 4. Documentation and migration quality
 
