@@ -6,10 +6,10 @@ tagging `1.0.0`.
 All sections must be complete at least once during RC, and the "RC close"
 section must be complete on the candidate commit that will lead to `1.0.0`.
 
-## Status snapshot at `0.19.2` (2026-03-03)
+## Status snapshot at `0.19.3` (2026-03-03)
 
-- RC checkpoint tag published: `0.19.2`.
-- Local test suite snapshot on Python `3.13`: `305 passed` (`pytest -q tests --ignore=tests/test_import.py`).
+- RC checkpoint tag published: `0.19.3`.
+- Local test suite snapshot on Python `3.13`: `308 passed` (`pytest -q tests --ignore=tests/test_import.py`).
 - Ecosystem integration smoke tests for `argdigest`, `depdigest`, `smonitor`: green.
 - Local sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`): green when repos are present.
 - Collective test execution policy documented (library CI repos only; no dedicated test suite in `molsyssuite`).
@@ -86,7 +86,7 @@ Execution policy for collective tests:
 ## Evidence log (2026-03-03)
 
 - Local quality baseline: `pytest -q tests --ignore=tests/test_import.py` -> `305 passed` on Python `3.13`.
-- RC checkpoint tag published: `0.19.2`.
+- RC checkpoint tag published: `0.19.3`.
 - Integration evidence:
   - `tests/integration/test_ecosystem_smoke.py` (ArgDigest/DepDigest/SMonitor smoke and pipeline checks).
   - `tests/integration/test_local_sibling_repos.py` (local sibling imports + contract checks).

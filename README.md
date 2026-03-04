@@ -96,6 +96,15 @@ String parser support:
 - explicit parser-not-supported errors: `openmm.unit`, `unyt`, `physipy`,
   `quantities`.
 
+Matplotlib transparent integration:
+- Keep using standard `matplotlib` imports.
+- Enable unit-aware plotting for mixed backend quantities with:
+
+```python
+import pyunitwizard as puw
+puw.utils.matplotlib.setup_matplotlib()
+```
+
 ## Diagnostics (SMonitor)
 
 PyUnitWizard integrates with **SMonitor** for structured diagnostics.

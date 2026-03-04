@@ -8,8 +8,9 @@ line to a stable `1.0.0` release.
 1. `0.17.x` - Hardening and correctness
 2. `0.18.x` - API freeze and contract tests
 3. `0.19.x` - Release candidate (ecosystem validation and stability window)
-4. `0.20.x` - Release candidate extension (only if blockers remain)
-5. `1.0.0` - Stable release
+4. `0.20.x` - Ecosystem interoperability expansion (NumPy/Matplotlib/Pandas path)
+5. `0.21.x` - Release candidate consolidation window
+6. `1.0.0` - Stable release
 
 ## 0.17.x - Hardening and correctness
 
@@ -54,8 +55,9 @@ line to a stable `1.0.0` release.
 
 ### Current checkpoint (2026-03-03)
 
-- Tag `0.19.1` created from `main` as RC checkpoint.
-- Full suite baseline at checkpoint: `263 passed` on local Python `3.13`.
+- Tag `0.19.3` created from `main` as RC checkpoint.
+- Full suite baseline at checkpoint: `308 passed` on local Python `3.13`
+  (`pytest -q tests --ignore=tests/test_import.py`).
 - Integration smoke coverage includes:
   - sibling repo import precedence and contract checks,
   - DepDigest contract/dependency assertions,
@@ -64,6 +66,9 @@ line to a stable `1.0.0` release.
   - shared collective E2E policy: scenario runs in each library repo CI
     (`pyunitwizard`, `argdigest`, `depdigest`, `smonitor`), while
     `molsyssuite` is evidence/coordination-only.
+  - backend expansion and hardening for `physipy` and `quantities`.
+  - transparent `matplotlib` bridge (`pyunitwizard.utils.matplotlib.setup_matplotlib`)
+    to keep standard matplotlib workflows while accepting mixed backend quantities.
 
 ### Exit criteria
 
@@ -80,16 +85,26 @@ line to a stable `1.0.0` release.
 - `0.19.x`: keep alias without behavior changes, enforce warning/attribute contract by tests.
 - `1.0.0`: keep alias only if no downstream blocker remains; otherwise drop in next minor after stable with migration notes.
 
-## 0.20.x contingency policy
+## 0.20.x interoperability expansion policy
 
-`0.20.x` must only be used if `0.19.x` RC closure criteria are not met by the
-planned close date.
+`0.20.x` is now reserved for integration expansion toward "transparent use" with:
+- NumPy workflows,
+- Matplotlib plotting,
+- Pandas tabular pipelines.
 
-When this contingency is activated:
-
+Rules:
 - keep API behavior additive and backward-compatible with `0.19.x`,
-- carry unresolved RC items explicitly from `release_0.19.x_rc_checklist.md`,
-- treat `0.20.x` as an extension of the same stabilization window, not a reset.
+- preserve `pint` as hard dependency and optional backends as soft dependencies,
+- avoid forcing users to replace `numpy/matplotlib/pandas` imports with
+  `puw.*` imports for common workflows,
+- provide explicit `puw.*` helpers as an optional strict mode for integrators.
+
+## 0.21.x RC consolidation policy
+
+`0.21.x` is the final stabilization window before `1.0.0`:
+- validate interoperability additions under CI matrix continuity,
+- close remaining collective blockers and traceability contracts,
+- freeze behavior and docs for release-owner go/no-go.
 
 ## 1.0.0 - Stable release
 

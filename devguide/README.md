@@ -16,11 +16,11 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active release-candidate line: `0.19.x` (RC window before `1.0.0`).
-- Current RC tag checkpoint: `0.19.2`.
+- Current RC tag checkpoint: `0.19.3`.
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-03): `305 passed` (`pytest -q tests --ignore=tests/test_import.py`).
+- Current local test snapshot (2026-03-03): `308 passed` (`pytest -q tests --ignore=tests/test_import.py`).
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
@@ -42,6 +42,10 @@ Pending before `1.0.0` go/no-go:
 - close remaining collective finality items (traceability tag alignment and
   end-to-end evidence closure across the four libraries);
 - complete release-owner go/no-go signoff with no open blockers/high-severity incidents.
+
+Route update:
+- `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).
+- `0.21.x` is reserved as final RC consolidation window before `1.0.0`.
 
 ## Coordination scope
 
