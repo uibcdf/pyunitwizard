@@ -13,7 +13,7 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 - [x] Confirm baseline policy: Python `3.11`, `3.12`, `3.13` supported.
 - [x] Confirm `0.21.x` is documented as active RC in README/devguide/docs.
 - [ ] Confirm no planned breaking API change remains before `1.0.0`.
-- [ ] Publish RC scope and known risks for integrators.
+- [x] Publish RC scope and known risks for integrators.
 
 ## 2. Stability monitoring during RC
 
@@ -33,10 +33,10 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 ## 4. Documentation and migration quality
 
 - [ ] User docs and API docs match shipped behavior.
-- [ ] Developer docs include current release process and RC policy.
+- [x] Developer docs include current release process and RC policy.
 - [x] `devguide/minimum_quantity_protocol_contract.md` is aligned with actual tested behavior.
 - [x] `devguide/frontend_transparent_mode_contract.md` is aligned with actual tested behavior.
-- [ ] Release notes draft includes migration notes and compatibility statements.
+- [x] Release notes draft includes migration notes and compatibility statements.
 
 ## 5. RC close (go/no-go to `1.0.0`)
 

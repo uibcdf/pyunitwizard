@@ -12,6 +12,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `serialization_contract_draft.md`: draft canonical serialization contract for post-`1.0.0` promotion.
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
 - `release_0.21.x_rc_checklist.md`: active RC checklist for consolidation before `1.0.0`.
+- `release_0.21.x_notes_draft.md`: draft release notes for RC scope, risks, compatibility, and migration guidance.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
@@ -25,7 +26,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-04): `356 passed` (`pytest -q tests --ignore=tests/test_import.py`).
+- Current local test snapshot (2026-03-04): `376 passed` (`pytest -q tests --ignore=tests/test_import.py`).
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
