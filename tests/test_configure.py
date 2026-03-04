@@ -5,10 +5,10 @@ import sys
 import importlib
 
 def test_libraries_supported():
-    assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units']
+    assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
 
 def test_parsers_supported():
-    assert puw.configure.get_parsers_supported() == ['pint', 'openmm.unit', 'unyt', 'astropy.units']
+    assert puw.configure.get_parsers_supported() == ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
 
 def test_load_library():
     puw.configure.reset()

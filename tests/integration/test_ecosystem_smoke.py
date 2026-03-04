@@ -29,7 +29,15 @@ def test_depdigest_reports_expected_runtime_dependencies():
     dependencies = payload["dependencies"]
 
     libraries = {item["library"] for item in dependencies}
-    assert {"numpy", "pint", "unyt", "openmm.unit", "astropy.units"}.issubset(libraries)
+    assert {
+        "numpy",
+        "pint",
+        "unyt",
+        "openmm.unit",
+        "astropy.units",
+        "physipy",
+        "quantities",
+    }.issubset(libraries)
 
     type_by_library = {item["library"]: item["type"] for item in dependencies}
     assert type_by_library["numpy"] == "hard"
