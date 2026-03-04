@@ -47,11 +47,13 @@ jobs:
       - name: Run API contract and integration smoke
         shell: bash -l {0}
         run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest -q tests/test_api_layout.py tests/integration/test_ecosystem_smoke.py
 
       - name: Run full test suite
         shell: bash -l {0}
         run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest -q tests
 
   packaging_smoke:
