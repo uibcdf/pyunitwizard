@@ -16,12 +16,15 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active release-candidate line: `0.19.x` (RC window before `1.0.0`).
-- Current RC tag checkpoint: `0.19.1`.
+- Current RC tag checkpoint: `0.19.2`.
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-03): `263 passed` (full `pytest` suite).
+- Current local test snapshot (2026-03-03): `305 passed` (`pytest -q tests --ignore=tests/test_import.py`).
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
+- Supported runtime backends:
+  `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
+  `physipy` (soft), `quantities` (soft), plus `string` form.
 
 ## RC checkpoint summary (2026-03-03)
 
@@ -30,6 +33,8 @@ Completed in `0.19.x`:
 - Shared collective E2E scenario is implemented in all four library repos.
 - Collective test execution policy is now explicit: tests run in library repos
   with CI, while `molsyssuite` remains coordination-only.
+- Runtime integration support is implemented and tested for
+  `pint`, `openmm.unit`, `unyt`, `astropy.units`, `physipy`, and `quantities`.
 
 Pending before `1.0.0` go/no-go:
 - sustain CI matrix continuity (`ubuntu`/`macos`, Python `3.11`/`3.12`/`3.13`);
