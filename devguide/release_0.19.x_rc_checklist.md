@@ -89,6 +89,8 @@ Execution policy for collective tests:
   - `tests/integration/test_ecosystem_smoke.py` (ArgDigest/DepDigest/SMonitor smoke and pipeline checks).
   - `tests/integration/test_local_sibling_repos.py` (local sibling imports + contract checks).
   - `tests/e2e/test_collective_error_path.py` (shared collective error-path scenario aligned across the four repos).
+  - `tests/integration/test_backend_interop_matrix.py` (full conversion/unit/parser matrix across `pint`, `openmm.unit`, `unyt`, `astropy.units`).
+  - `tests/forms/test_upstream_adapter_contracts.py` (adapter-level upstream API contract hardening for the four supported backends).
 - Configuration precedence evidence (`runtime > env > file`) validated with real temporary-module tests in `tests/test_configure.py`.
 - Deprecation contract evidence for `pyunitwizard.main` covered by `tests/test_api_layout.py` and documented in developer docs.
 - DepDigest policy contract evidence covered by `tests/test_depdigest_contract.py`.
