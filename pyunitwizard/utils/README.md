@@ -40,7 +40,7 @@ Unit inference relies on the first quantity in the first sequence argument. Vali
 
 Transparent NumPy mode is available through:
 - `setup_numpy(enable=True)` to patch selected NumPy calls (`np.mean`, `np.sum`,
-  `np.linalg.norm`, `np.trapezoid`) so quantity inputs dispatch through
+  `np.std`, `np.var`, `np.dot`, `np.linalg.norm`, `np.trapezoid`) so quantity inputs dispatch through
   PyUnitWizard wrappers.
 - `numpy_context()` for temporary patching in a context manager.
 
@@ -66,6 +66,9 @@ Pandas interoperability is implemented as an additive layer:
 - `add_quantity_column(...)` appends/updates one column from a quantity and keeps unit metadata synchronized.
 - `get_quantity_column(...)` reconstructs a quantity from a DataFrame column using metadata or an explicit `unit_name`.
 - `get_units_map(...)` returns the units metadata dictionary.
+- `set_units_map(...)` injects/replaces units metadata with validation.
+- `sync_units_map(...)` drops stale metadata keys not present in columns.
+- `concat(...)` and `merge(...)` preserve and validate units metadata across table operations.
 - `setup_pandas(enable=True)` injects an optional transparent accessor (`DataFrame.puw`).
 - `pandas_context()` enables that accessor only inside a context manager.
 

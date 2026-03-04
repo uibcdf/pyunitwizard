@@ -70,10 +70,16 @@ line to a stable `1.0.0` release.
   - transparent `matplotlib` bridge (`pyunitwizard.utils.matplotlib.setup_matplotlib`)
     to keep standard matplotlib workflows while accepting mixed backend quantities.
   - transparent `numpy` bridge (`pyunitwizard.utils.numpy.setup_numpy`) for
-    quantity-aware dispatch in common operations without changing `numpy` imports.
-  - initial `pandas` interoperability helpers in `pyunitwizard.utils.pandas`
+    quantity-aware dispatch in common operations (`mean`, `sum`, `std`, `var`,
+    `dot`, `linalg.norm`, `trapezoid`) without changing `numpy` imports.
+  - expanded `pandas` interoperability helpers in `pyunitwizard.utils.pandas`
     (`dataframe_from_quantities`, `add_quantity_column`, `get_quantity_column`,
-    `get_units_map`) with contract coverage.
+    `get_units_map`, `set_units_map`, `sync_units_map`, `concat`, `merge`)
+    with contract coverage.
+  - advanced `matplotlib` layout tests (shared axes, twin axes, multi-backend
+    compatible overlays).
+  - cross-backend frontend matrix tests covering NumPy/Pandas/Matplotlib
+    behavior for available backend forms and mixed-form pairs.
 
 ### Exit criteria
 

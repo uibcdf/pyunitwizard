@@ -107,7 +107,8 @@ puw.utils.matplotlib.setup_matplotlib()
 
 NumPy transparent integration:
 - Keep using standard `numpy` imports.
-- Enable quantity-aware dispatch for common operations with:
+- Enable quantity-aware dispatch for common operations (`mean`, `sum`, `std`,
+  `var`, `dot`, `linalg.norm`, `trapezoid`) with:
 
 ```python
 import numpy as np
@@ -120,6 +121,8 @@ result = np.mean(puw.quantity([1.0, 2.0, 3.0], "meter"))
 Pandas interoperability helpers:
 - Keep using standard `pandas` imports.
 - Optional transparent accessor for DataFrames: `df.puw.*`.
+- Metadata-preserving table helpers are available: `concat`, `merge`,
+  `set_units_map`, `sync_units_map`.
 
 ```python
 import pyunitwizard as puw
