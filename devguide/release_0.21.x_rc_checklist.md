@@ -34,8 +34,8 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 - [ ] User docs and API docs match shipped behavior.
 - [ ] Developer docs include current release process and RC policy.
-- [ ] `devguide/minimum_quantity_protocol_contract.md` is aligned with actual tested behavior.
-- [ ] `devguide/frontend_transparent_mode_contract.md` is aligned with actual tested behavior.
+- [x] `devguide/minimum_quantity_protocol_contract.md` is aligned with actual tested behavior.
+- [x] `devguide/frontend_transparent_mode_contract.md` is aligned with actual tested behavior.
 - [ ] Release notes draft includes migration notes and compatibility statements.
 
 ## 5. RC close (go/no-go to `1.0.0`)
