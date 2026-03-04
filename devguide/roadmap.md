@@ -117,6 +117,7 @@ Rules:
 - validate interoperability additions under CI matrix continuity,
 - close remaining collective blockers and traceability contracts,
 - freeze behavior and docs for release-owner go/no-go.
+- operate with `devguide/release_0.21.x_rc_checklist.md` as the active tracker.
 
 ## 1.0.0 - Stable release
 

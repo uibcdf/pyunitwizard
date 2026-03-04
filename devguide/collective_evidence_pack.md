@@ -28,7 +28,7 @@ This file is intentionally self-contained so a maintainer can understand:
 
 Use this file in three moments:
 
-1. Before tagging a new RC checkpoint (`0.19.x`):
+1. Before tagging a new RC checkpoint (`0.21.x`):
 - refresh local evidence and references (tests, docs, performance baseline).
 
 2. During cross-repo synchronization:
@@ -57,7 +57,7 @@ PyUnitWizard head reference for this pack: `fd62f3e`
 
 - Full suite: `pytest -q` -> `263 passed` (Python `3.13`).
 - Performance baseline snapshot:
-  `devguide/performance_baseline_0.19.x.json`
+  `devguide/performance_baseline_0.20.x.json`
   (generated via `devtools/benchmarks/conversion_baseline.py`).
 
 ## 2. Contract evidence index (PyUnitWizard)

@@ -32,7 +32,7 @@ git push origin X.Y.Z
 
 - `devguide/roadmap.md`
 - `devguide/compatibility_matrix.md`
-- `devguide/release_0.19.x_rc_checklist.md`
+- `devguide/release_0.21.x_rc_checklist.md`
 - `devguide/release_1.0.0_checklist.md`
 - [GitHub Releases docs](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
 - [Git tagging reference](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
