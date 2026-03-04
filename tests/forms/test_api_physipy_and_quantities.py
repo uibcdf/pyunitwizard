@@ -24,6 +24,10 @@ def test_api_physipy_core_and_bridges():
         converted_q = api.convert(q, "centimeter")
         assert api.is_quantity(converted_q)
 
+        converted_u = api.convert(u, "centimeter")
+        assert api.is_unit(converted_u)
+        assert api.unit_to_string(converted_u)
+
         with pytest.raises(LibraryWithoutParserError):
             api.string_to_quantity("1 meter")
         with pytest.raises(LibraryWithoutParserError):
@@ -50,6 +54,9 @@ def test_api_quantities_core_and_bridges():
 
         converted_q = api.convert(q, "centimeter")
         assert api.is_quantity(converted_q)
+        converted_u = api.convert(u, "centimeter")
+        assert api.is_unit(converted_u)
+        assert api.compatibility(converted_u, pq.cm)
 
         with pytest.raises(LibraryWithoutParserError):
             api.string_to_quantity("1 meter")

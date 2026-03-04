@@ -78,7 +78,8 @@ def convert(quantity_or_unit: QuantitiesQuantity, unit: Union[str, QuantitiesQua
     from .api_pint import convert as pint_convert
 
     if is_unit(quantity_or_unit):
-        source_quantity = make_quantity(1.0, quantity_or_unit)
+        # Use a non-unit magnitude to avoid re-entering this branch recursively.
+        source_quantity = make_quantity(2.0, quantity_or_unit)
         converted = convert(source_quantity, unit)
         return get_unit(converted)
 
