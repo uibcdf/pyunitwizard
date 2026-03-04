@@ -90,3 +90,25 @@ def test_api_string_astropy_bridge_functions():
 
         assert puw.forms.api_astropy_unit.get_value(quantity) == 2
         assert puw.forms.api_astropy_unit.unit_to_string(unit) == "m"
+
+
+def test_api_string_physipy_bridge_functions():
+    pytest.importorskip("physipy")
+
+    with loaded_libraries(["pint", "physipy"]):
+        quantity = puw.forms.api_string.quantity_to_physipy("2 meter")
+        unit = puw.forms.api_string.unit_to_physipy("meter")
+
+        assert puw.forms.api_physipy.get_value(quantity) == pytest.approx(2.0)
+        assert puw.forms.api_physipy.is_unit(unit)
+
+
+def test_api_string_quantities_bridge_functions():
+    pytest.importorskip("quantities")
+
+    with loaded_libraries(["pint", "quantities"]):
+        quantity = puw.forms.api_string.quantity_to_quantities("2 meter")
+        unit = puw.forms.api_string.unit_to_quantities("meter")
+
+        assert puw.forms.api_quantities.get_value(quantity) == pytest.approx(2.0)
+        assert puw.forms.api_quantities.is_unit(unit)
