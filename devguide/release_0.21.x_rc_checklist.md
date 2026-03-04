@@ -32,7 +32,7 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 ## 4. Documentation and migration quality
 
-- [ ] User docs and API docs match shipped behavior.
+- [x] User docs and API docs match shipped behavior.
 - [x] Developer docs include current release process and RC policy.
 - [x] `devguide/minimum_quantity_protocol_contract.md` is aligned with actual tested behavior.
 - [x] `devguide/frontend_transparent_mode_contract.md` is aligned with actual tested behavior.
