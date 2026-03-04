@@ -55,3 +55,5 @@ Those belong to separate contracts and extension guides.
 
 - Contract tests exist and are green for supported runtime backends.
 - Known deviations are documented with explicit scope.
+- Current contract evidence module:
+  - `tests/test_minimum_quantity_protocol_contract.py`
