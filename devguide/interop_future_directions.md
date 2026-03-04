@@ -1,9 +1,7 @@
 # Interoperability Future Directions
 
-This document consolidates long-term ideas extracted from:
-- `devguide/scientific-python-units-layer.md`
-- `devguide/expansion.md`
-- `devguide/units_interoperability/*`
+This document consolidates long-term ideas extracted from the former
+interoperability concept drafts that existed in `devguide/` before cleanup.
 
 Its purpose is to preserve useful strategic direction without mixing it with
 release-operational documents.
