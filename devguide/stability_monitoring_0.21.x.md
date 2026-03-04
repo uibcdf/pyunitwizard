@@ -4,6 +4,18 @@ This file tracks CI/release-gate stability evidence during the active RC line.
 
 ## Run ledger
 
+### 2026-03-04 - Post-RC maintenance hardening (`0.21.1`)
+
+- Scope:
+  - fixed recursion defect in `forms/api_quantities.py` unit-conversion path,
+  - aligned CI coverage environment to include `physipy` and `quantities`.
+- Local validation:
+  - `pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`
+  - Result: `391 passed`, total coverage `94%`.
+- Classification:
+  - Defect class: correctness bugfix (core conversion adapter path),
+  - CI class: coverage observability alignment (non-breaking).
+
 ### 2026-03-04 - CI Full Matrix (manual dispatch)
 
 - Workflow: `CI Full Matrix`

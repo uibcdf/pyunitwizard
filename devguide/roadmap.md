@@ -122,6 +122,9 @@ Rules:
 Current checkpoint:
 - RC-close checklist completed and tag `0.21.0` created as stabilization-window
   baseline.
+- Tag `0.21.1` created as maintenance hardening patch in the RC line:
+  - fixed recursion in `forms/api_quantities.py` when converting unit-like inputs,
+  - aligned CI coverage environment with optional `physipy` and `quantities` backends.
 
 ## 1.0.0 - Stable release
 

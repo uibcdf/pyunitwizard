@@ -18,12 +18,13 @@ This pack reports:
 - Date: `2026-03-04`
 - Active RC line: `0.21.x`
 - Latest stabilization-window tag: `0.21.0`
-- Head reference for this pack: `49494d5`
+- Latest RC maintenance tag: `0.21.1`
+- Head reference for this pack: `7816587`
 
 ## Local quality baseline
 
 - Full suite baseline:
-  - `pytest -q tests --ignore=tests/test_import.py` -> `376 passed`
+  - `pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing` -> `391 passed`, `94%` coverage
 - Docs build baseline:
   - `make -C docs html` -> success
 

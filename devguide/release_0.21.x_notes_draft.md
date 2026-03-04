@@ -5,6 +5,7 @@ before `1.0.0`.
 
 Checkpoint note:
 - RC close checklist completed and stabilization-window tag `0.21.0` created.
+- RC maintenance patch tag `0.21.1` created for post-close hardening.
 
 ## Scope
 
@@ -43,6 +44,16 @@ The line focuses on:
   handled robustly across parsers, including parser paths that require
   quantity-like strings internally.
 - evidence: `tests/test_conversion_branches.py`
+
+4. Quantities backend unit-conversion bugfix:
+- fixed recursion when `forms/api_quantities.py::convert` receives unit-like
+  inputs.
+- regression covered in `tests/forms/test_api_physipy_and_quantities.py`.
+
+5. Coverage/CI alignment for optional backends:
+- `.coveragerc` cleaned from stale omit entry.
+- CI test environment now installs `physipy` and `quantities`, reducing
+  local-vs-Codecov drift.
 
 ## Migration notes for integrators
 

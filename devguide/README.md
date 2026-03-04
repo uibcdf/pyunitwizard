@@ -26,13 +26,15 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active release-candidate line (planned/final): `0.21.x`.
+- Latest maintenance tag in RC line: `0.21.1`.
 - RC consolidation closure checkpoint tag: `0.21.0`.
 - `0.19.3` remains the historical checkpoint tag from the earlier pre-RC phase.
 - Current head relative to tag: run `git describe --tags --always` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-04): `376 passed` (`pytest -q tests --ignore=tests/test_import.py`).
+- Current local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).
+- Current local coverage snapshot (2026-03-04): `94%` total.
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
@@ -60,6 +62,9 @@ Current RC-close status before `1.0.0` go/no-go:
 - ecosystem collective validation evidence is recorded
   (see `ecosystem_validation_0.21.x.md`);
 - release-owner explicit RC-close approval is recorded.
+- post-RC maintenance hardening in `0.21.1` includes:
+  - recursion bugfix for `quantities` unit conversion path,
+  - CI/Codecov alignment for optional backend coverage (`physipy`, `quantities`).
 
 Route update:
 - `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).

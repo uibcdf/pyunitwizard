@@ -5,11 +5,13 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 Closure note:
 - RC close checklist completed on `2026-03-04`.
 - Stabilization-window checkpoint tag created: `0.21.0`.
+- Post-closure maintenance patch created: `0.21.1` (bugfix + coverage/CI alignment).
 
 ## Status snapshot (starting point after `0.20.0`)
 
 - Interoperability expansion shipped in `0.20.0` (NumPy/Pandas/Matplotlib).
 - Current baseline command: `pytest -q tests --ignore=tests/test_import.py`.
+- Current validation command: `pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`.
 - Current performance baseline file: `devguide/performance_baseline_0.20.x.json`.
 
 ## 1. RC entry
