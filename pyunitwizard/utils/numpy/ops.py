@@ -43,6 +43,21 @@ def mean(
     return quantity(output_value, output_unit, form=to_form, standardized=standardized)
 
 
+def std(
+    quantity_like,
+    axis=None,
+    to_unit=None,
+    to_form=None,
+    value_type=None,
+    standardized=False,
+    **kwargs,
+):
+    output_unit = get_unit(quantity_like) if to_unit is None else to_unit
+    output_value = np.std(get_value(quantity_like, to_unit=output_unit), axis=axis, **kwargs)
+    output_value = _format_output_value(output_value, value_type)
+    return quantity(output_value, output_unit, form=to_form, standardized=standardized)
+
+
 def sum(
     quantity_like,
     axis=None,
@@ -56,6 +71,35 @@ def sum(
     output_value = np.sum(get_value(quantity_like, to_unit=output_unit), axis=axis, **kwargs)
     output_value = _format_output_value(output_value, value_type)
     return quantity(output_value, output_unit, form=to_form, standardized=standardized)
+
+
+def var(
+    quantity_like,
+    axis=None,
+    to_unit=None,
+    to_form=None,
+    value_type=None,
+    standardized=False,
+    **kwargs,
+):
+    form = get_form(quantity_like)
+    input_unit = get_unit(quantity_like)
+    output_value = np.var(get_value(quantity_like, to_unit=input_unit), axis=axis, **kwargs)
+
+    base_unit = get_unit(
+        quantity(1.0, input_unit, form=form) * quantity(1.0, input_unit, form=form)
+    )
+    out = quantity(output_value, base_unit, form=to_form, standardized=standardized)
+    if to_unit is not None:
+        out = convert(out, to_unit=to_unit, to_form=to_form)
+    if value_type is not None:
+        out = quantity(
+            _format_output_value(get_value(out), value_type),
+            get_unit(out),
+            form=to_form,
+            standardized=standardized,
+        )
+    return out
 
 
 def linalg_norm(
@@ -77,6 +121,44 @@ def linalg_norm(
     )
     output_value = _format_output_value(output_value, value_type)
     return quantity(output_value, output_unit, form=to_form, standardized=standardized)
+
+
+def dot(
+    quantity_like_a,
+    quantity_like_b,
+    to_unit=None,
+    to_form=None,
+    value_type=None,
+    standardized=False,
+    **kwargs,
+):
+    form = get_form(quantity_like_a)
+    a_unit = get_unit(quantity_like_a)
+
+    if get_form(quantity_like_b) != form:
+        quantity_like_b = convert(quantity_like_b, to_form=form)
+    b_unit = get_unit(quantity_like_b)
+
+    output_value = np.dot(
+        get_value(quantity_like_a, to_unit=a_unit),
+        get_value(quantity_like_b, to_unit=b_unit),
+        **kwargs,
+    )
+
+    base_unit = get_unit(
+        quantity(1.0, a_unit, form=form) * quantity(1.0, b_unit, form=form)
+    )
+    out = quantity(output_value, base_unit, form=to_form, standardized=standardized)
+    if to_unit is not None:
+        out = convert(out, to_unit=to_unit, to_form=to_form)
+    if value_type is not None:
+        out = quantity(
+            _format_output_value(get_value(out), value_type),
+            get_unit(out),
+            form=to_form,
+            standardized=standardized,
+        )
+    return out
 
 
 def trapz(

@@ -28,6 +28,19 @@ def test_sum_axis_and_numpy_array_value_type():
     assert puw.get_unit(out, to_form="string") == "meter"
 
 
+def test_std_and_var_units_behavior():
+    configure_libraries()
+
+    quantity = puw.quantity([1.0, 2.0, 3.0], "meter")
+    std_out = puw.utils.numpy.std(quantity)
+    var_out = puw.utils.numpy.var(quantity)
+
+    assert puw.get_unit(std_out, to_form="string") == "meter"
+    assert "meter ** 2" in puw.get_unit(var_out, to_form="string")
+    assert np.isclose(puw.get_value(std_out), np.std([1.0, 2.0, 3.0]))
+    assert np.isclose(puw.get_value(var_out), np.var([1.0, 2.0, 3.0]))
+
+
 def test_linalg_norm_preserves_dimensions():
     configure_libraries()
 
@@ -36,6 +49,17 @@ def test_linalg_norm_preserves_dimensions():
 
     assert np.isclose(puw.get_value(out), 5.0)
     assert puw.get_unit(out, to_form="string") == "meter"
+
+
+def test_dot_builds_product_unit():
+    configure_libraries()
+
+    a = puw.quantity([1.0, 2.0], "meter")
+    b = puw.quantity([3.0, 4.0], "second")
+    out = puw.utils.numpy.dot(a, b)
+
+    assert np.isclose(puw.get_value(out), 11.0)
+    assert "meter * second" in puw.get_unit(out, to_form="string")
 
 
 def test_trapz_with_quantity_x_builds_product_unit():
@@ -68,8 +92,14 @@ def test_ops_invalid_value_type_raises_value_error():
     with pytest.raises(ValueError):
         puw.utils.numpy.mean(quantity, value_type="invalid")
     with pytest.raises(ValueError):
+        puw.utils.numpy.std(quantity, value_type="invalid")
+    with pytest.raises(ValueError):
         puw.utils.numpy.sum(quantity, value_type="invalid")
     with pytest.raises(ValueError):
+        puw.utils.numpy.var(quantity, value_type="invalid")
+    with pytest.raises(ValueError):
         puw.utils.numpy.linalg_norm(quantity, value_type="invalid")
+    with pytest.raises(ValueError):
+        puw.utils.numpy.dot(quantity, quantity, value_type="invalid")
     with pytest.raises(ValueError):
         puw.utils.numpy.trapz(quantity, value_type="invalid")

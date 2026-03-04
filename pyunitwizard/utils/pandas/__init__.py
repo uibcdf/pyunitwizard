@@ -21,6 +21,58 @@ def get_units_map(dataframe):
     return dict(units)
 
 
+def set_units_map(dataframe, units_map, inplace=False, strict=True):
+    if inplace:
+        target = dataframe
+    else:
+        target = dataframe.copy()
+
+    normalized = {}
+    columns = set(target.columns)
+    for name, unit_like in units_map.items():
+        if strict and name not in columns:
+            raise ValueError(f"Column '{name}' is not present in dataframe.")
+        if name in columns:
+            normalized[name] = _normalize_unit(unit_like)
+
+    target.attrs[UNITS_ATTR_KEY] = normalized
+    return target
+
+
+def sync_units_map(dataframe, inplace=False):
+    units = get_units_map(dataframe)
+    return set_units_map(dataframe, units, inplace=inplace, strict=False)
+
+
+def _merge_units_maps(*maps):
+    merged = {}
+    for units_map in maps:
+        for name, unit_name in units_map.items():
+            normalized = _normalize_unit(unit_name)
+            if name in merged and merged[name] != normalized:
+                raise ValueError(
+                    f"Incompatible units metadata for column '{name}': "
+                    f"'{merged[name]}' vs '{normalized}'."
+                )
+            merged[name] = normalized
+    return merged
+
+
+def concat(dataframes, axis=0, **kwargs):
+    pd = _import_pandas()
+    dataframes = list(dataframes)
+    output = pd.concat(dataframes, axis=axis, **kwargs)
+    merged_units = _merge_units_maps(*(get_units_map(df) for df in dataframes))
+    return set_units_map(output, merged_units, inplace=True, strict=False)
+
+
+def merge(left, right, **kwargs):
+    pd = _import_pandas()
+    output = pd.merge(left, right, **kwargs)
+    merged_units = _merge_units_maps(get_units_map(left), get_units_map(right))
+    return set_units_map(output, merged_units, inplace=True, strict=False)
+
+
 def dataframe_from_quantities(columns, index=None, to_units=None, copy=True):
     pd = _import_pandas()
     to_units = to_units or {}
@@ -95,6 +147,23 @@ class _PyUnitWizardDataFrameAccessor:
     def get_units_map(self):
         return get_units_map(self._dataframe)
 
+    def set_units_map(self, units_map, inplace=True, strict=True):
+        output = set_units_map(
+            self._dataframe,
+            units_map,
+            inplace=inplace,
+            strict=strict,
+        )
+        if inplace:
+            return self._dataframe
+        return output
+
+    def sync_units_map(self, inplace=True):
+        output = sync_units_map(self._dataframe, inplace=inplace)
+        if inplace:
+            return self._dataframe
+        return output
+
     def get_quantity(
         self,
         name,
@@ -161,6 +230,10 @@ __all__ = [
     "add_quantity_column",
     "get_quantity_column",
     "get_units_map",
+    "set_units_map",
+    "sync_units_map",
+    "concat",
+    "merge",
     "setup_pandas",
     "pandas_context",
 ]

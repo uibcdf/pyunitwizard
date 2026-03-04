@@ -11,12 +11,15 @@ from .hstack import hstack
 from .vstack import vstack
 from .column_stack import column_stack
 from .repeat import repeat
-from .ops import mean, sum, linalg_norm, trapz
+from .ops import mean, std, sum, var, linalg_norm, dot, trapz
 
 _NUMPY_PATCH_STATE = {
     "enabled": False,
     "mean": None,
     "sum": None,
+    "std": None,
+    "var": None,
+    "dot": None,
     "trapezoid": None,
     "trapz": None,
     "linalg_norm": None,
@@ -43,6 +46,24 @@ def _patched_sum(a, *args, **kwargs):
     return _NUMPY_PATCH_STATE["sum"](a, *args, **kwargs)
 
 
+def _patched_std(a, *args, **kwargs):
+    if _is_quantity_payload(a):
+        return std(a, *args, **kwargs)
+    return _NUMPY_PATCH_STATE["std"](a, *args, **kwargs)
+
+
+def _patched_var(a, *args, **kwargs):
+    if _is_quantity_payload(a):
+        return var(a, *args, **kwargs)
+    return _NUMPY_PATCH_STATE["var"](a, *args, **kwargs)
+
+
+def _patched_dot(a, b, *args, **kwargs):
+    if _is_quantity_payload(a) or _is_quantity_payload(b):
+        return dot(a, b, *args, **kwargs)
+    return _NUMPY_PATCH_STATE["dot"](a, b, *args, **kwargs)
+
+
 def _patched_trapezoid(y, x=None, dx=1.0, axis=-1):
     if _is_quantity_payload(y) or _is_quantity_payload(x) or _puw.is_quantity(dx):
         return trapz(y, x=x, dx=dx, axis=axis)
@@ -63,12 +84,18 @@ def setup_numpy(enable: bool = True) -> None:
 
         _NUMPY_PATCH_STATE["mean"] = _np.mean
         _NUMPY_PATCH_STATE["sum"] = _np.sum
+        _NUMPY_PATCH_STATE["std"] = _np.std
+        _NUMPY_PATCH_STATE["var"] = _np.var
+        _NUMPY_PATCH_STATE["dot"] = _np.dot
         _NUMPY_PATCH_STATE["trapezoid"] = getattr(_np, "trapezoid", None)
         _NUMPY_PATCH_STATE["trapz"] = getattr(_np, "trapz", None)
         _NUMPY_PATCH_STATE["linalg_norm"] = _np.linalg.norm
 
         _np.mean = _patched_mean
         _np.sum = _patched_sum
+        _np.std = _patched_std
+        _np.var = _patched_var
+        _np.dot = _patched_dot
         _np.linalg.norm = _patched_linalg_norm
         if hasattr(_np, "trapezoid"):
             _np.trapezoid = _patched_trapezoid
@@ -82,6 +109,9 @@ def setup_numpy(enable: bool = True) -> None:
 
         _np.mean = _NUMPY_PATCH_STATE["mean"]
         _np.sum = _NUMPY_PATCH_STATE["sum"]
+        _np.std = _NUMPY_PATCH_STATE["std"]
+        _np.var = _NUMPY_PATCH_STATE["var"]
+        _np.dot = _NUMPY_PATCH_STATE["dot"]
         _np.linalg.norm = _NUMPY_PATCH_STATE["linalg_norm"]
         if _NUMPY_PATCH_STATE["trapezoid"] is not None:
             _np.trapezoid = _NUMPY_PATCH_STATE["trapezoid"]
@@ -91,6 +121,9 @@ def setup_numpy(enable: bool = True) -> None:
         _NUMPY_PATCH_STATE["enabled"] = False
         _NUMPY_PATCH_STATE["mean"] = None
         _NUMPY_PATCH_STATE["sum"] = None
+        _NUMPY_PATCH_STATE["std"] = None
+        _NUMPY_PATCH_STATE["var"] = None
+        _NUMPY_PATCH_STATE["dot"] = None
         _NUMPY_PATCH_STATE["trapezoid"] = None
         _NUMPY_PATCH_STATE["trapz"] = None
         _NUMPY_PATCH_STATE["linalg_norm"] = None
@@ -115,8 +148,11 @@ __all__ = [
     "column_stack",
     "repeat",
     "mean",
+    "std",
     "sum",
+    "var",
     "linalg_norm",
+    "dot",
     "trapz",
     "setup_numpy",
     "numpy_context",
