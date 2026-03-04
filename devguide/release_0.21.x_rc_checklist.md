@@ -43,4 +43,4 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 - [x] No high-severity open issues in core public APIs.
 - [x] No open blocker incidents from ecosystem validation.
 - [x] `devguide/release_1.0.0_checklist.md` is fully actionable and current.
-- [ ] Release owner explicitly approves closing RC window.
+- [x] Release owner explicitly approves closing RC window.
