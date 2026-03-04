@@ -1,13 +1,13 @@
 # Roadmap to 1.0.0
 
-This roadmap defines the stabilization path from the `0.19.x` release-candidate
-line to a stable `1.0.0` release.
+This roadmap defines the stabilization path from the `0.19.x` historical
+checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 
 ## Release stages
 
 1. `0.17.x` - Hardening and correctness
 2. `0.18.x` - API freeze and contract tests
-3. `0.19.x` - Release candidate (ecosystem validation and stability window)
+3. `0.19.x` - Historical integration checkpoint (pre-RC)
 4. `0.20.x` - Ecosystem interoperability expansion (NumPy/Matplotlib/Pandas path)
 5. `0.21.x` - Release candidate consolidation window
 6. `1.0.0` - Stable release
@@ -42,7 +42,7 @@ line to a stable `1.0.0` release.
 - Deprecation policy documented for any remaining legacy aliases.
 - Manual `.github/workflows/release_gates.yaml` green on candidate commits.
 
-## 0.19.x - Release candidate
+## 0.19.x - Historical integration checkpoint
 
 ### Objectives
 
@@ -51,7 +51,7 @@ line to a stable `1.0.0` release.
 - Run local-sibling smoke tests when `../argdigest`, `../depdigest`, and `../smonitor` are available.
 - Collect and triage integrator feedback (blocking vs non-blocking).
 - Complete deprecation contract for `pyunitwizard.main` (warning semantics and migration path).
-- Keep this line open for a stability observation window before `1.0.0`.
+- This line is closed as a historical checkpoint baseline.
 
 ### Current checkpoint (2026-03-04)
 
@@ -82,14 +82,14 @@ line to a stable `1.0.0` release.
   - cross-backend frontend matrix tests covering NumPy/Pandas/Matplotlib
     behavior for available backend forms and mixed-form pairs.
 
-### Exit criteria
+### Exit criteria (historical closure)
 
 - Integration smoke checks green across the target ecosystem.
 - Local sibling smoke test is passing in development workspaces and skip-safe in CI.
 - No blocker incidents open in diagnostics flows.
 - `pyunitwizard.main` deprecation policy is documented for pre-`1.0.0` and validated by tests.
 - Release checklist for `1.0.0` fully actionable.
-- RC closure checks in `devguide/release_0.19.x_rc_checklist.md` are complete.
+- Carry-over scope for `0.20.x`/`0.21.x` documented.
 
 ### Deprecation policy for `pyunitwizard.main`
 
@@ -111,7 +111,7 @@ Rules:
   `puw.*` imports for common workflows,
 - provide explicit `puw.*` helpers as an optional strict mode for integrators.
 
-## 0.21.x RC consolidation policy
+## 0.21.x RC consolidation policy (active RC track)
 
 `0.21.x` is the final stabilization window before `1.0.0`:
 - validate interoperability additions under CI matrix continuity,

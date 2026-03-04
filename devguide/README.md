@@ -7,7 +7,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
-- `release_0.19.x_rc_checklist.md`: operational checklist for RC stability window management.
+- `release_0.19.x_rc_checklist.md`: historical RC checklist from the `0.19.x` phase (kept as evidence baseline).
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
@@ -15,8 +15,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Active release-candidate line: `0.19.x` (RC window before `1.0.0`).
-- Current RC tag checkpoint: `0.19.3`.
+- Active release-candidate line (planned/final): `0.21.x`.
+- `0.19.3` remains the historical checkpoint tag from the earlier pre-RC phase.
 - Current head relative to tag: `0.19.3-15-g7f1b43d` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
@@ -27,7 +27,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
   `physipy` (soft), `quantities` (soft), plus `string` form.
 
-## RC checkpoint summary (2026-03-03)
+## 0.19.x checkpoint summary (historical baseline)
 
 Completed in `0.19.x`:
 - Public-contract hardening and cross-library smoke coverage are in place.
@@ -52,7 +52,7 @@ Pending before `1.0.0` go/no-go:
 
 Route update:
 - `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).
-- `0.21.x` is reserved as final RC consolidation window before `1.0.0`.
+- `0.21.x` is the RC consolidation window before `1.0.0`.
 
 ## Coordination scope
 

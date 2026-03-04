@@ -1,12 +1,12 @@
-# Release 0.19.x RC Checklist
+# Release 0.19.x RC Checklist (Historical)
 
-Use this checklist to operate the `0.19.x` release-candidate window before
-tagging `1.0.0`.
+This document is preserved as historical evidence from the `0.19.x` phase.
+The active RC planning line was later moved to `0.21.x` after expanding
+interoperability scope in `0.20.x`.
 
-All sections must be complete at least once during RC, and the "RC close"
-section must be complete on the candidate commit that will lead to `1.0.0`.
+Do not use this file as the active RC tracker.
 
-## Status snapshot at `0.19.3` (updated 2026-03-04)
+## Historical snapshot at `0.19.3` (updated 2026-03-04)
 
 - RC checkpoint tag published: `0.19.3`.
 - Local test suite snapshot on Python `3.13`: `356 passed` (`pytest -q tests --ignore=tests/test_import.py`).
@@ -18,14 +18,14 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - Remaining work toward RC close: CI/release-gates continuity over time,
   sustained incident tracking, and final release-owner go/no-go.
 
-## 1. RC entry (open the stability window)
+## 1. RC entry (historical)
 
 - [x] Confirm baseline policy: Python `3.11`, `3.12`, `3.13` supported.
 - [x] Confirm `0.19.x` is documented as RC in README/devguide/docs.
 - [ ] Confirm no planned breaking API change remains before `1.0.0`.
 - [ ] Publish RC scope and known risks for integrators.
 
-## 2. Stability monitoring during RC
+## 2. Stability monitoring during RC (historical)
 
 - [x] Run full `pytest` suite regularly on local `3.13` and CI matrix.
 - [ ] Keep CI matrix green on Ubuntu and macOS for supported Python versions.
@@ -33,7 +33,7 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - [ ] Track flaky tests and close or quarantine with explicit issue links.
 - [ ] Record blocker vs non-blocker incidents for conversion/parser/config paths.
 
-## 3. Ecosystem validation during RC
+## 3. Ecosystem validation during RC (historical)
 
 - [x] Validate integration smoke checks with `argdigest`.
 - [x] Validate integration smoke checks with `depdigest`.
@@ -41,14 +41,14 @@ section must be complete on the candidate commit that will lead to `1.0.0`.
 - [x] Validate local-sibling smoke (`../argdigest`, `../depdigest`, `../smonitor`) when repos are available.
 - [ ] Confirm no unresolved cross-repo contract drift is open.
 
-## 4. Documentation and migration quality
+## 4. Documentation and migration quality (historical)
 
 - [ ] User docs and API docs match shipped behavior.
 - [x] Developer docs include current release process and RC policy.
 - [x] `pyunitwizard.main` deprecation contract is documented and test-backed.
 - [ ] Release notes draft includes any migration notes and compatibility statements.
 
-## 5. Collective 1.0 alignment during RC (ecosystem-wide checklist)
+## 5. Collective 1.0 alignment during RC (historical ecosystem-wide checklist)
 
 Execution policy for collective tests:
 - collective E2E/contract tests run in library repositories with CI support
@@ -70,14 +70,14 @@ Execution policy for collective tests:
 - [x] Fundamental dimensions (`[L]`, `[M]`, `[T]`, `[K]`, `[mol]`, `[A]`, `[Cd]`) are treated as a locked serialization contract.
 - [x] Performance baseline exists for conversion/introspection hot paths and is tracked for regressions.
 
-## 6. RC close (go/no-go to 1.0.0 candidate)
+## 6. RC close (historical go/no-go record)
 
 - [ ] No high-severity open issues in core public APIs.
 - [ ] No open blocker incidents from ecosystem validation.
 - [x] `devguide/release_1.0.0_checklist.md` is fully actionable and current.
 - [ ] Release owner explicitly approves closing RC window.
 
-## 7. Contingency decision: extend RC to `0.20.x` if needed
+## 7. Contingency decision record (historical)
 
 - [ ] If blocker items remain unresolved at planned RC close, open `0.20.x` as the next RC window instead of forcing `1.0.0`.
 - [ ] Preserve no-breaking-change policy when moving from `0.19.x` RC to `0.20.x` RC.
