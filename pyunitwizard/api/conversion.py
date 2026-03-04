@@ -28,6 +28,8 @@ from depdigest import dep_digest
 @dep_digest('unyt', when={'to_form': 'unyt'})
 @dep_digest('openmm.unit', when={'to_form': 'openmm.unit'})
 @dep_digest('astropy.units', when={'to_form': 'astropy.units'})
+@dep_digest('physipy', when={'to_form': 'physipy'})
+@dep_digest('quantities', when={'to_form': 'quantities'})
 def convert(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,

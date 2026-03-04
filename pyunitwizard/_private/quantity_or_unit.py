@@ -28,6 +28,27 @@ try:
 except:
     pass
 
+try:
+    from astropy import units as astropy_units
+    quantity_types.append(astropy_units.Quantity)
+    unit_types.append(astropy_units.UnitBase)
+except:
+    pass
+
+try:
+    from physipy.quantity.quantity import Quantity as physipy_quantity
+    quantity_types.append(physipy_quantity)
+    unit_types.append(physipy_quantity)
+except:
+    pass
+
+try:
+    import quantities as pq
+    quantity_types.append(pq.quantity.Quantity)
+    unit_types.append(pq.quantity.Quantity)
+except:
+    pass
+
 quantity_or_unit_types = quantity_types + unit_types + [str]
 quantity_types.append(str)
 unit_types.append(str)
@@ -47,4 +68,3 @@ UnitLike = TypeVar("UnitLike",
 QuantityOrUnit = TypeVar("QuantityOrUnit",
                 str,
                 *quantity_or_unit_types)
-

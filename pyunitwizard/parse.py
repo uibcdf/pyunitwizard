@@ -112,6 +112,14 @@ def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
             pint_quantity = _parse_with_pint(string)
             return dict_translate_quantity['pint']['astropy.units'](pint_quantity)
 
+        elif to_form == 'physipy':
+            pint_quantity = _parse_with_pint(string)
+            return dict_translate_quantity['pint']['physipy'](pint_quantity)
+
+        elif to_form == 'quantities':
+            pint_quantity = _parse_with_pint(string)
+            return dict_translate_quantity['pint']['quantities'](pint_quantity)
+
         else:
             raise NotImplementedParserError(parser, to_form)
 
@@ -119,6 +127,10 @@ def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
         raise LibraryWithoutParserError('openmm.unit')
     elif parser == 'unyt':
         raise LibraryWithoutParserError("unyt")
+    elif parser == 'physipy':
+        raise LibraryWithoutParserError("physipy")
+    elif parser == 'quantities':
+        raise LibraryWithoutParserError("quantities")
     elif parser == 'astropy.units':
         astropy_quantity = dict_translate_quantity['string']['astropy.units'](string)
 

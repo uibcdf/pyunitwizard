@@ -22,6 +22,8 @@ _forms_apis_modules = {
     'pint': 'api_pint',
     'unyt': 'api_unyt',
     'astropy.units': 'api_astropy_unit',
+    'physipy': 'api_physipy',
+    'quantities': 'api_quantities',
 }
 
 def load_library(library: str) -> None:
@@ -90,6 +92,41 @@ def load_library(library: str) -> None:
                     break
 
     loaded_libraries.append(library)
+
+    # Build missing direct translators through Pint as an interoperability hub.
+    # This keeps cross-library conversions available when adapters only define
+    # `to_pint` / `from_pint` pairs.
+    for in_form in list(loaded_libraries):
+        for out_form in list(loaded_libraries):
+            if in_form == out_form:
+                continue
+
+            if out_form not in dict_translate_quantity.get(in_form, {}):
+                if (
+                    in_form != 'pint'
+                    and 'pint' in dict_translate_quantity.get(in_form, {})
+                    and out_form in dict_translate_quantity.get('pint', {})
+                ):
+                    def _qty_bridge(x, _in=in_form, _out=out_form):
+                        return dict_translate_quantity['pint'][_out](
+                            dict_translate_quantity[_in]['pint'](x)
+                        )
+
+                    dict_translate_quantity[in_form][out_form] = _qty_bridge
+
+            if out_form not in dict_translate_unit.get(in_form, {}):
+                if (
+                    in_form != 'pint'
+                    and 'pint' in dict_translate_unit.get(in_form, {})
+                    and out_form in dict_translate_unit.get('pint', {})
+                ):
+                    def _unit_bridge(x, _in=in_form, _out=out_form):
+                        return dict_translate_unit['pint'][_out](
+                            dict_translate_unit[_in]['pint'](x)
+                        )
+
+                    dict_translate_unit[in_form][out_form] = _unit_bridge
+
     del(api)
 
     pass

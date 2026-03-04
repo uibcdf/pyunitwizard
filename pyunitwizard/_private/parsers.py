@@ -1,4 +1,4 @@
-parsers = ['openmm.unit', 'pint', 'unyt', 'astropy.units']
+parsers = ['openmm.unit', 'pint', 'unyt', 'astropy.units', 'physipy', 'quantities']
 
 def digest_parser(parser: str) -> str:
     """ Check if parser is correct."""
@@ -10,4 +10,3 @@ def digest_parser(parser: str) -> str:
     else:
         from pyunitwizard.kernel import default_parser
         return default_parser
-

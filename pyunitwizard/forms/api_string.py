@@ -384,3 +384,41 @@ def unit_to_astropy_units(unit: str):
     quantity = quantity_to_astropy_units(unit)
 
     return get_astropy_unit(quantity)
+
+
+## To physipy
+
+def quantity_to_physipy(quantity: str):
+    """Convert a string quantity into a physipy quantity."""
+    from .api_pint import string_to_quantity as _string_to_quantity
+    from .api_physipy import quantity_to_physipy as _quantity_to_physipy
+
+    pint_quantity = _string_to_quantity(quantity)
+    return _quantity_to_physipy(pint_quantity)
+
+
+def unit_to_physipy(unit: str):
+    """Convert a string unit into a physipy unit-like object."""
+    from .api_physipy import get_unit as _get_unit
+
+    quantity = quantity_to_physipy(unit)
+    return _get_unit(quantity)
+
+
+## To quantities
+
+def quantity_to_quantities(quantity: str):
+    """Convert a string quantity into a quantities quantity."""
+    from .api_pint import string_to_quantity as _string_to_quantity
+    from .api_quantities import quantity_to_quantities as _quantity_to_quantities
+
+    pint_quantity = _string_to_quantity(quantity)
+    return _quantity_to_quantities(pint_quantity)
+
+
+def unit_to_quantities(unit: str):
+    """Convert a string unit into a quantities unit-like object."""
+    from .api_quantities import get_unit as _get_unit
+
+    quantity = quantity_to_quantities(unit)
+    return _get_unit(quantity)

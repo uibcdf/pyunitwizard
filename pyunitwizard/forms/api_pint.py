@@ -430,3 +430,35 @@ def unit_to_astropy_units(unit: pint.Unit):
     quantity = quantity_to_astropy_units(1.0*unit)
 
     return get_astropy_unit(quantity)
+
+
+## To physipy
+
+def quantity_to_physipy(quantity: pint.Quantity):
+    """Transform a pint quantity into a physipy quantity."""
+    from .api_physipy import quantity_to_physipy as _quantity_to_physipy
+
+    return _quantity_to_physipy(quantity)
+
+
+def unit_to_physipy(unit: pint.Unit):
+    """Transform a pint unit into a physipy unit-like object."""
+    from .api_physipy import unit_to_physipy as _unit_to_physipy
+
+    return _unit_to_physipy(unit)
+
+
+## To quantities
+
+def quantity_to_quantities(quantity: pint.Quantity):
+    """Transform a pint quantity into a quantities quantity."""
+    from .api_quantities import quantity_to_quantities as _quantity_to_quantities
+
+    return _quantity_to_quantities(quantity)
+
+
+def unit_to_quantities(unit: pint.Unit):
+    """Transform a pint unit into a quantities unit-like object."""
+    from .api_quantities import unit_to_quantities as _unit_to_quantities
+
+    return _unit_to_quantities(unit)

@@ -9,13 +9,15 @@ import os
 from importlib.util import find_spec
 from typing import List, Dict, Union, Optional
 
-libraries = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
-parsers   = ['pint', 'openmm.unit', 'unyt', 'astropy.units']
+libraries = ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
+parsers   = ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
 _aux_dict_modules = {
     'pint': 'pint',
     'openmm.unit': 'openmm',
     'unyt': 'unyt',
     'astropy.units': 'astropy',
+    'physipy': 'physipy',
+    'quantities': 'quantities',
 }
 
 def resolve_config_module(

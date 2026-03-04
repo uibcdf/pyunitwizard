@@ -114,3 +114,9 @@ if is_installed('unyt'):
 
 if is_installed('astropy.units'):
     configure.load_library('astropy.units')
+
+if is_installed('physipy'):
+    configure.load_library('physipy')
+
+if is_installed('quantities'):
+    configure.load_library('quantities')
