@@ -14,6 +14,8 @@ Use this checklist as a hard release gate. All items must be complete before cre
 
 - [ ] Public API exports are frozen and covered by contract tests.
 - [ ] Parser/default configuration behavior is deterministic and documented.
+- [ ] Minimum quantity protocol contract is frozen and test-backed (`devguide/minimum_quantity_protocol_contract.md`).
+- [ ] Transparent frontend mode contract is frozen and test-backed (`devguide/frontend_transparent_mode_contract.md`).
 - [ ] Legacy `pyunitwizard.main` deprecation contract is tested and documented.
 - [ ] No open blockers in conversion, standardization, parsing, or compatibility workflows.
 
@@ -36,6 +38,7 @@ Use this checklist as a hard release gate. All items must be complete before cre
 - [ ] `pyproject.toml` metadata and Python support range are correct.
 - [ ] Build and installation workflows are green (`sdist`, wheel, conda).
 - [ ] README and devguide documents are synchronized with shipped behavior.
+- [ ] Serialization draft status is explicit in release notes (`devguide/serialization_contract_draft.md`: draft/non-stable unless promoted).
 - [ ] Tag/release notes prepared with migration notes (if any).
 
 ## 6. Final go/no-go

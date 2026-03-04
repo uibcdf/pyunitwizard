@@ -13,4 +13,6 @@ PyUnitWizard is on the pre-1.0 stabilization path.
 ## Contract references
 
 - `devguide/roadmap.md`
+- `devguide/minimum_quantity_protocol_contract.md`
+- `devguide/frontend_transparent_mode_contract.md`
 - `devguide/release_1.0.0_checklist.md`

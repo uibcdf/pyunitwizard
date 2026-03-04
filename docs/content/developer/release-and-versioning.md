@@ -10,6 +10,8 @@ Current path is tracked in:
 - `devguide/compatibility_matrix.md`
 - `devguide/release_0.21.x_rc_checklist.md`
 - `devguide/release_1.0.0_checklist.md`
+- `devguide/minimum_quantity_protocol_contract.md`
+- `devguide/frontend_transparent_mode_contract.md`
 
 Current policy:
 
