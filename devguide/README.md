@@ -9,6 +9,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `interop_future_directions.md`: consolidated long-term interoperability ideas (conceptual, non-operational).
 - `minimum_quantity_protocol_contract.md`: minimum backend-agnostic quantity contract for pre-`1.0.0` hardening.
 - `frontend_transparent_mode_contract.md`: contract for transparent frontend integrations (`numpy`/`pandas`/`matplotlib`).
+- `api_freeze_pre_1.0_decision.md`: explicit decision record for no planned breaking API changes before `1.0.0`.
 - `serialization_contract_draft.md`: draft canonical serialization contract for post-`1.0.0` promotion.
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
 - `release_0.21.x_rc_checklist.md`: active RC checklist for consolidation before `1.0.0`.

@@ -12,7 +12,7 @@ Use this checklist for the active RC consolidation window before `1.0.0`.
 
 - [x] Confirm baseline policy: Python `3.11`, `3.12`, `3.13` supported.
 - [x] Confirm `0.21.x` is documented as active RC in README/devguide/docs.
-- [ ] Confirm no planned breaking API change remains before `1.0.0`.
+- [x] Confirm no planned breaking API change remains before `1.0.0`.
 - [x] Publish RC scope and known risks for integrators.
 
 ## 2. Stability monitoring during RC
