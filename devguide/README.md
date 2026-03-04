@@ -17,10 +17,11 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 - Active release-candidate line: `0.19.x` (RC window before `1.0.0`).
 - Current RC tag checkpoint: `0.19.3`.
+- Current head relative to tag: `0.19.3-15-g7f1b43d` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-03): `308 passed` (`pytest -q tests --ignore=tests/test_import.py`).
+- Current local test snapshot (2026-03-04): `356 passed` (`pytest -q tests --ignore=tests/test_import.py`).
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
@@ -35,6 +36,12 @@ Completed in `0.19.x`:
   with CI, while `molsyssuite` remains coordination-only.
 - Runtime integration support is implemented and tested for
   `pint`, `openmm.unit`, `unyt`, `astropy.units`, `physipy`, and `quantities`.
+- Transparent integrations are now implemented and validated for:
+  - NumPy (`setup_numpy` / `numpy_context`),
+  - Pandas (`setup_pandas` / `pandas_context` + metadata-safe helpers),
+  - Matplotlib (`setup_matplotlib` / `plotting_context`).
+- Cross-backend frontend matrix coverage exists for mixed backend pairs across
+  NumPy/Pandas/Matplotlib integration surfaces.
 
 Pending before `1.0.0` go/no-go:
 - sustain CI matrix continuity (`ubuntu`/`macos`, Python `3.11`/`3.12`/`3.13`);

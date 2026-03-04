@@ -53,10 +53,11 @@ line to a stable `1.0.0` release.
 - Complete deprecation contract for `pyunitwizard.main` (warning semantics and migration path).
 - Keep this line open for a stability observation window before `1.0.0`.
 
-### Current checkpoint (2026-03-03)
+### Current checkpoint (2026-03-04)
 
 - Tag `0.19.3` created from `main` as RC checkpoint.
-- Full suite baseline at checkpoint: `308 passed` on local Python `3.13`
+- Current head after RC checkpoint: `0.19.3-15-g7f1b43d`.
+- Full suite baseline at current checkpoint: `356 passed` on local Python `3.13`
   (`pytest -q tests --ignore=tests/test_import.py`).
 - Integration smoke coverage includes:
   - sibling repo import precedence and contract checks,
