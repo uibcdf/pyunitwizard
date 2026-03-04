@@ -3,6 +3,7 @@
 The utilities package collects helper functions that operate on PyUnitWizard quantities without exposing the internals of the kernel. Each subpackage focuses on a specific integration surface:
 
 - `numpy` – array-like helpers that wrap NumPy stacking and repetition utilities while preserving quantity metadata.
+- `pandas` – tabular helpers to move quantities into/out of DataFrames without losing unit metadata.
 - `sequences` – light-weight tools for validating and manipulating Python sequences of quantities.
 - `matplotlib` (placeholder) – reserved for plotting adapters that inject unit-aware axes helpers.
 - `plot` (placeholder) – shared plotting shortcuts that will reuse the `matplotlib` integration when implemented.
@@ -50,3 +51,14 @@ Required tests should confirm:
 - Detection of valid vs. invalid sequences.
 - Correct propagation of `to_unit`, `to_form`, and `standardized` flags for helpers that produce quantities.
 - Informative errors when encountering unsupported operations or inconsistent dimensionality.
+
+### `utils.pandas`
+
+Pandas interoperability is implemented as an additive layer:
+
+- `dataframe_from_quantities(...)` builds a numeric `DataFrame` and stores per-column units in `DataFrame.attrs["pyunitwizard_units"]`.
+- `add_quantity_column(...)` appends/updates one column from a quantity and keeps unit metadata synchronized.
+- `get_quantity_column(...)` reconstructs a quantity from a DataFrame column using metadata or an explicit `unit_name`.
+- `get_units_map(...)` returns the units metadata dictionary.
+
+These helpers keep standard pandas imports/workflows intact (`import pandas as pd`) and use `pyunitwizard.utils.pandas` only for explicit quantity boundaries.

@@ -69,6 +69,9 @@ line to a stable `1.0.0` release.
   - backend expansion and hardening for `physipy` and `quantities`.
   - transparent `matplotlib` bridge (`pyunitwizard.utils.matplotlib.setup_matplotlib`)
     to keep standard matplotlib workflows while accepting mixed backend quantities.
+  - initial `pandas` interoperability helpers in `pyunitwizard.utils.pandas`
+    (`dataframe_from_quantities`, `add_quantity_column`, `get_quantity_column`,
+    `get_units_map`) with contract coverage.
 
 ### Exit criteria
 

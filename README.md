@@ -105,6 +105,19 @@ import pyunitwizard as puw
 puw.utils.matplotlib.setup_matplotlib()
 ```
 
+Pandas interoperability helpers:
+- Keep using standard `pandas` imports.
+- Use `pyunitwizard.utils.pandas` at quantity/dataframe boundaries:
+
+```python
+import pyunitwizard as puw
+
+df = puw.utils.pandas.dataframe_from_quantities(
+    {"length": puw.quantity([1.0, 2.0], "nanometer")}
+)
+q = puw.utils.pandas.get_quantity_column(df, "length")
+```
+
 ## Diagnostics (SMonitor)
 
 PyUnitWizard integrates with **SMonitor** for structured diagnostics.

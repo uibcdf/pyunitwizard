@@ -18,8 +18,18 @@ with pandas structures.
 
 ## Possible Interfaces
 
-puw.Series(quantity)
-puw.attach_units(df)
+- `pyunitwizard.utils.pandas.dataframe_from_quantities(...)`
+- `pyunitwizard.utils.pandas.add_quantity_column(...)`
+- `pyunitwizard.utils.pandas.get_quantity_column(...)`
+- `pyunitwizard.utils.pandas.get_units_map(...)`
+
+## Current Status
+
+Initial implementation is available in `pyunitwizard.utils.pandas` and covered
+by tests in `tests/utils/pandas/test_frame_contract.py`.
+
+The current contract is intentionally explicit: standard pandas workflows are
+preserved, and users call PyUnitWizard only at the conversion boundaries.
 
 ## Benefits
 
