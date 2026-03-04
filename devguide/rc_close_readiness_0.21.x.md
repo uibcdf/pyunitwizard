@@ -37,6 +37,8 @@ Evidence:
 - checklist now includes an explicit evidence index and standard verification
   commands aligned with the active `0.21.x` RC workflow.
 
-## Remaining RC close step
+## RC close decision
 
-- Release owner explicit approval to close the RC window.
+- Release owner explicit approval to close the RC window: recorded.
+- RC close checklist is fully checked in
+  `devguide/release_0.21.x_rc_checklist.md`.

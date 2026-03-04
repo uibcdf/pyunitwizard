@@ -119,6 +119,10 @@ Rules:
 - freeze behavior and docs for release-owner go/no-go.
 - operate with `devguide/release_0.21.x_rc_checklist.md` as the active tracker.
 
+Current checkpoint:
+- RC-close checklist completed and tag `0.21.0` created as stabilization-window
+  baseline.
+
 ## 1.0.0 - Stable release
 
 ### Objectives

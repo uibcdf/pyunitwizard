@@ -2,6 +2,10 @@
 
 Use this checklist for the active RC consolidation window before `1.0.0`.
 
+Closure note:
+- RC close checklist completed on `2026-03-04`.
+- Stabilization-window checkpoint tag created: `0.21.0`.
+
 ## Status snapshot (starting point after `0.20.0`)
 
 - Interoperability expansion shipped in `0.20.0` (NumPy/Pandas/Matplotlib).

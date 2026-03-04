@@ -26,6 +26,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Current baseline
 
 - Active release-candidate line (planned/final): `0.21.x`.
+- RC consolidation closure checkpoint tag: `0.21.0`.
 - `0.19.3` remains the historical checkpoint tag from the earlier pre-RC phase.
 - Current head relative to tag: run `git describe --tags --always` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
@@ -58,7 +59,7 @@ Current RC-close status before `1.0.0` go/no-go:
 - release-gates evidence is recorded, including blocker/fix closure;
 - ecosystem collective validation evidence is recorded
   (see `ecosystem_validation_0.21.x.md`);
-- remaining step: release-owner explicit RC-close approval.
+- release-owner explicit RC-close approval is recorded.
 
 Route update:
 - `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).

@@ -3,6 +3,9 @@
 This draft captures the candidate release notes for the `0.21.x` RC window
 before `1.0.0`.
 
+Checkpoint note:
+- RC close checklist completed and stabilization-window tag `0.21.0` created.
+
 ## Scope
 
 `0.21.x` is a stabilization and consolidation line. The objective is to freeze

@@ -17,8 +17,8 @@ This pack reports:
 
 - Date: `2026-03-04`
 - Active RC line: `0.21.x`
-- Latest stabilization tag: `0.20.1`
-- Head reference for this pack: `cc59491`
+- Latest stabilization-window tag: `0.21.0`
+- Head reference for this pack: `49494d5`
 
 ## Local quality baseline
 
