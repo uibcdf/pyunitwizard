@@ -3,6 +3,9 @@ import pyunitwizard as puw
 import pytest
 import unyt
 
+astropy_units = pytest.importorskip("astropy.units")
+from astropy import units as u
+
 @pytest.fixture
 def pint_unit_registry():
     """ Returns a pint unit registry"""
@@ -34,6 +37,17 @@ def test_get_value_openmm(openmm_quantity):
 
 def test_get_value_unyt(unyt_quantity):
     assert puw.get_value(unyt_quantity) == 2.5
+
+def test_get_value_astropy_returns_numeric_scalar():
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'astropy.units'])
+
+    quantity = 2.0 * u.m
+    converted = puw.convert(quantity, to_unit='cm')
+    value = puw.get_value(converted)
+
+    assert value == pytest.approx(200.0)
+    assert not puw.is_quantity(value)
 
 def test_get_value_standardized_ignores_to_unit():
     puw.configure.reset()

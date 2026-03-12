@@ -7,7 +7,7 @@ from typing import Optional, Tuple, Union
 import numpy as np
 
 from .._private.quantity_or_unit import QuantityLike, UnitLike
-from ..forms import dict_change_value
+from ..forms import dict_change_value, dict_get_value
 from .introspection import get_form
 
 
@@ -39,7 +39,7 @@ def get_value(
 
     # --- High Performance Fast Path ---
     # If it is already a numpy array and no conversion is requested, return it immediately.
-    if to_unit is None and not standardized and isinstance(quantity, np.ndarray):
+    if to_unit is None and not standardized and type(quantity) is np.ndarray:
         return quantity
     # ----------------------------------
 
@@ -49,6 +49,10 @@ def get_value(
     if standardized:
         quantity = standardize(quantity)
         to_unit = None
+
+    if to_unit is None:
+        form = get_form(quantity)
+        return dict_get_value[form](quantity)
 
     return convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
 
