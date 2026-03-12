@@ -18,6 +18,7 @@ from .comparison import (
     similarity,
 )
 from .standardization import get_standard_units, standardize
+from .specialized import to_kelvin, to_nanometers, to_picoseconds
 from .validation import check
 from .context import context
 
@@ -41,6 +42,9 @@ __all__ = [
     "quantity",
     "similarity",
     "standardize",
+    "to_kelvin",
+    "to_nanometers",
+    "to_picoseconds",
     "to_string",
     "unit",
     "context",
