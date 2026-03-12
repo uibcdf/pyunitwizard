@@ -11,9 +11,10 @@ from .._private.exceptions import NoStandardsError
 from .._private.forms import digest_form
 from .._private.parsers import digest_parser
 from .._private.quantity_or_unit import QuantityOrUnit, UnitLike
+from ..forms import dict_is_unit
 from .comparison import are_compatible
 from .conversion import convert
-from .introspection import get_dimensionality, is_unit
+from .introspection import get_dimensionality, get_form
 
 
 from smonitor import signal
@@ -183,7 +184,9 @@ def standardize(
 
     to_form = digest_form(to_form)
 
-    if is_unit(quantity_or_unit):
+    form_in = get_form(quantity_or_unit)
+
+    if dict_is_unit[form_in](quantity_or_unit):
         return get_standard_units(quantity_or_unit, form=to_form)
 
     standard = get_standard_units(quantity_or_unit, form=to_form)

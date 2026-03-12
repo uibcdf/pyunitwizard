@@ -7,7 +7,7 @@ from typing import Dict, Optional, TYPE_CHECKING
 from .._private.exceptions import NotImplementedFormError
 from .._private.quantity_or_unit import QuantityOrUnit
 from .._private.smonitor.emitter import emit_probe_miss
-from ..forms import dict_is_form, dict_is_quantity, dict_is_unit, dict_dimensionality
+from ..forms import dict_dimensionality, dict_is_form, dict_is_quantity, dict_is_unit
 from .. import kernel
 
 if TYPE_CHECKING:  # pragma: no cover - circular import guard
@@ -197,7 +197,11 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
             quantity_or_unit = convert(quantity_or_unit, to_type="unit")
 
     form = get_form(quantity_or_unit)
-    unit = quantity_or_unit if is_unit(quantity_or_unit) else get_unit(quantity_or_unit)
+    unit = (
+        quantity_or_unit
+        if dict_is_unit[form](quantity_or_unit)
+        else get_unit(quantity_or_unit)
+    )
     cache_key = (form, str(unit))
 
     if cache_key in _DIMENSIONALITY_CACHE:
