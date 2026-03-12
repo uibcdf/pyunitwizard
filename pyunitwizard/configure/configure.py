@@ -84,6 +84,8 @@ def reset() -> None:
     kernel.dimensional_fundamental_standards_units = None
     kernel.tentative_base_standards_matrix = None
     kernel.tentative_base_standards_units = None
+    from pyunitwizard.api.introspection import _TYPE_TO_FORM_CACHE
+    _TYPE_TO_FORM_CACHE.clear()
 
 def get_libraries_loaded() -> List[str]:
     """Return currently loaded backend libraries.

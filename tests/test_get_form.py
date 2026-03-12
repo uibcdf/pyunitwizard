@@ -1,6 +1,7 @@
 import pyunitwizard as puw
 import openmm.unit as openmm_unit
 import unyt
+from pyunitwizard.api.introspection import _TYPE_TO_FORM_CACHE
 
 def test_string():
     assert puw.get_form('1 meter')=='string'
@@ -47,3 +48,16 @@ def test_unyt_quantity():
 
     quantity = [2.0, 3.0] * unyt.s
     assert puw.get_form(quantity) == "unyt"
+
+
+def test_reset_clears_get_form_type_cache():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    quantity = puw.quantity(1.0, 'meter', form='pint')
+    assert puw.get_form(quantity) == 'pint'
+    assert len(_TYPE_TO_FORM_CACHE) > 0
+
+    puw.configure.reset()
+
+    assert _TYPE_TO_FORM_CACHE == {}
