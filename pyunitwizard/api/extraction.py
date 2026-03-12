@@ -37,6 +37,12 @@ def get_value(
 
     """
 
+    # --- High Performance Fast Path ---
+    # If it is already a numpy array and no conversion is requested, return it immediately.
+    if to_unit is None and not standardized and isinstance(quantity, np.ndarray):
+        return quantity
+    # ----------------------------------
+
     from .conversion import convert
     from .standardization import standardize
 

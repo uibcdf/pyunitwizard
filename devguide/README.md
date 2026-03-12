@@ -83,3 +83,8 @@ Collective testing policy:
   duplicated scenarios when needed for coverage and ownership clarity).
 - `molsyssuite` is used for coordination artifacts/checklists, not as a test
   execution repository.
+
+## 🥇 Performance Optimization (March 2026)
+
+### Numpy Fast Path
+The `get_value` API now implements a high-performance bypass for raw numpy arrays. If the input is already a numpy array and no conversion or standardization is requested, it is returned immediately. This reduces the overhead of the `arg_digest` decorator in tight loops.
