@@ -47,6 +47,29 @@ def test_set_standard_units_accepts_single_string():
     puw.configure.set_standard_units('nm')
     assert 'nm' in puw.configure.get_standard_units()
 
+def test_set_standard_units_builds_cached_matrices_once_state_is_ready():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+
+    puw.configure.set_standard_units(["nm", "ps", "nm*ps"])
+
+    assert puw.kernel.dimensional_fundamental_standards_matrix is not None
+    assert puw.kernel.dimensional_fundamental_standards_units is not None
+    assert puw.kernel.tentative_base_standards_matrix is not None
+    assert puw.kernel.tentative_base_standards_units is not None
+
+def test_reset_clears_standardization_caches():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "nm*ps"])
+
+    puw.configure.reset()
+
+    assert puw.kernel.dimensional_fundamental_standards_matrix is None
+    assert puw.kernel.dimensional_fundamental_standards_units is None
+    assert puw.kernel.tentative_base_standards_matrix is None
+    assert puw.kernel.tentative_base_standards_units is None
+
 def test_set_standard_units_rejects_non_list_tuple_or_string():
     puw.configure.reset()
     puw.configure.load_library(['pint'])

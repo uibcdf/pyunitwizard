@@ -80,6 +80,10 @@ def reset() -> None:
     kernel.dimensional_combinations_standards = {}
     kernel.adimensional_standards = {}
     kernel.tentative_base_standards = {}
+    kernel.dimensional_fundamental_standards_matrix = None
+    kernel.dimensional_fundamental_standards_units = None
+    kernel.tentative_base_standards_matrix = None
+    kernel.tentative_base_standards_units = None
 
 def get_libraries_loaded() -> List[str]:
     """Return currently loaded backend libraries.
@@ -349,6 +353,30 @@ def set_standard_units(standard_units: List[str]) -> None:
                 for jj in range(ii, n_dimensions):
                     if candidate_array[jj]>0:
                         already[jj]=1
+
+    if len(kernel.dimensional_fundamental_standards) > 0:
+        kernel.dimensional_fundamental_standards_units = [
+            convert(u, to_type="unit")
+            for u in kernel.dimensional_fundamental_standards.keys()
+        ]
+        kernel.dimensional_fundamental_standards_matrix = np.array(
+            list(kernel.dimensional_fundamental_standards.values())
+        )
+    else:
+        kernel.dimensional_fundamental_standards_units = None
+        kernel.dimensional_fundamental_standards_matrix = None
+
+    if len(kernel.tentative_base_standards) > 0:
+        kernel.tentative_base_standards_units = [
+            convert(u, to_type="unit")
+            for u in kernel.tentative_base_standards.keys()
+        ]
+        kernel.tentative_base_standards_matrix = np.array(
+            list(kernel.tentative_base_standards.values())
+        )
+    else:
+        kernel.tentative_base_standards_units = None
+        kernel.tentative_base_standards_matrix = None
 
 def add_constant(constant_name, value, unit) -> None:
     """Register a runtime constant.

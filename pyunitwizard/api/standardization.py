@@ -18,20 +18,26 @@ from .introspection import get_dimensionality, is_unit
 
 from smonitor import signal
 
-def _standard_units_lstsq(solution: np.ndarray, standards: dict) -> Optional[UnitLike]:
+
+def _standard_units_lstsq(solution: np.ndarray, standards: dict, 
+                          matrix: Optional[np.ndarray] = None, 
+                          units: Optional[list] = None) -> Optional[UnitLike]:
     """ Auxiliary function for get_standard_units.
         Returns standard units by using least squares method.
     """
 
-    matrix = []
-    standard_units = []
+    if matrix is None:
+        matrix_list = []
+        standard_units = []
+        for aux_unit, aux_dim_array in standards.items():
+            standard_units.append(convert(aux_unit, to_type="unit"))
+            matrix_list.append(aux_dim_array)
+        matrix = np.array(matrix_list)
+    else:
+        standard_units = units
 
-    for aux_unit, aux_dim_array in standards.items():
-        standard_units.append(convert(aux_unit, to_type="unit"))
-        matrix.append(aux_dim_array)
-
-    matrix = np.array(matrix)
     x, _, _, _ = np.linalg.lstsq(matrix.T, solution, rcond=None)
+
 
     x = x.round(4)
 
@@ -111,7 +117,7 @@ def get_standard_units(
             if len(kernel.tentative_base_standards) == 0:
                 raise NoStandardsError
 
-            output = _standard_units_lstsq(solution, kernel.tentative_base_standards)
+            output = _standard_units_lstsq(solution, kernel.tentative_base_standards, kernel.tentative_base_standards_matrix, kernel.tentative_base_standards_units)
 
     else:
         for standard_units, dim_array in kernel.dimensional_combinations_standards.items():
@@ -121,15 +127,13 @@ def get_standard_units(
         if len(kernel.dimensional_fundamental_standards) == 0:
             raise NoStandardsError
 
-        output = _standard_units_lstsq(
-            solution, kernel.dimensional_fundamental_standards
-        )
+        output = _standard_units_lstsq(solution, kernel.dimensional_fundamental_standards, kernel.dimensional_fundamental_standards_matrix, kernel.dimensional_fundamental_standards_units)
 
         if output is None:
             if len(kernel.tentative_base_standards) == 0:
                 raise NoStandardsError
 
-            output = _standard_units_lstsq(solution, kernel.tentative_base_standards)
+            output = _standard_units_lstsq(solution, kernel.tentative_base_standards, kernel.tentative_base_standards_matrix, kernel.tentative_base_standards_units)
 
     if output is None:
         raise NoStandardsError

@@ -21,6 +21,10 @@ def initialize() -> None:
     global dimensional_combinations_standards
     global adimensional_standards
     global tentative_base_standards
+    global dimensional_fundamental_standards_matrix
+    global dimensional_fundamental_standards_units
+    global tentative_base_standards_matrix
+    global tentative_base_standards_units
 
     loaded_libraries = []
     loaded_parsers = []
@@ -31,6 +35,10 @@ def initialize() -> None:
     dimensional_combinations_standards = {}
     adimensional_standards = {}
     tentative_base_standards = {}
+    dimensional_fundamental_standards_matrix = None
+    dimensional_fundamental_standards_units = None
+    tentative_base_standards_matrix = None
+    tentative_base_standards_units = None
 
 
 order_fundamental_units = ['[L]', '[M]', '[T]', '[K]', '[mol]', '[A]', '[Cd]']
