@@ -53,6 +53,15 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     if "unyt" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "unyt"
         return "unyt"
+    if "astropy" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "astropy.units"
+        return "astropy.units"
+    if "physipy" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "physipy"
+        return "physipy"
+    if "quantities" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "quantities"
+        return "quantities"
 
     for form_name, aux_is_form in dict_is_form.items():
         if aux_is_form(quantity_or_unit):

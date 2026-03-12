@@ -1,6 +1,7 @@
 import pyunitwizard as puw
 import openmm.unit as openmm_unit
 import unyt
+import pytest
 from pyunitwizard.api.introspection import _TYPE_TO_FORM_CACHE
 
 def test_string():
@@ -48,6 +49,36 @@ def test_unyt_quantity():
 
     quantity = [2.0, 3.0] * unyt.s
     assert puw.get_form(quantity) == "unyt"
+
+
+def test_astropy_quantity_and_unit_if_available():
+    astropy_units = pytest.importorskip("astropy.units")
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'astropy.units'])
+
+    assert puw.get_form(2.0 * astropy_units.m) == "astropy.units"
+    assert puw.get_form(astropy_units.m) == "astropy.units"
+
+
+def test_physipy_quantity_if_available():
+    pytest.importorskip("physipy")
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'physipy'])
+
+    quantity = puw.quantity(1.0, 'meter', form='physipy')
+    assert puw.get_form(quantity) == "physipy"
+
+
+def test_quantities_quantity_if_available():
+    pytest.importorskip("quantities")
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'quantities'])
+
+    quantity = puw.quantity(1.0, 'meter', form='quantities')
+    assert puw.get_form(quantity) == "quantities"
 
 
 def test_reset_clears_get_form_type_cache():
