@@ -72,6 +72,35 @@ def test_get_standard_units_adimensional_from_dimensionality_only():
     assert standard_unit == "radian"
 
 
+def test_get_standard_units_populates_dimensionality_cache():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    assert puw.kernel.standard_units_by_dimensionality_cache == {}
+
+    standard_unit = puw.get_standard_units(dimensionality={'[L]': 1}, form='string')
+
+    assert standard_unit == 'nanometer'
+    assert puw.kernel.standard_units_by_dimensionality_cache[
+        (1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    ] == 'nm'
+
+
+def test_set_standard_units_invalidates_dimensionality_cache():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm'])
+
+    assert puw.get_standard_units(dimensionality={'[L]': 1}, form='string') == 'nanometer'
+    assert puw.kernel.standard_units_by_dimensionality_cache
+
+    puw.configure.set_standard_units(['angstrom'])
+
+    assert puw.kernel.standard_units_by_dimensionality_cache == {}
+    assert puw.get_standard_units(dimensionality={'[L]': 1}, form='string') == 'angstrom'
+
+
 ### Tests for standardize ###
 
 def test_standardize_pint_quantity():

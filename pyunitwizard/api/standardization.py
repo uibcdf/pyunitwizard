@@ -92,9 +92,14 @@ def get_standard_units(
         [dimensionality[unit] for unit in kernel.order_fundamental_units],
         dtype=float,
     )
+    solution_key = tuple(solution.tolist())
     n_dims_solution = len(kernel.order_fundamental_units) - np.sum(
         np.isclose(solution, 0.0)
     )
+
+    cached_output = kernel.standard_units_by_dimensionality_cache.get(solution_key)
+    if cached_output is not None:
+        return convert(cached_output, to_form=form, parser=parser, to_type="unit")
 
     output: Optional[UnitLike] = None
 
@@ -138,6 +143,13 @@ def get_standard_units(
     if output is None:
         raise NoStandardsError
 
+    if isinstance(output, str):
+        kernel.standard_units_by_dimensionality_cache[solution_key] = output
+    else:
+        kernel.standard_units_by_dimensionality_cache[solution_key] = convert(
+            output, to_form="string", parser=parser, to_type="unit"
+        )
+
     output = convert(output, to_form=form, parser=parser, to_type="unit")
 
     return output
@@ -174,15 +186,8 @@ def standardize(
     if is_unit(quantity_or_unit):
         return get_standard_units(quantity_or_unit, form=to_form)
 
-    try:
-        output = convert(quantity_or_unit, to_form=to_form)
-        standard = get_standard_units(output)
-        output = convert(output, standard)
-    except Exception:
-        standard = get_standard_units(quantity_or_unit)
-        output = convert(quantity_or_unit, to_unit=standard, to_form=to_form)
-
-    return output
+    standard = get_standard_units(quantity_or_unit, form=to_form)
+    return convert(quantity_or_unit, to_unit=standard, to_form=to_form)
 
 
 __all__ = ["get_standard_units", "standardize"]

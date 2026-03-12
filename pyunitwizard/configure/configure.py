@@ -84,6 +84,7 @@ def reset() -> None:
     kernel.dimensional_fundamental_standards_units = None
     kernel.tentative_base_standards_matrix = None
     kernel.tentative_base_standards_units = None
+    kernel.standard_units_by_dimensionality_cache = {}
     from pyunitwizard.api.introspection import _DIMENSIONALITY_CACHE, _TYPE_TO_FORM_CACHE
     _DIMENSIONALITY_CACHE.clear()
     _TYPE_TO_FORM_CACHE.clear()
@@ -295,6 +296,7 @@ def set_standard_units(standard_units: List[str]) -> None:
     kernel.dimensional_fundamental_standards={}
     kernel.dimensional_combinations_standards={}
     kernel.adimensional_standards={}
+    kernel.standard_units_by_dimensionality_cache = {}
 
     n_dimensions = len(kernel.order_fundamental_units)
 
