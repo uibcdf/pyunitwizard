@@ -7,6 +7,7 @@ from time import perf_counter
 from typing import Callable, Dict, List
 
 import pyunitwizard as puw
+from pyunitwizard.parse import parse as parse_quantity
 
 
 def _time_block(func: Callable[[], None], iterations: int) -> float:
@@ -24,14 +25,21 @@ def run_baseline(iterations: int = 5000, repeats: int = 5) -> Dict[str, object]:
     puw.configure.load_library(["pint"])
     puw.configure.set_default_form("pint")
     puw.configure.set_default_parser("pint")
+    puw.configure.set_standard_units(["nanometer", "picosecond", "kilocalorie", "mole"])
 
     quantity = puw.quantity(1.0, "nanometer")
+    quantity_si = puw.quantity(1.0, "meter")
+    unit = puw.unit("nanometer", form="pint")
 
     benchmarks: Dict[str, Callable[[], None]] = {
         "convert_nm_to_angstrom": lambda: puw.convert(quantity, to_unit="angstrom"),
         "get_form_quantity": lambda: puw.get_form(quantity),
         "is_quantity_quantity": lambda: puw.is_quantity(quantity),
         "parse_string_quantity": lambda: puw.quantity("10 angstrom"),
+        "parse_array_string_quantity": lambda: parse_quantity("[1, 2, 3] angstrom", to_form="pint"),
+        "get_dimensionality_quantity": lambda: puw.get_dimensionality(quantity),
+        "get_dimensionality_unit": lambda: puw.get_dimensionality(unit),
+        "standardize_meter_quantity": lambda: puw.standardize(quantity_si),
     }
 
     results: Dict[str, Dict[str, float]] = {}
