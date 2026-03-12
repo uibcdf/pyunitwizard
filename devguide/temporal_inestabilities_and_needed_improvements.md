@@ -1,76 +1,184 @@
 # Temporal Instabilities and Needed Improvements (March 2026)
 
-This document details the instabilities detected during the 1.0.0 stabilization sprint and provides a technical roadmap for performance optimizations.
+This document records the instabilities detected during the pre-1.0 stabilization work, what was confirmed as real, what has already been corrected, and which optimization ideas remain optional future work.
 
-## 1. Detected Instabilities
+## 1. Current Status
 
-### 1.1 RecursionError in Astropy Integration
-A critical `RecursionError: maximum recursion depth exceeded` has been detected in the `main` branch, specifically affecting `tests/astropy_units/test_astropy_units.py`.
-- **Symptom**: When comparing an Astropy Quantity with `pytest.approx`, the system enters an infinite loop.
-- **Context**: This appears more frequently in Python 3.13 environments.
-- **Hypothesis**: The interaction between `pyunitwizard` introspection and Astropy's `__array_function__` protocol might be triggering circular calls when `numpy.isscalar` or `asarray` is invoked during testing.
+The critical instabilities originally motivating this document have now been addressed in `main`.
 
-### 1.2 Cross-Backend Matrix Failures
-Several tests in `tests/integration/test_frontend_cross_backend_matrix.py` are failing with `UnitConversionError`.
-- **Issue**: Converting between `astropy.units` and other backends (like `pint` or `unyt`) sometimes fails to resolve "absement" (m·s) or other compound dimensions.
-- **Status**: These failures persist even after reverting all performance optimizations, indicating a pre-existing fragility in the inter-library translation logic.
+Resolved recently:
 
-### 1.3 Registry Dispatch Fragility
-The use of dynamic dictionaries (`dict_is_form`, `dict_convert`, etc.) is powerful but highly sensitive to the order of library loading. Manual attempts to bypass these lookups often result in `KeyError: None` or returning raw strings where the API expects quantity objects.
+- Astropy recursion in `get_value()` and `pytest.approx` comparisons.
+- String conversion fast paths that incorrectly returned raw strings without parsing.
+- Standardization matrix prebuild placement and reset hygiene.
+- Introspection type-to-form cache cleanup on `configure.reset()`.
 
----
+As of the latest validation pass, these relevant blocks are green:
 
-## 2. Performance Roadmap (Proposed & Reverted Improvements)
+- `tests/astropy_units`
+- `tests/integration`
+- `tests/forms`
+- `tests/utils`
+- `tests/test_get.py`
+- `tests/test_parse.py`
+- `tests/test_conversion_branches.py`
+- `tests/test_configure.py`
+- `tests/test_standardize.py`
+- `tests/test_check.py`
+- `tests/test_get_form.py`
+- `tests/test_introspection_probe.py`
 
-The following strategies were implemented and subsequently reverted to ensure 1.0.0 stability. They should be revisited with stricter safety guards.
+## 2. Confirmed Instabilities and Resolution
 
-### 2.1 Fast Form Introspection (High Priority)
-The current `get_form()` performs a linear search across all loaded libraries.
-- **Proposed Optimization**: Use a `_TYPE_TO_FORM_CACHE: Dict[type, str]` mapping.
-- **The Catch**: Must exclude `str` type from caching and ensure that class name detection (e.g., checking if "pint" is in the type name string) doesn't fail when libraries are reloaded or shadowed.
+### 2.1 Astropy `RecursionError`
 
-### 2.2 Conversion Fast Path
-Avoiding backend calls when the input is already in the target form.
-- **Proposed Logic**: If `to_unit` is None and `form_in == to_form`, return the object immediately.
-- **The Catch**: This MUST NOT trigger for strings. Strings must always pass through a parser to become objects. Failing to do so results in downstream `AttributeError` (e.g., `'1.0 meter' has no attribute 'unit'`).
+This was a real bug, not just a test artifact.
 
-### 2.3 Unit String Caching
-Parsing strings like `'nanometers'` is the most expensive operation in construction.
-- **Proposed Optimization**: A global `_UNIT_STRING_CACHE: Dict[Tuple[str, form, parser], UnitObject]`.
-- **Impact**: This would provide near-zero latency for repeated unit creation in MolSysMT loops.
+- **Root cause**: `astropy.units.Quantity` is a subclass of `numpy.ndarray`.
+- **Faulty behavior**: `pyunitwizard.api.extraction.get_value()` had a fast path using `isinstance(quantity, np.ndarray)`.
+- **Effect**: Astropy quantities were returned as raw quantity objects instead of numeric values, and downstream NumPy / `pytest.approx` logic entered recursive scalar probing.
 
-### 2.4 Pre-calculated Standard Matrices
-The `standardize()` function currently rebuilds the dimensionality matrix for least-squares solving on every call.
-- **Proposed Optimization**: Store `dimensional_fundamental_standards_matrix` and its corresponding `units` list in the `kernel` upon calling `set_standard_units()`.
-- **Status**: This is the most stable mathematical optimization. It avoids thousands of `convert()` and `get_dimensionality()` calls during a simulation trajectory normalization.
+Resolution:
 
----
+- The fast path now only accepts plain `numpy.ndarray` objects, not arbitrary subclasses.
+- Regression coverage was added in `tests/test_get.py`.
 
-## 3. Mathematical & Numba Potential
+### 2.2 String Fast-Path Fragility in `convert()`
 
-### 3.1 Is Numba Necessary?
-Analysis of `_standard_units_lstsq` suggests that the systems of equations are too small ($7 \times N$) for Numba's JIT overhead to be worthwhile.
-- **Verdict**: Focus on **avoiding matrix construction** (caching) rather than accelerating the `lstsq` call itself. The linear algebra cost is negligible compared to the object-creation cost of the units.
+This was also a real bug.
 
-### 3.2 Dimensionality Caching
-Dimension extraction (`get_dimensionality`) is deterministic and immutable for a given unit.
-- **Strategy**: Cache the resulting dictionary using the unit's string representation as a key. This will speed up `puw.check()` calls used extensively in MolSysMT argument digestion.
+- **Faulty behavior**: `convert("1 meter")` or `convert("1 meter", parser="pint")` could return the original string unchanged when no explicit target form was requested.
+- **Effect**: downstream code could receive a raw string where a parsed quantity was expected.
 
----
+Resolution:
 
-## 4. Offloading Strategy: Making Host Libraries Lighter
+- Conversion fast paths no longer apply to inputs with `form_in == "string"`.
+- Regression coverage was added in `tests/test_conversion_branches.py`.
 
-To reduce the performance impact of `pyunitwizard` on large-scale processing (like MolSysMT), we propose an "Offloading at the Edge" strategy:
+### 2.3 Parser Resolution / Parse Cache Fragility
 
-### 4.1 Decorator-Level Normalization
-Utilize `argdigest` pipelines (`sci:to_float64_array`) to perform `standardize()` and `get_value()` only once at the function entry point.
-- **Goal**: Host library internal "Kernels" should receive raw NumPy arrays in standardized units (e.g., nm, ps, K).
-- **Benefit**: This eliminates the need for any `pyunitwizard` calls inside the computational loops, rendering the library's internal latency irrelevant for the most heavy tasks.
+This was a real state-dependent issue.
 
-### 4.2 Zero-Quantity Kernels
-Encourage a design where `Quantity` objects are "Border Citizens". They exist at the API level for user convenience but are stripped away before reaching the Numba/JIT layers.
+- **Faulty behavior**: `parse()` was cached while still depending on runtime parser resolution.
+- **Effect**: parsing behavior could drift depending on the active default parser, especially in mixed `pint` / `astropy.units` contexts.
+- **Observed symptom**: array-like quantity strings such as `"[2, 5, 7] joules"` could break when the active parser path reached Astropy parsing.
 
----
+Resolution:
 
-## 5. Conclusion for 1.0.0
-Due to the proximity of the 1.0.0 release, **correctness takes precedence over speed**. All experimental optimizations have been reverted. Future work must address the `RecursionError` in the test suite before re-introducing any caching mechanisms.
+- Effective parser resolution now happens before the cached parsing function.
+- Array-like strings preferentially use Pint parsing when appropriate.
+- Regression coverage was added in `tests/test_parse.py`.
+
+### 2.4 Standardization Matrix Rebuild Overhead
+
+The optimization idea was valid, but the first local implementation was not placed correctly.
+
+- **Original issue**: `get_standard_units()` rebuilt least-squares matrices repeatedly.
+- **Initial flawed implementation**: matrix prebuild was inserted inside an inner loop in `set_standard_units()`.
+
+Resolution:
+
+- Kernel-level prebuilt matrices and unit lists are now generated once, after standard-unit configuration has been fully assembled.
+- `configure.reset()` also clears those caches.
+- Regression coverage was added in `tests/test_configure.py`.
+
+### 2.5 Introspection Cache Hygiene
+
+This was not a major runtime bug, but it was a real hygiene issue.
+
+- **Issue**: `_TYPE_TO_FORM_CACHE` in `pyunitwizard.api.introspection` survived `configure.reset()`.
+- **Effect**: type-to-form state could persist across test/runtime resets unnecessarily.
+
+Resolution:
+
+- `configure.reset()` now clears `_TYPE_TO_FORM_CACHE`.
+- Regression coverage was added in `tests/test_get_form.py`.
+
+## 3. What Is No Longer an Active Instability
+
+The following points should no longer be treated as active release blockers:
+
+- `RecursionError` in Astropy integration.
+- Cross-backend frontend matrix instability as an active failure mode.
+- String fast-path misbehavior in `convert()`.
+- Standardization matrix rebuild cost as an unaddressed issue.
+
+These topics remain useful as historical context, but not as open blockers for 1.0 stabilization.
+
+## 4. Optional Optimization Work Still Open
+
+The following ideas remain reasonable, but they are now optional optimization or architecture work, not urgent stabilization fixes.
+
+### 4.1 Unit String Caching
+
+Potential direction:
+
+- cache parsed unit objects keyed by a stable tuple such as `(unit_string, parser, target_form)`.
+
+Current status:
+
+- not implemented.
+- should only be introduced with explicit regression tests and a benchmark showing repeated parser cost matters.
+
+Assessment:
+
+- useful candidate for heavy repeated construction workloads;
+- not necessary before 1.0 without measurement.
+
+### 4.2 Dimensionality Caching
+
+Potential direction:
+
+- cache dimensionality dictionaries for normalized unit identities or canonical string forms.
+
+Current status:
+
+- not implemented.
+
+Assessment:
+
+- likely useful in validation-heavy or argument-digestion-heavy workflows;
+- should not be added before 1.0 without careful key normalization and benchmark evidence.
+
+### 4.3 Further Introspection Hardening
+
+Potential direction:
+
+- review whether `_TYPE_TO_FORM_CACHE` should cache `str`,
+- review whether Astropy fast detection should be made explicit rather than relying solely on dispatch lookup,
+- review whether cache invalidation needs anything beyond `configure.reset()`.
+
+Current status:
+
+- no active bug remains here after reset cleanup.
+
+Assessment:
+
+- reasonable hardening work;
+- not urgent.
+
+## 5. Architecture Direction for Host Libraries
+
+The offloading strategy remains valid and important, but it belongs to ecosystem integration strategy rather than PyUnitWizard core stabilization.
+
+Recommended direction:
+
+- perform `standardize()` and `get_value()` at API boundaries in host libraries;
+- pass plain arrays in canonical units into inner computational kernels;
+- keep quantity objects at the integration edge, not in hot loops.
+
+This is especially aligned with coordinated use alongside:
+
+- `argdigest`
+- `depdigest`
+- `smonitor`
+
+## 6. Practical Conclusion
+
+The urgent instability work tracked by this document is now largely complete.
+
+What remains before 1.0 in this area is no longer emergency hardening, but disciplined optional work:
+
+- benchmark-driven caching only where it clearly helps,
+- continued architectural cleanup,
+- host-library integration guidance at the ecosystem boundary.
