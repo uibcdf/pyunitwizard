@@ -17,6 +17,7 @@ if TYPE_CHECKING:  # pragma: no cover - circular import guard
 from smonitor import signal
 
 _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
+_DIMENSIONALITY_CACHE: Dict[tuple[str, str], Dict[str, int]] = {}
 
 
 @signal(tags=["introspection"], exception_level="DEBUG")
@@ -187,8 +188,7 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
     """
 
     from .conversion import convert
-
-    dim = None
+    from .extraction import get_unit
 
     if isinstance(quantity_or_unit, str):
         if is_quantity(quantity_or_unit):
@@ -197,9 +197,16 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
             quantity_or_unit = convert(quantity_or_unit, to_type="unit")
 
     form = get_form(quantity_or_unit)
-    dim = dict_dimensionality[form](quantity_or_unit)
+    unit = quantity_or_unit if is_unit(quantity_or_unit) else get_unit(quantity_or_unit)
+    cache_key = (form, str(unit))
 
-    return dim
+    if cache_key in _DIMENSIONALITY_CACHE:
+        return dict(_DIMENSIONALITY_CACHE[cache_key])
+
+    dim = dict_dimensionality[form](quantity_or_unit)
+    _DIMENSIONALITY_CACHE[cache_key] = dict(dim)
+
+    return dict(dim)
 
 
 @signal(tags=["introspection"])
@@ -225,6 +232,8 @@ def is_dimensionless(quantity_or_unit: QuantityOrUnit) -> bool:
 
 
 __all__ = [
+    "_DIMENSIONALITY_CACHE",
+    "_TYPE_TO_FORM_CACHE",
     "get_form",
     "is_quantity",
     "is_unit",

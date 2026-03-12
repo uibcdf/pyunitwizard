@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 import pyunitwizard as puw
-from pyunitwizard.api.introspection import is_dimensionless
+from pyunitwizard.api.introspection import _DIMENSIONALITY_CACHE, is_dimensionless
 
 #### Tests for puw.check() function ####
 
@@ -251,3 +251,27 @@ def test_get_dimensionality_from_unit_string_path():
     dim = puw.get_dimensionality('meter')
     assert isinstance(dim, dict)
     assert dim.get('[L]') == 1
+
+
+def test_get_dimensionality_populates_cache_for_quantity_and_returns_copy():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    quantity = puw.quantity(2.0, 'meter')
+    dim = puw.get_dimensionality(quantity)
+
+    assert ('pint', 'meter') in _DIMENSIONALITY_CACHE
+    dim['[L]'] = 99
+    assert puw.get_dimensionality(quantity)['[L]'] == 1
+
+
+def test_reset_clears_dimensionality_cache():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    puw.get_dimensionality(puw.unit('meter'))
+    assert len(_DIMENSIONALITY_CACHE) > 0
+
+    puw.configure.reset()
+
+    assert _DIMENSIONALITY_CACHE == {}
