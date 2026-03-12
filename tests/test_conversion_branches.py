@@ -1,4 +1,5 @@
 import pytest
+import smonitor
 
 import pyunitwizard as puw
 from pyunitwizard._private.exceptions import ArgumentError
@@ -92,3 +93,20 @@ def test_get_value_to_unit_string_without_numeric_prefix_works_with_astropy_defa
     values_in_meter = puw.get_value(quantity, to_unit="meter")
 
     assert values_in_meter.tolist() == [1.0, 2.0]
+
+
+def test_convert_redundant_passthrough_records_aggregated_counter():
+    manager = smonitor.get_manager()
+    manager.configure(profile="user", handlers=[], event_buffer_size=20)
+    manager._redundant_conversions_by_callsite.clear()
+    manager._redundant_conversions_recent.clear()
+
+    _configure_pint()
+
+    quantity = puw.quantity(1.0, "nanometer", form="pint")
+    output = puw.convert(quantity, to_form="pint")
+
+    assert output is quantity
+    report = manager.report()
+    assert report["redundant_conversions_total"] >= 1
+    assert report["top_redundant_conversions"]

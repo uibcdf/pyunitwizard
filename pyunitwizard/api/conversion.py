@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 from typing import Any, Optional, Union
 
 import numpy as np
@@ -23,6 +24,45 @@ from .introspection import get_form, is_unit
 
 from smonitor import signal
 from depdigest import dep_digest
+
+
+def _external_callsite() -> str:
+    frame = inspect.currentframe()
+    try:
+        frame = frame.f_back
+        while frame is not None:
+            module_name = str(frame.f_globals.get("__name__", ""))
+            if not (
+                module_name.startswith("pyunitwizard")
+                or module_name.startswith("smonitor")
+                or module_name.startswith("depdigest")
+            ):
+                return f"{module_name}:{frame.f_code.co_name}:{frame.f_lineno}"
+            frame = frame.f_back
+    finally:
+        del frame
+    return "unknown"
+
+
+def _record_redundant_conversion(
+    *,
+    form_in: str,
+    to_unit: Optional[str],
+    to_form: Optional[str],
+    to_type: Optional[str],
+) -> None:
+    try:
+        from smonitor.core.manager import get_manager
+
+        get_manager().record_redundant_conversion(
+            _external_callsite(),
+            form_in=form_in,
+            to_unit=to_unit,
+            to_form=to_form,
+            to_type=to_type,
+        )
+    except Exception:
+        pass
 
 @signal(tags=["conversion"], exception_level="DEBUG")
 @dep_digest('unyt', when={'to_form': 'unyt'})
@@ -77,11 +117,23 @@ def convert(
     
     # --- High Performance Fast Path ---
     if form_in != "string" and to_unit is None and to_form is None and to_type == "quantity":
+        _record_redundant_conversion(
+            form_in=form_in,
+            to_unit=to_unit,
+            to_form=to_form,
+            to_type=to_type,
+        )
         return quantity_or_unit
     
     to_form = digest_to_form(to_form, form_in)
     
     if form_in != "string" and to_unit is None and form_in == to_form and to_type == "quantity":
+        _record_redundant_conversion(
+            form_in=form_in,
+            to_unit=to_unit,
+            to_form=to_form,
+            to_type=to_type,
+        )
         return quantity_or_unit
     # ----------------------------------
     parser = digest_parser(parser)
