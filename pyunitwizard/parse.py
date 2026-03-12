@@ -3,6 +3,7 @@ from ._private.exceptions import ArgumentError as BadCallError
 from ._private.forms import digest_to_form
 from ._private.parsers import digest_parser
 from .forms import dict_translate_quantity
+from . import kernel
 import ast
 from typing import Optional
 from functools import lru_cache
@@ -62,35 +63,23 @@ def _parse_with_pint(string: str):
     else:
        return dict_translate_quantity['string']['pint'](string)
 
-from smonitor import signal
+def _resolve_parser(string: str, parser: Optional[str], to_form: Optional[str]) -> str:
+    if parser is not None:
+        return digest_parser(parser)
+
+    if to_form in kernel.loaded_parsers and to_form != "string":
+        return to_form
+
+    if (string.startswith("[") or string.startswith("(")) and "pint" in kernel.loaded_parsers:
+        return "pint"
+
+    return digest_parser(None)
+
 
 @lru_cache(maxsize=1024)
-@signal(tags=["parse"], exception_level="DEBUG")
-def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
-    """ Parses a string and returns a quantity.
-
-        Parameters
-        ----------
-        string : str
-            A string quantity.
-        
-        parser : str
-            The parser that will be used.
-
-        to_form; str, optional
-            The form of the quantity. Can be "pint", "openmm.unit",
-            "unyt", "astropy.units" or "string".
-
-        Returns
-        -------
-        QuantityLike
-            A quantity.
-    """
+def _parse_cached(string: str, parser: str, to_form: str):
     if not isinstance(string, str):
         raise BadCallError('string')
-
-    parser = digest_parser(parser)
-    to_form = digest_to_form(to_form)
 
     if parser == 'pint':
         if to_form == 'pint':
@@ -148,3 +137,33 @@ def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
             raise NotImplementedParserError(parser, to_form)
     else:
         raise NotImplementedParserError(parser, to_form)
+
+
+from smonitor import signal
+
+
+@signal(tags=["parse"], exception_level="DEBUG")
+def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
+    """ Parses a string and returns a quantity.
+
+        Parameters
+        ----------
+        string : str
+            A string quantity.
+        
+        parser : str
+            The parser that will be used.
+
+        to_form; str, optional
+            The form of the quantity. Can be "pint", "openmm.unit",
+            "unyt", "astropy.units" or "string".
+
+        Returns
+        -------
+        QuantityLike
+            A quantity.
+    """
+
+    to_form = digest_to_form(to_form)
+    parser = _resolve_parser(string, parser, to_form)
+    return _parse_cached(string, parser, to_form)

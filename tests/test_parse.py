@@ -45,6 +45,15 @@ def test_parse_to_pint():
     assert np.allclose(quantity.magnitude, np.array([2, 5, 7]))
     assert str(quantity.units) == "joule"
 
+
+def test_parse_to_pint_is_stable_even_if_default_parser_is_astropy():
+    pytest.importorskip("astropy.units")
+
+    with loaded_libraries(["astropy.units", "pint"]):
+        quantity = parse("[2, 5, 7] joules", to_form="pint")
+        assert np.allclose(quantity.magnitude, np.array([2, 5, 7]))
+        assert str(quantity.units) == "joule"
+
 def test_parse_to_string():
 
     quantity = _parse_with_pint("5 meters")

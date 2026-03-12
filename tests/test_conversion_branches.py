@@ -45,6 +45,22 @@ def test_convert_string_quantity_to_string_value_uses_string_path():
     assert output == "3"
 
 
+def test_convert_string_quantity_without_explicit_target_still_parses():
+    _configure_pint()
+
+    output = puw.convert("1 meter")
+    assert puw.get_form(output) == "pint"
+    assert puw.get_value(output) == pytest.approx(1.0)
+
+
+def test_convert_string_quantity_with_parser_without_explicit_target_still_parses():
+    _configure_pint()
+
+    output = puw.convert("1 meter", parser="pint")
+    assert puw.get_form(output) == "pint"
+    assert puw.get_value(output) == pytest.approx(1.0)
+
+
 def test_convert_pint_unit_to_string_unit_keeps_unit_path():
     _configure_pint()
 
