@@ -18,6 +18,7 @@ from smonitor import signal
 
 _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
 
+
 @signal(tags=["introspection"], exception_level="DEBUG")
 def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     """ Returns the form of a quantity as a string.
@@ -37,12 +38,29 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
     if obj_type in _TYPE_TO_FORM_CACHE:
         return _TYPE_TO_FORM_CACHE[obj_type]
 
+    if isinstance(quantity_or_unit, str):
+        _TYPE_TO_FORM_CACHE[obj_type] = "string"
+        return "string"
+
+    # Fast class name detection to avoid loading all libraries or calling many functions
+    type_str = str(obj_type)
+    if "pint" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "pint"
+        return "pint"
+    if "openmm" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "openmm.unit"
+        return "openmm.unit"
+    if "unyt" in type_str:
+        _TYPE_TO_FORM_CACHE[obj_type] = "unyt"
+        return "unyt"
+
     for form_name, aux_is_form in dict_is_form.items():
         if aux_is_form(quantity_or_unit):
             _TYPE_TO_FORM_CACHE[obj_type] = form_name
             return form_name
 
     raise NotImplementedFormError(type(quantity_or_unit))
+
 
 
 @signal(tags=["introspection"], exception_level="DEBUG")

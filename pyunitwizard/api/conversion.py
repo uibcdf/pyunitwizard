@@ -74,9 +74,17 @@ def convert(
     output = None
 
     form_in = get_form(quantity_or_unit)
+    
+    # --- High Performance Fast Path ---
+    if to_unit is None and to_form is None and to_type == "quantity":
+        return quantity_or_unit
+    
     to_form = digest_to_form(to_form, form_in)
+    
+    if to_unit is None and form_in == to_form and to_type == "quantity":
+        return quantity_or_unit
+    # ----------------------------------
     parser = digest_parser(parser)
-
     if to_type not in ["unit", "value", "quantity"]:
         raise BadCallError("to_type")
 

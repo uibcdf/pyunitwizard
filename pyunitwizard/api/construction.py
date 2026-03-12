@@ -11,7 +11,7 @@ from .._private.exceptions import (
 from .._private.forms import digest_form
 from .._private.quantity_or_unit import ArrayLike, QuantityLike, UnitLike
 from ..forms import dict_make_quantity
-from .introspection import is_quantity, is_unit
+from .introspection import is_quantity, is_unit, get_form
 
 
 from smonitor import signal
@@ -70,7 +70,10 @@ def quantity(
         if unit is None:
             raise BadCallError("unit")
 
-        unit = convert(unit, to_form=form, parser=parser, to_type="unit")
+        # --- Fast construction if unit is already in the right form ---
+        unit_form = get_form(unit)
+        if unit_form != form:
+            unit = convert(unit, to_form=form, parser=parser, to_type="unit")
 
         try:
             output = dict_make_quantity[form](value, unit)
