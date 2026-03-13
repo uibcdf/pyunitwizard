@@ -538,7 +538,18 @@ once the following conditions are met:
 At that point, the useful conclusions should be migrated into the normal
 devguide documents and this file can be removed.
 
-## 8. Guidance For MolSysMT Feedback
+Current status against those criteria:
+
+- satisfied: the critical correctness issues recorded here are fixed in `main`;
+- satisfied: the accepted optional optimizations are already reflected in the
+  normal developer checkpoint documents;
+- partially satisfied: the remaining open items are now mostly future-work
+  questions, but some of them still live here more explicitly than in the
+  stable roadmap/checkpoint documents;
+- satisfied: the MolSysMT-facing conclusions were already shared and reviewed;
+- still open: we have not yet performed the final migration/removal pass.
+
+## 9. Guidance For MolSysMT Feedback
 
 This document should now be used to ask concrete questions, not only to collect
 opinions.
@@ -569,7 +580,7 @@ The most useful qualitative feedback would also be:
 - whether the balance has now changed in practice, or whether the main answer
   still remains "use PyUnitWizard less often inside hot paths".
 
-## 9. Practical Conclusion
+## 10. Practical Conclusion
 
 The original urgent instabilities have been addressed.
 

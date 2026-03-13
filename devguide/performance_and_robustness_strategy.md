@@ -360,6 +360,18 @@ It can be retired once:
 When that happens, the durable conclusions should be redistributed to the
 relevant permanent documents and this file can be deleted.
 
+Current status against those criteria:
+
+- partially satisfied: the core implementation phases are largely done, but the
+  roadmap still contains a few intentionally open branches (`time`,
+  `temperature`, and the possible internal retrieval question in MolSysMT);
+- satisfied: the first-wave and second-wave conclusions are already reflected in
+  the stable devguide documents across the involved repositories;
+- satisfied: the other team has reviewed the implemented direction and provided
+  positive architectural feedback;
+- partially satisfied: the remaining work is smaller now, but not all of it has
+  yet been moved into ordinary roadmap/checklist documents.
+
 ---
 *This plan represents the current consensus between the development team and the
 ecosystem maintainers for the post-hardening performance and robustness work.
