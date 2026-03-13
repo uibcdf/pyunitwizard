@@ -4,6 +4,12 @@ This document outlines the agreed-upon architectural plan to optimize molecular
 system processing and unit handling across **MolSysMT**, **PyUnitWizard**,
 **ArgDigest**, and, where needed, **SMonitor** itself.
 
+This document now serves two purposes:
+
+- it records the intended architecture;
+- it reports the result of the first implementation wave, so the other team can
+  react to what actually worked in code rather than only to a design sketch.
+
 ## 1. Motivation: The "Latency Tax" Problem
 
 During the 1.0.0 stabilization, we identified that PyUnitWizard, while robust
@@ -46,6 +52,27 @@ This point must stay strict: internal semantic pipelines should not sometimes
 return payloads and sometimes bare arrays depending on context. The extraction
 of the naked array should be a separate, explicit final step.
 
+Implementation status:
+
+- implemented in `argdigest` as `ValidatedPayload`;
+- implemented semantic canonical pipelines for:
+  - `nm_float64_payload`
+  - `ps_float64_payload`
+  - `kelvin_float64_payload`
+- implemented explicit extractor:
+  - `unwrap_validated_payload`
+
+Practical note from implementation:
+
+- the payload-and-extractor model works;
+- however, for MolSysMT the most natural place to apply the policy was not in
+  public functions but in caller-aware digesters under
+  `molsysmt/_private/arg_digestion/argument/*`.
+- in this first wave, the most practical win inside MolSysMT has come less from
+  carrying payloads deeply through the whole call graph and more from using the
+  payload idea to justify trusted caller-specific normalization at the digestion
+  boundary.
+
 ### 2.2 Layer 2: PyUnitWizard - Specialized "Fast-Tracks"
 Generic resolvers like `standardize()` are not removed. Instead, they are
 complemented in high-performance paths by explicit, "boring," and highly tested
@@ -60,6 +87,21 @@ fast-track functions:
 - **Optimization**: These bypass general linear-algebra dimensional solvers by
   using pre-cached standard unit objects and direct type guards.
 
+Implementation status:
+
+- implemented in `pyunitwizard`:
+  - `to_nanometers`
+  - `to_picoseconds`
+  - `to_kelvin`
+- added internal target-unit cache and reset hygiene
+
+Practical note from implementation:
+
+- these functions are useful as ecosystem helpers exactly because they are
+  small, explicit, and boring;
+- they should remain narrow and should not grow into a second generic
+  conversion API.
+
 ### 2.3 Layer 3: SMonitor - Aggregated Observability
 Instead of per-event signals, we use aggregated diagnostics to minimize instrumentation overhead:
 - **Redundancy Monitor**: A stateful counter within SMonitor that tracks cumulative redundant conversions by callsite.
@@ -69,15 +111,144 @@ This layer should be treated as part of the ecosystem design space, not as a
 fixed external constraint. If a better aggregated monitor requires changes in
 SMonitor, those changes are in scope.
 
-## 3. Implementation Roadmap
+Implementation status:
+
+- implemented in `smonitor` as an aggregated redundant-conversion counter in the
+  manager report;
+- connected in `pyunitwizard.convert()` fast paths to record redundant
+  pass-through conversions by callsite;
+- no per-event diagnostic flood was introduced.
+
+Practical note from implementation:
+
+- aggregation through the manager was the right design;
+- a new event type per redundant conversion would have been much noisier and
+  less useful.
+
+## 3. First-Wave Implementation Snapshot
+
+The first implementation wave has already produced concrete changes in all four
+libraries.
+
+- **PyUnitWizard**
+  - canonical fast-tracks added;
+  - redundant conversion callsite recording added.
+- **ArgDigest**
+  - `ValidatedPayload` added;
+  - canonical science pipelines added.
+- **MolSysMT**
+  - caller-specific canonical array normalization introduced in private
+    digesters for the first PBC chain (`box_lengths`, `box`);
+  - selected `pbc` functions now accept either canonical arrays or quantities
+    without changing their public API.
+- **SMonitor**
+  - aggregated redundant conversion counters exposed in manager reports.
+
+This is enough to evaluate the architecture as real engineering work rather than
+as a speculative roadmap.
+
+## 4. Implementation Roadmap
 
 1.  **Phase 1 (ArgDigest)**: Define the `ValidatedPayload` contract and the two-level pipeline logic.
+    Status: done.
 2.  **Phase 2 (ArgDigest)**: Implement semantic canonical pipelines such as `sci:nm_float64_payload`, `sci:ps_float64_payload`, and `sci:kelvin_float64_payload`, plus the final extractor step for kernel-facing naked arrays.
+    Status: done.
 3.  **Phase 3 (PyUnitWizard)**: Implement the first set of specialized fast-tracks (`to_nanometers`, `to_picoseconds`, `to_kelvin`).
+    Status: done.
 4.  **Phase 4 (MolSysMT)**: Update critical function decorators to leverage the new semantic payloads and kernel extractors, ensuring recursive calls do not repeatedly re-enter full PyUnitWizard digestion.
+    Status: partially done.
+    Current interpretation: the policy belongs primarily in caller-aware private digesters and, for hot structure routes, in local kernel-input helpers rather than in public API functions.
+    Current scope:
+    - initial PBC-oriented chain implemented;
+    - coordinates-related structure routes implemented through
+      `molsysmt.lib.structure._kernel_inputs`;
+    - broader `time` and `temperature` routes still pending.
 5.  **Phase 5 (SMonitor)**: Integrate the aggregated redundancy monitor for final auditing.
+    Status: first version done.
 
-## 4. Validation Strategy
+Remaining near-term work:
+
+- extend the MolSysMT side beyond the initial PBC chain into higher-value
+  routes such as coordinates, time, and temperature;
+- use the new diagnostics to confirm where redundant conversions still remain in
+  realistic workflows;
+- decide whether additional payload-bearing paths are worth adding, or whether
+  caller-specific naked-array normalization is enough for most hot paths.
+
+## 5. Second-Wave Refinement: Kernel Input Preparation
+
+The next implementation step changed an important design conclusion from the
+first wave.
+
+The original experimental direction inside MolSysMT had started to move some
+coordinates preparation into private digestion logic and, briefly, into
+canonicalization helpers that forced coordinates into nanometers before
+reaching `msmlib` kernels. That direction was rejected after a closer audit.
+
+What the audit confirmed is:
+
+- `molsysmt.lib.structure` kernels operate on numeric arrays and do not encode
+  nanometer-specific semantics;
+- public `structure` functions intentionally recover the numeric value, carry
+  the working unit as `length_unit`, and then rebuild the public quantity using
+  that unit;
+- forcing `nm` in internal callers would therefore mix "kernel work unit" with
+  "public output unit policy" and could add unnecessary conversions before and
+  after the kernel.
+
+The accepted refinement is narrower:
+
+- PyUnitWizard now exposes a more explicit extraction service through
+  `get_value()` and `get_value_and_unit()` by accepting `value_type` and
+  `dtype`;
+- MolSysMT keeps its kernel-specific preparation helpers locally in
+  `molsysmt.lib.structure`, because those helpers do more than extraction:
+  they also normalize coordinate shape for the Numba kernels and align units
+  between paired inputs where needed.
+
+This means the two libraries now split responsibilities more cleanly:
+
+- **PyUnitWizard** provides the reusable extraction capability:
+  value, unit, target container, and dtype;
+- **MolSysMT** keeps the domain-specific policy for structure kernels:
+  rank normalization, pairwise alignment, and kernel-facing input contracts.
+
+Implementation status:
+
+- implemented in `pyunitwizard`:
+  - `get_value(..., value_type=..., dtype=...)`
+  - `get_value_and_unit(..., value_type=..., dtype=...)`
+- implemented in `molsysmt`:
+  - `molsysmt.lib.structure._kernel_inputs.extract_coordinates_value_and_unit`
+  - `molsysmt.lib.structure._kernel_inputs.align_coordinates_values_and_unit`
+- adopted in MolSysMT for:
+  - `get_center`
+  - `get_distances`
+  - `get_rmsd`
+  - `get_least_rmsd`
+  - `least_rmsd_fit`
+  - `get_angles`
+  - `get_dihedral_angles`
+  - `principal_component_analysis`
+  - `set_dihedral_angles`
+
+Why this was worth doing:
+
+- it reduces repeated boilerplate around `puw.get_value_and_unit(...)` and
+  `np.asarray(..., dtype=np.float64)` in hot structure paths;
+- it preserves the user-facing unit/output policy already present in MolSysMT;
+- it advances the ecosystem goal of reducing gratuitous interaction with
+  PyUnitWizard in internal kernels without weakening public semantics.
+
+What remains open:
+
+- evaluate whether `basic.get()` should eventually expose a dedicated internal
+  path for structural consumers, or whether the new extraction options plus
+  MolSysMT kernel helpers are already sufficient;
+- extend the same thinking to other high-value routes such as `time` and
+  `temperature` if profiling justifies it.
+
+## 6. Validation Strategy
 
 Each phase should be accompanied by tests before rollout into the next layer.
 
@@ -99,7 +270,14 @@ Each phase should be accompanied by tests before rollout into the next layer.
   - no event explosion in repeated conversion scenarios.
   - reporting by callsite or equivalent useful grouping.
 
-## 5. Expected Results
+Validation snapshot from the first implementation wave:
+
+- `pyunitwizard`: fast-track + diagnostics blocks green.
+- `argdigest`: payload and science-pipeline tests green.
+- `molsysmt`: private scientific-array digesters and initial PBC chain green.
+- `smonitor`: redundant conversion aggregation tests green.
+
+## 7. Expected Results
 
 - **Stability**: Preserve the correctness and robustness already regained in PyUnitWizard, including the Astropy fixes.
 - **Performance**: Substantially reduced overhead for repeated internal MolSysMT calls.
@@ -109,7 +287,7 @@ Each phase should be accompanied by tests before rollout into the next layer.
 These are expected outcomes, not guarantees. They must be validated with both
 microbenchmarks and real host-library scenarios.
 
-## 6. Open Design Constraints
+## 8. Open Design Constraints
 
 Before implementation starts, the following constraints should remain explicit:
 
@@ -124,6 +302,27 @@ Before implementation starts, the following constraints should remain explicit:
 - Any shortcut that weakens correctness across supported backends is out of
   scope.
 
+Additional constraint learned during implementation:
+
+- in MolSysMT, argument-specific and caller-specific normalization rules are
+  often a better insertion point than modifying public API functions directly.
+
+## 9. Feedback Requested From The Other Team
+
+Before broadening adoption, the most useful feedback would be:
+
+- whether the current first-wave interpretation in MolSysMT looks correct,
+  especially the choice to center the policy in private digesters;
+- whether the next priority should be `coordinates`, `time`, `temperature`, or
+  some other route with more practical impact;
+- whether they expect more value from pushing `ValidatedPayload` deeper into
+  internal call chains, or from expanding caller-specific canonical array
+  normalization instead;
+- whether the current aggregated redundancy reporting in SMonitor is sufficient
+  for workflow diagnosis, or whether they need additional views or summaries.
+
 ---
 *This plan represents the current consensus between the development team and the
-ecosystem maintainers for the post-hardening performance and robustness work.*
+ecosystem maintainers for the post-hardening performance and robustness work.
+It should now be used to collect feedback on the first implementation wave
+before broadening adoption further.*

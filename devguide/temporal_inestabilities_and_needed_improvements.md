@@ -331,7 +331,42 @@ These are microbenchmark numbers, so they should not be overinterpreted as
 application speedups. Still, they were sufficient to justify the implemented
 changes.
 
-## 5. What We Considered And Did Not Implement
+## 5. What We Learned From The MolSysMT Kernel Audit
+
+After the PyUnitWizard hardening work, the next meaningful audit focused on how
+MolSysMT actually consumes quantities in hot structure paths.
+
+That audit confirmed three points:
+
+- `molsysmt.lib.structure` kernels are numerically unit-agnostic;
+- public MolSysMT structure routines intentionally carry a working unit through
+  the wrapper and rebuild the public quantity from that unit after the kernel
+  returns;
+- forcing a canonical unit such as `nm` before entering the kernel is therefore
+  the wrong optimization target.
+
+The right target is narrower:
+
+- reduce repeated extraction boilerplate;
+- preserve the public output-unit policy already present in MolSysMT;
+- centralize shape normalization and paired-input alignment for structure
+  kernels inside MolSysMT itself.
+
+This led to a two-part refinement:
+
+- PyUnitWizard now accepts `value_type` and `dtype` in `get_value()` and
+  `get_value_and_unit()`, which makes extraction more explicit and more useful
+  for host libraries;
+- MolSysMT keeps local helpers in `molsysmt.lib.structure` for the parts that
+  are genuinely domain-specific, namely coordinate rank normalization and
+  paired-input alignment for structure kernels.
+
+This is the right split of responsibility:
+
+- PyUnitWizard exposes a more capable general extraction service;
+- MolSysMT keeps control over kernel-facing shape and pairing semantics.
+
+## 6. What We Considered And Did Not Implement
 
 Some ideas remain valid in principle but did not yet clear the bar for entering
 the codebase.
@@ -393,7 +428,7 @@ Current judgement:
 
 - not recommended.
 
-## 6. What Still Looks Uncertain
+## 7. What Still Looks Uncertain
 
 The main remaining uncertainty is no longer about correctness. It is about
 where PyUnitWizard should stop and where host-library integration strategy
@@ -436,6 +471,12 @@ about where PyUnitWizard actually sits in hot paths:
 
 Without that, it is easy to overfit the optimization work to microbenchmarks.
 
+Another concrete open question now follows directly from the MolSysMT audit:
+
+- should a host library eventually expose a lighter internal path than the
+  current public convenience layer (`get()` in the MolSysMT case), or are the
+  new extraction controls plus local kernel helpers already sufficient?
+
 ### 6.3 Core Optimization vs Ecosystem Strategy
 
 Another open question is where future effort should be spent.
@@ -477,7 +518,7 @@ but also:
 - whether it keeps the mental model of quantities simple for both developers and
   scientists.
 
-## 7. Guidance For MolSysMT Feedback
+## 8. Guidance For MolSysMT Feedback
 
 This document should now be used to ask concrete questions, not only to collect
 opinions.
@@ -493,6 +534,9 @@ The most useful feedback from MolSysMT would be:
   its overhead;
 - whether repeated construction from strings is common enough to justify unit-
   string caching later.
+- whether the new extraction controls in PyUnitWizard plus local MolSysMT
+  kernel helpers are enough, or whether MolSysMT still needs a lighter internal
+  retrieval path than the current `get()` contract.
 
 The most useful qualitative feedback would also be:
 
@@ -505,7 +549,7 @@ The most useful qualitative feedback would also be:
 - whether the balance has now changed in practice, or whether the main answer
   still remains "use PyUnitWizard less often inside hot paths".
 
-## 8. Practical Conclusion
+## 9. Practical Conclusion
 
 The original urgent instabilities have been addressed.
 
