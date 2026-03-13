@@ -18,7 +18,7 @@ from .comparison import (
     similarity,
 )
 from .standardization import get_standard_units, standardize
-from .specialized import to_kelvin, to_nanometers, to_picoseconds
+from .specialized import fast_track, register_fast_track, to_kelvin, to_nanometers, to_picoseconds
 from .validation import check
 from .context import context
 

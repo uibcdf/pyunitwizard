@@ -10,76 +10,41 @@ from .conversion import convert
 from .extraction import get_unit
 from .introspection import get_form
 
-from smonitor import signal
 
-_SPECIALIZED_TARGET_UNIT_CACHE: dict[tuple[str, str], Any] = {}
+class FastTrack:
+    """Container for dynamically registered conversion fast-tracks."""
+    pass
 
+fast_track = FastTrack()
 
-def _cached_target_unit(form: str, unit_name: str) -> Any:
-    key = (form, unit_name)
-    if key not in _SPECIALIZED_TARGET_UNIT_CACHE:
-        _SPECIALIZED_TARGET_UNIT_CACHE[key] = convert(
-            unit_name,
-            to_form=form,
-            to_type="unit",
-        )
-    return _SPECIALIZED_TARGET_UNIT_CACHE[key]
+def register_fast_track(name: str, target_unit: Any):
+    """Register a new fast-track conversion function.
+    
+    Parameters
+    ----------
+    name : str
+        The name of the function (e.g., "nanometers" will create fast_track.to_nanometers).
+    target_unit : Any
+        The pre-parsed unit object from a supported backend.
+    """
+    from .conversion import convert
+    from .extraction import get_unit
+    from .introspection import get_form
 
+    def to_standard(obj, parser=None):
+        # 1. Bypass for naked arrays (trusted internal calls)
+        if isinstance(obj, np.ndarray):
+            return obj
+        
+        # 2. Bypass if already in the right unit
+        if get_unit(obj) == target_unit:
+            return obj
+            
+        # 3. Fallback to general conversion
+        return convert(obj, to_unit=target_unit, parser=parser)
 
-def _to_canonical_unit(
-    quantity_or_unit: Any,
-    unit_name: str,
-    parser: Optional[str] = None,
-) -> Any:
-    # Trusted internal callers may already hold naked arrays in canonical units.
-    if type(quantity_or_unit) is np.ndarray:
-        return quantity_or_unit
+    # Inject into the fast_track instance
+    setattr(fast_track, f"to_{name}", to_standard)
 
-    form = get_form(quantity_or_unit)
-
-    if form == "string":
-        return convert(
-            quantity_or_unit,
-            to_unit=unit_name,
-            to_form="string",
-            parser=parser,
-        )
-
-    if get_unit(quantity_or_unit, to_form="string") == unit_name:
-        return quantity_or_unit
-
-    return convert(
-        quantity_or_unit,
-        to_unit=_cached_target_unit(form, unit_name),
-        to_form=form,
-        parser=parser,
-    )
-
-
-@signal(tags=["specialized", "conversion"])
-def to_nanometers(quantity_or_unit: Any, parser: Optional[str] = None) -> Any:
-    """Convert trusted inputs to nanometers using a narrow optimized path."""
-
-    return _to_canonical_unit(quantity_or_unit, "nanometer", parser=parser)
-
-
-@signal(tags=["specialized", "conversion"])
-def to_picoseconds(quantity_or_unit: Any, parser: Optional[str] = None) -> Any:
-    """Convert trusted inputs to picoseconds using a narrow optimized path."""
-
-    return _to_canonical_unit(quantity_or_unit, "picosecond", parser=parser)
-
-
-@signal(tags=["specialized", "conversion"])
-def to_kelvin(quantity_or_unit: Any, parser: Optional[str] = None) -> Any:
-    """Convert trusted inputs to kelvin using a narrow optimized path."""
-
-    return _to_canonical_unit(quantity_or_unit, "kelvin", parser=parser)
-
-
-__all__ = [
-    "_SPECIALIZED_TARGET_UNIT_CACHE",
-    "to_kelvin",
-    "to_nanometers",
-    "to_picoseconds",
-]
+# Pre-register common ones if needed or leave empty for host libraries
+# register_fast_track("nanometers", convert("nm", to_type="unit"))
