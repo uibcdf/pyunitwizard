@@ -66,8 +66,8 @@ This pack reports:
 
 ## Temporary strategy-note closure status
 
-Two March 2026 temporary devguide documents remain open but are now close to
-retirement:
+Two March 2026 temporary devguide documents were used during the hardening
+phase and are now retired:
 
 - `devguide/performance_and_robustness_strategy.md`
 - `devguide/temporal_inestabilities_and_needed_improvements.md`
@@ -85,25 +85,20 @@ What is already settled:
 - a lightweight coordinate-path benchmark now exists in MolSysMT and confirms
   that local `_kernel_inputs` helpers are not the dominant cost.
 
-What still remains open before those temporary notes can be deleted:
+Their durable conclusions have now been migrated into the stable devguide and
+the temporary notes have been removed.
 
-- final confirmation on whether MolSysMT still wants to pursue a lighter
-  internal retrieval path than the current public `get()` contract;
-- final decision on whether any remaining future ideas (`time`,
-  `temperature`, lighter internal fast paths, extra caching) stay on roadmap or
-  move fully into long-term future-direction documents;
-- one last cross-repo feedback round confirming that the current split of
-  responsibilities and the current benchmark evidence are sufficient.
+Final feedback received from the other team:
 
-Requested final feedback from the other team:
-
-- do they consider the current `PyUnitWizard extraction` +
-  `MolSysMT kernel helper` split mature enough to treat as the settled
-  architecture for `1.0.0`;
-- do they still see a concrete need for a lighter internal retrieval path in
-  MolSysMT, or should that remain future work;
-- do they want any of the remaining performance ideas promoted to active
-  roadmap, or can they now live purely as future directions.
+- the current `PyUnitWizard extraction` + `MolSysMT kernel helper` split is
+  considered the correct settled architecture for `1.0.0`;
+- forcing canonical `nm` before structure kernels is considered definitively
+  rejected;
+- a lighter internal retrieval path in MolSysMT is considered deferred, not a
+  `1.0.0` requirement;
+- remaining ideas such as `time`, `temperature`, lighter internal fast paths,
+  and extra caching can now live as future work rather than as active release
+  blockers.
 
 ## Remaining non-local closure step
 

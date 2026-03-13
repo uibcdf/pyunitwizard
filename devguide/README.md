@@ -21,8 +21,6 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
-- `performance_and_robustness_strategy.md`: temporary cross-repo strategy note kept until its conclusions are fully migrated into stable devguide files.
-- `temporal_inestabilities_and_needed_improvements.md`: temporary instability/hardening checkpoint kept until its remaining open items are redistributed to stable devguide files.
 
 ## Current baseline
 
@@ -89,16 +87,3 @@ Collective testing policy:
 
 ### Numpy Fast Path
 The `get_value` API now implements a high-performance bypass for raw numpy arrays. If the input is already a numpy array and no conversion or standardization is requested, it is returned immediately. This reduces the overhead of the `arg_digest` decorator in tight loops.
-
-## Temporary strategy notes
-
-Two March 2026 documents remain intentionally temporary:
-
-- `performance_and_robustness_strategy.md`
-- `temporal_inestabilities_and_needed_improvements.md`
-
-They should be removed once:
-
-- their durable conclusions are migrated into the stable devguide;
-- remaining open questions are tracked in roadmap/checklist documents;
-- and the final cross-repo feedback round has been incorporated.
