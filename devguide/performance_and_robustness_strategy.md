@@ -248,6 +248,25 @@ What remains open:
 - extend the same thinking to other high-value routes such as `time` and
   `temperature` if profiling justifies it.
 
+Initial measurement result:
+
+- MolSysMT now ships a lightweight coordinate-path baseline in
+  `../molsysmt/benchmarks/structure_coordinate_paths.py`;
+- the first stable run uses the bundled `particles 4` `XYZ` trajectory to
+  avoid conflating structure-path cost with heavier topology rebuilds;
+- on that baseline, the local helper layer is clearly not the dominant cost:
+  extraction/alignment stays below `1e-3 s` per call, while the full public
+  wrappers (`get_center`, `get_distances`, `get_rmsd`) stay around
+  `2.1e-1` to `2.6e-1 s`.
+
+This is an important confirmation for the ecosystem plan:
+
+- keeping domain-specific kernel preparation inside MolSysMT is not a
+  measurable architectural mistake;
+- if additional optimization is required, it is more likely to come from the
+  public retrieval/wrapper path or from broader orchestration choices than from
+  `_kernel_inputs` itself.
+
 ## 6. Validation Strategy
 
 Each phase should be accompanied by tests before rollout into the next layer.
