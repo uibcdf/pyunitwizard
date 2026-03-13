@@ -518,6 +518,26 @@ but also:
 - whether it keeps the mental model of quantities simple for both developers and
   scientists.
 
+## 8. Closure Criteria For This Document
+
+This document should not remain a permanent catch-all note. It can be retired
+once the following conditions are met:
+
+- the critical correctness issues recorded here are all either fixed in `main`
+  or explicitly superseded by newer devguide documents;
+- the optional optimizations that were accepted have been absorbed into the
+  normal developer checkpoint documents (`README.md`, roadmap, release notes,
+  evidence packs, or equivalent);
+- the remaining open items have been reduced to explicit future-work bullets in
+  the stable devguide, rather than living here as an active investigation log;
+- the MolSysMT-facing conclusions have been shared back to the other team and
+  feedback has been incorporated;
+- the team agrees that this file is no longer needed as a working checkpoint
+  for unresolved instability diagnosis.
+
+At that point, the useful conclusions should be migrated into the normal
+devguide documents and this file can be removed.
+
 ## 8. Guidance For MolSysMT Feedback
 
 This document should now be used to ask concrete questions, not only to collect

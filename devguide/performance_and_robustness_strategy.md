@@ -340,6 +340,26 @@ Before broadening adoption, the most useful feedback would be:
 - whether the current aggregated redundancy reporting in SMonitor is sufficient
   for workflow diagnosis, or whether they need additional views or summaries.
 
+## 10. Closure Criteria For This Document
+
+This strategy document is temporary by design. It exists to carry the
+cross-repository plan while the architecture is still being actively validated.
+
+It can be retired once:
+
+- the implementation phases recorded here are either completed or clearly
+  downgraded to future work;
+- the first-wave and second-wave conclusions have been incorporated into the
+  stable devguide documents of `pyunitwizard`, `argdigest`, `molsysmt`, and
+  `smonitor`;
+- the other team has reviewed the implemented results and the follow-up
+  adjustments have been made;
+- the remaining work is tracked in normal roadmap/checklist documents instead
+  of needing a dedicated strategy memo.
+
+When that happens, the durable conclusions should be redistributed to the
+relevant permanent documents and this file can be deleted.
+
 ---
 *This plan represents the current consensus between the development team and the
 ecosystem maintainers for the post-hardening performance and robustness work.
