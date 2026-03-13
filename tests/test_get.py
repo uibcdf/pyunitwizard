@@ -2,6 +2,7 @@
 import pyunitwizard as puw
 import pytest
 import unyt
+import numpy as np
 
 astropy_units = pytest.importorskip("astropy.units")
 from astropy import units as u
@@ -58,6 +59,24 @@ def test_get_value_standardized_ignores_to_unit():
     value = puw.get_value(quantity, to_unit='meter', standardized=True)
 
     assert value == pytest.approx(1e9)
+
+
+def test_get_value_supports_value_type_and_dtype():
+    quantity = puw.quantity([[1, 2, 3]], "nanometer")
+
+    value = puw.get_value(quantity, value_type="numpy.ndarray", dtype=np.float32)
+
+    assert isinstance(value, np.ndarray)
+    assert value.dtype == np.float32
+    assert value.shape == (1, 3)
+
+
+def test_get_value_supports_list_output():
+    quantity = puw.quantity(np.array([1.0, 2.0, 3.0]), "nanometer")
+
+    value = puw.get_value(quantity, value_type="list")
+
+    assert value == [1.0, 2.0, 3.0]
 
 #### Tests for get unit ####
 
@@ -125,6 +144,21 @@ def test_get_value_and_unit_standardized_ignores_to_unit():
 
     assert value == pytest.approx(1e9)
     assert unit == 'nanometer'
+
+
+def test_get_value_and_unit_supports_value_type_and_dtype():
+    quantity = puw.quantity([[1, 2, 3]], "nanometer")
+
+    value, unit = puw.get_value_and_unit(
+        quantity,
+        value_type="numpy.ndarray",
+        dtype=np.float32,
+        to_form="string",
+    )
+
+    assert isinstance(value, np.ndarray)
+    assert value.dtype == np.float32
+    assert unit == "nanometer"
 
 #### Tests for get dimensionality ####
 

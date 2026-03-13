@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
+from typing import Any, Optional, Tuple, Union
 
 import numpy as np
 
@@ -13,13 +13,40 @@ from .introspection import get_form
 
 from smonitor import signal
 
+
+def _coerce_extracted_value(
+    value: Union[np.ndarray, float, int],
+    value_type: Optional[Any] = None,
+    dtype: Optional[Any] = None,
+) -> Union[np.ndarray, float, int, list, tuple]:
+    if value_type is None and dtype is None:
+        return value
+
+    if value_type is None:
+        if isinstance(value, np.ndarray):
+            return value.astype(dtype, copy=False)
+        return np.asarray(value, dtype=dtype)
+
+    if value_type in (np.ndarray, "numpy.ndarray", "ndarray"):
+        return np.asarray(value, dtype=dtype)
+
+    if value_type in (list, "list"):
+        return np.asarray(value, dtype=dtype).tolist()
+
+    if value_type in (tuple, "tuple"):
+        return tuple(np.asarray(value, dtype=dtype).tolist())
+
+    raise ValueError("Unsupported value_type.")
+
 @signal(tags=["extraction"])
 def get_value(
     quantity: QuantityLike,
     to_unit: Optional[str] = None,
     parser: Optional[str] = None,
     standardized: Optional[bool] = False,
-) -> Union[np.ndarray, float, int]:
+    value_type: Optional[Any] = None,
+    dtype: Optional[Any] = None,
+) -> Union[np.ndarray, float, int, list, tuple]:
     """ Returns the value of a quantity.
 
         Parameters
@@ -39,7 +66,13 @@ def get_value(
 
     # --- High Performance Fast Path ---
     # If it is already a numpy array and no conversion is requested, return it immediately.
-    if to_unit is None and not standardized and type(quantity) is np.ndarray:
+    if (
+        to_unit is None
+        and not standardized
+        and type(quantity) is np.ndarray
+        and value_type is None
+        and dtype is None
+    ):
         return quantity
     # ----------------------------------
 
@@ -52,9 +85,11 @@ def get_value(
 
     if to_unit is None:
         form = get_form(quantity)
-        return dict_get_value[form](quantity)
+        value = dict_get_value[form](quantity)
+        return _coerce_extracted_value(value, value_type=value_type, dtype=dtype)
 
-    return convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
+    value = convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
+    return _coerce_extracted_value(value, value_type=value_type, dtype=dtype)
 
 
 @signal(tags=["extraction"])
@@ -100,7 +135,9 @@ def get_value_and_unit(
     to_form: Optional[str] = None,
     parser: Optional[str] = None,
     standardized: Optional[bool] = False,
-) -> Tuple[Union[np.ndarray, float, int], UnitLike]:
+    value_type: Optional[Any] = None,
+    dtype: Optional[Any] = None,
+) -> Tuple[Union[np.ndarray, float, int, list, tuple], UnitLike]:
     """ Returns the value and unit of a quantity.
 
         Parameters
@@ -127,6 +164,7 @@ def get_value_and_unit(
         to_unit = None
 
     value = convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
+    value = _coerce_extracted_value(value, value_type=value_type, dtype=dtype)
     unit = convert(
         quantity, to_unit=to_unit, to_form=to_form, parser=parser, to_type="unit"
     )
