@@ -64,6 +64,47 @@ This pack reports:
 - local sibling smoke: done
 - unresolved cross-repo drift in current RC pass: not detected
 
+## Temporary strategy-note closure status
+
+Two March 2026 temporary devguide documents remain open but are now close to
+retirement:
+
+- `devguide/performance_and_robustness_strategy.md`
+- `devguide/temporal_inestabilities_and_needed_improvements.md`
+
+What is already settled:
+
+- the original correctness blockers were real and are fixed in `main`
+  (Astropy recursion, parser/string fast paths, parse-cache hygiene,
+  standardization prebuild placement);
+- the optional optimizations that proved worthwhile are already implemented and
+  reflected in stable devguide documents;
+- the MolSysMT-facing architectural refinement is already implemented:
+  PyUnitWizard owns general extraction/interoperability, while MolSysMT owns
+  local kernel-input shaping/alignment;
+- a lightweight coordinate-path benchmark now exists in MolSysMT and confirms
+  that local `_kernel_inputs` helpers are not the dominant cost.
+
+What still remains open before those temporary notes can be deleted:
+
+- final confirmation on whether MolSysMT still wants to pursue a lighter
+  internal retrieval path than the current public `get()` contract;
+- final decision on whether any remaining future ideas (`time`,
+  `temperature`, lighter internal fast paths, extra caching) stay on roadmap or
+  move fully into long-term future-direction documents;
+- one last cross-repo feedback round confirming that the current split of
+  responsibilities and the current benchmark evidence are sufficient.
+
+Requested final feedback from the other team:
+
+- do they consider the current `PyUnitWizard extraction` +
+  `MolSysMT kernel helper` split mature enough to treat as the settled
+  architecture for `1.0.0`;
+- do they still see a concrete need for a lighter internal retrieval path in
+  MolSysMT, or should that remain future work;
+- do they want any of the remaining performance ideas promoted to active
+  roadmap, or can they now live purely as future directions.
+
 ## Remaining non-local closure step
 
 Release-owner explicit approval to close RC (`devguide/release_0.21.x_rc_checklist.md`).
