@@ -60,6 +60,9 @@ Use these documents as the primary evidence sources while closing each section:
 - [ ] `pyproject.toml` metadata and Python support range are correct.
 - [ ] Build and installation workflows are green (`sdist`, wheel, conda).
 - [ ] README and devguide documents are synchronized with shipped behavior.
+- [ ] Temporary strategy notes (`performance_and_robustness_strategy.md`,
+      `temporal_inestabilities_and_needed_improvements.md`) are either retired
+      or explicitly justified as still needed.
 - [ ] Serialization draft status is explicit in release notes (`devguide/serialization_contract_draft.md`: draft/non-stable unless promoted).
 - [ ] Tag/release notes prepared with migration notes (if any).
 

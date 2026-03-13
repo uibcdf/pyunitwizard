@@ -138,3 +138,5 @@ Current checkpoint:
 - Full test matrix and release pipeline green.
 - `release_1.0.0_checklist.md` completed.
 - No open blocker/high-severity bugs in PyUnitWizard core paths.
+- Temporary strategy/hardening notes retired after their remaining conclusions
+  are migrated into stable devguide documents.

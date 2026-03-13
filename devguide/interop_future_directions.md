@@ -67,8 +67,21 @@ unless explicitly promoted to roadmap.
   - lazy conversion paths,
   - zero-copy extraction where feasible,
   - dimensionality caching with correctness guards.
+  - unit-string caching only if real host-library workloads show it is still a
+    practical bottleneck.
+  - lighter internal fast paths only if they do not weaken public diagnostic
+    contracts.
 
-7. Optional advanced domains
+7. Ecosystem boundary design
+- Keep clarifying the split between:
+  - PyUnitWizard as the general extraction/interoperability layer,
+  - host libraries as the owners of domain-specific kernel preparation.
+- Evaluate whether host libraries need lighter internal retrieval paths than
+  their public convenience APIs once real workflow measurements justify it.
+- Prefer explicit boundary normalization and local kernel helpers over adding
+  new decorator layers unless measurement shows clear value.
+
+8. Optional advanced domains
 - Symbolic physics (`sympy`) for formula-level dimensional reasoning.
 - Data-model integration patterns (`pydantic`) for API payload/contracts.
 - Uncertainty-aware ecosystems (exploratory; no active commitment).
