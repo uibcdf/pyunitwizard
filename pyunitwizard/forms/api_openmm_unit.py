@@ -330,9 +330,15 @@ def quantity_to_pint(quantity: openmm_unit.Quantity):
     from .api_pint import make_quantity as make_pint_quantity
 
     value = get_value(quantity)
-    unit_name = unit_to_string(get_unit(quantity))
+    unit = get_unit(quantity)
 
-    return make_pint_quantity(value, unit_name)
+    # MolSysSuite Mass Policy: Translate OpenMM Molar Mass to Pure Mass
+    dim = dimensionality(quantity)
+    if dim.get("[M]") == 1 and dim.get("[mol]") == -1:
+        # OpenMM "dalton" ([M]/[mol]) -> Pint "dalton" ([M])
+        return make_pint_quantity(value, "dalton")
+
+    return make_pint_quantity(value, str(unit))
 
 def unit_to_pint(unit: openmm_unit.Unit):
     """ Transform a unit from openmm.unit to a pint unit.
