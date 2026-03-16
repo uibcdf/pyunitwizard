@@ -333,8 +333,17 @@ def quantity_to_pint(quantity: openmm_unit.Quantity):
     unit = get_unit(quantity)
 
     # MolSysSuite Mass Policy: Translate OpenMM Molar Mass to Pure Mass
+    # OpenMM expresses atomic/molar mass as dalton = [M][mol]^-1.
+    # Pint dalton is a pure mass [M].  We translate here explicitly so that
+    # molar-mass quantities arrive in molsysmt as pure-mass dalton, not as
+    # a per-mole quantity.  The guard on all other dimensions being zero
+    # ensures we only match true molar-mass scalars (dalton, amu, g/mol…)
+    # and not energy-per-mole quantities like kilojoule_per_mole which share
+    # [M]=1 and [mol]=-1 but also carry [L]=2 and [T]=-2.
     dim = dimensionality(quantity)
-    if dim.get("[M]") == 1 and dim.get("[mol]") == -1:
+    _other_dims = ("[L]", "[T]", "[K]", "[A]", "[Cd]")
+    if (dim.get("[M]") == 1 and dim.get("[mol]") == -1
+            and all(dim.get(d, 0) == 0 for d in _other_dims)):
         # OpenMM "dalton" ([M]/[mol]) -> Pint "dalton" ([M])
         return make_pint_quantity(value, "dalton")
 
