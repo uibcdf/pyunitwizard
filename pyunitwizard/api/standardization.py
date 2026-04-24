@@ -158,9 +158,11 @@ def get_standard_units(
 
 @signal(tags=["standardization"])
 def standardize(
-    quantity_or_unit: QuantityOrUnit, to_form: Optional[str] = None
+    quantity_or_unit: QuantityOrUnit,
+    to_form: Optional[str] = None,
+    to_unit: Optional[str] = None,
 ) -> QuantityOrUnit:
-    """ Concert a quantity or unit to standard units.
+    """ Convert a quantity or unit to standard units.
 
         Parameters
         ----------
@@ -168,17 +170,24 @@ def standardize(
             The quantity or a unit that will be converted.
 
         to_form : str, optional.
-            The form to transform to
+            The form to transform to.  When omitted the configured default form
+            is used.
+
+        to_unit : str, optional.
+            Target unit expressed as a string (e.g. ``"ms"``, ``"angstrom"``).
+            When provided the output is converted to this unit instead of the
+            configured standard unit for the corresponding dimensionality.
+            The form standardization controlled by *to_form* still applies.
 
         Returns
         -------
         QuantityOrUnit
-            The quantity ot unit converted to standard units.
+            The quantity or unit converted to standard (or requested) units.
 
         Raises
         ------
         NoStandardsError
-            If no standard units were defined.
+            If no standard units were defined and *to_unit* was not supplied.
 
     """
 
@@ -187,7 +196,12 @@ def standardize(
     form_in = get_form(quantity_or_unit)
 
     if dict_is_unit[form_in](quantity_or_unit):
+        if to_unit is not None:
+            return convert(quantity_or_unit, to_unit=to_unit, to_form=to_form)
         return get_standard_units(quantity_or_unit, form=to_form)
+
+    if to_unit is not None:
+        return convert(quantity_or_unit, to_unit=to_unit, to_form=to_form)
 
     standard = get_standard_units(quantity_or_unit, form=to_form)
     return convert(quantity_or_unit, to_unit=standard, to_form=to_form)

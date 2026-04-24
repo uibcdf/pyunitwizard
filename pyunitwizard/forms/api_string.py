@@ -58,12 +58,15 @@ def is_unit(quantity_or_unit: str) -> bool:
             True if its a unit.
     """
     from pyunitwizard.kernel import default_form, default_parser
-    from pyunitwizard import convert as _convert, is_unit as _is_unit
+    from pyunitwizard import convert as _convert, get_value as _get_value
 
-    tmp_quantity_or_unit = _convert(
-        quantity_or_unit, to_form=default_form, parser=default_parser, to_type="unit"
-    )
-    return _is_unit(tmp_quantity_or_unit)
+    # Parse the string as-is (quantity, not forced to unit) and check whether
+    # its numeric value is 1.  A pure unit string like "nanometer" parses as
+    # Quantity(1, 'nm'); a quantity string like "250 ms" parses as
+    # Quantity(250, 'ms').  This is consistent with the public puw.is_unit
+    # heuristic in api/introspection.py.
+    tmp = _convert(quantity_or_unit, to_form=default_form, parser=default_parser)
+    return _get_value(tmp) == 1
 
 def dimensionality(quantity_or_unit: str) -> Dict[str, int]:
     """ Returns the dimensionality of the quantity or unit.
