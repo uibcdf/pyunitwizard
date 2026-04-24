@@ -384,6 +384,61 @@ def set_standard_units(standard_units: List[str]) -> None:
         kernel.tentative_base_standards_units = None
         kernel.tentative_base_standards_matrix = None
 
+def add_standard_units(standard_units: List[str]) -> None:
+    """Add or replace standard units without discarding the full existing set.
+
+    Each incoming unit is matched against the current standards by
+    dimensionality.  Any existing standard that shares its dimensionality
+    with an incoming unit is replaced; all other existing standards are
+    preserved.  Calling this function is equivalent to calling
+    ``set_standard_units`` with a merged list, but avoids the need to
+    enumerate the whole set when only one or a few standards need changing.
+
+    Parameters
+    ----------
+    standard_units : list of str or str
+        Standard unit name(s) to add or, if a unit with the same
+        dimensionality is already registered, to replace.
+
+    Returns
+    -------
+    None
+        Runtime standard-unit maps are rebuilt in place.
+
+    Raises
+    ------
+    ValueError
+        If `standard_units` is neither a string nor a list/tuple.
+    """
+    if type(standard_units) is str:
+        standard_units = [standard_units]
+    elif type(standard_units) not in [list, tuple]:
+        raise ValueError
+
+    # Compute dimensionality arrays for each incoming unit
+    new_dim_arrays = []
+    for unit in standard_units:
+        dim = get_dimensionality(convert(unit, to_type='unit'))
+        dim_array = np.array(
+            [dim[ii] for ii in kernel.order_fundamental_units], dtype=float
+        )
+        new_dim_arrays.append(dim_array)
+
+    # Keep existing standards whose dimensionality is not covered by any new unit
+    surviving = []
+    for existing_unit, existing_dim in kernel.standards.items():
+        existing_array = np.array(
+            [existing_dim[ii] for ii in kernel.order_fundamental_units], dtype=float
+        )
+        superseded = any(
+            np.allclose(existing_array, new_array) for new_array in new_dim_arrays
+        )
+        if not superseded:
+            surviving.append(existing_unit)
+
+    set_standard_units(surviving + list(standard_units))
+
+
 def add_constant(constant_name, value, unit) -> None:
     """Register a runtime constant.
 

@@ -89,6 +89,59 @@ def test_set_standard_units_tie_candidate_path_with_combination_units():
     assert 'nm*ps' in standards
     assert 'm*s' in standards
 
+def test_add_standard_units_adds_new_dimensionality():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.add_standard_units(['K'])
+    standards = puw.configure.get_standard_units()
+    assert 'nm' in standards
+    assert 'ps' in standards
+    assert 'K' in standards
+
+
+def test_add_standard_units_replaces_same_dimensionality():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.add_standard_units(['angstrom'])
+    standards = puw.configure.get_standard_units()
+    # angstrom replaces nm (both are length); ps must survive
+    assert 'angstrom' in standards
+    assert 'nm' not in standards
+    assert 'ps' in standards
+
+
+def test_add_standard_units_accepts_single_string():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm'])
+    puw.configure.add_standard_units('ps')
+    standards = puw.configure.get_standard_units()
+    assert 'nm' in standards
+    assert 'ps' in standards
+
+
+def test_add_standard_units_rejects_invalid_type():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    try:
+        puw.configure.add_standard_units(42)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Expected ValueError for invalid type")
+
+
+def test_add_standard_units_rebuilds_matrices():
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.add_standard_units(['K'])
+    assert puw.kernel.dimensional_fundamental_standards_matrix is not None
+    assert puw.kernel.dimensional_fundamental_standards_units is not None
+
+
 def test_add_constant_registers_new_constant():
     from pyunitwizard.configure import configure as configure_module
     from pyunitwizard.constants import _constants
