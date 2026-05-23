@@ -180,6 +180,12 @@ def load_library(library_names: Union[str, List[str]]):
 
     for library in library_names:
         if library not in kernel.loaded_libraries:
+            from depdigest import is_installed
+            if not is_installed(library):
+                raise ModuleNotFoundError(
+                    f"The library '{library}' is required as a backend for PyUnitWizard but it is not installed. "
+                    f"Please install it using your package manager (pip or conda)."
+                )
             forms.load_library(library)
 
     if kernel.default_form is None:

@@ -1,11 +1,13 @@
 """PyUnitWizard
-Quantities and units assistant."""
+Quantities and units assistant.
+"""
 
 from __future__ import annotations
 
 import sys
 import types
 import warnings
+import importlib
 from importlib.metadata import version, PackageNotFoundError
 
 try:
@@ -26,41 +28,69 @@ def __print_version__() -> None:
     print("PyUnitWizard version " + __version__)
 
 
-from . import api as _api
+# Central lazy-loading registry mapping public API submodules and functions
+# to their respective internal import paths.
+_LAZY_ATTRIBUTES = {
+    # Submodules
+    'configure': '.configure',
+    'constants': '.constants',
+    'utils': '.utils',
 
-# Add imports here
-from .api import (
-    are_close,
-    are_compatible,
-    are_equal,
-    compatibility,
-    change_value,
-    check,
-    convert,
-    get_dimensionality,
-    get_form,
-    get_standard_units,
-    get_unit,
-    get_value,
-    get_value_and_unit,
-    is_dimensionless,
-    is_quantity,
-    is_unit,
-    quantity,
-    similarity,
-    fast_track,
-    register_fast_track,
-    standardize,
-                to_string,
-    unit,
-    context,
-)
-from . import configure
-from . import kernel as _kernel
-from . import constants
-from . import utils
+    # API functions
+    'are_close': ('.api', 'are_close'),
+    'are_compatible': ('.api', 'are_compatible'),
+    'are_equal': ('.api', 'are_equal'),
+    'compatibility': ('.api', 'compatibility'),
+    'change_value': ('.api', 'change_value'),
+    'check': ('.api', 'check'),
+    'convert': ('.api', 'convert'),
+    'get_dimensionality': ('.api', 'get_dimensionality'),
+    'get_form': ('.api', 'get_form'),
+    'get_standard_units': ('.api', 'get_standard_units'),
+    'get_unit': ('.api', 'get_unit'),
+    'get_value': ('.api', 'get_value'),
+    'get_value_and_unit': ('.api', 'get_value_and_unit'),
+    'is_dimensionless': ('.api', 'is_dimensionless'),
+    'is_quantity': ('.api', 'is_quantity'),
+    'is_unit': ('.api', 'is_unit'),
+    'quantity': ('.api', 'quantity'),
+    'similarity': ('.api', 'similarity'),
+    'fast_track': ('.api', 'fast_track'),
+    'register_fast_track': ('.api', 'register_fast_track'),
+    'standardize': ('.api', 'standardize'),
+    'to_string': ('.api', 'to_string'),
+    'unit': ('.api', 'unit'),
+    'context': ('.api', 'context'),
+}
 
-__all__ = list(_api.__all__)
+__all__ = sorted(list(_LAZY_ATTRIBUTES.keys()))
+
+
+def __getattr__(name: str):
+    if name in _LAZY_ATTRIBUTES:
+        target = _LAZY_ATTRIBUTES[name]
+        if isinstance(target, str):
+            mod = importlib.import_module(target, __name__)
+            globals()[name] = mod
+            return mod
+        elif isinstance(target, tuple):
+            submod_path, attr_name = target
+            mod = importlib.import_module(submod_path, __name__)
+            val = getattr(mod, attr_name)
+            globals()[name] = val
+            return val
+
+    # Dynamic fallback to fast_track for convenience (e.g. puw.to_nanometers)
+    if name.startswith("to_"):
+        ft = __getattr__("fast_track")
+        if hasattr(ft, name):
+            return getattr(ft, name)
+
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+def __dir__():
+    return sorted(list(globals().keys()) + list(_LAZY_ATTRIBUTES.keys()))
 
 
 def _create_main_compat_module() -> types.ModuleType:
@@ -83,42 +113,33 @@ def _create_main_compat_module() -> types.ModuleType:
             )
             warned = True
 
-    def __getattr__(name: str) -> object:
-        if name in _api.__all__:
+    def __getattr_compat__(name: str) -> object:
+        if name in _LAZY_ATTRIBUTES:
             _emit_warning()
-            return getattr(_api, name)
+            # Defer attribute loading through our package level lazy loader
+            return globals()[name] if name in globals() else __getattr__(name)
+
+        # Dynamic fallback to fast_track for convenience (e.g. puw.to_nanometers)
+        if name.startswith("to_"):
+            _emit_warning()
+            return __getattr__(name)
+
         raise AttributeError(f"module 'pyunitwizard.main' has no attribute {name!r}")
 
-    def __dir__() -> list[str]:
+    def __dir_compat__() -> list[str]:
         return sorted(__all__)
 
-    module.__getattr__ = __getattr__  # type: ignore[assignment]
-    module.__dir__ = __dir__  # type: ignore[assignment]
+    module.__getattr__ = __getattr_compat__  # type: ignore[assignment]
+    module.__dir__ = __dir_compat__  # type: ignore[assignment]
     module.__all__ = tuple(__all__)
     return module
 
 
 sys.modules.setdefault("pyunitwizard.main", _create_main_compat_module())
 
+# Initialize core kernel state eagerly
+from . import kernel as _kernel
 _kernel.initialize()
 
-# --- Optional Backends Initialization via DepDigest logic ---
-from depdigest import is_installed
-
-if is_installed('pint'):
-    configure.load_library('pint')
-
-if is_installed('openmm.unit'):
-    configure.load_library('openmm.unit')
-
-if is_installed('unyt'):
-    configure.load_library('unyt')
-
-if is_installed('astropy.units'):
-    configure.load_library('astropy.units')
-
-if is_installed('physipy'):
-    configure.load_library('physipy')
-
-if is_installed('quantities'):
-    configure.load_library('quantities')
+# Eager library loading has been completely removed to achieve ultra-fast startup times.
+# Backends are loaded perezosamente on first demand during form digestion.
