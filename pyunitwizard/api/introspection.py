@@ -21,7 +21,7 @@ _DIMENSIONALITY_CACHE: Dict[tuple[str, str], Dict[str, int]] = {}
 
 
 @signal(tags=["introspection"], exception_level="DEBUG")
-def get_form(quantity_or_unit: QuantityOrUnit) -> str:
+def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> Optional[str]:
     """ Returns the form of a quantity as a string.
 
         Parameters
@@ -29,9 +29,12 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
         quantity_or_unit : QuantityOrUnit
             A quanitity or a unit
 
+        raise_exception : bool, default=True
+            Whether to raise NotImplementedFormError if the form is not found.
+
         Returns
         -------
-        {"string", "pint", "openmm.unit", "unyt"}
+        {"string", "pint", "openmm.unit", "unyt", None}
             The form of the quantity
     """
 
@@ -69,7 +72,9 @@ def get_form(quantity_or_unit: QuantityOrUnit) -> str:
             _TYPE_TO_FORM_CACHE[obj_type] = form_name
             return form_name
 
-    raise NotImplementedFormError(type(quantity_or_unit))
+    if raise_exception:
+        raise NotImplementedFormError(type(quantity_or_unit))
+    return None
 
 
 
@@ -106,7 +111,10 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
             return False
     else:
         try:
-            form = get_form(quantity_or_unit)
+            form = get_form(quantity_or_unit, raise_exception=False)
+            if form is None:
+                emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
+                return False
             output = dict_is_quantity[form](quantity_or_unit)
         except Exception:
             emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
