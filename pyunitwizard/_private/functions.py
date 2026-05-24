@@ -1,10 +1,8 @@
-import inspect
+import sys
 
 def caller_name(skip=3):
-
-    return inspect.stack()[skip].function
-
-    #all_stack_frames = stack()
-    #caller_stack_frame = all_stack_frames[1]
-    #caller_name = caller_stack_frame[3]
+    try:
+        return sys._getframe(skip).f_code.co_name
+    except ValueError:
+        return "unknown"
 

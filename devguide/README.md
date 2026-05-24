@@ -87,3 +87,8 @@ Collective testing policy:
 
 ### Numpy Fast Path
 The `get_value` API now implements a high-performance bypass for raw numpy arrays. If the input is already a numpy array and no conversion or standardization is requested, it is returned immediately. This reduces the overhead of the `arg_digest` decorator in tight loops.
+
+### ⚡ Exception-Free Introspection Flow (May 2026)
+To avoid severe control-flow exception overhead in type checking:
+- **Graceful Form Probing**: `get_form()` has been extended to support `raise_exception=False`. When a form is not recognized, it returns `None` instead of raising a costly `NotImplementedFormError`.
+- **Introspection Bypass**: `is_quantity()` queries `get_form(..., raise_exception=False)` to check form validity. If it returns `None`, it gracefully returns `False` immediately. This completely avoids raising exceptions for common Python types, bypassing exception catalog overhead, stack-frame traversal, and telemetry signaling.
