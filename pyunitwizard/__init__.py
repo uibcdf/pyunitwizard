@@ -43,6 +43,7 @@ _LAZY_ATTRIBUTES = {
     'compatibility': ('.api', 'compatibility'),
     'change_value': ('.api', 'change_value'),
     'check': ('.api', 'check'),
+    'conversion_factor': ('.api', 'conversion_factor'),
     'convert': ('.api', 'convert'),
     'get_dimensionality': ('.api', 'get_dimensionality'),
     'get_form': ('.api', 'get_form'),

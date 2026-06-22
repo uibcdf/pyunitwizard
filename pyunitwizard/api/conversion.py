@@ -20,6 +20,7 @@ from ..forms import (
 )
 from ..parse import parse as _parse
 from .introspection import get_form, is_unit
+from .. import kernel
 
 
 from smonitor import signal
@@ -215,6 +216,86 @@ def convert(
 
 
 @signal(tags=["conversion"], exception_level="DEBUG")
+def conversion_factor(
+    from_unit: str,
+    to_unit: str,
+    parser: Optional[str] = None,
+) -> float:
+    """Return the multiplicative factor converting magnitudes between two units.
+
+    The returned factor ``s`` satisfies ``value_in_to_unit = s * value_in_from_unit``.
+    It is computed once per ``(from_unit, to_unit, parser, default_form)`` and cached,
+    so repeated calls in hot loops avoid constructing a quantity on every conversion.
+    This is the fast path for converting bare magnitudes; for full quantities (or
+    one-off conversions) use :func:`convert`.
+
+    Only offset-free (purely multiplicative) unit pairs are supported. Affine pairs,
+    such as ``degC`` -> ``kelvin``, carry an additive offset that no single factor can
+    express; those raise :class:`BadCallError` and must go through :func:`convert`.
+
+    Parameters
+    ----------
+    from_unit : str
+        Source unit of the magnitude.
+    to_unit : str
+        Target unit of the magnitude.
+    parser : {"pint", "openmm.unit", "astropy.units"}, optional
+        Parser used to interpret the unit strings.
+
+    Returns
+    -------
+    float
+        The multiplicative conversion factor.
+
+    Raises
+    ------
+    BadCallError
+        If the unit pair is affine (offset-bearing).
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.conversion_factor('nm', 'angstroms')
+    10.0
+    """
+
+    resolved_parser = digest_parser(parser)
+    cache = kernel.conversion_factor_cache
+    key = (from_unit, to_unit, resolved_parser, kernel.default_form)
+    cached = cache.get(key)
+    if cached is not None:
+        return cached
+
+    from .construction import quantity
+
+    offset = float(
+        convert(
+            quantity(0.0, from_unit, parser=resolved_parser),
+            to_unit=to_unit,
+            parser=resolved_parser,
+            to_type="value",
+        )
+    )
+    unit_value = float(
+        convert(
+            quantity(1.0, from_unit, parser=resolved_parser),
+            to_unit=to_unit,
+            parser=resolved_parser,
+            to_type="value",
+        )
+    )
+    if not np.isclose(offset, 0.0):
+        raise BadCallError(
+            f"conversion_factor requires offset-free units; '{from_unit}' -> "
+            f"'{to_unit}' is affine. Use convert() for offset-bearing units."
+        )
+
+    factor = unit_value - offset
+    cache[key] = factor
+    return factor
+
+
+@signal(tags=["conversion"], exception_level="DEBUG")
 def to_string(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,
@@ -252,7 +333,7 @@ def to_string(
     )
 
 
-__all__ = ["convert", "to_string"]
+__all__ = ["convert", "conversion_factor", "to_string"]
 def _parse_unit_string(unit_string: str, parser: str, to_form: str):
     """Parse a unit string robustly across parsers.
 

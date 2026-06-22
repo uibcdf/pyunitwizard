@@ -7,7 +7,7 @@ from .introspection import (
     is_quantity,
     is_unit,
 )
-from .conversion import convert, to_string
+from .conversion import convert, conversion_factor, to_string
 from .construction import quantity, unit
 from .extraction import change_value, get_unit, get_value, get_value_and_unit
 from .comparison import (
@@ -29,6 +29,7 @@ __all__ = [
     "change_value",
     "check",
     "compatibility",
+    "conversion_factor",
     "convert",
     "get_dimensionality",
     "get_form",
