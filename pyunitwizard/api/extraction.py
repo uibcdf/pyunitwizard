@@ -36,6 +36,15 @@ def _coerce_extracted_value(
     if value_type in (tuple, "tuple"):
         return tuple(np.asarray(value, dtype=dtype).tolist())
 
+    if value_type in (float, "float", int, "int"):
+        arr = np.asarray(value)
+        if arr.ndim != 0 and arr.size != 1:
+            raise ValueError(
+                f"value_type={value_type!r} requires a scalar quantity, got shape {arr.shape}."
+            )
+        scalar = arr.reshape(())
+        return float(scalar) if value_type in (float, "float") else int(scalar)
+
     raise ValueError("Unsupported value_type.")
 
 @signal(tags=["extraction"])

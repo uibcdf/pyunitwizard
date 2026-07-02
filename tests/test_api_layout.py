@@ -13,6 +13,7 @@ API_SYMBOLS = [
     "compatibility",
     "context",
     "convert",
+    "ensure_quantity",
     "get_dimensionality",
     "get_form",
     "get_standard_units",

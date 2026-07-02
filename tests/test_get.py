@@ -78,6 +78,33 @@ def test_get_value_supports_list_output():
 
     assert value == [1.0, 2.0, 3.0]
 
+
+def test_get_value_supports_scalar_float_output():
+    quantity = puw.quantity(3.5, "angstrom")
+
+    value = puw.get_value(quantity, to_unit="nanometer", value_type=float)
+
+    assert value == pytest.approx(0.35)
+    assert type(value) is float
+
+
+def test_get_value_supports_scalar_int_output_and_string_alias():
+    assert puw.get_value(puw.quantity(4.0, "nanometer"), value_type=int) == 4
+    assert type(puw.get_value(puw.quantity(4.0, "nanometer"), value_type="int")) is int
+
+
+def test_get_value_scalar_output_collapses_size_one_array():
+    quantity = puw.quantity(np.array([2.0]), "nanometer")
+
+    assert puw.get_value(quantity, value_type=float) == pytest.approx(2.0)
+
+
+def test_get_value_scalar_output_rejects_non_scalar():
+    quantity = puw.quantity(np.array([1.0, 2.0, 3.0]), "nanometer")
+
+    with pytest.raises(ValueError):
+        puw.get_value(quantity, value_type=float)
+
 #### Tests for get unit ####
 
 def test_get_unit_pint(pint_unit_registry, pint_quantity):

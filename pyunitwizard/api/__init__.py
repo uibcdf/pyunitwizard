@@ -19,7 +19,7 @@ from .comparison import (
 )
 from .standardization import get_standard_units, standardize
 from .specialized import fast_track, register_fast_track
-from .validation import check
+from .validation import check, ensure_quantity
 from .context import context
 
 __all__ = [
@@ -31,6 +31,7 @@ __all__ = [
     "compatibility",
     "conversion_factor",
     "convert",
+    "ensure_quantity",
     "get_dimensionality",
     "get_form",
     "get_standard_units",

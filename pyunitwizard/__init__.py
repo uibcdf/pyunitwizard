@@ -45,6 +45,7 @@ _LAZY_ATTRIBUTES = {
     'check': ('.api', 'check'),
     'conversion_factor': ('.api', 'conversion_factor'),
     'convert': ('.api', 'convert'),
+    'ensure_quantity': ('.api', 'ensure_quantity'),
     'get_dimensionality': ('.api', 'get_dimensionality'),
     'get_form': ('.api', 'get_form'),
     'get_standard_units': ('.api', 'get_standard_units'),
