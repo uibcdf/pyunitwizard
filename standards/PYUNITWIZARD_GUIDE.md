@@ -59,6 +59,15 @@ val = puw.get_value(q, to_unit='angstroms')
 unit = puw.get_unit(q)
 value, unit = puw.get_value_and_unit(q) # Recommended shortcut
 ```
+`get_value` can coerce the output type/shape for you — prefer this over manual
+`float(...)` / `np.asarray(...)` wrapping:
+```python
+r  = puw.get_value(q, to_unit='angstroms', value_type=float)              # Python scalar (errors if non-scalar)
+xs = puw.get_value(q, to_unit='angstroms', value_type=list, dtype=float)  # nested list of floats
+a  = puw.get_value(q, to_unit='angstroms', value_type=np.ndarray, dtype=np.float32)
+```
+`value_type` accepts `float`/`int` (scalar), `list`, `tuple`, `np.ndarray` (and
+their string aliases); `dtype` sets the array dtype.
 
 ### 3. Comparison (Science-Aware)
 Never use `==` for quantities. Use the API to handle tolerance and compatibility.
@@ -88,6 +97,20 @@ if puw.is_dimensionless(q):
 if not puw.check(q, dimensionality={'[L]': 1}, shape=(3,)):
     raise ValueError("Expected a 3D length vector")
 ```
+
+To **digest a physical-magnitude argument** in one call — the canonical pattern
+for argument validators (e.g. ArgDigest digesters) — use `ensure_quantity`:
+```python
+# Parse strings, accept any recognized quantity form, REJECT bare numbers,
+# require [L] dimensionality, and return it standardized (nm) — or in to_unit.
+radius = puw.ensure_quantity(radius, dimensionality={'[L]': 1})
+r_ang  = puw.ensure_quantity(radius, dimensionality={'[L]': 1}, to_unit='angstroms', standardized=False)
+```
+`ensure_quantity` raises `ArgumentError` when the value is not a quantity (bare
+number) or does not match `dimensionality`. It replaces the hand-rolled
+`parse → is_quantity → check → standardize → raise` block. This is how the suite
+enforces "physical magnitudes must carry explicit units; bare numbers are not
+accepted."
 
 ## SMonitor Integration
 
