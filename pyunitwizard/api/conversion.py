@@ -201,7 +201,9 @@ def convert(
                     output = dict_translate_quantity[form_in][to_form](quantity_or_unit)
 
             if to_unit is not None:
-                to_unit = convert(to_unit, to_form=to_form)
+                unit_form = get_form(to_unit)
+                if unit_form != to_form:
+                    to_unit = dict_translate_unit[unit_form][to_form](to_unit)
                 output = dict_convert[to_form](output, to_unit)
 
             if to_type == "unit":

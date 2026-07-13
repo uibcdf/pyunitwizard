@@ -33,6 +33,9 @@ def run_baseline(iterations: int = 5000, repeats: int = 5) -> Dict[str, object]:
 
     benchmarks: Dict[str, Callable[[], None]] = {
         "convert_nm_to_angstrom": lambda: puw.convert(quantity, to_unit="angstrom"),
+        "get_value_nm_to_angstrom": lambda: puw.get_value(
+            quantity, to_unit="angstrom"
+        ),
         "get_form_quantity": lambda: puw.get_form(quantity),
         "is_quantity_quantity": lambda: puw.is_quantity(quantity),
         "parse_string_quantity": lambda: puw.quantity("10 angstrom"),

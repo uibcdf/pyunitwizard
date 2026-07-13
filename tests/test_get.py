@@ -10,6 +10,7 @@ from astropy import units as u
 @pytest.fixture
 def pint_unit_registry():
     """ Returns a pint unit registry"""
+    puw.configure.load_library(["pint"])
     return puw.forms.api_pint.ureg
 
 @pytest.fixture
@@ -20,6 +21,7 @@ def pint_quantity(pint_unit_registry):
 @pytest.fixture
 def openmm_quantity():
     """ Returns an openmm quantity"""
+    puw.configure.load_library(["openmm.unit"])
     openmm_unit = puw.forms.api_openmm_unit.openmm_unit
     return 2.5 * openmm_unit.nanometer/openmm_unit.picoseconds
 

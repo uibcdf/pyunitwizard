@@ -20,6 +20,14 @@ _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
 _DIMENSIONALITY_CACHE: Dict[tuple[str, str], Dict[str, int]] = {}
 
 
+def _register_detected_form(form: str) -> str:
+    if form != "string" and form not in kernel.loaded_libraries:
+        from pyunitwizard.configure import load_library
+
+        load_library(form)
+    return form
+
+
 @signal(tags=["introspection"], exception_level="DEBUG")
 def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> Optional[str]:
     """ Returns the form of a quantity as a string.
@@ -50,27 +58,27 @@ def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> 
     type_str = str(obj_type)
     if "pint" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "pint"
-        return "pint"
+        return _register_detected_form("pint")
     if "openmm" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "openmm.unit"
-        return "openmm.unit"
+        return _register_detected_form("openmm.unit")
     if "unyt" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "unyt"
-        return "unyt"
+        return _register_detected_form("unyt")
     if "astropy" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "astropy.units"
-        return "astropy.units"
+        return _register_detected_form("astropy.units")
     if "physipy" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "physipy"
-        return "physipy"
+        return _register_detected_form("physipy")
     if "quantities" in type_str:
         _TYPE_TO_FORM_CACHE[obj_type] = "quantities"
-        return "quantities"
+        return _register_detected_form("quantities")
 
     for form_name, aux_is_form in dict_is_form.items():
         if aux_is_form(quantity_or_unit):
             _TYPE_TO_FORM_CACHE[obj_type] = form_name
-            return form_name
+            return _register_detected_form(form_name)
 
     if raise_exception:
         raise NotImplementedFormError(type(quantity_or_unit))

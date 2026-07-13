@@ -18,9 +18,10 @@ def test_quantity_openmm_unit():
 
 def test_quantity_pint():
 
-    ureg = puw.forms.api_pint.ureg
-    assert puw.quantity(2.5, 
-        'nanometers/picoseconds') == ureg.Quantity(2.5, 'nanometers/picoseconds')
+    with loaded_libraries(["pint"]):
+        ureg = puw.forms.api_pint.ureg
+        assert puw.quantity(2.5,
+            'nanometers/picoseconds') == ureg.Quantity(2.5, 'nanometers/picoseconds')
 
 def test_quantity_unyt():
 
