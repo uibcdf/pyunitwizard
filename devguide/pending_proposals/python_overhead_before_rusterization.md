@@ -1,214 +1,214 @@
-# Propuesta: el overhead de Python **antes** de rusterizar
+# Proposal: Python overhead **before** rusterizing
 
-**Estado:** propuesta (2026-07-12). **Todo medido**, con el comando al lado.
-**Origen:** perfilado desde MolSysViewer, investigando por qué una operación del visor costaba
-10 ms. Ver `molsysviewer/devguide/pending_proposals/import_cost_and_lazy_loading.md`.
-**Relación con [`rusterization_pyunitwizard_core.md`](rusterization_pyunitwizard_core.md):** no lo
-contradice, pero **cambia su orden**. Léase primero éste.
+**Status:** proposal (2026-07-12). **Everything measured**, with the command next to it.
+**Origin:** profiling from MolSysViewer, investigating why a viewer operation cost 10 ms.
+See `molsysviewer/devguide/pending_proposals/import_cost_and_lazy_loading.md`.
+**Relation to [`rusterization_pyunitwizard_core.md`](rusterization_pyunitwizard_core.md):** it does
+not contradict it, but it **changes its order**. Read this one first.
 
 ---
 
-## 1. El dato que cambia la prioridad
+## 1. The figure that changes the priority
 
-Medido sobre `puw.get_value(q, to_unit="nanometers")` (Python 3.13, pint como *form* por defecto):
+Measured on `puw.get_value(q, to_unit="nanometers")` (Python 3.13, pint as the default form):
 
-| | coste | % |
+| | cost | % |
 |---|---|---|
-| **pint desnudo — el trabajo real** | **17 µs** | **7 %** |
-| overhead de los decoradores, **incluso desactivados** | 127 µs | 49 % |
-| telemetría activa (SMonitor) | 118 µs | 45 % |
-| **total `puw.get_value`** | **262 µs** | **15× pint** |
+| **bare pint -- the real work** | **17 us** | **7 %** |
+| decorator overhead, **even when disabled** | 127 us | 49 % |
+| telemetry enabled (SMonitor) | 118 us | 45 % |
+| **total `puw.get_value`** | **262 us** | **15x pint** |
 
 ```bash
 python -c "
 import timeit, pint
-from pyunitwizard import ...   # configurado con pint
+from pyunitwizard import ...   # configured with pint
 ureg = pint.UnitRegistry(); qp = 1.5*ureg.angstrom; qw = puw.quantity(1.5,'angstroms')
-print(timeit.timeit(lambda: qp.to(ureg.nanometer).magnitude, number=3000)/3000*1e6, 'µs  pint')
-print(timeit.timeit(lambda: puw.get_value(qw, to_unit='nanometers'), number=3000)/3000*1e6, 'µs  puw')"
+print(timeit.timeit(lambda: qp.to(ureg.nanometer).magnitude, number=3000)/3000*1e6, 'us  pint')
+print(timeit.timeit(lambda: puw.get_value(qw, to_unit='nanometers'), number=3000)/3000*1e6, 'us  puw')"
 ```
 
-**El cálculo es el 7 % del coste. El 93 % es la capa que lo envuelve.**
+**The computation is 7 % of the cost. The other 93 % is the layer wrapping it.**
 
-### Por qué esto afecta a la propuesta de rusterización
+### Why this affects the rusterization proposal
 
-`rusterization_pyunitwizard_core.md` propone llevar la validación y conversión a Rust, y sitúa el
-cuello de botella en *"el wrapper de Pint, el parseo de strings de unidades y el GIL"*.
+`rusterization_pyunitwizard_core.md` proposes moving validation and conversion to Rust, and places
+the bottleneck in *"the Pint wrapper, unit string parsing and the GIL"*.
 
-**Si el cálculo se hiciera infinitamente rápido —0 µs— la llamada seguiría costando 245 µs.** Una
-mejora del **7 %**, a cambio de una toolchain de Rust, PyO3, Maturin y un core nativo que
-mantener.
+**If the computation were infinitely fast -- 0 us -- the call would still cost 245 us.** A **7 %**
+improvement, in exchange for a Rust toolchain, PyO3, Maturin and a native core to maintain.
 
-Eso **no invalida** la rusterización: para operaciones sobre arrays **muy** grandes (una trayectoria
-entera de coordenadas en una sola llamada) el cálculo sí puede llegar a dominar. Pero el caso común
-del ecosistema no es *una llamada gigante*: son **miles de llamadas pequeñas**, y ahí el coste es
-**fijo** — medido, un array de 1000×3 cuesta **lo mismo que un escalar** (253 µs vs 262 µs), porque
-el tiempo no está en los datos, está en el despacho.
+That does **not** invalidate rusterization: for operations on **very** large arrays (a whole
+coordinate trajectory in a single call) the computation can indeed come to dominate. But the common
+case in this ecosystem is not *one giant call*: it is **thousands of small ones**, and there the cost
+is **fixed** -- measured, a 1000x3 array costs **the same as a scalar** (253 us vs 262 us), because
+the time is not in the data, it is in the dispatch.
 
-**Recomendación: quitar el overhead de Python primero.** Cuando la llamada baje de 262 µs a ~30 µs,
-se podrá volver a medir y **entonces** decidir si el cálculo importa lo suficiente como para
-rusterizarlo. Optimizar el 7 % antes que el 93 % es invertir el orden.
+**Recommendation: remove the Python overhead first.** Once the call drops from 262 us to ~30 us it
+can be measured again, and **then** we can decide whether the computation matters enough to
+rusterize. Optimizing the 7 % before the 93 % is doing it backwards.
 
 ---
 
-## 2. Los tres problemas, medidos
+## 2. The three problems, measured
 
-### 2a. El coste de los decoradores — **se arregla en SMonitor y DepDigest, no aquí**
+### 2a. Decorator cost -- **fixed in SMonitor and DepDigest, not here**
 
-Con SMonitor **desactivado**, `puw.get_value` sigue costando **143 µs**, frente a los 17 µs del
-trabajo real: **el modo apagado cuesta 7,5× el cálculo.** La causa es que el `if not enabled` llega
-*después* de construir el manager, y que DepDigest se decora a sí mismo con `@signal`.
+With SMonitor **disabled**, `puw.get_value` still costs **143 us**, against the 17 us of real work:
+**the off mode costs 7.5x the computation.** The cause is that the `if not enabled` check happens
+*after* the manager is built, and that DepDigest decorates itself with `@signal`.
 
-**Esos dos arreglos no pertenecen a este repositorio, y no se documentan aquí.** Están, con las
-mediciones, donde toca:
+**Those two fixes do not belong to this repository and are not documented here.** They live, with
+their measurements, where they should:
 
-- `smonitor/devguide/pending_proposals/overhead_optimization_and_profiles.md` — el *fast path* del
-  decorador. *(La propuesta ya existía; le faltaban los números.)*
-- `depdigest/devguide/pending_proposals/fast_dependency_cache.md` — el cache, más dos defectos que
-  esa propuesta no cubría: el auto-decorado con `@signal` y el `resolve_config()` por llamada.
+- `smonitor/devguide/pending_proposals/overhead_optimization_and_profiles.md` -- the decorator's
+  fast path. *(The proposal already existed; it was missing the numbers.)*
+- `depdigest/devguide/pending_proposals/fast_dependency_cache.md` -- the cache, plus two defects
+  that proposal did not cover: the self-decoration with `@signal` and the per-call
+  `resolve_config()`.
 
-**Se mencionan aquí sólo porque el coste se paga en PyUnitWizard**, y porque sin ellos los arreglos
-de §2b y §2c rinden mucho menos de lo que podrían.
+**They are mentioned here only because the cost is paid in PyUnitWizard**, and because without them
+the fixes in 2b and 2c yield far less than they could.
 
-### 2b. PyUnitWizard entra en 22 funciones internas por llamada, **repitiendo trabajo**
+### 2b. PyUnitWizard enters 22 internal functions per call, **repeating work**
 
-Perfilado de 100 llamadas a `puw.get_value`:
+Profile of 100 calls to `puw.get_value`:
 
 ```
-   3×  _private/forms.py:8    digest_form        ← detecta el mismo "form" TRES veces
-   3×  _private/forms.py:38   digest_to_form
-   2×  api/introspection.py   get_form
-   2×  api/conversion.py:68   convert
-   2×  _private/parsers.py:3  digest_parser
+   3x  _private/forms.py:8    digest_form        <- detects the same form THREE times
+   3x  _private/forms.py:38   digest_to_form
+   2x  api/introspection.py   get_form
+   2x  api/conversion.py:68   convert
+   2x  _private/parsers.py:3  digest_parser
    ───────────────────────────────────────────
-   22 llamadas internas para convertir 1,5 Å a nm
+   22 internal calls to convert 1.5 A to nm
 ```
 
-**Esto es trabajo tirado con independencia de lo que cueste un decorador.** El *form* de una
-cantidad no cambia a mitad de la llamada: detectarlo tres veces es puro despilfarro.
+**This is wasted work regardless of what a decorator costs.** A quantity's form does not change
+halfway through the call: detecting it three times is pure waste.
 
-**Arreglo:** resolver el *form* y el *parser* **una vez** al entrar en la función pública, y pasarlos
-hacia dentro. No cambia la API.
+**Fix:** resolve the form and the parser **once** on entering the public function, and pass them
+inward. No API change.
 
-### 2c. Los helpers privados están decorados
+### 2c. The private helpers are decorated
 
-**Doce funciones de la API llevan `@digest` / `@signal`** (validation 2, construction 2, extraction
-4, conversion 3, context 1), y una llamada pública las atraviesa. Resultado medido: **4.800
-invocaciones del decorador de SMonitor y 3.000 de DepDigest para 300 llamadas** — 16 y 10 por
-llamada, respectivamente.
+**Twelve API functions carry `@digest` / `@signal`** (validation 2, construction 2, extraction 4,
+conversion 3, context 1), and a single public call traverses them. Measured result: **4,800
+invocations of SMonitor's decorator and 3,000 of DepDigest's for 300 calls** -- 16 and 10 per call
+respectively.
 
-**Un `@signal` pertenece a la frontera pública de la librería, no a cada helper que ésta se llama a
-sí misma.** La telemetría quiere saber que el usuario llamó a `get_value`, no que `get_value` llamó
-tres veces a `digest_form`.
+**A `@signal` belongs to the library's public boundary, not to every helper it calls itself.**
+Telemetry wants to know that the user called `get_value`, not that `get_value` called `digest_form`
+three times.
 
-**Arreglo:** decorar **sólo** la superficie pública. Dentro, funciones desnudas.
+**Fix:** decorate **only** the public surface. Inside, bare functions.
 
 ---
 
-## 3. Y un problema de import: seis backends para declarar unos `TypeVar`
+## 3. And an import problem: six backends just to declare some `TypeVar`s
 
-`pyunitwizard/_private/quantity_or_unit.py` importa **todos** los backends de unidades instalados
-—pint, openmm.unit, unyt, astropy.units, physipy, quantities— dentro de `try/except`, **sólo para
-construir unos `TypeVar`**:
+`pyunitwizard/_private/quantity_or_unit.py` imports **every** installed unit backend -- pint,
+openmm.unit, unyt, astropy.units, physipy, quantities -- inside `try/except`, **only to build a few
+`TypeVar`s**:
 
 ```python
 try:
-    import unyt                                # ← arrastra sympy y matplotlib
+    import unyt                                # <- drags in sympy and matplotlib
     quantity_types.append(unyt.unyt_quantity)
 except:
     pass
 ```
 
-Un consumidor que sólo use pint (como MolSysViewer, que hace
-`set_default_form('pint')`) **paga igual**:
+A consumer using only pint (like MolSysViewer, which calls `set_default_form('pint')`) **pays all the
+same**:
 
 | | RSS |
 |---|---|
 | pint + openmm.unit | 146 MB |
 | + unyt, astropy, physipy, quantities | 211 MB |
-| **desperdicio, siempre, nunca usado** | **65 MB** |
+| **wasted, always, never used** | **65 MB** |
 
-Y es el 50 % del tiempo de importar PyUnitWizard (`python -X importtime`): 1,70 s de los 1,93 s se
-van en `_private/quantity_or_unit`.
+And it is 50 % of the time to import PyUnitWizard (`python -X importtime`): 1.70 s out of 1.93 s go
+to `_private/quantity_or_unit`.
 
-**En runtime un `TypeVar` no valida nada.** Se puede:
+**At runtime a `TypeVar` validates nothing.** We can:
 
-- declararlos bajo `TYPE_CHECKING` (coste cero en ejecución), o
-- construir la lista **perezosamente**, la primera vez que se pida, o
-- importar **sólo los backends configurados**.
+- declare them under `TYPE_CHECKING` (zero runtime cost), or
+- build the list **lazily**, the first time it is asked for, or
+- import **only the configured backends**.
 
-Cualquiera de las tres devuelve **65 MB y 1,7 s** a todo el ecosistema.
+Any of the three gives **65 MB and 1.7 s** back to the whole ecosystem.
 
 ---
 
-## 4. Qué esperar de cada arreglo
+## 4. What to expect from each fix
 
-| arreglo | dónde | `get_value` pasa de 262 µs a… |
+| fix | where | `get_value` goes from 262 us to... |
 |---|---|---|
-| fast path del decorador (§2a) | SMonitor | ~145 µs |
-| resolver el *form* una sola vez (§2b) | **PyUnitWizard** | ~90 µs (estimado — **medir**) |
-| desdecorar los helpers privados (§2c) | **PyUnitWizard** | ~30 µs (estimado — **medir**) |
-| rusterizar el cálculo | PyUnitWizard | −17 µs sobre lo que quede |
+| decorator fast path (2a) | SMonitor | ~145 us |
+| resolve the form only once (2b) | **PyUnitWizard** | ~90 us (estimate -- **measure**) |
+| undecorate the private helpers (2c) | **PyUnitWizard** | ~30 us (estimate -- **measure**) |
+| rusterize the computation | PyUnitWizard | -17 us off whatever remains |
 
-**Los tres primeros son cambios de una tarde y no tocan la API.** El cuarto es un proyecto.
+**The first three are an afternoon's work and touch no API.** The fourth is a project.
 
-Las estimaciones de §2b y §2c están marcadas como tales **a propósito**: son las únicas cifras de
-este documento que no he medido, porque medirlas exige hacer el cambio. Todo lo demás lleva su
-comando al lado.
+The estimates in 2b and 2c are marked as such **on purpose**: they are the only figures in this
+document I have not measured, because measuring them requires making the change. Everything else
+carries its command next to it.
 
 ---
 
-## 5. Cómo se verifica
+## 5. How to verify
 
 ```bash
-# el objetivo: acercarse a pint, no a 15× pint
+# the goal: get close to pint, not to 15x pint
 python -c "
 import timeit
 from pyunitwizard import ...
 q = puw.quantity(1.5,'angstroms')
 t = timeit.timeit(lambda: puw.get_value(q, to_unit='nanometers'), number=3000)/3000
-print(f'{t*1e6:.1f} µs   (hoy: 262 µs | pint desnudo: 17 µs)')"
+print(f'{t*1e6:.1f} us   (today: 262 us | bare pint: 17 us)')"
 
-# el import
-python -X importtime -c "import pyunitwizard" 2>&1 | tail -1        # hoy: ~1,9 s
-/usr/bin/time -v python -c "import pyunitwizard" 2>&1 | grep Maximum # objetivo: −65 MB
+# the import
+python -X importtime -c "import pyunitwizard" 2>&1 | tail -1        # today: ~1.9 s
+/usr/bin/time -v python -c "import pyunitwizard" 2>&1 | grep Maximum # goal: -65 MB
 ```
 
-Y `benchmarks/` + `performance_baseline_0.20.x.json` ya existen en este repositorio: **este trabajo
-debería moverles la aguja de forma visible.** Si no lo hace, es que el diagnóstico está mal — y
-entonces hay que volver a medir, no seguir optimizando.
+And `benchmarks/` plus `performance_baseline_0.20.x.json` already exist in this repository: **this
+work should move their needle visibly.** If it does not, the diagnosis is wrong -- and then it is
+time to measure again, not to keep optimizing.
 
-## Implementación y resultados (2026-07-12)
+## Implementation and results (2026-07-12)
 
-Las optimizaciones previas a cualquier rusterización alcanzan el objetivo de esta propuesta:
+The optimizations preceding any rusterization reach this proposal's goal:
 
-| estado acumulado | `get_value(..., to_unit="nanometers")` |
+| cumulative state | `get_value(..., to_unit="nanometers")` |
 |---|---:|
-| línea base original | 262 µs |
-| fast path desactivado de SMonitor | 137,9 µs |
-| sin auto-instrumentación de DepDigest | 125,8 µs |
-| condiciones `when` sin `Signature.bind` caliente | 54,1 µs |
-| sin reconversión recursiva de la unidad ya parseada | **28,6 µs** |
-| Pint desnudo | 17 µs |
+| original baseline | 262 us |
+| SMonitor's disabled fast path | 137.9 us |
+| without DepDigest self-instrumentation | 125.8 us |
+| `when` conditions without a hot `Signature.bind` | 54.1 us |
+| without re-converting the already parsed unit | **28.6 us** |
+| bare Pint | 17 us |
 
-Además, `_private/quantity_or_unit.py` deja de importar seis backends para construir tipos runtime.
-Los aliases completos existen sólo bajo `TYPE_CHECKING`; en ejecución son `Any`. La importación
-directa de ese módulo baja de **1,91 s / 217 MB** a **0,12 s / 25 MB** en este host. El adaptador de
-un objeto externo se registra perezosamente desde `get_form`, de modo que un objeto Pint carga sólo
-Pint, no todos los backends instalados.
+In addition, `_private/quantity_or_unit.py` no longer imports six backends to build runtime types.
+The full aliases exist only under `TYPE_CHECKING`; at runtime they are `Any`. Importing that module
+directly drops from **1.91 s / 217 MB** to **0.12 s / 25 MB** on this host. The adapter for an
+external object is registered lazily from `get_form`, so a Pint object loads only Pint, not every
+installed backend.
 
-La última mejora de conversión no elimina una validación: `_parse_unit_string` ya había producido
-una unidad en el `to_form` correcto, pero `convert` volvía a pasarla recursivamente por la API
-pública antes de usarla. Ahora la entrega directamente cuando el backend coincide; si Matplotlib u
-otro cliente proporciona una unidad de un backend distinto, se traduce directamente mediante
-`dict_translate_unit`, sin reentrar en los cinco decoradores de dependencia.
+The last conversion improvement does not remove a validation: `_parse_unit_string` had already
+produced a unit in the right `to_form`, but `convert` passed it recursively back through the public
+API before using it. It is now handed over directly when the backend matches; if Matplotlib or
+another client supplies a unit from a different backend, it is translated directly via
+`dict_translate_unit`, without re-entering the five dependency decorators.
 
-`benchmarks/conversion_baseline.py` incluye el caso `get_value_nm_to_angstrom` para vigilar este
-camino. Con 28,6 µs frente a 17 µs del backend, rusterizar deja de ser una respuesta al overhead de
-despacho; sólo debe reevaluarse para cargas donde el cálculo numérico domine de verdad.
+`benchmarks/conversion_baseline.py` includes the `get_value_nm_to_angstrom` case to watch this path.
+At 28.6 us against the backend's 17 us, rusterizing stops being an answer to dispatch overhead; it
+should only be reassessed for workloads where the numerical computation genuinely dominates.
 
-Con la telemetría activa, sin profiling, la misma llamada mide **64,9 µs**. Es una reducción de 4×
-frente a los 262 µs originales, pero confirma que las llamadas internas entre funciones que también
-son API pública aún generan señales anidadas. Separar wrappers públicos de implementaciones
-privadas puede reducir ese coste diagnóstico en una ronda posterior; no es necesario para el
-objetivo de producción desactivada de ~30 µs alcanzado aquí.
+With telemetry enabled and no profiling, the same call measures **64.9 us**. That is a 4x reduction
+from the original 262 us, but it confirms that internal calls between functions that are also public
+API still generate nested signals. Separating public wrappers from private implementations could
+reduce that diagnostic cost in a later round; it is not needed for the ~30 us disabled-production
+goal reached here.
