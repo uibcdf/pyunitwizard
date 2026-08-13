@@ -6,8 +6,8 @@ This document gives human contributors a tour of the public package layout and e
 
 Importing `pyunitwizard` triggers `pyunitwizard.__init__`, which:
 1. Boots the runtime by calling `kernel.initialize()` to zero out all module-level state.
-2. Eagerly probes for supported unit libraries (`pint`, `openmm.unit`, `unyt`, `astropy.units`) and loads each one that can be imported through `configure.load_library`.
-3. Re-exports the user-facing helpers from `api/` plus configuration utilities from `configure`, so most consumers only need `import pyunitwizard as puw`.
+2. Defers backend discovery and adapter loading until a form or external quantity first requires it.
+3. Lazily re-exports the user-facing helpers from `api/` plus configuration utilities from `configure`, so most consumers only need `import pyunitwizard as puw`.
 4. Registers `pyunitwizard.main` as a compatibility module for legacy imports.
 
 Because initialization happens at import time, edits to any of the modules below must preserve idempotence and backward compatibility.
@@ -15,7 +15,7 @@ Because initialization happens at import time, edits to any of the modules below
 ## Layout highlights
 
 - `api/` — Home of the top-level quantity/unit helpers (`convert`, `get_value`, `is_quantity`, etc.) grouped by concern (`conversion`, `construction`, `introspection`, `comparison`, etc.). Touch these modules when you add or modify high-level operations exposed to users.
-- `__init__.py` — Public re-export surface and import-time initialization (kernel bootstrap, optional backend loading, and `pyunitwizard.main` compatibility module).
+- `__init__.py` — Lazy public re-export surface and import-time initialization (kernel bootstrap and `pyunitwizard.main` compatibility module).
 - `parse.py` — Implements `parse()` and related helpers for string-to-quantity conversion. Use this module for parser-specific behavior. Keep changes in sync with the translation tables in `forms` when you add new representations.
 - `kernel.py` — Defines `initialize()` and stores global registries (`loaded_libraries`, defaults, and dimensional standards). Only adjust it when you need to change how the runtime state is structured or reset.
 - `configure/` — Hosts configuration utilities that manage the kernel (`load_library`, defaults setters/getters, standard unit helpers). Reach for this package when wiring new unit systems, customizing defaults, or resetting state for tests.
@@ -35,7 +35,7 @@ Refer to `AGENTS.md` in the repository root for project-wide guidelines, and `py
 
 ## Testing expectations
 
-- Run `pytest tests` after modifying any of the public modules above.
-- Add regression tests for any change in default behavior (e.g., different default form, new eager-loaded library, new parsing branch).
+- Run `python -m pytest tests` after modifying any of the public modules above.
+- Add regression tests for any change in default behavior (e.g., different default form, new lazily loaded library, new parsing branch).
 - When adjusting import-time side effects, include tests that exercise a fresh interpreter state (for example by using `importlib.reload`).
 - Document user-visible changes in this README and the repository-level changelog or release notes as appropriate.

@@ -1,4 +1,5 @@
 from .argument_error import ArgumentError
+from .constant_not_found_error import ConstantNotFoundError
 from .library_not_found_error import LibraryNotFoundError
 from .library_without_parser_error import LibraryWithoutParserError
 from .no_parser_error import NoParserError
@@ -6,4 +7,3 @@ from .no_standards_error import NoStandardsError
 from .not_implemented_form_error import NotImplementedFormError
 from .not_implemented_method_error import NotImplementedMethodError
 from .not_implemented_parser_error import NotImplementedParserError
-

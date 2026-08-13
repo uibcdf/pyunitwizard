@@ -35,3 +35,9 @@ Avoid relying on implicit global state across test files.
 
 A single cross-backend contract for parsing, conversion, compatibility checks,
 and output standardization at the boundaries of scientific libraries.
+
+## How can I avoid converting a quantity that already has the target unit?
+
+Use `puw.has_unit(quantity, target_unit)`. It compares exact unit metadata
+without extracting the magnitude. It returns `None` for textual inputs or when
+a backend cannot decide cheaply; use `check` or `convert` for that fallback.

@@ -14,7 +14,7 @@ unit libraries into PyUnitWizard.
    `forms.load_library()` can adapt the library. Follow the patterns used for
    existing backends.
 3. Add regression tests in `tests/` that exercise `configure.load_library()`
-   with the new name. Ensure tests cover both eager initialization and explicit
+   with the new name. Ensure tests cover both first-demand loading and explicit
    calls made by users.
 4. Document the new backend in user-facing docs (Sphinx notebooks or README) to
    help consumers discover it.
@@ -34,8 +34,8 @@ unit libraries into PyUnitWizard.
 1. Always start tests with a clean kernel state by calling `configure.reset()`
    (or the `puw_kernel` fixture in `tests/helpers.py`). This mirrors the import
    behavior in `pyunitwizard.__init__`.
-2. Run `pytest tests/test_configure.py` to cover `load_library`, defaults, and
+2. Run `python -m pytest tests/test_configure.py` to cover `load_library`, defaults, and
    reset behavior whenever you touch configuration logic.
-3. Execute the full suite with `pytest tests` before shipping changes that
-   affect eager initialization to ensure downstream modules still behave as
+3. Execute the full suite with `python -m pytest tests` before shipping changes that
+   affect lazy initialization to ensure downstream modules still behave as
    expected.

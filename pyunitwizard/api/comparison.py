@@ -5,13 +5,18 @@ from __future__ import annotations
 from typing import Dict
 
 import numpy as np
+from smonitor import signal
 
 from .._private.quantity_or_unit import QuantityLike, QuantityOrUnit
 from ..forms import dict_compatibility
-from .introspection import get_dimensionality, get_form, is_dimensionless, is_quantity, is_unit
+from .introspection import (
+    get_dimensionality,
+    get_form,
+    is_dimensionless,
+    is_quantity,
+    is_unit,
+)
 
-
-from smonitor import signal
 
 @signal(tags=["comparison"])
 def similarity(
@@ -43,9 +48,7 @@ def similarity(
     >>> puw.similarity(a, b)
     """
 
-    return are_close(
-        quantity_or_unit_1, quantity_or_unit_2, rtol=relative_tolerance
-    )
+    return are_close(quantity_or_unit_1, quantity_or_unit_2, rtol=relative_tolerance)
 
 
 @signal(tags=["comparison"])
@@ -55,23 +58,23 @@ def are_close(
     rtol: float = 1e-05,
     atol: float = 1e-08,
 ) -> bool:
-    """ Compares whether two quantities are similiar within a specified tolerance.
+    """Compares whether two quantities are similiar within a specified tolerance.
 
-        Parameters
-        ----------
-        quantity_or_unit_1 : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ----------
+    quantity_or_unit_1 : QuantityOrUnit
+        A quantity or a unit
 
-        quantity_or_unit_2 : QuantityOrUnit
-            A quantity or a unit
+    quantity_or_unit_2 : QuantityOrUnit
+        A quantity or a unit
 
-        relative_tolerance : float
-            The relative tolerance to compare the quantities.
+    relative_tolerance : float
+        The relative tolerance to compare the quantities.
 
-        Returns
-        -------
-        bool
-            Whether the quantities or units are similar.
+    Returns
+    -------
+    bool
+        Whether the quantities or units are similar.
     """
 
     from .extraction import get_value, get_value_and_unit
@@ -85,10 +88,7 @@ def are_close(
         if isinstance(value_1, (list, tuple, np.ndarray)):
             return np.allclose(value_1, value_2, rtol=rtol, atol=atol)
         else:
-            check_atol = abs(value_1 - value_2) < atol
-            check_rtol = abs(value_1 / value_2 - 1.0) < rtol
-
-            return check_atol and check_rtol
+            return bool(np.isclose(value_1, value_2, rtol=rtol, atol=atol))
 
     return False
 
@@ -99,23 +99,23 @@ def are_equal(
     quantity_or_unit_2: QuantityOrUnit,
     same_form: bool = False,
 ) -> bool:
-    """ Compares whether two quantities are similiar within a specified tolerance.
+    """Compares whether two quantities are similiar within a specified tolerance.
 
-        Parameters
-        ----------
-        quantity_or_unit_1 : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ----------
+    quantity_or_unit_1 : QuantityOrUnit
+        A quantity or a unit
 
-        quantity_or_unit_2 : QuantityOrUnit
-            A quantity or a unit
+    quantity_or_unit_2 : QuantityOrUnit
+        A quantity or a unit
 
-        relative_tolerance : float
-            The relative tolerance to compare the quantities.
+    relative_tolerance : float
+        The relative tolerance to compare the quantities.
 
-        Returns
-        -------
-        bool
-            Whether the quantities or units are similar.
+    Returns
+    -------
+    bool
+        Whether the quantities or units are similar.
     """
 
     from .conversion import convert
@@ -180,21 +180,21 @@ def are_compatible(
     quantity_or_unit_1: QuantityOrUnit,
     quantity_or_unit_2: QuantityOrUnit,
 ) -> bool:
-    """ Check whether two quantities or units are compatible.
-        This means that they have the same dimensionalities.
+    """Check whether two quantities or units are compatible.
+    This means that they have the same dimensionalities.
 
-        Parameters
-        ----------
-        quantity_or_unit_1 : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ----------
+    quantity_or_unit_1 : QuantityOrUnit
+        A quantity or a unit
 
-        quantity_or_unit_2 : QuantityOrUnit
-            A quantity or a unit
+    quantity_or_unit_2 : QuantityOrUnit
+        A quantity or a unit
 
-        Returns
-        -------
-        bool
-            Whether the quantities or units are compatible.
+    Returns
+    -------
+    bool
+        Whether the quantities or units are compatible.
     """
 
     from .conversion import convert
@@ -223,23 +223,21 @@ def are_compatible(
     return is_compatible
 
 
-def _compatible_dimensionalities(
-    dim1: Dict[str, int], dim2: Dict[str, int]
-) -> bool:
-    """ Check whether two dimensionalities are compatible.
+def _compatible_dimensionalities(dim1: Dict[str, int], dim2: Dict[str, int]) -> bool:
+    """Check whether two dimensionalities are compatible.
 
-        Parameters
-        ----------
-        dim1 : dict
-            Dimensionality dictionary.
+    Parameters
+    ----------
+    dim1 : dict
+        Dimensionality dictionary.
 
-        dim2 : dict
-            Dimensionality dictionary.
+    dim2 : dict
+        Dimensionality dictionary.
 
-        Returns
-        ----------
-        bool
-            Whether the dimensiomnalities are compatible.
+    Returns
+    ----------
+    bool
+        Whether the dimensiomnalities are compatible.
 
     """
 

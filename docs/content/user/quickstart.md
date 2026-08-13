@@ -1,5 +1,8 @@
 # Quick Start
 
+PyUnitWizard supports Linux and macOS with Python 3.11, 3.12, and 3.13.
+Windows support is currently outside the maintained platform matrix.
+
 This walkthrough is intentionally short. Its purpose is to let you verify, in a
 few minutes, whether PyUnitWizard matches your workflow expectations.
 
@@ -50,9 +53,11 @@ b = puw.quantity(10.0, "angstrom")
 
 print(puw.are_compatible(a, b))
 print(puw.check(a, dimensionality={"[L]": 1}))
+print(puw.has_unit(a, "nm"))
 ```
 
-Both checks should return `True`.
+All three checks should return `True`. `has_unit` is the inexpensive choice
+when you need exact unit identity rather than dimensional compatibility.
 
 If you prefer notebook examples for this same flow, open:
 - [Importing.ipynb](Importing.ipynb)

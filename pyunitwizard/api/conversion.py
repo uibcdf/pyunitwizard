@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import inspect
+import logging
 from typing import Any, Optional, Union
 
 import numpy as np
+from depdigest import dep_digest
+from smonitor import signal
 
+from .. import kernel
 from .._private.exceptions import ArgumentError as BadCallError
 from .._private.forms import digest_to_form
 from .._private.parsers import digest_parser
@@ -20,11 +24,9 @@ from ..forms import (
 )
 from ..parse import parse as _parse
 from .introspection import get_form, is_unit
-from .. import kernel
 
-
-from smonitor import signal
-from depdigest import dep_digest
+_LOGGER = logging.getLogger(__name__)
+_REDUNDANT_CONVERSION_FALLBACK_EMITTED = False
 
 
 def _external_callsite() -> str:
@@ -52,6 +54,8 @@ def _record_redundant_conversion(
     to_form: Optional[str],
     to_type: Optional[str],
 ) -> None:
+    global _REDUNDANT_CONVERSION_FALLBACK_EMITTED
+
     try:
         from smonitor.core.manager import get_manager
 
@@ -62,15 +66,23 @@ def _record_redundant_conversion(
             to_form=to_form,
             to_type=to_type,
         )
-    except Exception:
-        pass
+    except Exception as exc:
+        if not _REDUNDANT_CONVERSION_FALLBACK_EMITTED:
+            _LOGGER.warning(
+                "Failed to record redundant-conversion telemetry "
+                "(caller=%s, signal=redundant_conversion): %s",
+                _external_callsite(),
+                exc,
+            )
+            _REDUNDANT_CONVERSION_FALLBACK_EMITTED = True
+
 
 @signal(tags=["conversion"], exception_level="DEBUG")
-@dep_digest('unyt', when={'to_form': 'unyt'})
-@dep_digest('openmm.unit', when={'to_form': 'openmm.unit'})
-@dep_digest('astropy.units', when={'to_form': 'astropy.units'})
-@dep_digest('physipy', when={'to_form': 'physipy'})
-@dep_digest('quantities', when={'to_form': 'quantities'})
+@dep_digest("unyt", when={"to_form": "unyt"})
+@dep_digest("openmm.unit", when={"to_form": "openmm.unit"})
+@dep_digest("astropy.units", when={"to_form": "astropy.units"})
+@dep_digest("physipy", when={"to_form": "physipy"})
+@dep_digest("quantities", when={"to_form": "quantities"})
 def convert(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,
@@ -115,9 +127,14 @@ def convert(
     output = None
 
     form_in = get_form(quantity_or_unit)
-    
+
     # --- High Performance Fast Path ---
-    if form_in != "string" and to_unit is None and to_form is None and to_type == "quantity":
+    if (
+        form_in != "string"
+        and to_unit is None
+        and to_form is None
+        and to_type == "quantity"
+    ):
         _record_redundant_conversion(
             form_in=form_in,
             to_unit=to_unit,
@@ -125,10 +142,15 @@ def convert(
             to_type=to_type,
         )
         return quantity_or_unit
-    
+
     to_form = digest_to_form(to_form, form_in)
-    
-    if form_in != "string" and to_unit is None and form_in == to_form and to_type == "quantity":
+
+    if (
+        form_in != "string"
+        and to_unit is None
+        and form_in == to_form
+        and to_type == "quantity"
+    ):
         _record_redundant_conversion(
             form_in=form_in,
             to_unit=to_unit,
@@ -141,8 +163,10 @@ def convert(
     if to_type not in ["unit", "value", "quantity"]:
         raise BadCallError("to_type")
 
+    target_unit_form = None
     if isinstance(to_unit, str):
         to_unit = _parse_unit_string(to_unit, parser=parser, to_form=to_form)
+        target_unit_form = to_form
 
     if form_in == "string":
         if to_form == "string":
@@ -201,7 +225,7 @@ def convert(
                     output = dict_translate_quantity[form_in][to_form](quantity_or_unit)
 
             if to_unit is not None:
-                unit_form = get_form(to_unit)
+                unit_form = target_unit_form or get_form(to_unit)
                 if unit_form != to_form:
                     to_unit = dict_translate_unit[unit_form][to_form](to_unit)
                 output = dict_convert[to_form](output, to_unit)
@@ -336,6 +360,8 @@ def to_string(
 
 
 __all__ = ["convert", "conversion_factor", "to_string"]
+
+
 def _parse_unit_string(unit_string: str, parser: str, to_form: str):
     """Parse a unit string robustly across parsers.
 

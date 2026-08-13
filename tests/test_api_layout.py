@@ -20,6 +20,7 @@ API_SYMBOLS = [
     "get_unit",
     "get_value",
     "get_value_and_unit",
+    "has_unit",
     "is_dimensionless",
     "is_quantity",
     "is_unit",
@@ -46,6 +47,14 @@ def test_package_reexports_api():
         assert getattr(puw, name) is getattr(api, name)
 
 
+def test_api_all_contains_only_real_public_attributes():
+    api = importlib.import_module("pyunitwizard.api")
+
+    missing = [name for name in api.__all__ if not hasattr(api, name)]
+
+    assert missing == []
+
+
 def test_main_deprecation_warning_emitted_once_for_attribute_access():
     sys.modules["pyunitwizard.main"] = puw._create_main_compat_module()
     main = importlib.import_module("pyunitwizard.main")
@@ -67,4 +76,6 @@ def test_main_unknown_attribute_raises_attribute_error():
     except AttributeError:
         pass
     else:
-        raise AssertionError("Expected AttributeError for unknown pyunitwizard.main attribute")
+        raise AssertionError(
+            "Expected AttributeError for unknown pyunitwizard.main attribute"
+        )

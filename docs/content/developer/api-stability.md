@@ -6,9 +6,10 @@ PyUnitWizard is on the pre-1.0 stabilization path.
 
 - Do not break documented public symbols without migration notes.
 - Keep behavioral contracts deterministic across supported Python versions.
-- Prefer additive changes over semantic rewrites in `0.18.x`, `0.19.x`,
-  and `0.20.x`.
-- Treat `0.21.x` as RC hard-freeze territory except for blocker fixes.
+- Treat the completed `0.18.x` through `0.21.x` lines as historical contract
+  baselines.
+- Keep `0.22.x`/`0.23.x` hardening additive and backward compatible unless a
+  documented correctness fix requires otherwise.
 
 ## Contract references
 

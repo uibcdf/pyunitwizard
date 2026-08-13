@@ -12,8 +12,8 @@ submodules that feed configuration state back into the runtime kernel.
   form until callers explicitly change it. Do not reorder arguments or mutate
   the provided sequence.
 - Only set `kernel.default_parser` when it is `None`, and pick the first name
-  in the request that is in `configure.parsers`. New parser backends must be
-  added to that list to participate in eager selection.
+  in the request that is registered as parser-capable. New parser backends must
+  be added to the supported parser list to participate in first-demand selection.
 - Preserve backwards compatibility for string inputs: all iterables that are
   not recognized as strings should be rejected with a `TypeError`.
 

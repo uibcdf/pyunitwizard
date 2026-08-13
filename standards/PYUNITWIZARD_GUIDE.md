@@ -98,6 +98,18 @@ if not puw.check(q, dimensionality={'[L]': 1}, shape=(3,)):
     raise ValueError("Expected a 3D length vector")
 ```
 
+For a hot path that only needs to know whether an object already carries an
+exact unit, use `has_unit`. It does not inspect the magnitude:
+
+```python
+match = puw.has_unit(q, "nanometer")
+if match is False:
+    q = puw.convert(q, to_unit="nanometer")
+elif match is None:
+    # Textual or backend-specific input needs the general validation path.
+    q = puw.ensure_quantity(q, to_unit="nanometer", standardized=False)
+```
+
 To **digest a physical-magnitude argument** in one call — the canonical pattern
 for argument validators (e.g. ArgDigest digesters) — use `ensure_quantity`:
 ```python

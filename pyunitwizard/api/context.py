@@ -1,11 +1,17 @@
 """Context manager for temporary PyUnitWizard configuration."""
 
 from __future__ import annotations
+
+import copy
 from contextlib import contextmanager
-from typing import Optional, List
+from typing import List, Optional
+
+import numpy as np
+from smonitor import signal
+
 from .. import kernel
 from ..configure import configure
-from smonitor import signal
+
 
 @signal(tags=["context"])
 @contextmanager
@@ -31,16 +37,29 @@ def context(
     >>> with puw.context(default_form='pint', standard_units=['nm', 'ps']):
     >>>     q = puw.standardize(input_q)
     """
-    # 1. Save current state
-    old_state = {
-        'default_form': kernel.default_form,
-        'default_parser': kernel.default_parser,
-        'standards': kernel.standards.copy(),
-        'dimensional_fundamental_standards': kernel.dimensional_fundamental_standards.copy(),
-        'dimensional_combinations_standards': kernel.dimensional_combinations_standards.copy(),
-        'adimensional_standards': kernel.adimensional_standards.copy(),
-        'tentative_base_standards': kernel.tentative_base_standards.copy(),
-    }
+    state_names = (
+        "loaded_libraries",
+        "loaded_parsers",
+        "default_form",
+        "default_parser",
+        "standards",
+        "dimensional_fundamental_standards",
+        "dimensional_combinations_standards",
+        "adimensional_standards",
+        "tentative_base_standards",
+        "dimensional_fundamental_standards_matrix",
+        "dimensional_fundamental_standards_units",
+        "tentative_base_standards_matrix",
+        "tentative_base_standards_units",
+        "standard_units_by_dimensionality_cache",
+        "conversion_factor_cache",
+    )
+    old_state = {}
+    for name in state_names:
+        value = getattr(kernel, name)
+        old_state[name] = (
+            value.copy() if isinstance(value, np.ndarray) else copy.copy(value)
+        )
 
     # 2. Apply new state
     try:
@@ -50,15 +69,9 @@ def context(
             configure.set_default_parser(default_parser)
         if standard_units is not None:
             configure.set_standard_units(standard_units)
-        
+
         yield
-        
+
     finally:
-        # 3. Restore state
-        kernel.default_form = old_state['default_form']
-        kernel.default_parser = old_state['default_parser']
-        kernel.standards = old_state['standards']
-        kernel.dimensional_fundamental_standards = old_state['dimensional_fundamental_standards']
-        kernel.dimensional_combinations_standards = old_state['dimensional_combinations_standards']
-        kernel.adimensional_standards = old_state['adimensional_standards']
-        kernel.tentative_base_standards = old_state['tentative_base_standards']
+        for name, value in old_state.items():
+            setattr(kernel, name, value)

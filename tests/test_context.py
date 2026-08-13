@@ -1,5 +1,8 @@
-import pyunitwizard as puw
+import numpy as np
 import pytest
+
+import pyunitwizard as puw
+from pyunitwizard import kernel
 
 
 def test_context_restores_configuration_after_exit():
@@ -13,7 +16,11 @@ def test_context_restores_configuration_after_exit():
     baseline_parser = puw.configure.get_default_parser()
     baseline_standard_units = set(puw.configure.get_standard_units().keys())
 
-    with puw.context(default_form="openmm.unit", default_parser="PINT", standard_units=["m", "s", "N"]):
+    with puw.context(
+        default_form="openmm.unit",
+        default_parser="PINT",
+        standard_units=["m", "s", "N"],
+    ):
         assert puw.configure.get_default_form() == "openmm.unit"
         assert puw.configure.get_default_parser() == "pint"
         assert set(puw.configure.get_standard_units().keys()) == {"m", "s", "N"}
@@ -52,7 +59,11 @@ def test_context_restores_configuration_after_exception():
     baseline_standard_units = set(puw.configure.get_standard_units().keys())
 
     with pytest.raises(RuntimeError):
-        with puw.context(default_form="openmm.unit", default_parser="PINT", standard_units=["m", "s", "N"]):
+        with puw.context(
+            default_form="openmm.unit",
+            default_parser="PINT",
+            standard_units=["m", "s", "N"],
+        ):
             assert puw.configure.get_default_form() == "openmm.unit"
             assert puw.configure.get_default_parser() == "pint"
             assert set(puw.configure.get_standard_units().keys()) == {"m", "s", "N"}
@@ -61,3 +72,33 @@ def test_context_restores_configuration_after_exception():
     assert puw.configure.get_default_form() == baseline_form
     assert puw.configure.get_default_parser() == baseline_parser
     assert set(puw.configure.get_standard_units().keys()) == baseline_standard_units
+
+
+def test_context_restores_derived_standard_state_and_caches():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "kJ/mol"])
+
+    baseline_fundamental_matrix = kernel.dimensional_fundamental_standards_matrix.copy()
+    baseline_tentative_matrix = kernel.tentative_base_standards_matrix.copy()
+    baseline_fundamental_units = list(kernel.dimensional_fundamental_standards_units)
+    baseline_tentative_units = list(kernel.tentative_base_standards_units)
+
+    length = puw.quantity(1.0, "angstrom")
+    puw.get_standard_units(length)
+    baseline_cache = dict(kernel.standard_units_by_dimensionality_cache)
+
+    with puw.context(standard_units=["m", "s", "N"]):
+        assert set(puw.configure.get_standard_units()) == {"m", "s", "N"}
+
+    np.testing.assert_allclose(
+        kernel.dimensional_fundamental_standards_matrix,
+        baseline_fundamental_matrix,
+    )
+    np.testing.assert_allclose(
+        kernel.tentative_base_standards_matrix,
+        baseline_tentative_matrix,
+    )
+    assert kernel.dimensional_fundamental_standards_units == baseline_fundamental_units
+    assert kernel.tentative_base_standards_units == baseline_tentative_units
+    assert kernel.standard_units_by_dimensionality_cache == baseline_cache

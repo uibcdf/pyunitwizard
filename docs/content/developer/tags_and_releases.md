@@ -7,7 +7,8 @@ PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.18.1`).
 - Pre-1.0 releases follow incremental stabilization.
 - `0.19.x` is a historical checkpoint line.
 - `0.20.x` is the interoperability expansion line.
-- `0.21.x` is the active RC consolidation line before `1.0.0`.
+- `0.21.x` is the completed RC consolidation line.
+- `0.22.x` and `0.23.x` are post-RC hardening lines before `1.0.0`.
 - `1.0.0` is the stable milestone.
 - If a tag was created by mistake, do not rewrite history; continue with the
   next correct numeric tag.
@@ -20,7 +21,7 @@ From `main`, after CI/release gates are green:
 git fetch origin
 git checkout main
 git pull --ff-only origin main
-pytest -q
+python -m pytest -q
 make -C docs html
 # replace X.Y.Z with the next version
 git tag X.Y.Z

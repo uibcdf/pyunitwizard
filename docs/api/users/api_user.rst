@@ -29,6 +29,7 @@ Core Validation and Comparison
    :toctree: autosummary
 
    pyunitwizard.check
+   pyunitwizard.has_unit
    pyunitwizard.ensure_quantity
    pyunitwizard.compatibility
    pyunitwizard.are_compatible

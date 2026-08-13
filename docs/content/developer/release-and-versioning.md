@@ -17,12 +17,13 @@ Current policy:
 
 - `0.19.x` is a historical checkpoint line.
 - `0.20.x` is interoperability expansion (NumPy/Pandas/Matplotlib hardening).
-- `0.21.x` is the active RC consolidation line.
-- `1.0.0` is created only after the `0.21.x` RC closure criteria are met.
+- `0.21.x` is the completed RC consolidation line.
+- `0.22.x` and `0.23.x` contain post-RC performance and API hardening.
+- `1.0.0` is created after current hardening and the final release checklist are complete.
 
 ## Pre-release checks
 
-1. `pytest -q` passes.
+1. `python -m pytest -q` passes.
 2. `make -C docs html` passes.
 3. `release_gates` workflow is green for candidate commit.
 4. Docs reflect actual runtime and supported Python versions.

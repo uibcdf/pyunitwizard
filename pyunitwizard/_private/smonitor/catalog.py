@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .meta import DOC_URL, ISSUES_URL, API_URL
+from .meta import API_URL, DOC_URL, ISSUES_URL
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,6 +17,12 @@ CATALOG = {
         "ArgumentError": {
             "code": "PUW-ERR-ARG-001",
             "source": "pyunitwizard.error.argument",
+            "category": "argument",
+            "level": "ERROR",
+        },
+        "ConstantNotFoundError": {
+            "code": "PUW-ERR-CONST-001",
+            "source": "pyunitwizard.error.constant_not_found",
             "category": "argument",
             "level": "ERROR",
         },
@@ -81,6 +87,13 @@ CODES = {
         "dev_message": "Argument error in '{caller}' for '{argument}'.",
         "dev_hint": "Validate input arguments. Docs: {doc_url}",
     },
+    "PUW-ERR-CONST-001": {
+        "title": "Constant not found",
+        "user_message": "The physical constant '{constant}' is not registered.",
+        "user_hint": "Use show_constants() to inspect available names. Docs: {doc_url}",
+        "dev_message": "Unknown constant '{constant}' requested in '{caller}'.",
+        "dev_hint": "Register the constant or correct its name. Docs: {doc_url}",
+    },
     "PUW-ERR-DEP-001": {
         "title": "Library not found",
         "user_message": "The required library '{library}' is not installed.",
@@ -141,12 +154,17 @@ CODES = {
 
 SIGNALS = {
     "pyunitwizard.error.argument": {"extra_required": ["argument", "value", "caller"]},
+    "pyunitwizard.error.constant_not_found": {"extra_required": ["constant", "caller"]},
     "pyunitwizard.error.library_not_found": {"extra_required": ["library", "caller"]},
     "pyunitwizard.error.no_parser": {"extra_required": ["caller"]},
-    "pyunitwizard.error.library_without_parser": {"extra_required": ["library", "caller"]},
+    "pyunitwizard.error.library_without_parser": {
+        "extra_required": ["library", "caller"]
+    },
     "pyunitwizard.error.not_implemented_form": {"extra_required": ["form", "caller"]},
     "pyunitwizard.error.not_implemented_method": {"extra_required": ["caller"]},
-    "pyunitwizard.error.not_implemented_parser": {"extra_required": ["parser", "caller"]},
+    "pyunitwizard.error.not_implemented_parser": {
+        "extra_required": ["parser", "caller"]
+    },
     "pyunitwizard.error.no_standards": {"extra_required": ["caller"]},
     "pyunitwizard.debug.probe_miss": {"extra_required": ["value", "caller"]},
 }

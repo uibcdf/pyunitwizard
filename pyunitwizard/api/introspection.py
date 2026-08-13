@@ -2,13 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional, TYPE_CHECKING
+from functools import lru_cache
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
+from .. import kernel
 from .._private.exceptions import NotImplementedFormError
 from .._private.quantity_or_unit import QuantityOrUnit
 from .._private.smonitor.emitter import emit_probe_miss
-from ..forms import dict_dimensionality, dict_is_form, dict_is_quantity, dict_is_unit
-from .. import kernel
+from ..forms import (
+    dict_dimensionality,
+    dict_get_unit,
+    dict_is_form,
+    dict_is_quantity,
+    dict_is_unit,
+    dict_translate_unit,
+)
 
 if TYPE_CHECKING:  # pragma: no cover - circular import guard
     from .conversion import convert
@@ -20,6 +28,18 @@ _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
 _DIMENSIONALITY_CACHE: Dict[tuple[str, str], Dict[str, int]] = {}
 
 
+@lru_cache(maxsize=256)
+def _target_unit_from_string(target_unit: str, form: str, parser: Optional[str]):
+    from .construction import unit
+
+    return unit(target_unit, form=form, parser=parser)
+
+
+@lru_cache(maxsize=256)
+def _target_unit_from_pint_registry(target_unit: str, registry):
+    return registry.Unit(target_unit)
+
+
 def _register_detected_form(form: str) -> str:
     if form != "string" and form not in kernel.loaded_libraries:
         from pyunitwizard.configure import load_library
@@ -29,21 +49,23 @@ def _register_detected_form(form: str) -> str:
 
 
 @signal(tags=["introspection"], exception_level="DEBUG")
-def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> Optional[str]:
-    """ Returns the form of a quantity as a string.
+def get_form(
+    quantity_or_unit: QuantityOrUnit, raise_exception: bool = True
+) -> Optional[str]:
+    """Returns the form of a quantity as a string.
 
-        Parameters
-        ---------
-        quantity_or_unit : QuantityOrUnit
-            A quanitity or a unit
+    Parameters
+    ---------
+    quantity_or_unit : QuantityOrUnit
+        A quanitity or a unit
 
-        raise_exception : bool, default=True
-            Whether to raise NotImplementedFormError if the form is not found.
+    raise_exception : bool, default=True
+        Whether to raise NotImplementedFormError if the form is not found.
 
-        Returns
-        -------
-        {"string", "pint", "openmm.unit", "unyt", None}
-            The form of the quantity
+    Returns
+    -------
+    {"string", "pint", "openmm.unit", "unyt", None}
+        The form of the quantity
     """
 
     obj_type = type(quantity_or_unit)
@@ -85,23 +107,22 @@ def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> 
     return None
 
 
-
 @signal(tags=["introspection"], exception_level="DEBUG")
 def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> bool:
-    """ Check whether an object is a quantity
+    """Check whether an object is a quantity
 
-        Parameters
-        ---------
-        quantity_or_unit : QuantityOrUnit
-            A quanitity or a unit
+    Parameters
+    ---------
+    quantity_or_unit : QuantityOrUnit
+        A quanitity or a unit
 
-        parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser for string quantities
+    parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser for string quantities
 
-        Returns
-        -------
-        bool
-            False if it's not a quantity
+    Returns
+    -------
+    bool
+        False if it's not a quantity
     """
 
     from .conversion import convert  # Local import to avoid circular dependency
@@ -121,7 +142,9 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
         try:
             form = get_form(quantity_or_unit, raise_exception=False)
             if form is None:
-                emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
+                emit_probe_miss(
+                    probe_input, "pyunitwizard.api.introspection.is_quantity"
+                )
                 return False
             output = dict_is_quantity[form](quantity_or_unit)
         except Exception:
@@ -136,20 +159,20 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
 
 @signal(tags=["introspection"], exception_level="DEBUG")
 def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> bool:
-    """ Check whether an object is a unit
+    """Check whether an object is a unit
 
-        Parameters
-        ---------
-        quantity_or_unit : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ---------
+    quantity_or_unit : QuantityOrUnit
+        A quantity or a unit
 
-        parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser for string quantities
+    parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser for string quantities
 
-        Returns
-        -------
-        bool
-            False if it's not a unit
+    Returns
+    -------
+    bool
+        False if it's not a unit
     """
 
     from .conversion import convert  # Local import to avoid circular dependency
@@ -176,6 +199,92 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> b
         emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_unit")
 
     return output
+
+
+@signal(tags=["introspection"], exception_level="DEBUG")
+def has_unit(
+    quantity_or_unit: QuantityOrUnit,
+    target_unit: Any,
+    parser: Optional[str] = None,
+) -> Optional[bool]:
+    """Check whether an object already uses an exact target unit.
+
+    This predicate inspects only unit metadata and never extracts or converts
+    the magnitude. String quantities return ``None`` because answering for
+    them requires parsing the input rather than inspecting existing metadata.
+
+    Parameters
+    ----------
+    quantity_or_unit : QuantityOrUnit
+        Quantity or unit whose current unit is inspected.
+    target_unit : str or UnitLike
+        Exact unit expected on the input object.
+    parser : str, optional
+        Parser used once when caching a string target unit.
+
+    Returns
+    -------
+    bool or None
+        ``True`` for an exact unit match, ``False`` for a different unit, and
+        ``None`` when the input is textual and cannot be inspected cheaply.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> quantity = puw.quantity(1.0, "nanometer")
+    >>> puw.has_unit(quantity, "nm")
+    True
+    """
+
+    if isinstance(quantity_or_unit, str):
+        return None
+
+    object_type = type(quantity_or_unit)
+    form = _TYPE_TO_FORM_CACHE.get(object_type)
+    if form is None:
+        form = get_form(quantity_or_unit)
+
+    source_unit = (
+        quantity_or_unit
+        if dict_is_unit[form](quantity_or_unit)
+        else dict_get_unit[form](quantity_or_unit)
+    )
+
+    if isinstance(target_unit, str) and form == "pint":
+        registry = getattr(source_unit, "_REGISTRY", None)
+        if registry is not None:
+            try:
+                target_unit = _target_unit_from_pint_registry(target_unit, registry)
+            except (AttributeError, TypeError, ValueError):
+                return None
+    elif isinstance(target_unit, str):
+        try:
+            target_unit = _target_unit_from_string(target_unit, form, parser)
+        except Exception:
+            return None
+    else:
+        target_form = get_form(target_unit)
+        if not dict_is_unit[target_form](target_unit):
+            target_unit = dict_get_unit[target_form](target_unit)
+        if target_form != form:
+            target_unit = dict_translate_unit[target_form][form](target_unit)
+
+    try:
+        comparison = source_unit == target_unit
+        return bool(comparison)
+    except (TypeError, ValueError):
+        if form != "pint":
+            return None
+        registry = getattr(source_unit, "_REGISTRY", None)
+        if registry is None:
+            return None
+        try:
+            normalized_target = _target_unit_from_pint_registry(
+                str(target_unit), registry
+            )
+            return bool(source_unit == normalized_target)
+        except (AttributeError, TypeError, ValueError):
+            return None
 
 
 @signal(tags=["introspection"])
@@ -231,17 +340,17 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
 
 @signal(tags=["introspection"])
 def is_dimensionless(quantity_or_unit: QuantityOrUnit) -> bool:
-    """ Check wheter a quantity or unit is dimensionless.
+    """Check wheter a quantity or unit is dimensionless.
 
-        Parameters
-        ----------
-        quantity_or_unit : QuantityOrUnit
-            A quantity or a unit
+    Parameters
+    ----------
+    quantity_or_unit : QuantityOrUnit
+        A quantity or a unit
 
-        Returns
-        -------
-        bool
-            Whether the quantity or unit is dimensionless.
+    Returns
+    -------
+    bool
+        Whether the quantity or unit is dimensionless.
     """
 
     dim = get_dimensionality(quantity_or_unit)
@@ -257,6 +366,7 @@ __all__ = [
     "get_form",
     "is_quantity",
     "is_unit",
+    "has_unit",
     "get_dimensionality",
     "is_dimensionless",
 ]

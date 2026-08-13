@@ -4,11 +4,11 @@ Quantities and units assistant.
 
 from __future__ import annotations
 
+import importlib
 import sys
 import types
 import warnings
-import importlib
-from importlib.metadata import version, PackageNotFoundError
+from importlib.metadata import PackageNotFoundError, version
 
 try:
     from ._version import __version__
@@ -19,6 +19,7 @@ except ImportError:
         __version__ = "0.0.0+unknown"
 
 from smonitor.integrations import ensure_configured as _ensure_smonitor_configured
+
 from ._private.smonitor import PACKAGE_ROOT as _SMONITOR_PACKAGE_ROOT
 
 _ensure_smonitor_configured(_SMONITOR_PACKAGE_ROOT)
@@ -32,37 +33,37 @@ def __print_version__() -> None:
 # to their respective internal import paths.
 _LAZY_ATTRIBUTES = {
     # Submodules
-    'configure': '.configure',
-    'constants': '.constants',
-    'utils': '.utils',
-
+    "configure": ".configure",
+    "constants": ".constants",
+    "utils": ".utils",
     # API functions
-    'are_close': ('.api', 'are_close'),
-    'are_compatible': ('.api', 'are_compatible'),
-    'are_equal': ('.api', 'are_equal'),
-    'compatibility': ('.api', 'compatibility'),
-    'change_value': ('.api', 'change_value'),
-    'check': ('.api', 'check'),
-    'conversion_factor': ('.api', 'conversion_factor'),
-    'convert': ('.api', 'convert'),
-    'ensure_quantity': ('.api', 'ensure_quantity'),
-    'get_dimensionality': ('.api', 'get_dimensionality'),
-    'get_form': ('.api', 'get_form'),
-    'get_standard_units': ('.api', 'get_standard_units'),
-    'get_unit': ('.api', 'get_unit'),
-    'get_value': ('.api', 'get_value'),
-    'get_value_and_unit': ('.api', 'get_value_and_unit'),
-    'is_dimensionless': ('.api', 'is_dimensionless'),
-    'is_quantity': ('.api', 'is_quantity'),
-    'is_unit': ('.api', 'is_unit'),
-    'quantity': ('.api', 'quantity'),
-    'similarity': ('.api', 'similarity'),
-    'fast_track': ('.api', 'fast_track'),
-    'register_fast_track': ('.api', 'register_fast_track'),
-    'standardize': ('.api', 'standardize'),
-    'to_string': ('.api', 'to_string'),
-    'unit': ('.api', 'unit'),
-    'context': ('.api', 'context'),
+    "are_close": (".api", "are_close"),
+    "are_compatible": (".api", "are_compatible"),
+    "are_equal": (".api", "are_equal"),
+    "compatibility": (".api", "compatibility"),
+    "change_value": (".api", "change_value"),
+    "check": (".api", "check"),
+    "conversion_factor": (".api", "conversion_factor"),
+    "convert": (".api", "convert"),
+    "ensure_quantity": (".api", "ensure_quantity"),
+    "get_dimensionality": (".api", "get_dimensionality"),
+    "get_form": (".api", "get_form"),
+    "has_unit": (".api", "has_unit"),
+    "get_standard_units": (".api", "get_standard_units"),
+    "get_unit": (".api", "get_unit"),
+    "get_value": (".api", "get_value"),
+    "get_value_and_unit": (".api", "get_value_and_unit"),
+    "is_dimensionless": (".api", "is_dimensionless"),
+    "is_quantity": (".api", "is_quantity"),
+    "is_unit": (".api", "is_unit"),
+    "quantity": (".api", "quantity"),
+    "similarity": (".api", "similarity"),
+    "fast_track": (".api", "fast_track"),
+    "register_fast_track": (".api", "register_fast_track"),
+    "standardize": (".api", "standardize"),
+    "to_string": (".api", "to_string"),
+    "unit": (".api", "unit"),
+    "context": (".api", "context"),
 }
 
 __all__ = sorted(list(_LAZY_ATTRIBUTES.keys()))
@@ -141,6 +142,7 @@ sys.modules.setdefault("pyunitwizard.main", _create_main_compat_module())
 
 # Initialize core kernel state eagerly
 from . import kernel as _kernel
+
 _kernel.initialize()
 
 # Eager library loading has been completely removed to achieve ultra-fast startup times.

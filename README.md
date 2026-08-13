@@ -28,6 +28,10 @@ It is designed for scientific Python projects that need to:
 
 ## Installation
 
+PyUnitWizard currently supports Linux and macOS on Python 3.11, 3.12, and
+3.13. Windows packages and runtime support are intentionally deferred until a
+concrete ecosystem need justifies adding and maintaining that platform matrix.
+
 Recommended:
 
 ```bash
@@ -62,7 +66,7 @@ print(puw.are_compatible(distance, distance_angstrom))
 
 - Quantity and unit construction: `quantity`, `unit`
 - Conversion and formatting: `convert`, `to_string`
-- Validation and comparison: `check`, `are_compatible`, `are_close`, `are_equal`
+- Validation and comparison: `check`, `has_unit`, `are_compatible`, `are_close`, `are_equal`
 - Introspection and extraction: `get_form`, `get_dimensionality`, `get_value`, `get_unit`
 - Standardization: `standardize`, `get_standard_units`
 - Runtime configuration: `pyunitwizard.configure.*`
@@ -176,8 +180,9 @@ make -C docs html
 ## Status
 
 PyUnitWizard is in pre-1.0 stabilization. The `0.19.x` line is treated as a
-historical checkpoint, `0.20.x` as interoperability expansion, and `0.21.x` as
-the RC consolidation window before the stable `1.0.0` tag.
+historical checkpoint, `0.20.x` as interoperability expansion, `0.21.x` as the
+completed RC consolidation window, and `0.22.x`/`0.23.x` as subsequent
+performance and API hardening before the stable `1.0.0` tag.
 Current release planning and milestones are tracked in `devguide/`.
 
 PyUnitWizard aims to become a units interoperability layer for Scientific Python.

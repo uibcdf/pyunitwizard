@@ -1,3 +1,5 @@
+import importlib
+
 import pytest
 import smonitor
 
@@ -93,6 +95,23 @@ def test_get_value_to_unit_string_without_numeric_prefix_works_with_astropy_defa
     values_in_meter = puw.get_value(quantity, to_unit="meter")
 
     assert values_in_meter.tolist() == [1.0, 2.0]
+
+
+def test_string_target_unit_reuses_the_resolved_target_form(monkeypatch):
+    _configure_pint()
+    quantity = puw.quantity(1.0, "nanometer", form="pint")
+    conversion_module = importlib.import_module("pyunitwizard.api.conversion")
+    original_get_form = conversion_module.get_form
+    calls = []
+
+    def counting_get_form(item, *args, **kwargs):
+        calls.append(item)
+        return original_get_form(item, *args, **kwargs)
+
+    monkeypatch.setattr(conversion_module, "get_form", counting_get_form)
+
+    assert puw.get_value(quantity, to_unit="angstrom") == pytest.approx(10.0)
+    assert calls == [quantity]
 
 
 def test_convert_redundant_passthrough_records_aggregated_counter():
