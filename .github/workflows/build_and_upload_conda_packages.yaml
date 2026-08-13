@@ -17,12 +17,8 @@ on:
 
 jobs:
   conda_deployment_with_new_tag:
-    name: Conda deployment of package to platform with Python ${{ matrix.python-version }}
+    name: Conda deployment
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false  # do not cancel all in-progress jobs if any job variation fails
-      matrix:
-        python-version: ${{ fromJSON(inputs.python_versions || '["3.11", "3.12", "3.13"]') }}
 
     steps:
       
@@ -34,7 +30,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.13"
 
       - name: Setup conda env
         uses: mamba-org/setup-micromamba@v2
@@ -48,7 +44,18 @@ jobs:
             channel_priority: strict
 
           create-args: >-
-            python=${{ matrix.python-version }}
+            python=3.13
+
+      - name: Select variants for a manual recovery run
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          PYTHON_VERSIONS: ${{ inputs.python_versions }}
+        run: |
+          {
+            echo 'python:'
+            jq -r '.[] | "  - \"\(.)\""' <<< "$PYTHON_VERSIONS"
+          } > devtools/conda-build/conda_build_config.yaml
 
       - name: Info conda
         shell: bash -l {0}
@@ -58,13 +65,13 @@ jobs:
           micromamba list
 
       - name: Build and upload the conda packages
-        uses: uibcdf/action-build-and-upload-conda-packages@main
+        uses: uibcdf/action-build-and-upload-conda-packages@v2.0.0
         with:
           meta_yaml_dir: devtools/conda-build
           mambabuild: false
           user: uibcdf
           label: main
-          conda_build_args: --python ${{ matrix.python-version }} --package-format tar.bz2
+          conda_build_args: --package-format tar.bz2
           platform_linux-64: true
           platform_osx-64: true
           platform_osx-arm64: true
