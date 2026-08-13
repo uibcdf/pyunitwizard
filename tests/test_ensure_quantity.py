@@ -59,6 +59,24 @@ def test_ensure_quantity_does_not_infer_incompatible_dimensionality_from_unit():
         puw.ensure_quantity(quantity, dimensionality={"[T]": 1})
 
 
+def test_ensure_quantity_reuses_validated_dimensionality_for_standardization(
+    monkeypatch,
+):
+    quantity = puw.quantity(np.array([3.5, 7.0]), "angstrom")
+
+    def fail_if_called(_quantity):
+        raise AssertionError("standardization must reuse validated dimensionality")
+
+    monkeypatch.setattr(
+        "pyunitwizard.api.standardization.get_dimensionality", fail_if_called
+    )
+
+    result = puw.ensure_quantity(quantity, dimensionality={"[L]": 1})
+
+    assert puw.has_unit(result, "nm") is True
+    assert np.asarray(puw.get_value(result)).tolist() == pytest.approx([0.35, 0.70])
+
+
 def test_ensure_quantity_to_unit_without_standardization():
     result = puw.ensure_quantity("0.35 nm", dimensionality={"[L]": 1},
                                  to_unit="angstroms", standardized=False)

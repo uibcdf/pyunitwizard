@@ -147,7 +147,11 @@ def ensure_quantity(
     from .._private.exceptions import ArgumentError
     from ..parse import parse
     from .conversion import convert
-    from .standardization import _matching_configured_standard, standardize
+    from .standardization import (
+        _matching_configured_standard,
+        get_standard_units,
+        standardize,
+    )
 
     if isinstance(value, str):
         value = parse(value, parser=parser)
@@ -183,6 +187,10 @@ def ensure_quantity(
             if standardized
             else convert(value, to_unit=to_unit)
         )
+
+    if standardized and dimensionality is not None:
+        standard_unit = get_standard_units(dimensionality=dict(dimensionality))
+        return standardize(value, to_unit=standard_unit)
 
     return standardize(value) if standardized else value
 
