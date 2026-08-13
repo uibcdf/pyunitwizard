@@ -4,6 +4,11 @@
 **Origin:** ArgDigest, while deciding whether to add a value-certification mechanism. It
 was designed, built, tested and then declined, because the problem it solved turned out
 to be this one.
+**Who was paying it:** not ArgDigest. It consumes PyUnitWizard through an optional extra,
+both import sites are guarded, and importing ArgDigest does not load it — so none of the
+cost above reached ArgDigest itself. It landed in MolSysMT's digesters, which ask this
+question per argument at every public boundary. ArgDigest is where the cost was
+*observed*, not where it hurt, and the case is carried by the consumer measurement in §2.
 **Relation to [`python_overhead_before_rusterization.md`](python_overhead_before_rusterization.md):**
 same family, different consequence. That proposal shows the API costs 15x what pint
 does. This one shows that one specific missing predicate makes downstream libraries
