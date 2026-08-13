@@ -5,6 +5,15 @@ on:
     types: ['released', 'prereleased']
 
   workflow_dispatch:
+    inputs:
+      release_ref:
+        description: Tag or commit to build
+        required: false
+        default: ''
+      python_versions:
+        description: JSON list of Python versions to build
+        required: false
+        default: '["3.11", "3.12", "3.13"]'
 
 jobs:
   conda_deployment_with_new_tag:
@@ -13,13 +22,14 @@ jobs:
     strategy:
       fail-fast: false  # do not cancel all in-progress jobs if any job variation fails
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ${{ fromJSON(inputs.python_versions || '["3.11", "3.12", "3.13"]') }}
 
     steps:
       
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          ref: ${{ inputs.release_ref || github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -51,11 +61,10 @@ jobs:
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
           meta_yaml_dir: devtools/conda-build
-          python-version: ${{ matrix.python-version }}
           mambabuild: false
           user: uibcdf
           label: main
-          conda_build_args: --package-format tar.bz2
+          conda_build_args: --python ${{ matrix.python-version }} --package-format tar.bz2
           platform_linux-64: true
           platform_osx-64: true
           platform_osx-arm64: true
