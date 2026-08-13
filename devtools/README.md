@@ -12,7 +12,9 @@ build, test, document, and develop PyUnitWizard.
 - `conda-envs/docs_env.yaml`: documentation dependencies.
 - `conda-envs/development_env.yaml`: full development environment.
 
-The supported Python range is `>=3.11,<3.14` across all environments.
+The supported Python range is `>=3.11,<3.14` across all environments. Release
+packages and CI support Linux and macOS. Windows packaging and runtime support
+are deferred until there is a concrete ecosystem requirement.
 
 ## Channels
 
