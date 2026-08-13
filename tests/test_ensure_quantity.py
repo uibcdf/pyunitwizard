@@ -29,6 +29,36 @@ def test_ensure_quantity_accepts_existing_quantity():
     assert puw.get_value(result, to_unit="angstroms") == pytest.approx(3.5)
 
 
+def test_ensure_quantity_returns_same_already_canonical_quantity():
+    quantity = puw.quantity(np.array([0.35, 0.70]), "nm")
+
+    result = puw.ensure_quantity(quantity, dimensionality={"[L]": 1})
+
+    assert result is quantity
+
+
+def test_ensure_quantity_canonical_fast_path_does_not_run_general_check(monkeypatch):
+    quantity = puw.quantity(np.array([0.35, 0.70]), "nm")
+
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError(
+            "general validation is forbidden on the canonical fast path"
+        )
+
+    monkeypatch.setattr("pyunitwizard.api.validation.check", fail_if_called)
+
+    result = puw.ensure_quantity(quantity, dimensionality={"[L]": 1})
+
+    assert result is quantity
+
+
+def test_ensure_quantity_does_not_infer_incompatible_dimensionality_from_unit():
+    quantity = puw.quantity(1.0, "nm")
+
+    with pytest.raises(ArgumentError):
+        puw.ensure_quantity(quantity, dimensionality={"[T]": 1})
+
+
 def test_ensure_quantity_to_unit_without_standardization():
     result = puw.ensure_quantity("0.35 nm", dimensionality={"[L]": 1},
                                  to_unit="angstroms", standardized=False)

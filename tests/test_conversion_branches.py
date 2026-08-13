@@ -129,3 +129,20 @@ def test_convert_redundant_passthrough_records_aggregated_counter():
     report = manager.report()
     assert report["redundant_conversions_total"] >= 1
     assert report["top_redundant_conversions"]
+
+
+def test_convert_quantity_already_in_target_unit_returns_same_object():
+    _configure_pint()
+    quantity = puw.quantity([1.0, 2.0], "nanometer", form="pint")
+
+    output = puw.convert(quantity, to_unit="nm")
+
+    assert output is quantity
+
+
+def test_convert_exact_unit_fast_path_still_validates_parser():
+    _configure_pint()
+    quantity = puw.quantity(1.0, "nanometer", form="pint")
+
+    with pytest.raises(ValueError):
+        puw.convert(quantity, to_unit="nm", parser="not-a-parser")

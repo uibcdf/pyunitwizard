@@ -134,6 +134,29 @@ On the implementation host, with a warm cache and telemetry disabled:
 
 Contract and cross-backend evidence lives in `tests/test_has_unit.py`.
 
+### 4.2 Propagation through normalization paths
+
+The predicate is also used by the general conversion and normalization routes. An
+exact-unit `convert()` returns the original object when the requested form and output
+type also match. `standardize()` recognizes the first configured standard for each
+dimensionality without recomputing the input dimensionality, and `ensure_quantity()`
+uses that metadata to satisfy a compatible dimensionality requirement. Registered
+`fast_track` normalizers use `has_unit()` instead of the general `get_unit()` API.
+
+On the same implementation host, for a warm Pint quantity containing a `(5000, 3)`
+float array, with telemetry disabled:
+
+| already-canonical path | time |
+|---|---:|
+| `puw.fast_track.to_nanometers(q)` | 3.37 µs |
+| `puw.convert(q, to_unit="nm")` | 16.23 µs |
+| `puw.standardize(q)` | 5.56 µs |
+| `puw.ensure_quantity(q, dimensionality={"[L]": 1})` | 14.94 µs |
+
+Identity, dimensionality, duplicate-standard, and cross-form regression coverage lives
+in `tests/test_conversion_branches.py`, `tests/test_specialized.py`,
+`tests/test_standardize.py`, and `tests/test_ensure_quantity.py`.
+
 ## 5. What this does not claim
 
 It does not claim `get_unit` and `check` are wrong — they do more, and their generality

@@ -2,18 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
+
 import numpy as np
+
 
 class FastTrack:
     """Container for dynamically registered conversion fast-tracks."""
-    pass
+
 
 fast_track = FastTrack()
 
+
 def register_fast_track(name: str, target_unit: Any):
     """Register a new fast-track conversion function.
-    
+
     Parameters
     ----------
     name : str
@@ -22,22 +25,23 @@ def register_fast_track(name: str, target_unit: Any):
         The pre-parsed unit object from a supported backend.
     """
     from .conversion import convert
-    from .extraction import get_unit
+    from .introspection import has_unit
 
     def to_standard(obj, parser=None):
         # 1. Bypass for naked arrays (trusted internal calls)
         if isinstance(obj, np.ndarray):
             return obj
-        
+
         # 2. Bypass if already in the right unit
-        if get_unit(obj) == target_unit:
+        if has_unit(obj, target_unit, parser=parser) is True:
             return obj
-            
+
         # 3. Fallback to general conversion
         return convert(obj, to_unit=target_unit, parser=parser)
 
     # Inject into the fast_track instance
     setattr(fast_track, f"to_{name}", to_standard)
+
 
 __all__ = [
     "fast_track",

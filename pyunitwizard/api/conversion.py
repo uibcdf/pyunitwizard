@@ -23,7 +23,7 @@ from ..forms import (
     dict_translate_unit,
 )
 from ..parse import parse as _parse
-from .introspection import get_form, is_unit
+from .introspection import get_form, has_unit, is_unit
 
 _LOGGER = logging.getLogger(__name__)
 _REDUNDANT_CONVERSION_FALLBACK_EMITTED = False
@@ -158,6 +158,23 @@ def convert(
             to_type=to_type,
         )
         return quantity_or_unit
+
+    exact_unit_fast_path_is_eligible = (
+        form_in != "string"
+        and to_unit is not None
+        and form_in == to_form
+        and to_type == "quantity"
+    )
+    if exact_unit_fast_path_is_eligible:
+        parser = digest_parser(parser)
+        if has_unit(quantity_or_unit, to_unit, parser=parser) is True:
+            _record_redundant_conversion(
+                form_in=form_in,
+                to_unit=str(to_unit),
+                to_form=to_form,
+                to_type=to_type,
+            )
+            return quantity_or_unit
     # ----------------------------------
     parser = digest_parser(parser)
     if to_type not in ["unit", "value", "quantity"]:

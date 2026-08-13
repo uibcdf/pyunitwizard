@@ -118,6 +118,60 @@ def test_standardize_pint_quantity():
     assert np.allclose(puw.get_value(quantity), [1.0, 2.0])
     assert quantity.units == "picosecond"
 
+
+def test_standardize_already_canonical_quantity_returns_same_object():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+
+    quantity = puw.quantity([1.0, 2.0], "nm", form="pint")
+
+    assert puw.standardize(quantity) is quantity
+
+
+def test_standardize_canonical_fast_path_does_not_recompute_dimensionality(
+    monkeypatch,
+):
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+    quantity = puw.quantity([1.0, 2.0], "nm", form="pint")
+
+    def fail_if_called(_quantity):
+        raise AssertionError("dimensionality lookup is forbidden on the fast path")
+
+    monkeypatch.setattr(
+        "pyunitwizard.api.standardization.get_dimensionality", fail_if_called
+    )
+
+    assert puw.standardize(quantity) is quantity
+
+
+def test_standardize_does_not_bypass_first_standard_for_same_dimensionality():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "angstrom"])
+    quantity = puw.quantity(1.0, "angstrom", form="pint")
+
+    output = puw.standardize(quantity)
+
+    assert output is not quantity
+    assert puw.has_unit(output, "nm") is True
+
+
+def test_standardize_keeps_form_conversion_for_canonical_unit():
+    puw.configure.reset()
+    puw.configure.load_library(["pint", "openmm.unit"])
+    puw.configure.set_default_form("pint")
+    puw.configure.set_standard_units(["nm"])
+
+    quantity = puw.quantity([1.0, 2.0], "nm", form="openmm.unit")
+    output = puw.standardize(quantity)
+
+    assert output is not quantity
+    assert puw.get_form(output) == "pint"
+    assert puw.has_unit(output, "nm") is True
+
 def test_standardize_openmm_quantity():
     puw.configure.reset()
     puw.configure.load_library(['pint', 'openmm.unit'])

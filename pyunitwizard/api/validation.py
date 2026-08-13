@@ -147,7 +147,7 @@ def ensure_quantity(
     from .._private.exceptions import ArgumentError
     from ..parse import parse
     from .conversion import convert
-    from .standardization import standardize
+    from .standardization import _matching_configured_standard, standardize
 
     if isinstance(value, str):
         value = parse(value, parser=parser)
@@ -159,6 +159,15 @@ def ensure_quantity(
             caller=caller,
             message="expected a quantity with explicit units; bare numbers are not accepted",
         )
+
+    if standardized and to_unit is None:
+        standard_match = _matching_configured_standard(value)
+        if standard_match is not None:
+            _, standard_dimensionality = standard_match
+            if dimensionality is None or _compatible_dimensionalities(
+                dict(standard_dimensionality), dict(dimensionality)
+            ):
+                return value
 
     if dimensionality is not None and not check(value, dimensionality=dimensionality):
         raise ArgumentError(

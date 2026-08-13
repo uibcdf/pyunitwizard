@@ -39,3 +39,12 @@ Refer to `AGENTS.md` in the repository root for project-wide guidelines, and `py
 - Add regression tests for any change in default behavior (e.g., different default form, new lazily loaded library, new parsing branch).
 - When adjusting import-time side effects, include tests that exercise a fresh interpreter state (for example by using `importlib.reload`).
 - Document user-visible changes in this README and the repository-level changelog or release notes as appropriate.
+
+## Canonical-unit fast paths
+
+`has_unit()` is the metadata-only exact-unit predicate used by `check(unit=...)`,
+`convert()`, `standardize()`, `ensure_quantity()`, and registered `fast_track`
+normalizers. When the input already has the requested canonical unit and output
+form, these APIs preserve the original quantity object instead of extracting or
+converting its magnitude. Requests that change backend form still use the full
+conversion path.

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Optional
 
 import numpy as np
+from smonitor import signal
 
 from .. import kernel
 from .._private.exceptions import NoStandardsError
@@ -14,10 +15,33 @@ from .._private.quantity_or_unit import QuantityOrUnit, UnitLike
 from ..forms import dict_is_unit
 from .comparison import are_compatible
 from .conversion import convert
-from .introspection import get_dimensionality, get_form
+from .introspection import get_dimensionality, get_form, has_unit
 
 
-from smonitor import signal
+def _matching_configured_standard(
+    quantity_or_unit: QuantityOrUnit,
+    to_form: Optional[str] = None,
+) -> Optional[tuple[UnitLike, dict]]:
+    """Return matching canonical-unit metadata without inspecting dimensionality."""
+
+    resolved_form = digest_form(to_form)
+    if get_form(quantity_or_unit) != resolved_form:
+        return None
+
+    seen_dimensionalities = set()
+    for standard_unit, dimensionality in kernel.standards.items():
+        dimensionality_key = tuple(
+            dimensionality.get(dimension, 0)
+            for dimension in kernel.order_fundamental_units
+        )
+        if dimensionality_key in seen_dimensionalities:
+            continue
+        seen_dimensionalities.add(dimensionality_key)
+
+        if has_unit(quantity_or_unit, standard_unit) is True:
+            return standard_unit, dict(dimensionality)
+
+    return None
 
 
 def _standard_units_lstsq(solution: np.ndarray, standards: dict, 
@@ -194,6 +218,12 @@ def standardize(
     to_form = digest_form(to_form)
 
     form_in = get_form(quantity_or_unit)
+
+    if (
+        to_unit is None
+        and _matching_configured_standard(quantity_or_unit, to_form) is not None
+    ):
+        return quantity_or_unit
 
     if dict_is_unit[form_in](quantity_or_unit):
         if to_unit is not None:

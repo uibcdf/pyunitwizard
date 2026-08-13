@@ -28,3 +28,19 @@ def test_specialized_passthrough_for_plain_ndarray():
     array = np.array([1.0, 2.0, 3.0], dtype=np.float64)
 
     assert puw.to_nanometers(array) is array
+
+
+def test_specialized_passthrough_does_not_use_general_unit_extraction(monkeypatch):
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+
+    target_unit = puw.unit("nm")
+    quantity = puw.quantity([1.0, 2.0], "nm")
+
+    def fail_if_called(_quantity):
+        raise AssertionError("general unit extraction is forbidden on the fast path")
+
+    monkeypatch.setattr("pyunitwizard.api.extraction.get_unit", fail_if_called)
+    puw.register_fast_track("nanometers", target_unit)
+
+    assert puw.fast_track.to_nanometers(quantity) is quantity
