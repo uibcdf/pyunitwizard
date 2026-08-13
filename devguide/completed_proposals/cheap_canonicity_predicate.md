@@ -1,6 +1,6 @@
 # Proposal: a cheap way to ask *"is this quantity already canonical?"*
 
-**Status:** proposal (2026-08-13). **Everything measured**, with the command next to it.
+**Status:** implemented (2026-08-13). **Everything measured**, with the command next to it.
 **Origin:** ArgDigest, while deciding whether to add a value-certification mechanism. It
 was designed, built, tested and then declined, because the problem it solved turned out
 to be this one.
@@ -113,6 +113,26 @@ Requirements:
 Whether it is a new function or a fast path inside `puw.check` is an implementation
 choice. What matters is that a caller can ask without paying more than the answer is
 worth.
+
+## 4.1 Implementation result
+
+The public predicate is `puw.has_unit(quantity_or_unit, target_unit, parser=None)`.
+It returns `True` or `False` when exact unit metadata can be compared cheaply and
+`None` when the input is textual or the backend cannot decide without general
+parsing/conversion. It never extracts the magnitude, supports external Pint
+registries, and is used as the fast path for `check(..., unit=...)`.
+
+On the implementation host, with a warm cache and telemetry disabled:
+
+| call | time |
+|---|---:|
+| `puw.has_unit(q, "nm")` | 2.58 µs |
+| `puw.has_unit(external_pint_q, "nm")` | 2.42 µs |
+| `puw.check(q, unit="nm")` | 4.81 µs |
+| `puw.get_unit(q)` | 99.15 µs |
+| `q.units` | 0.76 µs |
+
+Contract and cross-backend evidence lives in `tests/test_has_unit.py`.
 
 ## 5. What this does not claim
 

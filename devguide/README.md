@@ -12,7 +12,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `api_freeze_pre_1.0_decision.md`: explicit decision record for no planned breaking API changes before `1.0.0`.
 - `serialization_contract_draft.md`: draft canonical serialization contract for post-`1.0.0` promotion.
 - `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
-- `release_0.21.x_rc_checklist.md`: active RC checklist for consolidation before `1.0.0`.
+- `release_0.21.x_rc_checklist.md`: completed historical RC checklist for consolidation before `1.0.0`.
 - `release_0.21.x_notes_draft.md`: draft release notes for RC scope, risks, compatibility, and migration guidance.
 - `docs_api_alignment_0.21.x.md`: evidence that user/API docs match shipped behavior in the active RC line.
 - `stability_monitoring_0.21.x.md`: CI matrix and release-gates incident ledger for RC stability tracking.
@@ -21,10 +21,13 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
+- `pending_proposals/`: active, deferred, or implementation-pending technical proposals.
+- `completed_proposals/`: implemented proposals retained as design and benchmark evidence.
 
 ## Current baseline
 
-- Active release-candidate line (planned/final): `0.21.x`.
+- Current hardening line: `0.23.x`.
+- Completed release-candidate line: `0.21.x`.
 - Latest maintenance tag in RC line: `0.21.1`.
 - RC consolidation closure checkpoint tag: `0.21.0`.
 - `0.19.3` remains the historical checkpoint tag from the earlier pre-RC phase.
@@ -32,7 +35,9 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
-- Current local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).
+- Supported platforms: Linux and macOS. Windows support is deferred until a
+  concrete ecosystem requirement appears.
+- Historical local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).
 - Current local coverage snapshot (2026-03-04): `94%` total.
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
@@ -67,7 +72,8 @@ Current RC-close status before `1.0.0` go/no-go:
 
 Route update:
 - `0.20.x` is reserved for interoperability expansion (NumPy/Matplotlib/Pandas).
-- `0.21.x` is the RC consolidation window before `1.0.0`.
+- `0.21.x` is the completed RC consolidation window.
+- `0.22.x` and `0.23.x` contain post-RC performance and API hardening before `1.0.0`.
 
 ## Coordination scope
 

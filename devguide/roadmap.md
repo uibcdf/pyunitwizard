@@ -10,7 +10,9 @@ checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 3. `0.19.x` - Historical integration checkpoint (pre-RC)
 4. `0.20.x` - Ecosystem interoperability expansion (NumPy/Matplotlib/Pandas path)
 5. `0.21.x` - Release candidate consolidation window
-6. `1.0.0` - Stable release
+6. `0.22.x` - Ecosystem performance integration
+7. `0.23.x` - Lazy-loading and API hardening
+8. `1.0.0` - Stable release
 
 ## 0.17.x - Hardening and correctness
 
@@ -23,7 +25,7 @@ checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 ### Exit criteria
 
 - No known high-severity defects in core APIs (`parse`, `convert`, `context`, compatibility checks).
-- Full pytest suite green on Python `3.11`, `3.12`, `3.13`.
+- Full pytest suite green on Linux and macOS with Python `3.11`, `3.12`, `3.13`.
 - Public docs and devguide reflect current behavior.
 
 ## 0.18.x - API freeze and contract tests
@@ -33,7 +35,8 @@ checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 - Freeze public API surface and semantics for the stable line.
 - Add explicit contract tests for exported symbols and key invariants.
 - Remove ambiguity in parser capability and configuration behavior.
-- Keep `release_gates` checks reproducible for Python `3.11`, `3.12`, `3.13`.
+- Keep `release_gates` checks reproducible on Linux and macOS for Python
+  `3.11`, `3.12`, `3.13`.
 
 ### Exit criteria
 
@@ -111,13 +114,13 @@ Rules:
   `puw.*` imports for common workflows,
 - provide explicit `puw.*` helpers as an optional strict mode for integrators.
 
-## 0.21.x RC consolidation policy (active RC track)
+## 0.21.x RC consolidation policy (completed historical track)
 
 `0.21.x` is the final stabilization window before `1.0.0`:
 - validate interoperability additions under CI matrix continuity,
 - close remaining collective blockers and traceability contracts,
 - freeze behavior and docs for release-owner go/no-go.
-- operate with `devguide/release_0.21.x_rc_checklist.md` as the active tracker.
+- retain `devguide/release_0.21.x_rc_checklist.md` as the historical tracker.
 
 Current checkpoint:
 - RC-close checklist completed and tag `0.21.0` created as stabilization-window
@@ -126,12 +129,22 @@ Current checkpoint:
   - fixed recursion in `forms/api_quantities.py` when converting unit-like inputs,
   - aligned CI coverage environment with optional `physipy` and `quantities` backends.
 
+## 0.22.x and 0.23.x post-RC hardening (current track)
+
+- `0.22.x` added ecosystem fast tracks and extraction-oriented performance work.
+- `0.23.x` introduced PEP 562 API loading, on-demand backend adapters,
+  conversion-factor caching, and additional validation/extraction helpers.
+- Current work remains pre-`1.0.0` and must preserve the frozen core contracts
+  while closing measured correctness, documentation, and performance gaps.
+
 ## 1.0.0 - Stable release
 
 ### Objectives
 
 - Publish stable API/contracts suitable for production use in scientific libraries.
 - Confirm documentation, tests, and release automation are consistent and reproducible.
+- Publish and support packages for Linux and macOS; defer Windows until a
+  concrete downstream requirement exists.
 
 ### Exit criteria
 

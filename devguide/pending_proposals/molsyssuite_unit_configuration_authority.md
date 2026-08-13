@@ -2,7 +2,8 @@
 
 ## Status
 
-Pending architectural decision and cross-repository validation.
+Accepted architectural direction (2026-08-13); implementation and
+cross-repository validation remain pending.
 
 ## Motivation
 

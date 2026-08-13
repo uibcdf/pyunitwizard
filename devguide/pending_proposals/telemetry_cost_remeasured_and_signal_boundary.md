@@ -3,7 +3,7 @@
 **Status:** proposal (2026-07-19). Everything measured on this host, with the command next to it.
 **Origin:** performance work in SMonitor (`smonitor` on `main`, commits `023e39f` and `df86d5d`),
 after which this repository's telemetry figures stopped reproducing.
-**Relation to [`python_overhead_before_rusterization.md`](python_overhead_before_rusterization.md):**
+**Relation to [`python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md):**
 it continues it. That proposal is already implemented and its results section is correct except for
 one figure -- the 64.9 us with telemetry enabled -- which this document updates and explains.
 
@@ -132,10 +132,23 @@ Better said before deciding than after:
   repeated work -- not a decorator problem. Solving it first could make part of this discussion
   unnecessary: it would be 4 wrappers instead of 5 without touching any boundary.
 
-**Recommendation:** attack 2b (resolve the form only once) **before** this separation. It is cheaper,
-touches no boundaries, does not degrade error attribution, and reduces the wrapper count as a side
-effect. Measure again afterwards, and decide then whether the remaining ~8 us justify duplicating
-the public surface.
+**Decision (2026-08-13):** attack 2b (resolve the form only once) **before** this separation. The
+string-target conversion path now preserves the already known target form instead of calling
+`get_form()` on the parsed unit. Regression coverage verifies that `get_value(..., to_unit=...)`
+performs one form lookup for the input quantity. Remeasure the full call afterwards, and decide then
+whether the remaining overhead justifies duplicating the public surface.
+
+Remeasured on the implementation host after this change:
+
+| path | time |
+|---|---:|
+| bare Pint | 16.1 us |
+| PyUnitWizard, telemetry disabled | 31.3 us |
+| PyUnitWizard, telemetry enabled | 38.8 us |
+
+The instrumented path now traverses **4 wrappers per call**, down from 5. The
+remaining public/private wrapper split stays undecided because its diagnostic
+attribution trade-off still needs a separate measurement-backed decision.
 
 ---
 

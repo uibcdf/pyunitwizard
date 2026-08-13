@@ -1,9 +1,9 @@
 # Proposal: Python overhead **before** rusterizing
 
-**Status:** proposal (2026-07-12). **Everything measured**, with the command next to it.
+**Status:** implemented (2026-07-12). **Everything measured**, with the command next to it.
 **Origin:** profiling from MolSysViewer, investigating why a viewer operation cost 10 ms.
 See `molsysviewer/devguide/pending_proposals/import_cost_and_lazy_loading.md`.
-**Relation to [`rusterization_pyunitwizard_core.md`](rusterization_pyunitwizard_core.md):** it does
+**Relation to [`rusterization_pyunitwizard_core.md`](../pending_proposals/rusterization_pyunitwizard_core.md):** it does
 not contradict it, but it **changes its order**. Read this one first.
 
 ---

@@ -27,7 +27,7 @@ Use these documents as the primary evidence sources while closing each section:
 ## 1. Quality gates
 
 - [ ] `pytest` full suite is green locally and in CI.
-- [ ] CI matrix is green for Python `3.11`, `3.12`, `3.13`.
+- [ ] Linux and macOS CI matrices are green for Python `3.11`, `3.12`, `3.13`.
 - [ ] Coverage trend is stable or improving in critical API modules.
 - [ ] No flaky tests in release-critical paths.
 - [ ] `.github/workflows/release_gates.yaml` (manual `workflow_dispatch`) is green for the candidate commit.
@@ -58,7 +58,8 @@ Use these documents as the primary evidence sources while closing each section:
 ## 5. Packaging and release
 
 - [ ] `pyproject.toml` metadata and Python support range are correct.
-- [ ] Build and installation workflows are green (`sdist`, wheel, conda).
+- [ ] Linux and macOS build and installation workflows are green (`sdist`, wheel, conda).
+- [ ] Release artifacts do not claim or publish Windows support.
 - [ ] README and devguide documents are synchronized with shipped behavior.
 - [ ] Serialization draft status is explicit in release notes (`devguide/serialization_contract_draft.md`: draft/non-stable unless promoted).
 - [ ] Tag/release notes prepared with migration notes (if any).

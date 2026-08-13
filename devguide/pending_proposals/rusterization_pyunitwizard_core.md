@@ -1,8 +1,13 @@
 # Proposal: Rusterization of PyUnitWizard Core for High-Performance Quantity Operations
 
-**Status:** proposed (2026-07-12).  
+**Status:** deferred pending workload evidence (decision 2026-08-13).
 **Ecosystem impact:** `pyunitwizard` (fast array-unit operations), `molsysmt` (accelerated trajectory and coordinate analysis), `uibcdf` core library stack.  
 **Prerequisites:** Cargo/Rust toolchain, Maturin/PyO3, Dimensional analysis crate (`uom` or custom).
+
+The native project must not start solely to reduce Python dispatch overhead. It
+may be promoted only when a representative downstream benchmark shows that
+array conversion, memory transfer, or GIL contention remains a material
+bottleneck after the completed Python fast-path work.
 
 ---
 
