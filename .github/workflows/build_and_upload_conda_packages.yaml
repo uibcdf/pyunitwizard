@@ -17,8 +17,12 @@ on:
 
 jobs:
   conda_deployment_with_new_tag:
-    name: Conda deployment
+    name: Conda deployment (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ${{ fromJSON(inputs.python_versions || '["3.11", "3.12", "3.13"]') }}
 
     steps:
       
@@ -30,7 +34,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
 
       - name: Setup conda env
         uses: mamba-org/setup-micromamba@v2
@@ -44,18 +48,13 @@ jobs:
             channel_priority: strict
 
           create-args: >-
-            python=3.13
+            python=${{ matrix.python-version }}
 
-      - name: Select variants for a manual recovery run
-        if: github.event_name == 'workflow_dispatch'
+      - name: Normalize Python requirements in tagged recipes
         shell: bash
-        env:
-          PYTHON_VERSIONS: ${{ inputs.python_versions }}
         run: |
-          {
-            echo 'python:'
-            jq -r '.[] | "  - \"\(.)\""' <<< "$PYTHON_VERSIONS"
-          } > devtools/conda-build/conda_build_config.yaml
+          sed -i -E 's/^([[:space:]]*- python)([[:space:]]+.*)?$/\1/' \
+            devtools/conda-build/meta.yaml
 
       - name: Info conda
         shell: bash -l {0}
@@ -71,7 +70,7 @@ jobs:
           mambabuild: false
           user: uibcdf
           label: main
-          conda_build_args: --package-format tar.bz2
+          conda_build_args: --python ${{ matrix.python-version }} --package-format tar.bz2
           platform_linux-64: true
           platform_osx-64: true
           platform_osx-arm64: true
