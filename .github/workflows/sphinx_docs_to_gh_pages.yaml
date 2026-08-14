@@ -27,7 +27,7 @@ jobs:
           python-version: 3.13
 
       - name: Setup conda env
-        uses: mamba-org/setup-micromamba@v2
+        uses: mamba-org/setup-micromamba@v3.2.1
         with:
           environment-file: devtools/conda-envs/docs_env.yaml
           environment-name: docs
