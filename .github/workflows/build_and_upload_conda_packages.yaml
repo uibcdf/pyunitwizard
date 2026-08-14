@@ -14,6 +14,10 @@ on:
         description: JSON list of Python versions to build
         required: false
         default: '["3.11", "3.12", "3.13"]'
+      build_number:
+        description: Optional Conda build number for a recovery run
+        required: false
+        default: ''
 
 jobs:
   conda_deployment_with_new_tag:
@@ -50,11 +54,19 @@ jobs:
           create-args: >-
             python=${{ matrix.python-version }}
 
-      - name: Normalize Python requirements in tagged recipes
+      - name: Prepare tagged recipe
         shell: bash
+        env:
+          BUILD_NUMBER: ${{ inputs.build_number }}
         run: |
           sed -i -E 's/^([[:space:]]*- python)([[:space:]]+.*)?$/\1/' \
             devtools/conda-build/meta.yaml
+          if [[ -n "$BUILD_NUMBER" ]]; then
+            sed -i -E "s/^([[:space:]]*number:).*/\1 $BUILD_NUMBER/" \
+              devtools/conda-build/meta.yaml
+          fi
+          git update-index --assume-unchanged devtools/conda-build/meta.yaml
+          git describe --tags --exact-match --dirty
 
       - name: Info conda
         shell: bash -l {0}
