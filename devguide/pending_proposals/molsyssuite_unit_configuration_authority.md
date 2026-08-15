@@ -405,11 +405,16 @@ Require structured diagnostics for:
 1. Inventory all import-time configuration and all calls that depend on
    ambient standardization across MolSysSuite.
 2. Add import-order permutation tests that reproduce current conflicts.
-3. Fix the remaining state snapshot and restoration gaps in
-   `pyunitwizard.context()`: fast-track registrations, backend load state
-   (kernel list versus `forms/` registries), the `introspection` module caches,
-   and the shallow copy of nested standard dictionaries. The kernel globals
-   themselves are already covered — see "Additional Risk" above before starting.
+3. ~~Fix the remaining state snapshot and restoration gaps in
+   `pyunitwizard.context()`.~~ **Done (2026-08-15).** Fast-track registrations
+   are snapshotted; the snapshot copies one level deeper, so mutating a nested
+   standard dictionary no longer survives; backend loading was *removed* from
+   the snapshot rather than repaired, because loading a backend is a capability
+   and not a policy — Python cannot truly unload a module, and reverting
+   `loaded_libraries` while the `forms/` registries stayed populated was the
+   incoherence itself. The `introspection` caches are deliberately left out for
+   the same reason: a unit's dimensionality and a type's form are facts, not
+   configuration. Three regression tests cover it.
 4. Decide and document whether 1.0 contexts are context-local or serialized
    process-global state.
 5. Introduce atomic immutable session-policy replacement behind a small

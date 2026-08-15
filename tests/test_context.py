@@ -123,3 +123,54 @@ def test_context_restores_canonical_standards():
         assert [unit for unit, _ in kernel.canonical_standards] == ["angstrom", "fs"]
 
     assert kernel.canonical_standards == baseline
+
+
+def test_context_restores_fast_track_registrations():
+    """Fast tracks live outside the kernel and used to outlive the context."""
+    from pyunitwizard.api.specialized import fast_track
+
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+
+    before = set(vars(fast_track))
+
+    with puw.context():
+        puw.register_fast_track("leaked_unit_for_context_test", puw.unit("nm"))
+        assert hasattr(fast_track, "to_leaked_unit_for_context_test")
+
+    assert set(vars(fast_track)) == before
+
+
+def test_context_snapshot_is_deep_enough_to_undo_nested_mutation():
+    """`copy.copy` shared the nested dictionaries with the live state."""
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+
+    original = dict(kernel.standards["nm"])
+
+    with puw.context():
+        kernel.standards["nm"]["[L]"] = 999
+
+    assert kernel.standards["nm"] == original
+
+
+def test_context_leaves_backend_loading_alone():
+    """Loading a backend is a capability, not a policy.
+
+    Reverting `loaded_libraries` while the `forms/` registries stayed populated
+    left the kernel claiming a backend was unloaded when it was not. A backend
+    loaded inside a context now simply stays loaded, and the two agree.
+    """
+    from pyunitwizard import forms
+
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_default_form("pint")
+
+    with puw.context():
+        puw.configure.load_library(["unyt"])
+
+    assert ("unyt" in kernel.loaded_libraries) == ("unyt" in forms.dict_is_form)
+    assert kernel.loaded_libraries.count("unyt") == 1
