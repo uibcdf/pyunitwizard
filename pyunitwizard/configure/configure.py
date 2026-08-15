@@ -234,8 +234,9 @@ def set_default_form(form: str) -> None:
     None
         Runtime default form is updated in place.
     """
-    form = digest_form(form)
-    kernel.default_form = form
+    # Recording a preference must not import a backend; the first operation
+    # that actually needs it loads it through `digest_form()` anyway.
+    kernel.default_form = digest_form(form, load=False)
 
 def get_default_parser() -> str:
     """Return the configured default parser.
@@ -265,8 +266,7 @@ def set_default_parser(parser: str) -> None:
     None
         Runtime default parser is updated in place.
     """
-    form = digest_form(parser)
-    kernel.default_parser = form
+    kernel.default_parser = digest_form(parser, load=False)
 
 def get_standard_units() -> Dict[str, Dict[str, int]]:
     """Return configured standard units mapped to dimensionality definitions.

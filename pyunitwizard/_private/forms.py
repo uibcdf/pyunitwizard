@@ -5,8 +5,25 @@ forms = ['openmm.unit', 'pint', 'unyt', 'astropy.units', 'physipy', 'quantities'
 _LOADING = False
 
 
-def digest_form(form: str) -> str:
-    """Check if the form is correct and dynamically load the backend on-demand."""
+def digest_form(form: str, load: bool = True) -> str:
+    """Check if the form is correct and dynamically load the backend on-demand.
+
+    Parameters
+    ----------
+    form : str
+        Form name, or ``None`` to resolve the configured default.
+    load : bool, default=True
+        Whether to import the backend. Pass ``False`` when only recording a
+        preference: naming a form is not using it, and importing a backend is
+        expensive -- `pint` costs about 480 ms between its own import and
+        building a registry. Any later operation goes through this function
+        again and loads the backend then.
+
+    Returns
+    -------
+    str
+        The validated form name.
+    """
     global _LOADING
     if form is None:
         form_name = kernel.default_form
@@ -23,7 +40,7 @@ def digest_form(form: str) -> str:
         raise ValueError
 
     # Dynamic on-demand lazy library loading with re-entrancy guard
-    if form_name is not None and form_name != 'string':
+    if load and form_name is not None and form_name != 'string':
         if form_name not in kernel.loaded_libraries and not _LOADING:
             _LOADING = True
             try:

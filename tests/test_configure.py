@@ -1,3 +1,5 @@
+import pytest
+
 import pyunitwizard as puw
 from pathlib import Path
 import os
@@ -319,3 +321,48 @@ def test_context_restores_the_policy_provenance():
         assert puw.configure.report()["provenance"] is None
 
     assert puw.configure.report()["provenance"] == "outer"
+
+
+def test_setting_a_default_form_does_not_import_the_backend():
+    """Naming a form is not using it.
+
+    Importing a backend is expensive -- `pint` costs about 480 ms between its
+    own import and building a registry -- and a library that records a
+    preference at import time should not pay it. The first operation that
+    actually needs the backend loads it through `digest_form()`.
+    """
+    import subprocess
+    import sys
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys, warnings; warnings.filterwarnings('ignore')\n"
+            "import pyunitwizard as puw\n"
+            "puw.configure.set_default_form('pint')\n"
+            "puw.configure.set_default_parser('pint')\n"
+            "print('pint' in sys.modules)\n"
+            "puw.quantity(1.0, 'nm')\n"
+            "print('pint' in sys.modules)\n",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+
+    assert result.returncode == 0, result.stderr[-2000:]
+    loaded_after_configuring, loaded_after_use = result.stdout.split()
+
+    assert loaded_after_configuring == "False"
+    assert loaded_after_use == "True"
+
+
+def test_default_form_is_still_validated_without_loading():
+    puw.configure.reset()
+
+    with pytest.raises(ValueError):
+        puw.configure.set_default_form("not_a_form")
+
+    puw.configure.set_default_form("pint")
+    assert puw.configure.get_default_form() == "pint"
