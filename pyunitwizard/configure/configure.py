@@ -87,6 +87,7 @@ def reset() -> None:
     kernel.standard_units_by_dimensionality_cache = {}
     kernel.conversion_factor_cache = {}
     kernel.canonical_standards = []
+    kernel.policy_provenance = None
     from pyunitwizard.api.introspection import _DIMENSIONALITY_CACHE, _TYPE_TO_FORM_CACHE
     
     _DIMENSIONALITY_CACHE.clear()
@@ -282,13 +283,19 @@ def get_standard_units() -> Dict[str, Dict[str, int]]:
     """
     return kernel.standards
 
-def set_standard_units(standard_units: List[str]) -> None:
+def set_standard_units(
+    standard_units: List[str], provenance: Optional[str] = None
+) -> None:
     """Configure project standard units used by standardization helpers.
 
     Parameters
     ----------
     standard_units : list of str
         Standard unit names used as normalization references.
+    provenance : str, optional
+        Who is setting this policy, recorded so that :func:`report` can answer
+        "why are my results in these units?". Libraries should pass their own
+        name; a user setting units interactively can leave it unset.
 
     Returns
     -------
@@ -307,6 +314,7 @@ def set_standard_units(standard_units: List[str]) -> None:
     kernel.adimensional_standards={}
     kernel.standard_units_by_dimensionality_cache = {}
     kernel.canonical_standards = []
+    kernel.policy_provenance = provenance
 
     n_dimensions = len(kernel.order_fundamental_units)
 
@@ -405,7 +413,9 @@ def set_standard_units(standard_units: List[str]) -> None:
         kernel.tentative_base_standards_units = None
         kernel.tentative_base_standards_matrix = None
 
-def add_standard_units(standard_units: List[str]) -> None:
+def add_standard_units(
+    standard_units: List[str], provenance: Optional[str] = None
+) -> None:
     """Add or replace standard units without discarding the full existing set.
 
     Each incoming unit is matched against the current standards by
@@ -457,7 +467,7 @@ def add_standard_units(standard_units: List[str]) -> None:
         if not superseded:
             surviving.append(existing_unit)
 
-    set_standard_units(surviving + list(standard_units))
+    set_standard_units(surviving + list(standard_units), provenance=provenance)
 
 
 def add_constant(constant_name, value, unit) -> None:
@@ -480,3 +490,59 @@ def add_constant(constant_name, value, unit) -> None:
 
     _constants[constant_name]=[value, unit]
     pass
+
+
+def has_active_policy() -> bool:
+    """Return whether a unit policy is already active in this session.
+
+    A library that configures PyUnitWizard on import should consult this first
+    and stay out of the way when the answer is ``True``: another library, or
+    the user, already decided. Without that check the last import wins, and
+    with lazy imports "last" can mean a notebook cell run half an hour later.
+
+    Returns
+    -------
+    bool
+        ``True`` when standard units are configured.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> if not puw.configure.has_active_policy():
+    ...     puw.configure.set_standard_units(["nm", "ps"], provenance="mylib")
+    """
+
+    return bool(kernel.standards)
+
+
+def report() -> Dict[str, object]:
+    """Return the active unit policy and where it came from.
+
+    Answers "which units am I getting, and who decided that?" without reading
+    any library's import-time code.
+
+    Returns
+    -------
+    dict
+        Mapping with the active form, parser, standard units, provenance,
+        loaded backends and parsers, and registered fast-track names.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.report()["provenance"]
+    """
+
+    from pyunitwizard.api.specialized import fast_track
+
+    return {
+        "default_form": kernel.default_form,
+        "default_parser": kernel.default_parser,
+        "standard_units": list(kernel.standards),
+        "provenance": kernel.policy_provenance,
+        "loaded_libraries": list(kernel.loaded_libraries),
+        "loaded_parsers": list(kernel.loaded_parsers),
+        "fast_tracks": sorted(
+            name[len("to_") :] for name in vars(fast_track) if name.startswith("to_")
+        ),
+    }

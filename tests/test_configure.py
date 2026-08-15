@@ -261,3 +261,61 @@ def test_resolve_config_module_none_when_no_candidate():
             os.environ["PYUNITWIZARD_CONFIG"] = previous
 
     assert output is None
+
+
+def test_has_active_policy_reports_whether_units_are_configured():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+
+    assert puw.configure.has_active_policy() is False
+
+    puw.configure.set_standard_units(["nm", "ps"])
+
+    assert puw.configure.has_active_policy() is True
+
+
+def test_report_states_the_active_policy_and_its_provenance():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_default_form("pint")
+    puw.configure.set_default_parser("pint")
+    puw.configure.set_standard_units(["nm", "ps"], provenance="mylib")
+    puw.register_fast_track("nanometers_for_report_test", puw.unit("nm"))
+
+    report = puw.configure.report()
+
+    assert report["default_form"] == "pint"
+    assert report["default_parser"] == "pint"
+    assert report["standard_units"] == ["nm", "ps"]
+    assert report["provenance"] == "mylib"
+    assert "pint" in report["loaded_libraries"]
+    assert "nanometers_for_report_test" in report["fast_tracks"]
+
+
+def test_provenance_is_cleared_by_reset_and_replaced_by_a_new_policy():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"], provenance="first")
+
+    assert puw.configure.report()["provenance"] == "first"
+
+    puw.configure.set_standard_units(["angstrom"], provenance="second")
+    assert puw.configure.report()["provenance"] == "second"
+
+    # A caller that does not identify itself leaves no stale attribution.
+    puw.configure.set_standard_units(["nm"])
+    assert puw.configure.report()["provenance"] is None
+
+    puw.configure.reset()
+    assert puw.configure.report()["provenance"] is None
+
+
+def test_context_restores_the_policy_provenance():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"], provenance="outer")
+
+    with puw.context(standard_units=["angstrom", "fs"]):
+        assert puw.configure.report()["provenance"] is None
+
+    assert puw.configure.report()["provenance"] == "outer"

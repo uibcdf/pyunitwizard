@@ -28,6 +28,7 @@ def initialize() -> None:
     global standard_units_by_dimensionality_cache
     global conversion_factor_cache
     global canonical_standards
+    global policy_provenance
 
     loaded_libraries = []
     loaded_parsers = []
@@ -45,6 +46,7 @@ def initialize() -> None:
     standard_units_by_dimensionality_cache = {}
     conversion_factor_cache = {}
     canonical_standards = []
+    policy_provenance = None
 
 
 order_fundamental_units = ['[L]', '[M]', '[T]', '[K]', '[mol]', '[A]', '[Cd]']
