@@ -5,6 +5,11 @@
 Accepted architectural direction (2026-08-13); implementation and
 cross-repository validation remain pending.
 
+The "Additional Risk in the Current Context Manager" section was re-verified
+against `main` on 2026-08-15: one of its claims had been overtaken by changes to
+`pyunitwizard/api/context.py` and is corrected there, three were reproduced, and
+two further gaps were found. Migration-plan step 3 is scoped accordingly.
+
 ## Motivation
 
 MolSysSuite libraries such as MolSysMT, MolSysViewer, TopoMT, and
@@ -57,16 +62,105 @@ library is activated.
 
 ## Additional Risk in the Current Context Manager
 
+*Re-verified against `main` on 2026-08-15. The kernel-state item in the original
+list had already been fixed by then and is corrected below; the remaining items
+were reproduced. Commands are in "Evidence for this section".*
+
 `pyunitwizard.context()` is useful but does not yet constitute a safe solution
 for library coexistence:
 
 - it mutates the same process-global kernel;
 - overlapping thread or asynchronous contexts are not isolated;
 - concurrent readers can observe temporary or partially rebuilt state;
-- restoration currently covers the main standard dictionaries but not every
-  derived matrix, derived-unit list, or cache rebuilt by
-  `set_standard_units()`;
-- fast-track registrations and backend state are outside its snapshot.
+- fast-track registrations and backend state are outside its snapshot;
+- caches that live in API modules rather than in the kernel are outside it too;
+- the snapshot is shallow, so mutating a nested dictionary in place is not
+  undone.
+
+**Corrected:** this list previously claimed that restoration "covers the main
+standard dictionaries but not every derived matrix, derived-unit list, or cache
+rebuilt by `set_standard_units()`". That is no longer accurate.
+`pyunitwizard/api/context.py` snapshots **all fifteen** kernel globals, the
+derived matrices (`dimensional_fundamental_standards_matrix`,
+`tentative_base_standards_matrix`), the derived unit lists, and both caches
+(`standard_units_by_dimensionality_cache`, `conversion_factor_cache`) included.
+Anyone acting on step 3 of the migration plan should not re-fix this.
+
+Also worth crediting, because the original list implied otherwise: **nested
+contexts restore correctly** in a single thread. Entering `['angstrom','fs']`,
+then `['m','s']`, then leaving both returns to the outer set and finally to the
+original one. The isolation problem is between threads, not between nesting
+levels.
+
+### What is genuinely still outside the snapshot
+
+**Fast-track registrations.** `register_fast_track()` inside a context leaves
+its `to_<name>` attribute on the process-global `fast_track` object after exit.
+This is the item that most directly concerns section 6 of this proposal.
+
+**Backend load state, which diverges rather than reverts.** Loading a backend
+inside a context reverts `kernel.loaded_libraries` on exit but leaves the
+`pyunitwizard/forms/` dispatch registries populated. The kernel then reports a
+backend as not loaded while `forms.dict_is_form` still carries it. The
+divergence is self-healing — a later `load_library()` repopulates the kernel
+list without duplicating the entry — so it is an incoherent intermediate state
+rather than a live defect. It still has to be resolved before contexts can be
+described as a boundary.
+
+**Caches owned by API modules.** `_DIMENSIONALITY_CACHE` and
+`_TYPE_TO_FORM_CACHE` in `pyunitwizard/api/introspection.py` are cleared by
+`configure.reset()` but not snapshotted by `context()`. Entries created inside a
+context survive it. Practically these are pure-function caches — a
+dimensionality keyed by `(form, str(unit))`, and a stable type-to-form mapping —
+so leaking them does not change results. The real problem is the inconsistency:
+`reset()` and `context()` disagree about what constitutes runtime state, and the
+type-to-form entry for a backend loaded inside a context outlives the kernel's
+record that the backend was ever loaded.
+
+**Shallow copy.** The snapshot uses `copy.copy`, so the nested dictionaries
+inside `kernel.standards` are shared with the saved state rather than copied.
+Mutating one in place survives the context. The public API replaces those
+dictionaries instead of mutating them, so exposure today is low, but the
+snapshot should not be described as complete while this holds.
+
+### Evidence for this section
+
+```bash
+# fast tracks leak; nested contexts restore; the snapshot is shallow
+python - <<'PY'
+import pyunitwizard as puw
+from pyunitwizard import kernel
+puw.configure.reset(); puw.configure.load_library(['pint'])
+puw.configure.set_default_form('pint'); puw.configure.set_standard_units(['nm'])
+
+before = set(vars(puw.fast_track))
+with puw.context():
+    puw.register_fast_track('leaked_unit_xyz', puw.unit('nm'))
+print('leaked:', sorted(set(vars(puw.fast_track)) - before))
+
+with puw.context():
+    kernel.standards['nm']['[L]'] = 999
+print('inner mutation survived:', kernel.standards['nm']['[L]'] == 999)
+PY
+
+# a reader thread outside the context observes the context's state
+python - <<'PY'
+import threading, time
+import pyunitwizard as puw
+from pyunitwizard import kernel
+puw.configure.reset(); puw.configure.load_library(['pint'])
+puw.configure.set_default_form('pint'); puw.configure.set_standard_units(['nm','ps'])
+seen, stop = [], threading.Event()
+def reader():
+    while not stop.is_set():
+        seen.append(tuple(sorted(kernel.standards))); time.sleep(0.001)
+t = threading.Thread(target=reader); t.start()
+with puw.context(standard_units=['angstrom','fs']):
+    time.sleep(0.05)
+stop.set(); t.join()
+print('states seen by the other thread:', sorted(set(seen)))
+PY
+```
 
 The restoration completeness must be tested and corrected before contexts are
 recommended as the general isolation boundary.
@@ -310,7 +404,11 @@ Require structured diagnostics for:
 1. Inventory all import-time configuration and all calls that depend on
    ambient standardization across MolSysSuite.
 2. Add import-order permutation tests that reproduce current conflicts.
-3. Fix complete state snapshot and restoration in `pyunitwizard.context()`.
+3. Fix the remaining state snapshot and restoration gaps in
+   `pyunitwizard.context()`: fast-track registrations, backend load state
+   (kernel list versus `forms/` registries), the `introspection` module caches,
+   and the shallow copy of nested standard dictionaries. The kernel globals
+   themselves are already covered — see "Additional Risk" above before starting.
 4. Decide and document whether 1.0 contexts are context-local or serialized
    process-global state.
 5. Introduce atomic immutable session-policy replacement behind a small

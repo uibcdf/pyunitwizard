@@ -23,6 +23,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
 - `pending_proposals/`: active, deferred, or implementation-pending technical proposals.
 - `completed_proposals/`: implemented proposals retained as design and benchmark evidence.
+- `declined_proposals/`: proposals considered and not adopted, retained as design
+  evidence with the reasoning and any condition for revisiting them.
 
 ## Current baseline
 

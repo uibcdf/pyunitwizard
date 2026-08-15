@@ -1,6 +1,7 @@
 # Proposal: Rusterization of PyUnitWizard Core for High-Performance Quantity Operations
 
-**Status:** deferred pending workload evidence (decision 2026-08-13).
+**Status:** **declined as unnecessary (2026-08-15).** Retained as design evidence; not part of the
+backlog. See "Why this was declined" below.
 **Ecosystem impact:** `pyunitwizard` (fast array-unit operations), `molsysmt` (accelerated trajectory and coordinate analysis), `uibcdf` core library stack.  
 **Prerequisites:** Cargo/Rust toolchain, Maturin/PyO3, Dimensional analysis crate (`uom` or custom).
 
@@ -8,6 +9,36 @@ The native project must not start solely to reduce Python dispatch overhead. It
 may be promoted only when a representative downstream benchmark shows that
 array conversion, memory transfer, or GIL contention remains a material
 bottleneck after the completed Python fast-path work.
+
+---
+
+## Why this was declined
+
+The condition in the paragraph above was never met, and the measurements accumulated since it was
+written argue it will not be met by this reasoning.
+
+This proposal's case, in its own section 2, rests on three costs: wrapper instantiation, runtime
+unit-string parsing, and GIL overhead. The Python fast-path work has since addressed the first two
+directly — see
+[`completed_proposals/python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md)
+and [`completed_proposals/cheap_canonicity_predicate.md`](../completed_proposals/cheap_canonicity_predicate.md).
+A conversion that cost 262 us when this was filed now costs **38 us**, of which **16 us is pint
+doing the real work**. What a native core could contest is the remaining ~13 us of PyUnitWizard's
+own dispatch, plus ~9 us of instrumentation that
+[`pending_proposals/telemetry_cost_remeasured_and_signal_boundary.md`](../pending_proposals/telemetry_cost_remeasured_and_signal_boundary.md)
+shows can be reduced without leaving Python.
+
+That is the whole argument for declining: the prize is a fraction of a call whose dominant cost is
+now the unit library itself, and the cheaper Python-side lever has not been pulled yet. Paying for a
+Rust toolchain, a PyO3 boundary, wheel-building across the support matrix, and a second
+dimensional-analysis implementation to compete for that fraction is not a proportionate trade.
+
+Nothing here is refuted on its technical merits. Zero-copy NumPy interop and releasing the GIL
+remain the right tools **if** the problem ever presents as array throughput rather than per-call
+dispatch. The declining condition is specific and can be revisited: a downstream workload —
+realistically a `molsysmt` trajectory loop — showing that array conversion or GIL contention, not
+per-call Python overhead, is the measured bottleneck. Absent that evidence, this stays declined
+rather than deferred, so it does not read as pending work.
 
 ---
 
