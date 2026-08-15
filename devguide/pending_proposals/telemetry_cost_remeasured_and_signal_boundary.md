@@ -1,9 +1,10 @@
 # Proposal: remeasuring the cost of telemetry, and where to put the `@signal` boundary
 
-**Status:** proposal (2026-07-19); re-verified 2026-08-15 and reduced to a single open decision —
-the public/private `@signal` split of section 4. Its section 6 benchmark task is implemented, and
-section 8 reprices the decision across all nine baseline cases. Everything measured on this host,
-with the command next to it.
+**Status:** proposal (2026-07-19); re-verified 2026-08-15. Its section 6 benchmark task is
+implemented, section 8 reprices the decision across all nine baseline cases, and section 9 finishes
+problem 2b — which turned out to outrun what the section 4 split would have saved on the same paths.
+What remains: the section 4 decision (now less urgent), and a collective error-path signal question
+that section 9 uncovered. Everything measured on this host, with the command next to it.
 **Origin:** performance work in SMonitor (`smonitor` on `main`, commits `023e39f` and `df86d5d`),
 after which this repository's telemetry figures stopped reproducing.
 **Relation to [`python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md):**
@@ -320,11 +321,78 @@ public/private split is prototyped, `standardize` and `get_dimensionality` are t
 show whether it is worth the duplicated surface; `get_value` understates the prize by an order of
 magnitude.
 
+---
+
+## 9. Problem 2b, finished (2026-08-15)
+
+Section 4 decided to "attack 2b (resolve the form only once) **before** this separation", and applied
+it to the `get_value` path. Profiling the two worst cases from section 8 showed 2b was still open
+elsewhere. A single `standardize()` traversed **25** decorated calls for the one call the user made:
+
+| function | times |
+|---|---:|
+| `get_form` | 10 |
+| `has_unit` | 5 |
+| `convert` | 3 |
+| `is_unit` | 2 |
+| `standardize`, `parse`, `get_unit`, `get_standard_units`, `get_dimensionality` | 1 each |
+
+Two call sites were re-deriving a form the caller had just computed:
+
+- `get_dimensionality()` read the unit through the public `get_unit()`, which re-enters `convert()`
+  and resolves the same form twice more. The unit is only an ingredient of the cache key, so it now
+  comes from the already-resolved form dispatch — the pattern `has_unit()` was already using.
+- `standardize()` resolved the input form, then had `_matching_configured_standard()` resolve the
+  same object again.
+
+| | before | after |
+|---|---:|---:|
+| `get_dimensionality_quantity` | 145.8 us (7 wrappers) | **13.2 us** (2 wrappers) |
+| `standardize_meter_quantity` | 492.8 us (25 wrappers) | **350.7 us** (19 wrappers) |
+
+Neither change touches a public signature or emits differently. Both are covered by regression tests
+that fail on the previous implementation.
+
+Note how far this outruns wrapper arithmetic: `get_dimensionality` lost 5 wrappers worth perhaps
+15 us of telemetry, and got 132 us faster. The nested public calls were not merely paying for
+decorators, they were doing redundant *work* — a full conversion round trip to read a unit. That is
+the strongest argument yet for fixing repeated calls before touching the `@signal` boundary.
+
+### A third fix, measured but held back
+
+Inside `convert()`, five `is_unit(...)` calls test objects whose form that branch already knows.
+Replacing them with `dict_is_unit[<known form>](...)` takes `standardize_meter_quantity` from
+350.7 us to **195.2 us** — a further 44%, and the single largest win found.
+
+It is **not applied**, because it makes `tests/e2e/test_collective_error_path.py` fail, and that
+failure is worth more than the optimization:
+
+The public `is_unit()` emits a `ProbeMiss` (`PUW-DBG-PROBE-001`) when it returns `False`. Bypassing
+it removes those emissions. That test asserts the collective error path emits an event coded `ARG-`
+or `PUW-`, and **the probe miss was the only event satisfying it**. With the optimization applied,
+the path emits no coded event at all:
+
+```
+before:  ['PUW-DBG-PROBE-001', None, None]
+after :  [None, None]
+```
+
+So the test has been passing on a DEBUG event that the catalog itself describes as "expected during
+form/type detection flows" and "no action is required" — emitted because an internal check asked
+whether a quantity was a unit and got the expected `False`. The intended contract signal is absent,
+and has been for as long as this reading holds.
+
+That makes it a cross-repository question, not a local one: this scenario is duplicated across the
+four library repos by the collective testing policy, and the resolution — whether the error path
+should emit a real coded signal, and whether a probe miss should count as one — belongs with that
+contract rather than with a performance change. The patch is trivial to reproduce from the
+description above.
+
 ### What remains open
 
-Only the section 4 decision, now better priced. The section 6 benchmark task is done, and the
-section 2.1 question — whether the five DepDigest wrappers arise from the same public-calling-public
-pattern — remains open and would likely be answered by the same prototype.
+The section 4 decision, now better priced and less urgent: the 2b work above removed more than the
+split would have on these paths. The section 2.1 question about the five DepDigest wrappers is
+unchanged. New: the collective error-path signal described immediately above.
 
 One caution about the per-wrapper figures: SMonitor's microbenchmarks
 (`benchmarks/signal_enabled.py`) measure a synthetic function with a single positional argument and
