@@ -62,6 +62,27 @@ It is a resolution helper for integrators to call: it returns a module path and
 does not import or apply anything. Setting `PYUNITWIZARD_CONFIG` on its own has
 no effect on the active policy — to change that, use the calls above.
 
+## Faster startup with pint
+
+Parsing pint's unit definitions costs about 180 ms in every process that uses
+units. Pint can cache the parsed result on disk, which brings that down to
+about 17 ms. It is off by default -- writing to your filesystem is not
+something importing a units library should do uninvited -- and enabled with:
+
+```bash
+export PYUNITWIZARD_PINT_CACHE=1        # pint's own per-user cache location
+export PYUNITWIZARD_PINT_CACHE=/path    # or a location you choose
+```
+
+The cache is keyed by the content of pint's definitions file plus the pint,
+Python and platform versions, so it cannot serve a stale registry: upgrading
+pint simply misses and rebuilds. Old entries are left behind rather than
+removed, so the folder can be deleted at any time with no consequence beyond
+one slower start.
+
+If the folder cannot be written -- read-only containers, ephemeral CI -- the
+registry is built without it and nothing fails.
+
 ## Core controls
 
 - `load_library(...)`: register backend adapters.
