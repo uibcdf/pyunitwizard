@@ -25,7 +25,39 @@ if TYPE_CHECKING:  # pragma: no cover - circular import guard
 from smonitor import signal
 
 _TYPE_TO_FORM_CACHE: Dict[type, str] = {}
-_DIMENSIONALITY_CACHE: Dict[tuple[str, str], Dict[str, int]] = {}
+_DIMENSIONALITY_CACHE: Dict[tuple[str, Any], Dict[str, int]] = {}
+
+# Whether a unit type can key a dict directly. This is a property of the type,
+# not of the runtime configuration, so unlike the caches above it is never
+# invalidated.
+_UNIT_IS_HASHABLE: Dict[type, bool] = {}
+
+
+def _cache_key_for_unit(unit: Any) -> Any:
+    """Return the cheapest usable dictionary key for a unit.
+
+    Rendering a unit is expensive on several backends -- a pint unit costs
+    about 5.9 us to format against 0.16 us to hash -- and the dimensionality
+    cache needs a key, not a name. Units that can key a dict do so directly;
+    the rest fall back to their rendered form.
+
+    Unit equality and hashing agree on every backend that supports both, so
+    keying on the object cannot merge units that differ.
+    """
+
+    unit_type = type(unit)
+    hashable = _UNIT_IS_HASHABLE.get(unit_type)
+
+    if hashable is None:
+        try:
+            hash(unit)
+        except TypeError:
+            hashable = False
+        else:
+            hashable = True
+        _UNIT_IS_HASHABLE[unit_type] = hashable
+
+    return unit if hashable else str(unit)
 
 
 @lru_cache(maxsize=256)
@@ -384,7 +416,7 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
         if dict_is_unit[form](quantity_or_unit)
         else dict_get_unit[form](quantity_or_unit)
     )
-    cache_key = (form, str(unit))
+    cache_key = (form, _cache_key_for_unit(unit))
 
     if cache_key in _DIMENSIONALITY_CACHE:
         return dict(_DIMENSIONALITY_CACHE[cache_key])

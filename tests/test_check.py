@@ -260,8 +260,28 @@ def test_get_dimensionality_populates_cache_for_quantity_and_returns_copy():
     quantity = puw.quantity(2.0, 'meter')
     dim = puw.get_dimensionality(quantity)
 
-    assert ('pint', 'meter') in _DIMENSIONALITY_CACHE
+    # Keyed by form and unit. The unit part is whatever keys a dict most
+    # cheaply for that backend, so the property is asserted rather than the
+    # representation.
+    assert ('pint', puw.get_unit(quantity)) in _DIMENSIONALITY_CACHE
     dim['[L]'] = 99
+    assert puw.get_dimensionality(quantity)['[L]'] == 1
+
+
+def test_get_dimensionality_falls_back_to_a_rendered_key_for_unhashable_units():
+    """`quantities` units cannot key a dict; the cache must still work."""
+    puw.configure.reset()
+    puw.configure.load_library(['pint', 'quantities'])
+
+    quantity = puw.quantity(2.0, 'meter', form='quantities')
+    unit = puw.get_unit(quantity)
+
+    with pytest.raises(TypeError):
+        hash(unit)
+
+    assert puw.get_dimensionality(quantity)['[L]'] == 1
+    assert ('quantities', str(unit)) in _DIMENSIONALITY_CACHE
+    # Second call must hit the cache rather than raise on the unhashable unit.
     assert puw.get_dimensionality(quantity)['[L]'] == 1
 
 
