@@ -358,6 +358,41 @@ def test_setting_a_default_form_does_not_import_the_backend():
     assert loaded_after_use == "True"
 
 
+def test_declaring_a_policy_does_not_import_numpy_or_the_api_package():
+    """`puw.configure` must stay cheap to reach.
+
+    Configuring is often the first thing a consumer does. Importing the module
+    used to drag in the whole `pyunitwizard.api` package and numpy -- about
+    63 ms -- before any unit work had been requested. Both are now imported by
+    the functions that need them.
+    """
+    import subprocess
+    import sys
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys, warnings; warnings.filterwarnings('ignore')\n"
+            "import pyunitwizard as puw\n"
+            "puw.configure.set_default_form('pint')\n"
+            "puw.configure.set_default_parser('pint')\n"
+            "print('numpy' in sys.modules, 'pyunitwizard.api' in sys.modules)\n"
+            "puw.configure.set_standard_units(['nm'])\n"
+            "print('numpy' in sys.modules, 'pyunitwizard.api' in sys.modules)\n",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+
+    assert result.returncode == 0, result.stderr[-2000:]
+    declaring, after_standard_units = result.stdout.strip().splitlines()
+
+    assert declaring == "False False"
+    assert after_standard_units == "True True"
+
+
 def test_default_form_is_still_validated_without_loading():
     puw.configure.reset()
 

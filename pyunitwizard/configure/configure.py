@@ -1,10 +1,11 @@
-from pyunitwizard import forms
+# `pyunitwizard.forms` and `pyunitwizard.api` are imported inside the functions
+# that need them, not here. Configuring is often the first thing a consumer
+# does, and pulling the whole API package in to reach two functions cost about
+# 65 ms before any unit work had been requested.
 from pyunitwizard import kernel
 from pyunitwizard._private.forms import digest_form
 from pyunitwizard._private.lists_and_tuples import is_list_or_tuple
-from pyunitwizard.api import convert, get_dimensionality
 from pyunitwizard.constants import _constants, _constants_synonyms
-import numpy as np
 import os
 from importlib.util import find_spec
 from typing import List, Dict, Union, Optional
@@ -181,6 +182,8 @@ def load_library(library_names: Union[str, List[str]]):
     for ii in range(len(library_names)):
         library_names[ii]=digest_form(library_names[ii])
 
+    from pyunitwizard import forms
+
     for library in library_names:
         if library not in kernel.loaded_libraries:
             from depdigest import is_installed
@@ -307,6 +310,10 @@ def set_standard_units(
     ValueError
         If `standard_units` is neither a string nor list/tuple.
     """
+
+    import numpy as np
+
+    from pyunitwizard.api import convert, get_dimensionality
 
     kernel.standards={}
     kernel.dimensional_fundamental_standards={}
@@ -445,6 +452,10 @@ def add_standard_units(
         standard_units = [standard_units]
     elif type(standard_units) not in [list, tuple]:
         raise ValueError
+
+    import numpy as np
+
+    from pyunitwizard.api import convert, get_dimensionality
 
     # Compute dimensionality arrays for each incoming unit
     new_dim_arrays = []
