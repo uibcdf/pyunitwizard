@@ -1,6 +1,9 @@
 # Proposal: remeasuring the cost of telemetry, and where to put the `@signal` boundary
 
-**Status:** proposal (2026-07-19). Everything measured on this host, with the command next to it.
+**Status:** proposal (2026-07-19); re-verified 2026-08-15 and reduced to a single open decision —
+the public/private `@signal` split of section 4. Its section 6 benchmark task is implemented, and
+section 8 reprices the decision across all nine baseline cases. Everything measured on this host,
+with the command next to it.
 **Origin:** performance work in SMonitor (`smonitor` on `main`, commits `023e39f` and `df86d5d`),
 after which this repository's telemetry figures stopped reproducing.
 **Relation to [`python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md):**
@@ -247,9 +250,17 @@ for _ in range(100): puw.get_value(q, to_unit='nanometers')
 print((m.report()['calls_total'] - before)/100, 'wrappers per call')"
 ```
 
-`benchmarks/conversion_baseline.py` already watches `get_value_nm_to_angstrom` with telemetry
+~~`benchmarks/conversion_baseline.py` already watches `get_value_nm_to_angstrom` with telemetry
 disabled. **Suggestion:** add the same case with telemetry enabled, which is the mode a real user
-runs in and the only one where these 10.5 us are visible.
+runs in and the only one where these 10.5 us are visible.~~
+
+**Done (2026-08-15), and the premise was wrong.** The benchmark was not watching anything "with
+telemetry disabled": it never configured SMonitor at all, and telemetry is *enabled* by default on
+import. It measured whichever ambient configuration it happened to inherit, and said so nowhere.
+
+`run_baseline()` now pins SMonitor explicitly and times every case in both modes, emitting
+`results` (enabled) and `results_telemetry_disabled`. Their difference is the instrumentation cost
+per case. See section 8 for what that exposed.
 
 ---
 
@@ -259,6 +270,61 @@ Measured on a single host: Python 3.13, x86_64, Linux 6.17, `pyunitwizard` 0.22.
 default form, SMonitor on `main` after `df86d5d`. The before/after figures in section 1 were obtained
 by running the same script against two SMonitor worktrees in the same session, with bare pint as a
 control: it stayed at 15.6-17.3 us across every run.
+
+A caution on that version string, discovered while re-verifying: `pyunitwizard/_version.py` is
+git-ignored and written at build time, so `puw.__version__` reports whatever the last install wrote.
+It read `0.22.0` on a checkout describing as `0.24.0-8`. The "0.22.0" above is therefore the
+installed distribution, not necessarily the measured tree. Pair version strings with
+`git describe --tags --always` when recording provenance.
+
+---
+
+## 8. Re-verification and the benchmark, 2026-08-15
+
+Every figure in this document reproduces at `0.24.0-8`:
+
+| | documented | re-measured |
+|---|---:|---:|
+| bare pint | 16.1 us | 16.5 us |
+| telemetry disabled | 31.3 us | 28.9 us |
+| telemetry enabled | 38.8 us | 38.2 us |
+| SMonitor wrappers per call | 4 | 4.0 |
+| DepDigest wrappers per call | 5 | 5.0 |
+
+Section 3 also holds: across 50 calls only `calls_total` moves in the manager report. **Zero events
+emitted.**
+
+### What measuring every case exposed
+
+Section 4 priced the decision on `get_value` alone. With all nine baseline cases now timed in both
+modes, the instrumentation cost is far from uniform:
+
+| case | enabled | disabled | telemetry |
+|---|---:|---:|---:|
+| `standardize_meter_quantity` | 492.8 us | 399.1 us | **93.7 us** |
+| `get_dimensionality_quantity` | 145.8 us | 104.1 us | **41.7 us** |
+| `get_value_nm_to_angstrom` | 38.5 us | 28.8 us | 9.7 us |
+| `convert_nm_to_angstrom` | 39.4 us | 30.2 us | 9.2 us |
+| `parse_string_quantity` | 18.2 us | 10.7 us | 7.5 us |
+| `get_dimensionality_unit` | 12.5 us | 9.3 us | 3.2 us |
+| `is_quantity_quantity` | 3.8 us | 1.6 us | 2.2 us |
+| `parse_array_string_quantity` | 2.1 us | 0.9 us | 1.2 us |
+| `get_form_quantity` | 1.5 us | 0.4 us | 1.1 us |
+
+`standardize` carries **ten times** the absolute telemetry cost of the call this document was
+written about, and `get_dimensionality` four times. Both are public functions that call other public
+functions — exactly the nesting pattern of section 2 — so they traverse more wrappers per call.
+
+This does not decide section 4, but it changes where the decision should be measured. If the
+public/private split is prototyped, `standardize` and `get_dimensionality` are the cases that will
+show whether it is worth the duplicated surface; `get_value` understates the prize by an order of
+magnitude.
+
+### What remains open
+
+Only the section 4 decision, now better priced. The section 6 benchmark task is done, and the
+section 2.1 question — whether the five DepDigest wrappers arise from the same public-calling-public
+pattern — remains open and would likely be answered by the same prototype.
 
 One caution about the per-wrapper figures: SMonitor's microbenchmarks
 (`benchmarks/signal_enabled.py`) measure a synthetic function with a single positional argument and
