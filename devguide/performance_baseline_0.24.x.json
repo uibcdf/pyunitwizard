@@ -1,0 +1,108 @@
+{
+  "generated_at_utc": "2026-08-15T14:25:53.253863+00:00",
+  "git_describe": "0.24.0-19-g154bcea",
+  "iterations": 5000,
+  "note": "Recorded after the form-resolution, candidate-scan, cache-key and cache-ordering work. `versions` reports installed distribution metadata, which lags a development checkout; git_describe is the tree.",
+  "python": "3.13",
+  "repeats": 5,
+  "results": {
+    "convert_nm_to_angstrom": {
+      "max_seconds": 4.1307620983570815e-05,
+      "median_seconds": 4.0897752600722016e-05,
+      "min_seconds": 4.083312579896301e-05
+    },
+    "get_dimensionality_quantity": {
+      "max_seconds": 6.9752251962199805e-06,
+      "median_seconds": 6.95338121149689e-06,
+      "min_seconds": 6.9190608104690905e-06
+    },
+    "get_dimensionality_unit": {
+      "max_seconds": 6.088930182158947e-06,
+      "median_seconds": 5.751079600304365e-06,
+      "min_seconds": 5.72060439735651e-06
+    },
+    "get_form_quantity": {
+      "max_seconds": 1.4999077888205648e-06,
+      "median_seconds": 1.4847493963316083e-06,
+      "min_seconds": 1.4731589937582613e-06
+    },
+    "get_value_nm_to_angstrom": {
+      "max_seconds": 3.9975496008992196e-05,
+      "median_seconds": 3.970994318369776e-05,
+      "min_seconds": 3.9668042189441624e-05
+    },
+    "is_quantity_quantity": {
+      "max_seconds": 3.970950422808528e-06,
+      "median_seconds": 3.906089998781681e-06,
+      "min_seconds": 3.8920697988942266e-06
+    },
+    "parse_array_string_quantity": {
+      "max_seconds": 2.0648472011089324e-06,
+      "median_seconds": 2.024850994348526e-06,
+      "min_seconds": 2.0116830011829733e-06
+    },
+    "parse_string_quantity": {
+      "max_seconds": 1.903121641371399e-05,
+      "median_seconds": 1.8393512605689465e-05,
+      "min_seconds": 1.8330025393515824e-05
+    },
+    "standardize_meter_quantity": {
+      "max_seconds": 6.773854219354689e-05,
+      "median_seconds": 6.731198579072952e-05,
+      "min_seconds": 6.704303799197078e-05
+    }
+  },
+  "results_telemetry_disabled": {
+    "convert_nm_to_angstrom": {
+      "max_seconds": 3.127187800128013e-05,
+      "median_seconds": 3.1192866200581194e-05,
+      "min_seconds": 3.065346558578312e-05
+    },
+    "get_dimensionality_quantity": {
+      "max_seconds": 4.50543100014329e-06,
+      "median_seconds": 4.469303786754608e-06,
+      "min_seconds": 4.421688592992723e-06
+    },
+    "get_dimensionality_unit": {
+      "max_seconds": 3.5010864026844503e-06,
+      "median_seconds": 3.478727792389691e-06,
+      "min_seconds": 3.4694472094997764e-06
+    },
+    "get_form_quantity": {
+      "max_seconds": 4.973087925463915e-07,
+      "median_seconds": 4.6388460323214533e-07,
+      "min_seconds": 3.662192029878497e-07
+    },
+    "get_value_nm_to_angstrom": {
+      "max_seconds": 2.959082741290331e-05,
+      "median_seconds": 2.9537104419432582e-05,
+      "min_seconds": 2.9491413198411463e-05
+    },
+    "is_quantity_quantity": {
+      "max_seconds": 1.7468525795266031e-06,
+      "median_seconds": 1.6301925992593168e-06,
+      "min_seconds": 1.621531997807324e-06
+    },
+    "parse_array_string_quantity": {
+      "max_seconds": 9.586344007402658e-07,
+      "median_seconds": 9.077925933524966e-07,
+      "min_seconds": 8.941123960539699e-07
+    },
+    "parse_string_quantity": {
+      "max_seconds": 1.0804178006947041e-05,
+      "median_seconds": 1.0619963216595351e-05,
+      "min_seconds": 1.0569881601259112e-05
+    },
+    "standardize_meter_quantity": {
+      "max_seconds": 4.864018361549824e-05,
+      "median_seconds": 4.8332097404636444e-05,
+      "min_seconds": 4.824097040109336e-05
+    }
+  },
+  "versions": {
+    "depdigest": "0.10.0+2.g6e072b0",
+    "pint": "0.25.3",
+    "pyunitwizard": "0.22.0",
+    "smonitor": "0.12.0"
+  }
+}

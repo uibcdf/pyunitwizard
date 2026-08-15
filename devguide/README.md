@@ -21,6 +21,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
 - `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
+- `performance_baseline_0.24.x.json`: baseline snapshot after the post-RC
+  performance work, in both telemetry modes.
 - `pending_proposals/`: active, deferred, or implementation-pending technical proposals.
 - `completed_proposals/`: implemented proposals retained as design and benchmark evidence.
 - `declined_proposals/`: proposals considered and not adopted, retained as design
@@ -28,7 +30,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Current hardening line: `0.23.x`.
+- Current hardening line: `0.24.x`.
 - Completed release-candidate line: `0.21.x`.
 - Latest maintenance tag in RC line: `0.21.1`.
 - RC consolidation closure checkpoint tag: `0.21.0`.
@@ -100,3 +102,35 @@ The `get_value` API now implements a high-performance bypass for raw numpy array
 To avoid severe control-flow exception overhead in type checking:
 - **Graceful Form Probing**: `get_form()` has been extended to support `raise_exception=False`. When a form is not recognized, it returns `None` instead of raising a costly `NotImplementedFormError`.
 - **Introspection Bypass**: `is_quantity()` queries `get_form(..., raise_exception=False)` to check form validity. If it returns `None`, it gracefully returns `False` immediately. This completely avoids raising exceptions for common Python types, bypassing exception catalog overhead, stack-frame traversal, and telemetry signaling.
+
+### 🔁 Redundant Work Removal (August 2026)
+
+A round of work on PyUnitWizard's *own* cost, after
+`completed_proposals/telemetry_cost_remeasured_and_signal_boundary.md` declined the
+`@signal` split and established that the remaining time was ours, not the
+instrumentation's. Nothing here removes validation or changes a public signature.
+
+Four findings, all of the same shape — paying repeatedly for something already known:
+
+- **Form re-resolution.** `get_dimensionality()` read its unit through the public
+  `get_unit()`, re-entering `convert()` and resolving the same form twice more;
+  `standardize()` resolved a form its helper then resolved again.
+- **The candidate scan.** `standardize()`'s canonical fast path called `has_unit()`
+  once per configured standard, re-extracting the same source unit each time, and
+  rebuilt a dimensionality key per standard on every call. The deduplicated list is
+  now derived once as `kernel.canonical_standards`.
+- **The cache key cost more than the lookup.** `get_dimensionality()` keyed on
+  `(form, str(unit))`; formatting a pint unit costs 5.95 us against 0.16 us to hash
+  it, so most of a cache *hit* was spent building the key.
+- **Expensive work before the cheap check.** `get_standard_units()` built an array
+  and ran `np.isclose` over seven values *before* consulting its cache, discarding
+  all of it on a hit.
+
+| | before | after |
+|---|---:|---:|
+| `standardize_meter_quantity` | 492.8 us | **64.9 us** (-87%) |
+| `get_dimensionality_quantity` | 145.8 us | **6.9 us** (-95%) |
+| `get_dimensionality_unit` | 12.5 us | **5.8 us** (-54%) |
+
+Baseline snapshot in `performance_baseline_0.24.x.json`, recorded in both telemetry
+modes.
