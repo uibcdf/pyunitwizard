@@ -10,3 +10,6 @@ part of the active backlog.
   predicate and integrated into unit validation.
 - `docs_autosummary_artifact_policy.md`: generated autosummary trees are now
   ignored by git and removed by the docs build itself.
+- `telemetry_cost_remeasured_and_signal_boundary.md`: measurement, benchmark
+  and form-resolution work implemented; its one architectural question, the
+  public/private `@signal` split, was prototyped and declined in section 10.

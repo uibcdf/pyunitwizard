@@ -25,7 +25,7 @@ and [`completed_proposals/cheap_canonicity_predicate.md`](../completed_proposals
 A conversion that cost 262 us when this was filed now costs **38 us**, of which **16 us is pint
 doing the real work**. What a native core could contest is the remaining ~13 us of PyUnitWizard's
 own dispatch, plus ~9 us of instrumentation that
-[`pending_proposals/telemetry_cost_remeasured_and_signal_boundary.md`](../pending_proposals/telemetry_cost_remeasured_and_signal_boundary.md)
+[`completed_proposals/telemetry_cost_remeasured_and_signal_boundary.md`](../completed_proposals/telemetry_cost_remeasured_and_signal_boundary.md)
 shows can be reduced without leaving Python.
 
 That is the whole argument for declining: the prize is a fraction of a call whose dominant cost is

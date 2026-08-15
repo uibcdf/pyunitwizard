@@ -1,11 +1,10 @@
 # Proposal: remeasuring the cost of telemetry, and where to put the `@signal` boundary
 
-**Status:** proposal (2026-07-19); re-verified 2026-08-15. Its section 6 benchmark task is
-implemented, section 8 reprices the decision across all nine baseline cases, and section 9 finishes
-problem 2b — which outran what the section 4 split would have saved on the same paths, and uncovered
-an SMonitor defect that had been hiding an unmet contract across the collective. Only the section 4
-decision remains, and it is now less urgent. Everything measured on this host, with the command next
-to it.
+**Status:** closed (2026-08-15). Its measurement work, its section 6 benchmark task, its section 9
+completion of problem 2b, and the SMonitor fix that uncovered an unmet contract across the
+collective are all **implemented**. Its one architectural question — the public/private `@signal`
+split of section 4 — was prototyped, measured, and **declined** in section 10. Nothing remains open.
+Everything measured on this host, with the command next to it.
 **Origin:** performance work in SMonitor (`smonitor` on `main`, commits `023e39f` and `df86d5d`),
 after which this repository's telemetry figures stopped reproducing.
 **Relation to [`python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md):**
@@ -435,11 +434,80 @@ targets.
 Suites green across the collective: `pyunitwizard` 470, `smonitor` 280, `argdigest` 218,
 `depdigest` 49.
 
-### What remains open
+---
 
-Only the section 4 decision, and it is now materially less urgent: the 2b and dispatch work removed
-far more than the public/private split would have on these paths, without touching a boundary. The
-section 2.1 question about the five DepDigest wrappers is unchanged.
+## 10. The section 4 decision: declined (2026-08-15)
+
+**The split is declined.** It was prototyped, measured, and rejected on the measurement. The spike
+is preserved on the `spike/split-get-form` branch.
+
+### What it would have bought
+
+Splitting `get_form` alone — 29 of the 64 nested wrappers counted across twelve public entry points,
+and the only function whose wrapper costs more than its own work (1.09 us of wrapper over 0.33 us of
+a dict lookup, **3.3x**):
+
+| | before | with the split |
+|---|---:|---:|
+| `is_quantity(q)` | 3.9 us | 2.5 us (-36%) |
+| `standardize(1 nm)`, canonical | 6.0 us | 4.6 us (-23%) |
+| `quantity("10 angstrom")` | 18.4 us | 15.4 us (-16%) |
+| `get_dimensionality(q)` | 14.5 us | 12.8 us (-12%) |
+| `convert(nm->ang)` | 41.2 us | 38.8 us (-6%) |
+| `standardize(1 m)` | 176.0 us | 168.7 us (-4%) |
+
+Note the shape: the gain is large where the call is already cheap and small where it is expensive.
+
+### Why that is not enough
+
+The split has exactly one benefit — removing nested `@signal` wrappers. It fixes no defect and
+clarifies nothing; it makes the code harder, since every internal caller must remember the private
+name. So it stands or falls purely on telemetry cost. And there is a cheaper way to the same place:
+
+| `standardize(1 m)` | us | recovers |
+|---|---:|---|
+| telemetry enabled | 176.0 | — |
+| with the `get_form` split | 168.7 | 7.3 us |
+| **telemetry disabled** | **143.6** | **32.4 us** |
+
+A consumer in a hot loop writes `smonitor.configure(enabled=False)` and recovers 32.4 us today,
+without a line changing here. A full split would recover roughly the same 30 us — while permanently
+duplicating the internal surface and giving up attribution on `convert`, `parse` and
+`get_standard_units`.
+
+Section 3 remains the uncomfortable fact underneath all of this: **zero events are emitted** on
+these paths. The split would restructure the library to make cheaper an instrumentation that
+produces nothing in the hot loop, when whether to run instrumented is already the consumer's
+one-line choice. SMonitor is near its design floor besides (~1.2 us per wrapper buys thread and
+asyncio isolation), so there is no third place to win without giving something up.
+
+The declining condition is the same one used for
+[`rusterization_pyunitwizard_core.md`](../declined_proposals/rusterization_pyunitwizard_core.md):
+do not pay a permanent architectural cost for a fraction of what a consumer already gets from a
+switch. Reopen it if a downstream workload measures per-argument predicate calls as a real
+bottleneck *with telemetry deliberately enabled*.
+
+### Two findings worth keeping
+
+- **Attribution cost is not uniform, and it is now measured rather than assumed.**
+  `NotImplementedFormError` is DEBUG in the catalog and emits nothing, so removing `get_form`'s
+  wrapper would lose no attribution at all. `NoStandardsError` is ERROR and does emit. The usable
+  rule, if this is ever reopened: *the wrapper may go where the failure does not emit, and must stay
+  where it does.* By that rule the safe set is `get_form`, `get_dimensionality`, `is_quantity`,
+  `is_dimensionless` and `has_unit` — 44 of the 64 nested wrappers.
+- **The discipline objection is real, and it showed up immediately.** The spike silently broke two
+  tests that instrument `get_form` by its public name to count calls. They did not fail loudly for
+  the right reason; they simply stopped observing what they were written to observe.
+
+### What remains
+
+Nothing in this document. The section 2.1 question about the five DepDigest wrappers belongs to
+DepDigest and is recorded there.
+
+The direction that replaces it: **PyUnitWizard's own work**, not its instrumentation. With telemetry
+disabled `standardize(1 m)` still costs 143.6 us against roughly 16 us for the equivalent bare pint
+conversion. That gap is ours, it is where the remaining time is, and closing it costs no robustness
+and no architecture.
 
 One caution about the per-wrapper figures: SMonitor's microbenchmarks
 (`benchmarks/signal_enabled.py`) measure a synthetic function with a single positional argument and
