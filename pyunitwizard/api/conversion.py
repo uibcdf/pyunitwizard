@@ -19,11 +19,12 @@ from ..forms import (
     dict_convert,
     dict_get_unit,
     dict_get_value,
+    dict_is_unit,
     dict_translate_quantity,
     dict_translate_unit,
 )
 from ..parse import parse as _parse
-from .introspection import get_form, has_unit, is_unit
+from .introspection import get_form, has_unit
 
 _LOGGER = logging.getLogger(__name__)
 _REDUNDANT_CONVERSION_FALLBACK_EMITTED = False
@@ -192,9 +193,7 @@ def convert(
             if to_unit is not None:
                 output = dict_convert[parser](output, to_unit)
             if to_type == "unit":
-                if is_unit(output):
-                    output = output
-                else:
+                if not dict_is_unit[parser](output):
                     output = dict_get_unit[parser](output)
                 output = dict_translate_quantity[parser]["string"](output)
             elif to_type == "value":
@@ -208,9 +207,7 @@ def convert(
             if to_unit is not None:
                 output = dict_convert[to_form](output, to_unit)
             if to_type == "unit":
-                if is_unit(output):
-                    output = output
-                else:
+                if not dict_is_unit[to_form](output):
                     output = dict_get_unit[to_form](output)
             elif to_type == "value":
                 output = dict_get_value[to_form](output)
@@ -222,9 +219,7 @@ def convert(
                 output = dict_convert[form_in](output, to_unit)
 
             if to_type == "unit":
-                if is_unit(output):
-                    output = output
-                else:
+                if not dict_is_unit[form_in](output):
                     output = dict_get_unit[form_in](output)
                 output = dict_translate_unit[form_in]["string"](output)
             elif to_type == "value":
@@ -236,7 +231,7 @@ def convert(
             if form_in == to_form:
                 output = quantity_or_unit
             else:
-                if is_unit(quantity_or_unit):
+                if dict_is_unit[form_in](quantity_or_unit):
                     output = dict_translate_unit[form_in][to_form](quantity_or_unit)
                 else:
                     output = dict_translate_quantity[form_in][to_form](quantity_or_unit)
@@ -248,9 +243,7 @@ def convert(
                 output = dict_convert[to_form](output, to_unit)
 
             if to_type == "unit":
-                if is_unit(output):
-                    output = output
-                else:
+                if not dict_is_unit[to_form](output):
                     output = dict_get_unit[to_form](output)
             elif to_type == "value":
                 output = dict_get_value[to_form](output)

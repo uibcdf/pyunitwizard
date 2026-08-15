@@ -84,7 +84,22 @@ def test_collective_error_path_emits_contract_signal_and_dependency_hints():
             _accept_distance(wrong_distance)
 
         recent = manager.recent_events()[start:]
-        assert any((event.get("code") or "").startswith(("ARG-", "PUW-")) for event in recent)
+
+        # The contract is a coded signal *for the failure*. Requiring ERROR
+        # level is deliberate: this assertion used to be satisfied by an
+        # incidental DEBUG probe miss emitted while an internal check asked
+        # whether a quantity was a unit, which proved nothing about the error
+        # path and hid the fact that no coded error signal was reaching it.
+        contract_events = [
+            event
+            for event in recent
+            if (event.get("code") or "").startswith(("ARG-", "PUW-"))
+            and event.get("level") == "ERROR"
+        ]
+        assert contract_events, (
+            "the collective error path must emit a coded ERROR signal; "
+            f"got {[(e.get('code'), e.get('level')) for e in recent]}"
+        )
 
         payload = depdigest.get_info("pyunitwizard", format="dict")
         dependencies = payload.get("dependencies", [])

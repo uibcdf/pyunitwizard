@@ -2,9 +2,10 @@
 
 **Status:** proposal (2026-07-19); re-verified 2026-08-15. Its section 6 benchmark task is
 implemented, section 8 reprices the decision across all nine baseline cases, and section 9 finishes
-problem 2b — which turned out to outrun what the section 4 split would have saved on the same paths.
-What remains: the section 4 decision (now less urgent), and a collective error-path signal question
-that section 9 uncovered. Everything measured on this host, with the command next to it.
+problem 2b — which outran what the section 4 split would have saved on the same paths, and uncovered
+an SMonitor defect that had been hiding an unmet contract across the collective. Only the section 4
+decision remains, and it is now less urgent. Everything measured on this host, with the command next
+to it.
 **Origin:** performance work in SMonitor (`smonitor` on `main`, commits `023e39f` and `df86d5d`),
 after which this repository's telemetry figures stopped reproducing.
 **Relation to [`python_overhead_before_rusterization.md`](../completed_proposals/python_overhead_before_rusterization.md):**
@@ -358,41 +359,59 @@ Note how far this outruns wrapper arithmetic: `get_dimensionality` lost 5 wrappe
 decorators, they were doing redundant *work* — a full conversion round trip to read a unit. That is
 the strongest argument yet for fixing repeated calls before touching the `@signal` boundary.
 
-### A third fix, measured but held back
+### A third fix, and the defect it uncovered
 
 Inside `convert()`, five `is_unit(...)` calls test objects whose form that branch already knows.
 Replacing them with `dict_is_unit[<known form>](...)` takes `standardize_meter_quantity` from
-350.7 us to **195.2 us** — a further 44%, and the single largest win found.
+350.7 us to **194.4 us** — a further 45%, and the single largest win found.
 
-It is **not applied**, because it makes `tests/e2e/test_collective_error_path.py` fail, and that
-failure is worth more than the optimization:
-
-The public `is_unit()` emits a `ProbeMiss` (`PUW-DBG-PROBE-001`) when it returns `False`. Bypassing
-it removes those emissions. That test asserts the collective error path emits an event coded `ARG-`
-or `PUW-`, and **the probe miss was the only event satisfying it**. With the optimization applied,
-the path emits no coded event at all:
+Applying it first made `tests/e2e/test_collective_error_path.py` fail, which turned out to be worth
+more than the optimization. The public `is_unit()` emits a `ProbeMiss` (`PUW-DBG-PROBE-001`) when it
+returns `False`, and bypassing it removes those emissions. That test asserts the collective error
+path emits an event coded `ARG-` or `PUW-`, and **the probe miss was the only event satisfying it**:
 
 ```
-before:  ['PUW-DBG-PROBE-001', None, None]
-after :  [None, None]
+before the optimization:  ['PUW-DBG-PROBE-001', None, None]
+after  the optimization:  [None, None]
 ```
 
-So the test has been passing on a DEBUG event that the catalog itself describes as "expected during
+The test had been passing on a DEBUG event the catalog itself describes as "expected during
 form/type detection flows" and "no action is required" — emitted because an internal check asked
-whether a quantity was a unit and got the expected `False`. The intended contract signal is absent,
-and has been for as long as this reading holds.
+whether a quantity was a unit and got the expected `False`. Removing it did not break the contract;
+it revealed the contract had never been met.
 
-That makes it a cross-repository question, not a local one: this scenario is duplicated across the
-four library repos by the collective testing policy, and the resolution — whether the error path
-should emit a real coded signal, and whether a probe miss should count as one — belongs with that
-contract rather than with a performance change. The patch is trivial to reproduce from the
-description above.
+**The root cause was in SMonitor, and it affected this repository too.** A `CatalogException`
+resolves and stores its `code` and structured `extra`, but it does not emit — emission happens in
+the `@signal` wrapper as the exception propagates, and that wrapper emitted with `code=None` and
+only its own `source_module`. So the coded identity the exception had already resolved never reached
+telemetry. ArgDigest's `DigestValueError` carries `ARG-ERR-VAL-001` and surfaced uncoded; this
+repository's `NoStandardsError` carries `PUW-ERR-STD-001` and surfaced uncoded in exactly the same
+way.
+
+Fixed in SMonitor (`smonitor/core/decorator.py`): the exception path now carries a string `code` and
+merges the exception's structured `extra` onto the event, keeping the wrapper's own provenance
+alongside. Non-catalog exceptions stay uncoded, and a non-string `code` attribute is ignored, since
+unrelated exception types use that name for other things.
+
+With that in place the optimization is applied and the collective test passes for the right reason —
+a real `ARG-ERR-VAL-001` at ERROR level rather than an incidental debug event. The test was also
+strengthened to require ERROR level, so it can no longer be satisfied by probe-miss noise.
+
+### Final position of the paths this document tracks
+
+| | start | now |
+|---|---:|---:|
+| `get_dimensionality_quantity` | 145.8 us | **13.9 us** (-91%) |
+| `standardize_meter_quantity` | 492.8 us | **194.4 us** (-61%) |
+
+Suites green across the collective: `pyunitwizard` 467, `smonitor` 280, `argdigest` 218,
+`depdigest` 49.
 
 ### What remains open
 
-The section 4 decision, now better priced and less urgent: the 2b work above removed more than the
-split would have on these paths. The section 2.1 question about the five DepDigest wrappers is
-unchanged. New: the collective error-path signal described immediately above.
+Only the section 4 decision, and it is now materially less urgent: the 2b and dispatch work removed
+far more than the public/private split would have on these paths, without touching a boundary. The
+section 2.1 question about the five DepDigest wrappers is unchanged.
 
 One caution about the per-wrapper figures: SMonitor's microbenchmarks
 (`benchmarks/signal_enabled.py`) measure a synthetic function with a single positional argument and
