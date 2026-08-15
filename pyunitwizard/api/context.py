@@ -53,6 +53,7 @@ def context(
         "tentative_base_standards_units",
         "standard_units_by_dimensionality_cache",
         "conversion_factor_cache",
+        "canonical_standards",
     )
     old_state = {}
     for name in state_names:

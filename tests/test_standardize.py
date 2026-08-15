@@ -297,3 +297,46 @@ def test_get_dimensionality_extracts_the_unit_without_reconverting(monkeypatch):
     assert puw.get_dimensionality(quantity)['[L]'] == 1
 
     assert calls == []
+
+
+def test_canonical_standards_keeps_the_first_unit_of_each_dimensionality():
+    """Deduplication by dimensionality must survive being precomputed.
+
+    The observable consequence is covered by
+    ``test_standardize_does_not_bypass_first_standard_for_same_dimensionality``;
+    this pins the derived list that now carries it.
+    """
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'angstrom'])
+
+    from pyunitwizard import kernel
+
+    assert [unit for unit, _ in kernel.canonical_standards] == ['nm']
+
+
+def test_matching_configured_standard_extracts_the_unit_once(monkeypatch):
+    """The candidate scan must not re-extract the source unit per standard."""
+    import importlib
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps', 'kelvin', 'mole'])
+
+    introspection = importlib.import_module("pyunitwizard.api.introspection")
+    standardization = importlib.import_module("pyunitwizard.api.standardization")
+    original_unit_of = introspection.unit_of
+    calls = []
+
+    def counting_unit_of(quantity_or_unit, form):
+        calls.append(form)
+        return original_unit_of(quantity_or_unit, form)
+
+    monkeypatch.setattr(standardization, "unit_of", counting_unit_of)
+
+    # A miss walks every candidate; the extraction must still happen once.
+    standardization._matching_configured_standard(
+        puw.quantity(1.0, 'meter', form='pint'), 'pint', form_in='pint'
+    )
+
+    assert calls == ['pint']

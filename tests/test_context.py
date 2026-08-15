@@ -102,3 +102,24 @@ def test_context_restores_derived_standard_state_and_caches():
     assert kernel.dimensional_fundamental_standards_units == baseline_fundamental_units
     assert kernel.tentative_base_standards_units == baseline_tentative_units
     assert kernel.standard_units_by_dimensionality_cache == baseline_cache
+
+
+def test_context_restores_canonical_standards():
+    """Derived state must be in the snapshot, not just in the kernel.
+
+    `canonical_standards` is rebuilt by `set_standard_units()`, so a context
+    that changes the standards changes it too. Leaving it out of the snapshot
+    would let a context leak the candidate list that `standardize()` walks on
+    its canonical fast path.
+    """
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
+
+    baseline = list(kernel.canonical_standards)
+    assert [unit for unit, _ in baseline] == ["nm", "ps"]
+
+    with puw.context(standard_units=["angstrom", "fs"]):
+        assert [unit for unit, _ in kernel.canonical_standards] == ["angstrom", "fs"]
+
+    assert kernel.canonical_standards == baseline

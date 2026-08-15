@@ -86,6 +86,7 @@ def reset() -> None:
     kernel.tentative_base_standards_units = None
     kernel.standard_units_by_dimensionality_cache = {}
     kernel.conversion_factor_cache = {}
+    kernel.canonical_standards = []
     from pyunitwizard.api.introspection import _DIMENSIONALITY_CACHE, _TYPE_TO_FORM_CACHE
     
     _DIMENSIONALITY_CACHE.clear()
@@ -305,8 +306,14 @@ def set_standard_units(standard_units: List[str]) -> None:
     kernel.dimensional_combinations_standards={}
     kernel.adimensional_standards={}
     kernel.standard_units_by_dimensionality_cache = {}
+    kernel.canonical_standards = []
 
     n_dimensions = len(kernel.order_fundamental_units)
+
+    # First standard declared for each dimensionality. `standardize()` walks
+    # this on its canonical fast path, so it is derived here, once per
+    # configuration, rather than rebuilt on every call.
+    seen_dimensionalities = set()
 
     if type(standard_units) is str:
         standard_units=[standard_units]
@@ -332,6 +339,13 @@ def set_standard_units(standard_units: List[str]) -> None:
             kernel.dimensional_combinations_standards[standard_unit] = dim_array
 
         kernel.standards[standard_unit] = dim
+
+        dimensionality_key = tuple(
+            dim.get(dimension, 0) for dimension in kernel.order_fundamental_units
+        )
+        if dimensionality_key not in seen_dimensionalities:
+            seen_dimensionalities.add(dimensionality_key)
+            kernel.canonical_standards.append((standard_unit, dim))
 
     # Tentative base standards
 

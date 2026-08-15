@@ -244,11 +244,64 @@ def has_unit(
     if form is None:
         form = get_form(quantity_or_unit)
 
-    source_unit = (
+    return unit_matches_target(
+        unit_of(quantity_or_unit, form), form, target_unit, parser=parser
+    )
+
+
+def unit_of(quantity_or_unit: QuantityOrUnit, form: str):
+    """Return the unit of an object whose form is already known.
+
+    Parameters
+    ----------
+    quantity_or_unit : QuantityOrUnit
+        Quantity or unit, in `form`.
+    form : str
+        Form of `quantity_or_unit`, already resolved by the caller.
+
+    Returns
+    -------
+    UnitLike
+        The object itself when it is a unit, otherwise its unit.
+    """
+
+    return (
         quantity_or_unit
         if dict_is_unit[form](quantity_or_unit)
         else dict_get_unit[form](quantity_or_unit)
     )
+
+
+def unit_matches_target(
+    source_unit: Any,
+    form: str,
+    target_unit: Any,
+    parser: Optional[str] = None,
+) -> Optional[bool]:
+    """Compare an already-extracted unit against a target unit.
+
+    This carries the whole tri-state contract of :func:`has_unit`; that
+    function is the public, instrumented entry point onto it. Callers that
+    test one object against several targets extract the source unit once and
+    come here directly, rather than re-extracting it per target.
+
+    Parameters
+    ----------
+    source_unit : UnitLike
+        Unit already extracted from the object under test.
+    form : str
+        Form of `source_unit`.
+    target_unit : str or UnitLike
+        Unit expected on the object.
+    parser : str, optional
+        Parser used once when caching a string target unit.
+
+    Returns
+    -------
+    bool or None
+        ``True`` on an exact match, ``False`` on a different unit, and
+        ``None`` when the comparison cannot be made cheaply.
+    """
 
     if isinstance(target_unit, str) and form == "pint":
         registry = getattr(source_unit, "_REGISTRY", None)
@@ -371,6 +424,8 @@ __all__ = [
     "is_quantity",
     "is_unit",
     "has_unit",
+    "unit_matches_target",
+    "unit_of",
     "get_dimensionality",
     "is_dimensionless",
 ]

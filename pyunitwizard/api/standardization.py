@@ -15,7 +15,12 @@ from .._private.quantity_or_unit import QuantityOrUnit, UnitLike
 from ..forms import dict_is_unit
 from .comparison import are_compatible
 from .conversion import convert
-from .introspection import get_dimensionality, get_form, has_unit
+from .introspection import (
+    get_dimensionality,
+    get_form,
+    unit_matches_target,
+    unit_of,
+)
 
 
 def _matching_configured_standard(
@@ -35,17 +40,16 @@ def _matching_configured_standard(
     if form_in != resolved_form:
         return None
 
-    seen_dimensionalities = set()
-    for standard_unit, dimensionality in kernel.standards.items():
-        dimensionality_key = tuple(
-            dimensionality.get(dimension, 0)
-            for dimension in kernel.order_fundamental_units
-        )
-        if dimensionality_key in seen_dimensionalities:
-            continue
-        seen_dimensionalities.add(dimensionality_key)
+    if not kernel.canonical_standards:
+        return None
 
-        if has_unit(quantity_or_unit, standard_unit) is True:
+    # The source unit is the same for every candidate, so it is extracted once
+    # here instead of once per standard inside has_unit(). The candidate list
+    # is already deduplicated by dimensionality at configuration time.
+    source_unit = unit_of(quantity_or_unit, form_in)
+
+    for standard_unit, dimensionality in kernel.canonical_standards:
+        if unit_matches_target(source_unit, form_in, standard_unit) is True:
             return standard_unit, dict(dimensionality)
 
     return None
