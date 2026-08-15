@@ -67,8 +67,58 @@ That invalidates the instruction as written. Applied literally today it would me
 `@signal` from `convert`, `get_form` and `parse` -- precisely the functions a user may call
 directly, and we would lose their signal when they do.
 
-*(I have not remeasured the DepDigest side, which section 2c also cites at 10 invocations per call.
-That figure remains unverified in this document.)*
+*(Section 2c also cites the DepDigest side at 10 invocations per call. That figure was left
+unverified when this document was written; it is now measured in section 2.1.)*
+
+### 2.1 The DepDigest side, measured (2026-08-15)
+
+The same correction applies to DepDigest, and in the same direction: **5 wrappers per call, not
+10.** Counted on this host, exactly, via the `lru_cache` behind `resolve_config` — the `dep_digest`
+wrapper consults it once per invocation, so the delta in `hits + misses` is the invocation count:
+
+```bash
+python -c "
+import warnings; warnings.filterwarnings('ignore')
+import pyunitwizard as puw, smonitor
+from depdigest.core.config import resolve_config
+puw.configure.load_library(['pint']); puw.configure.set_default_form('pint')
+puw.configure.set_standard_units(['nm','ps','K','mole','amu','e','kJ/mol','kJ/(mol*nm**2)'])
+q = puw.quantity(1.5,'angstroms')
+smonitor.configure(enabled=True, handlers=[])
+used = lambda: sum(resolve_config.cache_info()[:2])
+b = used()
+for _ in range(100): puw.get_value(q, to_unit='nanometers')
+print((used()-b)/100, 'depdigest wrappers per call')"
+```
+
+Result: **5.0 DepDigest wrappers per call** (and 4.0 SMonitor wrappers, matching this document's
+post-2b figure). Measured with `pyunitwizard` 0.22.0, `depdigest` 0.10.0+2, `smonitor` 0.12.0.
+
+**What each of those wrappers now costs.** DepDigest acted on section 2c independently: it removed
+its own `@signal` self-instrumentation from the `dep_digest` wrapper and from `check_dependency`,
+and it precomputes the position and default of every `when={...}` condition parameter at decoration
+time instead of running `Signature.bind()` per call. Measured with
+`python benchmarks/decorator_overhead.py` in that repository, on this host:
+
+| `@dep_digest("json")`, dependency present | ns/call |
+|---|---:|
+| bare function | 71 |
+| decorated | 592 |
+| **overhead per wrapper** | **521** |
+| decorated with an unmatched `when={...}` | 720 |
+
+So DepDigest contributes roughly **2.6-3.6 us** to `puw.get_value` (5 wrappers, 0.52-0.72 us each
+depending on whether the wrapper carries a condition). Against the 31.3 us telemetry-disabled path,
+that is about **8-11 %** of the call — real, but an order of magnitude below the 13.4 us of
+PyUnitWizard's own overhead identified in section 5. **It does not change this document's
+conclusion:** the next cost block of our size is still PyUnitWizard itself, not its instrumentation
+layers.
+
+One caveat on the counting method: it measures wrapper *invocations*, which is what section 2c was
+about. It does not separate the five call sites, so it cannot say whether the same public/private
+self-call pattern found on the SMonitor side is also what produces these five. That question is
+open, and it is the same question — if the public/private separation of section 4 is ever applied,
+it would likely reduce both counts at once, since both decorators sit on the same functions.
 
 ---
 
