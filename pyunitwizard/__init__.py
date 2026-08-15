@@ -8,14 +8,19 @@ import importlib
 import sys
 import types
 import warnings
-from importlib.metadata import PackageNotFoundError, version
 
 try:
     from ._version import __version__
 except ImportError:
+    # Only when the package was not built. `importlib.metadata` costs about
+    # 32 ms to import -- it brings in `email.message`, `zipfile` and `quopri`
+    # to read package metadata -- so it stays out of the path that already has
+    # the answer in a file next to this one.
     try:
+        from importlib.metadata import version
+
         __version__ = version("pyunitwizard")
-    except PackageNotFoundError:
+    except Exception:
         __version__ = "0.0.0+unknown"
 
 from smonitor.integrations import ensure_configured as _ensure_smonitor_configured
