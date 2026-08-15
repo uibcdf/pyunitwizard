@@ -4,4 +4,5 @@ from .configure import get_default_form, set_default_form, get_default_parser, s
 from .configure import get_standard_units, set_standard_units, add_standard_units
 from .configure import reset
 from .configure import has_active_policy, report
+from .configure import get_pint_registry_cache, set_pint_registry_cache
 from .configure import resolve_config_module

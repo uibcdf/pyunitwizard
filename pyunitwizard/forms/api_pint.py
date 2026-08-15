@@ -5,8 +5,8 @@ try:
 except:
     raise LibraryNotFoundError('pint')
 
-import os
 from typing import Any, Union, Dict
+from pyunitwizard._private.backend_settings import resolve_pint_cache_folder
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 ## Create a unit UnitRegistry
 ## See: https://pint.readthedocs.io/en/stable/tutorial.html#using-pint-in-your-projects
@@ -21,24 +21,21 @@ def _build_registry() -> "pint.UnitRegistry":
     versions, so it cannot serve a stale registry -- a pint upgrade simply
     misses and rebuilds.
 
-    It is opt-in through ``PYUNITWIZARD_PINT_CACHE`` because it is a side effect
-    on the user's filesystem that a units library has no business causing
-    uninvited: read-only containers, ephemeral CI, and shared HPC home
-    directories all have opinions about that. Set it to ``1`` or ``auto`` for
-    pint's own per-user cache location, or to a path.
+    It is opt-in, through ``puw.configure.set_pint_registry_cache()`` or the
+    ``PYUNITWIZARD_PINT_CACHE`` environment variable, because it is a side
+    effect on the user's filesystem that a units library has no business
+    causing uninvited: read-only containers, ephemeral CI, and shared HPC home
+    directories all have opinions about that.
 
     pint raises rather than degrading when the folder cannot be used, so a
     failure here falls back to an uncached registry: a cache that cannot be
     written is a missed optimization, not an error.
     """
 
-    cache_folder = os.environ.get("PYUNITWIZARD_PINT_CACHE", "").strip()
+    cache_folder = resolve_pint_cache_folder()
 
-    if not cache_folder or cache_folder.lower() in {"0", "false", "off", "no"}:
+    if cache_folder is None:
         return pint.UnitRegistry()
-
-    if cache_folder.lower() in {"1", "true", "on", "yes", "auto"}:
-        cache_folder = ":auto:"
 
     try:
         return pint.UnitRegistry(cache_folder=cache_folder)

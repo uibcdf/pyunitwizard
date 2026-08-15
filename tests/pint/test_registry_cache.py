@@ -75,3 +75,54 @@ def test_explicit_off_is_honoured():
     for value in ("0", "false", "off", "no"):
         cache_folder, _ = _run(value)
         assert cache_folder == "None", f"{value!r} should disable the cache"
+
+
+def test_the_cache_can_be_enabled_programmatically(tmp_path):
+    """A library should not have to write to os.environ to opt in.
+
+    This works because naming a form no longer loads the backend, so there is
+    a window between configuring and the registry being built.
+    """
+    cache = tmp_path / "programmatic"
+    cache.mkdir()
+
+    probe = f"""
+import warnings; warnings.filterwarnings('ignore')
+import pyunitwizard as puw
+puw.configure.set_pint_registry_cache({str(cache)!r})
+puw.configure.set_default_form('pint')
+puw.configure.set_standard_units(['nm'])
+from pyunitwizard.forms.api_pint import ureg
+print(ureg.cache_folder)
+"""
+    import os
+
+    env = dict(os.environ)
+    env.pop("PYUNITWIZARD_PINT_CACHE", None)
+    result = subprocess.run(
+        [sys.executable, "-c", probe], capture_output=True, text=True, env=env, timeout=300
+    )
+
+    assert result.returncode == 0, result.stderr[-2000:]
+    assert result.stdout.strip() == str(cache)
+    assert list(cache.glob("*.pickle"))
+
+
+def test_setting_the_cache_after_the_backend_loaded_warns():
+    """Silently doing nothing would be worse than saying so."""
+    probe = """
+import warnings
+import pyunitwizard as puw
+puw.configure.set_default_form('pint')
+puw.configure.set_standard_units(['nm'])
+with warnings.catch_warnings(record=True) as captured:
+    warnings.simplefilter('always')
+    puw.configure.set_pint_registry_cache(True)
+print(captured[0].category.__name__ if captured else 'NONE')
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", probe], capture_output=True, text=True, timeout=300
+    )
+
+    assert result.returncode == 0, result.stderr[-2000:]
+    assert result.stdout.strip() == "RuntimeWarning"

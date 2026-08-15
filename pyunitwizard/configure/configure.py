@@ -557,3 +557,72 @@ def report() -> Dict[str, object]:
             name[len("to_") :] for name in vars(fast_track) if name.startswith("to_")
         ),
     }
+
+
+def set_pint_registry_cache(cache: Union[bool, str, None]) -> None:
+    """Let pint cache its parsed unit definitions on disk.
+
+    Parsing pint's definitions costs about 180 ms in every process that uses
+    units; from a warm cache it costs about 17 ms. It is off by default because
+    writing to a user's filesystem is not something importing a units library
+    should do uninvited.
+
+    Call this **before** anything loads the pint backend. Naming a form does not
+    load it, so the usual place is a package's configuration module, above the
+    call that sets the standard units.
+
+    Parameters
+    ----------
+    cache : bool or str or None
+        ``True`` for pint's own per-user cache location, a path to choose one,
+        ``False`` to disable, and ``None`` to defer to the
+        ``PYUNITWIZARD_PINT_CACHE`` environment variable.
+
+    Returns
+    -------
+    None
+        The setting is recorded for when the backend is built.
+
+    Warns
+    -----
+    RuntimeWarning
+        If the pint backend has already been loaded, in which case the registry
+        exists and this call cannot affect it.
+
+    Examples
+    --------
+    >>> import pyunitwizard as puw
+    >>> puw.configure.set_pint_registry_cache(True)
+    >>> puw.configure.set_default_form('pint')
+    """
+
+    import sys
+    import warnings
+
+    from pyunitwizard._private import backend_settings
+
+    if "pyunitwizard.forms.api_pint" in sys.modules:
+        warnings.warn(
+            "The pint backend is already loaded, so its registry has been built "
+            "and set_pint_registry_cache() has no effect on it. Call it before "
+            "the first operation that needs pint.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+
+    backend_settings.pint_registry_cache = cache
+
+
+def get_pint_registry_cache() -> Optional[str]:
+    """Return the folder pint will cache its parsed definitions in.
+
+    Returns
+    -------
+    str or None
+        The resolved folder, pint's ``":auto:"`` sentinel, or ``None`` when
+        caching is disabled.
+    """
+
+    from pyunitwizard._private.backend_settings import resolve_pint_cache_folder
+
+    return resolve_pint_cache_folder()
