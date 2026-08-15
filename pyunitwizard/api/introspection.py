@@ -313,7 +313,6 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
     """
 
     from .conversion import convert
-    from .extraction import get_unit
 
     if isinstance(quantity_or_unit, str):
         if is_quantity(quantity_or_unit):
@@ -322,10 +321,15 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
             quantity_or_unit = convert(quantity_or_unit, to_type="unit")
 
     form = get_form(quantity_or_unit)
+    # The unit is only an ingredient of the cache key, so it is extracted
+    # through the form dispatch already resolved above. Routing this through
+    # the public `get_unit()` would re-enter `convert()` and resolve the same
+    # form twice more, and it would render the unit in the default form while
+    # the key states `form`.
     unit = (
         quantity_or_unit
         if dict_is_unit[form](quantity_or_unit)
-        else get_unit(quantity_or_unit)
+        else dict_get_unit[form](quantity_or_unit)
     )
     cache_key = (form, str(unit))
 

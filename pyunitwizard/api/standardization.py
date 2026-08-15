@@ -21,11 +21,18 @@ from .introspection import get_dimensionality, get_form, has_unit
 def _matching_configured_standard(
     quantity_or_unit: QuantityOrUnit,
     to_form: Optional[str] = None,
+    form_in: Optional[str] = None,
 ) -> Optional[tuple[UnitLike, dict]]:
-    """Return matching canonical-unit metadata without inspecting dimensionality."""
+    """Return matching canonical-unit metadata without inspecting dimensionality.
+
+    `form_in` lets a caller that has already resolved the input form pass it in
+    rather than have it resolved a second time.
+    """
 
     resolved_form = digest_form(to_form)
-    if get_form(quantity_or_unit) != resolved_form:
+    if form_in is None:
+        form_in = get_form(quantity_or_unit)
+    if form_in != resolved_form:
         return None
 
     seen_dimensionalities = set()
@@ -221,7 +228,8 @@ def standardize(
 
     if (
         to_unit is None
-        and _matching_configured_standard(quantity_or_unit, to_form) is not None
+        and _matching_configured_standard(quantity_or_unit, to_form, form_in=form_in)
+        is not None
     ):
         return quantity_or_unit
 

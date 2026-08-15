@@ -238,3 +238,62 @@ def test_standard_units_lstsq_returns_none_when_unsatisfied():
     solution = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
     standards = {'second': np.array([0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])}
     assert _standard_units_lstsq(solution, standards) is None
+
+
+def test_standardize_resolves_the_input_form_once(monkeypatch):
+    """standardize() must not re-resolve a form it has already resolved.
+
+    It resolves the input form and then hands it to
+    ``_matching_configured_standard``; that helper previously resolved the very
+    same object again.
+    """
+    import importlib
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    standardization = importlib.import_module("pyunitwizard.api.standardization")
+    original_get_form = standardization.get_form
+    inputs = []
+
+    def counting_get_form(item, *args, **kwargs):
+        inputs.append(item)
+        return original_get_form(item, *args, **kwargs)
+
+    monkeypatch.setattr(standardization, "get_form", counting_get_form)
+
+    quantity = puw.quantity(1.0, 'meter', form='pint')
+    puw.standardize(quantity)
+
+    assert inputs == [quantity]
+
+
+def test_get_dimensionality_extracts_the_unit_without_reconverting(monkeypatch):
+    """get_dimensionality() must not re-enter convert() to read the unit.
+
+    The unit is only used to build the cache key, so it is taken from the form
+    dispatch already resolved. Routing it through the public ``get_unit()``
+    re-entered ``convert()`` and resolved the same form twice more.
+    """
+    import importlib
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+
+    # Built before instrumenting: quantity() legitimately goes through convert().
+    quantity = puw.quantity(1.0, 'nanometer', form='pint')
+
+    conversion = importlib.import_module("pyunitwizard.api.conversion")
+    calls = []
+    original_convert = conversion.convert
+
+    def counting_convert(*args, **kwargs):
+        calls.append(args[:1])
+        return original_convert(*args, **kwargs)
+
+    monkeypatch.setattr(conversion, "convert", counting_convert)
+
+    assert puw.get_dimensionality(quantity)['[L]'] == 1
+
+    assert calls == []
