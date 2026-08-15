@@ -340,3 +340,35 @@ def test_matching_configured_standard_extracts_the_unit_once(monkeypatch):
     )
 
     assert calls == ['pint']
+
+
+def test_get_standard_units_cache_hit_does_not_reconvert(monkeypatch):
+    """A cache hit must not rebuild the standard unit from its string.
+
+    The cache stores the standard as a string, so the hit path used to run a
+    full conversion to turn it back into a unit -- which was the entire cost of
+    a hit. It now resolves through the memoized helper.
+    """
+    import importlib
+
+    puw.configure.reset()
+    puw.configure.load_library(['pint'])
+    puw.configure.set_standard_units(['nm', 'ps'])
+
+    quantity = puw.quantity(1.0, 'meter', form='pint')
+    first = puw.get_standard_units(quantity)  # populates the cache
+
+    standardization = importlib.import_module("pyunitwizard.api.standardization")
+    calls = []
+    original_convert = standardization.convert
+
+    def counting_convert(*args, **kwargs):
+        calls.append(args[:1])
+        return original_convert(*args, **kwargs)
+
+    monkeypatch.setattr(standardization, "convert", counting_convert)
+
+    second = puw.get_standard_units(quantity)
+
+    assert calls == []
+    assert second == first

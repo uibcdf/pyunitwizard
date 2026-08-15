@@ -16,6 +16,7 @@ from ..forms import dict_is_unit
 from .comparison import are_compatible
 from .conversion import convert
 from .introspection import (
+    _target_unit_from_string,
     get_dimensionality,
     get_form,
     unit_matches_target,
@@ -124,18 +125,23 @@ def get_standard_units(
         for unit in kernel.order_fundamental_units:
             dimensionality.setdefault(unit, 0)
 
-    solution = np.array(
-        [dimensionality[unit] for unit in kernel.order_fundamental_units],
-        dtype=float,
-    )
-    solution_key = tuple(solution.tolist())
-    n_dims_solution = len(kernel.order_fundamental_units) - np.sum(
-        np.isclose(solution, 0.0)
-    )
+    # The cache key is built in plain Python and consulted before any array
+    # work: on a hit none of it is needed, and `np.isclose` over these seven
+    # values costs more than everything else in this function put together.
+    exponents = [float(dimensionality[unit]) for unit in kernel.order_fundamental_units]
+    solution_key = tuple(exponents)
 
     cached_output = kernel.standard_units_by_dimensionality_cache.get(solution_key)
     if cached_output is not None:
-        return convert(cached_output, to_form=form, parser=parser, to_type="unit")
+        # The cache holds the standard as a string, so resolving it back to a
+        # unit is the whole remaining cost of a hit. `_target_unit_from_string`
+        # is the memoized form of exactly this conversion.
+        return _target_unit_from_string(cached_output, form, parser)
+
+    solution = np.array(exponents, dtype=float)
+    # Equivalent to `np.isclose(exponent, 0.0)`, whose default tolerances
+    # reduce to `abs(exponent) <= atol` when comparing against zero.
+    n_dims_solution = sum(1 for exponent in exponents if abs(exponent) > 1e-08)
 
     output: Optional[UnitLike] = None
 
