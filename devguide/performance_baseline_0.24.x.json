@@ -1,102 +1,102 @@
 {
-  "generated_at_utc": "2026-08-15T14:25:53.253863+00:00",
-  "git_describe": "0.24.0-19-g154bcea",
+  "generated_at_utc": "2026-08-15T19:31:41.556753+00:00",
+  "git_describe": "0.24.0-33",
   "iterations": 5000,
-  "note": "Recorded after the form-resolution, candidate-scan, cache-key and cache-ordering work. `versions` reports installed distribution metadata, which lags a development checkout; git_describe is the tree.",
+  "note": "Recorded after the redundant-work and startup rounds. `versions` reports installed distribution metadata, which lags a development checkout; git_describe is the tree. Timings taken with the pint registry cache warm.",
   "python": "3.13",
   "repeats": 5,
   "results": {
     "convert_nm_to_angstrom": {
-      "max_seconds": 4.1307620983570815e-05,
-      "median_seconds": 4.0897752600722016e-05,
-      "min_seconds": 4.083312579896301e-05
+      "max_seconds": 2.934513420332223e-05,
+      "median_seconds": 2.8827417199499906e-05,
+      "min_seconds": 2.81907913973555e-05
     },
     "get_dimensionality_quantity": {
-      "max_seconds": 6.9752251962199805e-06,
-      "median_seconds": 6.95338121149689e-06,
-      "min_seconds": 6.9190608104690905e-06
+      "max_seconds": 7.352792401798069e-06,
+      "median_seconds": 7.259776396676898e-06,
+      "min_seconds": 7.165244780480861e-06
     },
     "get_dimensionality_unit": {
-      "max_seconds": 6.088930182158947e-06,
-      "median_seconds": 5.751079600304365e-06,
-      "min_seconds": 5.72060439735651e-06
+      "max_seconds": 6.550560798496008e-06,
+      "median_seconds": 6.046596611849964e-06,
+      "min_seconds": 5.817533400841057e-06
     },
     "get_form_quantity": {
-      "max_seconds": 1.4999077888205648e-06,
-      "median_seconds": 1.4847493963316083e-06,
-      "min_seconds": 1.4731589937582613e-06
+      "max_seconds": 1.521167391911149e-06,
+      "median_seconds": 1.4805173967033625e-06,
+      "min_seconds": 1.441982202231884e-06
     },
     "get_value_nm_to_angstrom": {
-      "max_seconds": 3.9975496008992196e-05,
-      "median_seconds": 3.970994318369776e-05,
-      "min_seconds": 3.9668042189441624e-05
+      "max_seconds": 2.8440792206674815e-05,
+      "median_seconds": 2.634364499244839e-05,
+      "min_seconds": 2.610220240894705e-05
     },
     "is_quantity_quantity": {
-      "max_seconds": 3.970950422808528e-06,
-      "median_seconds": 3.906089998781681e-06,
-      "min_seconds": 3.8920697988942266e-06
+      "max_seconds": 4.077238007448613e-06,
+      "median_seconds": 4.048687405884266e-06,
+      "min_seconds": 3.935084212571383e-06
     },
     "parse_array_string_quantity": {
-      "max_seconds": 2.0648472011089324e-06,
-      "median_seconds": 2.024850994348526e-06,
-      "min_seconds": 2.0116830011829733e-06
+      "max_seconds": 2.479206002317369e-06,
+      "median_seconds": 2.2933488013222812e-06,
+      "min_seconds": 2.069032797589898e-06
     },
     "parse_string_quantity": {
-      "max_seconds": 1.903121641371399e-05,
-      "median_seconds": 1.8393512605689465e-05,
-      "min_seconds": 1.8330025393515824e-05
+      "max_seconds": 1.4495986001566052e-05,
+      "median_seconds": 1.403668539132923e-05,
+      "min_seconds": 1.3856289791874588e-05
     },
     "standardize_meter_quantity": {
-      "max_seconds": 6.773854219354689e-05,
-      "median_seconds": 6.731198579072952e-05,
-      "min_seconds": 6.704303799197078e-05
+      "max_seconds": 6.15273152012378e-05,
+      "median_seconds": 5.978348159696907e-05,
+      "min_seconds": 5.8735125605016946e-05
     }
   },
   "results_telemetry_disabled": {
     "convert_nm_to_angstrom": {
-      "max_seconds": 3.127187800128013e-05,
-      "median_seconds": 3.1192866200581194e-05,
-      "min_seconds": 3.065346558578312e-05
+      "max_seconds": 2.297036238014698e-05,
+      "median_seconds": 2.1680429205298424e-05,
+      "min_seconds": 2.1489289798773825e-05
     },
     "get_dimensionality_quantity": {
-      "max_seconds": 4.50543100014329e-06,
-      "median_seconds": 4.469303786754608e-06,
-      "min_seconds": 4.421688592992723e-06
+      "max_seconds": 4.859668388962746e-06,
+      "median_seconds": 4.487974615767598e-06,
+      "min_seconds": 4.397870204411447e-06
     },
     "get_dimensionality_unit": {
-      "max_seconds": 3.5010864026844503e-06,
-      "median_seconds": 3.478727792389691e-06,
-      "min_seconds": 3.4694472094997764e-06
+      "max_seconds": 4.315378400497139e-06,
+      "median_seconds": 3.4557193983346226e-06,
+      "min_seconds": 3.4412523964419963e-06
     },
     "get_form_quantity": {
-      "max_seconds": 4.973087925463915e-07,
-      "median_seconds": 4.6388460323214533e-07,
-      "min_seconds": 3.662192029878497e-07
+      "max_seconds": 3.7964561488479374e-07,
+      "median_seconds": 3.514695912599564e-07,
+      "min_seconds": 3.499255981296301e-07
     },
     "get_value_nm_to_angstrom": {
-      "max_seconds": 2.959082741290331e-05,
-      "median_seconds": 2.9537104419432582e-05,
-      "min_seconds": 2.9491413198411463e-05
+      "max_seconds": 1.9717379380017518e-05,
+      "median_seconds": 1.9651521602645518e-05,
+      "min_seconds": 1.9404343399219216e-05
     },
     "is_quantity_quantity": {
-      "max_seconds": 1.7468525795266031e-06,
-      "median_seconds": 1.6301925992593168e-06,
-      "min_seconds": 1.621531997807324e-06
+      "max_seconds": 1.6507558058947326e-06,
+      "median_seconds": 1.6296652145683765e-06,
+      "min_seconds": 1.6149937873706222e-06
     },
     "parse_array_string_quantity": {
-      "max_seconds": 9.586344007402658e-07,
-      "median_seconds": 9.077925933524966e-07,
-      "min_seconds": 8.941123960539699e-07
+      "max_seconds": 9.084523888304829e-07,
+      "median_seconds": 8.927077986299991e-07,
+      "min_seconds": 8.857876062393189e-07
     },
     "parse_string_quantity": {
-      "max_seconds": 1.0804178006947041e-05,
-      "median_seconds": 1.0619963216595351e-05,
-      "min_seconds": 1.0569881601259112e-05
+      "max_seconds": 6.990040000528097e-06,
+      "median_seconds": 6.150472979061306e-06,
+      "min_seconds": 6.1090905917808415e-06
     },
     "standardize_meter_quantity": {
-      "max_seconds": 4.864018361549824e-05,
-      "median_seconds": 4.8332097404636444e-05,
-      "min_seconds": 4.824097040109336e-05
+      "max_seconds": 4.5954015222378073e-05,
+      "median_seconds": 4.2789203603751954e-05,
+      "min_seconds": 4.226817640010268e-05
     }
   },
   "versions": {

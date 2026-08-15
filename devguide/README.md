@@ -136,3 +136,31 @@ Four findings, all of the same shape — paying repeatedly for something already
 
 Baseline snapshot in `performance_baseline_0.24.x.json`, recorded in both telemetry
 modes.
+
+### 🚀 Startup Cost (August 2026)
+
+A second round, on what a consumer pays before doing any unit work at all. It
+was driven by a MolSysSuite question -- whether a library can declare its unit
+policy when it is imported rather than on first use -- and the answer turned out
+to depend entirely on this.
+
+- **Naming a form loaded its backend.** `set_default_form('pint')` cost 477 ms
+  because `digest_form()` both validated the name and imported pint. Recording a
+  preference is not using it; the first real operation loads the backend anyway.
+  **477 ms → 0 ms.**
+- **Reaching `puw.configure` imported numpy and the whole API package**, to get
+  two functions used by two of its own functions. **63 ms → 1.2 ms.**
+- **pint can cache its parsed definitions on disk.** Opt-in through
+  `set_pint_registry_cache()` or `PYUNITWIZARD_PINT_CACHE`, off by default
+  because writing to a user's filesystem is not a side effect importing a units
+  library should cause. Registry construction **180 ms → 17 ms**.
+- **`importlib.metadata` was imported to read our own version**, on a path that
+  already had the answer in `_version.py`. Currently masked because SMonitor
+  imports it first; filed as a proposal there, where it is 33 ms of a 72 ms
+  import that every dependent library inherits.
+
+Declaring a full policy cold went from 542 ms to about 310 ms warm, of which
+about 256 ms is `import pint` and irreducible. What is *not* worth doing is
+recorded too: deferring the resolution of standard units would take that to
+near zero, and was rejected because it defers validation with it. See
+`pending_proposals/molsyssuite_unit_configuration_authority.md`.

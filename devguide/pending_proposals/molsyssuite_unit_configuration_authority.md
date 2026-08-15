@@ -171,7 +171,7 @@ recommended as the general isolation boundary.
 Unit policy should follow this precedence, from strongest to weakest:
 
 1. an explicit target unit, form, or parser supplied to an API call;
-2. an explicitly activated local context or immutable unit-policy object;
+2. an explicitly activated local context;
 3. configuration selected by the application or interactive session;
 4. PyUnitWizard factory defaults.
 
@@ -404,7 +404,14 @@ Require structured diagnostics for:
 
 1. Inventory all import-time configuration and all calls that depend on
    ambient standardization across MolSysSuite.
-2. Add import-order permutation tests that reproduce current conflicts.
+2. ~~Add import-order permutation tests that reproduce current conflicts.~~
+   **Done (2026-08-15).** `tests/cross_repo/test_unit_policy_authority.py` in
+   `molsysmt` and `molsysviewer`, run in subprocesses because import order is
+   only observable once per interpreter. They assert the expected units
+   **absolutely** rather than comparing orderings against each other: a
+   library imposing its own policy in every ordering makes them all agree
+   with one another while disagreeing with the suite, which the relative
+   form cannot see. Verified by reverting one library to the old pattern.
 3. ~~Fix the remaining state snapshot and restoration gaps in
    `pyunitwizard.context()`.~~ **Done (2026-08-15).** Fast-track registrations
    are snapshotted; the snapshot copies one level deeper, so mutating a nested
@@ -417,18 +424,69 @@ Require structured diagnostics for:
    configuration. Three regression tests cover it.
 4. Decide and document whether 1.0 contexts are context-local or serialized
    process-global state.
-5. Introduce atomic immutable session-policy replacement behind a small
-   experimental API.
-6. Define and ratify the shared MolSysSuite default policy; defer named profiles
-   unless evidence shows they are necessary.
+5. ~~Introduce atomic immutable session-policy replacement behind a small
+   experimental API.~~ **Dropped (2026-08-15).** Its stated benefit was
+   reproducibility, and that argument does not hold: a result in metres
+   rather than centimetres, or in pint rather than openmm, is the same
+   physical magnitude in another representation. What remained was
+   atomicity, which only bites with concurrent writers — not the
+   single-threaded scripts and notebooks this proposal is about. The part
+   worth keeping was provenance, and that needed a report, not an
+   architecture: `puw.configure.report()`.
+6. ~~Define and ratify the shared MolSysSuite default policy; defer named
+   profiles unless evidence shows they are necessary.~~ **Done
+   (2026-08-15).** The shared policy is MolSysMT's, adopted verbatim by all
+   four libraries. This is what actually closed the defect: when the
+   libraries agree, who gets there first stops mattering. Named profiles
+   were not needed and are not implemented.
 7. Migrate library scientific invariants to explicit target units.
-8. Remove unconditional library activation so sibling libraries consume the
-   shared session policy; add profile registration only if later evidence
-   justifies it.
+8. ~~Remove unconditional library activation so sibling libraries consume
+   the shared session policy.~~ **Done (2026-08-15).** Each library now
+   guards its declaration with `puw.configure.has_active_policy()`. This is
+   the half the shared policy does not cover: libraries agreeing with each
+   other says nothing about them agreeing with the *user*, and a later
+   first-import used to undo a choice the user had already made.
+   Declaration also moved from first use to import time — see
+   "Declaring at import" below.
 9. Add a compatibility period with diagnostics for legacy import-time
    configuration.
 10. Publish script and Jupyter guidance and run the cross-repository matrix in
     CI.
+
+## Declaring at import (2026-08-15)
+
+Two questions the original plan left implicit turned out to matter more than the
+architecture it proposed.
+
+**Where does the policy live?** PyUnitWizard owns the *mechanism* — what a policy
+is, how it is declared, the authority precedence, introspection, temporary
+override. MolSysSuite owns the *content*: that mass is `dalton` and angles are
+radians is a molecular-domain decision. A units interoperability layer for
+Scientific Python has no business shipping a profile named after one domain.
+
+**When is it declared?** At import, not on first use. Reaching the configuration
+lazily left `report()` describing an empty session until something happened to
+touch it, and a user calling PyUnitWizard directly after importing a suite
+library got `NoStandardsError` with no visible cause. Measured, declaring the
+whole policy costs about 310 ms warm, once per process — a second suite library
+costs about 2 ms — against a session that pays the same at its first unit
+operation and already spends seconds in conversion and loading.
+
+That was only affordable after three changes in PyUnitWizard: naming a form no
+longer loads its backend, reaching `puw.configure` no longer imports numpy and
+the API package, and pint can cache its parsed definitions on disk
+(`set_pint_registry_cache()`), taking registry construction from about 180 ms to
+about 17 ms.
+
+**What was considered and rejected:** deferring the *resolution* of standard
+units, so that declaring would cost nothing at all. It would have worked, and
+the mechanical part was contained — every consumer of the derived maps lives in
+`standardization.py`. It was dropped because it defers validation with it:
+`set_standard_units(['typo'])` raises today at the declaration, in the library's
+own configuration module, pointing at the offending line. Deferred, that error
+surfaces inside some user's `standardize()` call, pointing at PyUnitWizard
+internals. Trading error locality for 300 ms in a nine-second session is the
+wrong trade, and it is the same trade this document argues against elsewhere.
 
 ## Acceptance Criteria
 
