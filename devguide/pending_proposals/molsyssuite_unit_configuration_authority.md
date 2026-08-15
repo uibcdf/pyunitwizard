@@ -80,9 +80,10 @@ for library coexistence:
 **Corrected:** this list previously claimed that restoration "covers the main
 standard dictionaries but not every derived matrix, derived-unit list, or cache
 rebuilt by `set_standard_units()`". That is no longer accurate.
-`pyunitwizard/api/context.py` snapshots **all fifteen** kernel globals, the
-derived matrices (`dimensional_fundamental_standards_matrix`,
-`tentative_base_standards_matrix`), the derived unit lists, and both caches
+`pyunitwizard/api/context.py` snapshots **every** kernel global -- sixteen at the
+time of writing -- the derived matrices (`dimensional_fundamental_standards_matrix`,
+`tentative_base_standards_matrix`), the derived unit lists, the deduplicated
+`canonical_standards` list, and both caches
 (`standard_units_by_dimensionality_cache`, `conversion_factor_cache`) included.
 Anyone acting on step 3 of the migration plan should not re-fix this.
 

@@ -397,14 +397,42 @@ With that in place the optimization is applied and the collective test passes fo
 a real `ARG-ERR-VAL-001` at ERROR level rather than an incidental debug event. The test was also
 strengthened to require ERROR level, so it can no longer be satisfied by probe-miss noise.
 
+### The canonical candidate scan
+
+One more instance of the same pattern, and the only one whose cost scaled with the *consumer's*
+configuration rather than with the call.
+
+`standardize()`'s canonical fast path asked `has_unit()` once per configured standard. Each call
+re-extracted the same source unit and paid for its own signalled wrapper, and the scan rebuilt a
+dimensionality key per standard on every call to deduplicate a list that changes only when standards
+are configured. Measured on a miss:
+
+| configured standards | before | after |
+|---|---:|---:|
+| 4 | 19.4 us | **4.7 us** (-76%) |
+| 8 (a MolSysSuite-sized profile) | 38.8 us | **8.0 us** (-79%) |
+
+The scaling is the point: at 8 standards it cost double what it cost at 4, so the more carefully a
+consumer declared its units the more it paid. On `standardize()` of an already-canonical quantity it
+was 65% of the whole call; it is now flat at 6.0 us whether 4 or 8 standards are configured.
+
+`has_unit()` keeps its full tri-state contract and delegates to `unit_matches_target()`, which takes
+an already-extracted unit — so the scan extracts once and compares N times through no wrapper. The
+deduplicated list is derived in `set_standard_units()` as `kernel.canonical_standards`, alongside the
+other maps built there, cleared by `reset()` and included in the `context()` snapshot.
+
+Note this is *not* the section 4 split. `has_unit()` remains the single public entry point; what was
+factored out is a helper taking different inputs, for a caller that tests one object against many
+targets.
+
 ### Final position of the paths this document tracks
 
 | | start | now |
 |---|---:|---:|
-| `get_dimensionality_quantity` | 145.8 us | **13.9 us** (-91%) |
-| `standardize_meter_quantity` | 492.8 us | **194.4 us** (-61%) |
+| `get_dimensionality_quantity` | 145.8 us | **13.9 us** (-90%) |
+| `standardize_meter_quantity` | 492.8 us | **175.3 us** (-64%) |
 
-Suites green across the collective: `pyunitwizard` 467, `smonitor` 280, `argdigest` 218,
+Suites green across the collective: `pyunitwizard` 470, `smonitor` 280, `argdigest` 218,
 `depdigest` 49.
 
 ### What remains open
