@@ -601,7 +601,13 @@ def set_pint_registry_cache(cache: Union[bool, str, None]) -> None:
 
     from pyunitwizard._private import backend_settings
 
-    if "pyunitwizard.forms.api_pint" in sys.modules:
+    # Only when the call would actually change something. A second library in a
+    # suite declaring the same setting is not making a mistake; it is just
+    # being second.
+    if (
+        "pyunitwizard.forms.api_pint" in sys.modules
+        and backend_settings.pint_registry_cache != cache
+    ):
         warnings.warn(
             "The pint backend is already loaded, so its registry has been built "
             "and set_pint_registry_cache() has no effect on it. Call it before "
