@@ -112,6 +112,8 @@ record.txt
 # Autosummary stubs are regenerated on every docs build, one tree per audience
 # (docs/api/users/, docs/api/developers/). Removed by `make -C docs clean-api`.
 docs/api/**/autosummary/
+# myst-nb writes the executed copies of every notebook here on each build.
+docs/jupyter_execute/
 *.mod
 *.swp
 

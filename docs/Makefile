@@ -33,4 +33,5 @@ html: clean-api builddir
 
 clean: clean-api
 	rm -rf $(BUILDDIR)
+	rm -rf jupyter_execute
 
