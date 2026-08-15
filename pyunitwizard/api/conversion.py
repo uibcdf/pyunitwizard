@@ -8,7 +8,6 @@ from functools import lru_cache
 from typing import Any, Optional, Union
 
 import numpy as np
-from depdigest import dep_digest
 from smonitor import signal
 
 from .. import kernel
@@ -79,12 +78,12 @@ def _record_redundant_conversion(
             _REDUNDANT_CONVERSION_FALLBACK_EMITTED = True
 
 
+# Backend availability is not declared here. `convert()` imports no backend:
+# every route that needs one goes through `digest_form()` -> `load_library()`,
+# which raises before the backend is touched. The form-to-library table lives
+# in `pyunitwizard/_depdigest.py` (`LIBRARIES` and `MAPPING`), which is what
+# DepDigest actually reads. See `devguide/dependency_declaration_placement.md`.
 @signal(tags=["conversion"], exception_level="DEBUG")
-@dep_digest("unyt", when={"to_form": "unyt"})
-@dep_digest("openmm.unit", when={"to_form": "openmm.unit"})
-@dep_digest("astropy.units", when={"to_form": "astropy.units"})
-@dep_digest("physipy", when={"to_form": "physipy"})
-@dep_digest("quantities", when={"to_form": "quantities"})
 def convert(
     quantity_or_unit: Any,
     to_unit: Optional[str] = None,
