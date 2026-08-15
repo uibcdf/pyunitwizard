@@ -71,14 +71,18 @@ After every run:
 
 ## Cleaning Autosummary Output
 
-Whenever the public API changes, clear obsolete autosummary trees to avoid stale reference pages:
+Obsolete autosummary trees are cleared for you: `make html` removes them before
+every build, so pages for symbols dropped from the public API cannot survive.
+These stubs are generated artifacts and git ignores them.
+
+To drop them without rebuilding the site:
 
 ```bash
+make -C docs clean-api
+
+# equivalent, and callable from any directory
 python docs/clean_api.py
 ```
-
-Run the command after a docs build that touches API pages, or before committing
-when you notice outdated files under `docs/api/autosummary/`.
 
 ## Building the Docs Locally
 
@@ -94,7 +98,9 @@ sphinx-build -M html docs docs/_build
 
 Common targets include:
 
-- `make clean` – remove the `_build/` tree before a fresh build.
+- `make clean` – remove the `_build/` tree and generated autosummary stubs
+  before a fresh build.
+- `make clean-api` – remove only the generated autosummary stubs.
 - `make html` – render the full site for local preview.
 
 Open `docs/_build/html/index.html` in your browser to inspect the result. Never commit the `_build/` directory.

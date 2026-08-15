@@ -109,7 +109,9 @@ ENV/
 # Temp included
 INSTALL.log
 record.txt
-/docs/api/_autosummary
+# Autosummary stubs are regenerated on every docs build, one tree per audience
+# (docs/api/users/, docs/api/developers/). Removed by `make -C docs clean-api`.
+docs/api/**/autosummary/
 *.mod
 *.swp
 

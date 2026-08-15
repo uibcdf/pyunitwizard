@@ -18,12 +18,14 @@ reStructuredText, and Jupyter notebooks. Key areas:
   - `developer/` – contributor guides and conventions.
   - `showcase/` – highlight notebooks and quick-start examples.
 - `api/` contains the API landing pages for users and developers. Autosummary
-  will create `autosummary/` subfolders under these trees; remove stale
-  directories with `python docs/clean_api.py` when the API surface changes.
+  will create `autosummary/` subfolders under these trees. They are generated
+  artifacts: git ignores them, and `make html` removes stale ones before every
+  build, so no manual cleanup step is required.
 - `_static/` and `_templates/` provide static assets and Jinja templates referenced by `conf.py`.
 - `bibliography.bib` stores citation metadata shared across the site.
 - `execute_notebooks.py` automates notebook execution and `.nbconvert.last_run`
-  timestamps; `clean_api.py` trims generated autosummary artifacts.
+  timestamps; `clean_api.py` trims generated autosummary artifacts and is wired
+  into the `html`, `clean`, and `clean-api` Makefile targets.
 - `Makefile`/`make.bat` wrap common Sphinx build targets such as `make html`.
 
 ## Authoring Guidelines
@@ -69,9 +71,9 @@ reStructuredText, and Jupyter notebooks. Key areas:
   Clean prior builds with `make clean` if assets look stale.
 - Alternatively, call `sphinx-build -M html . _build` when scripting builds
   (mirrors the Makefile target).
-- When the API reference changes, run Sphinx with autosummary enabled (default)
-  and, afterwards, invoke `python docs/clean_api.py` to remove outdated
-  autosummary directories before regenerating them on the next build.
+- When the API reference changes, just rebuild: `make html` removes outdated
+  autosummary directories and then regenerates them with autosummary enabled
+  (the default). Use `make clean-api` to drop the stubs without rebuilding.
 - The documentation is configured for the `pydata_sphinx_theme`, myst-nb, and
   notebook execution mode `"off"`—keep these defaults unless you have buy-in
   from maintainers.
