@@ -4,6 +4,25 @@ import pyunitwizard as puw
 from pyunitwizard._private.exceptions import LibraryWithoutParserError
 
 
+@pytest.fixture(autouse=True)
+def _backends_loaded():
+    """Register every available backend before each contract runs.
+
+    These tests address the adapter modules directly — `puw.forms.api_astropy_unit`
+    and friends — and those attributes do not exist until `load_library` imports
+    them. Without this fixture the file passes only when another test file has
+    already loaded the backend in the same process: sequentially `test_get_form.py`
+    does it, but under `pytest -n` each worker is its own process and whichever
+    worker gets this file without it fails. Loading is additive, so this leaves no
+    configuration for the next test to inherit.
+    """
+    for library in ("pint", "openmm.unit", "unyt", "astropy.units"):
+        try:
+            puw.configure.load_library(library)
+        except (ImportError, ModuleNotFoundError):
+            continue
+
+
 def _blank_dimensionality():
     return {"[L]": 0, "[M]": 0, "[T]": 0, "[K]": 0, "[mol]": 0, "[A]": 0, "[Cd]": 0}
 
