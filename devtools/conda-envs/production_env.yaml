@@ -1,9 +1,0 @@
-channels:
-- uibcdf
-- conda-forge
-dependencies:
-- python >=3.11,<3.14
-- numpy
-- pint
-- smonitor
-- depdigest

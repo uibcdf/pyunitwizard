@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-16x16.png" sizes="16x16" rel="icon" type="image/png">
+    <link href="../../_static/favicon-124x124.png" sizes="124x124" rel="icon" type="image/png">
+    <link href="../../_static/favicon-128x128.png" sizes="128x128" rel="icon" type="image/png">
+    <link href="../../_static/favicon-192x192.png" sizes="192x192" rel="icon" type="image/png">
+    <link href="../../_static/icon.svg" rel="icon" type="image/svg+xml">
+  
+    <title>Configuration – PyUnitWizard 0.25.0</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=d8dd0411"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/user/configuration';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Integrating Your Library" href="integrating-your-library.html" />
+    <link rel="prev" title="Mini Library Walkthrough" href="mini-library-walkthrough.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.25.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.25.0 documentation - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.25.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="library-integrators.html">Library Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end-users.html">End Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what-pyunitwizard-solves.html">What PyUnitWizard Solves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adoption-story.html">Adoption Story: From Drift to Determinism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend-coverage.html">Backend Coverage and Expectations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy-pandas-matplotlib.html">NumPy, Pandas, and Matplotlib Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mini-library-walkthrough.html">Mini Library Walkthrough</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrating-your-library.html">Integrating Your Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="production-checklist.html">Production Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Importing.html">Import and configure PyUnitWizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quantities_and_Units.html">Quantities and Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Convert.html">Convert quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strings.html">Working with strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dimensionality.html">Dimensionality and Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Check.html">Check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Similarity.html">Similarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Standardize.html">Standardization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lists_and_arrays.html">Working with lists and arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="In_Your_Library.html">PyUnitWizard in your library</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Configuration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">puw.configure</span></code> defines runtime behavior. Treat it as application/library
+configuration, not as per-call business logic.</p>
+<p>A reliable integration starts with one centralized initialization path. That
+single decision removes a large amount of hidden runtime drift.</p>
+<section id="who-owns-the-policy">
+<h2>Who owns the policy<a class="headerlink" href="#who-owns-the-policy" title="Link to this heading">#</a></h2>
+<p>Every library in a Python process shares <strong>one</strong> PyUnitWizard kernel. The active
+policy — default form, default parser, standard units — is therefore session-wide,
+and authority over it runs from strongest to weakest:</p>
+<ol class="arabic simple">
+<li><p>an explicit unit, form, or parser passed to a call;</p></li>
+<li><p>an explicitly entered <code class="docutils literal notranslate"><span class="pre">puw.context(...)</span></code>;</p></li>
+<li><p>the policy chosen by you, your application, or your session;</p></li>
+<li><p>PyUnitWizard’s factory defaults.</p></li>
+</ol>
+<p>Importing a library is not on that list. A well-behaved library configures
+PyUnitWizard only when no policy is active yet, so <strong>your choice survives any
+import that happens afterwards</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">report</span><span class="p">()</span>
+<span class="c1"># {'default_form': 'pint', 'default_parser': 'pint',</span>
+<span class="c1">#  'standard_units': ['nm', 'ps', ...], 'provenance': 'molsysmt',</span>
+<span class="c1">#  'loaded_libraries': ['pint'], 'loaded_parsers': ['pint'],</span>
+<span class="c1">#  'fast_tracks': ['nanometers']}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">report()</span></code> answers “which units am I getting, and who decided that?” — the
+<code class="docutils literal notranslate"><span class="pre">provenance</span></code> field names whoever set the active policy.</p>
+</section>
+<section id="changing-the-policy">
+<h2>Changing the policy<a class="headerlink" href="#changing-the-policy" title="Link to this heading">#</a></h2>
+<p>For the rest of the session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_standard_units</span><span class="p">([</span><span class="s2">"angstrom"</span><span class="p">,</span> <span class="s2">"fs"</span><span class="p">])</span>   <span class="c1"># replace the whole set</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">add_standard_units</span><span class="p">([</span><span class="s2">"angstrom"</span><span class="p">])</span>         <span class="c1"># replace one dimensionality</span>
+</pre></div>
+</div>
+<p>Temporarily, restoring the previous policy on exit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">puw</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="n">standard_units</span><span class="o">=</span><span class="p">[</span><span class="s2">"angstrom"</span><span class="p">,</span> <span class="s2">"fs"</span><span class="p">]):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="locating-a-configuration-module">
+<h2>Locating a configuration module<a class="headerlink" href="#locating-a-configuration-module" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">puw.configure.resolve_config_module(...)</span></code> resolves <em>which</em> module holds a
+package’s configuration, following the ecosystem precedence rule
+<code class="docutils literal notranslate"><span class="pre">runtime</span> <span class="pre">&gt;</span> <span class="pre">env</span> <span class="pre">&gt;</span> <span class="pre">file</span></code>:</p>
+<ol class="arabic simple">
+<li><p>runtime override (explicit argument),</p></li>
+<li><p>environment variable (<code class="docutils literal notranslate"><span class="pre">PYUNITWIZARD_CONFIG</span></code>),</p></li>
+<li><p>auto-discovered file (<code class="docutils literal notranslate"><span class="pre">&lt;root_package&gt;._pyunitwizard</span></code>).</p></li>
+</ol>
+<p>It is a resolution helper for integrators to call: it returns a module path and
+does not import or apply anything. Setting <code class="docutils literal notranslate"><span class="pre">PYUNITWIZARD_CONFIG</span></code> on its own has
+no effect on the active policy — to change that, use the calls above.</p>
+</section>
+<section id="faster-startup-with-pint">
+<h2>Faster startup with pint<a class="headerlink" href="#faster-startup-with-pint" title="Link to this heading">#</a></h2>
+<p>Parsing pint’s unit definitions costs about 180 ms in every process that uses
+units. Pint can cache the parsed result on disk, which brings that down to
+about 17 ms. It is off by default – writing to your filesystem is not
+something importing a units library should do uninvited – and enabled with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PYUNITWIZARD_PINT_CACHE</span><span class="o">=</span><span class="m">1</span><span class="w">        </span><span class="c1"># pint's own per-user cache location</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYUNITWIZARD_PINT_CACHE</span><span class="o">=</span>/path<span class="w">    </span><span class="c1"># or a location you choose</span>
+</pre></div>
+</div>
+<p>The cache is keyed by the content of pint’s definitions file plus the pint,
+Python and platform versions, so it cannot serve a stale registry: upgrading
+pint simply misses and rebuilds. Old entries are left behind rather than
+removed, so the folder can be deleted at any time with no consequence beyond
+one slower start.</p>
+<p>If the folder cannot be written – read-only containers, ephemeral CI – the
+registry is built without it and nothing fails.</p>
+</section>
+<section id="core-controls">
+<h2>Core controls<a class="headerlink" href="#core-controls" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">load_library(...)</span></code>: register backend adapters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_default_form(...)</span></code>: define canonical output form.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_default_parser(...)</span></code>: define parser for string inputs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_standard_units(...)</span></code>: define normalization targets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reset()</span></code>: clear mutable configuration (useful in tests).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">has_active_policy()</span></code>: whether standard units are already configured.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">report()</span></code>: the active policy and its provenance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resolve_config_module(...)</span></code>: resolve config module path with
+<code class="docutils literal notranslate"><span class="pre">runtime</span> <span class="pre">&gt;</span> <span class="pre">env</span> <span class="pre">&gt;</span> <span class="pre">file</span></code> precedence.</p></li>
+</ul>
+</section>
+<section id="recommended-baseline">
+<h2>Recommended baseline<a class="headerlink" href="#recommended-baseline" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyunitwizard</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">puw</span>
+
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">load_library</span><span class="p">([</span><span class="s2">"pint"</span><span class="p">])</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_default_form</span><span class="p">(</span><span class="s2">"pint"</span><span class="p">)</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_default_parser</span><span class="p">(</span><span class="s2">"pint"</span><span class="p">)</span>
+<span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">set_standard_units</span><span class="p">([</span><span class="s2">"nm"</span><span class="p">,</span> <span class="s2">"ps"</span><span class="p">,</span> <span class="s2">"kcal"</span><span class="p">,</span> <span class="s2">"mole"</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="read-back-checks">
+<h2>Read-back checks<a class="headerlink" href="#read-back-checks" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_libraries_loaded</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_default_form</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_default_parser</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">puw</span><span class="o">.</span><span class="n">configure</span><span class="o">.</span><span class="n">get_standard_units</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Use these checks in CI tests to ensure deterministic setup.</p>
+</section>
+<section id="operational-guidance">
+<h2>Operational guidance<a class="headerlink" href="#operational-guidance" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Keep one canonical initialization path in your package.</p></li>
+<li><p>Guard it with <code class="docutils literal notranslate"><span class="pre">has_active_policy()</span></code>: never overwrite a policy someone else
+already set. See the canonical integration guide for the required pattern.</p></li>
+<li><p>Do not reconfigure inside computational functions.</p></li>
+<li><p>In tests, call <code class="docutils literal notranslate"><span class="pre">reset()</span></code> before scenario-specific setup.</p></li>
+<li><p>If you support multiple backends, define one canonical production backend
+first, then expand with explicit cross-backend tests.</p></li>
+</ul>
+<p>For backend-specific expectations, continue with
+<a class="reference internal" href="backend-coverage.html"><span class="std std-doc">Backend Coverage and Expectations</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mini-library-walkthrough.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mini Library Walkthrough</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="integrating-your-library.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Integrating Your Library</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-owns-the-policy">Who owns the policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-the-policy">Changing the policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#locating-a-configuration-module">Locating a configuration module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faster-startup-with-pint">Faster startup with pint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-controls">Core controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-baseline">Recommended baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-back-checks">Read-back checks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-guidance">Operational guidance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2026, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.get\_parsers\_supported
+==============================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: get_parsers_supported

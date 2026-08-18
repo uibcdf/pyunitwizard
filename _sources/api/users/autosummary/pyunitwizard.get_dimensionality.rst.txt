@@ -1,0 +1,6 @@
+﻿pyunitwizard.get\_dimensionality
+================================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: get_dimensionality

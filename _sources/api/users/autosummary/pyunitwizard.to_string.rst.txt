@@ -1,0 +1,6 @@
+﻿pyunitwizard.to\_string
+=======================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: to_string

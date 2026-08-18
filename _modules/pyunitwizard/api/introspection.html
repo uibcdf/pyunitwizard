@@ -1,0 +1,968 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>pyunitwizard.api.introspection – PyUnitWizard 0.25.0</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=d8dd0411"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyunitwizard/api/introspection';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.25.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.25.0 documentation - Home"/>
+    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.25.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyunitwizard.api.introspection</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyunitwizard.api.introspection</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Introspection helpers for PyUnitWizard quantities and units."""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">kernel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._private.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NotImplementedFormError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._private.quantity_or_unit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantityOrUnit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.._private.smonitor.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">emit_probe_miss</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..forms</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">dict_dimensionality</span><span class="p">,</span>
+    <span class="n">dict_get_unit</span><span class="p">,</span>
+    <span class="n">dict_is_form</span><span class="p">,</span>
+    <span class="n">dict_is_quantity</span><span class="p">,</span>
+    <span class="n">dict_is_unit</span><span class="p">,</span>
+    <span class="n">dict_translate_unit</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>  <span class="c1"># pragma: no cover - circular import guard</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">smonitor</span><span class="w"> </span><span class="kn">import</span> <span class="n">signal</span>
+
+<span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">_DIMENSIONALITY_CACHE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Whether a unit type can key a dict directly. This is a property of the type,</span>
+<span class="c1"># not of the runtime configuration, so unlike the caches above it is never</span>
+<span class="c1"># invalidated.</span>
+<span class="n">_UNIT_IS_HASHABLE</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cache_key_for_unit</span><span class="p">(</span><span class="n">unit</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return the cheapest usable dictionary key for a unit.</span>
+
+<span class="sd">    Rendering a unit is expensive on several backends -- a pint unit costs</span>
+<span class="sd">    about 5.9 us to format against 0.16 us to hash -- and the dimensionality</span>
+<span class="sd">    cache needs a key, not a name. Units that can key a dict do so directly;</span>
+<span class="sd">    the rest fall back to their rendered form.</span>
+
+<span class="sd">    Unit equality and hashing agree on every backend that supports both, so</span>
+<span class="sd">    keying on the object cannot merge units that differ.</span>
+<span class="sd">    """</span>
+
+    <span class="n">unit_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+    <span class="n">hashable</span> <span class="o">=</span> <span class="n">_UNIT_IS_HASHABLE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">unit_type</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">hashable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">hash</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">hashable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hashable</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">_UNIT_IS_HASHABLE</span><span class="p">[</span><span class="n">unit_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">hashable</span>
+
+    <span class="k">return</span> <span class="n">unit</span> <span class="k">if</span> <span class="n">hashable</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_target_unit_from_string</span><span class="p">(</span><span class="n">target_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.construction</span><span class="w"> </span><span class="kn">import</span> <span class="n">unit</span>
+
+    <span class="k">return</span> <span class="n">unit</span><span class="p">(</span><span class="n">target_unit</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_target_unit_from_pint_registry</span><span class="p">(</span><span class="n">target_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">registry</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">registry</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">target_unit</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_register_detected_form</span><span class="p">(</span><span class="n">form</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="o">!=</span> <span class="s2">"string"</span> <span class="ow">and</span> <span class="n">form</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">loaded_libraries</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyunitwizard.configure</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_library</span>
+
+        <span class="n">load_library</span><span class="p">(</span><span class="n">form</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">form</span>
+
+
+<div class="viewcode-block" id="get_form">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.get_form.html#pyunitwizard.api.introspection.get_form">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">],</span> <span class="n">exception_level</span><span class="o">=</span><span class="s2">"DEBUG"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_form</span><span class="p">(</span>
+    <span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">,</span> <span class="n">raise_exception</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Returns the form of a quantity as a string.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        A quanitity or a unit</span>
+
+<span class="sd">    raise_exception : bool, default=True</span>
+<span class="sd">        Whether to raise NotImplementedFormError if the form is not found.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    {"string", "pint", "openmm.unit", "unyt", None}</span>
+<span class="sd">        The form of the quantity</span>
+<span class="sd">    """</span>
+
+    <span class="n">obj_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">obj_type</span> <span class="ow">in</span> <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"string"</span>
+        <span class="k">return</span> <span class="s2">"string"</span>
+
+    <span class="c1"># Fast class name detection to avoid loading all libraries or calling many functions</span>
+    <span class="n">type_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"pint"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"pint"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"pint"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"openmm"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"openmm.unit"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"openmm.unit"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"unyt"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"unyt"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"unyt"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"astropy"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"astropy.units"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"astropy.units"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"physipy"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"physipy"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"physipy"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">"quantities"</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
+        <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"quantities"</span>
+        <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="s2">"quantities"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">form_name</span><span class="p">,</span> <span class="n">aux_is_form</span> <span class="ow">in</span> <span class="n">dict_is_form</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">aux_is_form</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">):</span>
+            <span class="n">_TYPE_TO_FORM_CACHE</span><span class="p">[</span><span class="n">obj_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">form_name</span>
+            <span class="k">return</span> <span class="n">_register_detected_form</span><span class="p">(</span><span class="n">form_name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">raise_exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotImplementedFormError</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="is_quantity">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.is_quantity.html#pyunitwizard.api.introspection.is_quantity">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">],</span> <span class="n">exception_level</span><span class="o">=</span><span class="s2">"DEBUG"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_quantity</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check whether an object is a quantity</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        A quanitity or a unit</span>
+
+<span class="sd">    parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional</span>
+<span class="sd">        The parser for string quantities</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        False if it's not a quantity</span>
+<span class="sd">    """</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>  <span class="c1"># Local import to avoid circular dependency</span>
+
+    <span class="n">probe_input</span> <span class="o">=</span> <span class="n">quantity_or_unit</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">quantity_or_unit</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span>
+                <span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="n">kernel</span><span class="o">.</span><span class="n">default_form</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span>
+            <span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">dict_is_quantity</span><span class="p">[</span><span class="n">kernel</span><span class="o">.</span><span class="n">default_form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_quantity"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">get_form</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">emit_probe_miss</span><span class="p">(</span>
+                    <span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_quantity"</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">dict_is_quantity</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_quantity"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_quantity"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+
+<div class="viewcode-block" id="is_unit">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.is_unit.html#pyunitwizard.api.introspection.is_unit">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">],</span> <span class="n">exception_level</span><span class="o">=</span><span class="s2">"DEBUG"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_unit</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">,</span> <span class="n">parser</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check whether an object is a unit</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        A quantity or a unit</span>
+
+<span class="sd">    parser :  {"unyt", "pint", "openmm.unit", "astropy.units"}, optional</span>
+<span class="sd">        The parser for string quantities</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        False if it's not a unit</span>
+<span class="sd">    """</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>  <span class="c1"># Local import to avoid circular dependency</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.extraction</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_value</span>
+
+    <span class="n">probe_input</span> <span class="o">=</span> <span class="n">quantity_or_unit</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">quantity_or_unit</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_unit"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">get_form</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">dict_is_unit</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_unit"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">output</span><span class="p">:</span>
+        <span class="n">emit_probe_miss</span><span class="p">(</span><span class="n">probe_input</span><span class="p">,</span> <span class="s2">"pyunitwizard.api.introspection.is_unit"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+
+<div class="viewcode-block" id="has_unit">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.has_unit.html#pyunitwizard.api.introspection.has_unit">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">],</span> <span class="n">exception_level</span><span class="o">=</span><span class="s2">"DEBUG"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_unit</span><span class="p">(</span>
+    <span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">,</span>
+    <span class="n">target_unit</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">parser</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Check whether an object already uses an exact target unit.</span>
+
+<span class="sd">    This predicate inspects only unit metadata and never extracts or converts</span>
+<span class="sd">    the magnitude. String quantities return ``None`` because answering for</span>
+<span class="sd">    them requires parsing the input rather than inspecting existing metadata.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        Quantity or unit whose current unit is inspected.</span>
+<span class="sd">    target_unit : str or UnitLike</span>
+<span class="sd">        Exact unit expected on the input object.</span>
+<span class="sd">    parser : str, optional</span>
+<span class="sd">        Parser used once when caching a string target unit.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool or None</span>
+<span class="sd">        ``True`` for an exact unit match, ``False`` for a different unit, and</span>
+<span class="sd">        ``None`` when the input is textual and cannot be inspected cheaply.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import pyunitwizard as puw</span>
+<span class="sd">    &gt;&gt;&gt; quantity = puw.quantity(1.0, "nanometer")</span>
+<span class="sd">    &gt;&gt;&gt; puw.has_unit(quantity, "nm")</span>
+<span class="sd">    True</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">object_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">_TYPE_TO_FORM_CACHE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">object_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">form</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">get_form</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">unit_matches_target</span><span class="p">(</span>
+        <span class="n">unit_of</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">form</span><span class="p">),</span> <span class="n">form</span><span class="p">,</span> <span class="n">target_unit</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="unit_of">
+<a class="viewcode-back" href="../../../api/developers/api_developers.html#pyunitwizard.api.introspection.unit_of">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">unit_of</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the unit of an object whose form is already known.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        Quantity or unit, in `form`.</span>
+<span class="sd">    form : str</span>
+<span class="sd">        Form of `quantity_or_unit`, already resolved by the caller.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    UnitLike</span>
+<span class="sd">        The object itself when it is a unit, otherwise its unit.</span>
+<span class="sd">    """</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">quantity_or_unit</span>
+        <span class="k">if</span> <span class="n">dict_is_unit</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">dict_get_unit</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="unit_matches_target">
+<a class="viewcode-back" href="../../../api/developers/api_developers.html#pyunitwizard.api.introspection.unit_matches_target">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">unit_matches_target</span><span class="p">(</span>
+    <span class="n">source_unit</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">form</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_unit</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">parser</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Compare an already-extracted unit against a target unit.</span>
+
+<span class="sd">    This carries the whole tri-state contract of :func:`has_unit`; that</span>
+<span class="sd">    function is the public, instrumented entry point onto it. Callers that</span>
+<span class="sd">    test one object against several targets extract the source unit once and</span>
+<span class="sd">    come here directly, rather than re-extracting it per target.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    source_unit : UnitLike</span>
+<span class="sd">        Unit already extracted from the object under test.</span>
+<span class="sd">    form : str</span>
+<span class="sd">        Form of `source_unit`.</span>
+<span class="sd">    target_unit : str or UnitLike</span>
+<span class="sd">        Unit expected on the object.</span>
+<span class="sd">    parser : str, optional</span>
+<span class="sd">        Parser used once when caching a string target unit.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool or None</span>
+<span class="sd">        ``True`` on an exact match, ``False`` on a different unit, and</span>
+<span class="sd">        ``None`` when the comparison cannot be made cheaply.</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">form</span> <span class="o">==</span> <span class="s2">"pint"</span><span class="p">:</span>
+        <span class="n">registry</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source_unit</span><span class="p">,</span> <span class="s2">"_REGISTRY"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">registry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">target_unit</span> <span class="o">=</span> <span class="n">_target_unit_from_pint_registry</span><span class="p">(</span><span class="n">target_unit</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">target_unit</span> <span class="o">=</span> <span class="n">_target_unit_from_string</span><span class="p">(</span><span class="n">target_unit</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">parser</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">target_form</span> <span class="o">=</span> <span class="n">get_form</span><span class="p">(</span><span class="n">target_unit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dict_is_unit</span><span class="p">[</span><span class="n">target_form</span><span class="p">](</span><span class="n">target_unit</span><span class="p">):</span>
+            <span class="n">target_unit</span> <span class="o">=</span> <span class="n">dict_get_unit</span><span class="p">[</span><span class="n">target_form</span><span class="p">](</span><span class="n">target_unit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">target_form</span> <span class="o">!=</span> <span class="n">form</span><span class="p">:</span>
+            <span class="n">target_unit</span> <span class="o">=</span> <span class="n">dict_translate_unit</span><span class="p">[</span><span class="n">target_form</span><span class="p">][</span><span class="n">form</span><span class="p">](</span><span class="n">target_unit</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">comparison</span> <span class="o">=</span> <span class="n">source_unit</span> <span class="o">==</span> <span class="n">target_unit</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">comparison</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">form</span> <span class="o">!=</span> <span class="s2">"pint"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">registry</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source_unit</span><span class="p">,</span> <span class="s2">"_REGISTRY"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">registry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">normalized_target</span> <span class="o">=</span> <span class="n">_target_unit_from_pint_registry</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">target_unit</span><span class="p">),</span> <span class="n">registry</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">source_unit</span> <span class="o">==</span> <span class="n">normalized_target</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="get_dimensionality">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.get_dimensionality.html#pyunitwizard.api.introspection.get_dimensionality">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_dimensionality</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Return dimensional exponents for a quantity or unit.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        Quantity or unit to inspect. String values are parsed when possible.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Mapping of fundamental dimensions to integer exponents.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NotImplementedFormError</span>
+<span class="sd">        If the input form is not supported by current runtime adapters.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import pyunitwizard as puw</span>
+<span class="sd">    &gt;&gt;&gt; puw.get_dimensionality("1 nanometer")</span>
+<span class="sd">    """</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">is_quantity</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">):</span>
+            <span class="n">quantity_or_unit</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">to_type</span><span class="o">=</span><span class="s2">"quantity"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">is_unit</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">):</span>
+            <span class="n">quantity_or_unit</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">,</span> <span class="n">to_type</span><span class="o">=</span><span class="s2">"unit"</span><span class="p">)</span>
+
+    <span class="n">form</span> <span class="o">=</span> <span class="n">get_form</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="c1"># The unit is only an ingredient of the cache key, so it is extracted</span>
+    <span class="c1"># through the form dispatch already resolved above. Routing this through</span>
+    <span class="c1"># the public `get_unit()` would re-enter `convert()` and resolve the same</span>
+    <span class="c1"># form twice more, and it would render the unit in the default form while</span>
+    <span class="c1"># the key states `form`.</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">quantity_or_unit</span>
+        <span class="k">if</span> <span class="n">dict_is_unit</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">dict_get_unit</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="n">_cache_key_for_unit</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">in</span> <span class="n">_DIMENSIONALITY_CACHE</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">_DIMENSIONALITY_CACHE</span><span class="p">[</span><span class="n">cache_key</span><span class="p">])</span>
+
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">dict_dimensionality</span><span class="p">[</span><span class="n">form</span><span class="p">](</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="n">_DIMENSIONALITY_CACHE</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="is_dimensionless">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.is_dimensionless.html#pyunitwizard.api.introspection.is_dimensionless">[docs]</a>
+<span class="nd">@signal</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"introspection"</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_dimensionless</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">:</span> <span class="n">QuantityOrUnit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check wheter a quantity or unit is dimensionless.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    quantity_or_unit : QuantityOrUnit</span>
+<span class="sd">        A quantity or a unit</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        Whether the quantity or unit is dimensionless.</span>
+<span class="sd">    """</span>
+
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">get_dimensionality</span><span class="p">(</span><span class="n">quantity_or_unit</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="n">dim</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">exponent</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"_DIMENSIONALITY_CACHE"</span><span class="p">,</span>
+    <span class="s2">"_TYPE_TO_FORM_CACHE"</span><span class="p">,</span>
+    <span class="s2">"get_form"</span><span class="p">,</span>
+    <span class="s2">"is_quantity"</span><span class="p">,</span>
+    <span class="s2">"is_unit"</span><span class="p">,</span>
+    <span class="s2">"has_unit"</span><span class="p">,</span>
+    <span class="s2">"unit_matches_target"</span><span class="p">,</span>
+    <span class="s2">"unit_of"</span><span class="p">,</span>
+    <span class="s2">"get_dimensionality"</span><span class="p">,</span>
+    <span class="s2">"is_dimensionless"</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2026, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

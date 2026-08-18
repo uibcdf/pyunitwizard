@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.reset
+============================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: reset

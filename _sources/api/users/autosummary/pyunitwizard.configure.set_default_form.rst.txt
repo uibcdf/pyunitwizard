@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.set\_default\_form
+=========================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: set_default_form
