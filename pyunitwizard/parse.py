@@ -2,7 +2,7 @@ from ._private.exceptions import *
 from ._private.exceptions import ArgumentError as BadCallError
 from ._private.forms import digest_to_form
 from ._private.parsers import digest_parser
-from .forms import dict_translate_quantity
+from .forms import dict_translate_quantity, ensure_library
 from . import kernel
 import ast
 from typing import Optional
@@ -43,6 +43,7 @@ def _parse_with_pint(string: str):
         pint.quantity
             A pint quantity.
     """
+    ensure_library('pint')
     # Check if it's a non scalar quantity
     if string.startswith('['):
 
