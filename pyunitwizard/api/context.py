@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from contextlib import contextmanager
+from threading import RLock
 from typing import List, Optional
 
 import numpy as np
@@ -11,6 +12,8 @@ from smonitor import signal
 
 from .. import kernel
 from ..configure import configure
+
+_CONTEXT_LOCK = RLock()
 
 
 def _snapshot(value):
@@ -34,39 +37,26 @@ def _snapshot(value):
 
     if isinstance(value, list):
         return [
-            (item[0], dict(item[1]))
-            if isinstance(item, tuple) and len(item) == 2 and isinstance(item[1], dict)
-            else item
+            (
+                (item[0], dict(item[1]))
+                if isinstance(item, tuple)
+                and len(item) == 2
+                and isinstance(item[1], dict)
+                else item
+            )
             for item in value
         ]
 
     return copy.copy(value)
 
 
-@signal(tags=["context"])
 @contextmanager
-def context(
+def _temporary_context(
     default_form: Optional[str] = None,
     default_parser: Optional[str] = None,
     standard_units: Optional[List[str]] = None,
 ):
-    """
-    Context manager to temporarily change PyUnitWizard configuration.
-
-    Parameters
-    ----------
-    default_form : str, optional
-        Temporary default form.
-    default_parser : str, optional
-        Temporary default parser.
-    standard_units : list of str, optional
-        Temporary standard units.
-
-    Examples
-    --------
-    >>> with puw.context(default_form='pint', standard_units=['nm', 'ps']):
-    >>>     q = puw.standardize(input_q)
-    """
+    """Apply and restore temporary state while the caller holds the lock."""
     # Backend loading is deliberately absent. Loading a backend is a capability,
     # not a policy: Python cannot truly unload a module, and reverting
     # `loaded_libraries` while the `forms/` dispatch registries stay populated
@@ -121,3 +111,38 @@ def context(
             delattr(fast_track, name)
         for name, value in old_fast_tracks.items():
             setattr(fast_track, name, value)
+
+
+@signal(tags=["context"])
+@contextmanager
+def context(
+    default_form: Optional[str] = None,
+    default_parser: Optional[str] = None,
+    standard_units: Optional[List[str]] = None,
+):
+    """Temporarily change process-global PyUnitWizard configuration.
+
+    Overlapping context writers are serialized. Other threads can still read
+    the temporary configuration while this context is active.
+
+    Parameters
+    ----------
+    default_form : str, optional
+        Temporary default form.
+    default_parser : str, optional
+        Temporary default parser.
+    standard_units : list of str, optional
+        Temporary standard units.
+
+    Examples
+    --------
+    >>> with puw.context(default_form="pint", standard_units=["nm", "ps"]):
+    ...     q = puw.standardize(input_q)
+    """
+    with _CONTEXT_LOCK:
+        with _temporary_context(
+            default_form=default_form,
+            default_parser=default_parser,
+            standard_units=standard_units,
+        ):
+            yield

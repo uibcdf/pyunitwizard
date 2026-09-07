@@ -1,3 +1,5 @@
+import threading
+
 import numpy as np
 import pytest
 
@@ -174,3 +176,48 @@ def test_context_leaves_backend_loading_alone():
 
     assert ("unyt" in kernel.loaded_libraries) == ("unyt" in forms.dict_is_form)
     assert kernel.loaded_libraries.count("unyt") == 1
+
+
+def test_overlapping_context_writers_are_serialized():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+
+    first_entered = threading.Event()
+    second_attempting = threading.Event()
+    release_first = threading.Event()
+    second_entered = threading.Event()
+    observed = []
+
+    def first_writer():
+        with puw.context(standard_units=["angstrom"]):
+            observed.append(set(puw.configure.get_standard_units()))
+            first_entered.set()
+            assert release_first.wait(timeout=5)
+
+    def second_writer():
+        assert first_entered.wait(timeout=5)
+        second_attempting.set()
+        with puw.context(standard_units=["meter"]):
+            observed.append(set(puw.configure.get_standard_units()))
+            second_entered.set()
+
+    first_thread = threading.Thread(target=first_writer)
+    second_thread = threading.Thread(target=second_writer)
+    first_thread.start()
+    second_thread.start()
+
+    try:
+        assert second_attempting.wait(timeout=5)
+        assert not second_entered.wait(timeout=0.1)
+    finally:
+        release_first.set()
+
+    first_thread.join(timeout=5)
+    second_thread.join(timeout=5)
+
+    assert not first_thread.is_alive()
+    assert not second_thread.is_alive()
+    assert second_entered.is_set()
+    assert observed == [{"angstrom"}, {"meter"}]
+    assert set(puw.configure.get_standard_units()) == {"nm"}

@@ -2,13 +2,13 @@
 
 ## Status
 
-Accepted architectural direction (2026-08-13); implementation and
-cross-repository validation remain pending.
+Accepted architectural direction (2026-08-13). Core PyUnitWizard mechanisms
+are implemented; PharmacophoreMT migration, API-output classification, and
+cross-repository validation remain pending as of 2026-09-06.
 
-The "Additional Risk in the Current Context Manager" section was re-verified
-against `main` on 2026-08-15: one of its claims had been overtaken by changes to
-`pyunitwizard/api/context.py` and is corrected there, three were reproduced, and
-two further gaps were found. Migration-plan step 3 is scoped accordingly.
+The historical context-manager risk analysis records the 2026-08-15 findings;
+the 2026-09-06 implementation update above that section records the resulting
+restoration and writer-serialization contract.
 
 ## Motivation
 
@@ -38,29 +38,26 @@ PyUnitWizard stores the following values in a process-global kernel:
 - loaded backends and parsers;
 - dynamically registered fast-track conversions.
 
-Several MolSysSuite libraries currently execute calls equivalent to
-`set_default_form()`, `set_default_parser()`, and `set_standard_units()` from
-their `_pyunitwizard.py` modules. The configured profiles are not identical:
-
-- MolSysMT and TopoMT use nanometers, picoseconds, kelvin, daltons,
-  elementary charge, kilojoules per mole, and radians;
-- MolSysViewer is nearly equivalent but currently spells the mass unit as
-  `amu`;
-- PharmacophoreMT includes both kilocalories and kilojoules per mole and uses
-  degrees.
-
-Because these calls update one shared kernel, the last configuration applied
-wins. With lazy imports, "last" may mean the last library whose unit bridge was
-first accessed, not necessarily the last top-level package imported. In a
-notebook, module caching and out-of-order cell execution make this even harder
-to reason about.
+MolSysMT, MolSysViewer, and TopoMT now declare the same suite policy only when
+`has_active_policy()` is false. PharmacophoreMT still configures the kernel
+unconditionally and declares a divergent policy containing both kilocalories
+and kilojoules per mole plus degrees. Activating that bridge can therefore
+still replace an application or sibling policy; this is the remaining concrete
+import-order defect.
 
 Explicit conversion to a requested unit remains well-defined, but operations
 that rely on `standardize()`, the default quantity form, the default parser, or
 derived standard-unit lookup can change behavior after an unrelated sibling
 library is activated.
 
-## Additional Risk in the Current Context Manager
+## Historical Risk Analysis of the Context Manager
+
+**Implementation update (2026-09-06):** the restoration defects documented
+below were fixed on 2026-08-15. Context writers are now serialized with a
+reentrant lock and covered by an overlapping-thread regression test. The
+chosen 1.0 contract remains process-global, not context-local: unrelated
+readers can still observe a temporary policy, and async tasks are not isolated.
+The original analysis and reproduction are retained below as design history.
 
 *Re-verified against `main` on 2026-08-15. The kernel-state item in the original
 list had already been fixed by then and is corrected below; the remaining items
@@ -422,8 +419,12 @@ Require structured diagnostics for:
    incoherence itself. The `introspection` caches are deliberately left out for
    the same reason: a unit's dimensionality and a type's form are facts, not
    configuration. Three regression tests cover it.
-4. Decide and document whether 1.0 contexts are context-local or serialized
-   process-global state.
+4. ~~Decide and document whether 1.0 contexts are context-local or serialized
+   process-global state.~~ **Done (2026-09-06).** The 1.0 contract is
+   serialized process-global state. A reentrant lock prevents overlapping
+   writers and preserves nesting; public documentation states explicitly that
+   unrelated readers can observe the temporary state and that contexts are not
+   thread- or async-task-local isolation.
 5. ~~Introduce atomic immutable session-policy replacement behind a small
    experimental API.~~ **Dropped (2026-08-15).** Its stated benefit was
    reproducibility, and that argument does not hold: a result in metres
@@ -433,16 +434,17 @@ Require structured diagnostics for:
    single-threaded scripts and notebooks this proposal is about. The part
    worth keeping was provenance, and that needed a report, not an
    architecture: `puw.configure.report()`.
-6. ~~Define and ratify the shared MolSysSuite default policy; defer named
-   profiles unless evidence shows they are necessary.~~ **Done
-   (2026-08-15).** The shared policy is MolSysMT's, adopted verbatim by all
-   four libraries. This is what actually closed the defect: when the
-   libraries agree, who gets there first stops mattering. Named profiles
-   were not needed and are not implemented.
+6. Define and ratify the shared MolSysSuite default policy; defer named
+   profiles unless evidence shows they are necessary. **Partially done.** The
+   shared policy is MolSysMT's and is used by MolSysMT, MolSysViewer, and
+   TopoMT. PharmacophoreMT still declares a divergent policy, including both
+   energy units and degrees, so suite-wide adoption is not complete. Named
+   profiles were not needed and are not implemented.
 7. Migrate library scientific invariants to explicit target units.
-8. ~~Remove unconditional library activation so sibling libraries consume
-   the shared session policy.~~ **Done (2026-08-15).** Each library now
-   guards its declaration with `puw.configure.has_active_policy()`. This is
+8. Remove unconditional library activation so sibling libraries consume
+   the shared session policy. **Partially done (re-audited 2026-09-06).**
+   MolSysMT, MolSysViewer, and TopoMT guard their declarations with
+   `puw.configure.has_active_policy()`; PharmacophoreMT does not yet. This is
    the half the shared policy does not cover: libraries agreeing with each
    other says nothing about them agreeing with the *user*, and a later
    first-import used to undo a choice the user had already made.
@@ -452,6 +454,10 @@ Require structured diagnostics for:
    configuration.
 10. Publish script and Jupyter guidance and run the cross-repository matrix in
     CI.
+11. ~~Make fast-track registration idempotent and conflict-aware.~~ **Done
+    (2026-09-06).** Equivalent exact-unit registration preserves the original
+    normalizer. Reusing a name for a different unit raises the deterministic
+    catalog diagnostic `PUW-ERR-FAST-001` without replacing existing state.
 
 ## Declaring at import (2026-08-15)
 

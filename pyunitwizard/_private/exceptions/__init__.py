@@ -1,5 +1,6 @@
 from .argument_error import ArgumentError
 from .constant_not_found_error import ConstantNotFoundError
+from .fast_track_conflict_error import FastTrackConflictError
 from .library_not_found_error import LibraryNotFoundError
 from .library_without_parser_error import LibraryWithoutParserError
 from .no_parser_error import NoParserError

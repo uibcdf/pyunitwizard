@@ -48,6 +48,11 @@ with puw.context(standard_units=["angstrom", "fs"]):
     ...
 ```
 
+Contexts remain process-global. Overlapping context writers are serialized and
+nested contexts restore correctly, but unrelated threads can observe the
+temporary policy while a context is active. Do not use `puw.context()` as
+thread- or async-task-local isolation.
+
 ## Locating a configuration module
 
 `puw.configure.resolve_config_module(...)` resolves *which* module holds a
@@ -94,6 +99,14 @@ registry is built without it and nothing fails.
 - `report()`: the active policy and its provenance.
 - `resolve_config_module(...)`: resolve config module path with
   `runtime > env > file` precedence.
+
+## Fast-track ownership
+
+`register_fast_track(name, target_unit)` adds a process-global canonical-unit
+normalizer. Registering the same name and exact target unit again is a no-op.
+Registering that name for a different unit raises `FastTrackConflictError`, so
+library import order cannot silently redefine an existing fast track. Use a
+namespaced name when two integrations require different semantics.
 
 ## Recommended baseline
 

@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from threading import RLock
 from typing import Any
 
 import numpy as np
+
+from .._private.exceptions import FastTrackConflictError
 
 
 class FastTrack:
@@ -12,9 +15,10 @@ class FastTrack:
 
 
 fast_track = FastTrack()
+_REGISTRATION_LOCK = RLock()
 
 
-def register_fast_track(name: str, target_unit: Any):
+def register_fast_track(name: str, target_unit: Any) -> None:
     """Register a new fast-track conversion function.
 
     Parameters
@@ -23,7 +27,32 @@ def register_fast_track(name: str, target_unit: Any):
         The name of the function (e.g., "nanometers" will create fast_track.to_nanometers).
     target_unit : Any
         The pre-parsed unit object from a supported backend.
+
+    Raises
+    ------
+    FastTrackConflictError
+        If ``name`` is already registered for a different target unit.
     """
+    from .introspection import has_unit
+
+    attribute_name = f"to_{name}"
+
+    with _REGISTRATION_LOCK:
+        existing = getattr(fast_track, attribute_name, None)
+        if existing is not None:
+            existing_target = getattr(existing, "_pyunitwizard_target_unit", None)
+            if existing_target is not None and has_unit(existing_target, target_unit):
+                return
+            raise FastTrackConflictError(
+                name=name,
+                existing_target=str(existing_target),
+                requested_target=str(target_unit),
+            )
+
+        _register_fast_track(attribute_name, target_unit)
+
+
+def _register_fast_track(attribute_name: str, target_unit: Any) -> None:
     from .conversion import convert
     from .introspection import has_unit
 
@@ -39,8 +68,8 @@ def register_fast_track(name: str, target_unit: Any):
         # 3. Fallback to general conversion
         return convert(obj, to_unit=target_unit, parser=parser)
 
-    # Inject into the fast_track instance
-    setattr(fast_track, f"to_{name}", to_standard)
+    to_standard._pyunitwizard_target_unit = target_unit
+    setattr(fast_track, attribute_name, to_standard)
 
 
 __all__ = [

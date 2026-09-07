@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 import pyunitwizard as puw
+from pyunitwizard._private.exceptions import FastTrackConflictError
 
 
 def test_dynamic_fast_track_registration():
@@ -44,3 +45,30 @@ def test_specialized_passthrough_does_not_use_general_unit_extraction(monkeypatc
     puw.register_fast_track("nanometers", target_unit)
 
     assert puw.fast_track.to_nanometers(quantity) is quantity
+
+
+def test_equivalent_fast_track_registration_is_idempotent():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+
+    puw.register_fast_track("idempotent_nanometers", puw.unit("nm"))
+    registered = puw.fast_track.to_idempotent_nanometers
+
+    puw.register_fast_track("idempotent_nanometers", puw.unit("nanometer"))
+
+    assert puw.fast_track.to_idempotent_nanometers is registered
+
+
+def test_conflicting_fast_track_registration_is_rejected():
+    puw.configure.reset()
+    puw.configure.load_library(["pint"])
+
+    puw.register_fast_track("conflicting_length", puw.unit("nm"))
+    registered = puw.fast_track.to_conflicting_length
+
+    with pytest.raises(FastTrackConflictError) as excinfo:
+        puw.register_fast_track("conflicting_length", puw.unit("angstrom"))
+
+    assert excinfo.value.code == "PUW-ERR-FAST-001"
+    assert excinfo.value.extra["name"] == "conflicting_length"
+    assert puw.fast_track.to_conflicting_length is registered

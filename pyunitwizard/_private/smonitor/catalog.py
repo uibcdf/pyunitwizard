@@ -26,6 +26,12 @@ CATALOG = {
             "category": "argument",
             "level": "ERROR",
         },
+        "FastTrackConflictError": {
+            "code": "PUW-ERR-FAST-001",
+            "source": "pyunitwizard.error.fast_track_conflict",
+            "category": "configuration",
+            "level": "ERROR",
+        },
         "LibraryNotFoundError": {
             "code": "PUW-ERR-DEP-001",
             "source": "pyunitwizard.error.library_not_found",
@@ -94,6 +100,13 @@ CODES = {
         "dev_message": "Unknown constant '{constant}' requested in '{caller}'.",
         "dev_hint": "Register the constant or correct its name. Docs: {doc_url}",
     },
+    "PUW-ERR-FAST-001": {
+        "title": "Fast-track registration conflict",
+        "user_message": "Fast track '{name}' is already registered for '{existing_target}', not '{requested_target}'.",
+        "user_hint": "Use a distinct name or register the same target unit. Docs: {doc_url}",
+        "dev_message": "Conflicting fast-track registration for '{name}' in '{caller}'.",
+        "dev_hint": "Keep fast-track names unique across consumers. Docs: {doc_url}",
+    },
     "PUW-ERR-DEP-001": {
         "title": "Library not found",
         "user_message": "The required library '{library}' is not installed.",
@@ -155,6 +168,14 @@ CODES = {
 SIGNALS = {
     "pyunitwizard.error.argument": {"extra_required": ["argument", "value", "caller"]},
     "pyunitwizard.error.constant_not_found": {"extra_required": ["constant", "caller"]},
+    "pyunitwizard.error.fast_track_conflict": {
+        "extra_required": [
+            "name",
+            "existing_target",
+            "requested_target",
+            "caller",
+        ]
+    },
     "pyunitwizard.error.library_not_found": {"extra_required": ["library", "caller"]},
     "pyunitwizard.error.no_parser": {"extra_required": ["caller"]},
     "pyunitwizard.error.library_without_parser": {

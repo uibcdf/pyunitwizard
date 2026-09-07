@@ -48,3 +48,8 @@ normalizers. When the input already has the requested canonical unit and output
 form, these APIs preserve the original quantity object instead of extracting or
 converting its magnitude. Requests that change backend form still use the full
 conversion path.
+
+Fast-track registration is idempotent: registering an existing name for the
+same exact unit keeps the original normalizer. Reusing that name for a different
+unit raises a catalog-backed `FastTrackConflictError` instead of silently
+replacing process-global behavior.
