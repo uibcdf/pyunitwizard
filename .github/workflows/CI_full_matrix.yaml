@@ -79,3 +79,66 @@ jobs:
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)
         pytest -n logical -v --color=yes
+
+  report-scheduled-result:
+    name: Report scheduled matrix result
+    if: always() && github.event_name == 'schedule'
+    needs: full-test
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+    - name: Open, update, or resolve the CI monitor issue
+      uses: actions/github-script@v9
+      env:
+        MATRIX_RESULT: ${{ needs.full-test.result }}
+      with:
+        script: |
+          const marker = "<!-- pyunitwizard-ci-full-matrix-monitor -->";
+          const title = "[CI monitor] Scheduled full matrix is failing";
+          const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+          const result = process.env.MATRIX_RESULT;
+          const {owner, repo} = context.repo;
+
+          const openIssues = await github.paginate(
+            github.rest.issues.listForRepo,
+            {owner, repo, state: "open", per_page: 100},
+          );
+          const monitorIssue = openIssues.find(
+            issue => !issue.pull_request && issue.body?.includes(marker),
+          );
+
+          if (result !== "success") {
+            const report = `Scheduled full-matrix run [${context.runId}](${runUrl}) concluded with **${result}**.`;
+            if (monitorIssue) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: monitorIssue.number,
+                body: report,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title,
+                body: `${marker}\n\n${report}\n\nThis issue is maintained automatically and will close after a successful scheduled run.`,
+                labels: ["bug"],
+              });
+            }
+            core.setFailed(`Scheduled full matrix concluded with ${result}.`);
+          } else if (monitorIssue) {
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: monitorIssue.number,
+              body: `Recovered in scheduled run [${context.runId}](${runUrl}).`,
+            });
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: monitorIssue.number,
+              state: "closed",
+              state_reason: "completed",
+            });
+          }
