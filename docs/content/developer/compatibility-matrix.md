@@ -7,7 +7,7 @@ defines the minimum versions expected during the current RC stabilization path.
 |---|---:|---|
 | `argdigest` | `0.9.0` | quantity-aware contract pipelines and caller-context error mapping |
 | `depdigest` | `0.9.1` | runtime dependency introspection and optional backend governance |
-| `smonitor` | `0.13.0` | diagnostics, signaling, catalog-backed codes and hints |
+| `smonitor` | `0.14.0` | diagnostics, signaling, catalog-backed codes and hints |
 
 ## Operational rules
 

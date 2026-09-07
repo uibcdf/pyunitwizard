@@ -15,7 +15,7 @@ requirements:
   - python
   - numpy
   - pint
-  - smonitor >=0.13.0
+  - smonitor >=0.14.0
   - depdigest
 about:
   home: https://uibcdf.org
