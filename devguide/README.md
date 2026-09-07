@@ -25,7 +25,10 @@ This directory contains operational guidance for maintaining and releasing PyUni
   in `_depdigest.py` and enforced in `load_library()`, not on `convert()`.
 - `performance_baseline_0.24.x.json`: baseline snapshot after the post-RC
   performance work, in both telemetry modes.
+- `reporting_protocol.md`: issue-backed lifecycle for durable bugs and proposals.
+- `pending_bugs/`: active defect reports.
 - `pending_proposals/`: active, deferred, or implementation-pending technical proposals.
+- `archive/`: generated index of resolved and historical reports.
 - `completed_proposals/`: implemented proposals retained as design and benchmark evidence.
 - `declined_proposals/`: proposals considered and not adopted, retained as design
   evidence with the reasoning and any condition for revisiting them.
@@ -162,5 +165,5 @@ to depend entirely on this.
 Declaring a full policy cold went from 542 ms to about 310 ms warm, of which
 about 256 ms is `import pint` and irreducible. What is *not* worth doing is
 recorded too: deferring the resolution of standard units would take that to
-near zero, and was rejected because it defers validation with it. See
-`pending_proposals/molsyssuite_unit_configuration_authority.md`.
+near zero, and was rejected because it defers validation with it. The remaining
+suite-wide configuration work is tracked by `uibcdf/molsyssuite#18`.

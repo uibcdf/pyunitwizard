@@ -7,6 +7,10 @@ ground is not re-argued from scratch, but they are not part of the backlog.
 A declined proposal is separate from a completed one: nothing here was built.
 Each document states the condition, if any, under which it could be revisited.
 
+Managed and pre-adoption entries are listed in the generated
+[`archive`](../archive/README.md) index. New entries follow
+[`reporting_protocol.md`](../reporting_protocol.md).
+
 - `rusterization_pyunitwizard_core.md`: declined as unnecessary. The Python
   fast-path work removed the overhead that motivated a native core; the
   remaining per-call cost is dominated by the unit backend itself.

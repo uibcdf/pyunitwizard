@@ -13,6 +13,10 @@ All contributors must also read `MOLSYSSUITE_GUIDE.md`. It is the synchronized,
 read-only suite-governance guide owned by `uibcdf/molsyssuite`; shared policies and
 cross-component improvements are reported there as the guide directs.
 
+Before filing or closing durable local work, read `devguide/reporting_protocol.md`.
+Open the owning issue first, regenerate report indexes, synchronize the GitHub state and
+archive resolved records instead of deleting them.
+
 ---
 
 ## 2. Project Overview
