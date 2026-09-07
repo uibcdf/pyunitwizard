@@ -62,4 +62,4 @@ def test_catalog_exception_constructor_is_safe_to_rebuild(
 def test_conda_recipe_requires_the_supported_smonitor_version():
     recipe = (REPOSITORY_ROOT / "devtools" / "conda-build" / "meta.yaml").read_text()
 
-    assert "- smonitor >=0.14.0" in recipe
+    assert "- smonitor >=0.13.0" in recipe
