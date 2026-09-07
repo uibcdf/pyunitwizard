@@ -270,6 +270,8 @@ def test_get_dimensionality_populates_cache_for_quantity_and_returns_copy():
 
 def test_get_dimensionality_falls_back_to_a_rendered_key_for_unhashable_units():
     """`quantities` units cannot key a dict; the cache must still work."""
+    pytest.importorskip("quantities")
+
     puw.configure.reset()
     puw.configure.load_library(['pint', 'quantities'])
 
