@@ -10,7 +10,7 @@ try:
     from physipy import units as physipy_units
     from physipy.quantity.quantity import Quantity as PhysipyQuantity
 except Exception as exc:  # pragma: no cover - optional dependency
-    raise LibraryNotFoundError("physipy") from exc
+    raise LibraryNotFoundError(library="physipy") from exc
 
 form_name = "physipy"
 parser = False
@@ -113,11 +113,11 @@ def convert(quantity_or_unit: PhysipyQuantity, unit: Union[str, PhysipyQuantity]
 
 
 def string_to_quantity(string: str):
-    raise LibraryWithoutParserError("physipy")
+    raise LibraryWithoutParserError(library="physipy")
 
 
 def string_to_unit(string: str):
-    raise LibraryWithoutParserError("physipy")
+    raise LibraryWithoutParserError(library="physipy")
 
 
 def quantity_to_string(quantity: PhysipyQuantity) -> str:

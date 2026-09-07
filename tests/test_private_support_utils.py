@@ -25,7 +25,7 @@ def test_list_string_helpers_contract():
 
 
 def test_library_not_found_error_includes_library_and_docs():
-    exc = LibraryNotFoundError("not-a-real-lib")
+    exc = LibraryNotFoundError(library="not-a-real-lib")
     text = str(exc)
     assert "not-a-real-lib" in text
     assert "Docs: https://uibcdf.org/pyunitwizard" in text
@@ -40,7 +40,7 @@ def test_no_parser_error_supports_optional_caller():
 
 
 def test_not_implemented_parser_error_mentions_parser():
-    exc = NotImplementedParserError("fancy-parser")
+    exc = NotImplementedParserError(parser="fancy-parser")
     text = str(exc)
     assert "fancy-parser" in text
     assert "Parser for" in text

@@ -60,7 +60,7 @@ def quantity(
         if unit is None:
             output = convert(value, to_form=form, parser=parser)
             if not is_quantity(output):
-                raise BadCallError("value")
+                raise BadCallError(argument="value")
         elif type(unit) is str:
             output = convert(value + " " + unit, to_form=form, parser=parser)
         elif is_unit(unit):
@@ -68,7 +68,7 @@ def quantity(
             output = convert(value + " " + unit, to_form=form, parser=parser)
     else:
         if unit is None:
-            raise BadCallError("unit")
+            raise BadCallError(argument="unit")
 
         # --- Fast construction if unit is already in the right form ---
         unit_form = get_form(unit)

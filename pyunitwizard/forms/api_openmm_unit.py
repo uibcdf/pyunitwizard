@@ -5,7 +5,7 @@ from typing import Any, Dict, Union
 try:
     import openmm.unit as openmm_unit
 except:
-    raise LibraryNotFoundError('openmm')
+    raise LibraryNotFoundError(library="openmm")
 
 form_name = 'openmm.unit'
 parser = False
@@ -255,7 +255,7 @@ def string_to_quantity(string):
         OpenMM backend has no native string parser in this layer.
     """
 
-    raise LibraryWithoutParserError('openmm.unit')
+    raise LibraryWithoutParserError(library="openmm.unit")
 
 def string_to_unit(string):
     """Raise parser error for OpenMM string units.
@@ -276,7 +276,7 @@ def string_to_unit(string):
         OpenMM backend has no native string parser in this layer.
     """
 
-    raise LibraryWithoutParserError('openmm.unit')
+    raise LibraryWithoutParserError(library="openmm.unit")
 
 
 ## To string

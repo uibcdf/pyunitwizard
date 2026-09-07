@@ -8,7 +8,7 @@ try:
     from unyt import unyt_array, unyt_quantity
     from unyt import Unit as unyt_unit
 except:
-    raise LibraryNotFoundError('unyt')
+    raise LibraryNotFoundError(library="unyt")
 
 form_name = 'unyt'
 parser = False
@@ -242,7 +242,7 @@ def string_to_quantity(string):
         Unyt backend has no parser in this layer.
     """
 
-    raise LibraryWithoutParserError("Unyt library has no string parser")
+    raise LibraryWithoutParserError(library="unyt")
 
 def string_to_unit(string):
     """Raise parser error for unyt string units.
@@ -263,7 +263,7 @@ def string_to_unit(string):
         Unyt backend has no parser in this layer.
     """
 
-    raise LibraryWithoutParserError("Unyt library has no string parser")
+    raise LibraryWithoutParserError(library="unyt")
 
 
 ## To string

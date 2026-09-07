@@ -80,7 +80,7 @@ def _resolve_parser(string: str, parser: Optional[str], to_form: Optional[str]) 
 @lru_cache(maxsize=1024)
 def _parse_cached(string: str, parser: str, to_form: str):
     if not isinstance(string, str):
-        raise BadCallError('string')
+        raise BadCallError(argument="string")
 
     if parser == 'pint':
         if to_form == 'pint':
@@ -111,16 +111,16 @@ def _parse_cached(string: str, parser: str, to_form: str):
             return dict_translate_quantity['pint']['quantities'](pint_quantity)
 
         else:
-            raise NotImplementedParserError(parser, to_form)
+            raise NotImplementedParserError(parser=parser, caller=to_form)
 
     elif parser == 'openmm.unit':
-        raise LibraryWithoutParserError('openmm.unit')
+        raise LibraryWithoutParserError(library="openmm.unit")
     elif parser == 'unyt':
-        raise LibraryWithoutParserError("unyt")
+        raise LibraryWithoutParserError(library="unyt")
     elif parser == 'physipy':
-        raise LibraryWithoutParserError("physipy")
+        raise LibraryWithoutParserError(library="physipy")
     elif parser == 'quantities':
-        raise LibraryWithoutParserError("quantities")
+        raise LibraryWithoutParserError(library="quantities")
     elif parser == 'astropy.units':
         astropy_quantity = dict_translate_quantity['string']['astropy.units'](string)
 
@@ -135,9 +135,9 @@ def _parse_cached(string: str, parser: str, to_form: str):
         elif to_form == 'unyt':
             return dict_translate_quantity['astropy.units']['unyt'](astropy_quantity)
         else:
-            raise NotImplementedParserError(parser, to_form)
+            raise NotImplementedParserError(parser=parser, caller=to_form)
     else:
-        raise NotImplementedParserError(parser, to_form)
+        raise NotImplementedParserError(parser=parser, caller=to_form)
 
 
 from smonitor import signal

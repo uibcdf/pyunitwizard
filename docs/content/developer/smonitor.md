@@ -19,6 +19,9 @@ and traceable operational events.
 - Do not silence emission failures with `except Exception: pass`; use a safe fallback warning/log path.
 - Keep `ensure_configured(PACKAGE_ROOT)` in `pyunitwizard.__init__` to initialize diagnostics at import time.
 - Use `DiagnosticBundle` helpers (`warn`, `warn_once`, `resolve`) from `emitter.py` where applicable.
+- Define catalog exception constructors as `message=None, *, <domain fields>`.
+  This keeps reconstruction via `type(exc)(*exc.args)` from treating a rendered
+  message as a domain field.
 
 ## Emission pattern
 

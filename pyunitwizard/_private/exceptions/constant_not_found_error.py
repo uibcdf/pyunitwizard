@@ -6,7 +6,7 @@ class ConstantNotFoundError(PyUnitWizardCatalogException, ValueError):
 
     catalog_key = "ConstantNotFoundError"
 
-    def __init__(self, constant, caller=None, message=None):
+    def __init__(self, message=None, *, constant=None, caller=None):
         extra = {"constant": constant}
         if caller:
             extra["caller"] = caller

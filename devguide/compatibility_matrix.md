@@ -2,13 +2,13 @@
 
 This matrix defines the minimum sibling-library versions validated through the
 `0.19.x` historical checkpoint and carried into the current pre-`1.0.0` path
-(`0.20.x` expansion, `0.21.x` RC consolidation).
+(`0.20.x` expansion through the current post-`0.25.0` stabilization work).
 
 | Component | Minimum Version | Role |
 |---|---:|---|
 | `argdigest` | `0.9.0` | quantity-aware contract pipelines and caller-context error mapping |
 | `depdigest` | `0.9.1` | runtime dependency introspection and optional backend governance |
-| `smonitor` | `0.11.4` | diagnostics, signaling, catalog-backed codes and hints |
+| `smonitor` | `0.13.0` | diagnostics, signaling, catalog-backed codes and hints |
 
 ## Policy
 

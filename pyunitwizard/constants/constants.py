@@ -55,7 +55,7 @@ def get_constant(
     try:
         value, unit = _constants[constant_name]
     except KeyError as exc:
-        raise ConstantNotFoundError(constant_name) from exc
+        raise ConstantNotFoundError(constant=constant_name) from exc
 
     output = quantity(value, unit, form=to_form, standardized=standardized)
     if to_unit is not None:

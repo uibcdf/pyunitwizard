@@ -6,7 +6,7 @@ from pyunitwizard._private.quantity_or_unit import ArrayLike
 try:
     from astropy import units as astropy_units
 except Exception as exc:  # pragma: no cover - handled through exception
-    raise LibraryNotFoundError('astropy') from exc
+    raise LibraryNotFoundError(library="astropy") from exc
 
 AstropyQuantity = astropy_units.Quantity
 AstropyUnitBase = astropy_units.UnitBase

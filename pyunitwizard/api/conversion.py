@@ -179,7 +179,7 @@ def convert(
             return quantity_or_unit
     # ----------------------------------
     if to_type not in ["unit", "value", "quantity"]:
-        raise BadCallError("to_type")
+        raise BadCallError(argument="to_type")
 
     target_unit_form = None
     if isinstance(to_unit, str):

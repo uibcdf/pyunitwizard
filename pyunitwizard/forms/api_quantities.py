@@ -10,7 +10,7 @@ try:
     from quantities.quantity import Quantity as QuantitiesQuantity
     from quantities.unitquantity import UnitQuantity
 except Exception as exc:  # pragma: no cover - optional dependency
-    raise LibraryNotFoundError("quantities") from exc
+    raise LibraryNotFoundError(library="quantities") from exc
 
 form_name = "quantities"
 parser = False
@@ -90,11 +90,11 @@ def convert(quantity_or_unit: QuantitiesQuantity, unit: Union[str, QuantitiesQua
 
 
 def string_to_quantity(string: str):
-    raise LibraryWithoutParserError("quantities")
+    raise LibraryWithoutParserError(library="quantities")
 
 
 def string_to_unit(string: str):
-    raise LibraryWithoutParserError("quantities")
+    raise LibraryWithoutParserError(library="quantities")
 
 
 def quantity_to_string(quantity: QuantitiesQuantity) -> str:

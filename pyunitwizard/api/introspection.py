@@ -135,7 +135,7 @@ def get_form(
             return _register_detected_form(form_name)
 
     if raise_exception:
-        raise NotImplementedFormError(type(quantity_or_unit))
+        raise NotImplementedFormError(form=type(quantity_or_unit))
     return None
 
 

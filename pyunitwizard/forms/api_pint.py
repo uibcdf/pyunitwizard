@@ -3,7 +3,7 @@ from pyunitwizard._private.exceptions import *
 try:
     import pint
 except:
-    raise LibraryNotFoundError('pint')
+    raise LibraryNotFoundError(library="pint")
 
 from typing import Any, Union, Dict
 from pyunitwizard._private.backend_settings import resolve_pint_cache_folder
@@ -345,7 +345,7 @@ def quantity_to_openmm_unit(quantity: pint.Quantity):
     try:
         import openmm.unit as openmm_unit
     except:
-        raise LibraryNotFoundError('openmm')
+        raise LibraryNotFoundError(library="openmm")
 
     value = quantity.magnitude
 
