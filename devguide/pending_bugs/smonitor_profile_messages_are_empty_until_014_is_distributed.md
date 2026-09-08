@@ -1,15 +1,15 @@
 ---
 summary: QA and agent catalog messages remain empty until SMonitor 0.14 is distributed.
 issue: uibcdf/pyunitwizard#71
-status: blocked
+status: active
 opened: 2026-09-06
 closed:
 severity: medium
 verification: reproduced
 area: [diagnostics, deps]
-guard:
+guard: tests/test_smonitor_catalog_contract.py
 normative:
-blocked_by: [uibcdf/smonitor#8]
+blocked_by: []
 supersedes: []
 ---
 
@@ -24,10 +24,11 @@ resolve to an empty message under the `qa` and `agent` profiles.
 ## How
 
 SMonitor before 0.14 selects only the profile-specific message field. Its current source
-implements a fallback chain, but that behavior is not yet available through the
-dependency path exercised by PyUnitWizard CI. A temporary downstream guard and 0.14
-floor in commit `75a3604` reproduced the empty output in Actions run `34161369362`; the
-premature requirement was withdrawn in `313eb3e`, after which run `34165675202` passed.
+implements a fallback chain, and 0.14.0 is now available through the UIBCDF Conda channel.
+A temporary downstream guard and 0.14 floor in commit `75a3604` reproduced the empty
+output in Actions run `34161369362`; the premature requirement was withdrawn in
+`313eb3e`, after which run `34165675202` passed. Provider publication completed in
+`uibcdf/smonitor#8`; the dependency floors and guard are now active here.
 
 ## Why
 
@@ -38,16 +39,18 @@ The provider release is tracked by `uibcdf/smonitor#8` under the shared-stewards
 
 ## What is measured and what is assumed
 
-Measured in CI: the eleven codes listed by the failure all render empty under `qa` and
-`agent` with the resolved dependency environment. Inspected in the SMonitor source: its
-current manager contains the intended fallback chain. Assumed until provider release:
-the published 0.14 artifact will contain that exact behavior.
+Measured in the earlier CI run: the eleven codes listed by the failure all rendered empty
+under `qa` and `agent` with SMonitor 0.13. Inspected in the SMonitor source and release
+record: 0.14.0 contains the intended fallback chain and 12 Conda distributions cover the
+supported Python/platform matrix. The remaining measurement is PyUnitWizard's own remote
+matrix with the raised floor and permanent guard.
 
 ## What was refuted
 
-Raising the PyUnitWizard minimum version alone is not currently viable. The project
-installation step uses `--no-deps` after the conda environment is solved, so metadata
-cannot turn an unavailable provider build into the required runtime behavior.
+Raising the PyUnitWizard minimum version before provider publication was not viable. The
+project installation step uses `--no-deps` after the conda environment is solved, so
+metadata could not turn an unavailable provider build into the required runtime behavior.
+That constraint remains useful: the Conda recipe floor must move with project metadata.
 
 ## Scope and exclusions
 

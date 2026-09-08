@@ -1,7 +1,12 @@
 import logging
 
+import pytest
+import smonitor
+
 from pyunitwizard._private.smonitor.catalog import CATALOG, CODES, SIGNALS
 from pyunitwizard.api import conversion
+
+PROFILES = ["user", "dev", "qa", "agent", "debug"]
 
 
 def test_catalog_and_code_registry_are_consistent():
@@ -18,6 +23,17 @@ def test_all_code_messages_include_stable_hint_fields():
         assert payload["title"].strip() != "", f"{code} must define a non-empty title"
         assert payload["user_hint"].strip() != "", f"{code} must define user_hint"
         assert payload["dev_hint"].strip() != "", f"{code} must define dev_hint"
+
+
+@pytest.mark.parametrize("profile", PROFILES)
+def test_every_code_renders_in_every_profile(profile):
+    try:
+        smonitor.configure(profile=profile, handlers=[], codes=CODES)
+        empty = [code for code in CODES if not smonitor.resolve(code=code, extra={})[0]]
+
+        assert not empty, f"empty message under {profile!r}: {empty}"
+    finally:
+        smonitor.configure(profile="user", handlers=[], codes=CODES)
 
 
 def test_signal_contract_declares_required_extra_per_source():
