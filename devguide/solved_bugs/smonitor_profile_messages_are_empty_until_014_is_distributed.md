@@ -1,9 +1,9 @@
 ---
 summary: QA and agent catalog messages remain empty until SMonitor 0.14 is distributed.
 issue: uibcdf/pyunitwizard#71
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
+closed: 2026-09-08
 severity: medium
 verification: reproduced
 area: [diagnostics, deps]
@@ -66,3 +66,19 @@ shape of catalog exception constructors is resolved separately by
 3. A regression test asserts that every catalog code renders a non-empty message under
    `user`, `dev`, `qa`, `agent` and `debug`.
 4. The full supported Python matrix passes with the released provider artifact.
+
+## Resolution
+
+Commit `dec2616` raises the project and Conda recipe floors to SMonitor 0.14.0 and adds
+the permanent all-profile rendering guard. The test restores SMonitor's default `user`
+profile after each case so it does not leak singleton configuration into unrelated tests.
+
+Ordinary CI run `34287566219` passed on the Python 3.13 development baseline. Manually
+dispatched full-matrix run `34287748673` then passed all six Linux/macOS combinations for
+Python 3.11, 3.12, and 3.13. Its schedule-only notification job was correctly skipped
+under `workflow_dispatch`; GitHub concluded `success`.
+
+GH Run Receptor 0.19.0 was the first inspection path for both runs. It returned `PASS`,
+matched the repository's `ci` profile, and preserved the source conclusions and job
+inventory. SMonitor publication itself remains independently evidenced by
+`uibcdf/smonitor#8`.
