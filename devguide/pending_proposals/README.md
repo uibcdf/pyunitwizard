@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`adopt_molsyssuite_python_tooling_policy.md`](adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
+
 ### Open (1)
 
 - [`pydantic_integration.md`](pydantic_integration.md) — [#52](https://github.com/uibcdf/pyunitwizard/issues/52) — Define whether PyUnitWizard needs a Pydantic integration contract. *(asserted)*
