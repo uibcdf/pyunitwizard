@@ -1,5 +1,16 @@
 """Public API groupings for PyUnitWizard."""
 
+from .comparison import (
+    are_close,
+    are_compatible,
+    are_equal,
+    compatibility,
+    similarity,
+)
+from .construction import quantity, unit
+from .context import context
+from .conversion import conversion_factor, convert, to_string
+from .extraction import change_value, get_unit, get_value, get_value_and_unit
 from .introspection import (
     get_dimensionality,
     get_form,
@@ -8,20 +19,9 @@ from .introspection import (
     is_quantity,
     is_unit,
 )
-from .conversion import convert, conversion_factor, to_string
-from .construction import quantity, unit
-from .extraction import change_value, get_unit, get_value, get_value_and_unit
-from .comparison import (
-    are_close,
-    are_compatible,
-    are_equal,
-    compatibility,
-    similarity,
-)
-from .standardization import get_standard_units, standardize
 from .specialized import fast_track, register_fast_track
+from .standardization import get_standard_units, standardize
 from .validation import check, ensure_quantity
-from .context import context
 
 __all__ = [
     "are_close",

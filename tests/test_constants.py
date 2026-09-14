@@ -62,7 +62,4 @@ def test_show_constants_lists_synonyms():
     registry = puw.constants.show_constants()
 
     assert ("Avogadro", "NA") in registry
-    assert (
-        registry[("Universal gas", "R", "Molar gas")]
-        == "8.31446261815324 J/(kelvin*mole)"
-    )
+    assert registry[("Universal gas", "R", "Molar gas")] == "8.31446261815324 J/(kelvin*mole)"

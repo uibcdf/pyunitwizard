@@ -6,8 +6,8 @@ from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
-import pyunitwizard as puw
 
+import pyunitwizard as puw
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SIBLING_ARGDIGEST = REPO_ROOT.parent / "argdigest"
@@ -45,8 +45,9 @@ def _force_fresh_imports(packages: list[str]):
 
 @pytest.mark.skipif(not _siblings_available(), reason="Sibling repos are not available in this environment")
 def test_local_sibling_import_precedence_and_basic_contracts():
-    with _prepend_paths([SIBLING_ARGDIGEST, SIBLING_DEPDIGEST, SIBLING_SMONITOR]), _force_fresh_imports(
-        ["argdigest", "depdigest", "smonitor"]
+    with (
+        _prepend_paths([SIBLING_ARGDIGEST, SIBLING_DEPDIGEST, SIBLING_SMONITOR]),
+        _force_fresh_imports(["argdigest", "depdigest", "smonitor"]),
     ):
         argdigest = importlib.import_module("argdigest")
         depdigest = importlib.import_module("depdigest")

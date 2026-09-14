@@ -178,14 +178,10 @@ SIGNALS = {
     },
     "pyunitwizard.error.library_not_found": {"extra_required": ["library", "caller"]},
     "pyunitwizard.error.no_parser": {"extra_required": ["caller"]},
-    "pyunitwizard.error.library_without_parser": {
-        "extra_required": ["library", "caller"]
-    },
+    "pyunitwizard.error.library_without_parser": {"extra_required": ["library", "caller"]},
     "pyunitwizard.error.not_implemented_form": {"extra_required": ["form", "caller"]},
     "pyunitwizard.error.not_implemented_method": {"extra_required": ["caller"]},
-    "pyunitwizard.error.not_implemented_parser": {
-        "extra_required": ["parser", "caller"]
-    },
+    "pyunitwizard.error.not_implemented_parser": {"extra_required": ["parser", "caller"]},
     "pyunitwizard.error.no_standards": {"extra_required": ["caller"]},
     "pyunitwizard.debug.probe_miss": {"extra_required": ["value", "caller"]},
 }

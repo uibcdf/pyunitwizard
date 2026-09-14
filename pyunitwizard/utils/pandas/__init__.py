@@ -2,7 +2,6 @@ from contextlib import contextmanager
 
 from pyunitwizard import convert, get_unit, get_value, quantity
 
-
 UNITS_ATTR_KEY = "pyunitwizard_units"
 
 
@@ -51,8 +50,7 @@ def _merge_units_maps(*maps):
             normalized = _normalize_unit(unit_name)
             if name in merged and merged[name] != normalized:
                 raise ValueError(
-                    f"Incompatible units metadata for column '{name}': "
-                    f"'{merged[name]}' vs '{normalized}'."
+                    f"Incompatible units metadata for column '{name}': '{merged[name]}' vs '{normalized}'."
                 )
             merged[name] = normalized
     return merged
@@ -118,8 +116,7 @@ def get_quantity_column(
         units = get_units_map(dataframe)
         if name not in units:
             raise ValueError(
-                f"Column '{name}' has no associated unit metadata. "
-                "Provide unit_name explicitly or attach units first."
+                f"Column '{name}' has no associated unit metadata. Provide unit_name explicitly or attach units first."
             )
         output_unit = units[name]
     else:

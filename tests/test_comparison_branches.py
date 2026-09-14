@@ -1,5 +1,3 @@
-import pytest
-
 import pyunitwizard as puw
 from pyunitwizard.api.comparison import _compatible_dimensionalities
 

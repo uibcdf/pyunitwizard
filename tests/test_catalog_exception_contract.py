@@ -40,16 +40,12 @@ EXCEPTION_CASES = [
 
 
 @pytest.mark.parametrize(("exception_class", "domain_fields"), EXCEPTION_CASES)
-def test_catalog_exception_constructor_is_safe_to_rebuild(
-    exception_class, domain_fields
-):
+def test_catalog_exception_constructor_is_safe_to_rebuild(exception_class, domain_fields):
     parameters = list(inspect.signature(exception_class).parameters.values())
 
     assert parameters[0].name == "message"
     assert parameters[0].kind is inspect.Parameter.POSITIONAL_OR_KEYWORD
-    assert all(
-        parameter.kind is inspect.Parameter.KEYWORD_ONLY for parameter in parameters[1:]
-    )
+    assert all(parameter.kind is inspect.Parameter.KEYWORD_ONLY for parameter in parameters[1:])
 
     original = exception_class(**domain_fields, caller="tests.catalog_contract")
     rebuilt = exception_class(*original.args)

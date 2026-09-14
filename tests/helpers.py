@@ -40,7 +40,7 @@ def loaded_libraries(libraries):
         if previous_libraries:
             puw.configure.load_library(previous_libraries)
         else:
-            for library in ['pint', 'openmm.unit', 'unyt']:
+            for library in ["pint", "openmm.unit", "unyt"]:
                 try:
                     puw.configure.load_library(library)
                 except (ImportError, ModuleNotFoundError):

@@ -1,21 +1,40 @@
+import importlib
+import os
+import sys
+from pathlib import Path
+
 import pytest
 
 import pyunitwizard as puw
-from pathlib import Path
-import os
-import sys
-import importlib
+
 
 def test_libraries_supported():
-    assert puw.configure.get_libraries_supported()==['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
+    assert puw.configure.get_libraries_supported() == [
+        "pint",
+        "openmm.unit",
+        "unyt",
+        "astropy.units",
+        "physipy",
+        "quantities",
+    ]
+
 
 def test_parsers_supported():
-    assert puw.configure.get_parsers_supported() == ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
+    assert puw.configure.get_parsers_supported() == [
+        "pint",
+        "openmm.unit",
+        "unyt",
+        "astropy.units",
+        "physipy",
+        "quantities",
+    ]
+
 
 def test_load_library():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit'])
-    assert puw.configure.get_libraries_loaded()==['pint', 'openmm.unit']
+    puw.configure.load_library(["pint", "openmm.unit"])
+    assert puw.configure.get_libraries_loaded() == ["pint", "openmm.unit"]
+
 
 def test_load_library_rejects_non_string_or_sequence():
     puw.configure.reset()
@@ -26,28 +45,33 @@ def test_load_library_rejects_non_string_or_sequence():
     else:
         raise AssertionError("Expected TypeError when loading a non-string scalar")
 
+
 def test_default_form():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit'])
-    assert puw.configure.get_default_form()=='pint'
+    puw.configure.load_library(["pint", "openmm.unit"])
+    assert puw.configure.get_default_form() == "pint"
+
 
 def test_default_parser():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit'])
-    assert puw.configure.get_default_parser()=='pint'
+    puw.configure.load_library(["pint", "openmm.unit"])
+    assert puw.configure.get_default_parser() == "pint"
+
 
 def test_set_default_parser_normalizes_input_form():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit'])
+    puw.configure.load_library(["pint", "openmm.unit"])
 
-    puw.configure.set_default_parser('PINT')
-    assert puw.configure.get_default_parser() == 'pint'
+    puw.configure.set_default_parser("PINT")
+    assert puw.configure.get_default_parser() == "pint"
+
 
 def test_set_standard_units_accepts_single_string():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units('nm')
-    assert 'nm' in puw.configure.get_standard_units()
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units("nm")
+    assert "nm" in puw.configure.get_standard_units()
+
 
 def test_set_standard_units_builds_cached_matrices_once_state_is_ready():
     puw.configure.reset()
@@ -59,6 +83,7 @@ def test_set_standard_units_builds_cached_matrices_once_state_is_ready():
     assert puw.kernel.dimensional_fundamental_standards_units is not None
     assert puw.kernel.tentative_base_standards_matrix is not None
     assert puw.kernel.tentative_base_standards_units is not None
+
 
 def test_reset_clears_standardization_caches():
     puw.configure.reset()
@@ -72,9 +97,10 @@ def test_reset_clears_standardization_caches():
     assert puw.kernel.tentative_base_standards_matrix is None
     assert puw.kernel.tentative_base_standards_units is None
 
+
 def test_set_standard_units_rejects_non_list_tuple_or_string():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
+    puw.configure.load_library(["pint"])
     try:
         puw.configure.set_standard_units(10)
     except ValueError:
@@ -82,51 +108,53 @@ def test_set_standard_units_rejects_non_list_tuple_or_string():
     else:
         raise AssertionError("Expected ValueError for invalid standard_units type")
 
+
 def test_set_standard_units_tie_candidate_path_with_combination_units():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm*ps', 'm*s'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm*ps", "m*s"])
     # Ensure combination standards are still registered and no crash on tie path.
     standards = puw.configure.get_standard_units()
-    assert 'nm*ps' in standards
-    assert 'm*s' in standards
+    assert "nm*ps" in standards
+    assert "m*s" in standards
+
 
 def test_add_standard_units_adds_new_dimensionality():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
-    puw.configure.add_standard_units(['K'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
+    puw.configure.add_standard_units(["K"])
     standards = puw.configure.get_standard_units()
-    assert 'nm' in standards
-    assert 'ps' in standards
-    assert 'K' in standards
+    assert "nm" in standards
+    assert "ps" in standards
+    assert "K" in standards
 
 
 def test_add_standard_units_replaces_same_dimensionality():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
-    puw.configure.add_standard_units(['angstrom'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
+    puw.configure.add_standard_units(["angstrom"])
     standards = puw.configure.get_standard_units()
     # angstrom replaces nm (both are length); ps must survive
-    assert 'angstrom' in standards
-    assert 'nm' not in standards
-    assert 'ps' in standards
+    assert "angstrom" in standards
+    assert "nm" not in standards
+    assert "ps" in standards
 
 
 def test_add_standard_units_accepts_single_string():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm'])
-    puw.configure.add_standard_units('ps')
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
+    puw.configure.add_standard_units("ps")
     standards = puw.configure.get_standard_units()
-    assert 'nm' in standards
-    assert 'ps' in standards
+    assert "nm" in standards
+    assert "ps" in standards
 
 
 def test_add_standard_units_rejects_invalid_type():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
+    puw.configure.load_library(["pint"])
     try:
         puw.configure.add_standard_units(42)
     except ValueError:
@@ -137,9 +165,9 @@ def test_add_standard_units_rejects_invalid_type():
 
 def test_add_standard_units_rebuilds_matrices():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
-    puw.configure.add_standard_units(['K'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
+    puw.configure.add_standard_units(["K"])
     assert puw.kernel.dimensional_fundamental_standards_matrix is not None
     assert puw.kernel.dimensional_fundamental_standards_units is not None
 
@@ -148,37 +176,39 @@ def test_add_constant_registers_new_constant():
     from pyunitwizard.configure import configure as configure_module
     from pyunitwizard.constants import _constants
 
-    constant_name = 'TestConstantConfigure'
+    constant_name = "TestConstantConfigure"
     if constant_name in _constants:
         del _constants[constant_name]
 
-    configure_module.add_constant(constant_name, 42.0, 'meter')
-    assert _constants[constant_name] == [42.0, 'meter']
+    configure_module.add_constant(constant_name, 42.0, "meter")
+    assert _constants[constant_name] == [42.0, "meter"]
     del _constants[constant_name]
+
 
 def test_get_parsers_loaded_only_reports_backends_with_parser_support():
     puw.configure.reset()
-    puw.configure.load_library(['openmm.unit', 'unyt'])
+    puw.configure.load_library(["openmm.unit", "unyt"])
     assert puw.configure.get_parsers_loaded() == []
 
+
 def test_init_openmolecularsystems():
-    puw.configure.load_library(['pint','openmm.unit'])
-    puw.configure.set_default_form('openmm.unit')
-    puw.configure.set_default_parser('pint')
-    puw.configure.set_standard_units(['nm', 'ps', 'K', 'mole', 'amu', 'e',
-                                 'kJ/mol', 'kJ/(mol*nm**2)', 'N', 'degrees'])
+    puw.configure.load_library(["pint", "openmm.unit"])
+    puw.configure.set_default_form("openmm.unit")
+    puw.configure.set_default_parser("pint")
+    puw.configure.set_standard_units(["nm", "ps", "K", "mole", "amu", "e", "kJ/mol", "kJ/(mol*nm**2)", "N", "degrees"])
 
     assert True
 
+
 def test_all():
     puw.configure.reset()
-    libraries = ['pint', 'openmm.unit', 'unyt']
+    libraries = ["pint", "openmm.unit", "unyt"]
     try:
         import astropy.units  # noqa: F401
     except Exception:
         puw.configure.load_library(libraries)
     else:
-        puw.configure.load_library(libraries + ['astropy.units'])
+        puw.configure.load_library(libraries + ["astropy.units"])
 
     assert True
 

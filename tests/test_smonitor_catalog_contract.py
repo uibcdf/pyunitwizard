@@ -10,9 +10,7 @@ PROFILES = ["user", "dev", "qa", "agent", "debug"]
 
 
 def test_catalog_and_code_registry_are_consistent():
-    catalog_codes = {
-        payload["code"] for section in CATALOG.values() for payload in section.values()
-    }
+    catalog_codes = {payload["code"] for section in CATALOG.values() for payload in section.values()}
     registered_codes = set(CODES.keys())
 
     assert catalog_codes == registered_codes
@@ -37,11 +35,7 @@ def test_every_code_renders_in_every_profile(profile):
 
 
 def test_signal_contract_declares_required_extra_per_source():
-    sources = {
-        payload["source"]
-        for section in CATALOG.values()
-        for payload in section.values()
-    }
+    sources = {payload["source"] for section in CATALOG.values() for payload in section.values()}
     assert sources == set(SIGNALS.keys())
 
     for source, spec in SIGNALS.items():
@@ -49,9 +43,7 @@ def test_signal_contract_declares_required_extra_per_source():
         assert len(spec["extra_required"]) >= 1, source
 
 
-def test_redundant_conversion_telemetry_failure_has_logging_fallback(
-    monkeypatch, caplog
-):
+def test_redundant_conversion_telemetry_failure_has_logging_fallback(monkeypatch, caplog):
     import smonitor.core.manager
 
     conversion._REDUNDANT_CONVERSION_FALLBACK_EMITTED = False

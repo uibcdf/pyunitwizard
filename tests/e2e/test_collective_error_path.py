@@ -7,7 +7,6 @@ from pathlib import Path
 
 import pytest
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SIBLING_PYW = REPO_ROOT.parent / "pyunitwizard"
 SIBLING_ARG = REPO_ROOT.parent / "argdigest"
@@ -51,8 +50,9 @@ def _force_fresh_imports(packages: list[str]):
 
 @pytest.mark.skipif(not _siblings_available(), reason="Sibling repos are not available in this environment")
 def test_collective_error_path_emits_contract_signal_and_dependency_hints():
-    with _prepend_paths([SIBLING_PYW, SIBLING_ARG, SIBLING_DEP, SIBLING_SMON]), _force_fresh_imports(
-        ["pyunitwizard", "argdigest", "depdigest", "smonitor"]
+    with (
+        _prepend_paths([SIBLING_PYW, SIBLING_ARG, SIBLING_DEP, SIBLING_SMON]),
+        _force_fresh_imports(["pyunitwizard", "argdigest", "depdigest", "smonitor"]),
     ):
         puw = importlib.import_module("pyunitwizard")
         argdigest = importlib.import_module("argdigest")
@@ -93,8 +93,7 @@ def test_collective_error_path_emits_contract_signal_and_dependency_hints():
         contract_events = [
             event
             for event in recent
-            if (event.get("code") or "").startswith(("ARG-", "PUW-"))
-            and event.get("level") == "ERROR"
+            if (event.get("code") or "").startswith(("ARG-", "PUW-")) and event.get("level") == "ERROR"
         ]
         assert contract_events, (
             "the collective error path must emit a coded ERROR signal; "

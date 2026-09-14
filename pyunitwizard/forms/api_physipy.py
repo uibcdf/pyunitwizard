@@ -6,7 +6,6 @@ from pyunitwizard._private.exceptions import LibraryNotFoundError, LibraryWithou
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 try:
-    import physipy
     from physipy import units as physipy_units
     from physipy.quantity.quantity import Quantity as PhysipyQuantity
 except Exception as exc:  # pragma: no cover - optional dependency

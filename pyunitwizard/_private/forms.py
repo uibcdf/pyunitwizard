@@ -1,6 +1,6 @@
 from pyunitwizard import kernel
 
-forms = ['openmm.unit', 'pint', 'unyt', 'astropy.units', 'physipy', 'quantities', 'string']
+forms = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "string"]
 
 _LOADING = False
 
@@ -30,7 +30,8 @@ def digest_form(form: str, load: bool = True) -> str:
         if form_name is None:
             # Probe for the first available installed form to set as default on-the-fly
             from depdigest import is_installed
-            for candidate in ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']:
+
+            for candidate in ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities"]:
                 if is_installed(candidate):
                     form_name = candidate
                     break
@@ -40,11 +41,12 @@ def digest_form(form: str, load: bool = True) -> str:
         raise ValueError
 
     # Dynamic on-demand lazy library loading with re-entrancy guard
-    if load and form_name is not None and form_name != 'string':
+    if load and form_name is not None and form_name != "string":
         if form_name not in kernel.loaded_libraries and not _LOADING:
             _LOADING = True
             try:
                 from pyunitwizard.configure import load_library
+
                 load_library(form_name)
             finally:
                 _LOADING = False
@@ -70,6 +72,6 @@ def digest_to_form(to_form: str, from_form: str = None) -> str:
     if to_form is not None:
         return digest_form(to_form)
     else:
-        if from_form == 'string':
+        if from_form == "string":
             from_form = None
         return digest_form(from_form)

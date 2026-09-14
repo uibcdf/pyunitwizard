@@ -1,7 +1,8 @@
-parsers = ['openmm.unit', 'pint', 'unyt', 'astropy.units', 'physipy', 'quantities']
+parsers = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities"]
+
 
 def digest_parser(parser: str) -> str:
-    """ Check if parser is correct."""
+    """Check if parser is correct."""
     if parser is not None:
         if parser.lower() in parsers:
             return parser.lower()
@@ -9,4 +10,5 @@ def digest_parser(parser: str) -> str:
             raise ValueError
     else:
         from pyunitwizard.kernel import default_parser
+
         return default_parser

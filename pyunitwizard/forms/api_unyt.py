@@ -1,23 +1,24 @@
-from sympy import im
-from pyunitwizard._private.exceptions import *
-from pyunitwizard._private.quantity_or_unit import ArrayLike
 from typing import Any, Dict, Union
 
+from pyunitwizard._private.exceptions import LibraryNotFoundError, LibraryWithoutParserError
+from pyunitwizard._private.quantity_or_unit import ArrayLike
+
 try:
-    import unyt
-    from unyt import unyt_array, unyt_quantity
+    import unyt as unyt
     from unyt import Unit as unyt_unit
-except:
+    from unyt import unyt_array, unyt_quantity
+except ImportError:
     raise LibraryNotFoundError(library="unyt")
 
-form_name = 'unyt'
+form_name = "unyt"
 parser = False
 
-#is_form = {
+# is_form = {
 #    unyt_array:    form_name,
 #    unyt_quantity: form_name,
 #    unyt_unit:          form_name,
-#}
+# }
+
 
 def is_form(quantity_or_unit: Any) -> bool:
     """Check whether an object belongs to unyt form.
@@ -34,50 +35,52 @@ def is_form(quantity_or_unit: Any) -> bool:
     """
     return is_quantity(quantity_or_unit) or is_unit(quantity_or_unit)
 
+
 def is_quantity(quantity_or_unit: Any) -> bool:
-    """ Check whether a quantity or unit is a unyt quantity.
+    """Check whether a quantity or unit is a unyt quantity.
 
-        Parameters
-        -----------
-        quantity_or_unit : Any
-            A quanitity or a unit
+    Parameters
+    -----------
+    quantity_or_unit : Any
+        A quanitity or a unit
 
-        Returns
-        -------
-        bool
-            True if it is a unyt.unyt_array or unyt.unyt_quantity.
+    Returns
+    -------
+    bool
+        True if it is a unyt.unyt_array or unyt.unyt_quantity.
     """
     return isinstance(quantity_or_unit, (unyt_array, unyt_quantity))
 
+
 def is_unit(quantity_or_unit: Any) -> bool:
-    """ Check whether a quantity or unit is a unyt unit.
+    """Check whether a quantity or unit is a unyt unit.
 
-        Parameters
-        -----------
-        quantity_or_unit : Any
-            A quanitity or a unit.
+    Parameters
+    -----------
+    quantity_or_unit : Any
+        A quanitity or a unit.
 
-        Returns
-        -------
-        bool
-            True if it is a unyt_unit.
+    Returns
+    -------
+    bool
+        True if it is a unyt_unit.
     """
     return isinstance(quantity_or_unit, unyt_unit)
 
-def dimensionality(quantity_or_unit: Union[unyt_array, unyt_quantity, unyt_unit]
-                  ) -> Dict[str, int]:
-    """ Returns the dimensionality of the quantity or unit.
 
-        Parameters
-        -----------
-        quantity_or_unit : pint.Quantity or pint.Unit
-            A quanitity or a unit
+def dimensionality(quantity_or_unit: Union[unyt_array, unyt_quantity, unyt_unit]) -> Dict[str, int]:
+    """Returns the dimensionality of the quantity or unit.
 
-        Returns
-        -------
-        dimensionality_dict : dict
-            Dictionary which keys are fundamental units and values are the exponent of
-            each unit in the quantity.
+    Parameters
+    -----------
+    quantity_or_unit : pint.Quantity or pint.Unit
+        A quanitity or a unit
+
+    Returns
+    -------
+    dimensionality_dict : dict
+        Dictionary which keys are fundamental units and values are the exponent of
+        each unit in the quantity.
 
     """
     # We get the dimensionality by transforming first to pint because
@@ -92,31 +95,32 @@ def dimensionality(quantity_or_unit: Union[unyt_array, unyt_quantity, unyt_unit]
     temp_quantity = temp_quantity.to_pint()
 
     return dimensionality_pint(temp_quantity)
-    
 
-def compatibility(quantity_or_unit_1: Union[unyt_array, unyt_quantity, unyt_unit], 
-                  quantity_or_unit_2: Union[unyt_array, unyt_quantity, unyt_unit]
-                  ) -> bool:
-    """ Check whether two quantities or units are compatible.
 
-        Parameters
-        ----------
-        quantity_or_unit_1 : unyt_array or unyt_quantity or unyt_unit
-            A quanitity or a unit.
+def compatibility(
+    quantity_or_unit_1: Union[unyt_array, unyt_quantity, unyt_unit],
+    quantity_or_unit_2: Union[unyt_array, unyt_quantity, unyt_unit],
+) -> bool:
+    """Check whether two quantities or units are compatible.
 
-        quantity_or_unit_2 : unyt_array or unyt_quantity or unyt_unit
-            A quanitity or a unit.
+    Parameters
+    ----------
+    quantity_or_unit_1 : unyt_array or unyt_quantity or unyt_unit
+        A quanitity or a unit.
 
-        Returns
-        -------
-        bool
-            True if they are compatible.
+    quantity_or_unit_2 : unyt_array or unyt_quantity or unyt_unit
+        A quanitity or a unit.
+
+    Returns
+    -------
+    bool
+        True if they are compatible.
     """
     if is_quantity(quantity_or_unit_1):
         unit_1 = get_unit(quantity_or_unit_1)
     else:
         unit_1 = quantity_or_unit_1
-    
+
     if is_quantity(quantity_or_unit_2):
         unit_2 = get_unit(quantity_or_unit_2)
     else:
@@ -124,66 +128,70 @@ def compatibility(quantity_or_unit_1: Union[unyt_array, unyt_quantity, unyt_unit
 
     return unit_1.same_dimensions_as(unit_2)
 
-def make_quantity(value: Union[int, float, ArrayLike], 
-                  unit: Union[str, unyt_unit]) -> Union[unyt_array, unyt_quantity]:
-    """ Returns a unyt quantity.
 
-        Parmeters
-        ---------
-        value: int, float or ArrayLike
-            The value of the quantity.
+def make_quantity(
+    value: Union[int, float, ArrayLike], unit: Union[str, unyt_unit]
+) -> Union[unyt_array, unyt_quantity]:
+    """Returns a unyt quantity.
 
-        unit : unyt_unit or str
-            The unit.
-        
-        Returns
-        -------
-        unyt_array or unyt_quantity
-            The quantity.
+    Parmeters
+    ---------
+    value: int, float or ArrayLike
+        The value of the quantity.
 
-        Examples
-        --------
-        >>> make_quantity(1.0, "nm")
-    """ 
+    unit : unyt_unit or str
+        The unit.
+
+    Returns
+    -------
+    unyt_array or unyt_quantity
+        The quantity.
+
+    Examples
+    --------
+    >>> make_quantity(1.0, "nm")
+    """
     if isinstance(value, (int, float)):
         return unyt_quantity(value, unit)
     else:
         return unyt_array(value, unit)
 
-def get_value(quantity: Union[unyt_array, 
-                        unyt_quantity]) -> Union[int, float, ArrayLike]:
-    """ Returns the value of the quantity.
-        
-        Parameters
-        -----------
-        quantity : unyt_array or unyt_quantity
-            A quanitity or a unit.
-        
-        Returns
-        -------
-        int, float or ArrrayLike
-            The value.
+
+def get_value(quantity: Union[unyt_array, unyt_quantity]) -> Union[int, float, ArrayLike]:
+    """Returns the value of the quantity.
+
+    Parameters
+    -----------
+    quantity : unyt_array or unyt_quantity
+        A quanitity or a unit.
+
+    Returns
+    -------
+    int, float or ArrrayLike
+        The value.
     """
     return quantity.value
 
-def get_unit(quantity: Union[unyt_array, 
-                       unyt_quantity]) -> unyt_unit:
-    """ Returns the units of the quantity.
-        
-        Parameters
-        -----------
-        quantity : unyt_array or unyt_quantity
-            A quanitity or a unit.
-        
-        Returns
-        -------
-        unyt_unit
-            The unit.
+
+def get_unit(quantity: Union[unyt_array, unyt_quantity]) -> unyt_unit:
+    """Returns the units of the quantity.
+
+    Parameters
+    -----------
+    quantity : unyt_array or unyt_quantity
+        A quanitity or a unit.
+
+    Returns
+    -------
+    unyt_unit
+        The unit.
     """
     return quantity.units
 
-def change_value(quantity: Union[unyt_quantity, unyt_array],
-                 value: Union[int, float, ArrayLike]) -> Union[unyt_array, unyt_quantity]:
+
+def change_value(
+    quantity: Union[unyt_quantity, unyt_array], value: Union[int, float, ArrayLike]
+) -> Union[unyt_array, unyt_quantity]:
     """Return a unyt quantity with updated value and preserved unit.
 
     Parameters
@@ -201,27 +209,28 @@ def change_value(quantity: Union[unyt_quantity, unyt_array],
 
     return make_quantity(value, get_unit(quantity))
 
-def convert(quantity: Union[unyt_array, unyt_quantity], 
-            unit_name: str) -> Union[unyt_array, unyt_quantity]:
-    """ Converts the quantity to a different unit.
 
-        Parameters
-        -----------
-        quantity : unyt_array or unyt_quantity
-            A quanitity or a unit.
-        
-        unit : str
-            The unit to convert to.
-        
-        Returns
-        -------
-        unyt_array or unyt_quantity
-            The converted quantity.
+def convert(quantity: Union[unyt_array, unyt_quantity], unit_name: str) -> Union[unyt_array, unyt_quantity]:
+    """Converts the quantity to a different unit.
+
+    Parameters
+    -----------
+    quantity : unyt_array or unyt_quantity
+        A quanitity or a unit.
+
+    unit : str
+        The unit to convert to.
+
+    Returns
+    -------
+    unyt_array or unyt_quantity
+        The converted quantity.
     """
     return quantity.to(unit_name)
 
 
 ## Parser
+
 
 def string_to_quantity(string):
     """Raise parser error for unyt string quantities.
@@ -243,6 +252,7 @@ def string_to_quantity(string):
     """
 
     raise LibraryWithoutParserError(library="unyt")
+
 
 def string_to_unit(string):
     """Raise parser error for unyt string units.
@@ -268,118 +278,124 @@ def string_to_unit(string):
 
 ## To string
 
-def quantity_to_string(quantity: Union[unyt_array, 
-                                unyt_quantity]) -> str:
-    """ Convert a quantity to string. 
 
-        Parameters
-        -----------
-        quantity: unyt_array or unyt_quantity
-            A quanitity or a unit.
+def quantity_to_string(quantity: Union[unyt_array, unyt_quantity]) -> str:
+    """Convert a quantity to string.
 
-        Returns
-        -------
-        str
-            The quantitity as a string.
+    Parameters
+    -----------
+    quantity: unyt_array or unyt_quantity
+        A quanitity or a unit.
+
+    Returns
+    -------
+    str
+        The quantitity as a string.
     """
     return str(quantity)
 
+
 def unit_to_string(unit: unyt_unit) -> str:
-    """ Convert a unit to string. 
+    """Convert a unit to string.
 
-        Parameters
-        -----------
-        unit: unyt_unit
-            A unit.
+    Parameters
+    -----------
+    unit: unyt_unit
+        A unit.
 
-        Returns
-        -------
-        str
-            The unit as a string.
+    Returns
+    -------
+    str
+        The unit as a string.
     """
     return str(unit)
 
 
 ## To Pint
 
-def quantity_to_pint(quantity: Union[unyt_array, 
-                       unyt_quantity]):
-    """ Transform a quantity from unyt to a pint quantity.
-        
-        Parameters
-        -----------
-        quantity : unyt_array or unyt_quantity
-            A quanitity.
-        
-        Returns
-        -------
-        pint.Quantity
-            The quantity.
+
+def quantity_to_pint(quantity: Union[unyt_array, unyt_quantity]):
+    """Transform a quantity from unyt to a pint quantity.
+
+    Parameters
+    -----------
+    quantity : unyt_array or unyt_quantity
+        A quanitity.
+
+    Returns
+    -------
+    pint.Quantity
+        The quantity.
     """
     from .api_pint import ureg
+
     return quantity.to_pint(unit_registry=ureg)
 
+
 def unit_to_pint(unit: unyt_unit):
-    """ Transform a unit from unyt to a pint unit.
-        
-        Parameters
-        -----------
-        unit : unyt_unit
-            A unit.
-        
-        Returns
-        -------
-        pint.Unit
-            The unit.
+    """Transform a unit from unyt to a pint unit.
+
+    Parameters
+    -----------
+    unit : unyt_unit
+        A unit.
+
+    Returns
+    -------
+    pint.Unit
+        The unit.
     """
     from .api_pint import get_unit as get_pint_unit
 
-    quantity = quantity_to_pint(1.0*unit)
+    quantity = quantity_to_pint(1.0 * unit)
 
     return get_pint_unit(quantity)
 
 
 ## To openmm.unit
 
+
 def quantity_to_openmm_unit(quantity: Union[unyt_array, unyt_quantity]):
-    """ Transform a quantity from unyt to an openmm.unit quantity.
-        
-        Parameters
-        -----------
-        quantity : unyt_array or unyt_quantity
-            A quanitity.
-        
-        Returns
-        -------
-        openmm.unit.Quantity
-            The quantity.
+    """Transform a quantity from unyt to an openmm.unit quantity.
+
+    Parameters
+    -----------
+    quantity : unyt_array or unyt_quantity
+        A quanitity.
+
+    Returns
+    -------
+    openmm.unit.Quantity
+        The quantity.
     """
     # Convert to pint quantity first and then to openmm. Temporary solution
     from .api_pint import quantity_to_openmm_unit as pint_quantity_to_openmm
 
     return pint_quantity_to_openmm(quantity.to_pint())
 
+
 def unit_to_openmm_unit(unit: unyt_unit):
-    """ Transform a unit from unyt to a openmm.unit unit.
+    """Transform a unit from unyt to a openmm.unit unit.
 
-        Parameters
-        -----------
-        unit : unyt_unit
-            A unit.
+    Parameters
+    -----------
+    unit : unyt_unit
+        A unit.
 
-        Returns
-        -------
-        openmm_unit.Unit
-            The unit.
+    Returns
+    -------
+    openmm_unit.Unit
+        The unit.
     """
     from .api_openmm_unit import get_unit as get_openmm_unit_unit
 
-    quantity = quantity_to_openmm_unit(1.0*unit)
+    quantity = quantity_to_openmm_unit(1.0 * unit)
 
     return get_openmm_unit_unit(quantity)
 
 
 ## To astropy.units
+
 
 def quantity_to_astropy_units(quantity: Union[unyt_array, unyt_quantity]):
     """Transform a unyt quantity into an Astropy quantity.
@@ -418,6 +434,6 @@ def unit_to_astropy_units(unit: unyt_unit):
 
     from .api_astropy_unit import get_unit as get_astropy_unit
 
-    quantity = quantity_to_astropy_units(1.0*unit)
+    quantity = quantity_to_astropy_units(1.0 * unit)
 
     return get_astropy_unit(quantity)

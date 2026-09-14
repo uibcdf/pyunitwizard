@@ -4,9 +4,7 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_scheduled_full_matrix_failures_are_reported_and_recovered():
-    workflow = (
-        REPOSITORY_ROOT / ".github" / "workflows" / "CI_full_matrix.yaml"
-    ).read_text()
+    workflow = (REPOSITORY_ROOT / ".github" / "workflows" / "CI_full_matrix.yaml").read_text()
 
     assert "issues: write" in workflow
     assert "needs: full-test" in workflow

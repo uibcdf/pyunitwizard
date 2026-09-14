@@ -1,12 +1,11 @@
 import importlib
 
 import numpy as np
-import pyunitwizard as puw
 import pytest
 
+import pyunitwizard as puw
 from pyunitwizard._private.exceptions import LibraryWithoutParserError
 from tests.helpers import loaded_libraries
-
 
 _BACKEND_CANDIDATES = [
     ("pint", "pint"),

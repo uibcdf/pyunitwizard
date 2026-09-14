@@ -1,112 +1,118 @@
 # This file contains test for get_standard_units and standardize
-import pyunitwizard as puw
-from pyunitwizard._private.exceptions import NoStandardsError
+import numpy as np
 import openmm.unit as openmm_unit
 import pytest
-import numpy as np
 import unyt
+
+import pyunitwizard as puw
+from pyunitwizard._private.exceptions import NoStandardsError
 from pyunitwizard.api.standardization import _standard_units_lstsq
 
 puw.configure.reset()
-puw.configure.load_library(['pint', 'openmm.unit', 'unyt'])
+puw.configure.load_library(["pint", "openmm.unit", "unyt"])
 
 ### Tests for get standard units ####
 
+
 def test_raises_no_standard_error():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
+    puw.configure.load_library(["pint"])
 
     with pytest.raises(NoStandardsError):
-        quantity = puw.quantity(value=3.0, unit='radian', form='pint')
+        quantity = puw.quantity(value=3.0, unit="radian", form="pint")
         puw.get_standard_units(quantity)
-    
+
     with pytest.raises(NoStandardsError):
-        quantity = puw.quantity(value=3.0, unit='meter', form='pint')
+        quantity = puw.quantity(value=3.0, unit="meter", form="pint")
         puw.get_standard_units(quantity)
+
 
 def test_get_standard_units_pint_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
 
-    quantity = puw.quantity(value=[3.0, 5.0, 5.0], unit='joules', form='pint')
+    quantity = puw.quantity(value=[3.0, 5.0, 5.0], unit="joules", form="pint")
     standard_unit = puw.get_standard_units(quantity)
     assert standard_unit == "kcal"
 
+
 def test_get_standard_units_openmm_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint','openmm.unit'])
+    puw.configure.load_library(["pint", "openmm.unit"])
     puw.configure.set_standard_units([openmm_unit.meter, openmm_unit.second, openmm_unit.joule])
 
-    quantity = puw.quantity(value=5.0, unit=openmm_unit.centimeter/openmm_unit.picosecond, form='openmm.unit')
+    quantity = puw.quantity(value=5.0, unit=openmm_unit.centimeter / openmm_unit.picosecond, form="openmm.unit")
     standard_unit = puw.get_standard_units(quantity)
     assert standard_unit == "meter/second"
 
+
 def test_get_standard_units_unyt_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint','unyt'])
+    puw.configure.load_library(["pint", "unyt"])
     puw.configure.set_standard_units([unyt.m, unyt.s, unyt.J])
 
-    quantity = puw.quantity(value=5.0, unit=unyt.cm/unyt.ps, form='unyt')
-    standard_unit = puw.get_standard_units(quantity, form='string')
+    quantity = puw.quantity(value=5.0, unit=unyt.cm / unyt.ps, form="unyt")
+    standard_unit = puw.get_standard_units(quantity, form="string")
     assert standard_unit == "meter / second"
+
 
 def test_get_standard_units_dimensionality():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
 
-    standard_unit = puw.get_standard_units(dimensionality={'[L]':1}, form='string')
+    standard_unit = puw.get_standard_units(dimensionality={"[L]": 1}, form="string")
     assert standard_unit == "nanometer"
 
-    standard_unit = puw.get_standard_units(dimensionality={'[L]':1})
+    standard_unit = puw.get_standard_units(dimensionality={"[L]": 1})
     unit = puw.unit("nanometer", form="pint")
     assert standard_unit == unit
 
+
 def test_get_standard_units_adimensional_from_dimensionality_only():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['radian'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["radian"])
 
-    standard_unit = puw.get_standard_units(dimensionality={}, form='string')
+    standard_unit = puw.get_standard_units(dimensionality={}, form="string")
     assert standard_unit == "radian"
 
 
 def test_get_standard_units_populates_dimensionality_cache():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
 
     assert puw.kernel.standard_units_by_dimensionality_cache == {}
 
-    standard_unit = puw.get_standard_units(dimensionality={'[L]': 1}, form='string')
+    standard_unit = puw.get_standard_units(dimensionality={"[L]": 1}, form="string")
 
-    assert standard_unit == 'nanometer'
-    assert puw.kernel.standard_units_by_dimensionality_cache[
-        (1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    ] == 'nm'
+    assert standard_unit == "nanometer"
+    assert puw.kernel.standard_units_by_dimensionality_cache[(1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)] == "nm"
 
 
 def test_set_standard_units_invalidates_dimensionality_cache():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm"])
 
-    assert puw.get_standard_units(dimensionality={'[L]': 1}, form='string') == 'nanometer'
+    assert puw.get_standard_units(dimensionality={"[L]": 1}, form="string") == "nanometer"
     assert puw.kernel.standard_units_by_dimensionality_cache
 
-    puw.configure.set_standard_units(['angstrom'])
+    puw.configure.set_standard_units(["angstrom"])
 
     assert puw.kernel.standard_units_by_dimensionality_cache == {}
-    assert puw.get_standard_units(dimensionality={'[L]': 1}, form='string') == 'angstrom'
+    assert puw.get_standard_units(dimensionality={"[L]": 1}, form="string") == "angstrom"
 
 
 ### Tests for standardize ###
 
+
 def test_standardize_pint_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
 
     quantity = puw.quantity(1.0, "meter", form="pint")
     quantity = puw.standardize(quantity)
@@ -140,9 +146,7 @@ def test_standardize_canonical_fast_path_does_not_recompute_dimensionality(
     def fail_if_called(_quantity):
         raise AssertionError("dimensionality lookup is forbidden on the fast path")
 
-    monkeypatch.setattr(
-        "pyunitwizard.api.standardization.get_dimensionality", fail_if_called
-    )
+    monkeypatch.setattr("pyunitwizard.api.standardization.get_dimensionality", fail_if_called)
 
     assert puw.standardize(quantity) is quantity
 
@@ -172,10 +176,11 @@ def test_standardize_keeps_form_conversion_for_canonical_unit():
     assert puw.get_form(output) == "pint"
     assert puw.has_unit(output, "nm") is True
 
+
 def test_standardize_openmm_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'openmm.unit'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+    puw.configure.load_library(["pint", "openmm.unit"])
+    puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
 
     quantity = puw.quantity(1.0, openmm_unit.meter, form="openmm.unit")
     quantity = puw.standardize(quantity)
@@ -187,10 +192,11 @@ def test_standardize_openmm_quantity():
     assert np.allclose(puw.get_value(quantity), [1.0, 2.0])
     assert puw.get_unit(quantity) == "picosecond"
 
+
 def test_standardize_unyt_quantity():
     puw.configure.reset()
-    puw.configure.load_library(['pint', 'unyt'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kcal', 'mole'])
+    puw.configure.load_library(["pint", "unyt"])
+    puw.configure.set_standard_units(["nm", "ps", "kcal", "mole"])
 
     quantity = puw.quantity(1.0, unyt.m, form="unyt")
     quantity = puw.standardize(quantity)
@@ -202,41 +208,46 @@ def test_standardize_unyt_quantity():
     assert np.allclose(puw.get_value(quantity), [1.0, 2.0])
     assert str(puw.get_unit(quantity)) == "picosecond"
 
+
 def test_get_standard_units_uses_tentative_base_standards_for_combinations():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm*ps'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm*ps"])
 
-    standard_unit = puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
-    assert standard_unit == 'nm*ps'
+    standard_unit = puw.get_standard_units(dimensionality={"[L]": 1, "[T]": 1}, form="string")
+    assert standard_unit == "nm*ps"
+
 
 def test_standardize_unit_input_returns_standard_unit():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
 
-    standardized_unit = puw.standardize(puw.unit('meter', form='pint'))
-    assert puw.get_unit(standardized_unit) == 'nanometer'
+    standardized_unit = puw.standardize(puw.unit("meter", form="pint"))
+    assert puw.get_unit(standardized_unit) == "nanometer"
+
 
 def test_get_standard_units_without_args_uses_adimensional_standard():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['radian'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["radian"])
 
-    standard_unit = puw.get_standard_units(form='string')
-    assert standard_unit == 'radian'
+    standard_unit = puw.get_standard_units(form="string")
+    assert standard_unit == "radian"
+
 
 def test_get_standard_units_combination_raises_without_fundamental_standards():
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['radian'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["radian"])
 
     with pytest.raises(NoStandardsError):
-        puw.get_standard_units(dimensionality={'[L]': 1, '[T]': 1}, form='string')
+        puw.get_standard_units(dimensionality={"[L]": 1, "[T]": 1}, form="string")
+
 
 def test_standard_units_lstsq_returns_none_when_unsatisfied():
     solution = np.array([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
-    standards = {'second': np.array([0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])}
+    standards = {"second": np.array([0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])}
     assert _standard_units_lstsq(solution, standards) is None
 
 
@@ -250,8 +261,8 @@ def test_standardize_resolves_the_input_form_once(monkeypatch):
     import importlib
 
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
 
     standardization = importlib.import_module("pyunitwizard.api.standardization")
     original_get_form = standardization.get_form
@@ -263,7 +274,7 @@ def test_standardize_resolves_the_input_form_once(monkeypatch):
 
     monkeypatch.setattr(standardization, "get_form", counting_get_form)
 
-    quantity = puw.quantity(1.0, 'meter', form='pint')
+    quantity = puw.quantity(1.0, "meter", form="pint")
     puw.standardize(quantity)
 
     assert inputs == [quantity]
@@ -279,10 +290,10 @@ def test_get_dimensionality_extracts_the_unit_without_reconverting(monkeypatch):
     import importlib
 
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
+    puw.configure.load_library(["pint"])
 
     # Built before instrumenting: quantity() legitimately goes through convert().
-    quantity = puw.quantity(1.0, 'nanometer', form='pint')
+    quantity = puw.quantity(1.0, "nanometer", form="pint")
 
     conversion = importlib.import_module("pyunitwizard.api.conversion")
     calls = []
@@ -294,7 +305,7 @@ def test_get_dimensionality_extracts_the_unit_without_reconverting(monkeypatch):
 
     monkeypatch.setattr(conversion, "convert", counting_convert)
 
-    assert puw.get_dimensionality(quantity)['[L]'] == 1
+    assert puw.get_dimensionality(quantity)["[L]"] == 1
 
     assert calls == []
 
@@ -307,12 +318,12 @@ def test_canonical_standards_keeps_the_first_unit_of_each_dimensionality():
     this pins the derived list that now carries it.
     """
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'angstrom'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "angstrom"])
 
     from pyunitwizard import kernel
 
-    assert [unit for unit, _ in kernel.canonical_standards] == ['nm']
+    assert [unit for unit, _ in kernel.canonical_standards] == ["nm"]
 
 
 def test_matching_configured_standard_extracts_the_unit_once(monkeypatch):
@@ -320,8 +331,8 @@ def test_matching_configured_standard_extracts_the_unit_once(monkeypatch):
     import importlib
 
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps', 'kelvin', 'mole'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps", "kelvin", "mole"])
 
     introspection = importlib.import_module("pyunitwizard.api.introspection")
     standardization = importlib.import_module("pyunitwizard.api.standardization")
@@ -335,11 +346,9 @@ def test_matching_configured_standard_extracts_the_unit_once(monkeypatch):
     monkeypatch.setattr(standardization, "unit_of", counting_unit_of)
 
     # A miss walks every candidate; the extraction must still happen once.
-    standardization._matching_configured_standard(
-        puw.quantity(1.0, 'meter', form='pint'), 'pint', form_in='pint'
-    )
+    standardization._matching_configured_standard(puw.quantity(1.0, "meter", form="pint"), "pint", form_in="pint")
 
-    assert calls == ['pint']
+    assert calls == ["pint"]
 
 
 def test_get_standard_units_cache_hit_does_not_reconvert(monkeypatch):
@@ -352,10 +361,10 @@ def test_get_standard_units_cache_hit_does_not_reconvert(monkeypatch):
     import importlib
 
     puw.configure.reset()
-    puw.configure.load_library(['pint'])
-    puw.configure.set_standard_units(['nm', 'ps'])
+    puw.configure.load_library(["pint"])
+    puw.configure.set_standard_units(["nm", "ps"])
 
-    quantity = puw.quantity(1.0, 'meter', form='pint')
+    quantity = puw.quantity(1.0, "meter", form="pint")
     first = puw.get_standard_units(quantity)  # populates the cache
 
     standardization = importlib.import_module("pyunitwizard.api.standardization")

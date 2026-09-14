@@ -1,68 +1,73 @@
-from ._private.exceptions import *
+import ast
+from functools import lru_cache
+from typing import Optional
+
+from smonitor import signal
+
+from . import kernel
 from ._private.exceptions import ArgumentError as BadCallError
+from ._private.exceptions import LibraryWithoutParserError, NotImplementedParserError
 from ._private.forms import digest_to_form
 from ._private.parsers import digest_parser
 from .forms import dict_translate_quantity, ensure_library
-from . import kernel
-import ast
-from typing import Optional
-from functools import lru_cache
+
 
 def _find_closing_bracket_position(string):
     stack = 0
     for i, char in enumerate(string):
-        if char == '[':
+        if char == "[":
             stack += 1
-        elif char == ']':
+        elif char == "]":
             stack -= 1
             if stack == 0:
                 return i
     raise ValueError  # If there is no closing bracket
 
+
 def _find_closing_parenthesis_position(string):
     stack = 0
     for i, char in enumerate(string):
-        if char == '(':
+        if char == "(":
             stack += 1
-        elif char == ')':
+        elif char == ")":
             stack -= 1
             if stack == 0:
                 return i
     raise ValueError  # If there is no closing parenthesis
 
+
 def _parse_with_pint(string: str):
-    """ Parses a string and returns a pint quantity.
+    """Parses a string and returns a pint quantity.
 
-        Parameters
-        ----------
-        string : str
-            A string quantity.
-        
-        Returns
-        -------
-        pint.quantity
-            A pint quantity.
+    Parameters
+    ----------
+    string : str
+        A string quantity.
+
+    Returns
+    -------
+    pint.quantity
+        A pint quantity.
     """
-    ensure_library('pint')
+    ensure_library("pint")
     # Check if it's a non scalar quantity
-    if string.startswith('['):
-
+    if string.startswith("["):
         end_list = _find_closing_bracket_position(string)
-        value_string = string[:(end_list+1)]
-        unit_string = string[(end_list+1):]
+        value_string = string[: (end_list + 1)]
+        unit_string = string[(end_list + 1) :]
 
-        return ast.literal_eval(value_string)*dict_translate_quantity['string']['pint'](unit_string)
+        return ast.literal_eval(value_string) * dict_translate_quantity["string"]["pint"](unit_string)
 
-    elif string.startswith('('):
-
+    elif string.startswith("("):
         end_list = _find_closing_parenthesis_position(string)
-        value_string = string[:(end_list+1)]
-        unit_string = string[(end_list+1):]
+        value_string = string[: (end_list + 1)]
+        unit_string = string[(end_list + 1) :]
 
-        return ast.literal_eval(value_string)*dict_translate_quantity['string']['pint'](unit_string)
+        return ast.literal_eval(value_string) * dict_translate_quantity["string"]["pint"](unit_string)
 
     else:
-       return dict_translate_quantity['string']['pint'](string)
+        return dict_translate_quantity["string"]["pint"](string)
+
 
 def _resolve_parser(string: str, parser: Optional[str], to_form: Optional[str]) -> str:
     if parser is not None:
@@ -82,87 +87,84 @@ def _parse_cached(string: str, parser: str, to_form: str):
     if not isinstance(string, str):
         raise BadCallError(argument="string")
 
-    if parser == 'pint':
-        if to_form == 'pint':
+    if parser == "pint":
+        if to_form == "pint":
             return _parse_with_pint(string)
 
-        elif to_form == 'openmm.unit':
+        elif to_form == "openmm.unit":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['openmm.unit'](pint_quantity)
+            return dict_translate_quantity["pint"]["openmm.unit"](pint_quantity)
 
-        elif to_form == 'string':
+        elif to_form == "string":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['string'](pint_quantity)
+            return dict_translate_quantity["pint"]["string"](pint_quantity)
 
-        elif to_form == 'unyt':
+        elif to_form == "unyt":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['unyt'](pint_quantity)
+            return dict_translate_quantity["pint"]["unyt"](pint_quantity)
 
-        elif to_form == 'astropy.units':
+        elif to_form == "astropy.units":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['astropy.units'](pint_quantity)
+            return dict_translate_quantity["pint"]["astropy.units"](pint_quantity)
 
-        elif to_form == 'physipy':
+        elif to_form == "physipy":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['physipy'](pint_quantity)
+            return dict_translate_quantity["pint"]["physipy"](pint_quantity)
 
-        elif to_form == 'quantities':
+        elif to_form == "quantities":
             pint_quantity = _parse_with_pint(string)
-            return dict_translate_quantity['pint']['quantities'](pint_quantity)
+            return dict_translate_quantity["pint"]["quantities"](pint_quantity)
 
         else:
             raise NotImplementedParserError(parser=parser, caller=to_form)
 
-    elif parser == 'openmm.unit':
+    elif parser == "openmm.unit":
         raise LibraryWithoutParserError(library="openmm.unit")
-    elif parser == 'unyt':
+    elif parser == "unyt":
         raise LibraryWithoutParserError(library="unyt")
-    elif parser == 'physipy':
+    elif parser == "physipy":
         raise LibraryWithoutParserError(library="physipy")
-    elif parser == 'quantities':
+    elif parser == "quantities":
         raise LibraryWithoutParserError(library="quantities")
-    elif parser == 'astropy.units':
-        astropy_quantity = dict_translate_quantity['string']['astropy.units'](string)
+    elif parser == "astropy.units":
+        astropy_quantity = dict_translate_quantity["string"]["astropy.units"](string)
 
-        if to_form == 'astropy.units':
+        if to_form == "astropy.units":
             return astropy_quantity
-        elif to_form == 'pint':
-            return dict_translate_quantity['astropy.units']['pint'](astropy_quantity)
-        elif to_form == 'string':
-            return dict_translate_quantity['astropy.units']['string'](astropy_quantity)
-        elif to_form == 'openmm.unit':
-            return dict_translate_quantity['astropy.units']['openmm.unit'](astropy_quantity)
-        elif to_form == 'unyt':
-            return dict_translate_quantity['astropy.units']['unyt'](astropy_quantity)
+        elif to_form == "pint":
+            return dict_translate_quantity["astropy.units"]["pint"](astropy_quantity)
+        elif to_form == "string":
+            return dict_translate_quantity["astropy.units"]["string"](astropy_quantity)
+        elif to_form == "openmm.unit":
+            return dict_translate_quantity["astropy.units"]["openmm.unit"](astropy_quantity)
+        elif to_form == "unyt":
+            return dict_translate_quantity["astropy.units"]["unyt"](astropy_quantity)
         else:
             raise NotImplementedParserError(parser=parser, caller=to_form)
     else:
         raise NotImplementedParserError(parser=parser, caller=to_form)
 
 
-from smonitor import signal
-
-
 @signal(tags=["parse"], exception_level="DEBUG")
-def parse(string: str, parser: Optional[str]=None, to_form: Optional[str]=None):
-    """ Parses a string and returns a quantity.
+def parse(string: str, parser: Optional[str] = None, to_form: Optional[str] = None):
+    """Parses a string and returns a quantity.
 
-        Parameters
-        ----------
-        string : str
-            A string quantity.
-        
-        parser : str
-            The parser that will be used.
+    Parameters
+    ----------
+    string : str
+        A string quantity.
 
-        to_form; str, optional
-            The form of the quantity. Can be "pint", "openmm.unit",
-            "unyt", "astropy.units" or "string".
+    parser : str
+        The parser that will be used.
 
-        Returns
-        -------
-        QuantityLike
-            A quantity.
+    to_form; str, optional
+        The form of the quantity. Can be "pint", "openmm.unit",
+        "unyt", "astropy.units" or "string".
+
+    Returns
+    -------
+    QuantityLike
+        A quantity.
     """
 
     to_form = digest_to_form(to_form)

@@ -1,4 +1,5 @@
 import smonitor
+
 from pyunitwizard.api import introspection
 
 
@@ -13,13 +14,11 @@ def test_is_quantity_emits_probe_miss_for_non_quantity_string():
     probe_events = [
         event
         for event in recent
-        if event.get("code") == "PUW-DBG-PROBE-001"
-        and event.get("source") == "pyunitwizard.debug.probe_miss"
+        if event.get("code") == "PUW-DBG-PROBE-001" and event.get("source") == "pyunitwizard.debug.probe_miss"
     ]
     assert len(probe_events) >= 1
     assert any(
-        event.get("extra", {}).get("caller") == "pyunitwizard.api.introspection.is_quantity"
-        for event in probe_events
+        event.get("extra", {}).get("caller") == "pyunitwizard.api.introspection.is_quantity" for event in probe_events
     )
 
 
@@ -34,11 +33,9 @@ def test_is_unit_emits_probe_miss_for_non_unit_string():
     probe_events = [
         event
         for event in recent
-        if event.get("code") == "PUW-DBG-PROBE-001"
-        and event.get("source") == "pyunitwizard.debug.probe_miss"
+        if event.get("code") == "PUW-DBG-PROBE-001" and event.get("source") == "pyunitwizard.debug.probe_miss"
     ]
     assert len(probe_events) >= 1
     assert any(
-        event.get("extra", {}).get("caller") == "pyunitwizard.api.introspection.is_unit"
-        for event in probe_events
+        event.get("extra", {}).get("caller") == "pyunitwizard.api.introspection.is_unit" for event in probe_events
     )

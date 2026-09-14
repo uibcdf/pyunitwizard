@@ -1,5 +1,7 @@
 import numpy as np
-from pyunitwizard import quantity, get_unit, get_value
+
+from pyunitwizard import get_unit, get_value, quantity
+
 
 def repeat(sequence, repeats, axis=None, to_unit=None, to_form=None, value_type=None, standardized=False):
 
@@ -12,14 +14,13 @@ def repeat(sequence, repeats, axis=None, to_unit=None, to_form=None, value_type=
 
     output_value = np.repeat(output_value, repeats, axis=axis)
 
-    if value_type=='list':
+    if value_type == "list":
         return quantity(output_value.tolist(), output_unit, form=to_form, standardized=standardized)
-    elif value_type=='tuple':
+    elif value_type == "tuple":
         return quantity(tuple(output_value.tolist()), output_unit, form=to_form, standardized=standardized)
-    elif value_type=='numpy.ndarray':
+    elif value_type == "numpy.ndarray":
         return quantity(output_value, output_unit, form=to_form, standardized=standardized)
     elif value_type is None:
         return quantity(output_value, output_unit, form=to_form, standardized=standardized)
     else:
         raise ValueError
-

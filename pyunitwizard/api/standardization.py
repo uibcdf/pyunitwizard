@@ -56,11 +56,11 @@ def _matching_configured_standard(
     return None
 
 
-def _standard_units_lstsq(solution: np.ndarray, standards: dict, 
-                          matrix: Optional[np.ndarray] = None, 
-                          units: Optional[list] = None) -> Optional[UnitLike]:
-    """ Auxiliary function for get_standard_units.
-        Returns standard units by using least squares method.
+def _standard_units_lstsq(
+    solution: np.ndarray, standards: dict, matrix: Optional[np.ndarray] = None, units: Optional[list] = None
+) -> Optional[UnitLike]:
+    """Auxiliary function for get_standard_units.
+    Returns standard units by using least squares method.
     """
 
     if matrix is None:
@@ -75,14 +75,13 @@ def _standard_units_lstsq(solution: np.ndarray, standards: dict,
 
     x, _, _, _ = np.linalg.lstsq(matrix.T, solution, rcond=None)
 
-
     x = x.round(4)
 
     if np.allclose(np.dot(matrix.T, x), solution):
         output: UnitLike = 1
         for u, exponent in zip(standard_units, x):
             if not np.isclose(0.0, exponent):
-                output *= u ** exponent
+                output *= u**exponent
 
         return convert(output, to_form="string", to_type="unit")
 
@@ -96,22 +95,22 @@ def get_standard_units(
     form: Optional[str] = None,
     parser: Optional[str] = None,
 ) -> UnitLike:
-    """ Returns standard unit of the quantity or unit passed.
+    """Returns standard unit of the quantity or unit passed.
 
-        Parameters
-        ----------
-        quantity_or_unit: Any
-            A quantity or unit
+    Parameters
+    ----------
+    quantity_or_unit: Any
+        A quantity or unit
 
-        Returns
-        -------
-        str
-            The standard unit.
+    Returns
+    -------
+    str
+        The standard unit.
 
-        Raises
-        ------
-        NoStandardsError
-            If no standard units were defined.
+    Raises
+    ------
+    NoStandardsError
+        If no standard units were defined.
     """
 
     form = digest_form(form)
@@ -164,7 +163,12 @@ def get_standard_units(
             if len(kernel.tentative_base_standards) == 0:
                 raise NoStandardsError
 
-            output = _standard_units_lstsq(solution, kernel.tentative_base_standards, kernel.tentative_base_standards_matrix, kernel.tentative_base_standards_units)
+            output = _standard_units_lstsq(
+                solution,
+                kernel.tentative_base_standards,
+                kernel.tentative_base_standards_matrix,
+                kernel.tentative_base_standards_units,
+            )
 
     else:
         for standard_units, dim_array in kernel.dimensional_combinations_standards.items():
@@ -174,13 +178,23 @@ def get_standard_units(
         if len(kernel.dimensional_fundamental_standards) == 0:
             raise NoStandardsError
 
-        output = _standard_units_lstsq(solution, kernel.dimensional_fundamental_standards, kernel.dimensional_fundamental_standards_matrix, kernel.dimensional_fundamental_standards_units)
+        output = _standard_units_lstsq(
+            solution,
+            kernel.dimensional_fundamental_standards,
+            kernel.dimensional_fundamental_standards_matrix,
+            kernel.dimensional_fundamental_standards_units,
+        )
 
         if output is None:
             if len(kernel.tentative_base_standards) == 0:
                 raise NoStandardsError
 
-            output = _standard_units_lstsq(solution, kernel.tentative_base_standards, kernel.tentative_base_standards_matrix, kernel.tentative_base_standards_units)
+            output = _standard_units_lstsq(
+                solution,
+                kernel.tentative_base_standards,
+                kernel.tentative_base_standards_matrix,
+                kernel.tentative_base_standards_units,
+            )
 
     if output is None:
         raise NoStandardsError
@@ -203,32 +217,32 @@ def standardize(
     to_form: Optional[str] = None,
     to_unit: Optional[str] = None,
 ) -> QuantityOrUnit:
-    """ Convert a quantity or unit to standard units.
+    """Convert a quantity or unit to standard units.
 
-        Parameters
-        ----------
-        quantity_or_unit : QuantityOrUnit
-            The quantity or a unit that will be converted.
+    Parameters
+    ----------
+    quantity_or_unit : QuantityOrUnit
+        The quantity or a unit that will be converted.
 
-        to_form : str, optional.
-            The form to transform to.  When omitted the configured default form
-            is used.
+    to_form : str, optional.
+        The form to transform to.  When omitted the configured default form
+        is used.
 
-        to_unit : str, optional.
-            Target unit expressed as a string (e.g. ``"ms"``, ``"angstrom"``).
-            When provided the output is converted to this unit instead of the
-            configured standard unit for the corresponding dimensionality.
-            The form standardization controlled by *to_form* still applies.
+    to_unit : str, optional.
+        Target unit expressed as a string (e.g. ``"ms"``, ``"angstrom"``).
+        When provided the output is converted to this unit instead of the
+        configured standard unit for the corresponding dimensionality.
+        The form standardization controlled by *to_form* still applies.
 
-        Returns
-        -------
-        QuantityOrUnit
-            The quantity or unit converted to standard (or requested) units.
+    Returns
+    -------
+    QuantityOrUnit
+        The quantity or unit converted to standard (or requested) units.
 
-        Raises
-        ------
-        NoStandardsError
-            If no standard units were defined and *to_unit* was not supplied.
+    Raises
+    ------
+    NoStandardsError
+        If no standard units were defined and *to_unit* was not supplied.
 
     """
 
@@ -236,11 +250,7 @@ def standardize(
 
     form_in = get_form(quantity_or_unit)
 
-    if (
-        to_unit is None
-        and _matching_configured_standard(quantity_or_unit, to_form, form_in=form_in)
-        is not None
-    ):
+    if to_unit is None and _matching_configured_standard(quantity_or_unit, to_form, form_in=form_in) is not None:
         return quantity_or_unit
 
     if dict_is_unit[form_in](quantity_or_unit):

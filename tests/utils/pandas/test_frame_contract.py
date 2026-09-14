@@ -1,7 +1,7 @@
 import numpy as np
-import pyunitwizard as puw
 import pytest
 
+import pyunitwizard as puw
 
 pd = pytest.importorskip("pandas")
 
@@ -47,9 +47,7 @@ def test_add_quantity_column_updates_units_map():
 def test_get_quantity_column_uses_metadata_or_explicit_unit():
     configure_libraries()
 
-    dataframe = puw.utils.pandas.dataframe_from_quantities(
-        {"mass": puw.quantity([1.0, 2.0], "gram")}
-    )
+    dataframe = puw.utils.pandas.dataframe_from_quantities({"mass": puw.quantity([1.0, 2.0], "gram")})
 
     from_metadata = puw.utils.pandas.get_quantity_column(dataframe, "mass")
     explicit = puw.utils.pandas.get_quantity_column(dataframe, "mass", unit_name="kilogram")
@@ -71,9 +69,7 @@ def test_get_quantity_column_raises_without_unit_metadata():
 def test_get_quantity_column_invalid_value_type():
     configure_libraries()
 
-    dataframe = puw.utils.pandas.dataframe_from_quantities(
-        {"x": puw.quantity([1.0, 2.0], "meter")}
-    )
+    dataframe = puw.utils.pandas.dataframe_from_quantities({"x": puw.quantity([1.0, 2.0], "meter")})
     with pytest.raises(ValueError):
         puw.utils.pandas.get_quantity_column(dataframe, "x", value_type="invalid")
 
@@ -82,9 +78,7 @@ def test_setup_pandas_adds_dataframe_accessor():
     configure_libraries()
     puw.utils.pandas.setup_pandas(enable=False)
 
-    dataframe = puw.utils.pandas.dataframe_from_quantities(
-        {"x": puw.quantity([1.0, 2.0], "meter")}
-    )
+    dataframe = puw.utils.pandas.dataframe_from_quantities({"x": puw.quantity([1.0, 2.0], "meter")})
 
     puw.utils.pandas.setup_pandas(enable=True)
     q = dataframe.puw.get_quantity("x")

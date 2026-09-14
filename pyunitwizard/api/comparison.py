@@ -119,7 +119,7 @@ def are_equal(
     """
 
     from .conversion import convert
-    from .extraction import get_unit, get_value, get_value_and_unit
+    from .extraction import get_value, get_value_and_unit
 
     if same_form:
         form_1 = get_form(quantity_or_unit_1)
@@ -149,9 +149,7 @@ def are_equal(
 
 
 @signal(tags=["comparison"])
-def compatibility(
-    quantity_or_unit_1: QuantityOrUnit, quantity_or_unit_2: QuantityOrUnit
-) -> bool:
+def compatibility(quantity_or_unit_1: QuantityOrUnit, quantity_or_unit_2: QuantityOrUnit) -> bool:
     """Check whether two quantities or units are dimensionally compatible.
 
     Parameters
@@ -211,9 +209,7 @@ def are_compatible(
                 tmp = convert(quantity_or_unit_2, to_form=form1)
                 is_compatible = dict_compatibility[form1](tmp, quantity_or_unit_1)
         else:
-            is_compatible = dict_compatibility[form1](
-                quantity_or_unit_1, quantity_or_unit_2
-            )
+            is_compatible = dict_compatibility[form1](quantity_or_unit_1, quantity_or_unit_2)
     else:
         dim1 = get_dimensionality(quantity_or_unit_1)
         dim2 = get_dimensionality(quantity_or_unit_2)

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, TypeAlias
 
-
 if TYPE_CHECKING:
     import numpy as np
     import openmm.unit as openmm_unit

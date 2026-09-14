@@ -2,24 +2,26 @@
 # that need them, not here. Configuring is often the first thing a consumer
 # does, and pulling the whole API package in to reach two functions cost about
 # 65 ms before any unit work had been requested.
+import os
+from importlib.util import find_spec
+from typing import Dict, List, Optional, Union
+
 from pyunitwizard import kernel
 from pyunitwizard._private.forms import digest_form
 from pyunitwizard._private.lists_and_tuples import is_list_or_tuple
-from pyunitwizard.constants import _constants, _constants_synonyms
-import os
-from importlib.util import find_spec
-from typing import List, Dict, Union, Optional
+from pyunitwizard.constants import _constants
 
-libraries = ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
-parsers   = ['pint', 'openmm.unit', 'unyt', 'astropy.units', 'physipy', 'quantities']
+libraries = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities"]
+parsers = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities"]
 _aux_dict_modules = {
-    'pint': 'pint',
-    'openmm.unit': 'openmm',
-    'unyt': 'unyt',
-    'astropy.units': 'astropy',
-    'physipy': 'physipy',
-    'quantities': 'quantities',
+    "pint": "pint",
+    "openmm.unit": "openmm",
+    "unyt": "unyt",
+    "astropy.units": "astropy",
+    "physipy": "physipy",
+    "quantities": "quantities",
 }
+
 
 def resolve_config_module(
     config: Optional[str] = None,
@@ -59,6 +61,7 @@ def resolve_config_module(
 
     return None
 
+
 def reset() -> None:
     """Reset runtime configuration state to defaults.
 
@@ -74,8 +77,8 @@ def reset() -> None:
     """
     kernel.loaded_libraries = []
     kernel.loaded_parsers = []
-    kernel.default_form=None
-    kernel.default_parser=None
+    kernel.default_form = None
+    kernel.default_parser = None
     kernel.standards = {}
     kernel.dimensional_fundamental_standards = {}
     kernel.dimensional_combinations_standards = {}
@@ -90,9 +93,10 @@ def reset() -> None:
     kernel.canonical_standards = []
     kernel.policy_provenance = None
     from pyunitwizard.api.introspection import _DIMENSIONALITY_CACHE, _TYPE_TO_FORM_CACHE
-    
+
     _DIMENSIONALITY_CACHE.clear()
     _TYPE_TO_FORM_CACHE.clear()
+
 
 def get_libraries_loaded() -> List[str]:
     """Return currently loaded backend libraries.
@@ -109,6 +113,7 @@ def get_libraries_loaded() -> List[str]:
     """
     return kernel.loaded_libraries
 
+
 def get_libraries_supported() -> List[str]:
     """Return backend libraries supported by this installation.
 
@@ -124,6 +129,7 @@ def get_libraries_supported() -> List[str]:
     """
     return libraries
 
+
 def get_parsers_loaded() -> List[str]:
     """Return currently loaded parsers.
 
@@ -138,6 +144,7 @@ def get_parsers_loaded() -> List[str]:
     >>> puw.configure.get_parsers_loaded()
     """
     return kernel.loaded_parsers
+
 
 def get_parsers_supported() -> List[str]:
     """Return parser backends supported by this installation.
@@ -180,13 +187,14 @@ def load_library(library_names: Union[str, List[str]]):
             raise TypeError("Expected string or list of strings for library_names")
 
     for ii in range(len(library_names)):
-        library_names[ii]=digest_form(library_names[ii])
+        library_names[ii] = digest_form(library_names[ii])
 
     from pyunitwizard import forms
 
     for library in library_names:
         if library not in kernel.loaded_libraries:
             from depdigest import is_installed
+
             if not is_installed(library):
                 raise ModuleNotFoundError(
                     f"The library '{library}' is required as a backend for PyUnitWizard but it is not installed. "
@@ -224,6 +232,7 @@ def get_default_form() -> str:
     """
     return kernel.default_form
 
+
 def set_default_form(form: str) -> None:
     """Set the default form for quantities and units.
 
@@ -241,6 +250,7 @@ def set_default_form(form: str) -> None:
     # that actually needs it loads it through `digest_form()` anyway.
     kernel.default_form = digest_form(form, load=False)
 
+
 def get_default_parser() -> str:
     """Return the configured default parser.
 
@@ -255,6 +265,7 @@ def get_default_parser() -> str:
     >>> puw.configure.get_default_parser()
     """
     return kernel.default_parser
+
 
 def set_default_parser(parser: str) -> None:
     """Set the default parser for string quantities.
@@ -271,6 +282,7 @@ def set_default_parser(parser: str) -> None:
     """
     kernel.default_parser = digest_form(parser, load=False)
 
+
 def get_standard_units() -> Dict[str, Dict[str, int]]:
     """Return configured standard units mapped to dimensionality definitions.
 
@@ -286,9 +298,8 @@ def get_standard_units() -> Dict[str, Dict[str, int]]:
     """
     return kernel.standards
 
-def set_standard_units(
-    standard_units: List[str], provenance: Optional[str] = None
-) -> None:
+
+def set_standard_units(standard_units: List[str], provenance: Optional[str] = None) -> None:
     """Configure project standard units used by standardization helpers.
 
     Parameters
@@ -315,10 +326,10 @@ def set_standard_units(
 
     from pyunitwizard.api import convert, get_dimensionality
 
-    kernel.standards={}
-    kernel.dimensional_fundamental_standards={}
-    kernel.dimensional_combinations_standards={}
-    kernel.adimensional_standards={}
+    kernel.standards = {}
+    kernel.dimensional_fundamental_standards = {}
+    kernel.dimensional_combinations_standards = {}
+    kernel.adimensional_standards = {}
     kernel.standard_units_by_dimensionality_cache = {}
     kernel.canonical_standards = []
     kernel.policy_provenance = provenance
@@ -331,75 +342,68 @@ def set_standard_units(
     seen_dimensionalities = set()
 
     if type(standard_units) is str:
-        standard_units=[standard_units]
+        standard_units = [standard_units]
     elif type(standard_units) not in [list, tuple]:
         raise ValueError
 
     for standard_unit in standard_units:
-
-        dim = get_dimensionality(convert(standard_unit, to_type='unit'))
+        dim = get_dimensionality(convert(standard_unit, to_type="unit"))
         dim_array = np.array([dim[ii] for ii in kernel.order_fundamental_units], dtype=float)
-        n_dims_array = n_dimensions - np.isclose(dim_array,0.0).sum()
+        n_dims_array = n_dimensions - np.isclose(dim_array, 0.0).sum()
 
         if n_dims_array == 1:
-
             kernel.dimensional_fundamental_standards[standard_unit] = dim_array
 
         elif n_dims_array == 0:
-
             kernel.adimensional_standards[standard_unit] = dim_array
 
         else:
-
             kernel.dimensional_combinations_standards[standard_unit] = dim_array
 
         kernel.standards[standard_unit] = dim
 
-        dimensionality_key = tuple(
-            dim.get(dimension, 0) for dimension in kernel.order_fundamental_units
-        )
+        dimensionality_key = tuple(dim.get(dimension, 0) for dimension in kernel.order_fundamental_units)
         if dimensionality_key not in seen_dimensionalities:
             seen_dimensionalities.add(dimensionality_key)
             kernel.canonical_standards.append((standard_unit, dim))
 
     # Tentative base standards
 
-    kernel.tentative_base_standards=kernel.dimensional_fundamental_standards.copy()
+    kernel.tentative_base_standards = kernel.dimensional_fundamental_standards.copy()
 
     already = np.zeros(shape=n_dimensions)
     for unit, array in kernel.tentative_base_standards.items():
         already += array
 
     for ii in range(n_dimensions):
-        if np.isclose(already[ii],0):
+        if np.isclose(already[ii], 0):
             candidate = None
             candidate_array = None
             candidate_n_dims = np.inf
             candidate_n_ii = np.inf
             for standard_unit, array in kernel.dimensional_combinations_standards.items():
-                if array[ii]>0:
-                    if array[ii]<candidate_n_ii:
+                if array[ii] > 0:
+                    if array[ii] < candidate_n_ii:
                         candidate = standard_unit
                         candidate_array = array
-                        candidate_n_dis = (n_dimensions - np.isclose(array,0.0).sum())
+                        candidate_n_dis = n_dimensions - np.isclose(array, 0.0).sum()  # noqa: F841
                         candidate_n_ii = array[ii]
-                    elif np.isclose(array[ii],candidate_n_ii):
-                        if (n_dimensions - np.isclose(array,0.0).sum()) <candidate_n_dims:
+                    elif np.isclose(array[ii], candidate_n_ii):
+                        if (n_dimensions - np.isclose(array, 0.0).sum()) < candidate_n_dims:
                             candidate = standard_unit
                             candidate_array = array
-                            candidate_n_dis = (n_dimensions - np.isclose(array,0.0).sum())
+                            candidate_n_dis = n_dimensions - np.isclose(array, 0.0).sum()  # noqa: F841
                             candidate_n_ii = array[ii]
 
             if candidate is not None:
                 kernel.tentative_base_standards[candidate] = candidate_array
                 for jj in range(ii, n_dimensions):
-                    if candidate_array[jj]>0:
-                        already[jj]=1
+                    if candidate_array[jj] > 0:
+                        already[jj] = 1
 
     if len(kernel.dimensional_fundamental_standards) > 0:
         kernel.dimensional_fundamental_standards_units = [
-            convert(u, to_type="unit")
-            for u in kernel.dimensional_fundamental_standards.keys()
+            convert(u, to_type="unit") for u in kernel.dimensional_fundamental_standards.keys()
         ]
         kernel.dimensional_fundamental_standards_matrix = np.array(
             list(kernel.dimensional_fundamental_standards.values())
@@ -410,19 +414,15 @@ def set_standard_units(
 
     if len(kernel.tentative_base_standards) > 0:
         kernel.tentative_base_standards_units = [
-            convert(u, to_type="unit")
-            for u in kernel.tentative_base_standards.keys()
+            convert(u, to_type="unit") for u in kernel.tentative_base_standards.keys()
         ]
-        kernel.tentative_base_standards_matrix = np.array(
-            list(kernel.tentative_base_standards.values())
-        )
+        kernel.tentative_base_standards_matrix = np.array(list(kernel.tentative_base_standards.values()))
     else:
         kernel.tentative_base_standards_units = None
         kernel.tentative_base_standards_matrix = None
 
-def add_standard_units(
-    standard_units: List[str], provenance: Optional[str] = None
-) -> None:
+
+def add_standard_units(standard_units: List[str], provenance: Optional[str] = None) -> None:
     """Add or replace standard units without discarding the full existing set.
 
     Each incoming unit is matched against the current standards by
@@ -460,21 +460,15 @@ def add_standard_units(
     # Compute dimensionality arrays for each incoming unit
     new_dim_arrays = []
     for unit in standard_units:
-        dim = get_dimensionality(convert(unit, to_type='unit'))
-        dim_array = np.array(
-            [dim[ii] for ii in kernel.order_fundamental_units], dtype=float
-        )
+        dim = get_dimensionality(convert(unit, to_type="unit"))
+        dim_array = np.array([dim[ii] for ii in kernel.order_fundamental_units], dtype=float)
         new_dim_arrays.append(dim_array)
 
     # Keep existing standards whose dimensionality is not covered by any new unit
     surviving = []
     for existing_unit, existing_dim in kernel.standards.items():
-        existing_array = np.array(
-            [existing_dim[ii] for ii in kernel.order_fundamental_units], dtype=float
-        )
-        superseded = any(
-            np.allclose(existing_array, new_array) for new_array in new_dim_arrays
-        )
+        existing_array = np.array([existing_dim[ii] for ii in kernel.order_fundamental_units], dtype=float)
+        superseded = any(np.allclose(existing_array, new_array) for new_array in new_dim_arrays)
         if not superseded:
             surviving.append(existing_unit)
 
@@ -499,7 +493,7 @@ def add_constant(constant_name, value, unit) -> None:
         Constant mapping is updated in global constants registry.
     """
 
-    _constants[constant_name]=[value, unit]
+    _constants[constant_name] = [value, unit]
     pass
 
 
@@ -553,9 +547,7 @@ def report() -> Dict[str, object]:
         "provenance": kernel.policy_provenance,
         "loaded_libraries": list(kernel.loaded_libraries),
         "loaded_parsers": list(kernel.loaded_parsers),
-        "fast_tracks": sorted(
-            name[len("to_") :] for name in vars(fast_track) if name.startswith("to_")
-        ),
+        "fast_tracks": sorted(name[len("to_") :] for name in vars(fast_track) if name.startswith("to_")),
     }
 
 
@@ -604,10 +596,7 @@ def set_pint_registry_cache(cache: Union[bool, str, None]) -> None:
     # Only when the call would actually change something. A second library in a
     # suite declaring the same setting is not making a mistake; it is just
     # being second.
-    if (
-        "pyunitwizard.forms.api_pint" in sys.modules
-        and backend_settings.pint_registry_cache != cache
-    ):
+    if "pyunitwizard.forms.api_pint" in sys.modules and backend_settings.pint_registry_cache != cache:
         warnings.warn(
             "The pint backend is already loaded, so its registry has been built "
             "and set_pint_registry_cache() has no effect on it. Call it before "

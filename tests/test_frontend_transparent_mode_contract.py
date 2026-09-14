@@ -1,7 +1,7 @@
 import numpy as np
-import pyunitwizard as puw
 import pytest
 
+import pyunitwizard as puw
 from tests.helpers import loaded_libraries
 
 

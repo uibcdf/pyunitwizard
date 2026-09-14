@@ -88,9 +88,7 @@ def test_astropy_roundtrip_through_pint_contract():
 
     assert puw.forms.api_astropy_unit.compatibility(q_astropy, q_astropy_back)
     assert puw.forms.api_astropy_unit.get_value(q_astropy_back) == pytest.approx(7.0)
-    assert puw.forms.api_astropy_unit.unit_to_string(
-        puw.forms.api_astropy_unit.get_unit(q_astropy_back)
-    ) == "kg"
+    assert puw.forms.api_astropy_unit.unit_to_string(puw.forms.api_astropy_unit.get_unit(q_astropy_back)) == "kg"
 
 
 def test_unyt_roundtrip_through_pint_contract():

@@ -9,7 +9,6 @@ units library has no business writing to a user's filesystem uninvited.
 import subprocess
 import sys
 
-
 PROBE = """
 import warnings; warnings.filterwarnings('ignore')
 import pyunitwizard as puw
@@ -99,9 +98,7 @@ print(ureg.cache_folder)
 
     env = dict(os.environ)
     env.pop("PYUNITWIZARD_PINT_CACHE", None)
-    result = subprocess.run(
-        [sys.executable, "-c", probe], capture_output=True, text=True, env=env, timeout=300
-    )
+    result = subprocess.run([sys.executable, "-c", probe], capture_output=True, text=True, env=env, timeout=300)
 
     assert result.returncode == 0, result.stderr[-2000:]
     assert result.stdout.strip() == str(cache)
@@ -120,9 +117,7 @@ with warnings.catch_warnings(record=True) as captured:
     puw.configure.set_pint_registry_cache(True)
 print(captured[0].category.__name__ if captured else 'NONE')
 """
-    result = subprocess.run(
-        [sys.executable, "-c", probe], capture_output=True, text=True, timeout=300
-    )
+    result = subprocess.run([sys.executable, "-c", probe], capture_output=True, text=True, timeout=300)
 
     assert result.returncode == 0, result.stderr[-2000:]
     assert result.stdout.strip() == "RuntimeWarning"

@@ -1,5 +1,3 @@
-import pytest
-
 from pyunitwizard._private.exceptions import (
     LibraryNotFoundError,
     NoParserError,

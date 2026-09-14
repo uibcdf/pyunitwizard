@@ -17,7 +17,6 @@ import textwrap
 
 import pytest
 
-
 RACE = textwrap.dedent(
     """
     import sys, threading, pathlib, tempfile
@@ -68,9 +67,5 @@ RACE = textwrap.dedent(
 @pytest.mark.parametrize("attempt", range(8))
 def test_two_threads_may_configure_at_once(attempt):
     """Repeated because it is a race: one clean pass proves nothing on its own."""
-    done = subprocess.run(
-        [sys.executable, "-c", RACE], capture_output=True, text=True, timeout=300
-    )
-    assert done.returncode == 0, (
-        f"concurrent configuration raised: {done.stdout.strip() or done.stderr.strip()}"
-    )
+    done = subprocess.run([sys.executable, "-c", RACE], capture_output=True, text=True, timeout=300)
+    assert done.returncode == 0, f"concurrent configuration raised: {done.stdout.strip() or done.stderr.strip()}"

@@ -30,4 +30,5 @@ PROFILES = {
 }
 
 # Keep catalog templates as the single source of truth.
-from pyunitwizard._private.smonitor.catalog import CODES, SIGNALS
+from pyunitwizard._private.smonitor.catalog import CODES as CODES
+from pyunitwizard._private.smonitor.catalog import SIGNALS as SIGNALS

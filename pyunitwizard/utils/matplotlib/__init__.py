@@ -50,6 +50,7 @@ class _PyUnitWizardMplConverter:
     @staticmethod
     def axisinfo(unit, axis):
         import matplotlib.units as munits
+
         import pyunitwizard as puw
 
         label = puw.convert(unit, to_form="string", to_type="unit")

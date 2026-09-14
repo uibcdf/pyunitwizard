@@ -1,5 +1,1 @@
-from . import sequences
-from . import plot
-from . import matplotlib
-from . import numpy
-from . import pandas
+from . import matplotlib, numpy, pandas, plot, sequences

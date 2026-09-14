@@ -1,15 +1,16 @@
+import numpy as np
+import pytest
+
+import pyunitwizard as puw
+from pyunitwizard._private.exceptions import (
+    ArgumentError,
+    LibraryWithoutParserError,
+)
 from pyunitwizard.parse import (
     _find_closing_bracket_position,
     _find_closing_parenthesis_position,
     _parse_with_pint,
     parse,
-)
-import numpy as np
-import pyunitwizard as puw
-import pytest
-from pyunitwizard._private.exceptions import (
-    ArgumentError,
-    LibraryWithoutParserError,
 )
 
 from .helpers import loaded_libraries
@@ -20,6 +21,7 @@ def test_parse_with_pint_scalar():
     quantity = _parse_with_pint("5 meters")
     assert quantity.magnitude == 5
     assert str(quantity.units) == "meter"
+
 
 def test_parse_with_pint_array():
 
@@ -39,8 +41,9 @@ def test_parse_with_pint_array():
     assert np.allclose(quantity.magnitude, np.array([[2, 5, 7], [7, 8, 9]]))
     assert str(quantity.units) == "kilojoule / mole / nanometer"
 
+
 def test_parse_to_pint():
-    
+
     quantity = parse("[2, 5, 7] joules", to_form="pint")
     assert np.allclose(quantity.magnitude, np.array([2, 5, 7]))
     assert str(quantity.units) == "joule"
@@ -53,6 +56,7 @@ def test_parse_to_pint_is_stable_even_if_default_parser_is_astropy():
         quantity = parse("[2, 5, 7] joules", to_form="pint")
         assert np.allclose(quantity.magnitude, np.array([2, 5, 7]))
         assert str(quantity.units) == "joule"
+
 
 def test_parse_to_string():
 
@@ -68,16 +72,18 @@ def test_parse_to_string():
     assert isinstance(quantity, str)
     assert quantity == "[2 5 7] joule"
 
+
 def test_parse_to_openmm_scalar():
 
-    with loaded_libraries(['pint', 'openmm.unit']):
+    with loaded_libraries(["pint", "openmm.unit"]):
         quantity = parse("5 meters", to_form="openmm.unit")
         assert quantity._value == 5
         assert str(quantity.unit) == "meter"
 
+
 def test_parse_to_openmm_array():
 
-    with loaded_libraries(['pint', 'openmm.unit']):
+    with loaded_libraries(["pint", "openmm.unit"]):
         quantity = parse("[2, 5, 7] joules", to_form="openmm.unit")
         assert np.allclose(quantity._value, np.array([2, 5, 7]))
         assert str(quantity.unit) == "joule"
@@ -93,7 +99,7 @@ def test_parse_to_openmm_array():
 
 def test_parse_to_unyt():
 
-    with loaded_libraries(['pint', 'unyt']):
+    with loaded_libraries(["pint", "unyt"]):
         quantity = parse("5 meters", to_form="unyt")
         assert quantity.value == 5
         assert str(quantity.units) == "m"
@@ -120,13 +126,16 @@ def test_parse_library_without_parser_has_readable_message():
     assert message.strip() != ""
     assert "parser" in message.lower()
 
+
 def test_parse_rejects_non_string_input():
     with pytest.raises(ArgumentError):
         parse(3.0)  # type: ignore[arg-type]
 
+
 def test_parse_rejects_invalid_parser_name():
     with pytest.raises(ValueError):
         parse("1 nm", parser="unknown")
+
 
 def test_parse_bracket_helpers_raise_on_unbalanced_input():
     with pytest.raises(ValueError):
@@ -134,14 +143,16 @@ def test_parse_bracket_helpers_raise_on_unbalanced_input():
     with pytest.raises(ValueError):
         _find_closing_parenthesis_position("(1, 2")
 
+
 def test_parse_parenthesis_helper_handles_nested_parentheses():
     text = "((1, 2), (3, 4)) meters"
     idx = _find_closing_parenthesis_position(text)
     assert idx == text.index(") meters")
 
+
 def test_parse_with_astropy_parser_if_available():
     pytest.importorskip("astropy.units")
-    with loaded_libraries(['pint', 'astropy.units']):
+    with loaded_libraries(["pint", "astropy.units"]):
         quantity = parse("2 meter", parser="astropy.units", to_form="string")
         assert isinstance(quantity, str)
         assert "2" in quantity
@@ -155,7 +166,7 @@ def test_parse_with_unyt_parser_raises_library_without_parser():
 
 def test_parse_with_astropy_parser_to_multiple_forms_if_available():
     pytest.importorskip("astropy.units")
-    with loaded_libraries(['pint', 'openmm.unit', 'unyt', 'astropy.units']):
+    with loaded_libraries(["pint", "openmm.unit", "unyt", "astropy.units"]):
         q_pint = parse("2 meter", parser="astropy.units", to_form="pint")
         assert puw.get_form(q_pint) == "pint"
 
@@ -170,10 +181,12 @@ def test_parse_rejects_unknown_to_form_for_pint_parser():
     with pytest.raises(ValueError):
         parse("1 meter", parser="pint", to_form="unknown")
 
+
 def test_parse_rejects_unknown_to_form_for_astropy_parser():
     pytest.importorskip("astropy.units")
     with pytest.raises(ValueError):
         parse("1 meter", parser="astropy.units", to_form="unknown")
+
 
 def test_parse_rejects_unknown_parser_before_dispatch():
     with pytest.raises(ValueError):

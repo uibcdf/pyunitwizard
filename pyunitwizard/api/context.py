@@ -30,18 +30,13 @@ def _snapshot(value):
         return value.copy()
 
     if isinstance(value, dict):
-        return {
-            key: dict(item) if isinstance(item, dict) else copy.copy(item)
-            for key, item in value.items()
-        }
+        return {key: dict(item) if isinstance(item, dict) else copy.copy(item) for key, item in value.items()}
 
     if isinstance(value, list):
         return [
             (
                 (item[0], dict(item[1]))
-                if isinstance(item, tuple)
-                and len(item) == 2
-                and isinstance(item[1], dict)
+                if isinstance(item, tuple) and len(item) == 2 and isinstance(item[1], dict)
                 else item
             )
             for item in value

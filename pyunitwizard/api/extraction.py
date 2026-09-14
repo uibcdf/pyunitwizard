@@ -5,13 +5,11 @@ from __future__ import annotations
 from typing import Any, Optional, Tuple, Union
 
 import numpy as np
+from smonitor import signal
 
 from .._private.quantity_or_unit import QuantityLike, UnitLike
 from ..forms import dict_change_value, dict_get_value
 from .introspection import get_form
-
-
-from smonitor import signal
 
 
 def _coerce_extracted_value(
@@ -39,13 +37,12 @@ def _coerce_extracted_value(
     if value_type in (float, "float", int, "int"):
         arr = np.asarray(value)
         if arr.ndim != 0 and arr.size != 1:
-            raise ValueError(
-                f"value_type={value_type!r} requires a scalar quantity, got shape {arr.shape}."
-            )
+            raise ValueError(f"value_type={value_type!r} requires a scalar quantity, got shape {arr.shape}.")
         scalar = arr.reshape(())
         return float(scalar) if value_type in (float, "float") else int(scalar)
 
     raise ValueError("Unsupported value_type.")
+
 
 @signal(tags=["extraction"])
 def get_value(
@@ -56,32 +53,26 @@ def get_value(
     value_type: Optional[Any] = None,
     dtype: Optional[Any] = None,
 ) -> Union[np.ndarray, float, int, list, tuple]:
-    """ Returns the value of a quantity.
+    """Returns the value of a quantity.
 
-        Parameters
-        ----------
-        to_unit : str, optional
-            Name of the unit to which the quantity will be converted (i.e kcal/mol).
+    Parameters
+    ----------
+    to_unit : str, optional
+        Name of the unit to which the quantity will be converted (i.e kcal/mol).
 
-        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use.
+    parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser to use.
 
-        Returns
-        -------
-        np.ndarray or float or int
-            An array with the quantity value or a a float or an int if it's a scalar.
+    Returns
+    -------
+    np.ndarray or float or int
+        An array with the quantity value or a a float or an int if it's a scalar.
 
     """
 
     # --- High Performance Fast Path ---
     # If it is already a numpy array and no conversion is requested, return it immediately.
-    if (
-        to_unit is None
-        and not standardized
-        and type(quantity) is np.ndarray
-        and value_type is None
-        and dtype is None
-    ):
+    if to_unit is None and not standardized and type(quantity) is np.ndarray and value_type is None and dtype is None:
         return quantity
     # ----------------------------------
 
@@ -108,23 +99,23 @@ def get_unit(
     parser: Optional[str] = None,
     standardized: Optional[bool] = False,
 ) -> UnitLike:
-    """ Returns the unit of a quantity.
+    """Returns the unit of a quantity.
 
-        Parameters
-        ----------
-        to_unit : str, optional
-            Name of the unit to which the quantity will be converted (i.e kcal/mol).
+    Parameters
+    ----------
+    to_unit : str, optional
+        Name of the unit to which the quantity will be converted (i.e kcal/mol).
 
-         form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
-            If passed the unit will be converted to that form. This is the type that will be returned
+     form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
+        If passed the unit will be converted to that form. This is the type that will be returned
 
-        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use.
+    parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser to use.
 
-        Returns
-        -------
-        UnitLike
-            The unit.
+    Returns
+    -------
+    UnitLike
+        The unit.
 
     """
 
@@ -147,21 +138,21 @@ def get_value_and_unit(
     value_type: Optional[Any] = None,
     dtype: Optional[Any] = None,
 ) -> Tuple[Union[np.ndarray, float, int, list, tuple], UnitLike]:
-    """ Returns the value and unit of a quantity.
+    """Returns the value and unit of a quantity.
 
-        Parameters
-        ----------
-        to_unit : str, optional
-            Name of the unit to which the quantity will be converted (i.e kcal/mol).
+    Parameters
+    ----------
+    to_unit : str, optional
+        Name of the unit to which the quantity will be converted (i.e kcal/mol).
 
-        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use.
+    parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser to use.
 
-        Returns
-        -------
-        np.ndarray or float or int
-        UnitLike
-            The value and unit of the input quantity.
+    Returns
+    -------
+    np.ndarray or float or int
+    UnitLike
+        The value and unit of the input quantity.
 
     """
 
@@ -174,9 +165,7 @@ def get_value_and_unit(
 
     value = convert(quantity, to_unit=to_unit, parser=parser, to_type="value")
     value = _coerce_extracted_value(value, value_type=value_type, dtype=dtype)
-    unit = convert(
-        quantity, to_unit=to_unit, to_form=to_form, parser=parser, to_type="unit"
-    )
+    unit = convert(quantity, to_unit=to_unit, to_form=to_form, parser=parser, to_type="unit")
 
     return value, unit
 

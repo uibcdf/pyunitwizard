@@ -4,7 +4,6 @@ import pytest
 import pyunitwizard as puw
 from tests.helpers import loaded_libraries
 
-
 matplotlib = pytest.importorskip("matplotlib")
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt

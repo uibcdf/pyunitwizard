@@ -49,4 +49,4 @@ def initialize() -> None:
     policy_provenance = None
 
 
-order_fundamental_units = ['[L]', '[M]', '[T]', '[K]', '[mol]', '[A]', '[Cd]']
+order_fundamental_units = ["[L]", "[M]", "[T]", "[K]", "[mol]", "[A]", "[Cd]"]

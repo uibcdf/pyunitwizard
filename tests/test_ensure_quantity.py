@@ -41,9 +41,7 @@ def test_ensure_quantity_canonical_fast_path_does_not_run_general_check(monkeypa
     quantity = puw.quantity(np.array([0.35, 0.70]), "nm")
 
     def fail_if_called(*args, **kwargs):
-        raise AssertionError(
-            "general validation is forbidden on the canonical fast path"
-        )
+        raise AssertionError("general validation is forbidden on the canonical fast path")
 
     monkeypatch.setattr("pyunitwizard.api.validation.check", fail_if_called)
 
@@ -67,9 +65,7 @@ def test_ensure_quantity_reuses_validated_dimensionality_for_standardization(
     def fail_if_called(_quantity):
         raise AssertionError("standardization must reuse validated dimensionality")
 
-    monkeypatch.setattr(
-        "pyunitwizard.api.standardization.get_dimensionality", fail_if_called
-    )
+    monkeypatch.setattr("pyunitwizard.api.standardization.get_dimensionality", fail_if_called)
 
     result = puw.ensure_quantity(quantity, dimensionality={"[L]": 1})
 
@@ -78,14 +74,14 @@ def test_ensure_quantity_reuses_validated_dimensionality_for_standardization(
 
 
 def test_ensure_quantity_to_unit_without_standardization():
-    result = puw.ensure_quantity("0.35 nm", dimensionality={"[L]": 1},
-                                 to_unit="angstroms", standardized=False)
+    result = puw.ensure_quantity("0.35 nm", dimensionality={"[L]": 1}, to_unit="angstroms", standardized=False)
     assert puw.get_value(result) == pytest.approx(3.5)
 
 
 def test_ensure_quantity_batch_positions():
-    result = puw.ensure_quantity(puw.quantity(np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]), "angstrom"),
-                                 dimensionality={"[L]": 1})
+    result = puw.ensure_quantity(
+        puw.quantity(np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]]), "angstrom"), dimensionality={"[L]": 1}
+    )
     assert np.asarray(puw.get_value(result, to_unit="angstroms")).shape == (2, 3)
 
 

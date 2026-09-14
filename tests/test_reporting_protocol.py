@@ -84,11 +84,9 @@ def test_protocol_routes_shared_work_and_defines_archive_semantics():
 
 
 def test_suite_owned_configuration_proposal_left_no_local_active_copy():
-    assert not (
-        ROOT / "devguide/pending_proposals/molsyssuite_unit_configuration_authority.md"
-    ).exists()
-    lifecycle_record = (
-        ROOT / "devguide/completed_proposals/adopt_shared_reporting_lifecycle.md"
-    ).read_text(encoding="utf-8")
+    assert not (ROOT / "devguide/pending_proposals/molsyssuite_unit_configuration_authority.md").exists()
+    lifecycle_record = (ROOT / "devguide/completed_proposals/adopt_shared_reporting_lifecycle.md").read_text(
+        encoding="utf-8"
+    )
 
     assert "uibcdf/molsyssuite#18" in lifecycle_record

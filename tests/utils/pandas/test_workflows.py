@@ -1,7 +1,7 @@
 import numpy as np
-import pyunitwizard as puw
 import pytest
 
+import pyunitwizard as puw
 
 pd = pytest.importorskip("pandas")
 
@@ -14,12 +14,8 @@ def configure_libraries():
 def test_concat_preserves_and_merges_units_map():
     configure_libraries()
 
-    left = puw.utils.pandas.dataframe_from_quantities(
-        {"length": puw.quantity([1.0], "nanometer")}
-    )
-    right = puw.utils.pandas.dataframe_from_quantities(
-        {"length": puw.quantity([2.0], "nanometer")}
-    )
+    left = puw.utils.pandas.dataframe_from_quantities({"length": puw.quantity([1.0], "nanometer")})
+    right = puw.utils.pandas.dataframe_from_quantities({"length": puw.quantity([2.0], "nanometer")})
 
     out = puw.utils.pandas.concat([left, right], ignore_index=True)
 
@@ -30,12 +26,8 @@ def test_concat_preserves_and_merges_units_map():
 def test_concat_raises_on_units_metadata_conflict():
     configure_libraries()
 
-    left = puw.utils.pandas.dataframe_from_quantities(
-        {"length": puw.quantity([1.0], "nanometer")}
-    )
-    right = puw.utils.pandas.dataframe_from_quantities(
-        {"length": puw.quantity([2.0], "meter")}
-    )
+    left = puw.utils.pandas.dataframe_from_quantities({"length": puw.quantity([1.0], "nanometer")})
+    right = puw.utils.pandas.dataframe_from_quantities({"length": puw.quantity([2.0], "meter")})
 
     with pytest.raises(ValueError):
         puw.utils.pandas.concat([left, right], ignore_index=True)
@@ -67,9 +59,7 @@ def test_merge_preserves_units_map_for_output_columns():
 def test_assign_and_copy_can_be_resynced():
     configure_libraries()
 
-    dataframe = puw.utils.pandas.dataframe_from_quantities(
-        {"length": puw.quantity([1.0, 2.0], "nanometer")}
-    )
+    dataframe = puw.utils.pandas.dataframe_from_quantities({"length": puw.quantity([1.0, 2.0], "nanometer")})
     assigned = dataframe.assign(raw=[5.0, 6.0])
     copied = assigned.copy()
 
@@ -82,9 +72,7 @@ def test_assign_and_copy_can_be_resynced():
 def test_set_units_map_allows_recovery_after_attrs_loss():
     configure_libraries()
 
-    dataframe = puw.utils.pandas.dataframe_from_quantities(
-        {"energy": puw.quantity([1.0, 2.0], "kilocalorie")}
-    )
+    dataframe = puw.utils.pandas.dataframe_from_quantities({"energy": puw.quantity([1.0, 2.0], "kilocalorie")})
     dataframe.attrs.clear()
     assert puw.utils.pandas.get_units_map(dataframe) == {}
 

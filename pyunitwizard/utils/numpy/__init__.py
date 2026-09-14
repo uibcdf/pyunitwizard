@@ -6,12 +6,12 @@ import numpy as _np
 
 import pyunitwizard as _puw
 
-from .stack import stack
-from .hstack import hstack
-from .vstack import vstack
 from .column_stack import column_stack
+from .hstack import hstack
+from .ops import dot, linalg_norm, mean, std, sum, trapz, var
 from .repeat import repeat
-from .ops import mean, std, sum, var, linalg_norm, dot, trapz
+from .stack import stack
+from .vstack import vstack
 
 _NUMPY_PATCH_STATE = {
     "enabled": False,

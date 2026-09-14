@@ -182,11 +182,7 @@ def ensure_quantity(
         )
 
     if to_unit is not None:
-        return (
-            standardize(value, to_unit=to_unit)
-            if standardized
-            else convert(value, to_unit=to_unit)
-        )
+        return standardize(value, to_unit=to_unit) if standardized else convert(value, to_unit=to_unit)
 
     if standardized and dimensionality is not None:
         standard_unit = get_standard_units(dimensionality=dict(dimensionality))

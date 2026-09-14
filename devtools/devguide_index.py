@@ -33,20 +33,13 @@ def _issue_link(reference: str) -> str:
 def _report_line(report: Report, base: Path) -> str:
     fields = report.fields
     path = Path(os.path.relpath(report.path, base)).as_posix()
-    qualifiers = [
-        str(fields[key]) for key in ("severity", "verification") if fields.get(key)
-    ]
+    qualifiers = [str(fields[key]) for key in ("severity", "verification") if fields.get(key)]
     suffix = f" *({', '.join(qualifiers)})*" if qualifiers else ""
-    return (
-        f"- [`{report.path.name}`]({path}) — "
-        f"{_issue_link(str(fields['issue']))} — {fields['summary']}{suffix}"
-    )
+    return f"- [`{report.path.name}`]({path}) — {_issue_link(str(fields['issue']))} — {fields['summary']}{suffix}"
 
 
 def _render_queue(reports: list[Report], kind: str, base: Path) -> str:
-    selected = [
-        report for report in reports if not report.archived and report.kind == kind
-    ]
+    selected = [report for report in reports if not report.archived and report.kind == kind]
     lines: list[str] = []
     for status in OPEN_STATUSES:
         group = sorted(

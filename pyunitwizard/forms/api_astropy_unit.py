@@ -11,13 +11,14 @@ except Exception as exc:  # pragma: no cover - handled through exception
 AstropyQuantity = astropy_units.Quantity
 AstropyUnitBase = astropy_units.UnitBase
 
-form_name = 'astropy.units'
+form_name = "astropy.units"
 parser = True
 
-#is_form = {
+# is_form = {
 #    AstropyQuantity: form_name,
 #    AstropyUnitBase: form_name,
-#}
+# }
+
 
 def is_form(quantity_or_unit: Any) -> bool:
     """Check whether an object belongs to Astropy form.
@@ -40,7 +41,7 @@ def _to_unit(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) -> Astro
         return get_unit(quantity_or_unit)
     if is_unit(quantity_or_unit):
         return quantity_or_unit
-    raise TypeError('Expected an astropy quantity or unit')
+    raise TypeError("Expected an astropy quantity or unit")
 
 
 def is_quantity(quantity_or_unit: Any) -> bool:
@@ -76,13 +77,13 @@ def is_unit(quantity_or_unit: Any) -> bool:
 
 
 _dimensions_translator = {
-    'm': '[L]',
-    'kg': '[M]',
-    's': '[T]',
-    'K': '[K]',
-    'mol': '[mol]',
-    'A': '[A]',
-    'cd': '[Cd]',
+    "m": "[L]",
+    "kg": "[M]",
+    "s": "[T]",
+    "K": "[K]",
+    "mol": "[mol]",
+    "A": "[A]",
+    "cd": "[Cd]",
 }
 
 
@@ -101,7 +102,7 @@ def dimensionality(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) ->
     """
     unit = _to_unit(quantity_or_unit)
     decomposed = unit.decompose(bases=astropy_units.si.bases)
-    dimensionality_dict = {'[L]': 0, '[M]': 0, '[T]': 0, '[K]': 0, '[mol]': 0, '[A]': 0, '[Cd]': 0}
+    dimensionality_dict = {"[L]": 0, "[M]": 0, "[T]": 0, "[K]": 0, "[mol]": 0, "[A]": 0, "[Cd]": 0}
 
     for base, power in zip(decomposed.bases, decomposed.powers):
         key = _dimensions_translator.get(base.to_string())
@@ -111,8 +112,10 @@ def dimensionality(quantity_or_unit: Union[AstropyQuantity, AstropyUnitBase]) ->
     return dimensionality_dict
 
 
-def compatibility(quantity_or_unit_1: Union[AstropyQuantity, AstropyUnitBase],
-                  quantity_or_unit_2: Union[AstropyQuantity, AstropyUnitBase]) -> bool:
+def compatibility(
+    quantity_or_unit_1: Union[AstropyQuantity, AstropyUnitBase],
+    quantity_or_unit_2: Union[AstropyQuantity, AstropyUnitBase],
+) -> bool:
     """Check dimensional compatibility between two Astropy objects.
 
     Parameters
@@ -132,8 +135,7 @@ def compatibility(quantity_or_unit_1: Union[AstropyQuantity, AstropyUnitBase],
     return unit_1.is_equivalent(unit_2)
 
 
-def make_quantity(value: Union[int, float, ArrayLike],
-                  unit: Union[str, AstropyUnitBase]) -> AstropyQuantity:
+def make_quantity(value: Union[int, float, ArrayLike], unit: Union[str, AstropyUnitBase]) -> AstropyQuantity:
     """Create an Astropy quantity from value and unit.
 
     Parameters
@@ -184,8 +186,7 @@ def get_unit(quantity: AstropyQuantity) -> AstropyUnitBase:
     return quantity.unit
 
 
-def change_value(quantity: AstropyQuantity,
-                 value: Union[int, float, ArrayLike]) -> AstropyQuantity:
+def change_value(quantity: AstropyQuantity, value: Union[int, float, ArrayLike]) -> AstropyQuantity:
     """Return an Astropy quantity with updated value and preserved unit.
 
     Parameters
@@ -203,8 +204,7 @@ def change_value(quantity: AstropyQuantity,
     return make_quantity(value, get_unit(quantity))
 
 
-def convert(quantity: AstropyQuantity,
-            unit: Union[str, AstropyUnitBase]) -> AstropyQuantity:
+def convert(quantity: AstropyQuantity, unit: Union[str, AstropyUnitBase]) -> AstropyQuantity:
     """Convert an Astropy quantity to another unit.
 
     Parameters
@@ -224,6 +224,7 @@ def convert(quantity: AstropyQuantity,
 
 
 # Parser
+
 
 def string_to_quantity(string: str) -> AstropyQuantity:
     """Parse a string into an Astropy quantity.
@@ -259,6 +260,7 @@ def string_to_unit(string: str) -> AstropyUnitBase:
 
 # To string
 
+
 def quantity_to_string(quantity: AstropyQuantity) -> str:
     """Convert an Astropy quantity to string form.
 
@@ -292,6 +294,7 @@ def unit_to_string(unit: AstropyUnitBase) -> str:
 
 
 # To pint
+
 
 def quantity_to_pint(quantity: AstropyQuantity):
     """Convert an Astropy quantity to a pint quantity.
@@ -334,6 +337,7 @@ def unit_to_pint(unit: AstropyUnitBase):
 
 # To openmm.unit
 
+
 def quantity_to_openmm_unit(quantity: AstropyQuantity):
     """Convert an Astropy quantity to an OpenMM quantity.
 
@@ -373,6 +377,7 @@ def unit_to_openmm_unit(unit: AstropyUnitBase):
 
 
 # To unyt
+
 
 def quantity_to_unyt(quantity: AstropyQuantity):
     """Convert an Astropy quantity to a unyt quantity.

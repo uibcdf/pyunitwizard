@@ -6,7 +6,6 @@ import pyunitwizard as puw
 from pyunitwizard._private.exceptions import LibraryWithoutParserError
 from tests.helpers import loaded_libraries
 
-
 FORMS = ("pint", "openmm.unit", "unyt", "astropy.units")
 
 
@@ -25,9 +24,9 @@ def _make_quantity(form: str, value: float, unit_name: str):
     raise ValueError(f"Unsupported form {form}")
 
 
-@pytest.mark.parametrize("source_form,target_form", [
-    pair for pair in itertools.product(FORMS, FORMS) if pair[0] != pair[1]
-])
+@pytest.mark.parametrize(
+    "source_form,target_form", [pair for pair in itertools.product(FORMS, FORMS) if pair[0] != pair[1]]
+)
 def test_quantity_conversion_matrix_preserves_value_unit_and_dimensionality(source_form, target_form):
     with loaded_libraries(list(FORMS)):
         source_q = _make_quantity(source_form, 2.5, "meter")
@@ -43,9 +42,9 @@ def test_quantity_conversion_matrix_preserves_value_unit_and_dimensionality(sour
         assert puw.get_dimensionality(source_q) == puw.get_dimensionality(converted)
 
 
-@pytest.mark.parametrize("source_form,target_form", [
-    pair for pair in itertools.product(FORMS, FORMS) if pair[0] != pair[1]
-])
+@pytest.mark.parametrize(
+    "source_form,target_form", [pair for pair in itertools.product(FORMS, FORMS) if pair[0] != pair[1]]
+)
 def test_unit_conversion_matrix_preserves_dimensionality(source_form, target_form):
     with loaded_libraries(list(FORMS)):
         source_q = _make_quantity(source_form, 1.0, "meter")

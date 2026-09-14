@@ -1,6 +1,7 @@
 import numpy as np
-import pyunitwizard as puw
 import pytest
+
+import pyunitwizard as puw
 
 
 def configure_libraries():

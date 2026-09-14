@@ -76,6 +76,4 @@ def test_main_unknown_attribute_raises_attribute_error():
     except AttributeError:
         pass
     else:
-        raise AssertionError(
-            "Expected AttributeError for unknown pyunitwizard.main attribute"
-        )
+        raise AssertionError("Expected AttributeError for unknown pyunitwizard.main attribute")

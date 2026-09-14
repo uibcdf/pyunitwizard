@@ -70,8 +70,7 @@ def _record_redundant_conversion(
     except Exception as exc:
         if not _REDUNDANT_CONVERSION_FALLBACK_EMITTED:
             _LOGGER.warning(
-                "Failed to record redundant-conversion telemetry "
-                "(caller=%s, signal=redundant_conversion): %s",
+                "Failed to record redundant-conversion telemetry (caller=%s, signal=redundant_conversion): %s",
                 _external_callsite(),
                 exc,
             )
@@ -130,12 +129,7 @@ def convert(
     form_in = get_form(quantity_or_unit)
 
     # --- High Performance Fast Path ---
-    if (
-        form_in != "string"
-        and to_unit is None
-        and to_form is None
-        and to_type == "quantity"
-    ):
+    if form_in != "string" and to_unit is None and to_form is None and to_type == "quantity":
         _record_redundant_conversion(
             form_in=form_in,
             to_unit=to_unit,
@@ -146,12 +140,7 @@ def convert(
 
     to_form = digest_to_form(to_form, form_in)
 
-    if (
-        form_in != "string"
-        and to_unit is None
-        and form_in == to_form
-        and to_type == "quantity"
-    ):
+    if form_in != "string" and to_unit is None and form_in == to_form and to_type == "quantity":
         _record_redundant_conversion(
             form_in=form_in,
             to_unit=to_unit,
@@ -161,10 +150,7 @@ def convert(
         return quantity_or_unit
 
     exact_unit_fast_path_is_eligible = (
-        form_in != "string"
-        and to_unit is not None
-        and form_in == to_form
-        and to_type == "quantity"
+        form_in != "string" and to_unit is not None and form_in == to_form and to_type == "quantity"
     )
     parser = digest_parser(parser)
 

@@ -4,17 +4,19 @@ from __future__ import annotations
 
 from typing import Optional, Union
 
+from smonitor import signal
+
 from .._private.exceptions import (
     ArgumentError as BadCallError,
+)
+from .._private.exceptions import (
     NotImplementedMethodError,
 )
 from .._private.forms import digest_form
 from .._private.quantity_or_unit import ArrayLike, QuantityLike, UnitLike
 from ..forms import dict_make_quantity
-from .introspection import is_quantity, is_unit, get_form
+from .introspection import get_form, is_quantity, is_unit
 
-
-from smonitor import signal
 
 @signal(tags=["construction"])
 def quantity(
@@ -24,29 +26,29 @@ def quantity(
     parser: Optional[str] = None,
     standardized: Optional[bool] = False,
 ) -> QuantityLike:
-    """ Returns a quantity.
+    """Returns a quantity.
 
-        Parameters
-        ----------
-        value : int, float or arraylike
-            The value of the quantity. Can be a scalar or an array like type.
+    Parameters
+    ----------
+    value : int, float or arraylike
+        The value of the quantity. Can be a scalar or an array like type.
 
-        unit : UnitLike
-            Unit in of the quantity in any of the accepted form.
+    unit : UnitLike
+        Unit in of the quantity in any of the accepted form.
 
-        form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
-            Output form of the quantity.
+    form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
+        Output form of the quantity.
 
-        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use.
+    parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser to use.
 
-        standardized : bool, optional
-            Return a standardized quantity, default=False.
+    standardized : bool, optional
+        Return a standardized quantity, default=False.
 
-        Returns
-        -------
-        QuantityLike
-            The quantity.
+    Returns
+    -------
+    QuantityLike
+        The quantity.
     """
 
     from .conversion import convert
@@ -88,23 +90,23 @@ def quantity(
 
 @signal(tags=["construction"])
 def unit(unit: str, form: Optional[str] = None, parser: Optional[str] = None) -> UnitLike:
-    """ Returns a unit.
+    """Returns a unit.
 
-        Parameters
-        ----------
-        unit : str
-            Name of the unit (i.e kcal/mol).
+    Parameters
+    ----------
+    unit : str
+        Name of the unit (i.e kcal/mol).
 
-        form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
-            The form of the unit. This is the type that will be returned
+    form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
+        The form of the unit. This is the type that will be returned
 
-        parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
-            The parser to use.
+    parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional
+        The parser to use.
 
-        Returns
-        -------
-        Unitlike
-            The unit.
+    Returns
+    -------
+    Unitlike
+        The unit.
     """
 
     from .conversion import convert

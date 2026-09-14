@@ -19,7 +19,7 @@ from ..forms import (
 )
 
 if TYPE_CHECKING:  # pragma: no cover - circular import guard
-    from .conversion import convert
+    pass
 
 
 from smonitor import signal
@@ -81,9 +81,7 @@ def _register_detected_form(form: str) -> str:
 
 
 @signal(tags=["introspection"], exception_level="DEBUG")
-def get_form(
-    quantity_or_unit: QuantityOrUnit, raise_exception: bool = True
-) -> Optional[str]:
+def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> Optional[str]:
     """Returns the form of a quantity as a string.
 
     Parameters
@@ -163,9 +161,7 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
 
     if isinstance(quantity_or_unit, str):
         try:
-            quantity_or_unit = convert(
-                quantity_or_unit, to_form=kernel.default_form, parser=parser
-            )
+            quantity_or_unit = convert(quantity_or_unit, to_form=kernel.default_form, parser=parser)
             output = dict_is_quantity[kernel.default_form](quantity_or_unit)
         except Exception:
             emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
@@ -174,9 +170,7 @@ def is_quantity(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) 
         try:
             form = get_form(quantity_or_unit, raise_exception=False)
             if form is None:
-                emit_probe_miss(
-                    probe_input, "pyunitwizard.api.introspection.is_quantity"
-                )
+                emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_quantity")
                 return False
             output = dict_is_quantity[form](quantity_or_unit)
         except Exception:
@@ -276,9 +270,7 @@ def has_unit(
     if form is None:
         form = get_form(quantity_or_unit)
 
-    return unit_matches_target(
-        unit_of(quantity_or_unit, form), form, target_unit, parser=parser
-    )
+    return unit_matches_target(unit_of(quantity_or_unit, form), form, target_unit, parser=parser)
 
 
 def unit_of(quantity_or_unit: QuantityOrUnit, form: str):
@@ -297,11 +289,7 @@ def unit_of(quantity_or_unit: QuantityOrUnit, form: str):
         The object itself when it is a unit, otherwise its unit.
     """
 
-    return (
-        quantity_or_unit
-        if dict_is_unit[form](quantity_or_unit)
-        else dict_get_unit[form](quantity_or_unit)
-    )
+    return quantity_or_unit if dict_is_unit[form](quantity_or_unit) else dict_get_unit[form](quantity_or_unit)
 
 
 def unit_matches_target(
@@ -364,9 +352,7 @@ def unit_matches_target(
         if registry is None:
             return None
         try:
-            normalized_target = _target_unit_from_pint_registry(
-                str(target_unit), registry
-            )
+            normalized_target = _target_unit_from_pint_registry(str(target_unit), registry)
             return bool(source_unit == normalized_target)
         except (AttributeError, TypeError, ValueError):
             return None
@@ -411,11 +397,7 @@ def get_dimensionality(quantity_or_unit: QuantityOrUnit) -> Dict[str, int]:
     # the public `get_unit()` would re-enter `convert()` and resolve the same
     # form twice more, and it would render the unit in the default form while
     # the key states `form`.
-    unit = (
-        quantity_or_unit
-        if dict_is_unit[form](quantity_or_unit)
-        else dict_get_unit[form](quantity_or_unit)
-    )
+    unit = quantity_or_unit if dict_is_unit[form](quantity_or_unit) else dict_get_unit[form](quantity_or_unit)
     cache_key = (form, _cache_key_for_unit(unit))
 
     if cache_key in _DIMENSIONALITY_CACHE:

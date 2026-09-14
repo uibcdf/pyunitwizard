@@ -86,9 +86,7 @@ def var(
     input_unit = get_unit(quantity_like)
     output_value = np.var(get_value(quantity_like, to_unit=input_unit), axis=axis, **kwargs)
 
-    base_unit = get_unit(
-        quantity(1.0, input_unit, form=form) * quantity(1.0, input_unit, form=form)
-    )
+    base_unit = get_unit(quantity(1.0, input_unit, form=form) * quantity(1.0, input_unit, form=form))
     out = quantity(output_value, base_unit, form=to_form, standardized=standardized)
     if to_unit is not None:
         out = convert(out, to_unit=to_unit, to_form=to_form)
@@ -145,9 +143,7 @@ def dot(
         **kwargs,
     )
 
-    base_unit = get_unit(
-        quantity(1.0, a_unit, form=form) * quantity(1.0, b_unit, form=form)
-    )
+    base_unit = get_unit(quantity(1.0, a_unit, form=form) * quantity(1.0, b_unit, form=form))
     out = quantity(output_value, base_unit, form=to_form, standardized=standardized)
     if to_unit is not None:
         out = convert(out, to_unit=to_unit, to_form=to_form)
@@ -181,9 +177,7 @@ def trapz(
         x_unit = get_unit(x)
         x_value = get_value(x, to_unit=x_unit)
         output_value = _trapezoid(y_value, x=x_value, axis=axis)
-        output_unit = get_unit(
-            quantity(1.0, y_unit, form=y_form) * quantity(1.0, x_unit, form=y_form)
-        )
+        output_unit = get_unit(quantity(1.0, y_unit, form=y_form) * quantity(1.0, x_unit, form=y_form))
     else:
         if is_quantity(dx):
             if get_form(dx) != y_form:
@@ -191,9 +185,7 @@ def trapz(
             dx_unit = get_unit(dx)
             dx_value = get_value(dx, to_unit=dx_unit)
             output_value = _trapezoid(y_value, dx=dx_value, axis=axis)
-            output_unit = get_unit(
-                quantity(1.0, y_unit, form=y_form) * quantity(1.0, dx_unit, form=y_form)
-            )
+            output_unit = get_unit(quantity(1.0, y_unit, form=y_form) * quantity(1.0, dx_unit, form=y_form))
         else:
             output_value = _trapezoid(y_value, dx=dx, axis=axis)
             output_unit = y_unit

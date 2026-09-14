@@ -1,5 +1,6 @@
-import pytest
 from contextlib import contextmanager
+
+import pytest
 
 import pyunitwizard as puw
 from pyunitwizard._private.exceptions import LibraryWithoutParserError
@@ -20,7 +21,7 @@ def loaded_libraries(libraries):
         if previous_libraries:
             puw.configure.load_library(previous_libraries)
         else:
-            for library in ['pint', 'openmm.unit', 'unyt']:
+            for library in ["pint", "openmm.unit", "unyt"]:
                 try:
                     puw.configure.load_library(library)
                 except (ImportError, ModuleNotFoundError):
@@ -62,7 +63,6 @@ def test_api_string_openmm_conversion_paths_raise_expected_error():
             puw.forms.api_string.quantity_to_openmm_unit("1 meter")
         with pytest.raises(LibraryWithoutParserError):
             puw.forms.api_string.unit_to_openmm_unit("meter")
-
 
 
 def test_api_string_unyt_stubs_raise_not_implemented():

@@ -1,12 +1,12 @@
 import pytest
 
 import pyunitwizard as puw
-from pyunitwizard.parse import parse as parse_quantity
 from pyunitwizard._private.exceptions import (
     LibraryWithoutParserError,
     NoStandardsError,
     NotImplementedMethodError,
 )
+from pyunitwizard.parse import parse as parse_quantity
 
 from .helpers import loaded_libraries
 
