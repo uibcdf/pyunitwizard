@@ -2,11 +2,12 @@ channels:
 - uibcdf
 - conda-forge
 dependencies:
-- python >=3.11,<3.14
+- python=3.13
 - pint
 - pytest
 - pytest-cov
 - pytest-xdist
+- ruff=0.16.5
 - codecov
 - openmm
 - unyt

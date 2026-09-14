@@ -70,6 +70,34 @@ pyunitwizard = [
     "py.typed"
 ]
 
+[tool.ruff]
+target-version = "py311"
+line-length = 119
+include = ["*.py", "*.pyi"]
+extend-exclude = [
+    "DEPDIGEST_GUIDE.md",
+    "GH_RUN_RECEPTOR_GUIDE.md",
+    "MOLSYSSUITE_GUIDE.md",
+    "SMONITOR_GUIDE.md",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]
+"examples/testlib2/__init__.py" = ["I001"]
+"pyunitwizard/__init__.py" = ["E402"]
+"pyunitwizard/_smonitor.py" = ["E402"]
+"tests/astropy_units/test_astropy_units.py" = ["E402"]
+"tests/forms/test_api_physipy_and_quantities.py" = ["E402"]
+"tests/integration/test_frontend_cross_backend_matrix.py" = ["E402"]
+"tests/physipy/test_convert_physipy.py" = ["E402"]
+"tests/test_get.py" = ["E402"]
+"tests/utils/matplotlib/test_complex_layouts.py" = ["E402"]
+"tests/utils/matplotlib/test_internal_helpers.py" = ["E402"]
+"tests/utils/matplotlib/test_units_bridge.py" = ["E402"]
+
 [tool.versioningit]
 default-version = "0+unknown"
 

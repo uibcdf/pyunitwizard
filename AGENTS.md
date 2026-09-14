@@ -77,10 +77,13 @@ Additional `AGENTS.md` files may exist in submodules with specialized instructio
 ### 4.2 Code Style
 
 - Follow **PEP 8**.  
-- Tools: `black` (formatting), `isort` (imports), `flake8` (linting), `mypy` (type checking).  
+- Ruff is the formatter, import sorter, and linter; run `ruff check .` and
+  `ruff format --check .` before committing.
+- Static type checking is repository-local rather than a MolSysSuite gate. Runtime
+  argument validation and normalization use ArgDigest where the public API needs it.
 - Prefer short, modular functions.  
 - Use explicit, descriptive names.  
-- Run linting and type checks before committing.
+- Run the configured quality checks before committing.
 
 ### 4.3 Naming
 
