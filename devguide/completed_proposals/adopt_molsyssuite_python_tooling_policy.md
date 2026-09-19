@@ -1,12 +1,12 @@
 ---
 summary: Adopt the shared Python and Ruff development baseline.
 issue: uibcdf/pyunitwizard#74
-status: active
+status: resolved
 opened: 2026-09-12
-closed:
+closed: 2026-09-19
 verification: measured
 area: [tooling, ci]
-guard:
+guard: .github/workflows/molsyssuite-policy.yml
 normative:
 blocked_by: []
 supersedes: []
@@ -47,3 +47,10 @@ Python range is already semantically correct.
 - The PyUnitWizard test suite passes.
 - The local issue and this record close together after the guard is published.
 
+## Resolution
+
+PyUnitWizard now uses Ruff 0.16.5 for formatting, import sorting and linting,
+with the common baseline and repository-specific initialization exceptions.
+Active YAPF/flake8 configuration was removed. The full local suite passed with
+495 tests and 10 skips, and policy 1.1.6 passed in GitHub Actions run
+`35468880337`.
