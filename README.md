@@ -1,11 +1,15 @@
 # PyUnitWizard
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/)
-[![CI](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml/badge.svg)](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml)
-[![Documentation](https://github.com/uibcdf/pyunitwizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://github.com/uibcdf/pyunitwizard/actions/workflows/sphinx_docs_to_gh_pages.yaml)
-[![codecov](https://codecov.io/github/uibcdf/pyunitwizard/graph/badge.svg?token=9ZMA4YZLOR)](https://codecov.io/github/uibcdf/pyunitwizard)
-[![Install with conda](https://img.shields.io/badge/Install%20with-conda-brightgreen.svg)](https://conda.anaconda.org/uibcdf/pyunitwizard)
+[![MolSysSuite: Support Library](https://img.shields.io/badge/MolSysSuite-support%20library-2563eb?labelColor=24292f)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/repository_badges.md#support-library)
+[![MolSysSuite policy](https://github.com/uibcdf/pyunitwizard/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/pyunitwizard/actions/workflows/molsyssuite-policy.yml)
+[![Python 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
+[![License](https://img.shields.io/github/license/uibcdf/pyunitwizard)](https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE)
+[![Tests](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml/badge.svg?branch=main)](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml)
+[![Codecov](https://codecov.io/github/uibcdf/pyunitwizard/graph/badge.svg)](https://codecov.io/github/uibcdf/pyunitwizard)
+[![Documentation](https://github.com/uibcdf/pyunitwizard/actions/workflows/sphinx_docs_to_gh_pages.yaml/badge.svg)](https://www.uibcdf.org/pyunitwizard/)
+[![GitHub release](https://img.shields.io/github/v/release/uibcdf/pyunitwizard)](https://github.com/uibcdf/pyunitwizard/releases/latest)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088374.svg)](https://doi.org/10.5281/zenodo.8088374)
+[![Conda](https://img.shields.io/conda/vn/uibcdf/pyunitwizard)](https://anaconda.org/uibcdf/pyunitwizard)
 
 *A Python Units Wizard that streamlines work with physical quantities.*
 
