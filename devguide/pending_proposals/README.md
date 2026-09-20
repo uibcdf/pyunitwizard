@@ -5,8 +5,9 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Open (1)
+### Open (2)
 
+- [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*
 - [`pydantic_integration.md`](pydantic_integration.md) — [#52](https://github.com/uibcdf/pyunitwizard/issues/52) — Define whether PyUnitWizard needs a Pydantic integration contract. *(asserted)*
 
 <!-- /generated -->
