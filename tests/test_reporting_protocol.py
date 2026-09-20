@@ -90,3 +90,37 @@ def test_suite_owned_configuration_proposal_left_no_local_active_copy():
     )
 
     assert "uibcdf/molsyssuite#18" in lifecycle_record
+
+
+def test_pytest_guard_rejects_a_missing_file(tmp_path):
+    errors = devguide_reports.validate_pytest_guard(tmp_path, "tests/test_missing.py")
+
+    assert any("file that does not exist" in error for error in errors)
+
+
+def test_pytest_guard_rejects_a_missing_node_and_parameter_id(tmp_path):
+    test_file = tmp_path / "tests/test_example.py"
+    test_file.parent.mkdir()
+    test_file.write_text("def test_present():\n    pass\n", encoding="utf-8")
+
+    missing = devguide_reports.validate_pytest_guard(tmp_path, "tests/test_example.py::test_absent")
+    parameterized = devguide_reports.validate_pytest_guard(tmp_path, "tests/test_example.py::test_present[param]")
+
+    assert any("does not resolve" in error for error in missing)
+    assert any("parameterized selectors are not supported" in error for error in parameterized)
+
+
+def test_pytest_guard_accepts_a_module_function_and_class_method(tmp_path):
+    test_file = tmp_path / "tests/test_example.py"
+    test_file.parent.mkdir()
+    test_file.write_text(
+        "def test_function():\n    pass\n\nclass TestGroup:\n    def test_method(self):\n        pass\n",
+        encoding="utf-8",
+    )
+
+    for selector in (
+        "tests/test_example.py",
+        "tests/test_example.py::test_function",
+        "tests/test_example.py::TestGroup::test_method",
+    ):
+        assert devguide_reports.validate_pytest_guard(tmp_path, selector) == []
