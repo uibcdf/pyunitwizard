@@ -112,7 +112,10 @@ method = "git"  # <- The method name
 # Parameters to pass to the method:
 match = ["*"]
 default-tag = "0.17.0"
-tag-filter = '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'
+
+[tool.versioningit.tag2version]
+regex = '^(?P<version>(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*))$'
+require-match = true
 
 [tool.versioningit.write]
 file = "pyunitwizard/_version.py"
