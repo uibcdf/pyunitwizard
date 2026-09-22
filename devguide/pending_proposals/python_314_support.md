@@ -70,7 +70,13 @@ at 3.13, so source success alone cannot be advertised as support.
   because immutable `policy-v1.4.3` predates the central authorization. This
   is a policy snapshot mismatch, not a runtime or metadata failure. The
   replacement `policy-v1.4.4` was published from `uibcdf/molsyssuite@ebdcf49`
-  and the local caller now pins it; its hosted gate still requires a rerun.
+  and the local caller now pins it. Hosted policy run `35708012251` passed at
+  component commit `2dbd9bc`; an independent GitHub query confirmed its SHA
+  and successful conclusion.
+- Release-gate run `35708015351` passed at the same commit: four Python
+  3.11–3.14 tests-and-contracts jobs, one Python 3.13 wheel packaging smoke,
+  and one documentation build. GH Run Receptor and GitHub agree. This is not
+  a staged or public Conda package check.
 - The scheduled matrix failure tracked by `uibcdf/pyunitwizard#77` concerns a
   different `parse` assertion on Python 3.13 and is not resolved by this report.
 
