@@ -61,26 +61,18 @@ def verify_receipts(
     _require(len(routes) == 1 and len(producers) == 1, "Expected exactly two receipts")
     route = _read_json(routes[0])
     producer = _read_json(producers[0])
-    _require(
-        route.get("schema") == "pyunitwizard.conda-route@1", "Unexpected route schema"
-    )
+    _require(route.get("schema") == "pyunitwizard.conda-route@1", "Unexpected route schema")
     _require(route.get("candidate_sha") == sha, "Route commit mismatch")
     _require(route.get("version") == version, "Route version mismatch")
     _require(route.get("route") == "staged", "Not a staged release route")
     _require(route.get("gates"), "No CI gate recorded")
-    _require(
-        producer.get("schema") == "gh-run-receptor.events@1", "Unexpected event schema"
-    )
+    _require(producer.get("schema") == "gh-run-receptor.events@1", "Unexpected event schema")
     subject = producer.get("subject", {})
-    _require(
-        subject.get("repository") == "uibcdf/pyunitwizard", "Wrong producer repository"
-    )
+    _require(subject.get("repository") == "uibcdf/pyunitwizard", "Wrong producer repository")
     _require(subject.get("head_sha") == sha, "Producer commit mismatch")
     _require(subject.get("run_id") == run_id, "Producer run mismatch")
     _require(subject.get("run_attempt") == attempt, "Producer attempt mismatch")
-    _require(
-        subject.get("job_key") == "conda_deployment_with_new_tag", "Wrong producer job"
-    )
+    _require(subject.get("job_key") == "conda_deployment_with_new_tag", "Wrong producer job")
     events = producer.get("events", [])
     _require(len(events) == 1, "Expected exactly one package event")
     event = events[0]
@@ -98,9 +90,7 @@ def verify_receipts(
     return digest
 
 
-def verify_installed(
-    prefix: Path, sha256: str, version: str, build_number: int, python_version: str
-) -> None:
+def verify_installed(prefix: Path, sha256: str, version: str, build_number: int, python_version: str) -> None:
     """Check the installed bytes, source channels, interpreter, import, and API."""
     _require(bool(re.fullmatch(r"[0-9a-f]{64}", sha256)), "Invalid expected digest")
     _require(
@@ -109,28 +99,19 @@ def verify_installed(
     )
     _require(prefix.resolve() == Path(sys.prefix).resolve(), "Wrong environment prefix")
     build = f"py_{build_number}"
-    package_record = _read_json(
-        prefix / "conda-meta" / f"{PACKAGE}-{version}-{build}.json"
-    )
+    package_record = _read_json(prefix / "conda-meta" / f"{PACKAGE}-{version}-{build}.json")
     _require(package_record.get("name") == PACKAGE, "Wrong package record")
-    _require(
-        package_record.get("version") == version, "Wrong installed package version"
-    )
+    _require(package_record.get("version") == version, "Wrong installed package version")
     _require(package_record.get("build") == build, "Wrong installed package build")
     _require(package_record.get("subdir") == "noarch", "Package not noarch")
+    _require(package_record.get("sha256") == sha256, "Installed package digest mismatch")
     _require(
-        package_record.get("sha256") == sha256, "Installed package digest mismatch"
-    )
-    _require(
-        package_record.get("url")
-        == f"{STAGING_CHANNEL}/{PACKAGE}-{version}-{build}.tar.bz2",
+        package_record.get("url") == f"{STAGING_CHANNEL}/{PACKAGE}-{version}-{build}.tar.bz2",
         "Wrong package URL",
     )
     for dependency, dependency_version, dependency_build in PUBLIC_DEPENDENCIES:
         dependency_record = _read_json(
-            prefix
-            / "conda-meta"
-            / f"{dependency}-{dependency_version}-{dependency_build}.json"
+            prefix / "conda-meta" / f"{dependency}-{dependency_version}-{dependency_build}.json"
         )
         _require(dependency_record.get("name") == dependency, "Wrong dependency record")
         _require(
@@ -147,9 +128,7 @@ def verify_installed(
             "Dependency not from public channel",
         )
 
-    _require(
-        importlib.metadata.version(PACKAGE) == version, "Distribution version mismatch"
-    )
+    _require(importlib.metadata.version(PACKAGE) == version, "Distribution version mismatch")
     import pyunitwizard
 
     _require(pyunitwizard.__version__ == version, "Imported module version mismatch")

@@ -31,9 +31,7 @@ def freeze_project_version(root: Path, version: str) -> None:
     pyproject = root / "pyproject.toml"
     text = pyproject.read_text(encoding="utf-8")
     if text.count(PROJECT_VERSION_MARKER) != 1:
-        raise RuntimeError(
-            f"Expected one {PROJECT_VERSION_MARKER!r} marker in {pyproject}"
-        )
+        raise RuntimeError(f"Expected one {PROJECT_VERSION_MARKER!r} marker in {pyproject}")
     frozen = text.replace(PROJECT_VERSION_MARKER, f'version = "{version}"')
     pyproject.write_text(_without_versioningit_configuration(frozen), encoding="utf-8")
 

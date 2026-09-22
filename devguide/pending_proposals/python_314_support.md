@@ -90,12 +90,17 @@ at 3.13, so source success alone cannot be advertised as support.
 - The Python and Conda runtime requirements now share the admitted public
   SMonitor 0.16.0 and DepDigest 0.11.0 floors. The changed recipe and release
   route passed 36 focused local tests before the staged verifier was pinned
-  to the candidate SHA; after that pin, both Python 3.13 and 3.14 full local
-  suites passed 564 tests with 12 workers and `--receptor=llm`. Conda render
+  to the candidate SHA; after that pin and a formatter correction, both
+  Python 3.13 and 3.14 full local suites passed 566 tests with 12 workers and
+  `--receptor=llm`. Conda render
   produced one `noarch` coordinate. Before the 0.26.0 tag exists, it
   naturally derives the existing 0.25.0 tag, so that render is a shape check,
   not evidence of a 0.26.0 artifact. No staging upload or public publication
   has occurred.
+- The first exact-commit shared-policy run at `55253ba` failed the Python
+  formatting step, despite passing functional tests. The affected new files
+  were formatted and the repository-wide Ruff formatting check now passes.
+  The failed run is retained as diagnostic evidence, not counted as a gate.
 
 ## What was refuted
 

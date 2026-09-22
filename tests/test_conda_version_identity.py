@@ -31,9 +31,7 @@ def test_freezer_writes_one_exact_version_source(tmp_path):
     assert 'version = "0.26.0"' in pyproject
     assert 'dynamic = ["version"]' not in pyproject
     assert "[tool.versioningit" not in pyproject
-    assert (package / "_version.py").read_text(
-        encoding="utf-8"
-    ) == '__version__ = "0.26.0"\n'
+    assert (package / "_version.py").read_text(encoding="utf-8") == '__version__ = "0.26.0"\n'
 
 
 def test_freezer_rejects_an_untrusted_version(tmp_path):
@@ -42,15 +40,9 @@ def test_freezer_rejects_an_untrusted_version(tmp_path):
 
 
 def test_conda_build_freezes_and_checks_the_exact_version():
-    build_script = (ROOT / "devtools" / "conda-build" / "build.sh").read_text(
-        encoding="utf-8"
-    )
-    assert build_script.index("freeze_project_version.py") < build_script.index(
-        "pip install"
-    )
+    build_script = (ROOT / "devtools" / "conda-build" / "build.sh").read_text(encoding="utf-8")
+    assert build_script.index("freeze_project_version.py") < build_script.index("pip install")
 
-    recipe = (ROOT / "devtools" / "conda-build" / "meta.yaml").read_text(
-        encoding="utf-8"
-    )
+    recipe = (ROOT / "devtools" / "conda-build" / "meta.yaml").read_text(encoding="utf-8")
     assert "m.version('pyunitwizard') == os.environ['PKG_VERSION']" in recipe
     assert "puw.__version__ == os.environ['PKG_VERSION']" in recipe

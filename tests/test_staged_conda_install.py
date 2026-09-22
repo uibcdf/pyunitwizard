@@ -60,12 +60,8 @@ def _receipts(tmp_path: Path) -> dict:
             }
         ],
     }
-    (tmp_path / "pyunitwizard-conda-route.json").write_text(
-        json.dumps(route), encoding="utf-8"
-    )
-    (tmp_path / "gh-run-receptor-events.json").write_text(
-        json.dumps(producer), encoding="utf-8"
-    )
+    (tmp_path / "pyunitwizard-conda-route.json").write_text(json.dumps(route), encoding="utf-8")
+    (tmp_path / "gh-run-receptor-events.json").write_text(json.dumps(producer), encoding="utf-8")
     return run
 
 
@@ -98,18 +94,12 @@ def test_staged_matrix_uses_candidate_verifier_and_supported_lanes():
         ("producer", "artifact", f"pyunitwizard-{VERSION}-py_1.tar.bz2"),
     ],
 )
-def test_wrong_or_failed_receipt_is_rejected(
-    tmp_path, surface, field, bad_value
-):
+def test_wrong_or_failed_receipt_is_rejected(tmp_path, surface, field, bad_value):
     run = _receipts(tmp_path)
     if surface == "run":
         run[field] = bad_value
     else:
-        filename = (
-            "pyunitwizard-conda-route.json"
-            if surface == "route"
-            else "gh-run-receptor-events.json"
-        )
+        filename = "pyunitwizard-conda-route.json" if surface == "route" else "gh-run-receptor-events.json"
         path = tmp_path / filename
         receipt = json.loads(path.read_text(encoding="utf-8"))
         if surface == "producer":
@@ -145,14 +135,10 @@ def _installed_records(tmp_path: Path) -> None:
             "sha256": sha256,
             "url": f"{channel}/{filename}",
         }
-        (meta / f"{name}-{version}-{build}.json").write_text(
-            json.dumps(record), encoding="utf-8"
-        )
+        (meta / f"{name}-{version}-{build}.json").write_text(json.dumps(record), encoding="utf-8")
 
 
-def test_installed_gate_accepts_exact_stage_and_public_dependencies(
-    tmp_path, monkeypatch
-):
+def test_installed_gate_accepts_exact_stage_and_public_dependencies(tmp_path, monkeypatch):
     _installed_records(tmp_path)
     monkeypatch.setattr(sys, "prefix", str(tmp_path))
     monkeypatch.setattr(verifier.importlib.metadata, "version", lambda _: VERSION)
@@ -196,9 +182,7 @@ def test_installed_gate_accepts_exact_stage_and_public_dependencies(
         ),
     ],
 )
-def test_installed_gate_rejects_wrong_digest_or_channel(
-    tmp_path, monkeypatch, record, field, bad_value
-):
+def test_installed_gate_rejects_wrong_digest_or_channel(tmp_path, monkeypatch, record, field, bad_value):
     _installed_records(tmp_path)
     path = next((tmp_path / "conda-meta").glob(f"{record}-*.json"))
     data = json.loads(path.read_text(encoding="utf-8"))

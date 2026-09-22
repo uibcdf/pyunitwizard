@@ -9,12 +9,7 @@ from urllib.error import HTTPError
 
 import pytest
 
-SCRIPT = (
-    Path(__file__).resolve().parents[1]
-    / "devtools"
-    / "conda-build"
-    / "release_route.py"
-)
+SCRIPT = Path(__file__).resolve().parents[1] / "devtools" / "conda-build" / "release_route.py"
 SPEC = importlib.util.spec_from_file_location("pyunitwizard_release_route", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 route = importlib.util.module_from_spec(SPEC)
@@ -77,13 +72,9 @@ def test_required_ci_must_have_exact_identity_and_success(monkeypatch, wrong_fie
         "status": "in_progress",
     }
     run[wrong_field] = wrong_values[wrong_field]
-    monkeypatch.setattr(
-        route, "_read_json", lambda *args, **kwargs: {"workflow_runs": [run]}
-    )
+    monkeypatch.setattr(route, "_read_json", lambda *args, **kwargs: {"workflow_runs": [run]})
     with pytest.raises(route.ReleaseRouteError, match="no successful exact-commit run"):
-        route.verified_workflow_runs(
-            "uibcdf/pyunitwizard", SHA, [route.FULL_MATRIX], "token"
-        )
+        route.verified_workflow_runs("uibcdf/pyunitwizard", SHA, [route.FULL_MATRIX], "token")
 
 
 def test_required_ci_accepts_only_exact_successful_run(monkeypatch):
@@ -101,9 +92,9 @@ def test_required_ci_accepts_only_exact_successful_run(monkeypatch):
         return {"workflow_runs": [run]}
 
     monkeypatch.setattr(route, "_read_json", fake_read)
-    assert route.verified_workflow_runs(
-        "uibcdf/pyunitwizard", SHA, [route.FULL_MATRIX], "token"
-    ) == [{"workflow": route.FULL_MATRIX, "run_id": 123}]
+    assert route.verified_workflow_runs("uibcdf/pyunitwizard", SHA, [route.FULL_MATRIX], "token") == [
+        {"workflow": route.FULL_MATRIX, "run_id": 123}
+    ]
 
 
 def test_direct_preflight_accepts_only_explicit_404(monkeypatch):
@@ -116,9 +107,7 @@ def test_direct_preflight_accepts_only_explicit_404(monkeypatch):
 
 @pytest.mark.parametrize("distributions", [[{"basename": "noarch/pyunitwizard-py_0"}], []])
 def test_direct_preflight_rejects_any_existing_version(monkeypatch, distributions):
-    monkeypatch.setattr(
-        route, "_read_json", lambda *args, **kwargs: {"distributions": distributions}
-    )
+    monkeypatch.setattr(route, "_read_json", lambda *args, **kwargs: {"distributions": distributions})
     with pytest.raises(route.ReleaseRouteError, match="direct upload is forbidden"):
         route.assert_version_unoccupied("0.26.0")
 
@@ -136,9 +125,7 @@ def test_staged_plan_cannot_enter_the_direct_release_route(monkeypatch, tmp_path
     monkeypatch.setattr(route, "read_plan", lambda: _plan(chosen_route="staged"))
 
     def should_not_run(*args, **kwargs):
-        raise AssertionError(
-            "no gate or registry request is allowed after a route mismatch"
-        )
+        raise AssertionError("no gate or registry request is allowed after a route mismatch")
 
     monkeypatch.setattr(route, "verified_workflow_runs", should_not_run)
     monkeypatch.setattr(route, "assert_version_unoccupied", should_not_run)
@@ -159,9 +146,7 @@ def test_direct_route_retains_decision_gate_and_preflight(monkeypatch, tmp_path)
         "verified_workflow_runs",
         lambda *args: [{"workflow": route.FULL_MATRIX, "run_id": 123}],
     )
-    monkeypatch.setattr(
-        route, "assert_version_unoccupied", lambda version: {"state": "absent"}
-    )
+    monkeypatch.setattr(route, "assert_version_unoccupied", lambda version: {"state": "absent"})
     monkeypatch.setenv("GH_TOKEN", "token")
     receipt = tmp_path / "receipt.json"
     evidence = route.check_route(
@@ -179,9 +164,7 @@ def test_direct_route_retains_decision_gate_and_preflight(monkeypatch, tmp_path)
 
 def test_public_poststate_matches_the_exact_built_file(monkeypatch, tmp_path):
     receipt = tmp_path / "receipt.json"
-    receipt.write_text(
-        json.dumps({"version": "0.26.0", "route": "direct"}), encoding="utf-8"
-    )
+    receipt.write_text(json.dumps({"version": "0.26.0", "route": "direct"}), encoding="utf-8")
     package = tmp_path / "pyunitwizard-0.26.0-py_0.tar.bz2"
     package.write_bytes(b"noarch candidate")
     digest = hashlib.sha256(package.read_bytes()).hexdigest()
@@ -199,18 +182,14 @@ def test_public_poststate_matches_the_exact_built_file(monkeypatch, tmp_path):
             args=[], returncode=0, stdout=json.dumps({"pyunitwizard": [record]}), stderr=""
         ),
     )
-    evidence = route.verify_public(
-        version="0.26.0", built_paths=str(package), receipt=receipt, attempts=1
-    )
+    evidence = route.verify_public(version="0.26.0", built_paths=str(package), receipt=receipt, attempts=1)
     assert evidence["public"]["sha256"] == digest
     assert json.loads(receipt.read_text())["public"]["channel"] == route.PUBLIC_CHANNEL
 
 
 def test_public_poststate_rejects_checksum_mismatch(monkeypatch, tmp_path):
     receipt = tmp_path / "receipt.json"
-    receipt.write_text(
-        json.dumps({"version": "0.26.0", "route": "direct"}), encoding="utf-8"
-    )
+    receipt.write_text(json.dumps({"version": "0.26.0", "route": "direct"}), encoding="utf-8")
     package = tmp_path / "pyunitwizard-0.26.0-py_0.tar.bz2"
     package.write_bytes(b"local candidate")
     record = {
@@ -227,6 +206,4 @@ def test_public_poststate_rejects_checksum_mismatch(monkeypatch, tmp_path):
         ),
     )
     with pytest.raises(route.ReleaseRouteError, match="does not match"):
-        route.verify_public(
-            version="0.26.0", built_paths=str(package), receipt=receipt, attempts=1
-        )
+        route.verify_public(version="0.26.0", built_paths=str(package), receipt=receipt, attempts=1)

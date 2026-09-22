@@ -45,14 +45,10 @@ def read_plan(path: Path = PLAN) -> dict:
         or FULL_MATRIX not in workflows
         or len(workflows) != len(set(workflows))
         or any(
-            not value.startswith(".github/workflows/")
-            or not value.endswith((".yaml", ".yml"))
-            for value in workflows
+            not value.startswith(".github/workflows/") or not value.endswith((".yaml", ".yml")) for value in workflows
         )
     ):
-        raise ReleaseRouteError(
-            "release plan must include the unique full-matrix workflow"
-        )
+        raise ReleaseRouteError("release plan must include the unique full-matrix workflow")
     return plan
 
 
@@ -68,9 +64,7 @@ def _read_json(url: str, *, token: str | None = None) -> dict:
     return result
 
 
-def verified_workflow_runs(
-    repository: str, sha: str, workflows: list[str], token: str
-) -> list[dict]:
+def verified_workflow_runs(repository: str, sha: str, workflows: list[str], token: str) -> list[dict]:
     """Finding completed successful runs of each required workflow at one SHA."""
     if not token:
         raise ReleaseRouteError("GitHub token is required to verify release gates")
@@ -105,9 +99,7 @@ def assert_version_unoccupied(version: str) -> dict:
     except HTTPError as error:
         if error.code == 404:
             return {"url": url, "state": "absent", "http_status": 404}
-        raise ReleaseRouteError(
-            f"Anaconda preflight failed with HTTP {error.code}"
-        ) from error
+        raise ReleaseRouteError(f"Anaconda preflight failed with HTTP {error.code}") from error
     distributions = existing.get("distributions")
     if not isinstance(distributions, list):
         raise ReleaseRouteError("Anaconda preflight did not list distributions")
@@ -117,24 +109,16 @@ def assert_version_unoccupied(version: str) -> dict:
     )
 
 
-def check_route(
-    *, version: str, route: str, sha: str, repository: str, receipt: Path
-) -> dict:
+def check_route(*, version: str, route: str, sha: str, repository: str, receipt: Path) -> dict:
     """Checking the committed decision, exact gates, and direct-route registry state."""
     if not VERSION.fullmatch(version) or not SHA.fullmatch(sha):
-        raise ReleaseRouteError(
-            "release identity needs a canonical version and full SHA"
-        )
+        raise ReleaseRouteError("release identity needs a canonical version and full SHA")
     if repository != "uibcdf/pyunitwizard":
         raise ReleaseRouteError("release route must run in uibcdf/pyunitwizard")
     plan = read_plan()
     if plan["version"] != version or plan["route"] != route:
-        raise ReleaseRouteError(
-            "tag or dispatch does not match the committed release plan"
-        )
-    gates = verified_workflow_runs(
-        repository, sha, plan["required_workflows"], os.environ.get("GH_TOKEN", "")
-    )
+        raise ReleaseRouteError("tag or dispatch does not match the committed release plan")
+    gates = verified_workflow_runs(repository, sha, plan["required_workflows"], os.environ.get("GH_TOKEN", ""))
     evidence = {
         "schema": "pyunitwizard.conda-route@1",
         "version": version,
@@ -147,21 +131,15 @@ def check_route(
     }
     if route == "direct":
         evidence["preflight"] = assert_version_unoccupied(version)
-    receipt.write_text(
-        json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    receipt.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return evidence
 
 
-def verify_public(
-    *, version: str, built_paths: str, receipt: Path, attempts: int = 6
-) -> dict:
+def verify_public(*, version: str, built_paths: str, receipt: Path, attempts: int = 6) -> dict:
     """Matching the uploaded public record to the exact locally built noarch file."""
     evidence = json.loads(receipt.read_text(encoding="utf-8"))
     if evidence.get("version") != version or evidence.get("route") != "direct":
-        raise ReleaseRouteError(
-            "public verification requires the matching direct receipt"
-        )
+        raise ReleaseRouteError("public verification requires the matching direct receipt")
     paths = shlex.split(built_paths, posix=os.name != "nt")
     if len(paths) != 1:
         raise ReleaseRouteError("PyUnitWizard noarch release must build exactly one file")
@@ -241,9 +219,7 @@ def main() -> None:
             receipt=args.receipt,
         )
     else:
-        verify_public(
-            version=args.version, built_paths=args.built_paths, receipt=args.receipt
-        )
+        verify_public(version=args.version, built_paths=args.built_paths, receipt=args.receipt)
 
 
 if __name__ == "__main__":
