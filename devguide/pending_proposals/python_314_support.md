@@ -119,6 +119,12 @@ at 3.13, so source success alone cannot be advertised as support.
   the candidate SHA, the old staged `py_0` file is evidence for the prior
   commit only. Repeat the exact-commit gates and stage `py_1` before
   release.
+- Documentation-candidate policy run `35714016742` rejected a Python 3.14
+  README badge with `PYTHON_BADGE`: the central badge generator correctly treats
+  only `admitted` support as public. Keep the canonical 3.11–3.13 badge
+  through the pre-public tag while the version-scoped prose documents what
+  0.26.0 will support. After independent public verification and central
+  admission, update the badge on `main`; do not relax the common policy.
 
 ## What was refuted
 

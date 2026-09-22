@@ -2,7 +2,7 @@
 
 [![MolSysSuite: Support Library](https://img.shields.io/badge/MolSysSuite-support%20library-2563eb?labelColor=24292f)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/repository_badges.md#support-library)
 [![MolSysSuite policy](https://github.com/uibcdf/pyunitwizard/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/pyunitwizard/actions/workflows/molsyssuite-policy.yml)
-[![Python 3.11 | 3.12 | 3.13 | 3.14](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
+[![Python 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
 [![License](https://img.shields.io/github/license/uibcdf/pyunitwizard)](https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE)
 [![Tests](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml/badge.svg?branch=main)](https://github.com/uibcdf/pyunitwizard/actions/workflows/CI.yaml)
 [![Codecov](https://codecov.io/github/uibcdf/pyunitwizard/graph/badge.svg)](https://codecov.io/github/uibcdf/pyunitwizard)
