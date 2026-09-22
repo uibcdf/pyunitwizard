@@ -60,9 +60,17 @@ at 3.13, so source success alone cannot be advertised as support.
 - The complete source suite also passed 528 tests under local Python 3.13
   after the test fix, using 12 workers and the LLM receptor.
 - The target interpreter bound, Python classifiers, Linux/macOS full-matrix
-  lanes, release-test lane, and development environment bounds have been
-  aligned in the working candidate. The public README and documentation still
-  state the delivered 3.11–3.13 range until admission.
+  lanes, release-test lane, and development environment bounds were aligned
+  at commit `905aebf`. Hosted run `35706809548` passed all eight full-suite
+  Linux/macOS × Python 3.11–3.14 cells at that exact SHA. GH Run Receptor and
+  an independent GitHub job query agree; a ninth scheduled-monitor job was
+  skipped because the run was manually dispatched. The public README and
+  documentation still state the delivered 3.11–3.13 range until admission.
+- The initial hosted shared-policy run `35706813034` failed on `PYTHON_RANGE`
+  because immutable `policy-v1.4.3` predates the central authorization. This
+  is a policy snapshot mismatch, not a runtime or metadata failure. The
+  replacement `policy-v1.4.4` was published from `uibcdf/molsyssuite@ebdcf49`
+  and the local caller now pins it; its hosted gate still requires a rerun.
 - The scheduled matrix failure tracked by `uibcdf/pyunitwizard#77` concerns a
   different `parse` assertion on Python 3.13 and is not resolved by this report.
 
