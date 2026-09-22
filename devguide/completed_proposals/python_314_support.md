@@ -1,25 +1,26 @@
 ---
 summary: Adopt Python 3.14 support with clean installed-package and release evidence.
 issue: uibcdf/pyunitwizard#78
-status: active
+status: resolved
 opened: 2026-09-22
-closed:
+closed: 2026-09-22
 verification: measured
 area: [compatibility, ci, packaging]
-guard:
-normative:
+guard: tests/test_noarch_conda_publication.py
+normative: devguide/compatibility_matrix.md
 blocked_by: []
 supersedes: []
 ---
 
 # Python 3.14 support
 
-Current checkpoint, 2026-09-22: GitHub Release 0.26.0 and its exact Conda
+Final checkpoint, 2026-09-22: GitHub Release 0.26.0 and its exact Conda
 `noarch` file are public. Clean Python 3.14 installations from the public
 Conda channel and the released source tag passed. MolSysSuite's
 `policy-v1.4.5` records central `admitted` status, and the canonical Python
-3.14 README badge and policy caller have been updated together. The hosted
-policy gate for the new caller remains the final closure check.
+3.14 README badge and policy caller were updated together. Hosted policy
+run `35718929828` passed on exact component commit
+`cbd07adfe6896cdc41a372f6c4961dad7e231c1b`.
 
 ## What
 
@@ -173,7 +174,14 @@ at 3.13, so source success alone cannot be advertised as support.
 - MolSysSuite commit `aa4bb4e` and annotated tag `policy-v1.4.5` record
   PyUnitWizard as `admitted` after the public evidence above. The component
   policy caller and generated Python badge now target that immutable policy
-  snapshot; their hosted gate is the remaining synchronization check.
+  snapshot. Hosted run `35718929828` passed at exact commit `cbd07ad`.
+
+The addressable guard `tests/test_noarch_conda_publication.py` protects the
+noarch target range and exact-file staged/direct release routes. The normative
+`devguide/compatibility_matrix.md` records the required sibling floors for
+the 0.26.0 path. Together with the hosted matrix and independently verified
+public installations above, these make the interpreter claim durable without
+asserting untested platforms or an unavailable PyPI distribution.
 
 ## What was refuted
 
