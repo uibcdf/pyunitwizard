@@ -14,6 +14,12 @@ supersedes: []
 
 # Python 3.14 support
 
+Current checkpoint, 2026-09-22: GitHub Release 0.26.0 and its exact Conda
+`noarch` file are public. Clean Python 3.14 installations from the public
+Conda channel and the released source tag passed. Central `admitted` status
+and the canonical Python 3.14 README badge are the remaining governance
+steps; this report stays active until they are complete.
+
 ## What
 
 Extend PyUnitWizard's supported interpreter range from Python 3.11–3.13 to
@@ -110,7 +116,7 @@ at 3.13, so source success alone cannot be advertised as support.
   both the route receipt and the `events@1` producer receipt. Installed
   artifact run `35712957758` passed its receipt gate and all eight clean
   Linux/macOS × Python 3.11–3.14 installations. This proves staging only;
-  there is still no 0.26.0 public package, tag, or GitHub Release.
+  at that point there was no 0.26.0 public package, tag, or GitHub Release.
 - A final documentation audit found public pages still limited to 3.13 and
   an unsupported `pip install pyunitwizard` instruction. The public PyPI
   index returned no matching PyUnitWizard distribution on 2026-09-22.
@@ -118,8 +124,8 @@ at 3.13, so source success alone cannot be advertised as support.
   instructions were corrected for the 0.26.0 tag. The documentation HTML
   build succeeded locally without warnings. Since this changes
   the candidate SHA, the old staged `py_0` file is evidence for the prior
-  commit only. Repeat the exact-commit gates and stage `py_1` before
-  release.
+  commit only. This required repeating the exact-commit gates and staging
+  `py_1` before release.
 - Documentation-candidate policy run `35714016742` rejected a Python 3.14
   README badge with `PYTHON_BADGE`: the central badge generator correctly treats
   only `admitted` support as public. Keep the canonical 3.11–3.13 badge
@@ -129,8 +135,40 @@ at 3.13, so source success alone cannot be advertised as support.
 - Final-candidate matrix run `35714401355` found an Ubuntu/Python 3.12
   failure in `test_parse_rejects_non_string_input`. The input-type check
   occurred after parser resolution and was test-order-sensitive. Issue
-  `uibcdf/pyunitwizard#79` owns the fix; the 0.26.0 release remains gated
-  until a new exact-commit matrix passes.
+  `uibcdf/pyunitwizard#79` owns the fix; publication was held until a new
+  exact-commit matrix passed.
+- Final release commit `026be28d9530077d57f92cbd5fd1755c0982c596`
+  passed 566 local tests on each of Python 3.13 and 3.14, the eight
+  Linux/macOS × Python 3.11–3.14 hosted matrix cells in run `35715344397`,
+  release gates `35715344393`, and suite policy `35715345024`. All three
+  hosted runs have the same exact SHA. The parsing defect is fixed and
+  separately guarded under `uibcdf/pyunitwizard#79`.
+- Staging run `35715749149` built only
+  `pyunitwizard-0.26.0-py_1.tar.bz2` from that SHA. Run `35716044649`
+  passed producer provenance and all eight clean Linux/macOS × Python
+  3.11–3.14 installations. The producer receipt and independent staging
+  registry record agree on SHA-256
+  `3689855787a82b7dc942c6b3a71f40733f4f2633c3509f10c12b45892e9ae1a9`.
+  The earlier `py_0` artifact is not the release artifact.
+- Numeric tag and stable GitHub Release `0.26.0` point to the release SHA.
+  The release-triggered Conda run `35716501517` verified the staged route
+  without rebuilding. Promotion run `35716642205` moved the digest-matched
+  `py_1` file to `uibcdf/noarch`; a fresh public-channel query independently
+  returned the same filename, noarch status and SHA-256.
+- A clean Linux/Python 3.14.7 Conda environment installed public
+  `pyunitwizard=0.26.0=py_1`, SMonitor 0.16.0 build `py_1`, and DepDigest
+  0.11.0 build `py_2` solely from public `uibcdf` and conda-forge.
+  The Conda record points to `uibcdf/noarch` with the verified digest,
+  metadata and imported version equal 0.26.0, import resolves inside the
+  environment, and a nanometer quantity smoke test passed.
+- Public PyPI index queries found no PyUnitWizard, SMonitor, or DepDigest
+  distributions. A second clean Linux/Python 3.14.7 environment installed
+  the latter two from public Conda, then installed the Git tag with
+  `pip --no-deps`. Pip resolved the exact release commit, built a
+  `py3-none-any` wheel, and installed PyUnitWizard 0.26.0. Its
+  `direct_url.json`, imported version and API smoke test passed. Public
+  guidance now requires Conda dependencies before this source route; it
+  does not claim standalone PyPI installation.
 
 ## What was refuted
 

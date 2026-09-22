@@ -40,15 +40,13 @@ need justifies adding and maintaining that platform matrix.
 Install a published release from the `uibcdf` Conda channel:
 
 ```bash
-conda install -c uibcdf pyunitwizard
+conda install -c uibcdf 'pyunitwizard>=0.26.0'
 ```
 
-PyUnitWizard is not currently distributed on the public PyPI index. For a
-source installation of a released version, use its numeric Git tag:
-
-```bash
-python -m pip install 'git+https://github.com/uibcdf/pyunitwizard.git@0.26.0'
-```
+PyUnitWizard and its required SMonitor and DepDigest versions are not
+currently distributed on the public PyPI index. A source installation needs
+those dependencies from Conda first; see the
+[installation guide](docs/content/about/installation.md).
 
 ## Quick start
 

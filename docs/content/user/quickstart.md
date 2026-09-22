@@ -13,15 +13,13 @@ validate that compatibility and dimensional checks behave as expected.
 Start by installing the package:
 
 ```bash
-conda install -c uibcdf pyunitwizard
+conda install -c uibcdf 'pyunitwizard>=0.26.0'
 ```
 
-The public PyPI index does not currently distribute PyUnitWizard. To install
-version 0.26.0 from its source tag instead, use:
-
-```bash
-python -m pip install 'git+https://github.com/uibcdf/pyunitwizard.git@0.26.0'
-```
+The public PyPI index does not currently distribute PyUnitWizard or its
+required SMonitor and DepDigest versions. If you need a source installation,
+install those dependencies from Conda first; follow the
+[installation guide](../about/installation.md).
 
 Now configure runtime behavior explicitly:
 

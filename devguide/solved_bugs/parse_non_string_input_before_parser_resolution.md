@@ -1,13 +1,13 @@
 ---
 summary: Validate non-string parse input before parser resolution.
 issue: uibcdf/pyunitwizard#79
-status: active
+status: resolved
 opened: 2026-09-22
-closed:
+closed: 2026-09-22
 severity: high
 verification: reproduced
 area: [api, parsing, ci]
-guard:
+guard: tests/test_parse.py::test_parse_rejects_non_string_input
 normative:
 blocked_by: []
 supersedes: []
@@ -71,4 +71,9 @@ parsing, parser selection, output forms, or the generic CI monitor lifecycle.
 
 ## Dependencies and risks
 
-This blocks the final exact-commit full matrix and 0.26.0 publication.
+The fix is included in release 0.26.0. The exact release commit
+`026be28d9530077d57f92cbd5fd1755c0982c596` passed 566 local tests
+on each of Python 3.13 and 3.14 and all eight hosted Linux/macOS × Python
+3.11–3.14 matrix cells in run `35715344397`. The guard explicitly loads
+Pint and requests `to_form="string"`, so validation after parser resolution
+would fail it with the original `AttributeError`.
