@@ -92,15 +92,33 @@ at 3.13, so source success alone cannot be advertised as support.
   route passed 36 focused local tests before the staged verifier was pinned
   to the candidate SHA; after that pin and a formatter correction, both
   Python 3.13 and 3.14 full local suites passed 566 tests with 12 workers and
-  `--receptor=llm`. Conda render
-  produced one `noarch` coordinate. Before the 0.26.0 tag exists, it
+  `--receptor=llm`. Conda render produced one `noarch` coordinate.
+  Before the 0.26.0 tag exists, it
   naturally derives the existing 0.25.0 tag, so that render is a shape check,
-  not evidence of a 0.26.0 artifact. No staging upload or public publication
-  has occurred.
+  not evidence of a 0.26.0 artifact.
 - The first exact-commit shared-policy run at `55253ba` failed the Python
   formatting step, despite passing functional tests. The affected new files
   were formatted and the repository-wide Ruff formatting check now passes.
   The failed run is retained as diagnostic evidence, not counted as a gate.
+- At `3ee5d01`, hosted full matrix run `35712086674` passed all eight
+  Linux/macOS × Python 3.11–3.14 test cells (the scheduled monitor was
+  skipped on manual dispatch). Release gates `35712086712` and suite
+  policy `35712087441` passed at the same SHA. GH Run Receptor and
+  independent GitHub SHA/conclusion checks agree.
+- Staging producer run `35712625482` passed at `3ee5d01` and retained
+  both the route receipt and the `events@1` producer receipt. Installed
+  artifact run `35712957758` passed its receipt gate and all eight clean
+  Linux/macOS × Python 3.11–3.14 installations. This proves staging only;
+  there is still no 0.26.0 public package, tag, or GitHub Release.
+- A final documentation audit found public pages still limited to 3.13 and
+  an unsupported `pip install pyunitwizard` instruction. The public PyPI
+  index returned no matching PyUnitWizard distribution on 2026-09-22.
+  README, Installation, Quick Start, compatibility matrix, and release
+  instructions were corrected for the 0.26.0 tag. The documentation HTML
+  build succeeded locally without warnings. Since this changes
+  the candidate SHA, the old staged `py_0` file is evidence for the prior
+  commit only. Repeat the exact-commit gates and stage `py_1` before
+  release.
 
 ## What was refuted
 

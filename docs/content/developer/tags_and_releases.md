@@ -15,19 +15,25 @@ PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.18.1`).
 
 ## Creating the next tag
 
-From `main`, after CI/release gates are green:
+From `main`, after the full matrix, policy, release gates, and any required
+staged installed-package tests are green at the same commit:
 
 ```bash
 git fetch origin
-git checkout main
+git switch main
 git pull --ff-only origin main
-python -m pytest -q
+python -m pytest --receptor=llm -n 12 -q
 make -C docs html
 # replace X.Y.Z with the next version
 git tag X.Y.Z
 git push origin main
 git push origin X.Y.Z
 ```
+
+For a staged Conda route, publishing the GitHub Release verifies the
+committed plan but does not rebuild the package. Promote the digest-verified
+staged file afterward; see `devtools/conda-build/README.md`. A direct route
+builds once on the stable release event, after its registry preflight.
 
 ## Release references
 

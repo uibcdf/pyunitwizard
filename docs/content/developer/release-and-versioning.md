@@ -26,13 +26,23 @@ Current policy:
 1. `python -m pytest -q` passes.
 2. `make -C docs html` passes.
 3. `release_gates` workflow is green for candidate commit.
-4. Docs reflect actual runtime and supported Python versions.
-5. Performance baseline snapshot is refreshed for the RC line.
+4. The full Linux/macOS matrix and suite policy workflow are green at the
+   same candidate commit.
+5. Docs reflect actual runtime and supported Python versions.
+6. When the committed Conda release plan selects `staged`, the exact
+   candidate artifact has passed its clean installed-package matrix.
+7. Performance baseline snapshot is refreshed when the release changes a
+   measured RC performance contract.
 
 ## Practical release flow
 
 1. Finalize scope and docs updates.
 2. Run local gates.
 3. Push coherent commits to `main`.
-4. Create and push numeric tag.
-5. Validate post-tag CI and package publication.
+4. Follow the committed direct or staged Conda route in
+   `devtools/conda-build/README.md`; stage and test before publication when
+   the route requires it.
+5. Create and push the numeric tag, then publish the stable GitHub Release
+   only after the exact-commit gates pass.
+6. For a staged release, promote the verified file without rebuilding.
+   Independently validate the public package and its installability.

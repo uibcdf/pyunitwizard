@@ -1,7 +1,8 @@
 # Quick Start
 
-PyUnitWizard supports Linux and macOS with Python 3.11, 3.12, and 3.13.
-Windows support is currently outside the maintained platform matrix.
+PyUnitWizard 0.26.0 and later support Linux and macOS with Python 3.11–3.14.
+Earlier releases were validated only through Python 3.13. Windows support
+remains outside the maintained platform matrix.
 
 This walkthrough is intentionally short. Its purpose is to let you verify, in a
 few minutes, whether PyUnitWizard matches your workflow expectations.
@@ -15,10 +16,11 @@ Start by installing the package:
 conda install -c uibcdf pyunitwizard
 ```
 
-or:
+The public PyPI index does not currently distribute PyUnitWizard. To install
+version 0.26.0 from its source tag instead, use:
 
 ```bash
-pip install pyunitwizard
+python -m pip install 'git+https://github.com/uibcdf/pyunitwizard.git@0.26.0'
 ```
 
 Now configure runtime behavior explicitly:
