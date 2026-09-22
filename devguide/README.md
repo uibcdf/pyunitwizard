@@ -35,7 +35,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Current hardening line: `0.24.x`.
+- Current hardening line: `0.25.x`.
 - Completed release-candidate line: `0.21.x`.
 - Latest maintenance tag in RC line: `0.21.1`.
 - RC consolidation closure checkpoint tag: `0.21.0`.
@@ -43,7 +43,10 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Current head relative to tag: run `git describe --tags --always` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
-- Supported Python versions: `3.11`, `3.12`, and `3.13` (daily operation in `3.13`).
+- Publicly supported Python versions: `3.11`, `3.12`, and `3.13` (daily
+  operation in `3.13`). Python `3.14` is an authorized transition under
+  `uibcdf/pyunitwizard#78`, not yet a public support claim; its local Linux
+  source suite passed 528 tests on 2026-09-22.
 - Supported platforms: Linux and macOS. Windows support is deferred until a
   concrete ecosystem requirement appears.
 - Historical local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).

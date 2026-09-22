@@ -2,7 +2,7 @@ channels:
 - uibcdf
 - conda-forge
 dependencies:
-- python >=3.11,<3.14
+- python >=3.11,<3.15
 - setuptools
 - pint
 - pytest

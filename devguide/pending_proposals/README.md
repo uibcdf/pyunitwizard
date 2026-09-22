@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`python_314_support.md`](python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
+
 ### Open (2)
 
 - [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*

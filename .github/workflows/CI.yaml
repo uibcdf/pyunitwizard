@@ -86,6 +86,12 @@ jobs:
         pwd
         python -c 'import pyunitwizard; print("Version of the package: {}".format(pyunitwizard.__version__))'
 
+    - name: Check code style
+      shell: bash -l {0}
+      run: |
+        ruff check .
+        ruff format --check .
+
     - name: Run tests
       shell: bash -l {0}
       run: |
