@@ -82,6 +82,7 @@ extend-exclude = [
     "DEPDIGEST_GUIDE.md",
     "GH_RUN_RECEPTOR_GUIDE.md",
     "MOLSYSSUITE_GUIDE.md",
+    "PYTEST_RECEPTOR_GUIDE.md",
     "SMONITOR_GUIDE.md",
 ]
 
