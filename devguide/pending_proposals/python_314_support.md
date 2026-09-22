@@ -16,9 +16,10 @@ supersedes: []
 
 Current checkpoint, 2026-09-22: GitHub Release 0.26.0 and its exact Conda
 `noarch` file are public. Clean Python 3.14 installations from the public
-Conda channel and the released source tag passed. Central `admitted` status
-and the canonical Python 3.14 README badge are the remaining governance
-steps; this report stays active until they are complete.
+Conda channel and the released source tag passed. MolSysSuite's
+`policy-v1.4.5` records central `admitted` status, and the canonical Python
+3.14 README badge and policy caller have been updated together. The hosted
+policy gate for the new caller remains the final closure check.
 
 ## What
 
@@ -169,6 +170,10 @@ at 3.13, so source success alone cannot be advertised as support.
   `direct_url.json`, imported version and API smoke test passed. Public
   guidance now requires Conda dependencies before this source route; it
   does not claim standalone PyPI installation.
+- MolSysSuite commit `aa4bb4e` and annotated tag `policy-v1.4.5` record
+  PyUnitWizard as `admitted` after the public evidence above. The component
+  policy caller and generated Python badge now target that immutable policy
+  snapshot; their hosted gate is the remaining synchronization check.
 
 ## What was refuted
 
