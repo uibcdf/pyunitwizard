@@ -165,7 +165,15 @@ def parse(string: str, parser: Optional[str] = None, to_form: Optional[str] = No
     -------
     QuantityLike
         A quantity.
+
+    Raises
+    ------
+    ArgumentError
+        If `string` is not a string.
     """
+
+    if not isinstance(string, str):
+        raise BadCallError(argument="string")
 
     to_form = digest_to_form(to_form)
     parser = _resolve_parser(string, parser, to_form)

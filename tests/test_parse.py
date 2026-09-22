@@ -128,8 +128,10 @@ def test_parse_library_without_parser_has_readable_message():
 
 
 def test_parse_rejects_non_string_input():
-    with pytest.raises(ArgumentError):
-        parse(3.0)  # type: ignore[arg-type]
+    with loaded_libraries(["pint"]):
+        for to_form in (None, "string"):
+            with pytest.raises(ArgumentError):
+                parse(3.0, to_form=to_form)  # type: ignore[arg-type]
 
 
 def test_parse_rejects_invalid_parser_name():

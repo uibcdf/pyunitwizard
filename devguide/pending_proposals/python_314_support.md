@@ -77,8 +77,9 @@ at 3.13, so source success alone cannot be advertised as support.
   3.11–3.14 tests-and-contracts jobs, one Python 3.13 wheel packaging smoke,
   and one documentation build. GH Run Receptor and GitHub agree. This is not
   a staged or public Conda package check.
-- The scheduled matrix failure tracked by `uibcdf/pyunitwizard#77` concerns a
-  different `parse` assertion on Python 3.13 and is not resolved by this report.
+- The scheduled-matrix monitor `uibcdf/pyunitwizard#77` exposed an
+  independently tracked `parse` error-contract defect. Its deterministic
+  reproduction and fix are recorded under `uibcdf/pyunitwizard#79`.
 
 - The Conda recipe and release workflows are being converted to a single
   `noarch: python` build with a committed direct/staged release decision.
@@ -125,6 +126,11 @@ at 3.13, so source success alone cannot be advertised as support.
   through the pre-public tag while the version-scoped prose documents what
   0.26.0 will support. After independent public verification and central
   admission, update the badge on `main`; do not relax the common policy.
+- Final-candidate matrix run `35714401355` found an Ubuntu/Python 3.12
+  failure in `test_parse_rejects_non_string_input`. The input-type check
+  occurred after parser resolution and was test-order-sensitive. Issue
+  `uibcdf/pyunitwizard#79` owns the fix; the 0.26.0 release remains gated
+  until a new exact-commit matrix passes.
 
 ## What was refuted
 
