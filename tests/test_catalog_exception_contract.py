@@ -55,7 +55,8 @@ def test_catalog_exception_constructor_is_safe_to_rebuild(exception_class, domai
     assert rebuilt.code == original.code
 
 
-def test_conda_recipe_requires_the_supported_smonitor_version():
+def test_conda_recipe_requires_the_admitted_public_dependency_versions():
     recipe = (REPOSITORY_ROOT / "devtools" / "conda-build" / "meta.yaml").read_text()
 
-    assert "- smonitor >=0.14.0" in recipe
+    assert "- smonitor >=0.16.0" in recipe
+    assert "- depdigest >=0.11.0" in recipe

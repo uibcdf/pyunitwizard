@@ -4,19 +4,25 @@ package:
 source:
   path: ../../
 build:
-  number: 1
+  number: "{{ environ.get('PYUNITWIZARD_CONDA_BUILD_NUMBER', '0') }}"
+  noarch: python
 requirements:
   host:
-  - python
+  - python >=3.11,<3.15
   - pip
   - setuptools >=68.0
   - versioningit >=3.0
   run:
-  - python
+  - python >=3.11,<3.15
   - numpy
   - pint
-  - smonitor >=0.14.0
-  - depdigest
+  - smonitor >=0.16.0
+  - depdigest >=0.11.0
+test:
+  imports:
+  - pyunitwizard
+  commands:
+  - python -c "import importlib.metadata as m; import os; import pyunitwizard as puw; assert m.version('pyunitwizard') == os.environ['PKG_VERSION']; assert puw.__version__ == os.environ['PKG_VERSION']; assert puw.get_value(puw.quantity(1.0, 'nm')) == 1.0"
 about:
   home: https://uibcdf.org
   license: MIT License

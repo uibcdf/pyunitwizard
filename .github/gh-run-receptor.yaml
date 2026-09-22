@@ -8,6 +8,14 @@ workflows:
     profile: ci
   - match:
       path: .github/workflows/build_and_upload_conda_packages.yaml
+    profile: conda
+    settings:
+      package_kind: noarch
+  - match:
+      path: .github/workflows/test_staged_conda_package.yaml
+    profile: ci
+  - match:
+      path: .github/workflows/promote_conda_package.yaml
     profile: release
   - match:
       path: .github/workflows/install_macos_latest.yaml

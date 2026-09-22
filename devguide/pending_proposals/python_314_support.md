@@ -80,9 +80,22 @@ at 3.13, so source success alone cannot be advertised as support.
 - The scheduled matrix failure tracked by `uibcdf/pyunitwizard#77` concerns a
   different `parse` assertion on Python 3.13 and is not resolved by this report.
 
-The public Conda recipe is currently Python-specific. Whether the next package
-should become `noarch: python` requires an explicit recipe and installed-package
-audit; it is not inferred from source-only test success.
+- The Conda recipe and release workflows are being converted to a single
+  `noarch: python` build with a committed direct/staged release decision.
+  The first 0.26.0 candidate is staged; it cannot be promoted merely because
+  source tests passed. Exact-commit CI, producer receipts, clean installations,
+  digest comparison, and public-channel verification remain separate gates.
+  The recipe noarch choice follows a source inventory with no compiled
+  PyUnitWizard extension; native optional backends remain dependencies.
+- The Python and Conda runtime requirements now share the admitted public
+  SMonitor 0.16.0 and DepDigest 0.11.0 floors. The changed recipe and release
+  route passed 36 focused local tests before the staged verifier was pinned
+  to the candidate SHA; after that pin, both Python 3.13 and 3.14 full local
+  suites passed 564 tests with 12 workers and `--receptor=llm`. Conda render
+  produced one `noarch` coordinate. Before the 0.26.0 tag exists, it
+  naturally derives the existing 0.25.0 tag, so that render is a shape check,
+  not evidence of a 0.26.0 artifact. No staging upload or public publication
+  has occurred.
 
 ## What was refuted
 

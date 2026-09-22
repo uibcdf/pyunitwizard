@@ -1,0 +1,115 @@
+name: Test staged Conda package
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Full commit SHA used by the successful staging build
+        required: true
+        type: string
+      version:
+        description: Exact staged version
+        required: true
+        type: string
+      build_number:
+        description: Exact staged build number
+        required: true
+        type: number
+      staging_run_id:
+        description: Successful staging workflow run with producer receipts
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify-producer:
+    name: Verify the immutable producer evidence
+    runs-on: ubuntu-latest
+    outputs:
+      sha256: ${{ steps.receipts.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ inputs.candidate_sha }}
+      - name: Confirm the verifier comes from the candidate commit
+        shell: bash
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+        run: test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+      - name: Download and verify the exact staging run receipts
+        id: receipts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          CANDIDATE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$STAGING_RUN_ID" > "$RUNNER_TEMP/staging-run.json"
+          gh run download "$STAGING_RUN_ID" --dir "$RUNNER_TEMP/staging-evidence"
+          sha256="$(python devtools/conda-build/verify_staged_install.py receipts \
+            --run "$RUNNER_TEMP/staging-run.json" \
+            --evidence-dir "$RUNNER_TEMP/staging-evidence" \
+            --sha "$CANDIDATE_SHA" --version "$CANDIDATE_VERSION" \
+            --build-number "$BUILD_NUMBER" --run-id "$STAGING_RUN_ID")"
+          echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
+
+  install:
+    name: Install ${{ matrix.os }} / Python ${{ matrix.python }}
+    needs: verify-producer
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ inputs.candidate_sha }}
+      - name: Confirm the install smoke comes from the candidate commit
+        shell: bash
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+        run: test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+      - name: Create a clean environment from the exact staged build
+        uses: mamba-org/setup-micromamba@v3.2.1
+        with:
+          environment-name: candidate
+          condarc: |
+            channels:
+              - uibcdf/label/staging
+              - uibcdf
+              - conda-forge
+            # Staging also contains SMonitor; strict priority masks the public
+            # build in libmamba even with an explicit channel qualifier.
+            channel_priority: flexible
+          create-args: >-
+            python=${{ matrix.python }}
+            uibcdf/label/staging::pyunitwizard=${{ inputs.version }}=py_${{ inputs.build_number }}
+            uibcdf::depdigest=0.11.0=py_2
+            uibcdf::smonitor=0.16.0=py_1
+      - name: Verify installed artifact and smoke test outside the source checkout
+        shell: bash -l {0}
+        env:
+          EXPECTED_SHA256: ${{ needs.verify-producer.outputs.sha256 }}
+          CANDIDATE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          PYTHON_VERSION: ${{ matrix.python }}
+        run: |
+          set -euo pipefail
+          checker="$GITHUB_WORKSPACE/devtools/conda-build/verify_staged_install.py"
+          cd "$RUNNER_TEMP"
+          python "$checker" installed --prefix "$CONDA_PREFIX" \
+            --sha256 "$EXPECTED_SHA256" --version "$CANDIDATE_VERSION" \
+            --build-number "$BUILD_NUMBER" --python-version "$PYTHON_VERSION"

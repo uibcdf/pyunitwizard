@@ -1,0 +1,154 @@
+name: Promote an exact conda package
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Full commit SHA of the published release
+        required: true
+        type: string
+      version:
+        description: Three-part published release version
+        required: true
+        type: string
+      build_number:
+        description: Exact verified staging build number
+        required: true
+        type: number
+      sha256:
+        description: SHA-256 of the independently verified staging package
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: pyunitwizard-conda-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    name: Promote the digest-verified noarch package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ inputs.candidate_sha }}
+
+      - name: Validate immutable published release identity
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          EXPECTED_SHA256: ${{ inputs.sha256 }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CANDIDATE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE_VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          [[ "$BUILD_NUMBER" =~ ^[0-9]+$ ]]
+          [[ "$EXPECTED_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          test "$(git rev-list -n 1 "$RELEASE_VERSION")" = "$CANDIDATE_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_VERSION" --jq .draft)" = false
+          test "$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_VERSION" --jq .prerelease)" = false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Verify the staged release decision and exact CI gates
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          python devtools/conda-build/release_route.py check \
+            --version "$RELEASE_VERSION" --route staged \
+            --sha "$CANDIDATE_SHA" --repository "$GITHUB_REPOSITORY" \
+            --receipt "$RUNNER_TEMP/pyunitwizard-conda-route.json"
+
+      - name: Set up the authenticated Anaconda client
+        uses: mamba-org/setup-micromamba@v3.2.1
+        with:
+          environment-file: devtools/conda-envs/build_env.yaml
+          environment-name: promote
+          condarc: |
+            channels:
+              - uibcdf/label/staging
+              - uibcdf
+              - conda-forge
+            channel_priority: strict
+          create-args: >-
+            python=3.13
+
+      - name: Derive the exact package identity
+        id: identity
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: |
+          spec="uibcdf/pyunitwizard/$RELEASE_VERSION/noarch/pyunitwizard-$RELEASE_VERSION-py_$BUILD_NUMBER.tar.bz2"
+          echo "spec=$spec" >> "$GITHUB_OUTPUT"
+
+      - name: Promote the verified staged artifact
+        id: promotion
+        uses: uibcdf/action-build-and-upload-conda-packages/promote@v2.2.2
+        with:
+          package-spec: ${{ steps.identity.outputs.spec }}
+          expected-sha256: ${{ inputs.sha256 }}
+          from-label: staging
+          to-label: main
+          token: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}
+
+      - name: Retain the promotion receipt
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: pyunitwizard-conda-promotion-${{ inputs.version }}-py_${{ inputs.build_number }}
+          path: |
+            ${{ steps.promotion.outputs.receipt }}
+            ${{ runner.temp }}/pyunitwizard-conda-route.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Independently verify the public channel
+        shell: bash -l {0}
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          EXPECTED_SHA256: ${{ inputs.sha256 }}
+        run: |
+          output="$RUNNER_TEMP/pyunitwizard-conda-main.json"
+          conda search --json --override-channels -c uibcdf \
+            "pyunitwizard=$RELEASE_VERSION=py_$BUILD_NUMBER" > "$output"
+          python - "$output" <<'PY'
+          import json
+          import os
+          import pathlib
+          import sys
+
+          records = json.loads(pathlib.Path(sys.argv[1]).read_text())["pyunitwizard"]
+          expected = os.environ["EXPECTED_SHA256"]
+          filename = f"pyunitwizard-{os.environ['RELEASE_VERSION']}-py_{os.environ['BUILD_NUMBER']}.tar.bz2"
+          matches = [
+              record for record in records
+              if record.get("sha256") == expected and record.get("fn") == filename
+          ]
+          if len(matches) != 1:
+              raise SystemExit(
+                  f"expected one public artifact with SHA-256 {expected}, got {len(matches)}"
+              )
+          record = matches[0]
+          if record["channel"] != "https://conda.anaconda.org/uibcdf/noarch":
+              raise SystemExit(f"unexpected public channel: {record['channel']}")
+          print(record["url"])
+          PY

@@ -3,44 +3,139 @@ name: Build and upload conda packages
 on:
   release:
     types: ['released']
-
   workflow_dispatch:
     inputs:
-      release_ref:
-        description: Tag or commit to build
-        required: false
-        default: ''
-      python_versions:
-        description: JSON list of Python versions to build
-        required: false
-        default: '["3.11", "3.12", "3.13"]'
+      candidate_sha:
+        description: Full commit SHA to build into the staging label
+        required: true
+        type: string
+      version:
+        description: Candidate version (for example, 0.10.2)
+        required: true
+        type: string
       build_number:
-        description: Optional Conda build number for a recovery run
-        required: false
-        default: ''
+        description: Staging build number; increment only to supersede a defective artifact
+        required: true
+        default: 0
+        type: number
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: pyunitwizard-conda-${{ inputs.version || github.event.release.tag_name }}
+  cancel-in-progress: false
 
 jobs:
   conda_deployment_with_new_tag:
-    name: Conda deployment (Python ${{ matrix.python-version }})
+    name: Conda deployment of the noarch package
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ${{ fromJSON(inputs.python_versions || '["3.11", "3.12", "3.13"]') }}
 
     steps:
-      
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ inputs.release_ref || github.ref }}
+          persist-credentials: false
+          ref: ${{ inputs.candidate_sha || github.event.release.tag_name }}
+
+      - name: Validate the immutable candidate identity
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: |
+          [[ "$CANDIDATE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE_VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          [[ "$BUILD_NUMBER" =~ ^[0-9]+$ ]]
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          if git show-ref --verify --quiet "refs/tags/$RELEASE_VERSION"; then
+            test "$(git rev-list -n 1 "$RELEASE_VERSION")" = "$CANDIDATE_SHA"
+          else
+            git tag "$RELEASE_VERSION" HEAD
+          fi
+
+      - name: Validate the release tag
+        if: github.event_name == 'release'
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          [[ "$RELEASE_VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          test "$(git rev-parse HEAD)" = "$(git rev-list -n 1 "$RELEASE_VERSION")"
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.13"
 
-      - name: Setup conda env
+      - name: Read the committed release route
+        id: plan
+        shell: bash
+        run: |
+          route="$(python -c 'import tomllib; print(tomllib.load(open("devtools/conda-build/release_plan.toml", "rb"))["route"])')"
+          [[ "$route" == direct || "$route" == staged ]]
+          echo "route=$route" >> "$GITHUB_OUTPUT"
+
+      - name: Verify the staged candidate decision and exact CI gates
+        id: route_staged
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+        run: |
+          python devtools/conda-build/release_route.py check \
+            --version "$RELEASE_VERSION" --route staged \
+            --sha "$CANDIDATE_SHA" --repository "$GITHUB_REPOSITORY" \
+            --receipt "$RUNNER_TEMP/pyunitwizard-conda-route.json"
+
+      - name: Verify the direct release decision and empty registry coordinate
+        id: route_direct
+        if: github.event_name == 'release' && steps.plan.outputs.route == 'direct'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          python devtools/conda-build/release_route.py check \
+            --version "$RELEASE_VERSION" --route direct \
+            --sha "$(git rev-parse HEAD)" --repository "$GITHUB_REPOSITORY" \
+            --receipt "$RUNNER_TEMP/pyunitwizard-conda-route.json"
+
+      - name: Verify the staged release decision without rebuilding
+        id: route_release_staged
+        if: github.event_name == 'release' && steps.plan.outputs.route == 'staged'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          python devtools/conda-build/release_route.py check \
+            --version "$RELEASE_VERSION" --route staged \
+            --sha "$(git rev-parse HEAD)" --repository "$GITHUB_REPOSITORY" \
+            --receipt "$RUNNER_TEMP/pyunitwizard-conda-route.json"
+
+      - name: Setup the candidate build environment
+        if: github.event_name == 'workflow_dispatch'
+        uses: mamba-org/setup-micromamba@v3.2.1
+        with:
+          environment-file: devtools/conda-envs/build_env.yaml
+          environment-name: build
+          condarc: |
+            channels:
+              - uibcdf/label/staging
+              - uibcdf
+              - conda-forge
+            channel_priority: strict
+          create-args: >-
+            python=3.13
+
+      - name: Setup the public release build environment
+        if: github.event_name == 'release' && steps.plan.outputs.route == 'direct'
         uses: mamba-org/setup-micromamba@v3.2.1
         with:
           environment-file: devtools/conda-envs/build_env.yaml
@@ -50,40 +145,94 @@ jobs:
               - uibcdf
               - conda-forge
             channel_priority: strict
-
           create-args: >-
-            python=${{ matrix.python-version }}
-
-      - name: Prepare tagged recipe
-        shell: bash
-        env:
-          BUILD_NUMBER: ${{ inputs.build_number }}
-        run: |
-          sed -i -E 's/^([[:space:]]*- python)([[:space:]]+.*)?$/\1/' \
-            devtools/conda-build/meta.yaml
-          if [[ -n "$BUILD_NUMBER" ]]; then
-            sed -i -E "s/^([[:space:]]*number:).*/\1 $BUILD_NUMBER/" \
-              devtools/conda-build/meta.yaml
-          fi
-          git update-index --assume-unchanged devtools/conda-build/meta.yaml
-          git describe --tags --exact-match --dirty
+            python=3.13
 
       - name: Info conda
+        if: github.event_name == 'workflow_dispatch' || steps.plan.outputs.route == 'direct'
         shell: bash -l {0}
         run: |
           micromamba activate build
           micromamba info
           micromamba list
 
-      - name: Build and upload the conda packages
-        uses: uibcdf/action-build-and-upload-conda-packages@v2.0.1
+      - name: Verify the derived package version
+        if: github.event_name == 'workflow_dispatch' || steps.plan.outputs.route == 'direct'
+        shell: bash -l {0}
+        env:
+          EXPECTED_VERSION: ${{ inputs.version || github.event.release.tag_name }}
+        run: test "$(python -m versioningit)" = "$EXPECTED_VERSION"
+
+      - name: Build, test, and upload the staging candidate
+        id: conda_staging
+        if: github.event_name == 'workflow_dispatch'
+        uses: uibcdf/action-build-and-upload-conda-packages@v2.1.0
+        env:
+          PYUNITWIZARD_CONDA_BUILD_NUMBER: ${{ inputs.build_number }}
+        with:
+          meta_yaml_dir: devtools/conda-build
+          mambabuild: false
+          user: uibcdf
+          label: staging
+          token: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}
+          conda_build_args: --package-format tar.bz2
+          platform_linux-64: false
+          platform_osx-64: false
+          platform_osx-arm64: false
+          platform_win-64: false
+
+      - name: Build, test, and upload the unstaged release
+        id: conda_release
+        if: github.event_name == 'release' && steps.plan.outputs.route == 'direct'
+        uses: uibcdf/action-build-and-upload-conda-packages@v2.1.0
+        env:
+          PYUNITWIZARD_CONDA_BUILD_NUMBER: 0
         with:
           meta_yaml_dir: devtools/conda-build
           mambabuild: false
           user: uibcdf
           label: main
-          conda_build_args: --python ${{ matrix.python-version }} --package-format tar.bz2
-          platform_linux-64: true
-          platform_osx-64: true
-          platform_osx-arm64: true
           token: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}
+          conda_build_args: --package-format tar.bz2
+          platform_linux-64: false
+          platform_osx-64: false
+          platform_osx-arm64: false
+          platform_win-64: false
+
+      - name: Independently verify the exact public release file
+        if: github.event_name == 'release' && steps.plan.outputs.route == 'direct'
+        shell: bash -l {0}
+        env:
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+          BUILT_PATHS: ${{ steps.conda_release.outputs.built_paths }}
+        run: |
+          python devtools/conda-build/release_route.py verify-public \
+            --version "$RELEASE_VERSION" --built-paths "$BUILT_PATHS" \
+            --receipt "$RUNNER_TEMP/pyunitwizard-conda-route.json"
+
+      - name: Retain the release-route decision and registry receipt
+        if: ${{ always() && (steps.route_staged.outcome == 'success' || steps.route_direct.outcome == 'success' || steps.route_release_staged.outcome == 'success') }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: pyunitwizard-conda-route-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/pyunitwizard-conda-route.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload staging producer evidence
+        if: ${{ always() && steps.conda_staging.outputs.evidence_path != '' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: ${{ steps.conda_staging.outputs.evidence_artifact_name }}
+          path: ${{ steps.conda_staging.outputs.evidence_path }}
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload release producer evidence
+        if: ${{ always() && steps.conda_release.outputs.evidence_path != '' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: ${{ steps.conda_release.outputs.evidence_artifact_name }}
+          path: ${{ steps.conda_release.outputs.evidence_path }}
+          if-no-files-found: error
+          retention-days: 7
