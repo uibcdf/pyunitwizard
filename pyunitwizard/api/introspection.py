@@ -5,6 +5,8 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
+import numpy as np
+
 from .. import kernel
 from .._private.exceptions import NotImplementedFormError
 from .._private.quantity_or_unit import QuantityOrUnit
@@ -209,7 +211,8 @@ def is_unit(quantity_or_unit: QuantityOrUnit, parser: Optional[str] = None) -> b
     if isinstance(quantity_or_unit, str):
         try:
             quantity_or_unit = convert(quantity_or_unit, parser=parser)
-            output = get_value(quantity_or_unit) == 1
+            value = get_value(quantity_or_unit)
+            output = bool(np.ndim(value) == 0 and value == 1)
         except Exception:
             emit_probe_miss(probe_input, "pyunitwizard.api.introspection.is_unit")
             return False

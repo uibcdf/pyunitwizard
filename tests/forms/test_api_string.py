@@ -57,6 +57,20 @@ def test_api_string_basic_ops_with_pint_defaults():
         assert api.convert("1 meter", "centimeter") == "100.0 centimeter"
 
 
+def test_vector_quantity_string_is_not_a_unit_and_standardizes():
+    with loaded_libraries(["pint"]):
+        puw.configure.set_default_form("pint")
+        puw.configure.set_default_parser("pint")
+        puw.configure.set_standard_units(["nm"])
+
+        vector = "[0, 0, 0] nm"
+        assert puw.forms.api_string.is_unit(vector) is False
+        assert puw.is_unit(vector) is False
+        standard = puw.standardize(vector)
+        assert puw.is_quantity(standard)
+        assert puw.get_value(standard).tolist() == [0, 0, 0]
+
+
 def test_api_string_openmm_conversion_paths_raise_expected_error():
     with loaded_libraries(["openmm.unit"]):
         with pytest.raises(LibraryWithoutParserError):

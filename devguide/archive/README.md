@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (6)
+### Resolved (7)
 
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
 - [`adopt_shared_reporting_lifecycle.md`](../completed_proposals/adopt_shared_reporting_lifecycle.md) — [#72](https://github.com/uibcdf/pyunitwizard/issues/72) — Adopt the shared issue-backed developer-guide lifecycle. *(reproduced)*
@@ -12,6 +12,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`python_314_support.md`](../completed_proposals/python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*
+- [`string_vector_unit_detection.md`](../solved_bugs/string_vector_unit_detection.md) — [#80](https://github.com/uibcdf/pyunitwizard/issues/80) — Classify vector quantity strings without ambiguous array truth values. *(medium, reproduced)*
 
 ### Legacy pre-adoption records (5)
 

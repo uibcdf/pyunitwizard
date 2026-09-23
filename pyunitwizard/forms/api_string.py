@@ -1,5 +1,7 @@
 from typing import Any, Dict, Union
 
+import numpy as np
+
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 form_name = "string"
@@ -71,7 +73,8 @@ def is_unit(quantity_or_unit: str) -> bool:
     # Quantity(250, 'ms').  This is consistent with the public puw.is_unit
     # heuristic in api/introspection.py.
     tmp = _convert(quantity_or_unit, to_form=default_form, parser=default_parser)
-    return _get_value(tmp) == 1
+    value = _get_value(tmp)
+    return bool(np.ndim(value) == 0 and value == 1)
 
 
 def dimensionality(quantity_or_unit: str) -> Dict[str, int]:
