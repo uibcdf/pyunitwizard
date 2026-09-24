@@ -186,3 +186,23 @@ dict_dimensionality["string"] = api.dimensionality
 dict_compatibility["string"] = api.compatibility
 
 del api
+
+# Load the record api: PyUnitWizard's inert interchange form (uibcdf/pyunitwizard#82).
+# It imports no backend at load time; pint is used only when a record is built or read.
+
+api = _import_module(".api_record", _base_package)
+
+dict_is_form["record"] = api.is_form
+dict_is_unit["record"] = api.is_unit
+dict_is_quantity["record"] = api.is_quantity
+dict_get_value["record"] = api.get_value
+dict_get_unit["record"] = api.get_unit
+dict_change_value["record"] = api.change_value
+dict_make_quantity["record"] = api.make_quantity
+dict_convert["record"] = api.convert
+dict_translate_quantity["record"] = {}
+dict_translate_unit["record"] = {}
+dict_dimensionality["record"] = api.dimensionality
+dict_compatibility["record"] = api.compatibility
+
+del api

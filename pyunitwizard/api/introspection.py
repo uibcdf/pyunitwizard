@@ -75,7 +75,7 @@ def _target_unit_from_pint_registry(target_unit: str, registry):
 
 
 def _register_detected_form(form: str) -> str:
-    if form != "string" and form not in kernel.loaded_libraries:
+    if form not in ("string", "record") and form not in kernel.loaded_libraries:
         from pyunitwizard.configure import load_library
 
         load_library(form)
@@ -107,6 +107,10 @@ def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> 
     if isinstance(quantity_or_unit, str):
         _TYPE_TO_FORM_CACHE[obj_type] = "string"
         return "string"
+
+    if obj_type.__name__ == "QuantityRecord" and obj_type.__module__ == "pyunitwizard.record":
+        _TYPE_TO_FORM_CACHE[obj_type] = "record"
+        return "record"
 
     # Fast class name detection to avoid loading all libraries or calling many functions
     type_str = str(obj_type)

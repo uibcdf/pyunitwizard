@@ -1,0 +1,31 @@
+{
+  "record": {
+    "block_digests": [
+      "blake2b-128:7680177f7cc17b8a86589f0b5edfa0b3"
+    ],
+    "digest": "blake2b-128:46d3340bea3df37c3eda18498d701662",
+    "manifest": {
+      "blocks": [
+        1
+      ],
+      "dtype": "float64",
+      "field": "bioactivity.ic50",
+      "format": "qrec/0.3",
+      "kind": "http://qudt.org/vocab/quantitykind/AmountOfSubstanceConcentration",
+      "shape": [],
+      "si": {
+        "exponents": {
+          "m": -3,
+          "mol": 1
+        },
+        "factor": 1e-06,
+        "offset": 0.0
+      },
+      "unit": "nanomolar"
+    },
+    "values": 3.0
+  },
+  "si_values": [
+    3e-06
+  ]
+}

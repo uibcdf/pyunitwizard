@@ -100,8 +100,9 @@ def convert(
     to_unit : str, optional
         Target unit. When provided, the quantity is converted to this unit before
         returning.
-    to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
-        Target backend form. If omitted, the input form is preserved.
+    to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string", "record"}, optional
+        Target backend form. If omitted, the input form is preserved. ``"record"`` is
+        the inert interchange form (:class:`pyunitwizard.record.QuantityRecord`).
     parser : {"pint", "openmm.unit", "astropy.units"}, optional
         Parser used when `quantity_or_unit` or `to_unit` is provided as a string.
     to_type : {"quantity", "unit", "value"}, optional, default="quantity"
@@ -148,6 +149,18 @@ def convert(
             to_type=to_type,
         )
         return quantity_or_unit
+
+    if form_in == "record" or to_form == "record":
+        from ..record import _convert_with_records
+
+        return _convert_with_records(
+            quantity_or_unit,
+            form_in=form_in,
+            to_unit=to_unit,
+            to_form=to_form,
+            parser=parser,
+            to_type=to_type,
+        )
 
     exact_unit_fast_path_is_eligible = (
         form_in != "string" and to_unit is not None and form_in == to_form and to_type == "quantity"

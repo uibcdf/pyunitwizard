@@ -1,0 +1,35 @@
+{
+  "record": {
+    "block_digests": [
+      "blake2b-128:032afeb78e1a176e91751a6e8d396ff7"
+    ],
+    "digest": "blake2b-128:639fc7f9cc2be715d7679a4965bc5614",
+    "manifest": {
+      "blocks": [
+        2
+      ],
+      "dtype": "int32",
+      "field": "properties.molecular_weight",
+      "format": "qrec/0.3",
+      "shape": [
+        2
+      ],
+      "si": {
+        "exponents": {
+          "kg": 1
+        },
+        "factor": 1.66053906892e-27,
+        "offset": 0.0
+      },
+      "unit": "dalton"
+    },
+    "values": [
+      180,
+      18
+    ]
+  },
+  "si_values": [
+    2.988970324056e-25,
+    2.988970324056e-26
+  ]
+}

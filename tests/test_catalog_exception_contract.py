@@ -14,6 +14,7 @@ from pyunitwizard._private.exceptions import (
     NotImplementedFormError,
     NotImplementedMethodError,
     NotImplementedParserError,
+    RecordError,
 )
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +37,7 @@ EXCEPTION_CASES = [
     (NotImplementedFormError, {"form": "future-form"}),
     (NotImplementedMethodError, {}),
     (NotImplementedParserError, {"parser": "future-parser"}),
+    (RecordError, {"reason": "digest mismatch", "field": "bioactivity.ic50"}),
 ]
 
 

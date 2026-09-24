@@ -1,0 +1,35 @@
+{
+  "record": {
+    "block_digests": [
+      "blake2b-128:438a680675108035cc7306af8b0d2d5a"
+    ],
+    "digest": "blake2b-128:2d92ab58f4fa8eda4b77833abce928a2",
+    "manifest": {
+      "blocks": [
+        1
+      ],
+      "dtype": "float64",
+      "field": "fluid.viscosity",
+      "format": "qrec/0.3",
+      "shape": [
+        1
+      ],
+      "si": {
+        "exponents": {
+          "kg": 1,
+          "m": -1,
+          "s": -1
+        },
+        "factor": 1.0,
+        "offset": 0.0
+      },
+      "unit": "newton * second / meter ** 2"
+    },
+    "values": [
+      0.001
+    ]
+  },
+  "si_values": [
+    0.001
+  ]
+}

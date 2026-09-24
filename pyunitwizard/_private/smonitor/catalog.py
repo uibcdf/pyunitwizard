@@ -74,6 +74,12 @@ CATALOG = {
             "category": "standards",
             "level": "ERROR",
         },
+        "RecordError": {
+            "code": "PUW-ERR-REC-001",
+            "source": "pyunitwizard.error.record",
+            "category": "record",
+            "level": "ERROR",
+        },
     },
     "events": {
         "ProbeMiss": {
@@ -156,6 +162,13 @@ CODES = {
         "dev_message": "No standards defined in '{caller}'.",
         "dev_hint": "Call configure.set_standard_units(). Docs: {doc_url}",
     },
+    "PUW-ERR-REC-001": {
+        "title": "Quantity record refused",
+        "user_message": "Quantity record for field '{field}' refused: {reason}.",
+        "user_hint": "A record is read only when its seal, its unit description and the reader's expectations all agree; there is no default unit. Docs: {doc_url}",
+        "dev_message": "Quantity record for field '{field}' refused in '{caller}': {reason}.",
+        "dev_hint": "Write records only through QuantityRecord, and declare the expected field, unit or dimensionality when reading. Docs: {doc_url}",
+    },
     "PUW-DBG-PROBE-001": {
         "title": "Expected probe miss",
         "user_message": "Input is not a recognized quantity in this probe context.",
@@ -182,6 +195,7 @@ SIGNALS = {
     "pyunitwizard.error.not_implemented_form": {"extra_required": ["form", "caller"]},
     "pyunitwizard.error.not_implemented_method": {"extra_required": ["caller"]},
     "pyunitwizard.error.not_implemented_parser": {"extra_required": ["parser", "caller"]},
+    "pyunitwizard.error.record": {"extra_required": ["reason", "field", "caller"]},
     "pyunitwizard.error.no_standards": {"extra_required": ["caller"]},
     "pyunitwizard.debug.probe_miss": {"extra_required": ["value", "caller"]},
 }

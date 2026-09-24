@@ -8,3 +8,4 @@ from .no_standards_error import NoStandardsError
 from .not_implemented_form_error import NotImplementedFormError
 from .not_implemented_method_error import NotImplementedMethodError
 from .not_implemented_parser_error import NotImplementedParserError
+from .record_error import RecordError

@@ -1,6 +1,6 @@
 from pyunitwizard import kernel
 
-forms = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "string"]
+forms = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "string", "record"]
 
 _LOADING = False
 
@@ -41,7 +41,7 @@ def digest_form(form: str, load: bool = True) -> str:
         raise ValueError
 
     # Dynamic on-demand lazy library loading with re-entrancy guard
-    if load and form_name is not None and form_name != "string":
+    if load and form_name is not None and form_name not in ("string", "record"):
         if form_name not in kernel.loaded_libraries and not _LOADING:
             _LOADING = True
             try:

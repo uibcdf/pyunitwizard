@@ -69,6 +69,9 @@ _LAZY_ATTRIBUTES = {
     "to_string": (".api", "to_string"),
     "unit": (".api", "unit"),
     "context": (".api", "context"),
+    # Inert interchange form (provisional until the 1.0 checklist promotes it; #82)
+    "QuantityRecord": (".record", "QuantityRecord"),
+    "QuantityRecordBundle": (".record", "QuantityRecordBundle"),
 }
 
 __all__ = sorted(list(_LAZY_ATTRIBUTES.keys()))

@@ -1,0 +1,35 @@
+{
+  "record": {
+    "block_digests": [
+      "blake2b-128:d6c6e03474428b859698d3146757148b"
+    ],
+    "digest": "blake2b-128:ebabe38f097315eb3ccb74e35d7e4b05",
+    "manifest": {
+      "blocks": [
+        2
+      ],
+      "dtype": "float64",
+      "field": "assay.temperature",
+      "format": "qrec/0.3",
+      "shape": [
+        2
+      ],
+      "si": {
+        "exponents": {
+          "K": 1
+        },
+        "factor": 1.0,
+        "offset": 273.15
+      },
+      "unit": "degree_Celsius"
+    },
+    "values": [
+      20.0,
+      37.0
+    ]
+  },
+  "si_values": [
+    293.15,
+    310.15
+  ]
+}
