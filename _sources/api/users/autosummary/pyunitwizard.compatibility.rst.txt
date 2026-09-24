@@ -1,0 +1,6 @@
+﻿pyunitwizard.compatibility
+==========================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: compatibility

@@ -1,0 +1,1096 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>pyunitwizard.record – PyUnitWizard 0.27.0</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../_static/documentation_options.js?v=3b7790a3"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyunitwizard/record';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.27.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.27.0 documentation - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.27.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyunitwizard.record</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyunitwizard.record</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""QuantityRecord: PyUnitWizard's inert interchange form (provisional).</span>
+
+<span class="sd">A quantity record carries values together with a verified description of their unit, so</span>
+<span class="sd">that a number is never read in a unit it was not written in. It is a *form* like</span>
+<span class="sd">``"string"``: it converts to and from every other form, and it does not compute. To</span>
+<span class="sd">compute, convert it to ``pint``, ``openmm.unit``, ``astropy.units`` or ``unyt``.</span>
+
+<span class="sd">Design, alternatives and measurements: uibcdf/pyunitwizard#83. Implementation issue:</span>
+<span class="sd">uibcdf/pyunitwizard#82. The API is **provisional** until the 1.0 checklist promotes it</span>
+<span class="sd">(``devguide/release_1.0.0_checklist.md``).</span>
+
+<span class="sd">What a record guarantees:</span>
+
+<span class="sd">- **The unit travels inside the same object as the values.** Its canonical name and its</span>
+<span class="sd">  description in SI base units (factor, offset, exponents) are both recorded, and readers</span>
+<span class="sd">  check that they agree.</span>
+<span class="sd">- **A seal.** A blake2b digest covers the manifest and the values' bytes. Only this module</span>
+<span class="sd">  produces it, so any change made elsewhere (a hand edit, a raw append, a renamed unit)</span>
+<span class="sd">  fails on read.</span>
+<span class="sd">- **A handshake.** Readers may declare the field, unit, dimensionality or kind they</span>
+<span class="sd">  expect; a disagreement is an error.</span>
+<span class="sd">- **No defaults.** A record without a manifest is refused; there is no fallback unit.</span>
+
+<span class="sd">It is not a "passport" (see ``standards/PYUNITWIZARD_GUIDE.md``). It remembers nothing</span>
+<span class="sd">about live objects and never lets a check be skipped; it is verified every time it is read.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._private.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecordError</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FORMAT"</span><span class="p">,</span> <span class="s2">"BUNDLE_FORMAT"</span><span class="p">,</span> <span class="s2">"QuantityRecord"</span><span class="p">,</span> <span class="s2">"QuantityRecordBundle"</span><span class="p">,</span> <span class="s2">"RecordError"</span><span class="p">]</span>
+
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">"qrec/0.3"</span>
+<span class="n">BUNDLE_FORMAT</span> <span class="o">=</span> <span class="s2">"qrec-bundle/0.3"</span>
+<span class="c1">#: Relative tolerance between a record's SI description and this reader's definition of the</span>
+<span class="c1">#: same unit. Definitions differ across CODATA revisions (dalton: ~1.4e-9 between 2018 and</span>
+<span class="c1">#: 2022) and libraries (UDUNITS' ``u`` differs from pint's dalton by ~7e-7). Distinct units</span>
+<span class="c1">#: are never this close, so a larger disagreement means the unit is not what it claims.</span>
+<span class="n">REL_TOL</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">DTYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"float64"</span><span class="p">,</span> <span class="s2">"float32"</span><span class="p">,</span> <span class="s2">"int64"</span><span class="p">,</span> <span class="s2">"int32"</span><span class="p">,</span> <span class="s2">"int16"</span><span class="p">,</span> <span class="s2">"uint8"</span><span class="p">,</span> <span class="s2">"uint16"</span><span class="p">)</span>
+<span class="n">_SI_BASE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"[length]"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">,</span>
+    <span class="s2">"[mass]"</span><span class="p">:</span> <span class="s2">"kg"</span><span class="p">,</span>
+    <span class="s2">"[time]"</span><span class="p">:</span> <span class="s2">"s"</span><span class="p">,</span>
+    <span class="s2">"[current]"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">,</span>
+    <span class="s2">"[temperature]"</span><span class="p">:</span> <span class="s2">"K"</span><span class="p">,</span>
+    <span class="s2">"[substance]"</span><span class="p">:</span> <span class="s2">"mol"</span><span class="p">,</span>
+    <span class="s2">"[luminosity]"</span><span class="p">:</span> <span class="s2">"cd"</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="c1"># --- canonical bytes ---------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_canonical</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Language-independent encoding of manifest data.</span>
+
+<span class="sd">    JSON text is not canonical across languages (Python writes ``1e-06``, JavaScript</span>
+<span class="sd">    ``0.000001``), so the digest is computed over this tagged little-endian encoding.</span>
+<span class="sd">    Map keys are sorted by their UTF-8 bytes.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"n"</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"t"</span> <span class="k">if</span> <span class="n">obj</span> <span class="k">else</span> <span class="sa">b</span><span class="s2">"f"</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"i"</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;q"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="o">!=</span> <span class="n">obj</span> <span class="ow">or</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"-inf"</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"a manifest cannot hold a non-finite number"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"d"</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;d"</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"s"</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;I"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">+</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">"l"</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;I"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="o">+</span> <span class="sa">b</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_canonical</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">b</span><span class="s2">"m"</span>
+            <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;I"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
+            <span class="o">+</span> <span class="sa">b</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">"&lt;I"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="n">_canonical</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> cannot appear in a manifest"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_little_endian</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">memoryview</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""C-order little-endian bytes, with every NaN written as the canonical quiet NaN."""</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">"&lt;"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"f"</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">),</span> <span class="n">values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">dtype</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">values</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">c_contiguous</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_digest</span><span class="p">(</span><span class="o">*</span><span class="n">parts</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">blake2b</span><span class="p">(</span><span class="n">digest_size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">part</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">memoryview</span><span class="p">))</span> <span class="k">else</span> <span class="n">_canonical</span><span class="p">(</span><span class="n">part</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">"blake2b-128:"</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_seal</span><span class="p">(</span><span class="n">manifest</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Block digests and record digest. Only the codec may call this."""</span>
+    <span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">block_digests</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="p">[],</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"blocks"</span><span class="p">]):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">flat</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">start</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span>
+        <span class="n">block_digests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_digest</span><span class="p">({</span><span class="s2">"block"</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s2">"dtype"</span><span class="p">:</span> <span class="n">manifest</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]},</span> <span class="n">_little_endian</span><span class="p">(</span><span class="n">block</span><span class="p">)))</span>
+        <span class="n">start</span> <span class="o">+=</span> <span class="n">size</span>
+    <span class="k">return</span> <span class="n">block_digests</span><span class="p">,</span> <span class="n">_digest</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"ascii"</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">block_digests</span><span class="p">])</span>
+
+
+<span class="c1"># --- unit description --------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_registry</span><span class="p">():</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.forms.api_pint</span><span class="w"> </span><span class="kn">import</span> <span class="n">ureg</span>
+
+    <span class="k">return</span> <span class="n">ureg</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_canonical_name</span><span class="p">(</span><span class="n">unit</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""PyUnitWizard's canonical spelling: pint's default long form, whatever the display</span>
+<span class="sd">    format a user configured on the registry."""</span>
+    <span class="k">return</span> <span class="nb">format</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">)</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_describe</span><span class="p">(</span><span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">ureg</span> <span class="o">=</span> <span class="n">_registry</span><span class="p">()</span>
+    <span class="n">one</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+    <span class="n">base_one</span><span class="p">,</span> <span class="n">base_zero</span> <span class="o">=</span> <span class="n">one</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">(),</span> <span class="n">zero</span><span class="o">.</span><span class="n">to_base_units</span><span class="p">()</span>
+    <span class="n">exponents</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">exponent</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">one</span><span class="o">.</span><span class="n">dimensionality</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exponent</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">dimension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_SI_BASE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unit </span><span class="si">{</span><span class="n">unit</span><span class="si">!r}</span><span class="s2"> has a dimension outside the SI base: </span><span class="si">{</span><span class="n">dimension</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">exponents</span><span class="p">[</span><span class="n">_SI_BASE</span><span class="p">[</span><span class="n">dimension</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span> <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">()</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">base_zero</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="n">_canonical_name</span><span class="p">(</span><span class="n">one</span><span class="o">.</span><span class="n">units</span><span class="p">),</span>
+            <span class="s2">"si"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"factor"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">base_one</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span> <span class="o">-</span> <span class="n">offset</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span>
+                <span class="s2">"exponents"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">exponents</span><span class="o">.</span><span class="n">items</span><span class="p">())),</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_descriptor</span><span class="p">(</span><span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""A fresh description every call: a record must never share state with the cache</span>
+<span class="sd">    that checks it."""</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">_describe</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cross_check</span><span class="p">(</span><span class="n">description</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""The unit's name and its SI description must tell the same story."""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">])</span>
+    <span class="k">except</span> <span class="n">RecordError</span><span class="p">:</span>
+        <span class="k">raise</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unit </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'unit'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> is not known to this reader"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+    <span class="k">if</span> <span class="n">reference</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">description</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unit </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'unit'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> is not in canonical spelling"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+    <span class="n">si</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s2">"si"</span><span class="p">],</span> <span class="n">reference</span><span class="p">[</span><span class="s2">"si"</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">si</span><span class="p">[</span><span class="s2">"exponents"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"exponents"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unit </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'unit'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> disagrees with its SI dimensions"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"factor"</span><span class="p">,</span> <span class="s2">"offset"</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">si</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">ref</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">REL_TOL</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unit </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'unit'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> disagrees with its SI </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+
+
+<span class="c1"># --- values ----------------------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_dtype</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">DTYPES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">values</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"f"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"i"</span> <span class="ow">or</span> <span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"u"</span> <span class="ow">and</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"values of dtype </span><span class="si">{</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> cannot be recorded"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_to_pint</span><span class="p">(</span><span class="n">quantity</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.api.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.api.introspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_quantity</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">QuantityRecord</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">quantity</span><span class="o">.</span><span class="n">to_quantity</span><span class="p">(</span><span class="n">form</span><span class="o">=</span><span class="s2">"pint"</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_quantity</span><span class="p">(</span><span class="n">quantity</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"a record is built from a quantity, not from a bare value"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s2">"pint"</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_decode</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">manifest</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">])</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">"&lt;"</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="s2">"base64"</span><span class="p">],</span> <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"shape"</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">"="</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"values do not match the manifest's dtype and shape"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_encode</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">encoding</span> <span class="o">==</span> <span class="s2">"base64"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"base64"</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">_little_endian</span><span class="p">(</span><span class="n">values</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"ascii"</span><span class="p">)}</span>
+    <span class="k">if</span> <span class="n">encoding</span> <span class="o">!=</span> <span class="s2">"json"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"unknown encoding </span><span class="si">{</span><span class="n">encoding</span><span class="si">!r}</span><span class="s2">; use 'json' or 'base64'"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">"f"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span>
+            <span class="n">reason</span><span class="o">=</span><span class="s2">"JSON has no NaN or infinity; use encoding='base64' for non-finite values"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+
+<span class="c1"># --- QuantityRecord ----------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="QuantityRecord">
+<a class="viewcode-back" href="../../api/users/autosummary/pyunitwizard.QuantityRecord.html#pyunitwizard.QuantityRecord">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuantityRecord</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Values plus a verified description of their unit. Inert: it does not compute.</span>
+
+<span class="sd">    Build one with :meth:`from_quantity` (or ``puw.convert(q, to_form="record")``), store</span>
+<span class="sd">    it with :meth:`to_dict`, read it back with :meth:`from_dict`, and get a computing</span>
+<span class="sd">    quantity with :meth:`to_quantity`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import pyunitwizard as puw</span>
+<span class="sd">    &gt;&gt;&gt; from pyunitwizard.record import QuantityRecord</span>
+<span class="sd">    &gt;&gt;&gt; record = QuantityRecord.from_quantity(puw.quantity(3.0, "nM"), field="ic50")</span>
+<span class="sd">    &gt;&gt;&gt; data = record.to_dict()                      # JSON-ready, sealed</span>
+<span class="sd">    &gt;&gt;&gt; q = QuantityRecord.from_dict(data).to_quantity(field="ic50", unit="uM")</span>
+<span class="sd">    """</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"_manifest"</span><span class="p">,</span> <span class="s2">"_values"</span><span class="p">,</span> <span class="s2">"_block_digests"</span><span class="p">,</span> <span class="s2">"_digest"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuantityRecord.__init__">
+<a class="viewcode-back" href="../../api/users/autosummary/pyunitwizard.QuantityRecord.html#pyunitwizard.QuantityRecord.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover - construction goes through classmethods</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"build a QuantityRecord with from_quantity() or from_dict()"</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">manifest</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">block_digests</span><span class="p">,</span> <span class="n">digest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecord"</span><span class="p">:</span>
+        <span class="n">record</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">values</span><span class="o">.</span><span class="n">setflags</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">record</span><span class="o">.</span><span class="n">_manifest</span> <span class="o">=</span> <span class="n">manifest</span>
+        <span class="n">record</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="n">record</span><span class="o">.</span><span class="n">_block_digests</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">block_digests</span><span class="p">)</span>
+        <span class="n">record</span><span class="o">.</span><span class="n">_digest</span> <span class="o">=</span> <span class="n">digest</span>
+        <span class="k">return</span> <span class="n">record</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_quantity</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">quantity</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">unit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">kind</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecord"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Seal a quantity. The value and its unit are taken from the same object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        quantity : quantity in any PyUnitWizard form</span>
+<span class="sd">            The quantity to record. Bare numbers are refused.</span>
+<span class="sd">        field : str, optional</span>
+<span class="sd">            The name the values are bound to. A reader that declares a field refuses a</span>
+<span class="sd">            record bound to another one, or to none.</span>
+<span class="sd">        unit : str, optional</span>
+<span class="sd">            The negotiated unit to record in. Defaults to the quantity's own unit.</span>
+<span class="sd">        kind : str, optional</span>
+<span class="sd">            A quantity-kind identifier (a QUDT or OBO UO IRI, for instance). It tells apart</span>
+<span class="sd">            units with equal SI dimensions, such as hertz and becquerel.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        QuantityRecord</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RecordError</span>
+<span class="sd">            If ``quantity`` is not a quantity, or its values cannot be recorded.</span>
+<span class="sd">        """</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">_to_pint</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">_normalize_dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">magnitude</span><span class="p">))</span>
+        <span class="n">manifest</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"format"</span><span class="p">:</span> <span class="n">FORMAT</span><span class="p">,</span> <span class="s2">"field"</span><span class="p">:</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">_descriptor</span><span class="p">(</span><span class="n">_canonical_name</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">units</span><span class="p">))}</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">manifest</span><span class="p">[</span><span class="s2">"kind"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
+        <span class="n">manifest</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"dtype"</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"shape"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s2">"blocks"</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="p">)]})</span>
+        <span class="n">block_digests</span><span class="p">,</span> <span class="n">digest</span> <span class="o">=</span> <span class="n">_seal</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">block_digests</span><span class="p">,</span> <span class="n">digest</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecord"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Read a stored record, refusing it unless every check passes.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RecordError</span>
+<span class="sd">            If the manifest is missing or malformed, the seal does not verify, or the unit's</span>
+<span class="sd">            name and SI description disagree.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"manifest"</span><span class="p">),</span> <span class="n">Mapping</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"no manifest; there is no default unit"</span><span class="p">)</span>
+        <span class="n">manifest</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"manifest"</span><span class="p">]))</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"field"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"format"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">FORMAT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"format </span><span class="si">{</span><span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'format'</span><span class="p">)</span><span class="si">!r}</span><span class="s2"> is not </span><span class="si">{</span><span class="n">FORMAT</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"unit"</span><span class="p">,</span> <span class="s2">"si"</span><span class="p">,</span> <span class="s2">"dtype"</span><span class="p">,</span> <span class="s2">"shape"</span><span class="p">,</span> <span class="s2">"blocks"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">manifest</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"the manifest has no </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">manifest</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DTYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"dtype </span><span class="si">{</span><span class="n">manifest</span><span class="p">[</span><span class="s1">'dtype'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> is not allowed"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">_decode</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"values"</span><span class="p">),</span> <span class="n">manifest</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"blocks"</span><span class="p">])</span> <span class="o">!=</span> <span class="n">values</span><span class="o">.</span><span class="n">size</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"block_digests"</span><span class="p">,</span> <span class="p">[]))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">manifest</span><span class="p">[</span><span class="s2">"blocks"</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"the blocks do not cover the values"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">block_digests</span><span class="p">,</span> <span class="n">digest</span> <span class="o">=</span> <span class="n">_seal</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"block_digests"</span><span class="p">,</span> <span class="p">[]))</span> <span class="o">!=</span> <span class="n">block_digests</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"the values were changed outside the codec"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"digest"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">digest</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"the manifest was changed outside the codec"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">_cross_check</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">block_digests</span><span class="p">,</span> <span class="n">digest</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"json"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""The sealed, JSON-ready representation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        encoding : {"json", "base64"}</span>
+<span class="sd">            ``"json"`` writes readable lists and refuses non-finite values, which JSON</span>
+<span class="sd">            cannot hold. ``"base64"`` writes the little-endian bytes (about 1.33 times their</span>
+<span class="sd">            raw size) and holds any value exactly.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"manifest"</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_manifest</span><span class="p">),</span>
+            <span class="s2">"values"</span><span class="p">:</span> <span class="n">_encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">),</span>
+            <span class="s2">"block_digests"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_block_digests</span><span class="p">),</span>
+            <span class="s2">"digest"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digest</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_quantity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">field</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">unit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dimensionality</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">kind</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">form</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""A computing quantity, after the reader's handshake.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        field : str, optional</span>
+<span class="sd">            The field the reader expects. A record bound to another field, or to none, is</span>
+<span class="sd">            refused.</span>
+<span class="sd">        unit : str, optional</span>
+<span class="sd">            Convert to this unit. A unit of other dimensions is refused.</span>
+<span class="sd">        dimensionality : dict, optional</span>
+<span class="sd">            Expected dimensionality in PyUnitWizard notation, e.g. ``{"[L]": 1}``.</span>
+<span class="sd">        kind : str, optional</span>
+<span class="sd">            The quantity kind the reader expects.</span>
+<span class="sd">        form : str, optional</span>
+<span class="sd">            The form to return. Defaults to the session's default form, or ``"pint"``.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RecordError</span>
+<span class="sd">            If any expectation is not met.</span>
+<span class="sd">        """</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">kernel</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.api.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.api.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check</span>
+
+        <span class="k">if</span> <span class="n">field</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">!=</span> <span class="n">field</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"the record belongs to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">!r}</span><span class="s2">, not </span><span class="si">{</span><span class="n">field</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">!=</span> <span class="n">kind</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"expected kind </span><span class="si">{</span><span class="n">kind</span><span class="si">!r}</span><span class="s2">, the record holds </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">_registry</span><span class="p">()</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">target</span><span class="p">[</span><span class="s2">"si"</span><span class="p">][</span><span class="s2">"exponents"</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">si</span><span class="p">[</span><span class="s2">"exponents"</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">!r}</span><span class="s2"> cannot be read as </span><span class="si">{</span><span class="n">unit</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">target</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">:</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">dimensionality</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">dimensionality</span><span class="o">=</span><span class="n">dimensionality</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span>
+                <span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"expected dimensionality </span><span class="si">{</span><span class="n">dimensionality</span><span class="si">}</span><span class="s2">, the record holds </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span>
+            <span class="p">)</span>
+        <span class="n">target_form</span> <span class="o">=</span> <span class="n">form</span> <span class="ow">or</span> <span class="n">kernel</span><span class="o">.</span><span class="n">default_form</span> <span class="ow">or</span> <span class="s2">"pint"</span>
+        <span class="k">return</span> <span class="n">q</span> <span class="k">if</span> <span class="n">target_form</span> <span class="o">==</span> <span class="s2">"pint"</span> <span class="k">else</span> <span class="n">convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="n">target_form</span><span class="p">)</span>
+
+    <span class="c1"># --- read-only views -------------------------------------------------------------</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"field"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manifest</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">si</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_manifest</span><span class="p">[</span><span class="s2">"si"</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""The recorded values, read-only: they cannot change behind the seal."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">digest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digest</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"QuantityRecord(field=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">!r}</span><span class="s2">, unit=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">!r}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"shape=</span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">, dtype=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuantityRecord</span><span class="p">)</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">_digest</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digest</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_digest</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># --- bundles ---------------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="QuantityRecordBundle">
+<a class="viewcode-back" href="../../api/users/autosummary/pyunitwizard.QuantityRecordBundle.html#pyunitwizard.QuantityRecordBundle">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">QuantityRecordBundle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Many small quantities under one seal, for documents such as a card.</span>
+
+<span class="sd">    A separate record per scalar costs about 350 bytes; a bundle about half, with a single</span>
+<span class="sd">    digest over every entry, its unit description and its values.</span>
+<span class="sd">    """</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"_entries"</span><span class="p">,</span> <span class="s2">"_digest"</span><span class="p">)</span>
+
+<div class="viewcode-block" id="QuantityRecordBundle.__init__">
+<a class="viewcode-back" href="../../api/users/autosummary/pyunitwizard.QuantityRecordBundle.html#pyunitwizard.QuantityRecordBundle.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"build a QuantityRecordBundle with from_quantities() or from_dict()"</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_new</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">entries</span><span class="p">,</span> <span class="n">digest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecordBundle"</span><span class="p">:</span>
+        <span class="n">bundle</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">_entries</span> <span class="o">=</span> <span class="n">entries</span>
+        <span class="n">bundle</span><span class="o">.</span><span class="n">_digest</span> <span class="o">=</span> <span class="n">digest</span>
+        <span class="k">return</span> <span class="n">bundle</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parts</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">parts</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">"format"</span><span class="p">:</span> <span class="n">BUNDLE_FORMAT</span><span class="p">}]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">entries</span><span class="p">):</span>
+            <span class="n">description</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">entries</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">parts</span> <span class="o">+=</span> <span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">_little_endian</span><span class="p">(</span><span class="n">values</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">parts</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_quantities</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">quantities</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">kinds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecordBundle"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Seal a mapping of field names to quantities (any PyUnitWizard form)."""</span>
+        <span class="n">entries</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">quantities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">_to_pint</span><span class="p">(</span><span class="n">quantity</span><span class="p">)</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">_normalize_dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">magnitude</span><span class="p">))</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="n">_descriptor</span><span class="p">(</span><span class="n">_canonical_name</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">kinds</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">kinds</span><span class="p">:</span>
+                <span class="n">description</span><span class="p">[</span><span class="s2">"kind"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">kinds</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+            <span class="n">description</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"dtype"</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"shape"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">)})</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">setflags</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">entries</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">_digest</span><span class="p">(</span><span class="o">*</span><span class="bp">cls</span><span class="o">.</span><span class="n">_parts</span><span class="p">(</span><span class="n">entries</span><span class="p">)))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"QuantityRecordBundle"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Read a stored bundle, refusing it unless the seal and every unit check pass."""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"format"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">BUNDLE_FORMAT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"not a </span><span class="si">{</span><span class="n">BUNDLE_FORMAT</span><span class="si">!r}</span><span class="s2"> bundle"</span><span class="p">)</span>
+        <span class="n">entries</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">stored</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"entries"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">stored</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"values"</span><span class="p">}</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"unit"</span><span class="p">,</span> <span class="s2">"si"</span><span class="p">,</span> <span class="s2">"dtype"</span><span class="p">,</span> <span class="s2">"shape"</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">description</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"the entry has no </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">description</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DTYPES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"dtype </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'dtype'</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> is not allowed"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">_decode</span><span class="p">(</span><span class="n">stored</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"values"</span><span class="p">),</span> <span class="n">description</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">setflags</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">entries</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"digest"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">_digest</span><span class="p">(</span><span class="o">*</span><span class="bp">cls</span><span class="o">.</span><span class="n">_parts</span><span class="p">(</span><span class="n">entries</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"the bundle was changed outside the codec"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">entries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">_cross_check</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">"digest"</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""The sealed, JSON-ready representation (strict JSON; non-finite values refused)."""</span>
+        <span class="n">entries</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_entries</span><span class="p">):</span>
+            <span class="n">description</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_entries</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">entries</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">description</span><span class="p">),</span> <span class="s2">"values"</span><span class="p">:</span> <span class="n">_encode</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s2">"json"</span><span class="p">,</span> <span class="n">name</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"format"</span><span class="p">:</span> <span class="n">BUNDLE_FORMAT</span><span class="p">,</span> <span class="s2">"entries"</span><span class="p">:</span> <span class="n">entries</span><span class="p">,</span> <span class="s2">"digest"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digest</span><span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_entries</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_quantities</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">form</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Computing quantities, after the handshake.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        expected : dict, optional</span>
+<span class="sd">            Every field the reader expects, mapped to its expected dimensionality (or</span>
+<span class="sd">            ``None``). A bundle holding other fields, or missing one, is refused.</span>
+<span class="sd">        form : str, optional</span>
+<span class="sd">            The form to return. Defaults to the session's default form, or ``"pint"``.</span>
+<span class="sd">        """</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">kernel</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.api.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.api.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check</span>
+
+        <span class="k">if</span> <span class="n">expected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">set</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_entries</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"the bundle holds </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="si">}</span><span class="s2">, expected </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">target_form</span> <span class="o">=</span> <span class="n">form</span> <span class="ow">or</span> <span class="n">kernel</span><span class="o">.</span><span class="n">default_form</span> <span class="ow">or</span> <span class="s2">"pint"</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_entries</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">_registry</span><span class="p">()</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">description</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">])</span>
+            <span class="n">wanted</span> <span class="o">=</span> <span class="p">(</span><span class="n">expected</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">wanted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">dimensionality</span><span class="o">=</span><span class="n">wanted</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span>
+                    <span class="n">reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">"expected dimensionality </span><span class="si">{</span><span class="n">wanted</span><span class="si">}</span><span class="s2">, the entry holds </span><span class="si">{</span><span class="n">description</span><span class="p">[</span><span class="s1">'unit'</span><span class="p">]</span><span class="si">!r}</span><span class="s2">"</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">name</span>
+                <span class="p">)</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span> <span class="k">if</span> <span class="n">target_form</span> <span class="o">==</span> <span class="s2">"pint"</span> <span class="k">else</span> <span class="n">convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="n">target_form</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"QuantityRecordBundle(fields=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="si">}</span><span class="s2">)"</span></div>
+
+
+
+<span class="c1"># --- the "record" form inside convert() -------------------------------------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_with_records</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">form_in</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">,</span> <span class="n">to_form</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="n">to_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""convert() delegates here whenever the source or the target form is "record"."""</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">._private.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArgumentError</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.api.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+
+    <span class="k">if</span> <span class="n">to_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"quantity"</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ArgumentError</span><span class="p">(</span><span class="n">argument</span><span class="o">=</span><span class="s2">"to_type"</span><span class="p">)</span>
+    <span class="n">unit_name</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">to_unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">unit_name</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">to_unit</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">to_unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">_canonical_name</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">to_unit</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s2">"pint"</span><span class="p">,</span> <span class="n">to_type</span><span class="o">=</span><span class="s2">"unit"</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">form_in</span> <span class="o">==</span> <span class="s2">"record"</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_quantity</span><span class="p">(</span><span class="n">form</span><span class="o">=</span><span class="s2">"pint"</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">unit_name</span><span class="p">)</span>
+        <span class="n">field</span><span class="p">,</span> <span class="n">kind</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">kind</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="s2">"pint"</span><span class="p">,</span> <span class="n">to_unit</span><span class="o">=</span><span class="n">unit_name</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">kind</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">to_form</span> <span class="o">!=</span> <span class="s2">"record"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">to_form</span><span class="o">=</span><span class="n">to_form</span><span class="p">,</span> <span class="n">to_type</span><span class="o">=</span><span class="n">to_type</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">to_type</span> <span class="o">==</span> <span class="s2">"unit"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_canonical_name</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">to_type</span> <span class="o">==</span> <span class="s2">"value"</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">QuantityRecord</span><span class="o">.</span><span class="n">from_quantity</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">field</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2026, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

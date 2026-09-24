@@ -1,8 +1,0 @@
-# .coveragerc
-
-[run]
-branch = True
-source = pyunitwizard
-
-[report]
-show_missing = True

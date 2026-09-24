@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.get\_default\_form
+=========================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: get_default_form

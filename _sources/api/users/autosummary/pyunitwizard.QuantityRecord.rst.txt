@@ -1,0 +1,37 @@
+﻿pyunitwizard.QuantityRecord
+===========================
+
+.. currentmodule:: pyunitwizard
+
+.. autoclass:: QuantityRecord
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QuantityRecord.__init__
+      ~QuantityRecord.from_dict
+      ~QuantityRecord.from_quantity
+      ~QuantityRecord.to_dict
+      ~QuantityRecord.to_quantity
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QuantityRecord.digest
+      ~QuantityRecord.field
+      ~QuantityRecord.kind
+      ~QuantityRecord.si
+      ~QuantityRecord.unit
+      ~QuantityRecord.values
+   
+   

@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-16x16.png" sizes="16x16" rel="icon" type="image/png">
+    <link href="../../_static/favicon-124x124.png" sizes="124x124" rel="icon" type="image/png">
+    <link href="../../_static/favicon-128x128.png" sizes="128x128" rel="icon" type="image/png">
+    <link href="../../_static/favicon-192x192.png" sizes="192x192" rel="icon" type="image/png">
+    <link href="../../_static/icon.svg" rel="icon" type="image/svg+xml">
+  
+    <title>Why QuantityRecord – PyUnitWizard 0.27.0</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+
+    <script src="../../_static/documentation_options.js?v=3b7790a3"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/user/quantity-records-why';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Integrating Your Library" href="integrating-your-library.html" />
+    <link rel="prev" title="Quantity Records" href="quantity-records.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.27.0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.27.0 documentation - Home"/>
+    <img src="../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.27.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="library-integrators.html">Library Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="end-users.html">End Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what-pyunitwizard-solves.html">What PyUnitWizard Solves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adoption-story.html">Adoption Story: From Drift to Determinism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend-coverage.html">Backend Coverage and Expectations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numpy-pandas-matplotlib.html">NumPy, Pandas, and Matplotlib Interoperability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mini-library-walkthrough.html">Mini Library Walkthrough</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantity-records.html">Quantity Records</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Why QuantityRecord</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrating-your-library.html">Integrating Your Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="production-checklist.html">Production Checklist</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Importing.html">Import and configure PyUnitWizard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quantities_and_Units.html">Quantities and Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Convert.html">Convert quantities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Strings.html">Working with strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dimensionality.html">Dimensionality and Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Check.html">Check</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Similarity.html">Similarity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Standardize.html">Standardization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lists_and_arrays.html">Working with lists and arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="In_Your_Library.html">PyUnitWizard in your library</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Why QuantityRecord</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="why-quantityrecord">
+<h1>Why QuantityRecord<a class="headerlink" href="#why-quantityrecord" title="Link to this heading">#</a></h1>
+<p>If your data move between tools, files, databases or services, sooner or later a number
+arrives without its unit, or with a unit the receiver misreads. This page explains the
+problem, what already exists to address it, and where
+<a class="reference internal" href="quantity-records.html"><span class="std std-doc">QuantityRecord</span></a> stands among those solutions: what it does better,
+what it does worse, and what it makes possible.</p>
+<p>The full design record, with measurements and every alternative considered, is
+<a class="reference external" href="https://github.com/uibcdf/pyunitwizard/issues/83">uibcdf/pyunitwizard#83</a>.</p>
+<section id="the-problem-a-valid-looking-number-with-the-wrong-unit">
+<h2>The problem: a valid-looking number with the wrong unit<a class="headerlink" href="#the-problem-a-valid-looking-number-with-the-wrong-unit" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Mars Climate Orbiter (1999).</strong> The interface specification required thruster impulse
+in newton-seconds, but the ground software wrote pound-force-seconds into the file. The
+factor was 4.45, and the spacecraft was lost
+(<a class="reference external" href="https://llis.nasa.gov/lesson/641">NASA lessons learned</a>). The unit had been agreed in a
+<em>document</em>; it did not travel with the <em>data</em>.</p></li>
+<li><p><strong>Bioactivity databases.</strong> ChEMBL flags records whose values differ by exactly 3 or 6
+orders of magnitude from otherwise identical entries as a <em>potential transcription
+error</em>, a likely µM-for-nM confusion
+(<a class="reference external" href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions">ChEMBL FAQ</a>).
+A dimension check cannot catch this: both values are concentrations.</p></li>
+<li><p><strong>Our own ecosystem.</strong> While designing this form we found a viewer that took a
+standardized length, dropped its unit and assumed nanometres. Under a user whose standard
+length was ångström, a simulation box was drawn ten times too large, with no error
+(<a class="reference external" href="https://github.com/uibcdf/molsysviewer/issues/96">uibcdf/molsysviewer#96</a>). We also
+found a file format whose readers could take the unit from different places, or fall
+back silently to a default
+(<a class="reference external" href="https://github.com/uibcdf/molsysmt/issues/240">uibcdf/molsysmt#240</a>).</p></li>
+</ul>
+<p>The common thread: <strong>the unit is lost, or assumed, at a boundary.</strong> Units libraries keep
+units right <em>inside</em> one program. They do not, by themselves, keep them right <em>between</em>
+programs.</p>
+</section>
+<section id="what-already-exists">
+<h2>What already exists<a class="headerlink" href="#what-already-exists" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Approach</p></th>
+<th class="head"><p>What it gives</p></th>
+<th class="head"><p>What it leaves open</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Unit libraries</strong> (pint, astropy, unyt, openmm.unit)</p></td>
+<td><p>Correct units and conversions in memory</p></td>
+<td><p>No storage format of their own. Pint suggests <code class="docutils literal notranslate"><span class="pre">str(q)</span></code> or <code class="docutils literal notranslate"><span class="pre">to_tuple()</span></code> (<a class="reference external" href="https://pint.readthedocs.io/en/stable/advanced/serialization.html">docs</a>). Quantities from different pint registries cannot be combined. Pint has no notion of quantity <em>kinds</em> (<a class="reference external" href="https://github.com/hgrecco/pint/issues/676">pint#676</a>, closed).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Per-value <code class="docutils literal notranslate"><span class="pre">{value,</span> <span class="pre">unit}</span></code> records</strong> (for example OpenFF: <a class="reference external" href="https://github.com/openforcefield/openff-units">openff-units</a>, <a class="reference external" href="https://github.com/openforcefield/openff-models">openff-models</a>)</p></td>
+<td><p>The unit next to every value; simple and readable</p></td>
+<td><p>No integrity check and no reader handshake. Costly for arrays: in our measurements, 4.3× the size and 5× the load time of the bare numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CF conventions / UDUNITS</strong> (NetCDF, and Zarr by convention)</p></td>
+<td><p>A required <code class="docutils literal notranslate"><span class="pre">units</span></code> attribute per variable, and <code class="docutils literal notranslate"><span class="pre">standard_name</span></code> as a kind; decades of use (<a class="reference external" href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch03.html">CF units</a>)</p></td>
+<td><p>Nothing detects a unit or a value changed by a tool that ignores the convention. The reader is not required to state what it expects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ASDF</strong> (astronomy)</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">quantity</span></code> type with value and unit, and binary blocks with a checksum (<a class="reference external" href="https://www.asdf-format.org/projects/asdf-standard/en/latest/generated/stsci.edu/asdf/unit/quantity-1.2.0.html">quantity schema</a>)</p></td>
+<td><p>The MD5 checksum is <strong>optional</strong>, covers the <strong>block bytes only</strong>, not the unit, and the behaviour on a mismatch is <strong>not defined</strong> (<a class="reference external" href="https://www.asdf-format.org/projects/asdf-standard/en/latest/file_layout.html">file layout</a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Container checksums</strong> (HDF5 Fletcher32, Parquet page CRC, BagIt manifests)</p></td>
+<td><p>Detect corruption of bytes or files</p></td>
+<td><p>Any writer recomputes them, so they cannot tell a correct write from one that bypassed the rules. They say nothing about units.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>UCUM</strong> (HL7/FHIR, LOINC)</p></td>
+<td><p>A formal, portable spelling of units (<code class="docutils literal notranslate"><span class="pre">mol/L</span></code>; no <code class="docutils literal notranslate"><span class="pre">M</span></code> for molar, since <code class="docutils literal notranslate"><span class="pre">M</span></code> is mega) (<a class="reference external" href="https://ucum.org/ucum">ucum.org</a>)</p></td>
+<td><p>A spelling only: no container, no integrity.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>QUDT</strong> and the <strong>OBO Units Ontology</strong></p></td>
+<td><p>Unit identifiers, conversion multipliers to SI, dimension vectors and quantity kinds (<a class="reference external" href="https://www.qudt.org/pages/QUDToverviewPage.html">QUDT</a>, <a class="reference external" href="http://obofoundry.org/ontology/uo.html">UO</a>)</p></td>
+<td><p>Semantics only: no data format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>D-SI</strong> (metrology, PTB)</p></td>
+<td><p>Strict SI exchange of measurement data (<a class="reference external" href="https://www.dmet.ptb.de/d-si">D-SI</a>)</p></td>
+<td><p>Built for calibration certificates; heavy for large arrays.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each of these solves part of the problem well. None of the ones we examined combines all
+three things a boundary needs: <strong>the unit and the values protected together, a reader
+that must say what it expects, and no default when something is missing.</strong></p>
+</section>
+<section id="where-quantityrecord-stands">
+<h2>Where QuantityRecord stands<a class="headerlink" href="#where-quantityrecord-stands" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>QuantityRecord</p></th>
+<th class="head"><p>Best existing alternative</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Unit travels with the values</p></td>
+<td><p>Inside the same object</p></td>
+<td><p>CF, ASDF, OpenFF</p></td>
+<td><p>equal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integrity of unit <strong>and</strong> values together</p></td>
+<td><p>Digest over the unit description and the values’ bytes</p></td>
+<td><p>ASDF: optional, bytes only</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Detects writes that bypassed the library</p></td>
+<td><p>Only the codec produces the digest</p></td>
+<td><p>Container checksums are recomputed by any writer</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Behaviour on failure</p></td>
+<td><p>Always an error; never a default unit</p></td>
+<td><p>ASDF: undefined; CF: a required attribute, but readers are not held to it</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Reader states its expectations</p></td>
+<td><p>Field, unit, dimensionality, kind</p></td>
+<td><p>Not formalized elsewhere</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>A record copied into another field</p></td>
+<td><p>Refused</p></td>
+<td><p>Not detected elsewhere</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Unit renamed and then resealed</p></td>
+<td><p>Caught: name and SI description must agree</p></td>
+<td><p>QUDT holds both, but does not check one against the other</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Quantity kinds (Hz vs Bq, J vs N·m)</p></td>
+<td><p>Optional <code class="docutils literal notranslate"><span class="pre">kind</span></code>, with QUDT or UO identifiers</p></td>
+<td><p>QUDT, CF <code class="docutils literal notranslate"><span class="pre">standard_name</span></code></p></td>
+<td><p>equal (reused)</p></td>
+</tr>
+<tr class="row-even"><td><p>Readable without the library</p></td>
+<td><p>A reference reader in the Python standard library, and published test vectors</p></td>
+<td><p>CF needs UDUNITS; ASDF needs its library</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Portable across languages</p></td>
+<td><p>Canonical binary encoding of the manifest; strict JSON (no NaN)</p></td>
+<td><p>CF and ASDF, within their ecosystems</p></td>
+<td><p>equal</p></td>
+</tr>
+<tr class="row-even"><td><p>Many units across backends</p></td>
+<td><p>pint, openmm.unit, astropy.units, unyt… through PyUnitWizard</p></td>
+<td><p>OpenFF: pint; ASDF: astropy</p></td>
+<td><p><strong>better</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cost</p></td>
+<td><p>Base64: 1.33× raw size; JSON text: 2.4×; a digest at about 0.3–0.6 GB/s</p></td>
+<td><p>Bare numbers: no cost</p></td>
+<td><p><strong>worse</strong>, by design</p></td>
+</tr>
+<tr class="row-even"><td><p>Maturity and adoption</p></td>
+<td><p>New and provisional</p></td>
+<td><p>CF: decades; UCUM: a clinical standard</p></td>
+<td><p><strong>worse</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Editing data by hand</p></td>
+<td><p>Refused unless resealed through the library</p></td>
+<td><p>Free</p></td>
+<td><p><strong>worse</strong> in comfort, which is the protection</p></td>
+</tr>
+<tr class="row-even"><td><p>Deliberate forgery</p></td>
+<td><p>Out of scope: the threat model is mistakes</p></td>
+<td><p>D-SI certificates carry signatures</p></td>
+<td><p><strong>worse</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Our reading: QuantityRecord wins exactly in the gap nobody covered (integrity, handshake,
+no defaults) and loses in maturity and convenience. It does not compete with the
+standards. It reuses them: QUDT and UO for kinds, QUDT’s semantics for the SI description,
+and CF for containers (a planned HDF5 binding writes CF’s <code class="docutils literal notranslate"><span class="pre">units</span></code> attribute too).</p>
+</section>
+<section id="what-it-makes-possible">
+<h2>What it makes possible<a class="headerlink" href="#what-it-makes-possible" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>CF-compatible and verified data.</strong> Every CF tool still reads the unit, and
+QuantityRecord additionally proves that nobody changed it or the values.</p></li>
+<li><p><strong>Finding who broke a record.</strong> A failed verification means something wrote outside the
+contract, instead of a silently wrong number further down the pipeline.</p></li>
+<li><p><strong>One bridge between unit ecosystems.</strong> Records convert to and from every form
+PyUnitWizard supports, with the same checks at every step.</p></li>
+<li><p><strong>Compact, verified data with mixed units.</strong> A planned layout gives every value a
+one-byte unit code, for tables where the units really vary from row to row.</p></li>
+</ul>
+</section>
+<section id="what-no-format-can-do">
+<h2>What no format can do<a class="headerlink" href="#what-no-format-can-do" title="Link to this heading">#</a></h2>
+<p>A writer that is wrong <em>and</em> consistent (it meant nM, built pM and wrote pM) produces a
+record that is coherent with itself. That case is covered by contracts at your API
+boundaries, by tests that compare values across tools, and by domain checks such as
+ChEMBL’s orders-of-magnitude flag. QuantityRecord makes sure that such a mistake is the
+<em>only</em> kind left.</p>
+</section>
+<section id="measured">
+<h2>Measured<a class="headerlink" href="#measured" title="Link to this heading">#</a></h2>
+<p>The measurements come from the prototype and from this implementation (Python 3.13,
+pint 0.25.3); the full tables are in
+<a class="reference external" href="https://github.com/uibcdf/pyunitwizard/issues/83">#83</a> and
+<a class="reference external" href="https://github.com/uibcdf/pyunitwizard/issues/82">#82</a>.</p>
+<ul class="simple">
+<li><p>A prototype was subjected to deliberate slips: hand edits, raw appends, renamed or
+respelled units, reordered, truncated or pasted values, deleted manifests, and records
+copied between fields. Every slip was refused.</p></li>
+<li><p>Base64 encoding: 100,000 values are written in about 5 ms and read, verified, in about
+4 ms.</p></li>
+<li><p>A bundle stores the scalars of a document at about half the size of separate records.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quantity-records.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quantity Records</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="integrating-your-library.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Integrating Your Library</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-a-valid-looking-number-with-the-wrong-unit">The problem: a valid-looking number with the wrong unit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-already-exists">What already exists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-quantityrecord-stands">Where QuantityRecord stands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-makes-possible">What it makes possible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-no-format-can-do">What no format can do</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measured">Measured</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2026, <a href=contents/about/who.html>Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿pyunitwizard.context
+====================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: context
