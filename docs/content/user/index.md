@@ -32,7 +32,9 @@ In this route you will learn how to:
 ## Storing and Exchanging Quantities
 
 To write quantities to files, databases or messages without ever losing or misreading
-their unit, read [Quantity Records](quantity-records.md).
+their unit, read [Quantity Records](quantity-records.md). To see how it compares with
+other approaches (CF/UDUNITS, ASDF, OpenFF, UCUM, QUDT…), read
+[Why QuantityRecord](quantity-records-why.md).
 
 Both routes converge on the same objective: unit-safe workflows across
 scientific Python libraries without hidden assumptions.
@@ -74,6 +76,7 @@ quickstart.md
 mini-library-walkthrough.md
 configuration.md
 quantity-records.md
+quantity-records-why.md
 integrating-your-library.md
 troubleshooting.md
 production-checklist.md

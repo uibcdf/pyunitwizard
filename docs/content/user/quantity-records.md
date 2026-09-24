@@ -9,6 +9,9 @@ that never leaves its values, and a reader that never assumes one, prevent it.
 **inert**, like the `"string"` form: it converts to and from every other form, but it does
 not compute. To compute, convert it to pint, openmm.unit, astropy.units or unyt.
 
+How this compares with CF/UDUNITS, ASDF, OpenFF, UCUM, QUDT and container checksums, and
+why it exists, is explained in [Why QuantityRecord](quantity-records-why.md).
+
 ```{note}
 Provisional API. `QuantityRecord` and the `qrec/0.3` format may still change before the
 1.0 checklist promotes them. The design, the alternatives evaluated and the measurements
