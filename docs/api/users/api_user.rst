@@ -53,6 +53,19 @@ Core Introspection and Extraction
    pyunitwizard.get_value_and_unit
    pyunitwizard.change_value
 
+Interchange Form (provisional)
+------------------------------
+
+Quantity records carry values with a verified description of their unit, for storage
+and exchange between tools. See :doc:`../../content/user/quantity-records`. The API is
+provisional until the 1.0 checklist promotes it.
+
+.. autosummary::
+   :toctree: autosummary
+
+   pyunitwizard.QuantityRecord
+   pyunitwizard.QuantityRecordBundle
+
 Standardization and Context
 ---------------------------
 

@@ -29,6 +29,11 @@ In this route you will learn how to:
 - diagnose common failures quickly,
 - communicate reproducible unit issues to library maintainers.
 
+## Storing and Exchanging Quantities
+
+To write quantities to files, databases or messages without ever losing or misreading
+their unit, read [Quantity Records](quantity-records.md).
+
 Both routes converge on the same objective: unit-safe workflows across
 scientific Python libraries without hidden assumptions.
 
@@ -68,6 +73,7 @@ numpy-pandas-matplotlib.md
 quickstart.md
 mini-library-walkthrough.md
 configuration.md
+quantity-records.md
 integrating-your-library.md
 troubleshooting.md
 production-checklist.md
