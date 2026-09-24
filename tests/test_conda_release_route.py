@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import re
 import subprocess
 from pathlib import Path
 from urllib.error import HTTPError
@@ -17,10 +18,13 @@ SPEC.loader.exec_module(route)
 SHA = "cd4680a653942c4cace7e8ae89b9cc623242f12c"
 
 
-def test_first_python_314_release_is_staged_and_requires_all_exact_gates():
+def test_committed_release_plan_names_a_version_route_and_all_exact_gates():
+    # The committed plan changes with every release; what must hold is its shape.
+    # 0.26.0 (the first Python 3.14 release) and 0.27.0 (QuantityRecord) were staged.
     plan = route.read_plan()
-    assert plan["version"] == "0.26.0"
-    assert plan["route"] == "staged"
+    assert re.fullmatch(r"\d+\.\d+\.\d+", plan["version"])
+    assert plan["route"] in {"direct", "staged"}
+    assert plan["reason"] and plan["decision_by"]
     assert plan["required_workflows"] == [
         ".github/workflows/CI_full_matrix.yaml",
         ".github/workflows/release_gates.yaml",

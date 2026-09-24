@@ -1,7 +1,7 @@
-version = "0.26.0"
+version = "0.27.0"
 route = "staged"
-reason = "First Python 3.14 noarch release requires clean installed-package gates before public visibility."
-decision_by = "PyUnitWizard release coordination, 2026-09-22"
+reason = "Adds the provisional QuantityRecord module (the \"record\" form); clean installed-package gates must show the new public module works before public visibility."
+decision_by = "Diego Prada (PyUnitWizard maintainer), 2026-09-24"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
   ".github/workflows/release_gates.yaml",

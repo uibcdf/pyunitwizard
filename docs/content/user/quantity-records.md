@@ -13,7 +13,7 @@ How this compares with CF/UDUNITS, ASDF, OpenFF, UCUM, QUDT and container checks
 why it exists, is explained in [Why QuantityRecord](quantity-records-why.md).
 
 ```{note}
-Provisional API. `QuantityRecord` and the `qrec/0.3` format may still change before the
+Available from PyUnitWizard 0.27.0. Provisional API. `QuantityRecord` and the `qrec/0.3` format may still change before the
 1.0 checklist promotes them. The design, the alternatives evaluated and the measurements
 are recorded in [uibcdf/pyunitwizard#83](https://github.com/uibcdf/pyunitwizard/issues/83).
 ```
