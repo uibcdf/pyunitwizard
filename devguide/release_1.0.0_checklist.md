@@ -40,6 +40,7 @@ Use these documents as the primary evidence sources while closing each section:
 - [ ] Transparent frontend mode contract is frozen and test-backed (`devguide/frontend_transparent_mode_contract.md`).
 - [ ] Legacy `pyunitwizard.main` deprecation contract is tested and documented.
 - [ ] No open blockers in conversion, standardization, parsing, or compatibility workflows.
+- [ ] Provisional `QuantityRecord` / `QuantityRecordBundle` API and `qrec` format (#82): either promoted (frozen, contract-tested, format version fixed) or explicitly kept provisional in the release notes. Admitted as a provisional surface on 2026-09-24 under the change-control policy of `api_freeze_pre_1.0_decision.md`.
 
 ## 3. Diagnostics and observability
 
@@ -61,7 +62,7 @@ Use these documents as the primary evidence sources while closing each section:
 - [ ] Linux and macOS build and installation workflows are green (`sdist`, wheel, conda).
 - [ ] Release artifacts do not claim or publish Windows support.
 - [ ] README and devguide documents are synchronized with shipped behavior.
-- [ ] Serialization draft status is explicit in release notes (`devguide/serialization_contract_draft.md`: draft/non-stable unless promoted).
+- [ ] Serialization status is explicit in release notes: `devguide/serialization_contract_draft.md` is superseded by `QuantityRecord` (#82), whose API and `qrec` format are provisional unless promoted.
 - [ ] Tag/release notes prepared with migration notes (if any).
 
 ## 6. Final go/no-go

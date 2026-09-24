@@ -1,6 +1,13 @@
 # Serialization Contract Draft (Post-1.0 Candidate)
 
-Status: draft for future promotion. Not a committed public API yet.
+Status: **superseded** (2026-09-24) by `QuantityRecord`, the inert interchange form
+(`pyunitwizard/record.py`; issue uibcdf/pyunitwizard#82; design record #83; report
+`pending_proposals/quantity_record.md`). Kept as history. Its safety rules are all met
+by the new design: versioned format (`qrec/0.3`), dimensional validation on read, explicit
+errors for missing or malformed fields, and no implicit backend import. Its promotion
+gate is met by two real integration cases: uibcdf/sabueso#32 and uibcdf/molsysmt#240. The
+`form` field of the payload below was dropped: a record is independent of the backend it
+came from.
 
 ## Goal
 
