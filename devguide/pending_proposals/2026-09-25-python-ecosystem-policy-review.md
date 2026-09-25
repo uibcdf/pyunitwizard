@@ -46,8 +46,27 @@ the full matrix, and release gates invoked plain pytest. After the changes,
 temporary checkout's SMonitor sibling was sparse; completing that temporary
 clone and repeating the unchanged suite made the test pass. Ruff check and
 format, the report-index check, and the MolSysSuite repository checker pass.
-Hosted results will be added after validation. No claim is made that all
-optional integrations are active in the existing environments.
+No claim is made that all optional integrations are active in the existing
+environments.
+
+Routine CI `36102753740` passed at source commit `c8cd856`, with 622 passed and
+5 skipped. Its native log confirms the exact `uibcdf` Conda package
+`pytest-receptor 1.1.0 py_1` and the `--receptor=ci` command. The policy run
+`36102754343`, release gates `36102768017`, and the eight-cell full matrix
+`36102767731` passed; the release gates include the full test suite on Python
+3.11 through 3.14. All four were first inspected with gh-run-receptor.
+
+For the support-library review, SMonitor is a runtime dependency used for
+diagnostic signals and covered by catalog and error-path tests. DepDigest is a
+runtime dependency used for optional backend availability, with declaration
+and integration tests. PyUnitWizard owns the physical-quantity conversion and
+dimensional checks. ArgDigest's PyUnitWizard adapter has six passing local
+ecosystem smoke and collective error-path tests, but the hosted Conda test
+environments do not install ArgDigest, so these optional tests cannot establish published
+integration on all claimed Python minors. The public API also has native
+nontrivial argument checks; the issue must decide where ArgDigest is applicable
+without creating an unnecessary library cycle before the support-library
+review can be called complete.
 
 ## What was refuted
 
