@@ -48,13 +48,13 @@ jobs:
         shell: bash -l {0}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          pytest -q tests/test_api_layout.py tests/integration/test_ecosystem_smoke.py
+          pytest --receptor=ci -q tests/test_api_layout.py tests/integration/test_ecosystem_smoke.py
 
       - name: Run full test suite
         shell: bash -l {0}
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          pytest -q tests
+          pytest --receptor=ci -q tests
 
   packaging_smoke:
     name: Packaging Smoke (Python 3.13)

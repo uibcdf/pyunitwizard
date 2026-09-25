@@ -5,6 +5,7 @@ dependencies:
 - python=3.13
 - pint
 - pytest
+- pytest-receptor =1.1.0
 - pytest-cov
 - pytest-xdist
 - ruff=0.16.5

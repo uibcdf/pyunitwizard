@@ -6,6 +6,7 @@ dependencies:
 - pint
 - pip
 - pytest
+- pytest-receptor =1.1.0
 - pytest-cov
 - pytest-xdist
 - ruff

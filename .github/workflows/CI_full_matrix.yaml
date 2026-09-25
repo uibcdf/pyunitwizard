@@ -81,7 +81,7 @@ jobs:
       shell: bash -l {0}
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)
-        pytest -n 12 -v --color=yes
+        pytest --receptor=ci -n 12 -v --color=yes
 
   report-scheduled-result:
     name: Report scheduled matrix result
