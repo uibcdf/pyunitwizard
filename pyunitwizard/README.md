@@ -62,3 +62,12 @@ same-form fast path or translation. It compares named base units, dimensions,
 scale and affine offset with relative tolerance `1e-12`; missing or different
 definitions raise `ValueError`. This permits ordinary arithmetic with
 PyUnitWizard-created Pint quantities after conversion.
+
+## Array string form
+
+When `convert(..., to_form="string")` receives an array quantity, the API
+formats its magnitude as a nested Python list before appending the source
+backend's unit text. This avoids NumPy's comma-free display and honors full
+numeric precision independently of global NumPy print options. Parsing the
+string preserves the values and shape; the inert `record` form carries dtype
+metadata when exact dtype preservation is required.

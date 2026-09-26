@@ -229,7 +229,18 @@ def convert(
                 output = dict_get_value[form_in](output)
                 output = str(output)
             else:
-                output = dict_translate_quantity[form_in]["string"](output)
+                if dict_is_unit[form_in](output):
+                    output = dict_translate_quantity[form_in]["string"](output)
+                else:
+                    magnitude = dict_get_value[form_in](output)
+                    if np.ndim(magnitude):
+                        # NumPy's display omits commas and obeys global precision
+                        # settings; neither is suitable for a parseable round trip.
+                        unit = dict_get_unit[form_in](output)
+                        unit_text = dict_translate_unit[form_in]["string"](unit)
+                        output = f"{np.asarray(magnitude).tolist()!r} {unit_text}"
+                    else:
+                        output = dict_translate_quantity[form_in]["string"](output)
         else:
             if form_in == to_form:
                 output = quantity_or_unit

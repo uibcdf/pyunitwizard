@@ -60,6 +60,20 @@ total = distance + local
 target unit definitions have matching dimensions, base units, scale and offset
 (within `1e-12` relative tolerance), and raises `ValueError` if they differ.
 
+Array quantities can also pass through the text form:
+
+```python
+import numpy as np
+
+coordinates = puw.quantity(np.array([1.5, 2.25]), "angstrom")
+text = puw.convert(coordinates, to_form="string")
+restored = puw.quantity(text)
+```
+
+The text contains comma-separated lists that preserve numeric values and array
+shape when parsed again. Use the verified `record` form when the original NumPy
+dtype must also survive serialization.
+
 Finally, verify compatibility and dimensional assumptions:
 
 ```python
