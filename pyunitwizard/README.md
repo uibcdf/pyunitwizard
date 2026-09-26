@@ -53,3 +53,12 @@ Fast-track registration is idempotent: registering an existing name for the
 same exact unit keeps the original normalizer. Reusing that name for a different
 unit raises a catalog-backed `FastTrackConflictError` instead of silently
 replacing process-global behavior.
+
+## Quantities from another Pint registry
+
+`is_quantity()` accepts Pint quantities from any `UnitRegistry`. `convert()`
+rebuilds a foreign quantity or unit in PyUnitWizard's Pint registry before any
+same-form fast path or translation. It compares named base units, dimensions,
+scale and affine offset with relative tolerance `1e-12`; missing or different
+definitions raise `ValueError`. This permits ordinary arithmetic with
+PyUnitWizard-created Pint quantities after conversion.

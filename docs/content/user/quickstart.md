@@ -45,6 +45,21 @@ print(puw.to_string(distance_angstrom))
 
 You should obtain a value equivalent to `10.0 angstrom`.
 
+If another library created a quantity with its own Pint `UnitRegistry`, bring
+it into PyUnitWizard's registry before combining it with PyUnitWizard values:
+
+```python
+import pint
+
+foreign = pint.UnitRegistry().Quantity(3.0, "nanometer")
+local = puw.convert(foreign, to_form="pint")
+total = distance + local
+```
+
+`puw.is_quantity(foreign)` recognizes it. Conversion checks that the source and
+target unit definitions have matching dimensions, base units, scale and offset
+(within `1e-12` relative tolerance), and raises `ValueError` if they differ.
+
 Finally, verify compatibility and dimensional assumptions:
 
 ```python

@@ -1,3 +1,5 @@
+from math import isclose
+
 from pyunitwizard._private.exceptions import LibraryNotFoundError
 
 try:
@@ -91,8 +93,7 @@ def is_quantity(quantity_or_unit: Any) -> bool:
     bool
         True if it's an pint quantity.
     """
-    tmp_type = type(quantity_or_unit)
-    return tmp_type == pint.Quantity or tmp_type == Q_
+    return isinstance(quantity_or_unit, pint.Quantity)
 
 
 def is_unit(quantity_or_unit: Any) -> bool:
@@ -108,8 +109,48 @@ def is_unit(quantity_or_unit: Any) -> bool:
     bool
         True if its an openmm.unit.Unit
     """
-    tmp_type = type(quantity_or_unit)
-    return tmp_type == pint.Unit or tmp_type == U_
+    return isinstance(quantity_or_unit, pint.Unit)
+
+
+def normalize_registry(quantity_or_unit: Union[pint.Quantity, pint.Unit]) -> Union[pint.Quantity, pint.Unit]:
+    """Rebuild a foreign Pint object after checking its unit definition.
+
+    The comparison uses base-unit names, dimensionality, and the conversions
+    of zero and one unit. This catches both changed scales and affine offsets.
+    Differences within 1e-12 relative tolerance are accepted.
+    """
+
+    if quantity_or_unit._REGISTRY is ureg:
+        return quantity_or_unit
+
+    source_unit = quantity_or_unit.units if is_quantity(quantity_or_unit) else quantity_or_unit
+    unit_name = str(source_unit)
+    try:
+        target_unit = ureg.Unit(unit_name)
+        source_zero = quantity_or_unit._REGISTRY.Quantity(0, source_unit).to_base_units()
+        source_one = quantity_or_unit._REGISTRY.Quantity(1, source_unit).to_base_units()
+        target_zero = ureg.Quantity(0, target_unit).to_base_units()
+        target_one = ureg.Quantity(1, target_unit).to_base_units()
+    except Exception as exc:
+        raise ValueError(f"Cannot verify Pint unit {unit_name!r} in PyUnitWizard's registry.") from exc
+
+    same_definition = (
+        source_unit.dimensionality == target_unit.dimensionality
+        and str(source_zero.units) == str(target_zero.units)
+        and str(source_one.units) == str(target_one.units)
+        and isclose(float(source_zero.magnitude), float(target_zero.magnitude), rel_tol=1e-12, abs_tol=1e-12)
+        and isclose(
+            float(source_one.magnitude - source_zero.magnitude),
+            float(target_one.magnitude - target_zero.magnitude),
+            rel_tol=1e-12,
+        )
+    )
+    if not same_definition:
+        raise ValueError(f"Pint unit {unit_name!r} has a different definition in PyUnitWizard's registry.")
+
+    if is_unit(quantity_or_unit):
+        return target_unit
+    return ureg.Quantity(quantity_or_unit.magnitude, target_unit)
 
 
 _dimensions_translator = {

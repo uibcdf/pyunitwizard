@@ -128,6 +128,10 @@ def convert(
     output = None
 
     form_in = get_form(quantity_or_unit)
+    if form_in == "pint":
+        from ..forms import api_pint
+
+        quantity_or_unit = api_pint.normalize_registry(quantity_or_unit)
 
     # --- High Performance Fast Path ---
     if form_in != "string" and to_unit is None and to_form is None and to_type == "quantity":
