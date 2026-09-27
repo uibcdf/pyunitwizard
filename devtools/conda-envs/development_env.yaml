@@ -26,3 +26,4 @@ dependencies:
 - mamba
 - smonitor
 - depdigest
+- argdigest =0.13.0

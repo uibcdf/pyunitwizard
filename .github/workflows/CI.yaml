@@ -84,7 +84,7 @@ jobs:
         trap 'echo "::endgroup::"' EXIT
         cd
         pwd
-        python -c 'import pyunitwizard; print("Version of the package: {}".format(pyunitwizard.__version__))'
+        python -c 'import pyunitwizard, argdigest.contrib.pyunitwizard_support; print("PyUnitWizard: {} ArgDigest: {}".format(pyunitwizard.__version__, argdigest.__version__))'
 
     - name: Check code style
       shell: bash -l {0}

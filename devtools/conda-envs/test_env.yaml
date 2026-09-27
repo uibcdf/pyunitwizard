@@ -16,6 +16,7 @@ dependencies:
 - astropy
 - depdigest
 - smonitor
+- argdigest =0.13.0
 - pip:
   - physipy
   - quantities

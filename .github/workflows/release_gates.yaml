@@ -47,6 +47,7 @@ jobs:
       - name: Run API contract and integration smoke
         shell: bash -l {0}
         run: |
+          python -c 'import argdigest.contrib.pyunitwizard_support; print("ArgDigest: {}".format(argdigest.__version__))'
           export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest --receptor=ci -q tests/test_api_layout.py tests/integration/test_ecosystem_smoke.py
 
