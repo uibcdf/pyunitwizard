@@ -1,10 +1,10 @@
 ---
 summary: Review inherited Python ecosystem policy in PyUnitWizard.
 issue: uibcdf/pyunitwizard#89
-status: active
+status: partial
 opened: 2026-09-25
 closed:
-verification: inspected
+verification: measured
 area: [development, integration]
 guard:
 normative:
@@ -16,7 +16,7 @@ supersedes: []
 
 ## What
 
-Review PyUnitWizard's adoption of the MOLI Python developer-tool and support-library
+Review PyUnitWizard's adoption of the MolSysSuite Python developer-tool and support-library
 policies under `uibcdf/molsyssuite#6`. Record the two conclusions independently.
 
 ## How
@@ -60,13 +60,31 @@ For the support-library review, SMonitor is a runtime dependency used for
 diagnostic signals and covered by catalog and error-path tests. DepDigest is a
 runtime dependency used for optional backend availability, with declaration
 and integration tests. PyUnitWizard owns the physical-quantity conversion and
-dimensional checks. ArgDigest's PyUnitWizard adapter has six passing local
-ecosystem smoke and collective error-path tests, but the hosted Conda test
-environments do not install ArgDigest, so these optional tests cannot establish published
-integration on all claimed Python minors. The public API also has native
-nontrivial argument checks; the issue must decide where ArgDigest is applicable
-without creating an unnecessary library cycle before the support-library
-review can be called complete.
+dimensional checks.
+
+Source `00d470773ac136d83a0ec2cde7566999ffda0d0e` pins published ArgDigest
+0.13.0 in the development, test, and release-gate environments. Routine CI and
+the eight-cell Linux/macOS matrix require an import of the published adapter
+before pytest; release gates require it on Python 3.11–3.14. Local integration
+smoke passed five tests, and the full local suite passed 634 with three
+unrelated skips. GH Run Receptor inspected exact-commit routine CI
+`36335377594`, policy `36335377971`, release gates `36335382518`, and matrix
+`36335382533`; all passed. Each matrix cell imported ArgDigest 0.13.0 and
+passed 634 tests with three unrelated skips. The release-gate API and
+integration smoke passed ten tests on every claimed Python minor, with the
+published ArgDigest version recorded in each native log. This resolves the
+hosted optional-integration evidence gap.
+
+The support-library review remains partial because the public API still has
+native nontrivial argument checks. Examples include
+`configure.load_library()` and `configure.set_standard_units()`; quantity
+construction and record reading also validate product-specific physical or
+integrity semantics. A test-only ArgDigest dependency does not decide which
+ordinary public argument constraints should move to ArgDigest, nor whether a
+bounded provider exception is appropriate. ArgDigest declares PyUnitWizard in
+an optional extra, so a required reverse edge would also need dependency and
+import-order analysis. Resolve that boundary under this issue before claiming
+full support-library adoption.
 
 ## What was refuted
 
@@ -76,7 +94,7 @@ the explicit profile is required in each hosted command.
 ## Scope and exclusions
 
 This review does not change PyUnitWizard's scientific behavior or resolve unrelated
-product issues. It does not redesign the shared MOLI policy.
+product issues. It does not redesign the shared MolSysSuite policy.
 
 ## Acceptance criteria
 
