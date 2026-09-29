@@ -3,11 +3,46 @@ name: CI Full Matrix
 on:
   schedule:
     - cron: "0 9 * * MON"
+    - cron: "57 0 * * *"
+      timezone: "America/Mexico_City"
   workflow_dispatch:
+    inputs:
+      probe_backlog:
+        description: Check skipped-commit debt without running the matrix
+        required: false
+        default: false
+        type: boolean
 
 jobs:
+  nightly-decision:
+    name: Check skipped-commit backlog
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '57 0 * * *')
+      || (github.event_name == 'workflow_dispatch' && inputs.probe_backlog == true)
+    permissions:
+      actions: read
+      contents: read
+    runs-on: ubuntu-latest
+    outputs:
+      run_full: ${{ steps.decide.outputs.run_full }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Decide whether to run the full matrix
+        id: decide
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python devtools/ci_backlog.py
+
   full-test:
     name: Full test on ${{ matrix.cfg.os }}, Python ${{ matrix.cfg.python-version }}
+    needs: nightly-decision
+    if: >-
+      always() && inputs.probe_backlog != true
+      && (github.event_name != 'schedule' || github.event.schedule != '57 0 * * *'
+      || needs.nightly-decision.result != 'success'
+      || needs.nightly-decision.outputs.run_full == 'true')
     runs-on: ${{ matrix.cfg.os }}
     timeout-minutes: 90
     concurrency:
@@ -85,7 +120,7 @@ jobs:
 
   report-scheduled-result:
     name: Report scheduled matrix result
-    if: always() && github.event_name == 'schedule'
+    if: always() && github.event_name == 'schedule' && github.event.schedule == '0 9 * * MON'
     needs: full-test
     runs-on: ubuntu-latest
     permissions:
