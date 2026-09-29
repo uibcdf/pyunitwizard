@@ -102,3 +102,13 @@ recognized the weekly watermark and counted exactly the one intentionally
 skipped commit `cdccfa8`; its matrix and monitor jobs were omitted. Keep this
 issue open until recovery, the first actual nightly, hosted PR route, and
 platform-claim review.
+
+The [manual full matrix](https://github.com/uibcdf/pyunitwizard/actions/runs/36538496360)
+at `8dc7f63` executed all eight test jobs; seven passed and Linux 3.13
+failed its `Run tests` step with one `LibraryWithoutParserError` in
+`tests/utils/sequences/test_slice.py::test_get_value_pint` (636 passed,
+3 skipped). This is a component test behavior outside this governance change.
+The [following probe](https://github.com/uibcdf/pyunitwizard/actions/runs/36539355874)
+still reported one skipped commit since the `4ffe2f1` weekly watermark, as
+required: a failed full matrix cannot erase the debt. The component team owns
+the test failure; this issue remains partial until a green recovery run.
