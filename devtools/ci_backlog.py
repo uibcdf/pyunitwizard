@@ -55,11 +55,13 @@ def full_linux_passed(repository: str, run_id: int, token: str) -> bool:
 def last_full_success(repository: str, head: str, token: str) -> str | None:
     for page in range(1, 4):
         runs = api_json(
-            f"/repos/{repository}/actions/workflows/{WORKFLOW}/runs?branch=main&per_page=100&page={page}",
+            f"/repos/{repository}/actions/workflows/{WORKFLOW}/runs?per_page=100&page={page}",
             token,
         )["workflow_runs"]
         for run in runs:
             if run["conclusion"] != "success":
+                continue
+            if run.get("head_branch") != "main":
                 continue
             if run["event"] not in {"schedule", "workflow_dispatch"}:
                 continue
