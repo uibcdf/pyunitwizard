@@ -43,8 +43,8 @@ PyUnitWizard is a shared support library. A green weekly matrix does not
 guard a PR whose test job never ran, and repeated skipped direct pushes can
 leave regressions unseen. The conditional daily route implements the suite
 policy in `uibcdf/molsyssuite#39` without requiring a full matrix after each
-commit. `Daniel-Ibarrola` has push permission but is not an administrator;
-the protected PR route applies to that contributor.
+commit. The current collaborator list contains only `dprada` and `LMMV`,
+both administrators; external contributors use the protected PR route.
 
 ## What is measured and what is assumed
 
@@ -88,15 +88,17 @@ watermark, found zero later skipped commits, and omitted all matrix and
 weekly-monitor jobs.
 
 The `main` branch now requires the strict `Test on ubuntu-latest, Python 3.13`
-check. Administrators `dprada` and `LMMV` can bypass it for direct pushes;
-`Daniel-Ibarrola` has push permission but is not an administrator. The direct
+check. The current collaborators, administrators `dprada` and `LMMV`, can
+bypass it for direct pushes. The direct
 push of `cdccfa8` with `[skip ci]` exercised that bypass. Its
 [probe](https://github.com/uibcdf/pyunitwizard/actions/runs/36537194515)
 chose full recovery but reported no usable watermark and counted 63
 historical skipped commits. Inspection showed that GitHub's workflow-run
 listing with `branch=main` omitted the recent `36457307824` matrix and other
 recent runs, while the unfiltered listing included them with
-`head_branch=main`. The detector now filters `head_branch` itself; a second
-hosted probe must verify the corrected count before claiming the backlog
-state. Keep this issue open until recovery, the first actual nightly, hosted
-PR route, and platform-claim review.
+`head_branch=main`. The detector now filters `head_branch` itself. The
+[second hosted probe](https://github.com/uibcdf/pyunitwizard/actions/runs/36538129589)
+recognized the weekly watermark and counted exactly the one intentionally
+skipped commit `cdccfa8`; its matrix and monitor jobs were omitted. Keep this
+issue open until recovery, the first actual nightly, hosted PR route, and
+platform-claim review.
