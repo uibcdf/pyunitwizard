@@ -79,5 +79,16 @@ the backlog due until an executed green matrix provides a new watermark.
 
 ## Resolution
 
-Implementation and hosted evidence are being collected. Keep this issue open
-until the first actual nightly, hosted PR route, and platform-claim review.
+Commit `4b7f5ed` implements the workflow and detector. At that exact commit,
+[routine CI](https://github.com/uibcdf/pyunitwizard/actions/runs/36536757396)
+and [MolSysSuite policy](https://github.com/uibcdf/pyunitwizard/actions/runs/36536758336)
+passed. The [probe-only dispatch](https://github.com/uibcdf/pyunitwizard/actions/runs/36536772026)
+recognized the executed weekly matrix `36457307824` at `4ffe2f1` as its
+watermark, found zero later skipped commits, and omitted all matrix and
+weekly-monitor jobs.
+
+The `main` branch now requires the strict `Test on ubuntu-latest, Python 3.13`
+check. Administrators `dprada` and `LMMV` can bypass it for direct pushes;
+`Daniel-Ibarrola` has push permission but is not an administrator. The
+skipped-push and recovery checks are pending. Keep this issue open until the
+first actual nightly, hosted PR route, and platform-claim review.
