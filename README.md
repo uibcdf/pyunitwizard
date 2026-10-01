@@ -32,7 +32,9 @@ It is designed for scientific Python projects that need to:
 
 ## Installation
 
-PyUnitWizard 0.26.0 and later support Linux and macOS on Python 3.11–3.14.
+PyUnitWizard 0.26.0 and later support Linux and macOS Apple Silicon (arm64) on Python 3.11–3.14.
+Intel-based macOS (x86_64) is outside the supported matrix. A concrete user need
+may reopen this decision under [MolSysSuite #59](https://github.com/uibcdf/molsyssuite/issues/59).
 Earlier releases were validated only through Python 3.13. Windows packages
 and runtime support are intentionally deferred until a concrete ecosystem
 need justifies adding and maintaining that platform matrix.

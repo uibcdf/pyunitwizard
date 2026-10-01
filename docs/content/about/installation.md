@@ -1,7 +1,10 @@
 # Installation
 
 Published PyUnitWizard packages are available from the `uibcdf` Conda
-channel. Version 0.26.0 and later support Python 3.11–3.14 on Linux and macOS.
+channel. Version 0.26.0 and later support Python 3.11–3.14 on Linux and macOS
+Apple Silicon (arm64). Intel macOS is outside the supported matrix; see
+[the suite support decision](https://github.com/uibcdf/molsyssuite/issues/59)
+for reconsideration based on concrete user demand.
 The public PyPI index does not currently distribute PyUnitWizard, SMonitor,
 or DepDigest.
 

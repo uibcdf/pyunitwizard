@@ -1,6 +1,8 @@
 # Quick Start
 
-PyUnitWizard 0.26.0 and later support Linux and macOS with Python 3.11–3.14.
+PyUnitWizard 0.26.0 and later support Linux and macOS Apple Silicon (arm64) with
+Python 3.11–3.14. Intel macOS is outside the supported matrix; concrete user
+demand may reopen [the suite decision](https://github.com/uibcdf/molsyssuite/issues/59).
 Earlier releases were validated only through Python 3.13. Windows support
 remains outside the maintained platform matrix.
 
