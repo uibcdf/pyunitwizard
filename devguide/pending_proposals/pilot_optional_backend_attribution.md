@@ -144,3 +144,24 @@ integration regression.
 
 The synchronized root guide is routed from `AGENTS.md` and explicitly excluded
 from Ruff, as required by the common read-only guide contract.
+
+
+## Authorized source publication
+
+The maintainer explicitly authorized direct push without a pull request for this
+pilot and guide delivery. Source commits `4be3500` (optional backend attribution)
+and `c3b7117` (synchronized guide and contributor routing) are prepared for
+publication to `origin/main` together with this record update. Provider source
+commit `561989e` corrects explicit CSL authors; its seven remote checks pass.
+Publication does not promote the provisional API or establish package-release
+compatibility. After guide routing, the focused integration/dependency/reporting
+gates pass 30 tests and Ruff/index checks pass.
+
+
+Final publication qualification on Python 3.13.14: the full PyUnitWizard suite
+passes 656 tests with one documented strict-JSON/NaN skip and one existing
+compatibility deprecation. The published Ackredit provider is now `6420407`
+(implementation `561989e` plus archived record); its primary checkout passes
+1,541 tests with all original maintainer edits restored unchanged. The canonical
+guide bytes are unchanged. Publication receipts are recorded in this issue;
+API promotion and released-installation qualification remain separate.
