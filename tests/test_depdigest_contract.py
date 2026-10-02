@@ -9,7 +9,7 @@ def test_depdigest_runtime_policy_has_expected_hard_and_soft_dependencies():
     soft = {name for name, metadata in puw_depdigest.LIBRARIES.items() if metadata.get("type") == "soft"}
 
     assert hard == {"numpy", "pint"}
-    assert soft == {"unyt", "openmm.unit", "astropy.units", "physipy", "quantities"}
+    assert soft == {"ackredit", "unyt", "openmm.unit", "astropy.units", "physipy", "quantities"}
 
 
 def test_depdigest_mapping_is_consistent_with_supported_forms():

@@ -163,9 +163,22 @@ def load_library(library: str) -> None:
 
                         dict_translate_unit[in_form][out_form] = _unit_bridge
 
-        del api
+        # Attribution observes completed dispatches, never adapter discovery.
+        # Source/destination keys select the actual external endpoints; bridges
+        # retain their child dispatches instead of adding an outer guessed credit.
+        from pyunitwizard._ackredit import wrap
 
-        pass
+        for backend in loaded_libraries:
+            for name, table in (("make_quantity", dict_make_quantity), ("convert", dict_convert)):
+                table[backend] = wrap(table[backend], backend, operation=f"pyunitwizard.forms.{backend}.{name}")
+        for kind, table in (("quantity", dict_translate_quantity), ("unit", dict_translate_unit)):
+            for source, destinations in table.items():
+                for destination, function in destinations.items():
+                    destinations[destination] = wrap(
+                        function, source, destination, operation=f"pyunitwizard.forms.{source}.{kind}_to_{destination}"
+                    )
+
+        del api
 
 
 # Load the string api.

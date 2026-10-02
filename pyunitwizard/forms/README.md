@@ -39,3 +39,33 @@ This directory documents how form adapters integrate with the dispatchers in `py
 - [ ] Implement translators following the established naming pattern (`quantity_to_<target>`, `unit_to_<target>`) and update `api_string.py` to provide reciprocal helpers.
 - [ ] Decide whether the form provides a parser. Expose a module-level `parser` flag and, if `True`, include `string_to_quantity`/`string_to_unit` implementations. If parsing is unavailable, set the flag to `False` and raise a clear `LibraryWithoutParserError` from the stubs.
 - [ ] Update this README with a summary of the new adapter and document any parser requirements or limitations.
+
+
+## Optional attribution development pilot
+
+Inside explicit `with puw.attribution():` blocks, when the Ackredit development
+provider is available, completed dispatched Pint and unyt construction, conversion and translation operations contribute software
+references to the application's current session. unyt also contributes its JOSS
+description article. Versions identify the actual executed software; loading an
+adapter alone earns no credit. The provider is loaded lazily after execution;
+absence preserves values and units, and provider failures emit a catalog warning.
+
+This bounded source pilot is tracked in uibcdf/pyunitwizard#92 and
+uibcdf/ackredit#75. It does not cover every adapter/internal call, claim complete
+transitive attribution, change QuantityRecord, or establish a published optional
+installation. Applications may pair the provisional Ackredit capture payload
+with a QuantityRecord; reading those saved records does not credit a new calculation.
+
+
+```python
+import pyunitwizard as puw
+
+with puw.attribution():
+    quantity = puw.quantity(2.0, "meter", form="pint")
+    result = puw.convert(quantity, to_unit="centimeter")
+```
+
+`attribution()` is provisional. It is context-local and nests without replacing
+the application's Ackredit session. Ordinary conversions outside it do not load
+the provider or pay active tracking cost. Scientific exceptions propagate and
+the enclosing choice is restored on exit.

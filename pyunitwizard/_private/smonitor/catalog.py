@@ -81,6 +81,14 @@ CATALOG = {
             "level": "ERROR",
         },
     },
+    "warnings": {
+        "AckreditTrackingWarning": {
+            "code": "PUW-WARN-ACK-001",
+            "source": "pyunitwizard.warning.ackredit_tracking",
+            "category": "attribution",
+            "level": "WARNING",
+        },
+    },
     "events": {
         "ProbeMiss": {
             "code": "PUW-DBG-PROBE-001",
@@ -92,6 +100,13 @@ CATALOG = {
 }
 
 CODES = {
+    "PUW-WARN-ACK-001": {
+        "title": "Optional attribution failed",
+        "user_message": "Optional citation tracking failed for '{operation}': {reason}.",
+        "user_hint": "The scientific result is retained; attribution may be incomplete. Docs: {doc_url}",
+        "dev_message": "Ackredit failed for '{operation}': {reason}.",
+        "dev_hint": "Inspect the optional provider boundary and supported API. Issues: {issues_url}",
+    },
     "PUW-ERR-ARG-001": {
         "title": "Argument error",
         "user_message": "Error in argument '{argument}' with value '{value}'.",
@@ -179,6 +194,7 @@ CODES = {
 }
 
 SIGNALS = {
+    "pyunitwizard.warning.ackredit_tracking": {"extra_required": ["operation", "reason"]},
     "pyunitwizard.error.argument": {"extra_required": ["argument", "value", "caller"]},
     "pyunitwizard.error.constant_not_found": {"extra_required": ["constant", "caller"]},
     "pyunitwizard.error.fast_track_conflict": {

@@ -71,3 +71,33 @@ backend's unit text. This avoids NumPy's comma-free display and honors full
 numeric precision independently of global NumPy print options. Parsing the
 string preserves the values and shape; the inert `record` form carries dtype
 metadata when exact dtype preservation is required.
+
+
+## Optional attribution development pilot
+
+Inside explicit `with puw.attribution():` blocks, when the Ackredit development
+provider is available, completed dispatched Pint and unyt construction, conversion and translation operations contribute software
+references to the application's current session. unyt also contributes its JOSS
+description article. Versions identify the actual executed software; loading an
+adapter alone earns no credit. The provider is loaded lazily after execution;
+absence preserves values and units, and provider failures emit a catalog warning.
+
+This bounded source pilot is tracked in uibcdf/pyunitwizard#92 and
+uibcdf/ackredit#75. It does not cover every adapter/internal call, claim complete
+transitive attribution, change QuantityRecord, or establish a published optional
+installation. Applications may pair the provisional Ackredit capture payload
+with a QuantityRecord; reading those saved records does not credit a new calculation.
+
+
+```python
+import pyunitwizard as puw
+
+with puw.attribution():
+    quantity = puw.quantity(2.0, "meter", form="pint")
+    result = puw.convert(quantity, to_unit="centimeter")
+```
+
+`attribution()` is provisional. It is context-local and nests without replacing
+the application's Ackredit session. Ordinary conversions outside it do not load
+the provider or pay active tracking cost. Scientific exceptions propagate and
+the enclosing choice is restored on exit.

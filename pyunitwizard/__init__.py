@@ -41,6 +41,8 @@ _LAZY_ATTRIBUTES = {
     "configure": ".configure",
     "constants": ".constants",
     "utils": ".utils",
+    # Explicit optional attribution pilot (provisional; #92)
+    "attribution": ("._private.attribution", "attribution"),
     # API functions
     "are_close": (".api", "are_close"),
     "are_compatible": (".api", "are_compatible"),
