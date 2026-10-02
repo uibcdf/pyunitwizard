@@ -272,6 +272,7 @@ To be extended in future versions, it may include:
 
 These guides are required reading for anyone developing this library. They describe how external tools must be used here.
 
+- `ACKREDIT_GUIDE.md` — Required synchronized guide for optional scientific attribution.
 - `SMONITOR_GUIDE.md` — Required guide for SMonitor integration and diagnostics.
 - `GH_RUN_RECEPTOR_GUIDE.md` — Required guide for compact, truth-preserving inspection of
   GitHub Actions runs and the native-command fallback.

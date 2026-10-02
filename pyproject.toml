@@ -79,6 +79,7 @@ target-version = "py311"
 line-length = 119
 include = ["*.py", "*.pyi"]
 extend-exclude = [
+    "ACKREDIT_GUIDE.md",
     "DEPDIGEST_GUIDE.md",
     "GH_RUN_RECEPTOR_GUIDE.md",
     "MOLSYSSUITE_GUIDE.md",

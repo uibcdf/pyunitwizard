@@ -129,3 +129,18 @@ adaptation) and uibcdf/molsyssuite#71 (registered guide delivery). Portable API
 adoption and publication remain pending; this record stays open/partial until
 their corresponding acceptance gates are met. No published-installation claim
 is made from this editable-source test run.
+
+
+## Provider source and guide delivery (2026-10-02)
+
+The tested portable API source is now published in Ackredit commit `4228444`,
+with source-qualification fix `4577c83`. The central guarded synchronizer
+delivered the canonical `ACKREDIT_GUIDE.md` to this checkout and its read-only
+check confirms byte equality. PyUnitWizard pilot commit `4be3500` remains local;
+provider package publication and member compatibility remain separate gates.
+The benchmark provider-unavailable column uses a controlled no-provider return;
+genuine missing-provider behavior is verified independently in a fresh-process
+integration regression.
+
+The synchronized root guide is routed from `AGENTS.md` and explicitly excluded
+from Ruff, as required by the common read-only guide contract.
