@@ -63,14 +63,18 @@ does not establish runtime adoption or published compatibility.
   minor. Keep the client's existing support range; editable pilot evidence does not
   authorize a public extra or installation claim.
 
-The development API under uibcdf/ackredit#75 provides provisional `capture`,
+The reviewed API under uibcdf/ackredit#75 provides `capture`,
 `Attribution` and `get_attribution` operations. Consumer adoption and published
-installation remain separate gates. Do not read private registries, copy renderers
+installation remain separate gates. The first reviewed contract is assigned to
+the **0.9.0 candidate**, pending immutable public delivery; older tags do not
+contain it. Its [compatibility contract](https://github.com/uibcdf/ackredit/blob/main/docs/content/user_guide/portable_attribution.md)
+keeps schema 1 readable in later releases and versions structural changes with
+a new schema ID. Do not read private registries, copy renderers
 or treat journals of IDs as a portable bibliography. The MolSysMT pilot at
 `e21f03d9992b87af2cc9285211adee888462be41` is consumer evidence; its
 `molsysmt.scientific_attribution@1` schema remains local.
 
-### Portable calculation capture (provisional development API)
+### Portable calculation capture (reviewed contract)
 
 Applications own the session and may capture each result without replacing it:
 

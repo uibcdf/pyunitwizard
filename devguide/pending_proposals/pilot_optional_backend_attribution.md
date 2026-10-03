@@ -37,7 +37,7 @@ the same software name/version without changing the article bibliography.
 
 Host-owned offline declarations remain readable independently of the provider.
 Provider absence preserves scientific results; failures emit `PUW-WARN-ACK-001`.
-The application uses Ackredit's provisional capture/export/import; there is no
+The application uses Ackredit's accepted capture/export/import contract; there is no
 second bibliography schema and no change to QuantityRecord's seal or codec.
 
 ## Why
@@ -95,8 +95,9 @@ public extra, release or reduced Python support range are introduced.
 
 ## Dependencies and risks
 
-The portable provider API is provisional under uibcdf/ackredit#75. Publication
-and distribution remain in uibcdf/ackredit#22; no installation route is promised.
+The portable provider API is accepted in source under uibcdf/ackredit#75 for
+the prepared 0.9.0 candidate. Publication and distribution remain in
+uibcdf/ackredit#22; no public installation route is promised.
 MolSysMT adaptation is requested from its maintainers, not implemented here.
 The shared policy is uibcdf/molsyssuite#68.
 
@@ -165,3 +166,21 @@ compatibility deprecation. The published Ackredit provider is now `6420407`
 1,541 tests with all original maintainer edits restored unchanged. The canonical
 guide bytes are unchanged. Publication receipts are recorded in this issue;
 API promotion and released-installation qualification remain separate.
+
+
+## Accepted provider contract and synchronized guide (2026-10-03)
+
+Ackredit source `840aab3d415312144e4f5754d5def11b3068832f` accepts
+`Attribution`, `capture` and `get_attribution`, with the documented
+`ackredit.attribution@1` compatibility boundary and a frozen real unyt workflow
+fixture. It assigns the first accepted contract to the prepared 0.9.0 candidate;
+this is not an already published release.
+
+The central guarded synchronizer refreshed this repository's read-only
+`ACKREDIT_GUIDE.md` from that committed provider source, replacing the
+provisional-provider wording. Registration remains tracked in
+uibcdf/molsyssuite#71. Real source-provider compatibility passes all 17 backend
+attribution integration tests on Python 3.13; this evidence remains distinct
+from the forthcoming exact Conda installed-provider qualification. The local
+`puw.attribution()` opt-in remains a pilot; guide delivery does not promote its
+product contract or add a public dependency floor.
