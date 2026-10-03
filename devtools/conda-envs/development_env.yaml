@@ -2,7 +2,7 @@ channels:
 - uibcdf
 - conda-forge
 dependencies:
-- python=3.13
+- python=3.14
 - pint
 - pytest
 - pytest-receptor =1.1.0
