@@ -168,6 +168,23 @@ def test_values_held_in_memory_cannot_be_changed_behind_the_seal():
         record.values[0] = 99.0
 
 
+def test_record_values_cannot_be_made_writable():
+    record = _record()
+    saved = record.to_dict()
+    with pytest.raises(ValueError):
+        record.values.setflags(write=True)
+    assert record.to_dict() == saved
+    assert np.array_equal(record.to_quantity(form="pint").magnitude, saved["values"])
+
+
+def test_record_values_are_detached_from_the_original_quantity():
+    values = np.array([3.0, 12.5])
+    record = QuantityRecord.from_quantity(puw.quantity(values, "nM", form="pint"))
+    values[0] = 3000.0
+    assert np.array_equal(record.values, [3.0, 12.5])
+    assert QuantityRecord.from_dict(record.to_dict()) == record
+
+
 # --- the handshake ----------------------------------------------------------------------------
 
 

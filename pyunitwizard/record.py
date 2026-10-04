@@ -264,8 +264,9 @@ class QuantityRecord:
     @classmethod
     def _new(cls, manifest, values, block_digests, digest) -> "QuantityRecord":
         record = object.__new__(cls)
-        values = np.array(values, copy=True)
-        values.setflags(write=False)
+        values = np.asarray(values)
+        # Owning arrays can re-enable WRITEABLE; immutable backing keeps the seal valid.
+        values = np.frombuffer(values.tobytes(order="C"), dtype=values.dtype).reshape(values.shape)
         record._manifest = manifest
         record._values = values
         record._block_digests = list(block_digests)

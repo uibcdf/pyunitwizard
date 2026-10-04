@@ -58,6 +58,10 @@ What no format can detect is a writer that is wrong *and* consistent: it meant n
 and wrote pM. Contracts at your API boundaries and tests that compare values across tools
 cover that case.
 
+The public `record.values` array is an immutable snapshot. Direct assignment and
+reactivating its NumPy write flag are refused. To change a recorded quantity,
+construct a new record from the changed quantity so its seal describes the new values.
+
 ## Kinds
 
 Some different quantities share SI dimensions: hertz and becquerel, joule and newton-metre.
