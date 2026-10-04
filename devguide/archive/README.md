@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (14)
+### Resolved (15)
 
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
 - [`adopt_shared_reporting_lifecycle.md`](../completed_proposals/adopt_shared_reporting_lifecycle.md) — [#72](https://github.com/uibcdf/pyunitwizard/issues/72) — Adopt the shared issue-backed developer-guide lifecycle. *(reproduced)*
@@ -15,6 +15,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`optional_backend_audit_boundary.md`](../completed_proposals/optional_backend_audit_boundary.md) — [#93](https://github.com/uibcdf/pyunitwizard/issues/93) — Document exact-file optional-import audit exceptions with startup guards. *(measured)*
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
+- [`pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md`](../solved_bugs/pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md) — [#91](https://github.com/uibcdf/pyunitwizard/issues/91) — PR CI can be skipped and direct-push debt is unchecked *(high, measured)*
 - [`python_314_support.md`](../completed_proposals/python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`showcase_offers_unavailable_pypi_install.md`](../solved_bugs/showcase_offers_unavailable_pypi_install.md) — [#76](https://github.com/uibcdf/pyunitwizard/issues/76) — The showcase notebook offered a PyPI installation route that cannot resolve PyUnitWizard. *(medium, inspected)*

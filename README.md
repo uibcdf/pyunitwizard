@@ -11,7 +11,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088374.svg)](https://doi.org/10.5281/zenodo.8088374)
 [![Conda](https://img.shields.io/conda/vn/uibcdf/pyunitwizard)](https://anaconda.org/uibcdf/pyunitwizard)
 
-Coverage: PyUnitWizard Python tests, uploaded by the routine Linux/Python 3.13 CI lane. The badge reflects the last uploaded report, which may lag later direct or skip-CI commits; it does not certify a full matrix or scientific correctness.
+Coverage: PyUnitWizard Python tests, uploaded by the routine Linux/Python 3.14 CI lane. The badge reflects the last uploaded report, which may lag later direct or skip-CI commits; it does not certify a full matrix or scientific correctness.
 
 *A Python Units Wizard that streamlines work with physical quantities.*
 

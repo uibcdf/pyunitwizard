@@ -1,11 +1,11 @@
 ---
 summary: PR CI can be skipped and direct-push debt is unchecked
 issue: uibcdf/pyunitwizard#91
-status: partial
+status: resolved
 opened: 2026-09-29
-closed:
+closed: 2026-10-04
 severity: high
-verification: inspected
+verification: measured
 area: [ci, governance]
 guard: tests/test_ci_backlog.py
 normative:
@@ -14,6 +14,37 @@ supersedes: []
 ---
 
 # PR CI can be skipped and direct-push debt is unchecked
+
+## Completed routing qualification — 2026-10-04
+
+[PR #97](https://github.com/uibcdf/pyunitwizard/pull/97) changed only this
+Markdown record, used branch `validation/skip-ci-pr-route-91`, and had
+`[skip ci]` in its title. Its actual `pull_request` routine
+[run 37230026063](https://github.com/uibcdf/pyunitwizard/actions/runs/37230026063)
+executed import, Ruff, and test steps successfully: 676 passed and 22
+documented skips. Policy run `37230026417` also passed. The requested PR
+head was `6120b8f9f5e3bc4de91b9b4402a96f68a2350649`; GitHub checked out
+its synthetic merge, identified in the installed version as `1b63822`.
+The commit was then integrated by an authorized fast-forward push to `main`,
+which marked the probe PR merged without another PR merge operation.
+
+The actual daily schedule recovery `37011806773` executed all eight cells
+and omitted the weekly monitor. The debt-free manual
+[probe 37230605443](https://github.com/uibcdf/pyunitwizard/actions/runs/37230605443)
+at `6120b8f` found zero skipped commits since the executed green watermark
+`71de829a53ab50964f180ac558ea0307510ee0cb`, and omitted both matrix and
+monitor jobs. A debt-free scheduled run is not claimed as observed: the
+zero-debt detector is exercised by the probe, and the monitor's independent
+weekly-only predicate is confirmed by the actual daily run. Its `always()`
+condition cannot turn daily skipped matrices into weekly monitor failures.
+
+The strict required check is `Test on ubuntu-latest, Python 3.14`.
+Administrators retain direct push access, exercised again during this
+qualification. Public claims match the maintained Linux/macOS Apple Silicon
+Python 3.11–3.14 matrix. The durable guard `tests/test_ci_backlog.py` protects
+debt retention and the requirement for executed full Linux matrix evidence;
+hosted PR/schedule/probe receipts independently establish routing behavior.
+The consolidated receipt is `devguide/evidence/ci_routing_2026-10-04.json`.
 
 ## Hosted routing review — 2026-10-04
 
