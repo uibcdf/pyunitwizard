@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-04",
+  "repository": "uibcdf/pyunitwizard",
+  "issue": 92,
+  "qualification_source_sha": "63af19301068d9324680c67ffe4bb65e21351647",
+  "provider": {
+    "distribution": "uibcdf::ackredit=0.9.0=py_0",
+    "public_url": "https://conda.anaconda.org/uibcdf/noarch/ackredit-0.9.0-py_0.tar.bz2",
+    "producer_sha": "598abf993a2409c025de5e912acd7eb45a257ebd",
+    "artifact_sha256": "37661090f6ad19a74b8155d8a4d4b4a068c9099f4ceba0743b3abfe887e97fe1",
+    "required_closure": [
+      "argdigest>=0.13.0",
+      "depdigest>=0.11.0",
+      "smonitor>=0.16.0",
+      "pyyaml>=6",
+      "python>=3.11,<3.15"
+    ],
+    "provisional_function_api_available": false
+  },
+  "local": {
+    "python": "3.14.7",
+    "ackredit": "0.9.0",
+    "argdigest": "0.14.0",
+    "smonitor": "0.16.0",
+    "depdigest": "0.11.0",
+    "pint": "0.26.1",
+    "unyt": "3.1.0",
+    "provider_install_scope": "Verified public Conda site-packages files mapped into isolated venv over the full scientific environment; not a normal Conda solve/install.",
+    "pip_check": "passed",
+    "source_backend_guards": {
+      "passed": 17,
+      "skipped": 0
+    },
+    "installed_backend_guards": {
+      "passed": 17,
+      "skipped": 0
+    },
+    "consumer_wheel": {
+      "name": "pyunitwizard-0.27.0+61.g8ac636b-py3-none-any.whl",
+      "source_sha": "8ac636bae08f2b2a43e252566284bf846b7570b1",
+      "sha256": "f7ab86693ed8fcf6ee97792f7f2cff9fe35c384fc0fdb1543288350d80b35106",
+      "scope": "Normally installed with pip; unchanged copied backend test module executed outside checkout. Scientific runtime package inputs unchanged at qualification source; benchmark/tests/profiles/docs changed."
+    },
+    "full_suite": {
+      "passed": 701,
+      "skipped": 10
+    },
+    "benchmark_and_backend_guards": {
+      "passed": 20
+    },
+    "reporting_and_benchmark_guards": {
+      "passed": 12
+    },
+    "ruff": "check and format check passed; 190 files",
+    "docs": "HTML passed; four pre-existing homepage heading warnings",
+    "late_diagnostic": "Focused public-provider pytest emits an unclosed /dev/null ResourceWarning after successful completion; owner not established, no attribution/scientific failure."
+  },
+  "benchmark": {
+    "receipt": "devtools/receipts/backend_attribution_public_090_2026-10-04.json",
+    "repeats": 7,
+    "portable_cases": 5,
+    "decision": "Retain explicit opt-in: measured roughly 200\u2013220 us additional fixed cost per conversion.",
+    "development_smoke": "Seven cases also execute with pre-existing dirty sibling Ackredit development source 0.9.0+30.g40f930a.dirty; not public-provider or exact-commit qualification evidence."
+  },
+  "skips": {
+    "local": [
+      "9 provisional function-observer tests owned by #94; API absent in public 0.9.0",
+      "1 strict-JSON NaN case covered by a separate rejection test"
+    ],
+    "hosted_additional": [
+      "2 sibling-source tests; hosted jobs do not include sibling repositories"
+    ]
+  },
+  "guards": [
+    "tests/integration/test_backend_attribution.py",
+    "tests/test_backend_attribution_benchmark.py"
+  ],
+  "scope": "Completed dispatched Pint/unyt construction/conversion/translation in explicit attribution contexts. Required runtime dependency, public extra, complete transitive attribution, #94 promotion and consumer release admission remain outside this pilot.",
+  "retention": "The closing record commit changes only developer-guide evidence and generated indexes; retain these source gates while scientific code, tests, profiles, workflow and environment inputs remain unchanged.",
+  "hosted_native_summaries": {
+    "matrix": {
+      "public_conda_ackredit": "0.9.0 py_0, channel uibcdf; verified in each full-suite job log",
+      "provider_digest_scope": "Archive digest independently verified locally; hosted logs identify version/build/channel, not installed-file hashes.",
+      "executed_full_suite_cells": 8,
+      "full_suite_each": {
+        "passed": 699,
+        "skipped": 12
+      }
+    },
+    "release": {
+      "public_conda_ackredit": "0.9.0 py_0, channel uibcdf; verified in each full-suite job log",
+      "provider_digest_scope": "Archive digest independently verified locally; hosted logs identify version/build/channel, not installed-file hashes.",
+      "executed_full_suite_cells": 4,
+      "full_suite_each": {
+        "passed": 699,
+        "skipped": 12
+      },
+      "api_smoke_each": {
+        "passed": 16,
+        "skipped": 0
+      },
+      "packaging": "success",
+      "docs": "success"
+    }
+  },
+  "runs": [
+    {
+      "id": 37233968233,
+      "name": "CI",
+      "event": "push",
+      "head_sha": "63af19301068d9324680c67ffe4bb65e21351647",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37233968233",
+      "jobs": [
+        {
+          "id": 111529298073,
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Check code style": "success",
+            "Run tests": "success"
+          }
+        }
+      ]
+    },
+    {
+      "id": 37233968812,
+      "name": "MolSysSuite policy",
+      "event": "push",
+      "head_sha": "63af19301068d9324680c67ffe4bb65e21351647",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37233968812",
+      "jobs": [
+        {
+          "id": 111529299510,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "executed_steps": {}
+        }
+      ]
+    },
+    {
+      "id": 37234125390,
+      "name": "CI Full Matrix",
+      "event": "workflow_dispatch",
+      "head_sha": "63af19301068d9324680c67ffe4bb65e21351647",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37234125390",
+      "jobs": [
+        {
+          "id": 111529751761,
+          "name": "Full test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751769,
+          "name": "Full test on macos-latest, Python 3.11",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751783,
+          "name": "Full test on macos-latest, Python 3.13",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751814,
+          "name": "Full test on ubuntu-latest, Python 3.12",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751843,
+          "name": "Full test on ubuntu-latest, Python 3.11",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751855,
+          "name": "Full test on macos-latest, Python 3.14",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751859,
+          "name": "Full test on macos-latest, Python 3.12",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111529751860,
+          "name": "Check skipped-commit backlog",
+          "conclusion": "skipped",
+          "executed_steps": {}
+        },
+        {
+          "id": 111529751890,
+          "name": "Full test on ubuntu-latest, Python 3.13",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Info conda": "success",
+            "Install package": "success",
+            "Test import module": "success",
+            "Run tests": "success"
+          }
+        },
+        {
+          "id": 111530548492,
+          "name": "Report scheduled matrix result",
+          "conclusion": "skipped",
+          "executed_steps": {}
+        }
+      ]
+    },
+    {
+      "id": 37234127542,
+      "name": "Release Gates",
+      "event": "workflow_dispatch",
+      "head_sha": "63af19301068d9324680c67ffe4bb65e21351647",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37234127542",
+      "jobs": [
+        {
+          "id": 111529757366,
+          "name": "Docs Build (Python 3.13)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Install package": "success",
+            "Build docs": "success"
+          }
+        },
+        {
+          "id": 111529757441,
+          "name": "Tests and Contracts (Python 3.12)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Install package": "success",
+            "Run API contract and integration smoke": "success",
+            "Run full test suite": "success"
+          }
+        },
+        {
+          "id": 111529757454,
+          "name": "Packaging Smoke (Python 3.13)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Build artifacts": "success",
+            "Install wheel and import": "success"
+          }
+        },
+        {
+          "id": 111529757507,
+          "name": "Tests and Contracts (Python 3.14)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Install package": "success",
+            "Run API contract and integration smoke": "success",
+            "Run full test suite": "success"
+          }
+        },
+        {
+          "id": 111529757511,
+          "name": "Tests and Contracts (Python 3.11)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Install package": "success",
+            "Run API contract and integration smoke": "success",
+            "Run full test suite": "success"
+          }
+        },
+        {
+          "id": 111529757544,
+          "name": "Tests and Contracts (Python 3.13)",
+          "conclusion": "success",
+          "executed_steps": {
+            "Setup conda env": "success",
+            "Install package": "success",
+            "Run API contract and integration smoke": "success",
+            "Run full test suite": "success"
+          }
+        }
+      ]
+    }
+  ]
+}

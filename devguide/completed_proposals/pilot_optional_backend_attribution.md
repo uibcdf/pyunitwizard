@@ -1,9 +1,9 @@
 ---
 summary: Pilot optional attribution of executed third-party software and its articles.
 issue: uibcdf/pyunitwizard#92
-status: partial
+status: resolved
 opened: 2026-10-02
-closed:
+closed: 2026-10-04
 verification: measured
 area: [integration, provenance]
 guard: tests/integration/test_backend_attribution.py
@@ -13,6 +13,46 @@ supersedes: []
 ---
 
 # Optional backend attribution pilot
+
+## Resolution — 2026-10-04
+
+The bounded optional Pint/unyt pilot is complete. Public Ackredit 0.9.0 is
+qualified in normally solved Conda receiving environments on Linux and
+macOS-arm64 across Python 3.11–3.14. Source
+`63af19301068d9324680c67ffe4bb65e21351647` passes
+[CI](https://github.com/uibcdf/pyunitwizard/actions/runs/37233968233),
+[suite policy](https://github.com/uibcdf/pyunitwizard/actions/runs/37233968812),
+[all eight full-matrix cells](https://github.com/uibcdf/pyunitwizard/actions/runs/37234125390),
+and [release gates](https://github.com/uibcdf/pyunitwizard/actions/runs/37234127542).
+Every full-suite cell passes 699 tests with 12 explicit skips; the release
+workflow also passes 16 API/integration smoke tests on each minor, builds the
+wheel and sdist, installs/imports the wheel, and builds documentation. Logs
+identify public Ackredit 0.9.0 py_0 and ArgDigest 0.14.0. Independent archive
+hash verification and hosted version/build/channel observations are separate
+facts, retained in
+`devguide/evidence/backend_attribution_public_090_2026-10-04.json`.
+
+The primary guard `tests/integration/test_backend_attribution.py` checks the
+actual completed-operation bibliography and original software versions,
+reused references in each capture, enclosing credit, missing/failing provider
+scientific parity, and saved-reader preservation without fresh credit. These
+assertions protect attribution correctness and its optional boundary rather
+than only importability. `tests/test_backend_attribution_benchmark.py` guards
+the real portable-provider measurement path and dispatch/provider restoration
+after measurement errors. Together with installed-wheel guards and raw timing
+samples, they satisfy the pilot's acceptance criteria.
+
+The ten local skips comprise nine provisional function-observer tests under
+`uibcdf/pyunitwizard#94` and the existing strict-JSON NaN case covered separately.
+Hosted jobs additionally omit two sibling-source checks. #94 remains open;
+public 0.9.0 provides no function observer. The opted-in pilot remains bounded
+to dispatched Pint/unyt operations, with no required runtime Ackredit
+dependency, public extra, broader backend/transitive claim, automatic
+activation, PyUnitWizard package release, or function-contract promotion.
+
+This closing record and index update retain the qualified scientific source,
+tests, environment profiles and workflows unchanged. Earlier pending-publication
+statements below are historical checkpoints, superseded by this resolution.
 
 ## Public-provider receiving qualification — 2026-10-04
 
@@ -67,8 +107,8 @@ Activation, imports and initial registration are excluded. The roughly
 not justify enabling tracking by installation or expanding backend coverage.
 Development/test/release profiles pin public `ackredit=0.9.0=py_0`; runtime
 dependencies and production profiles retain the optional provider boundary.
-Hosted normal Conda receiving qualification for all claimed Python minors
-remains due before closing this record. Public PyUnitWizard release admission,
+Hosted normal Conda receiving qualification is now complete for all claimed
+Python minors, as recorded in the resolution above. Public PyUnitWizard release admission,
 provisional function-contract promotion, and wider attribution are separate
 owner decisions.
 
