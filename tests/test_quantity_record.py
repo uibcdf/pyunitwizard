@@ -371,3 +371,18 @@ def test_the_standard_library_reference_reader_agrees():
         tampered["manifest"]["unit"] = "tampered"
         with pytest.raises(ValueError):
             read_si(tampered, manifest["field"], manifest["si"]["exponents"])
+
+
+@pytest.mark.parametrize("field", ["coordinates", "atom_radii", "epsilon"])
+def test_published_topomt_records_keep_their_unit_under_another_session_policy(field):
+    from pathlib import Path
+
+    fixture = json.loads((Path(__file__).parent / "data/topomt_quantity_records.json").read_text())
+    stored = fixture["records"][field]
+    with puw.context(standard_units=["meter", "second"]):
+        record = QuantityRecord.from_dict(stored)
+        result = record.to_quantity(field=field, unit="nanometer", dimensionality={"[L]": 1}, form="pint")
+    assert np.allclose(result.magnitude, np.asarray(stored["values"]) * 0.1)
+    assert record.to_dict() == stored
+    with pytest.raises(RecordError, match="belongs to"):
+        record.to_quantity(field="another_field", form="pint")

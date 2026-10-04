@@ -1,18 +1,67 @@
 ---
 summary: QuantityRecord — an inert interchange form that never loses or misreads a unit (provisional MVP implemented).
 issue: uibcdf/pyunitwizard#82
-status: active
+status: resolved
 opened: 2026-09-24
-closed:
+closed: 2026-10-04
 verification: measured
 area: [serialization, interoperability, forms]
-guard:
-normative:
+guard: tests/test_quantity_record.py::test_every_change_outside_the_codec_is_refused
+normative: devguide/api_freeze_pre_1.0_decision.md
 blocked_by: []
 supersedes: []
 ---
 
 # QuantityRecord: PyUnitWizard's inert interchange form
+
+## MVP scope resolution — 2026-10-04
+
+The delivered inert QuantityRecord/Bundle MVP is complete. Keep the API,
+`qrec/0.3` and `qrec-bundle/0.3` provisional in the 1.0 scope; this explicit
+decision is recorded in `api_freeze_pre_1.0_decision.md` and the release
+checklist. Closing this implementation issue neither promotes the format nor
+qualifies a new public package. Final release notes and exact-candidate gates
+remain the release owner's responsibility.
+
+Every deferred item now has an independent owning issue: HDF5/CF binding #101,
+tagged layout #102, Arrow/Parquet #103, Zarr #104, verified appends #105,
+translation-hub evaluation #106, dialect parsing #85, OpenFF #86 and deferred
+live computation #87. Foreign Pint registry recognition was resolved in #84.
+None of these features is inferred from the implemented homogeneous form.
+
+Two real published consumers are identified:
+
+- Sabueso #32: source `4b98b84` records negotiated quantity columns, bundle
+  verification and scalar/column quantity access; its owning resolution names
+  JSON/SQLite canaries and tests. That is owner-reported receiving evidence,
+  not a scientific suite rerun here.
+- TopoMT: published source `bfbd28f8c3d25a438c7b3d1e526097dd56f63d3c`
+  reads sealed coordinate, atom-radius and epsilon records with explicit field
+  and angstrom-unit expectations in `tests/test_dfnd_closed_shell_reference.py`.
+  Its published DFND showcase retains those actual scientific input records.
+  Their original file digest is
+  `ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157`.
+  Three local provider-owned canaries read these exact unchanged records under
+  a metre session policy, explicitly convert angstroms to nanometres and refuse
+  wrong field names. This checks the codec boundary; no TopoMT algorithm,
+  latest whole-suite success or public consumer release is claimed.
+
+Correction to the earlier promotion-gate wording below: MolSysMT #240 resolved
+legacy unit authority and missing/conflicting declarations in `396e6979f`, and
+explicitly leaves the integrity codec for future work. It is motivating
+consumer evidence, not QuantityRecord adoption. PharmacophoreMT has local
+unpublished uses in a dirty working tree; they are not counted as delivered
+adoption and were neither edited nor executed here. TopoMT supplies the real
+published MolSysSuite receiving example.
+
+The guard `test_every_change_outside_the_codec_is_refused` tests raw append,
+value/unit/SI changes, removed manifests/digests and reordering/truncation.
+Frozen vectors protect the current wire format, and the new TopoMT canaries
+protect cross-component units and reader expectations. Integrity defect #100
+additionally refuses public NumPy write-flag reactivation through immutable
+backing storage. Runtime qualification and archive-source checkpoints are
+retained in their owning issue/receipt; source changes do not invent a package
+release or promote the optional citation pilots.
 
 ## What
 
@@ -26,8 +75,9 @@ strings, pint tuples, unenforced container manifests, ASDF, CF/UDUNITS, OpenFF, 
 Parquet checksums, UCUM, QUDT, UO, D-SI) and the prior art (ArgDigest's removed passport
 and declined value certification) are recorded in uibcdf/pyunitwizard#83. It supersedes
 `devguide/serialization_contract_draft.md`, whose safety rules it meets and whose
-promotion gate (two real integration cases) is met by uibcdf/sabueso#32 and
-uibcdf/molsysmt#240.
+two-real-consumer criterion is now met by Sabueso's bundle adoption and TopoMT's
+published sealed DFND input pipeline. MolSysMT #240 motivates a future HDF5
+binding and does not implement the codec, as corrected above.
 
 ## How
 
@@ -59,11 +109,12 @@ Implemented in this MVP (`pyunitwizard/record.py`, `forms/api_record.py`):
 
 Deferred, each to be justified by a consumer case:
 
-- the HDF5 binding with a CF `units` attribute (needed by uibcdf/molsysmt#240);
-- the tagged layout for mixed units (TaggedQuantities; #83);
+- the HDF5 binding with a CF `units` attribute (#101; motivation in uibcdf/molsysmt#240);
+- the tagged layout for mixed units (#102; design in #83);
 - UCUM and CF spellings derived with real parsers (#85);
-- Arrow and Zarr bindings;
-- growing records by appended blocks;
+- Arrow/Parquet (#103) and Zarr (#104) bindings;
+- growing records by appended blocks (#105);
+- translation-hub evaluation (#106);
 - OpenFF (#86);
 - foreign pint registries (#84);
 - a live, computing form (#87).

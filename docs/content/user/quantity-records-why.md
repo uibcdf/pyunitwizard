@@ -8,6 +8,8 @@ what it does worse, and what it makes possible.
 
 The full design record, with measurements and every alternative considered, is
 [uibcdf/pyunitwizard#83](https://github.com/uibcdf/pyunitwizard/issues/83).
+Its [maintained design record](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/completed_proposals/quantity_interchange_design.md)
+documents the delivered provisional scope and separately owned extensions.
 
 ## The problem: a valid-looking number with the wrong unit
 

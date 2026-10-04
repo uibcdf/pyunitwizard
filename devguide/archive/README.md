@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (18)
+### Resolved (21)
 
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
 - [`adopt_shared_reporting_lifecycle.md`](../completed_proposals/adopt_shared_reporting_lifecycle.md) — [#72](https://github.com/uibcdf/pyunitwizard/issues/72) — Adopt the shared issue-backed developer-guide lifecycle. *(reproduced)*
@@ -20,6 +20,9 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`pilot_optional_backend_attribution.md`](../completed_proposals/pilot_optional_backend_attribution.md) — [#92](https://github.com/uibcdf/pyunitwizard/issues/92) — Pilot optional attribution of executed third-party software and its articles. *(measured)*
 - [`pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md`](../solved_bugs/pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md) — [#91](https://github.com/uibcdf/pyunitwizard/issues/91) — PR CI can be skipped and direct-push debt is unchecked *(high, measured)*
 - [`python_314_support.md`](../completed_proposals/python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
+- [`quantity_interchange_design.md`](../completed_proposals/quantity_interchange_design.md) — [#83](https://github.com/uibcdf/pyunitwizard/issues/83) — Record the accepted design and bounded provisional QuantityRecord implementation. *(measured)*
+- [`quantity_record.md`](../completed_proposals/quantity_record.md) — [#82](https://github.com/uibcdf/pyunitwizard/issues/82) — QuantityRecord — an inert interchange form that never loses or misreads a unit (provisional MVP implemented). *(measured)*
+- [`quantity_record_values_mutable_behind_seal.md`](../solved_bugs/quantity_record_values_mutable_behind_seal.md) — [#100](https://github.com/uibcdf/pyunitwizard/issues/100) — Public record values can be made writable behind the integrity seal. *(high, reproduced)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`showcase_offers_unavailable_pypi_install.md`](../solved_bugs/showcase_offers_unavailable_pypi_install.md) — [#76](https://github.com/uibcdf/pyunitwizard/issues/76) — The showcase notebook offered a PyPI installation route that cannot resolve PyUnitWizard. *(medium, inspected)*
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*

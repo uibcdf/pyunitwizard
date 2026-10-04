@@ -16,6 +16,10 @@ why it exists, is explained in [Why QuantityRecord](quantity-records-why.md).
 Available from PyUnitWizard 0.27.0. Provisional API. `QuantityRecord` and the `qrec/0.3` format may still change before the
 1.0 checklist promotes them. The design, the alternatives evaluated and the measurements
 are recorded in [uibcdf/pyunitwizard#83](https://github.com/uibcdf/pyunitwizard/issues/83).
+The implemented MVP is complete; its API and stored format remain provisional.
+HDF5/CF, tagged layouts, Arrow/Parquet, Zarr, verified appends and hub translation
+have separate proposals (#101–#106). Their tracking does not add those features
+to the current format.
 ```
 
 ## Writing and reading

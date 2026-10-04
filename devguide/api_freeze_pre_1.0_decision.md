@@ -51,3 +51,18 @@ Not allowed:
 - breaking rename/removal of public API,
 - silent semantic changes in existing public behavior,
 - new broad public surfaces without explicit RC checklist update.
+
+## QuantityRecord scope reconciliation — 2026-10-04
+
+Keep `QuantityRecord`, `QuantityRecordBundle`, `qrec/0.3` and
+`qrec-bundle/0.3` provisional in the 1.0 scope. Closing the delivered MVP and
+its design record under #82/#83 does not freeze the format or promote the API.
+Future stable admission requires an explicit reviewed compatibility decision,
+reader/writer contracts, release notes and exact-candidate evidence. Existing
+stored bytes and frozen vectors remain unchanged by this reconciliation.
+
+The deferred HDF5 binding (#101), tagged layout (#102), Arrow/Parquet (#103),
+Zarr (#104), appended blocks (#105) and translation-hub evaluation (#106) have
+independent owners and acceptance criteria. Unit dialects remain #85, OpenFF
+remains #86, and live computation remains deferred under #87. New layouts and
+bindings must not silently reinterpret the existing format identifier.

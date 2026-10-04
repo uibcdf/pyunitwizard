@@ -41,6 +41,9 @@ Use these documents as the primary evidence sources while closing each section:
 - [ ] Legacy `pyunitwizard.main` deprecation contract is tested and documented.
 - [ ] No open blockers in conversion, standardization, parsing, or compatibility workflows.
 - [ ] Provisional `QuantityRecord` / `QuantityRecordBundle` API and `qrec` format (#82): either promoted (frozen, contract-tested, format version fixed) or explicitly kept provisional in the release notes. Admitted as a provisional surface on 2026-09-24 under the change-control policy of `api_freeze_pre_1.0_decision.md`.
+  Scope decision 2026-10-04: retain the API and `qrec/0.3` / `qrec-bundle/0.3`
+  as provisional; final release notes must carry that status. MVP/design issue
+  closure does not satisfy the release gate. Independent extensions are #101–#106.
 
 ## 3. Diagnostics and observability
 
