@@ -25,7 +25,12 @@ except ImportError:
 
 from smonitor.integrations import ensure_configured as _ensure_smonitor_configured
 
+from ._private.citations import declaration as _citation_declaration
 from ._private.smonitor import PACKAGE_ROOT as _SMONITOR_PACKAGE_ROOT
+
+# Inert, provisional producer metadata (#94). This imports neither Ackredit nor
+# unit backends; lazy function exports are resolved only by explicit observation.
+__ackredit__ = _citation_declaration(__version__)
 
 _ensure_smonitor_configured(_SMONITOR_PACKAGE_ROOT)
 

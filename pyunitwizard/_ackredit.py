@@ -2,12 +2,14 @@
 
 from contextvars import ContextVar
 from functools import wraps
+from weakref import WeakKeyDictionary
 
 from depdigest import dep_digest, is_installed
 
 _ENABLED = ContextVar("pyunitwizard_attribution_enabled", default=False)
 
 _PILOT_BACKENDS = {"pint", "unyt"}
+_PREPARED = WeakKeyDictionary()
 
 
 @dep_digest("ackredit")
@@ -40,7 +42,33 @@ def _credit(libraries, operation):
 
         with provider.scope(operation):
             for library in libraries:
-                for declaration in records(library):
+                declarations = records(library)
+                prepare = getattr(provider, "prepare_credit", None)
+                if callable(prepare):
+                    # Values, not mutable identities, select a privately detached
+                    # fixed-use plan. Each credit still writes to the current
+                    # session/captures and refuses replaced provider metadata.
+                    cache = _PREPARED.setdefault(provider, {})
+                    previous = cache.get((operation, library))
+                    if previous is None or previous[0] != declarations:
+                        credits = []
+                        for declaration in declarations:
+                            record = declaration["record"]
+                            provider.register_item(**record)
+                            credits.append(
+                                prepare(
+                                    record["id"],
+                                    operation,
+                                    roles=declaration["roles"],
+                                    context=declaration["context"],
+                                )
+                            )
+                        cache[(operation, library)] = declarations, credits
+                    for credit in cache[(operation, library)][1]:
+                        credit()
+                    continue
+                # Public Ackredit 0.9.0 retains its existing portable boundary.
+                for declaration in declarations:
                     record = declaration["record"]
                     provider.register_item(**record)
                     provider.track_item(

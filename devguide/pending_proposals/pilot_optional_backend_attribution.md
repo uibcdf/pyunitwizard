@@ -101,6 +101,16 @@ uibcdf/ackredit#22; no public installation route is promised.
 MolSysMT adaptation is requested from its maintainers, not implemented here.
 The shared policy is uibcdf/molsyssuite#68.
 
+## Delivery and function-provider follow-up (2026-10-04)
+
+The earlier candidate/publication boundary is now historical: Ackredit 0.9.0 is
+public, and uibcdf/ackredit#22/#75 are closed with exact artifact and installed
+matrix evidence. The existing portable backend pilot can use that release.
+The separate dependency-free public function declarations in
+uibcdf/pyunitwizard#94 require Ackredit's development observer under
+uibcdf/ackredit#84; they do not change this pilot's completed-dispatch semantics
+or add a mandatory dependency. Protocol promotion remains open upstream.
+
 
 ## Validated source evidence (2026-10-02)
 

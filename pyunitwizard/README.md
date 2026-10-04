@@ -26,6 +26,14 @@ Because initialization happens at import time, edits to any of the modules below
 
 Refer to `AGENTS.md` in the repository root for project-wide guidelines, and `pyunitwizard/AGENTS.md` for package-specific rules.
 
+## Inert citation metadata
+
+The package exposes offline software citation metadata without importing a
+citation observer or unit backends. Ordinary scientific functions retain their
+original callables and signatures. The bounded development pilot, tested lazy
+activation and pending protocol review are documented in
+`devguide/pending_proposals/function_citation_provider.md` (uibcdf/pyunitwizard#94).
+
 ## When to edit each module
 
 - Start in `api/` if you are adding or adjusting APIs that users call directly. Keep signatures stable, introduce keyword-only parameters for new options, and backfill docstrings.
