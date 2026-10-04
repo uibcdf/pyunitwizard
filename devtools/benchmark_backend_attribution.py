@@ -1,10 +1,12 @@
-"""Measure optional backend-attribution cost with the real development provider.
+"""Measure optional backend-attribution cost with a real Ackredit provider.
 
 Run ``python devtools/benchmark_backend_attribution.py`` in the suite development
 environment. Reports medians of seven repeats in microseconds per conversion.
 The original-dispatch control removes only this pilot's observer in this process;
 the other cases use public conversion and attribution contexts. Fixed credit is
 per completed array operation, not per element. Results are machine-specific.
+The released portable provider is sufficient; function observation is measured
+only when the provider exposes that provisional capability.
 """
 
 import hashlib
@@ -31,70 +33,66 @@ def main():
     real_backend = _ackredit.backend
     observed_dispatch = dict_convert["pint"]
     original_dispatch = observed_dispatch.__wrapped__
+    observe_calls = getattr(ackredit, "observe_calls", None)
+    function_provider_available = callable(observe_calls)
+    sources = {
+        "ackredit/__init__.py": ackredit.__file__,
+        "pyunitwizard/__init__.py": puw.__file__,
+        "pyunitwizard/_private/citations.py": citations.__file__,
+        "pyunitwizard/_ackredit.py": _ackredit.__file__,
+        "devtools/benchmark_backend_attribution.py": __file__,
+    }
     results = {
         "python": platform.python_version(),
         "platform": platform.platform(),
         "ackredit": ackredit.__version__,
         "pyunitwizard": puw.__version__,
-        "source_sha256": {
-            name: hashlib.sha256(Path(path).read_bytes()).hexdigest()
-            for name, path in {
-                "ackredit/core/providers.py": ackredit.core.providers.__file__,
-                "ackredit/core/collector.py": ackredit.core.collector.__file__,
-                "pyunitwizard/__init__.py": puw.__file__,
-                "pyunitwizard/_private/citations.py": citations.__file__,
-                "pyunitwizard/_ackredit.py": _ackredit.__file__,
-                "devtools/benchmark_backend_attribution.py": __file__,
-            }.items()
-        },
+        "function_provider_available": function_provider_available,
+        "source_sha256": {name: hashlib.sha256(Path(path).read_bytes()).hexdigest() for name, path in sources.items()},
         "method": "seven warmed repeats; activation, imports and first-use setup excluded; microseconds per call",
     }
-    for size, number in [(1, 1000), (100000, 100)]:
-        with ackredit.session("benchmark"):
-            q = puw.quantity(np.ones(size), "meter", form="pint")
-            target = q._REGISTRY.centimeter
+    try:
+        for size, number in [(1, 1000), (100000, 100)]:
+            with ackredit.session("benchmark"):
+                q = puw.quantity(np.ones(size), "meter", form="pint")
+                target = q._REGISTRY.centimeter
 
-            def convert():
-                return puw.convert(q, to_unit=target)
+                def convert():
+                    return puw.convert(q, to_unit=target)
 
-            samples = {}
+                samples = {}
 
-            def median(case):
-                measured = [elapsed / number * 1e6 for elapsed in timeit.repeat(convert, number=number, repeat=7)]
-                samples[case] = measured
-                return statistics.median(measured)
+                def median(case):
+                    measured = [elapsed / number * 1e6 for elapsed in timeit.repeat(convert, number=number, repeat=7)]
+                    samples[case] = measured
+                    return statistics.median(measured)
 
-            convert()
-            dict_convert["pint"] = original_dispatch
-            original = median("original")
-            dict_convert["pint"] = observed_dispatch
-            ordinary = median("ordinary")
-            with puw.attribution():
-                _ackredit.backend = lambda: None
-                unavailable = median("unavailable")
-                _ackredit.backend = real_backend
                 convert()
-                workflow = median("workflow")
-                with ackredit.capture("benchmark"):
+                dict_convert["pint"] = original_dispatch
+                original = median("original")
+                dict_convert["pint"] = observed_dispatch
+                ordinary = median("ordinary")
+                measurements = {"original_us": original, "ordinary_us": ordinary}
+                with puw.attribution():
+                    _ackredit.backend = lambda: None
+                    measurements["unavailable_us"] = median("unavailable")
+                    _ackredit.backend = real_backend
                     convert()
-                    captured = median("captured")
-                with ackredit.observe_calls(puw):
-                    convert()
-                    function_workflow = median("function_workflow")
-                    with ackredit.capture("function-benchmark"):
+                    measurements["workflow_us"] = median("workflow")
+                    with ackredit.capture("benchmark"):
                         convert()
-                        function_captured = median("function_captured")
-            results[str(size)] = dict(
-                original_us=original,
-                ordinary_us=ordinary,
-                unavailable_us=unavailable,
-                workflow_us=workflow,
-                captured_us=captured,
-                function_workflow_us=function_workflow,
-                function_captured_us=function_captured,
-                number=number,
-                samples_us=samples,
-            )
+                        measurements["captured_us"] = median("captured")
+                    if function_provider_available:
+                        with observe_calls(puw):
+                            convert()
+                            measurements["function_workflow_us"] = median("function_workflow")
+                            with ackredit.capture("function-benchmark"):
+                                convert()
+                                measurements["function_captured_us"] = median("function_captured")
+                results[str(size)] = {**measurements, "number": number, "samples_us": samples}
+    finally:
+        _ackredit.backend = real_backend
+        dict_convert["pint"] = observed_dispatch
     print(json.dumps(results, indent=2))
 
 

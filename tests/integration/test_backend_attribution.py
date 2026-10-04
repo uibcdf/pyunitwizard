@@ -14,7 +14,7 @@ import pyunitwizard as puw
 def provider():
     ackredit = pytest.importorskip("ackredit")
     if not hasattr(ackredit, "capture"):
-        pytest.skip("portable attribution requires the Ackredit development provider")
+        pytest.skip("portable attribution requires Ackredit >=0.9.0")
     with ackredit.session("pyunitwizard-pilot"), puw.attribution():
         yield ackredit
 
@@ -235,7 +235,7 @@ def test_optin_is_isolated_between_async_tasks():
 
     ackredit = pytest.importorskip("ackredit")
     if not hasattr(ackredit, "capture"):
-        pytest.skip("requires the development provider")
+        pytest.skip("portable attribution requires Ackredit >=0.9.0")
     _setup()
 
     async def observed():

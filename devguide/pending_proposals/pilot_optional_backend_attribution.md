@@ -4,7 +4,7 @@ issue: uibcdf/pyunitwizard#92
 status: partial
 opened: 2026-10-02
 closed:
-verification: reproduced
+verification: measured
 area: [integration, provenance]
 guard: tests/integration/test_backend_attribution.py
 normative:
@@ -13,6 +13,64 @@ supersedes: []
 ---
 
 # Optional backend attribution pilot
+
+## Public-provider receiving qualification — 2026-10-04
+
+The portable API and registered guide are delivered: Ackredit 0.9.0 is public
+and the upstream owning issues `uibcdf/ackredit#22`, `uibcdf/ackredit#75`,
+and `uibcdf/molsyssuite#71` are closed. The exact noarch file
+`ackredit-0.9.0-py_0.tar.bz2` has independently verified SHA-256
+`37661090f6ad19a74b8155d8a4d4b4a068c9099f4ceba0743b3abfe887e97fe1`.
+Its declared required closure is ArgDigest >=0.13.0, DepDigest >=0.11.0,
+SMonitor >=0.16.0, PyYAML >=6, and Python >=3.11,<3.15. This receiving
+environment uses public ArgDigest 0.14.0 and retains PyUnitWizard's direct
+scientific requirements. No canonical guide copy is edited here.
+
+The local Python 3.14 environment maps those verified public provider files
+into an isolated virtual environment over the existing full scientific
+environment. `pip check` passes. A normally built PyUnitWizard wheel from
+source `8ac636bae08f2b2a43e252566284bf846b7570b1`, version
+`0.27.0+61.g8ac636b`, is installed there (SHA-256
+`f7ab86693ed8fcf6ee97792f7f2cff9fe35c384fc0fdb1543288350d80b35106`).
+All 17 attribution guards pass against the checkout, and all 17 pass again
+outside the checkout against the installed wheel. Their assertions cover
+original bibliography, repeated result captures, enclosing workflows, article
+roles and executed versions, absence/failure, no-op/failed science, selected
+backends, async/nested restoration, and saved readers without new credit.
+
+The full local suite passes 701 tests with ten explicit skips: nine provisional
+function-observer cases owned by `uibcdf/pyunitwizard#94`, and one strict-JSON
+NaN case covered by a rejection test. This public provider contains neither
+`observe_calls` nor `prepare_credit`; the actual portable register/track
+fallback executes. Ruff check/format and the HTML build pass, with the same
+four pre-existing homepage heading warnings.
+
+The measurement tool previously failed on public 0.9.0 because it required
+private development provider modules and the provisional observer. Three
+test-first guards reproduce that failure. The tool now fingerprints the
+provider's ordinary module, reports observer availability, measures its five
+portable cases on 0.9.0, and retains function cases when the provider supports
+them. Its temporary provider/dispatch overrides are restored in `finally`;
+guards cover failure during both the original-dispatch and absent-provider
+measurements. This changes development tooling, not scientific runtime behavior.
+
+Raw seven-repeat measurements are retained in
+`devtools/receipts/backend_attribution_public_090_2026-10-04.json`:
+
+| Elements | Original dispatcher | Ordinary observer | Provider unavailable | Workflow credit | Result capture |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 43.73 us | 45.89 us | 45.31 us | 248.67 us | 267.77 us |
+| 100,000 | 113.03 us | 113.96 us | 114.88 us | 319.12 us | 335.95 us |
+
+Activation, imports and initial registration are excluded. The roughly
+200–220 us fixed cost confirms the existing explicit opt-in decision; it does
+not justify enabling tracking by installation or expanding backend coverage.
+Development/test/release profiles pin public `ackredit=0.9.0=py_0`; runtime
+dependencies and production profiles retain the optional provider boundary.
+Hosted normal Conda receiving qualification for all claimed Python minors
+remains due before closing this record. Public PyUnitWizard release admission,
+provisional function-contract promotion, and wider attribution are separate
+owner decisions.
 
 ## What
 
