@@ -4,6 +4,7 @@ channels:
 dependencies:
 - python=3.14
 - pint
+- pip
 - pytest
 - pytest-receptor =1.1.0
 - pytest-cov
@@ -27,3 +28,6 @@ dependencies:
 - smonitor
 - depdigest
 - argdigest =0.14.0
+- pip:
+  - physipy
+  - quantities
