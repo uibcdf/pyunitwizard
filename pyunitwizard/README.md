@@ -12,6 +12,11 @@ Importing `pyunitwizard` triggers `pyunitwizard.__init__`, which:
 
 Because initialization happens at import time, edits to any of the modules below must preserve idempotence and backward compatibility.
 
+The default form follows the first backend request. The default parser stays
+unset until a parser-capable backend is loaded; loading OpenMM or another
+non-parser backend first must not prevent a later Pint request from parsing
+strings. Explicit parser choices remain unchanged by subsequent backend loads.
+
 ## Layout highlights
 
 - `api/` — Home of the top-level quantity/unit helpers (`convert`, `get_value`, `is_quantity`, etc.) grouped by concern (`conversion`, `construction`, `introspection`, `comparison`, etc.). Touch these modules when you add or modify high-level operations exposed to users.

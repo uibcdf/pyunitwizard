@@ -58,6 +58,34 @@ def test_default_parser():
     assert puw.configure.get_default_parser() == "pint"
 
 
+@pytest.mark.parametrize("backend", ["openmm.unit", "unyt", "physipy", "quantities"])
+def test_load_library_without_parser_leaves_default_parser_unset(backend):
+    puw.configure.reset()
+    try:
+        puw.configure.load_library(backend)
+
+        assert puw.configure.get_default_form() == backend
+        assert puw.configure.get_parsers_loaded() == []
+        assert puw.configure.get_default_parser() is None
+    finally:
+        puw.configure.reset()
+
+
+def test_pint_first_demand_selects_parser_after_openmm_loading():
+    puw.configure.reset()
+    try:
+        puw.configure.load_library("openmm.unit")
+
+        quantity = puw.quantity(3.0, "nM", form="pint")
+
+        assert puw.get_value(quantity) == 3.0
+        assert puw.get_form(quantity) == "pint"
+        assert puw.configure.get_default_form() == "openmm.unit"
+        assert puw.configure.get_default_parser() == "pint"
+    finally:
+        puw.configure.reset()
+
+
 def test_set_default_parser_normalizes_input_form():
     puw.configure.reset()
     puw.configure.load_library(["pint", "openmm.unit"])

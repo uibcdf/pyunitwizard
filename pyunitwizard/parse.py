@@ -79,7 +79,10 @@ def _resolve_parser(string: str, parser: Optional[str], to_form: Optional[str]) 
     if (string.startswith("[") or string.startswith("(")) and "pint" in kernel.loaded_parsers:
         return "pint"
 
-    return digest_parser(None)
+    default_parser = digest_parser(None)
+    if default_parser is None:
+        raise LibraryWithoutParserError(library=to_form)
+    return default_parser
 
 
 @lru_cache(maxsize=1024)

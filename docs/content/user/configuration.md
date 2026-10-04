@@ -32,6 +32,28 @@ puw.configure.report()
 `report()` answers "which units am I getting, and who decided that?" — the
 `provenance` field names whoever set the active policy.
 
+## Loading backends and choosing a parser
+
+`puw.configure.load_library()` keeps the first loaded backend as the default
+form. It selects a default parser only from backends that support string
+parsing, currently Pint and Astropy. Loading OpenMM, unyt, physipy, or quantities
+alone leaves the default parser unset; loading a parser-capable backend later
+fills it without changing the default form.
+
+```python
+puw.configure.reset()
+puw.configure.load_library("openmm.unit")
+assert puw.configure.get_default_parser() is None
+
+# Requesting Pint loads its adapter and selects its parser on first demand.
+quantity = puw.quantity(3.0, "nM", form="pint")
+assert puw.configure.get_default_form() == "openmm.unit"
+assert puw.configure.get_default_parser() == "pint"
+```
+
+An explicitly selected parser is preserved. Requesting a backend without parser
+support as a parser still raises `LibraryWithoutParserError` when parsing.
+
 ## Changing the policy
 
 For the rest of the session:

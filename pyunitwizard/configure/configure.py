@@ -206,15 +206,10 @@ def load_library(library_names: Union[str, List[str]]):
         kernel.default_form = library_names[0]
 
     if kernel.default_parser is None:
-        fallback_parser = None
         for library_name in library_names:
-            if fallback_parser is None:
-                fallback_parser = library_name
             if library_name in kernel.loaded_parsers:
                 kernel.default_parser = library_name
                 break
-        if kernel.default_parser is None:
-            kernel.default_parser = fallback_parser
 
 
 def get_default_form() -> str:

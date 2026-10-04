@@ -127,6 +127,15 @@ def test_parse_library_without_parser_has_readable_message():
     assert "parser" in message.lower()
 
 
+@pytest.mark.parametrize("backend", ["openmm.unit", "unyt", "physipy", "quantities"])
+def test_parse_without_available_parser_names_the_requested_backend(backend):
+    with loaded_libraries([backend]):
+        with pytest.raises(LibraryWithoutParserError, match=backend):
+            parse("1 meter", to_form=backend)
+
+        assert puw.configure.get_default_parser() is None
+
+
 def test_parse_rejects_non_string_input():
     with loaded_libraries(["pint"]):
         for to_form in (None, "string"):
