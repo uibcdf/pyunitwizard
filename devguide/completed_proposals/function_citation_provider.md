@@ -1,18 +1,94 @@
 ---
 summary: Pilot dependency-free function citation declarations for PyUnitWizard.
 issue: uibcdf/pyunitwizard#94
-status: partial
+status: resolved
 opened: 2026-10-04
-closed:
-verification: reproduced
+closed: 2026-10-04
+verification: measured
 area: [integration, provenance]
 guard: tests/integration/test_function_citation_provider.py::test_normally_installed_consumer_outside_checkout
 normative:
-blocked_by: [uibcdf/ackredit#84, uibcdf/molsyssuite#97, uibcdf/moli#46]
+blocked_by: []
 supersedes: []
 ---
 
 # Dependency-free function citation provider
+
+## Receiving pilot resolution — 2026-10-04
+
+The consumer accepts the bounded development pilot. Its dependency-free
+declarations and explicit observation of `quantity`, `convert`,
+`conversion_factor` and `standardize` meet this issue's acceptance criteria.
+This resolves producer/receiver experimentation, not the upstream decision to
+stabilize or distribute the provisional schema and observer API. Public
+Ackredit 0.9.0 remains unchanged and contains neither `observe_calls` nor
+`prepare_credit`; the released portable backend pilot is separately complete
+under `uibcdf/pyunitwizard#92`.
+
+The latest qualified provider producer is
+`1a5dd4566737f6195571b4cb421af6f01647c5f6`, wheel
+`ackredit-0.9.0+29.g1a5dd45-py3-none-any.whl`, SHA-256
+`4c1d65477af8a09f66873c119b40c9228e6e678a79e360a2e4c0fd4644080604`.
+[Provider CI](https://github.com/uibcdf/ackredit/actions/runs/37230213187)
+passes seven jobs;
+[installed receiving matrix](https://github.com/uibcdf/ackredit/actions/runs/37230225286)
+passes all eight Linux/macOS-arm64 × Python 3.11–3.14 cells, 48 tests without
+skips or deselections. The provider-owned immutable `qualification_bundle.py`
+verifies every wheel/package file and complete test event; its independent
+aggregate equals the hosted aggregate. Earlier independent central review
+of `fc00a6c` remains separate from this changed-runtime qualification.
+
+That hosted matrix uses PyUnitWizard `33fec8a`. Its attribution declaration,
+bridge, citation metadata and function tests are unchanged at current receiver
+`ef85201d619d2e50d4fd200a9196035d177f5a79`. A normally built and installed
+current receiver wheel, `pyunitwizard-0.27.0+63.gef85201-py3-none-any.whl`,
+SHA-256 `ed10e748aa5a9b8ae95f7d498ff122b9d23e746efbbe3c1a14c63d3cd6145c96`,
+is additionally qualified with the same exact provider on Python 3.14.7.
+Both installed package trees match every shipped wheel file outside the
+checkout. After supplying the required public ArgDigest 0.14 files, `pip check`
+passes; the full current suite passes 712 tests with one covered NaN/JSON skip.
+Copied installed attribution modules pass 27 tests, with only the
+build-from-checkout guard deselected there and exercised in the full suite.
+The receipt distinguishes wheel installation from mapped Conda provider files
+and does not claim a fresh local Conda solve or full current hosted matrix.
+
+The named guard
+`tests/integration/test_function_citation_provider.py::test_normally_installed_consumer_outside_checkout`
+builds and installs the actual consumer, tests scientific parity with the
+provider unavailable in a separate interpreter, then verifies original
+producer version, reused references and pipeline parentage under observation.
+The other module assertions guard lazy imports, selected completed backends,
+function entry on no-op/failure, original article roles, metadata replacement
+diagnostics, prepared-credit reuse, portable fallback and a saved reader that
+cannot import the producer. These assertions protect the optional receiving
+contract and citation ownership, rather than only metadata availability.
+
+The closing change adds two direct receiving assertions for `conversion_factor`
+and `standardize`, complementing construction/conversion coverage without
+changing scientific implementation. Both assert actual numerical results and
+the original producer citation/version/role on the reached public function.
+Their module hash is retained in the receipt. With public Ackredit 0.9.0 the
+focused run passes all 17 portable backend tests and explicitly skips all 11
+function-observer cases; that provider does not supply the provisional API.
+
+Seven warmed repeats with the exact provider and current checkout are retained
+in `devtools/receipts/function_provider_94_qualified_2026-10-04.json`:
+
+| Elements | Ordinary | Backend capture | Function + backend capture |
+| --- | --- | --- | --- |
+| 1 | 44.29 us | 86.98 us | 107.86 us |
+| 100,000 | 109.03 us | 149.49 us | 175.22 us |
+
+Explicit opt-in remains justified; initial preparation and activation are
+excluded. No hardware timing assertion or general speedup guarantee follows.
+The complete source/artifact/run/environment boundaries are in
+`devguide/evidence/function_provider_94_receiving_2026-10-04.json`.
+
+Remaining provider stability/release decisions stay in `uibcdf/ackredit#84/#87`,
+shared review in `uibcdf/molsyssuite#97`, and direct MOLI scope in `uibcdf/moli#46`.
+No stable-contract promotion, new dependency floor, public extra, next tag,
+public package, synchronized guide change or wider instrumentation is adopted.
+The earlier partial/source-only checkpoints below are retained as history.
 
 ## What
 

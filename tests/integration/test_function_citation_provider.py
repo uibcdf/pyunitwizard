@@ -50,6 +50,30 @@ def test_puw_calls_and_actual_backends_have_separate_reference_roles(provider):
     assert "10.5281/zenodo.8092688" in second.attribution.report(format="bibtex")
 
 
+@pytest.mark.parametrize("operation", ["conversion_factor", "standardize"])
+def test_factor_and_standardization_capture_the_declared_function(provider, operation):
+    puw.configure.set_standard_units(["centimeter"])
+    q = puw.quantity(2.0, "meter", form="pint")
+    with provider.observe_calls(puw), provider.capture(operation) as run:
+        if operation == "conversion_factor":
+            result = puw.conversion_factor("meter", "centimeter")
+        else:
+            result = puw.standardize(q)
+
+    if operation == "conversion_factor":
+        assert result == 100.0
+    else:
+        assert puw.get_value(result) == 200.0
+        assert result.units == q._REGISTRY.centimeter
+    data = run.attribution.to_dict()
+    assert len(data["items"]) == len(data["uses"]) == 1
+    assert data["items"][0]["doi"] == "10.5281/zenodo.8092688"
+    assert data["items"][0]["version"] == puw.__version__
+    assert data["uses"][0]["used_by"] == f"pyunitwizard.{operation}"
+    assert data["uses"][0]["roles"] == ["executed_software"]
+    assert data["uses"][0]["context"] == {"software": "pyunitwizard", "version": puw.__version__}
+
+
 def test_repeated_dispatch_prepares_credit_once_and_reaches_each_capture(provider, monkeypatch):
     if not hasattr(provider, "prepare_credit"):
         pytest.skip("requires the provisional Ackredit prepared-credit API")

@@ -9,10 +9,9 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 - [`quantity_record.md`](quantity_record.md) — [#82](https://github.com/uibcdf/pyunitwizard/issues/82) — QuantityRecord — an inert interchange form that never loses or misreads a unit (provisional MVP implemented). *(measured)*
 
-### Partial (2)
+### Partial (1)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
-- [`function_citation_provider.md`](function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(reproduced)*
 
 ### Open (2)
 

@@ -37,7 +37,7 @@ The package exposes offline software citation metadata without importing a
 citation observer or unit backends. Ordinary scientific functions retain their
 original callables and signatures. The bounded development pilot, tested lazy
 activation and pending protocol review are documented in
-`devguide/pending_proposals/function_citation_provider.md` (uibcdf/pyunitwizard#94).
+`devguide/completed_proposals/function_citation_provider.md` (uibcdf/pyunitwizard#94).
 
 ## When to edit each module
 
