@@ -312,7 +312,9 @@ def quantity_to_pint(quantity: AstropyQuantity):
     from .api_pint import make_quantity as make_pint_quantity
 
     value = get_value(quantity)
-    unit_name = unit_to_string(get_unit(quantity))
+    unit = get_unit(quantity)
+    # Astropy's canonical spelling is capitalized; Pint uses the lowercase name.
+    unit_name = "angstrom" if unit == astropy_units.angstrom else unit_to_string(unit)
     return make_pint_quantity(value, unit_name)
 
 

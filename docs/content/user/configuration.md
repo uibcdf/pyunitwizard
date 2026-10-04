@@ -54,6 +54,14 @@ assert puw.configure.get_default_parser() == "pint"
 An explicitly selected parser is preserved. Requesting a backend without parser
 support as a parser still raises `LibraryWithoutParserError` when parsing.
 
+Unit construction and `puw.convert(..., to_type="unit")` accept bare unit names
+with the Astropy parser, even though Astropy's quantity parser requires a numeric
+prefix. PyUnitWizard uses the same unit-string resolution as conversion targets.
+For example, after loading `["astropy.units", "pint"]`,
+`puw.quantity(3.5, "angstrom", form="pint")` works without changing the parser
+policy. The Astropy-to-Pint bridge maps Astropy's canonical `Angstrom` unit to
+Pint's `angstrom` spelling.
+
 ## Changing the policy
 
 For the rest of the session:

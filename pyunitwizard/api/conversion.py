@@ -20,6 +20,7 @@ from ..forms import (
     dict_get_unit,
     dict_get_value,
     dict_is_unit,
+    dict_make_quantity,
     dict_translate_quantity,
     dict_translate_unit,
 )
@@ -191,7 +192,11 @@ def convert(
 
     if form_in == "string":
         if to_form == "string":
-            output = _parse(quantity_or_unit, parser=parser, to_form=parser)
+            if to_type == "unit":
+                unit = _parse_unit_string(quantity_or_unit, parser=parser, to_form=parser)
+                output = dict_make_quantity[parser](1, unit)
+            else:
+                output = _parse(quantity_or_unit, parser=parser, to_form=parser)
 
             if to_unit is not None:
                 output = dict_convert[parser](output, to_unit)
@@ -205,7 +210,11 @@ def convert(
             else:
                 output = dict_translate_quantity[parser]["string"](output)
         else:
-            output = _parse(quantity_or_unit, parser=parser, to_form=to_form)
+            if to_type == "unit":
+                unit = _parse_unit_string(quantity_or_unit, parser=parser, to_form=to_form)
+                output = dict_make_quantity[to_form](1, unit)
+            else:
+                output = _parse(quantity_or_unit, parser=parser, to_form=to_form)
 
             if to_unit is not None:
                 output = dict_convert[to_form](output, to_unit)

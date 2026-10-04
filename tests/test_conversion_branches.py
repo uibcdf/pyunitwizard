@@ -97,6 +97,42 @@ def test_get_value_to_unit_string_without_numeric_prefix_works_with_astropy_defa
     assert values_in_meter.tolist() == [1.0, 2.0]
 
 
+@pytest.mark.parametrize("form", ["pint", "astropy.units", "openmm.unit", "unyt"])
+@pytest.mark.parametrize("unit", ["angstrom", "nanometer"])
+def test_quantity_with_bare_unit_works_with_astropy_default_parser(form, unit):
+    pytest.importorskip("astropy.units")
+    puw.configure.reset()
+    try:
+        puw.configure.load_library(["astropy.units", "pint"])
+
+        quantity = puw.quantity(3.5, unit, form=form)
+
+        assert puw.get_form(quantity) == form
+        assert puw.get_value(quantity, to_unit=unit) == pytest.approx(3.5)
+        assert puw.configure.get_default_parser() == "astropy.units"
+    finally:
+        puw.configure.reset()
+
+
+@pytest.mark.parametrize("form", ["pint", "astropy.units", "string"])
+@pytest.mark.parametrize("unit", ["angstrom", "nanometer", "2 angstrom"])
+def test_convert_string_to_unit_works_with_explicit_astropy_parser(form, unit):
+    pytest.importorskip("astropy.units")
+    puw.configure.reset()
+    try:
+        puw.configure.load_library(["astropy.units", "pint"])
+
+        output = puw.convert(unit, to_form=form, to_type="unit", parser="astropy.units")
+
+        if form == "string":
+            assert output == ("nm" if unit == "nanometer" else "Angstrom")
+        else:
+            expected = puw.unit("nanometer" if unit == "nanometer" else "angstrom", form=form, parser="pint")
+            assert puw.are_equal(output, expected)
+    finally:
+        puw.configure.reset()
+
+
 def test_string_target_unit_reuses_the_resolved_target_form(monkeypatch):
     _configure_pint()
     quantity = puw.quantity(1.0, "nanometer", form="pint")

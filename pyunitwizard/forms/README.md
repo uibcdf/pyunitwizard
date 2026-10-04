@@ -24,6 +24,11 @@ This directory documents how form adapters integrate with the dispatchers in `py
 - Provides a working parser (`parser = True`) along with factory, accessor, and converter helpers mirroring other adapters.【F:pyunitwizard/forms/api_astropy_unit.py†L73-L106】
 - Relies on Pint as a hub for translators, routing conversions through Pint-backed helpers before delegating to OpenMM or Unyt adapters.【F:pyunitwizard/forms/api_astropy_unit.py†L118-L164】
 
+The Astropy-to-Pint bridge normalizes the canonical Angstrom unit to Pint's
+lowercase `angstrom` spelling. Bare unit strings used in construction or unit
+extraction go through the shared cached unit parser, including its numeric-prefix
+fallback for Astropy. Quantity-string parsing still requires a numeric value.
+
 ### `api_string.py`
 - Represents the pure string form, marking `parser = False` and delegating structural queries (`is_quantity`, `dimensionality`, etc.) to the current kernel defaults after temporarily converting through the active parser/form pair.【F:pyunitwizard/forms/api_string.py†L1-L99】
 - Implements quantity creation, conversion, and serialization helpers that bounce through the configured defaults to maintain consistency with non-string adapters.【F:pyunitwizard/forms/api_string.py†L100-L188】
