@@ -15,6 +15,27 @@ supersedes: []
 
 # PR CI can be skipped and direct-push debt is unchecked
 
+## Hosted routing review — 2026-10-04
+
+The scheduled run `37011806773` at
+`2ffe1885675f47c76af03c08e51bc889a5e99a05` executed its backlog detector,
+reported six skipped commits since watermark
+`66e35d3ca896bf3ed7e76ff9e53dd5c49bf447e3`, and passed all eight matrix
+jobs. Its weekly failure monitor was skipped. This is an actual daily
+recovery: the detector only runs on the daily schedule or a manual probe;
+the run API identifies this event as `schedule`.
+
+Public claims in `README.md`, the installation guide, and the quickstart
+match the maintained Linux/macOS Apple Silicon Python 3.11–3.14 matrix.
+Windows and Intel macOS are explicitly outside that matrix. The required
+strict PR check is now `Test on ubuntu-latest, Python 3.14`.
+
+A documentation-only PR from `validation/skip-ci-pr-route-91`, with
+`[skip ci]` in its title, exercises the three former workflow bypasses
+together: documentation paths, branch name, and PR title. Its commit has
+no native GitHub skip marker. Record the hosted outcome before closing
+this issue.
+
 ## Manual recovery checkpoint — 2026-10-04
 
 The parser/configuration defect is resolved under uibcdf/pyunitwizard#95, and
