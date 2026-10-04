@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (15)
+### Resolved (16)
 
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
 - [`adopt_shared_reporting_lifecycle.md`](../completed_proposals/adopt_shared_reporting_lifecycle.md) — [#72](https://github.com/uibcdf/pyunitwizard/issues/72) — Adopt the shared issue-backed developer-guide lifecycle. *(reproduced)*
@@ -13,6 +13,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`automatic_parser_selects_backend_without_parser.md`](../solved_bugs/automatic_parser_selects_backend_without_parser.md) — [#95](https://github.com/uibcdf/pyunitwizard/issues/95) — Automatic parser selection retains a backend without string parsing. *(high, reproduced)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
+- [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
 - [`optional_backend_audit_boundary.md`](../completed_proposals/optional_backend_audit_boundary.md) — [#93](https://github.com/uibcdf/pyunitwizard/issues/93) — Document exact-file optional-import audit exceptions with startup guards. *(measured)*
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
 - [`pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md`](../solved_bugs/pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md) — [#91](https://github.com/uibcdf/pyunitwizard/issues/91) — PR CI can be skipped and direct-push debt is unchecked *(high, measured)*

@@ -75,8 +75,8 @@ integration smoke passed ten tests on every claimed Python minor, with the
 published ArgDigest version recorded in each native log. This resolves the
 hosted optional-integration evidence gap.
 
-The support-library review remains partial because the public API still has
-native nontrivial argument checks. Examples include
+At source `00d4707`, the support-library review remained partial because the public API had
+native nontrivial argument checks. Examples included
 `configure.load_library()` and `configure.set_standard_units()`; quantity
 construction and record reading also validate product-specific physical or
 integrity semantics. A test-only ArgDigest dependency does not decide which
@@ -139,9 +139,9 @@ Receiving tests exercise actual quantity checking, standardization and
 conversion with the published adapter. They also check that truthy values
 `1`, `"yes"`, and `"False"` still digest; only literal `True` bypasses;
 classmethod receivers are excluded; legacy caller identity is retained while
-the optional runtime `qualname` is supplied; and adapter construction works
-without PyUnitWizard, with its missing-dependency diagnostic deferred to
-execution. PyUnitWizard's runtime configuration calls do not expose a bypass
+the optional runtime `qualname` is supplied; and a fresh-process probe
+simulates absent PyUnitWizard and constructs an adapter, with its missing-dependency
+diagnostic deferred to execution. PyUnitWizard's runtime configuration calls do not expose a bypass
 flag or classmethod interface; these are receiving compatibility probes.
 
 The regression-first run against 0.13 and uncorrected configuration produced
@@ -160,5 +160,28 @@ accepted an unchanged alias tuple, and standardized 10 angstrom to 1 nm.
 `pip check` found no broken requirements. This verifies the dependency/import
 boundary; the wheel is a development probe, not a published release.
 
-Hosted exact-source matrix results and the central inventory receiving update
-remain to be reconciled before changing this review's partial status.
+Scientific source `1a10ae9cca56b5766d09426e9964687771b6cb2a` passed
+routine CI `37230831375`, policy `37230831849`, and the eight-cell
+Linux/macOS Python 3.11–3.14 matrix `37230868062`. Each matrix cell
+imported published ArgDigest 0.14.0 and executed 686 tests with 22 documented
+skips: the local 20 plus two tests requiring sibling source checkouts.
+
+The first release gate `37230869147` exposed a separate profile omission:
+physipy and quantities were absent, although smoke, packaging and documentation
+passed. `uibcdf/pyunitwizard#99` supplies those backends in the release and
+development profiles. At corrected head `bd5be9e4853a3b3a8783618463ae3d641613f6c8`,
+routine CI `37231386080`, policy `37231386414`, and Release Gates
+`37231437144` passed. All four Python full-suite jobs executed 686 tests
+with 22 documented skips; all four API/ecosystem smokes executed 16 tests;
+packaging and documentation also passed. Scientific code, tests, runtime
+metadata, full-matrix workflow, and matrix dependency inputs are unchanged
+between these two sources, so the original eight-cell evidence remains
+applicable with its original identity.
+
+The receipt is `devguide/evidence/argdigest_014_receiving_2026-10-04.json`.
+The member-local receiving implementation and applicability review are complete.
+This issue remains partial only until MolSysSuite records the support-library
+review as adopted in its owning inventory under `uibcdf/molsyssuite#6` and
+records the version-specific receiving outcome under `uibcdf/molsyssuite#98`.
+The proposed inventory evidence is the source, executed matrix and recovered
+release gates above, plus the named local guard; no provider exception is needed.

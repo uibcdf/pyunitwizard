@@ -1,0 +1,575 @@
+{
+  "date": "2026-10-04",
+  "repository": "uibcdf/pyunitwizard",
+  "issues": [
+    89,
+    98,
+    99
+  ],
+  "provider": {
+    "distribution": "uibcdf::argdigest=0.14.0=py_0",
+    "public_url": "https://conda.anaconda.org/uibcdf/noarch/argdigest-0.14.0-py_0.tar.bz2",
+    "producer_sha": "0fa776af2d271065c60727c28480b20c3ce09aee",
+    "artifact_sha256": "983dca0f6bd0944d81fb1efc01e1dfa5c951e95abac6e7a0a08a13b7370d3b9e",
+    "required_core_edges": [
+      "depdigest>=0.11.0",
+      "smonitor>=0.16.0"
+    ],
+    "pyunitwizard_edge": "optional extra; no required runtime cycle"
+  },
+  "scientific_source_sha": "1a10ae9cca56b5766d09426e9964687771b6cb2a",
+  "release_profile_recovery_sha": "bd5be9e4853a3b3a8783618463ae3d641613f6c8",
+  "runtime_consumers": [
+    "configure.load_library",
+    "configure.set_standard_units",
+    "configure.add_standard_units"
+  ],
+  "provider_operation": "argdigest.pipelines.coercers.to_list",
+  "local": {
+    "python": "3.14.7",
+    "full_suite": {
+      "passed": 688,
+      "skipped": 20
+    },
+    "red_receiving_regression": {
+      "failed": 8,
+      "passed": 2,
+      "provider_version": "0.13.0"
+    },
+    "configuration_ecosystem": {
+      "passed": 52
+    },
+    "ruff": "check and format check passed; 189 files",
+    "docs": "HTML build passed; four pre-existing homepage heading warnings",
+    "installed_pair": {
+      "wheel": "pyunitwizard-0.27.0+57.g6120b8f.dirty-py3-none-any.whl",
+      "wheel_sha256": "70a17f38e931b8545332cc71871d65246367fc1a08f9b7b5ff8b6eb311c99bc0",
+      "wheel_scope": "local development probe built from corrected uncommitted inputs; not a public artifact",
+      "argdigest_files": "same verified public Conda files mapped into isolated venv site-packages",
+      "dependency_closure": "system-site-packages from full scientific environment; pip check passed",
+      "orders": [
+        [
+          "pyunitwizard",
+          "argdigest"
+        ],
+        [
+          "argdigest",
+          "pyunitwizard"
+        ]
+      ],
+      "observed": [
+        "outside-checkout installed origins",
+        "no optional unit engine loaded during import",
+        "unchanged tuple alias accepted",
+        "10 angstrom standardized to 1 nm"
+      ]
+    }
+  },
+  "hosted_native_summaries": {
+    "matrix_37230868062": {
+      "executed_cells": 8,
+      "argdigest_version_each": "0.14.0",
+      "passed_each": 686,
+      "skipped_each": 22
+    },
+    "release_37231437144": {
+      "executed_full_suite_cells": 4,
+      "argdigest_version_each": "0.14.0",
+      "full_passed_each": 686,
+      "skipped_each": 22,
+      "smoke_passed_each": 16,
+      "packaging": "success",
+      "docs": "success"
+    },
+    "failed_release_37230869147": {
+      "full_suite_failures_each": 6,
+      "python314_passed": 650,
+      "python314_skipped": 29,
+      "cause": "physipy and quantities absent from release profile",
+      "owner": "uibcdf/pyunitwizard#99"
+    }
+  },
+  "skips": {
+    "local": [
+      "19 optional Ackredit provider tests",
+      "1 strict-JSON NaN case covered by separate rejection test"
+    ],
+    "hosted_additional": [
+      "2 sibling-source tests; hosted jobs do not supply local sibling checkouts"
+    ]
+  },
+  "receiving_contract_guards": "tests/integration/test_ecosystem_smoke.py",
+  "simulated_absence_scope": "Fresh subprocess overrides PyUnitWizard discovery; diagnostic observed on execution, not construction.",
+  "retained_matrix": "Scientific code, tests, runtime metadata, matrix workflow and test profile unchanged between scientific source and recovery source.",
+  "central_remaining": [
+    "uibcdf/molsyssuite#6 inventory receiving update",
+    "uibcdf/molsyssuite#98 version-specific receiving outcome"
+  ],
+  "runs": [
+    {
+      "id": 37230831375,
+      "name": "CI",
+      "event": "push",
+      "head_sha": "1a10ae9cca56b5766d09426e9964687771b6cb2a",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37230831375",
+      "jobs": [
+        {
+          "id": 111519912057,
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check code style",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37230831849,
+      "name": "MolSysSuite policy",
+      "event": "push",
+      "head_sha": "1a10ae9cca56b5766d09426e9964687771b6cb2a",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37230831849",
+      "jobs": [
+        {
+          "id": 111519913339,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": 37230868062,
+      "name": "CI Full Matrix",
+      "event": "workflow_dispatch",
+      "head_sha": "1a10ae9cca56b5766d09426e9964687771b6cb2a",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37230868062",
+      "jobs": [
+        {
+          "id": 111520023685,
+          "name": "Full test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023821,
+          "name": "Full test on macos-latest, Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023824,
+          "name": "Full test on macos-latest, Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023835,
+          "name": "Full test on macos-latest, Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023846,
+          "name": "Full test on macos-latest, Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023854,
+          "name": "Full test on ubuntu-latest, Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023930,
+          "name": "Full test on ubuntu-latest, Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520023972,
+          "name": "Full test on ubuntu-latest, Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520044445,
+          "name": "Check skipped-commit backlog",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "id": 111520679411,
+          "name": "Report scheduled matrix result",
+          "conclusion": "skipped",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": 37230869147,
+      "name": "Release Gates",
+      "event": "workflow_dispatch",
+      "head_sha": "1a10ae9cca56b5766d09426e9964687771b6cb2a",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37230869147",
+      "jobs": [
+        {
+          "id": 111520025498,
+          "name": "Docs Build (Python 3.13)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Build docs",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520025636,
+          "name": "Tests and Contracts (Python 3.12)",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 111520025649,
+          "name": "Tests and Contracts (Python 3.11)",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 111520025688,
+          "name": "Packaging Smoke (Python 3.13)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Install wheel and import",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111520025715,
+          "name": "Tests and Contracts (Python 3.14)",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 111520025749,
+          "name": "Tests and Contracts (Python 3.13)",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37231386080,
+      "name": "CI",
+      "event": "push",
+      "head_sha": "bd5be9e4853a3b3a8783618463ae3d641613f6c8",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37231386080",
+      "jobs": [
+        {
+          "id": 111521569956,
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check code style",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37231386414,
+      "name": "MolSysSuite policy",
+      "event": "push",
+      "head_sha": "bd5be9e4853a3b3a8783618463ae3d641613f6c8",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37231386414",
+      "jobs": [
+        {
+          "id": 111521570445,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": 37231437144,
+      "name": "Release Gates",
+      "event": "workflow_dispatch",
+      "head_sha": "bd5be9e4853a3b3a8783618463ae3d641613f6c8",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37231437144",
+      "jobs": [
+        {
+          "id": 111521738790,
+          "name": "Tests and Contracts (Python 3.12)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111521738927,
+          "name": "Docs Build (Python 3.13)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Build docs",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111521738943,
+          "name": "Tests and Contracts (Python 3.11)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111521738949,
+          "name": "Tests and Contracts (Python 3.13)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111521738959,
+          "name": "Packaging Smoke (Python 3.13)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Install wheel and import",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111521739019,
+          "name": "Tests and Contracts (Python 3.14)",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run API contract and integration smoke",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run full test suite",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

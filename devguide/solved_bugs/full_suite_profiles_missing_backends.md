@@ -1,9 +1,9 @@
 ---
 summary: Full-suite release and development profiles omit supported backends.
 issue: uibcdf/pyunitwizard#99
-status: active
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-04
 severity: medium
 verification: reproduced
 area: [testing, release, dependencies]
@@ -55,4 +55,10 @@ The failure was measured before the environment change, with 6 failures,
 650 passes, and 29 skips in the Python 3.14 full-suite job. The isolated
 full-backend local suite passed 688 tests with 20 documented skips before
 this profile correction; its dependency closure is the intended local model.
-Hosted recovery remains due until the corrected profiles execute successfully.
+Hosted recovery passed in Release Gates `37231437144` at
+`bd5be9e4853a3b3a8783618463ae3d641613f6c8`: all four Python 3.11–3.14
+jobs executed both smoke (16 passes) and full suite (686 passes, 22 documented
+skips); packaging and documentation jobs also passed. Routine CI
+`37231386080` and policy `37231386414` passed at the same head.
+The named guard executes a fresh-process load for each supported optional
+adapter, so missing providers fail at the actual operation boundary.
