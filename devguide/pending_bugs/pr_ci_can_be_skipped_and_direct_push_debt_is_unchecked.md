@@ -15,6 +15,23 @@ supersedes: []
 
 # PR CI can be skipped and direct-push debt is unchecked
 
+## Manual recovery checkpoint — 2026-10-04
+
+The parser/configuration defect is resolved under uibcdf/pyunitwizard#95, and
+the subsequent Astropy construction defect under uibcdf/pyunitwizard#96.
+Scientific source `71de829a53ab50964f180ac558ea0307510ee0cb` passes
+[routine CI](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621178),
+[suite policy](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621591)
+and [manual full matrix](https://github.com/uibcdf/pyunitwizard/actions/runs/37223629790):
+eight executed Linux/macOS Python 3.11–3.14 cells, each 676 passed and 22
+documented skips. The receipt is `devguide/evidence/ci_recovery_2026-10-04.json`.
+
+This supplies successful manual full-matrix recovery evidence. It does not
+establish the hosted PR route, the first actual nightly, or debt-free scheduled
+monitor behavior. The owning issue remains partial until those independent
+acceptance conditions are observed; earlier failed checkpoints remain dated
+evidence below.
+
 ## What
 
 At `4ffe2f1`, the primary `CI.yaml` PR test ignored documentation paths and
@@ -128,4 +145,3 @@ direct pushes; their exact commits and outcomes remain to be measured.
 The single Linux routine package suite moves to Python 3.14; the required
 PR check must use its new name while preserving strict checks and administrator
 direct-push bypass. The complete weekly matrix still includes every older minor.
-

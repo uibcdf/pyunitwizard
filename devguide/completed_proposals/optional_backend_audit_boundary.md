@@ -1,9 +1,9 @@
 ---
 summary: Document exact-file optional-import audit exceptions with startup guards.
 issue: uibcdf/pyunitwizard#93
-status: partial
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-04
 verification: measured
 area: [dependencies, adapters, testing]
 guard: tests/test_lazy_backend_loading.py::test_public_imports_do_not_attempt_optional_backend_imports
@@ -97,3 +97,27 @@ certify arbitrary dynamic imports, or qualify public PyUnitWizard artifacts.
 Static audits cannot model dynamic module reachability. The subprocess guards
 complement the scanner, and new imports or changes to adapter loading require a
 new boundary review. Broad provider runtime adoption is a separate decision.
+
+## Resolution — 2026-10-04
+
+The owner-approved exact-file boundary, maintained guidance and seven isolated
+import checks are committed in `ef91dce`. The original receipt preserves its
+dated uncommitted candidate identity. After the independently scoped Astropy
+construction fix, a new audit on committed source
+`71de829a53ab50964f180ac558ea0307510ee0cb` reproduces all three original payloads
+exactly: raw eleven/exit 1, template-only ten/exit 1, six exact-file exceptions
+zero/exit 0. The follow-up tree digest, provider artifact and payload comparisons
+are retained in `devguide/evidence/ci_recovery_2026-10-04.json`.
+
+The committed source passes routine CI, suite policy and all eight full-matrix
+cells in [37223629790](https://github.com/uibcdf/pyunitwizard/actions/runs/37223629790).
+Each cell reports 676 passed and 22 explicit skips: 19 optional Ackredit-provider
+cases, two absent sibling-source integrations and one strict-JSON NaN case
+covered separately. No complete optional-provider or sibling integration is
+claimed from these hosted runs.
+
+The durable guard blocks and records attempted optional imports while resolving
+every public export, including caught attempts. Its companion cases assert that
+individual backend requests import only that optional root and never dispatch
+the template. This protects the reachability premise behind the documented
+exceptions; the remainder of the package stays in static audit scope.

@@ -1,0 +1,282 @@
+{
+  "date": "2026-10-04",
+  "repository": "uibcdf/pyunitwizard",
+  "issues": [
+    93,
+    95,
+    96
+  ],
+  "scientific_source_sha": "71de829a53ab50964f180ac558ea0307510ee0cb",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 37223621178,
+      "event": "push",
+      "headSha": "71de829a53ab50964f180ac558ea0307510ee0cb",
+      "jobs": [
+        {
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check code style",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37223621178",
+      "workflowName": "CI"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 37223629790,
+      "event": "workflow_dispatch",
+      "headSha": "71de829a53ab50964f180ac558ea0307510ee0cb",
+      "jobs": [
+        {
+          "name": "Full test on ubuntu-latest, Python 3.12",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.14",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.14",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.11",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.12",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.13",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.11",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.13",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": [
+            {
+              "name": "Test import module",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run tests",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "Check skipped-commit backlog",
+          "conclusion": "skipped",
+          "status": "completed",
+          "steps": []
+        },
+        {
+          "name": "Report scheduled matrix result",
+          "conclusion": "skipped",
+          "status": "completed",
+          "steps": []
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37223629790",
+      "workflowName": "CI Full Matrix"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 37223621591,
+      "event": "push",
+      "headSha": "71de829a53ab50964f180ac558ea0307510ee0cb",
+      "jobs": [
+        {
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "status": "completed",
+          "steps": []
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/uibcdf/pyunitwizard/actions/runs/37223621591",
+      "workflowName": "MolSysSuite policy"
+    }
+  ],
+  "pytest": {
+    "local": {
+      "python": "3.14.7",
+      "serial": {
+        "passed": 678,
+        "skipped": 20
+      },
+      "parallel": {
+        "workers": 12,
+        "passed": 678,
+        "skipped": 20
+      },
+      "skips": {
+        "optional_ackredit_provider_absent": 19,
+        "strict_json_nan_with_separate_rejection_test": 1
+      }
+    },
+    "hosted_full_matrix": {
+      "cells": 8,
+      "passed_per_cell": 676,
+      "skipped_per_cell": 22,
+      "skips": {
+        "optional_ackredit_provider_absent": 19,
+        "sibling_repositories_absent": 2,
+        "strict_json_nan_with_separate_rejection_test": 1
+      }
+    }
+  },
+  "audit": {
+    "source_sha": "71de829a53ab50964f180ac558ea0307510ee0cb",
+    "python_source_tree_sha256": "382b5243e7b465a91ab95521caa9b3f72caf9403f8b62871ad186e6092935c2a",
+    "provider": {
+      "coordinate": "noarch/depdigest-0.13.0-py_0.tar.bz2",
+      "loading": "published package bytes from existing extracted Conda cache; installed environment unchanged",
+      "sha256": "e011d725c8a831ae46cd6b8d114185d04248e32b4d6701c70f988d19cc69f67b",
+      "version": "0.13.0"
+    },
+    "original_receipt": "devguide/evidence/optional_backend_audit_2026-10-04.json",
+    "checks": {
+      "raw": {
+        "exit_code": 1,
+        "violation_count": 11,
+        "payload_matches_original": true
+      },
+      "scoped": {
+        "exit_code": 0,
+        "violation_count": 0,
+        "payload_matches_original": true
+      },
+      "template_only": {
+        "exit_code": 1,
+        "violation_count": 10,
+        "payload_matches_original": true
+      }
+    }
+  },
+  "scope_limits": [
+    "Manual matrix recovery does not establish hosted PR routing or first real nightly adoption under #91.",
+    "Optional Ackredit integration and sibling-source tests are explicitly skipped on hosted runners.",
+    "This receipt preserves the producer source identity; later report archival changes do not replace that identity."
+  ]
+}

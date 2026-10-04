@@ -1,9 +1,9 @@
 ---
 summary: Automatic parser selection retains a backend without string parsing.
 issue: uibcdf/pyunitwizard#95
-status: partial
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-04
 severity: high
 verification: reproduced
 area: [configuration, parsing, testing]
@@ -58,8 +58,8 @@ fresh-import checks passed 42 tests. The full parallel suite
 `python -m pytest --receptor=llm -n 12 tests/` passed 661 tests with 20 skips:
 19 require the absent optional Ackredit provider, and one covers the intentional
 strict-JSON NaN limitation through a separate rejection test. The existing
-`pyunitwizard.main` deprecation warning remains. No hosted macOS reproduction
-or exact-candidate CI qualification has been executed for this local change.
+`pyunitwizard.main` deprecation warning remains. At that initial local checkpoint,
+hosted macOS reproduction and exact-candidate CI qualification were still pending.
 
 ## What was refuted
 
@@ -87,3 +87,24 @@ The fix affects process-global lazy configuration. Regression tests cover the
 state transition and observable quantity construction; full-suite verification
 includes the parallel execution mode used by the failing matrix. Platform
 coverage and optional-provider integration remain outside this local evidence.
+
+## Resolution — 2026-10-04
+
+Implementation `a6e4f35` was pushed with the audit review in `ef91dce`. Routine
+CI passed there and seven full-matrix cells passed, including the original
+macOS/Python 3.13 failure. The remaining macOS/Python 3.14 failure exposed the
+separate Astropy bare-unit defect, now resolved under uibcdf/pyunitwizard#96.
+
+The combined scientific source `71de829a53ab50964f180ac558ea0307510ee0cb`
+passes [CI 37223621178](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621178),
+[all eight full-matrix cells](https://github.com/uibcdf/pyunitwizard/actions/runs/37223629790)
+and [suite policy](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621591).
+Every cell executes `Run tests` successfully: 676 passed and 22 documented
+skips (19 optional Ackredit-provider, two absent sibling repositories, one
+strict-JSON NaN case with a separate rejection test). Source identities, job
+execution and limits are retained in `devguide/evidence/ci_recovery_2026-10-04.json`.
+
+The durable guard constructs a real Pint quantity after loading only OpenMM,
+asserts its value/form, and verifies that Pint becomes the parser while OpenMM
+remains the default form. It protects the failing public state transition,
+rather than concealing the failure through record-test configuration.

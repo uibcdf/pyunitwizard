@@ -1,9 +1,9 @@
 ---
 summary: Astropy parser rejects bare unit strings during quantity construction.
 issue: uibcdf/pyunitwizard#96
-status: partial
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-04
 severity: high
 verification: reproduced
 area: [construction, conversion, adapters]
@@ -62,9 +62,9 @@ remains; the parallel runner also emitted an unclosed `/dev/null` ResourceWarnin
 outside its summarized pytest warnings. Ruff/format, syntax compilation,
 reporting indexes and the HTML documentation build pass.
 
-Hosted follow-up is pending. The historical worker's exact configuration sequence
-is not reconstructed; the minimal deterministic reproduction proves the parser
-boundary problem.
+Hosted follow-up passes as recorded below. The historical worker's exact
+configuration sequence is not reconstructed; the minimal deterministic
+reproduction proves the parser boundary problem.
 
 ## What was refuted
 
@@ -92,3 +92,21 @@ uibcdf/pyunitwizard#91 retain their own issues.
 The cached unit parser already owns numeric-prefix fallback. The fix shares it
 with construction and unit extraction rather than changing public parser
 signatures. Full-suite serial and parallel tests cover configuration interactions.
+
+## Resolution — 2026-10-04
+
+Implementation `71de829a53ab50964f180ac558ea0307510ee0cb` passes
+[routine CI](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621178),
+[suite policy](https://github.com/uibcdf/pyunitwizard/actions/runs/37223621591)
+and [all eight full-matrix cells](https://github.com/uibcdf/pyunitwizard/actions/runs/37223629790),
+including macOS/Python 3.14. Each cell executes the suite successfully with 676
+passed and 22 documented skips: 19 optional Ackredit-provider cases, two absent
+sibling-source integrations and one strict-JSON NaN case with separate rejection
+coverage. Exact producer identities, executed steps and limits are preserved in
+`devguide/evidence/ci_recovery_2026-10-04.json`.
+
+The durable guard constructs quantities using the Astropy default parser for
+angstrom/nanometer across four target forms, checks form/value preservation, and
+asserts that parser policy stays unchanged. Its companion unit-extraction cases
+cover explicit Astropy, numeric prefixes and string outputs. These assertions
+exercise the construction failure before scalar coercion can hide it.
