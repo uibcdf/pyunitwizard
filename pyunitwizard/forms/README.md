@@ -40,6 +40,17 @@ This directory documents how form adapters integrate with the dispatchers in `py
 - [ ] Decide whether the form provides a parser. Expose a module-level `parser` flag and, if `True`, include `string_to_quantity`/`string_to_unit` implementations. If parsing is unavailable, set the flag to `False` and raise a clear `LibraryWithoutParserError` from the stubs.
 - [ ] Update this README with a summary of the new adapter and document any parser requirements or limitations.
 
+## Optional-import audit boundary
+
+The five optional runtime adapters initialize their backend types when explicitly
+loaded, while package imports and public API resolution remain independent of
+those backends. `template_api_form.py` is a non-dispatched contributor scaffold.
+The reviewed exact-file exceptions, raw and scoped DepDigest 0.13.0 commands,
+and required fresh-process regression checks are maintained in
+[Implementation Patterns](../../docs/content/developer/implementation-patterns.md#optional-import-audit-boundary)
+under uibcdf/pyunitwizard#93. Other files remain in the audit scope; exceptions
+do not extend to the `forms/` directory or to new imports elsewhere.
+
 
 ## Optional attribution development pilot
 
