@@ -20,6 +20,11 @@ unit libraries into PyUnitWizard.
    help consumers discover it.
 
 ## Customizing standard units
+- The public ArgDigest `to_list` coercer normalizes accepted configuration
+  strings and sequences into owned lists. `load_library` preserves the supplied
+  list or tuple and its order. Invalid standard-unit container types are rejected
+  before rebuilding policy state, preserving the previous units and provenance.
+  Backend identifiers, physical dimensionality, and unit parsing remain owned here.
 - Use `configure.set_standard_units()` in tests or examples to declare the
   canonical units for each dimensionality. The helper resets all internal
   dictionaries before applying new units, so pass the complete list of desired

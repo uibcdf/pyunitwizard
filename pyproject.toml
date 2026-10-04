@@ -29,6 +29,7 @@ dependencies = [
     "pint",
     "smonitor>=0.16.0",
     "depdigest>=0.11.0",
+    "argdigest>=0.14.0",
 ]
 
 # Update the urls once the hosting is set up.

@@ -8,7 +8,7 @@ def test_depdigest_runtime_policy_has_expected_hard_and_soft_dependencies():
     hard = {name for name, metadata in puw_depdigest.LIBRARIES.items() if metadata.get("type") == "hard"}
     soft = {name for name, metadata in puw_depdigest.LIBRARIES.items() if metadata.get("type") == "soft"}
 
-    assert hard == {"numpy", "pint"}
+    assert hard == {"numpy", "pint", "argdigest"}
     assert soft == {"ackredit", "unyt", "openmm.unit", "astropy.units", "physipy", "quantities"}
 
 

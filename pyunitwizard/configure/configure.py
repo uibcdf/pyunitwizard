@@ -162,13 +162,13 @@ def get_parsers_supported() -> List[str]:
     return parsers
 
 
-def load_library(library_names: Union[str, List[str]]):
+def load_library(library_names: Union[str, List[str], tuple[str, ...]]) -> None:
     """Load one or more backend libraries into runtime configuration.
 
     Parameters
     ----------
-    library_names : str or list of str
-        Library name or list of library names to load.
+    library_names : str or list/tuple of str
+        Library names to load in order. The supplied sequence is not modified.
 
     Returns
     -------
@@ -186,8 +186,9 @@ def load_library(library_names: Union[str, List[str]]):
         else:
             raise TypeError("Expected string or list of strings for library_names")
 
-    for ii in range(len(library_names)):
-        library_names[ii] = digest_form(library_names[ii])
+    from argdigest.pipelines.coercers import to_list
+
+    library_names = [digest_form(name) for name in to_list(library_names)]
 
     from pyunitwizard import forms
 
@@ -294,12 +295,14 @@ def get_standard_units() -> Dict[str, Dict[str, int]]:
     return kernel.standards
 
 
-def set_standard_units(standard_units: List[str], provenance: Optional[str] = None) -> None:
+def set_standard_units(
+    standard_units: Union[str, List[str], tuple[str, ...]], provenance: Optional[str] = None
+) -> None:
     """Configure project standard units used by standardization helpers.
 
     Parameters
     ----------
-    standard_units : list of str
+    standard_units : str or list/tuple of str
         Standard unit names used as normalization references.
     provenance : str, optional
         Who is setting this policy, recorded so that :func:`report` can answer
@@ -316,6 +319,13 @@ def set_standard_units(standard_units: List[str], provenance: Optional[str] = No
     ValueError
         If `standard_units` is neither a string nor list/tuple.
     """
+
+    if type(standard_units) not in (str, list, tuple):
+        raise ValueError
+
+    from argdigest.pipelines.coercers import to_list
+
+    standard_units = to_list(standard_units)
 
     import numpy as np
 
@@ -335,11 +345,6 @@ def set_standard_units(standard_units: List[str], provenance: Optional[str] = No
     # this on its canonical fast path, so it is derived here, once per
     # configuration, rather than rebuilt on every call.
     seen_dimensionalities = set()
-
-    if type(standard_units) is str:
-        standard_units = [standard_units]
-    elif type(standard_units) not in [list, tuple]:
-        raise ValueError
 
     for standard_unit in standard_units:
         dim = get_dimensionality(convert(standard_unit, to_type="unit"))
@@ -417,7 +422,9 @@ def set_standard_units(standard_units: List[str], provenance: Optional[str] = No
         kernel.tentative_base_standards_matrix = None
 
 
-def add_standard_units(standard_units: List[str], provenance: Optional[str] = None) -> None:
+def add_standard_units(
+    standard_units: Union[str, List[str], tuple[str, ...]], provenance: Optional[str] = None
+) -> None:
     """Add or replace standard units without discarding the full existing set.
 
     Each incoming unit is matched against the current standards by
@@ -429,7 +436,7 @@ def add_standard_units(standard_units: List[str], provenance: Optional[str] = No
 
     Parameters
     ----------
-    standard_units : list of str or str
+    standard_units : str or list/tuple of str
         Standard unit name(s) to add or, if a unit with the same
         dimensionality is already registered, to replace.
 
@@ -443,10 +450,12 @@ def add_standard_units(standard_units: List[str], provenance: Optional[str] = No
     ValueError
         If `standard_units` is neither a string nor a list/tuple.
     """
-    if type(standard_units) is str:
-        standard_units = [standard_units]
-    elif type(standard_units) not in [list, tuple]:
+    if type(standard_units) not in (str, list, tuple):
         raise ValueError
+
+    from argdigest.pipelines.coercers import to_list
+
+    standard_units = to_list(standard_units)
 
     import numpy as np
 

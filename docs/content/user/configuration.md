@@ -40,6 +40,11 @@ parsing, currently Pint and Astropy. Loading OpenMM, unyt, physipy, or quantitie
 alone leaves the default parser unset; loading a parser-capable backend later
 fills it without changing the default form.
 
+It accepts a string, list, or tuple of library names, normalizes aliases, and
+preserves the caller's sequence and its order. For example, passing
+`("PINT", "openmm.unit")` selects Pint as the default form without modifying
+the input.
+
 ```python
 puw.configure.reset()
 puw.configure.load_library("openmm.unit")
@@ -70,6 +75,10 @@ For the rest of the session:
 puw.configure.set_standard_units(["angstrom", "fs"])   # replace the whole set
 puw.configure.add_standard_units(["angstrom"])         # replace one dimensionality
 ```
+
+Both functions accept strings, lists, or tuples. An unsupported container type
+raises `ValueError` before changing the active units, provenance, or cached
+matrices. Unit strings are still parsed and checked by PyUnitWizard.
 
 Temporarily, restoring the previous policy on exit:
 

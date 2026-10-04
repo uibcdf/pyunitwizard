@@ -36,6 +36,19 @@ def test_load_library():
     assert puw.configure.get_libraries_loaded() == ["pint", "openmm.unit"]
 
 
+@pytest.mark.parametrize("names", [["PINT", "openmm.unit"], ("PINT", "openmm.unit")])
+def test_load_library_preserves_caller_sequence_and_normalizes_aliases(names):
+    original = names[:]
+    puw.configure.reset()
+    try:
+        puw.configure.load_library(names)
+        assert names == original
+        assert puw.configure.get_libraries_loaded() == ["pint", "openmm.unit"]
+        assert puw.configure.get_default_form() == "pint"
+    finally:
+        puw.configure.reset()
+
+
 def test_load_library_rejects_non_string_or_sequence():
     puw.configure.reset()
     try:
@@ -135,6 +148,23 @@ def test_set_standard_units_rejects_non_list_tuple_or_string():
         pass
     else:
         raise AssertionError("Expected ValueError for invalid standard_units type")
+
+
+@pytest.mark.parametrize("operation", ["set_standard_units", "add_standard_units"])
+def test_invalid_standard_container_preserves_active_policy(operation):
+    puw.configure.reset()
+    try:
+        puw.configure.load_library("pint")
+        puw.configure.set_standard_units(["nm", "ps"], provenance="existing-policy")
+        before = puw.configure.report()
+        matrix = puw.kernel.dimensional_fundamental_standards_matrix
+        with pytest.raises(ValueError):
+            getattr(puw.configure, operation)(10, provenance="invalid-request")
+        assert puw.configure.report() == before
+        assert puw.kernel.dimensional_fundamental_standards_matrix is matrix
+        assert puw.get_value(puw.standardize(puw.quantity(10, "angstrom"))) == pytest.approx(1)
+    finally:
+        puw.configure.reset()
 
 
 def test_set_standard_units_tie_candidate_path_with_combination_units():

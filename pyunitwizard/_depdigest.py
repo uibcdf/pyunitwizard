@@ -1,6 +1,7 @@
 # DepDigest configuration for PyUnitWizard
 
 LIBRARIES = {
+    "argdigest": {"type": "hard", "pypi": "argdigest", "conda": "argdigest"},
     "ackredit": {"type": "soft", "pypi": None, "conda": None},
     "numpy": {"type": "hard", "pypi": "numpy"},
     "pint": {"type": "hard", "pypi": "Pint"},

@@ -7,3 +7,4 @@ dependencies:
 - pint
 - smonitor
 - depdigest
+- argdigest >=0.14.0

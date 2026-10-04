@@ -6,7 +6,7 @@ opened: 2026-09-25
 closed:
 verification: measured
 area: [development, integration]
-guard:
+guard: tests/integration/test_ecosystem_smoke.py
 normative:
 blocked_by: []
 supersedes: []
@@ -106,6 +106,59 @@ product issues. It does not redesign the shared MolSysSuite policy.
 
 ## Dependencies and risks
 
-The full matrix currently has an open failure monitor, `uibcdf/pyunitwizard#77`.
-Its cause must be distinguished from the receptor change before claiming complete
-developer-tool adoption.
+The historical full-matrix monitor `uibcdf/pyunitwizard#77` is closed. Later
+parser/configuration failures were resolved under `uibcdf/pyunitwizard#95`
+and `uibcdf/pyunitwizard#96`, with eight-cell recovery `37223629790`.
+
+## Runtime boundary and receiving review — 2026-10-04
+
+ArgDigest 0.14.0 is used at runtime for ordinary configuration normalization:
+`load_library`, `set_standard_units`, and `add_standard_units` call its
+public `pipelines.coercers.to_list` after preserving the existing accepted
+container boundary. It provides string wrapping and owned list/tuple
+normalization, fixing caller mutation and premature policy reset under
+`uibcdf/pyunitwizard#98`. Its import occurs only when configuring or loading
+a backend. The simple allowed-container rejection preserves existing exception
+types; it does not introduce another digester protocol.
+
+Backend aliases, dimensionality, unit interpretation, conversions, record
+schema validation, seals, and compatibility checks are product semantics
+owned by PyUnitWizard. Enum/flag dispatch and ordinary Python type errors
+need no extra decorator layer. There is no required runtime cycle: published
+ArgDigest 0.14 requires SMonitor and DepDigest, while its PyUnitWizard edge is
+an optional extra. Therefore no bootstrap exception is claimed. PyUnitWizard
+retains its own NumPy requirement for scientific operations.
+
+The runtime minimum and Conda recipe require ArgDigest >=0.14.0, and the
+development, test, and release-gate profiles pin the public 0.14.0 release.
+The downloaded `uibcdf::argdigest=0.14.0=py_0` archive has SHA-256
+`983dca0f6bd0944d81fb1efc01e1dfa5c951e95abac6e7a0a08a13b7370d3b9e`,
+matching the provider handoff in `uibcdf/molsyssuite#98`.
+
+Receiving tests exercise actual quantity checking, standardization and
+conversion with the published adapter. They also check that truthy values
+`1`, `"yes"`, and `"False"` still digest; only literal `True` bypasses;
+classmethod receivers are excluded; legacy caller identity is retained while
+the optional runtime `qualname` is supplied; and adapter construction works
+without PyUnitWizard, with its missing-dependency diagnostic deferred to
+execution. PyUnitWizard's runtime configuration calls do not expose a bypass
+flag or classmethod interface; these are receiving compatibility probes.
+
+The regression-first run against 0.13 and uncorrected configuration produced
+eight failures and two passes. After the correction, the configuration and
+ecosystem targets passed 52 tests, and the full local Python 3.14 suite passed
+688 tests with 20 skips (19 absent optional Ackredit, one intentionally
+unsupported strict-JSON NaN case covered by a rejection test). Published
+ArgDigest files were installed into an isolated virtual environment layered
+on the existing full scientific environment; this is local receiving evidence,
+not a new public PyUnitWizard artifact qualification.
+
+A local wheel with the new runtime metadata was installed into that isolated
+environment. Outside the checkout, both import orders (`pyunitwizard` first
+and `argdigest` first) passed, loaded no optional unit engine during import,
+accepted an unchanged alias tuple, and standardized 10 angstrom to 1 nm.
+`pip check` found no broken requirements. This verifies the dependency/import
+boundary; the wheel is a development probe, not a published release.
+
+Hosted exact-source matrix results and the central inventory receiving update
+remain to be reconciled before changing this review's partial status.
