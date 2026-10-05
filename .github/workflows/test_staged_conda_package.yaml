@@ -60,6 +60,44 @@ jobs:
             --sha "$CANDIDATE_SHA" --version "$CANDIDATE_VERSION" \
             --build-number "$BUILD_NUMBER" --run-id "$STAGING_RUN_ID")"
           echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
+      - name: Bind original artifact source to the qualification workflow
+        shell: bash
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          QUALIFICATION_SHA: ${{ github.sha }}
+          CANDIDATE_VERSION: ${{ inputs.version }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+          ARTIFACT_SHA256: ${{ steps.receipts.outputs.sha256 }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import pathlib
+          import subprocess
+          candidate = os.environ['CANDIDATE_SHA']
+          assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip() == candidate
+          binding = {
+              'schema': 'pyunitwizard.installed-source@1',
+              'candidate_sha': candidate,
+              'qualification_sha': os.environ['QUALIFICATION_SHA'],
+              'run_id': int(os.environ['GITHUB_RUN_ID']),
+              'run_attempt': int(os.environ['GITHUB_RUN_ATTEMPT']),
+              'filename': f"pyunitwizard-{os.environ['CANDIDATE_VERSION']}-py_{os.environ['BUILD_NUMBER']}.tar.bz2",
+              'sha256': os.environ['ARTIFACT_SHA256'],
+              'profiles': {'baseline': ['3.11', '3.12', '3.13', '3.14'],
+                           'storage': ['3.11', '3.12', '3.13', '3.14'],
+                           'openff': ['3.12', '3.13', '3.14']},
+              'platforms': ['ubuntu-latest', 'macos-latest'],
+          }
+          pathlib.Path(os.environ['RUNNER_TEMP'], 'installed-source-binding.json').write_text(json.dumps(binding, indent=2) + '\n')
+          PY
+      - name: Retain original-source qualification binding
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: installed-source-binding-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/installed-source-binding.json
+          if-no-files-found: error
+          retention-days: 30
 
   install:
     name: Install ${{ matrix.profile }} / ${{ matrix.os }} / Python ${{ matrix.python }}
@@ -104,9 +142,14 @@ jobs:
             uibcdf::smonitor=0.16.0=py_1
             uibcdf::argdigest=0.14.0=py_0
             uibcdf::ackredit=0.9.0=py_0
-            pytest pytest-receptor=1.1.0 openmm unyt astropy
+            pip pytest pytest-receptor=1.1.0 openmm unyt astropy
             ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0' || '' }}
             ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.24,<0.26' || '' }}
+      - name: Install third-party test backends
+        shell: bash -l {0}
+        run: |
+          python -m pip install physipy quantities
+          python -m pip check
       - name: Verify installed artifact and smoke test outside the source checkout
         shell: bash -l {0}
         env:
@@ -145,12 +188,16 @@ jobs:
       - name: Retain the installed dependency closure
         if: success()
         shell: bash -l {0}
-        run: micromamba list --json > "$RUNNER_TEMP/installed-closure.json"
+        run: |
+          micromamba list --json > "$RUNNER_TEMP/installed-closure.json"
+          python -m pip list --format=json > "$RUNNER_TEMP/pip-closure.json"
       - name: Upload installed dependency evidence
         if: success()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: closure-${{ matrix.profile }}-${{ matrix.os }}-py${{ matrix.python }}
-          path: ${{ runner.temp }}/installed-closure.json
+          path: |
+            ${{ runner.temp }}/installed-closure.json
+            ${{ runner.temp }}/pip-closure.json
           if-no-files-found: error
           retention-days: 30

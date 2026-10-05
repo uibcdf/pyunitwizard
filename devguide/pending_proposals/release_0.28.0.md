@@ -102,6 +102,29 @@ The corrected candidate requires fresh consuming source gates and a new archive
 coordinate, `py_1`. Record both histories and qualify only the final installed
 bytes. These administrative checks do not qualify science or waive #107.
 
+## Installed qualification recovery — 2026-10-05
+
+Producer 37284526657 built and uploaded original `0.28.0-py_1` from
+`2d12b37ac8b20566afc82cb51eb67e98d762bc47`, with SHA-256
+`0fe6bde7f399db85a5cd764a803a222dc66a7d3f8a48ebd81dd67da90b00f69c`.
+The first installed run 37285223103 verifies producer receipts, installed file
+and public dependency coordinates, but its contract step fails two configuration
+cases because the expanded test environment omitted physipy and quantities.
+The inspected Linux/Python 3.14 storage job passes 247 cases, fails those two,
+and documents the one intentional strict-JSON skip. Keep the failed run failed.
+
+Correct only the qualification workflow to install those third-party test
+providers normally, as existing full-suite environments do. Never reinstall
+PyUnitWizard from source or rebuild its original archive. The recovery run uses
+the original candidate checkout, guards and file digest, while its native head
+identifies the corrected qualification workflow. It emits an explicit binding
+between original source/artifact and qualification source/run/attempt, and keeps
+both Conda and pip closure inventories. Independent native verification must
+check every declared job and successful scientific step on the qualification
+head, plus the binding and original producer receipts. The original exact-source
+gates remain attached to the original candidate. Publish its tag only after this
+bounded manual qualification succeeds; the correction is not a waiver.
+
 ## Acceptance and recovery
 
 - Exact-source required gates and all declared installed profiles pass.
