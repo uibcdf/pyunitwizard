@@ -63,3 +63,14 @@ baseline matrix and release gates also pass. Those scientific results neither
 clear this upload debt nor qualify public publication. Coverage and test-result
 uploads must execute successfully on the exact recovery candidate before #107
 can close. Keep the existing service-recovery route and fail-on-upload handling.
+
+## CF/HDF5 checkpoint — 2026-10-05
+
+Final runtime `d4c6089be2f4b8d4c975f31238209ce7348ee4c0` passes the optional
+eight-cell matrix 37277539184 (822 tests/14 skips and 69 installed guards per
+cell). Routine CI 37277485846 passes its baseline suite (762/14) and style,
+then fails coverage ingestion after retries. Policy 37277486550 passes.
+The qualification receipt is `devguide/evidence/cf_hdf5_interop_2026-10-05.json`.
+Original baseline/release and installed artifact identities remain attached to
+their producer commits. Closing #101/#108 does not clear this upload debt or
+qualify publication; the existing exact-head recovery route remains required.

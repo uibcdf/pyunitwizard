@@ -5,10 +5,9 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Partial (1)
 
-- [`cf_unit_dialect.md`](cf_unit_dialect.md) — [#108](https://github.com/uibcdf/pyunitwizard/issues/108) — Bounded CF/UDUNITS unit dialect for verified HDF5 quantities. *(inspected)*
-- [`quantity_record_hdf5.md`](quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(inspected)*
+- [`interop_unit_dialects.md`](interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*
 
 ### Open (7)
 
