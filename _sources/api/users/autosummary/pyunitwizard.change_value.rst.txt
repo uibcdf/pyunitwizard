@@ -1,0 +1,6 @@
+﻿pyunitwizard.change\_value
+==========================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: change_value

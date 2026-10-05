@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.set\_standard\_units
+===========================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: set_standard_units

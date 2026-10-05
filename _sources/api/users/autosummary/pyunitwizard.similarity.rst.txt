@@ -1,0 +1,6 @@
+﻿pyunitwizard.similarity
+=======================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: similarity
