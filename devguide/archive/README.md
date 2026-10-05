@@ -4,8 +4,9 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (22)
+### Resolved (23)
 
+- [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
 - [`adopt_shared_reporting_lifecycle.md`](../completed_proposals/adopt_shared_reporting_lifecycle.md) — [#72](https://github.com/uibcdf/pyunitwizard/issues/72) — Adopt the shared issue-backed developer-guide lifecycle. *(reproduced)*
 - [`array_string_form_does_not_roundtrip.md`](../solved_bugs/array_string_form_does_not_roundtrip.md) — [#81](https://github.com/uibcdf/pyunitwizard/issues/81) — Array quantities emitted comma-free NumPy text that PyUnitWizard could not parse. *(high, reproduced)*

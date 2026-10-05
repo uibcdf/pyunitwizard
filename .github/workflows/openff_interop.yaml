@@ -28,7 +28,7 @@ jobs:
         run: python -m pip install . --no-deps
       - name: Run full suite with optional backend
         shell: bash -l {0}
-        run: pytest --receptor=ci -q tests
+        run: python -m pytest --receptor=ci -q tests
       - name: Test installed consumer outside checkout
         shell: bash -l {0}
         run: |
@@ -37,4 +37,4 @@ jobs:
           cd "$RUNNER_TEMP/openff-installed-tests"
           python -m pip check
           python -c 'import pyunitwizard, openff.units, pint; print(pyunitwizard.__file__); print(pyunitwizard.__version__, openff.units.__version__, pint.__version__)'
-          pytest --receptor=ci -q .
+          python -m pytest --receptor=ci -q .

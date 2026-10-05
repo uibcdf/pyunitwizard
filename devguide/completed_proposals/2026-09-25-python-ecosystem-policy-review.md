@@ -1,9 +1,9 @@
 ---
 summary: Review inherited Python ecosystem policy in PyUnitWizard.
 issue: uibcdf/pyunitwizard#89
-status: partial
+status: resolved
 opened: 2026-09-25
-closed:
+closed: 2026-10-05
 verification: measured
 area: [development, integration]
 guard: tests/integration/test_ecosystem_smoke.py
@@ -180,8 +180,30 @@ applicable with its original identity.
 
 The receipt is `devguide/evidence/argdigest_014_receiving_2026-10-04.json`.
 The member-local receiving implementation and applicability review are complete.
-This issue remains partial only until MolSysSuite records the support-library
-review as adopted in its owning inventory under `uibcdf/molsyssuite#6` and
-records the version-specific receiving outcome under `uibcdf/molsyssuite#98`.
+At this checkpoint, the remaining dependency was MolSysSuite recording the
+support-library review as adopted under `uibcdf/molsyssuite#6` and the
+version-specific receiving outcome under `uibcdf/molsyssuite#98`.
 The proposed inventory evidence is the source, executed matrix and recovered
 release gates above, plus the named local guard; no provider exception is needed.
+
+## Central reconciliation and resolution — 2026-10-05
+
+MolSysSuite commit `4234be4a222846f189af290600a04c6162fde701` records
+PyUnitWizard's support-library review as **adopted** in `suite.toml`, retaining
+the independent developer-tool conclusion as **adopted**. Its receipt
+`devguide/rollouts/pyunitwizard_argdigest_receiving_98_20261004.json` records
+source/public-provider receiving as adopted with the original source and
+executed gate identities above. The owner confirmed this reconciliation in
+[the issue handoff](https://github.com/uibcdf/pyunitwizard/issues/89#issuecomment-5984721394).
+
+The local review is therefore resolved. The guard
+`tests/integration/test_ecosystem_smoke.py` exercises the published adapter,
+actual quantity conversion and import boundary that justified the adopted
+runtime relationship. No required dependency cycle or bootstrap exception is
+introduced. The historical development-wheel, optional-skip and receiving
+limitations remain attached to their original evidence; this closure does not
+qualify a new public PyUnitWizard artifact or clear subsequent CI debt.
+
+MolSysSuite #98 remains open for other consumers. Its separate cross-repository
+audit limitations, including private OpenCASTp access tracked by MolSysSuite
+#102, are not resolved by this member-local closure.

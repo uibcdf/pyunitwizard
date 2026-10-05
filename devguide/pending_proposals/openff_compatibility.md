@@ -46,3 +46,18 @@ native OpenMM parity including Vec3; scalar strings and unsealed val/unit
 boundary checked with field/unit/dimension expectations before codec conversion;
 non-default policy, lazy imports, absence/Python 3.11 diagnostics, baseline full
 suite and identified optional matrix. No stable schema or public release claim.
+
+## Qualification progress — 2026-10-05
+
+Runtime source e7ecdb8 passes the local optional full suite (775 passed/12
+skips) and base full suite (755 passed/13 skips, including the absent optional
+module). Its normally installed wheel in a fresh actual Conda OpenFF 0.4.0 /
+Pint 0.25.3 environment passes 22 copied guards outside checkout and pip check.
+Existing frozen vectors, 47 measurement cases, Ruff and docs continue passing.
+
+Initial optional run 37271566721 fails collection on all six cells: the pytest
+executable does not include checkout root for imports of the repository's
+`tests` helper namespace. Use `python -m pytest` for the full source suite;
+installed canaries remain in an independent temporary directory. No scientific
+assertion is waived. Qualified runtime source and later workflow recovery retain
+their separate identities. Coverage ingestion remains independently #107.
