@@ -1,12 +1,12 @@
 ---
 summary: Qualify and publish 0.28.0 with the exact staged Conda artifact.
 issue: uibcdf/pyunitwizard#110
-status: active
+status: resolved
 opened: 2026-10-05
-closed:
+closed: 2026-10-05
 verification: inspected
 area: [release, distribution, interoperability]
-guard:
+guard: tests/test_noarch_conda_publication.py::test_promotion_workflow_checks_exact_release_and_file_identity
 normative: devtools/conda-build/release_plan.toml
 blocked_by: []
 supersedes: []
@@ -149,3 +149,26 @@ defective or already occupied artifact coordinate, use an additive build number;
 never overwrite the original file. On a post-promotion verifier failure, inspect
 read-only registry/index state and rerun only the observation boundary. Do not
 move a public tag or republish bytes to force a green workflow.
+
+## Published outcome — 2026-10-05
+
+Canonical tag and stable GitHub Release 0.28.0 target original source 2d12b37ac8b20566afc82cb51eb67e98d762bc47.
+Final installed run 37288810671 passes all 22 cells using public runtime and test
+providers. Producer 37284526657 and promotion 37290090364 retain original py_1
+bytes and digest. Independent public registry and solver-index receipts verify
+the main label; a fresh public-only Linux/Python 3.14 environment imports that
+exact archive and executes immutable/empty records, MeasurementRecord, affine
+CF and HDF5 roundtrip/refusal guards. Release-event run 37290088911 validates the
+staged plan without rebuilding; public documentation run 37290088551 succeeds.
+
+Exact-source routine CI 37283485067 attempt 2 and qualifier CI 37288784566
+actually upload both Codecov reports. No exception was needed; keep prior failed
+attempts as history. The publication guard protects original tag/file/digest
+identity, staging-to-main promotion and independent verification retention. It
+does not substitute for executed science, external reports or public availability.
+
+Full safe receipts are in `devguide/evidence/release_0.28.0_2026-10-05.json`;
+all 22 normalized Conda/pip inventories and input digests are retained in
+`devguide/evidence/release_0.28.0_installed_closures.json`. The pre-tag decision
+is https://github.com/uibcdf/pyunitwizard/issues/110#issuecomment-5991713724.
+All provisional and unsupported-scope limits above remain in force.

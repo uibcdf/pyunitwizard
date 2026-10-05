@@ -1,13 +1,13 @@
 ---
 summary: CI coverage uploads fail at Codecov download and ingestion endpoints.
 issue: uibcdf/pyunitwizard#107
-status: active
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-05
 severity: medium
 verification: reproduced
 area: [ci, coverage]
-guard:
+guard: tests/test_codecov_reporting.py::test_codecov_uploads_use_isolated_cli_and_fail_on_reporting_errors
 normative: .github/workflows/CI.yaml
 blocked_by: []
 supersedes: []
@@ -74,3 +74,18 @@ The qualification receipt is `devguide/evidence/cf_hdf5_interop_2026-10-05.json`
 Original baseline/release and installed artifact identities remain attached to
 their producer commits. Closing #101/#108 does not clear this upload debt or
 qualify publication; the existing exact-head recovery route remains required.
+
+## Observed recovery — 2026-10-05
+
+Routine CI 37288784566 at 3665a87 and exact release-source CI 37283485067
+attempt 2 at 2d12b37 successfully execute both coverage and test-result uploads,
+with native job/step verification retained in
+`devguide/evidence/release_0.28.0_2026-10-05.json`. The earlier attempt remains
+a failed external-ingestion observation. No TLS bypass, error suppression or
+release exception was used.
+
+The regression guard keeps the isolated officially installed CLI, both report
+files and fail-on-upload handling mandatory; it rejects swallowed errors and
+conditional upload skips. It protects truthful future results rather than
+predicting external uptime. Actual executed upload recovery supplies the
+closure evidence. Final administrative-head CI is inspected after its push.

@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (27)
+### Resolved (29)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -13,6 +13,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`astropy_parser_rejects_bare_unit_construction.md`](../solved_bugs/astropy_parser_rejects_bare_unit_construction.md) — [#96](https://github.com/uibcdf/pyunitwizard/issues/96) — Astropy parser rejects bare unit strings during quantity construction. *(high, reproduced)*
 - [`automatic_parser_selects_backend_without_parser.md`](../solved_bugs/automatic_parser_selects_backend_without_parser.md) — [#95](https://github.com/uibcdf/pyunitwizard/issues/95) — Automatic parser selection retains a backend without string parsing. *(high, reproduced)*
 - [`cf_unit_dialect.md`](../completed_proposals/cf_unit_dialect.md) — [#108](https://github.com/uibcdf/pyunitwizard/issues/108) — Bounded CF/UDUNITS unit dialect for verified HDF5 quantities. *(measured)*
+- [`codecov_tls_upload.md`](../solved_bugs/codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage uploads fail at Codecov download and ingestion endpoints. *(medium, reproduced)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
@@ -29,6 +30,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`quantity_record_hdf5.md`](../completed_proposals/quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(measured)*
 - [`quantity_record_values_mutable_behind_seal.md`](../solved_bugs/quantity_record_values_mutable_behind_seal.md) — [#100](https://github.com/uibcdf/pyunitwizard/issues/100) — Public record values can be made writable behind the integrity seal. *(high, reproduced)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
+- [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`showcase_offers_unavailable_pypi_install.md`](../solved_bugs/showcase_offers_unavailable_pypi_install.md) — [#76](https://github.com/uibcdf/pyunitwizard/issues/76) — The showcase notebook offered a PyPI installation route that cannot resolve PyUnitWizard. *(medium, inspected)*
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*
 - [`stated_uncertainty.md`](../completed_proposals/stated_uncertainty.md) — [#90](https://github.com/uibcdf/pyunitwizard/issues/90) — Bind a scalar measurement to its stated uncertainty without statistical inference. *(measured)*

@@ -54,8 +54,10 @@ this release does not promote them to stable 1.0 contracts.
   published **ArgDigest >=0.14.0** contract. The dependency floor is reflected
   in the package and Conda recipe (#98).
 - Optional executed-backend attribution and function citation declarations use
-  **Ackredit >=0.9.0**. Prepared credits can be reused; attribution remains
-  opt-in and does not enable automatic import hooks (#92, #94).
+  **Ackredit >=0.9.0**. Executed-backend attribution remains opt-in and does not enable automatic
+  import hooks. Function-observer and prepared-credit paths are provisional:
+  the corresponding APIs are absent from the qualified public 0.9.0 provider,
+  and their deferred tests do not count as executed qualification (#92, #94).
 
 ## Distribution and qualification
 
@@ -73,3 +75,19 @@ dependency closure, archive digest and public-install evidence are retained
 there. Codecov upload debt is tracked independently in
 [uibcdf/pyunitwizard#107](https://github.com/uibcdf/pyunitwizard/issues/107);
 scientific test success must not be described as successful external ingestion.
+
+## Publication identity
+
+The original qualified source is `2d12b37ac8b20566afc82cb51eb67e98d762bc47`.
+The original Conda archive is `pyunitwizard-0.28.0-py_1.tar.bz2`, SHA-256
+`0fe6bde7f399db85a5cd764a803a222dc66a7d3f8a48ebd81dd67da90b00f69c`.
+Producer 37284526657 and final installed qualification 37288810671 preserve
+those exact bytes. All mandatory source and installed profiles passed, and
+exact-source CI attempt 2 successfully uploaded coverage and test results to
+Codecov. No release exception was used.
+
+See the [pre-tag decision and executed evidence](https://github.com/uibcdf/pyunitwizard/issues/110#issuecomment-5991713724).
+Promotion 37290090364 verifies the public main label and solver index. A clean
+public-channel Linux/Python 3.14 installation verifies the exact digest and
+executes record, measurement, CF and HDF5 success/refusal checks. Full receipts
+and all 22 installed dependency closures are retained under `devguide/evidence/`.
