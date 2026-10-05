@@ -11,6 +11,24 @@ except ImportError:
 form_name = "openmm.unit"
 parser = False
 
+
+def quantity_to_openff_units(quantity: Any) -> Any:
+    """Use native OpenFF conversion, then verify shared registry definitions."""
+    from .api_openff_units import quantity_to_pint, require_openff
+
+    require_openff()
+    from openff.units.openmm import from_openmm
+
+    result = from_openmm(quantity)
+    quantity_to_pint(result)
+    return result
+
+
+def unit_to_openff_units(unit: Any) -> Any:
+    """Translate a native OpenMM unit into the optional OpenFF registry."""
+    return quantity_to_openff_units(openmm_unit.Quantity(1, unit)).units
+
+
 # is_form={
 #    openmm_unit.Quantity:form_name,
 #    openmm_unit.Unit:form_name,

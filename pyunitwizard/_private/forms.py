@@ -1,6 +1,6 @@
 from pyunitwizard import kernel
 
-forms = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "string", "record"]
+forms = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "openff.units", "string", "record"]
 
 _LOADING = False
 

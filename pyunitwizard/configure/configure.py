@@ -11,8 +11,8 @@ from pyunitwizard._private.forms import digest_form
 from pyunitwizard._private.lists_and_tuples import is_list_or_tuple
 from pyunitwizard.constants import _constants
 
-libraries = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities"]
-parsers = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities"]
+libraries = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities", "openff.units"]
+parsers = ["pint", "openmm.unit", "unyt", "astropy.units", "physipy", "quantities", "openff.units"]
 _aux_dict_modules = {
     "pint": "pint",
     "openmm.unit": "openmm",
@@ -20,6 +20,7 @@ _aux_dict_modules = {
     "astropy.units": "astropy",
     "physipy": "physipy",
     "quantities": "quantities",
+    "openff.units": "openff.units",
 }
 
 
@@ -193,6 +194,10 @@ def load_library(library_names: Union[str, List[str], tuple[str, ...]]) -> None:
     from pyunitwizard import forms
 
     for library in library_names:
+        if library == "openff.units":
+            from pyunitwizard.forms.api_openff_units import require_openff
+
+            require_openff()
         if library not in kernel.loaded_libraries:
             from depdigest import is_installed
 

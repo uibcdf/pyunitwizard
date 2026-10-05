@@ -4,6 +4,17 @@ This directory documents how form adapters integrate with the dispatchers in `py
 
 ## Existing adapters
 
+### `api_openff_units.py`
+
+The optional `openff.units` dispatch/parser uses OpenFF's registry. Incoming
+and outgoing Pint translation reuses `api_pint.normalize_registry` with an
+explicit destination and its 1e-12 definition tolerance. Translator keys are
+`quantity_to_openff_units` / `unit_to_openff_units` on Pint, string and OpenMM;
+OpenFF supplies `quantity_to_pint`, `unit_to_pint` and native OpenMM translators.
+Other adapters use existing Pint bridges. Standalone `from_dict` / `to_dict`
+handle unsealed val/unit data with expectations; they do not auto-detect
+dictionaries or extend qrec bytes. See `docs/content/user/openff.md` (#86).
+
 ### `api_pint.py`
 - Boots a dedicated `pint.UnitRegistry` and exposes helpers for identifying quantities, units, dimensionality, and compatibility checks (`is_quantity`, `is_unit`, `dimensionality`, `compatibility`).【F:pyunitwizard/forms/api_pint.py†L13-L119】
 - Provides quantity construction, value/unit accessors, conversion helpers, and a parser that maps strings into Pint quantities (`parser = True`).【F:pyunitwizard/forms/api_pint.py†L120-L213】

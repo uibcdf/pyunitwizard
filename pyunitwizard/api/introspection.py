@@ -101,6 +101,11 @@ def get_form(quantity_or_unit: QuantityOrUnit, raise_exception: bool = True) -> 
     """
 
     obj_type = type(quantity_or_unit)
+    # OpenFF's dynamically generated classes may be named pint.Quantity/Unit.
+    # The owning registry identifies the form without importing an optional backend.
+    registry = getattr(quantity_or_unit, "_REGISTRY", None)
+    if type(registry).__module__.startswith("openff.units"):
+        return _register_detected_form("openff.units")
     if obj_type in _TYPE_TO_FORM_CACHE:
         return _TYPE_TO_FORM_CACHE[obj_type]
 

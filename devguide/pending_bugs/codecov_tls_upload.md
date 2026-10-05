@@ -44,3 +44,11 @@ PyPI Codecov CLI 11.3.1 in an isolated venv and the documented action `binary`
 input, retaining normal package installation and upload error handling. This
 uses the provider's supported alternate distribution; no insecure TLS or
 unchecked CDN binary is accepted. Executed upload results remain required.
+
+The official installed CLI successfully passes download/setup, but run
+37270848222 then fails requests to ingest.codecov.io after retries. Thus the
+external outage also affects ingestion, beyond the old downloader. Tests and
+style pass; no successful coverage upload or aggregate green CI is claimed.
+Keep #107 active until the service recovers and exact-head coverage/test-result
+uploads execute successfully. Do not keep changing unrelated scientific code
+or suppress upload errors to manufacture a green result.

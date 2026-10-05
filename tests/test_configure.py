@@ -16,6 +16,7 @@ def test_libraries_supported():
         "astropy.units",
         "physipy",
         "quantities",
+        "openff.units",
     ]
 
 
@@ -27,6 +28,7 @@ def test_parsers_supported():
         "astropy.units",
         "physipy",
         "quantities",
+        "openff.units",
     ]
 
 

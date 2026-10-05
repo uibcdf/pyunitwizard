@@ -90,6 +90,13 @@ def _parse_cached(string: str, parser: str, to_form: str):
     if not isinstance(string, str):
         raise BadCallError(argument="string")
 
+    if parser == "openff.units" or to_form == "openff.units":
+        # Registry-backed strings share existing dispatch; no guessed aliases.
+        quantity = _parse_with_pint(string) if parser == "pint" else dict_translate_quantity["string"][parser](string)
+        if parser == to_form:
+            return quantity
+        return dict_translate_quantity[parser][to_form](quantity)
+
     if parser == "pint":
         if to_form == "pint":
             return _parse_with_pint(string)

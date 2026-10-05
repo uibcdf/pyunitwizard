@@ -10,6 +10,7 @@ LIBRARIES = {
     "astropy.units": {"type": "soft", "pypi": "astropy"},
     "physipy": {"type": "soft", "pypi": "physipy"},
     "quantities": {"type": "soft", "pypi": "quantities"},
+    "openff.units": {"type": "soft", "pypi": None, "conda": "openff-units"},
 }
 
 # Mapping of form names to their required library
@@ -20,6 +21,7 @@ MAPPING = {
     "astropy.units": "astropy.units",
     "physipy": "physipy",
     "quantities": "quantities",
+    "openff.units": "openff.units",
 }
 
 SHOW_ALL_CAPABILITIES = True

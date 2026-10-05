@@ -11,6 +11,9 @@ In practical terms:
 - Pint is often the easiest baseline for deterministic parser/form behavior.
 - OpenMM, unyt, and Astropy are fully valid targets, but string parsing and
   representation conventions may differ from Pint-centric examples.
+- [OpenFF](openff.md) is an optional target with its own registry. Its official
+  Conda 0.4.0 package needs Python 3.12–3.14 and Pint <0.26; crossings refuse
+  definition disagreements and raw val/unit data is explicitly unsealed.
 
 A safe rollout strategy is:
 1. choose one backend as canonical in production,

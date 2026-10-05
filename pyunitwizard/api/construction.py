@@ -36,7 +36,7 @@ def quantity(
     unit : UnitLike
         Unit in of the quantity in any of the accepted form.
 
-    form : {"unyt", "pint", "openmm.unit", "astropy.units", "string"}, optional
+    form : {"unyt", "pint", "openmm.unit", "astropy.units", "openff.units", "string"}, optional
         Output form of the quantity.
 
     parser : {"unyt", "pint", "openmm.unit", "astropy.units"}, optional

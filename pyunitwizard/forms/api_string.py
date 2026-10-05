@@ -7,6 +7,21 @@ from pyunitwizard._private.quantity_or_unit import ArrayLike
 form_name = "string"
 parser = False
 
+
+def quantity_to_openff_units(string: str) -> Any:
+    """Parse a quantity using the optional OpenFF registry."""
+    from .api_openff_units import string_to_quantity
+
+    return string_to_quantity(string)
+
+
+def unit_to_openff_units(string: str) -> Any:
+    """Parse a unit using the optional OpenFF registry."""
+    from .api_openff_units import string_to_unit
+
+    return string_to_unit(string)
+
+
 # is_form={
 #    str:form_name,
 #    }

@@ -1,4 +1,4 @@
-parsers = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities"]
+parsers = ["openmm.unit", "pint", "unyt", "astropy.units", "physipy", "quantities", "openff.units"]
 
 
 def digest_parser(parser: str) -> str:

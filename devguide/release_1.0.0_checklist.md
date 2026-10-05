@@ -56,6 +56,11 @@ Use these documents as the primary evidence sources while closing each section:
 
 ## 4. Ecosystem coordination
 
+- [ ] Optional OpenFF 0.4.0 evidence (#86): Python 3.12–3.14/Pint <0.26
+  consumer matrix and installed-reader tests are identified for the candidate;
+  baseline Python 3.11 absence diagnostics and dependencies remain supported.
+  The val/unit tools leave the verified domain and do not promote qrec formats.
+
 - [ ] Integration smoke checks passed with `argdigest`.
 - [ ] Integration smoke checks passed with `depdigest`.
 - [ ] Integration smoke checks passed with `smonitor`.

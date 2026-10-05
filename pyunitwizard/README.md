@@ -69,6 +69,14 @@ replacing process-global behavior.
 
 ## Quantities from another Pint registry
 
+The optional `openff.units` form uses the actual OpenFF registry and shared
+Pint definition verification, with native OpenMM parity and explicit unsealed
+val/unit import/export in `forms/api_openff_units.py`. Install conda-forge
+openff-units 0.4.0 (Python 3.12–3.14/Pint <0.26); importing PyUnitWizard does
+not load it. Baseline dependencies and automatic backend probe order stay
+unchanged. The optional Linux/macOS matrix is `openff_interop.yaml`, and the
+maintained user contract is `docs/content/user/openff.md` (#86).
+
 `is_quantity()` accepts Pint quantities from any `UnitRegistry`. `convert()`
 rebuilds a foreign quantity or unit in PyUnitWizard's Pint registry before any
 same-form fast path or translation. It compares named base units, dimensions,

@@ -77,6 +77,7 @@ mini-library-walkthrough.md
 configuration.md
 quantity-records.md
 quantity-records-why.md
+openff.md
 integrating-your-library.md
 troubleshooting.md
 production-checklist.md

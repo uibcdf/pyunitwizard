@@ -88,23 +88,24 @@ PyUnitWizard supports interoperation with:
 - `astropy.units`
 - `physipy`
 - `quantities`
+- `openff.units` (optional; Python 3.12–3.14/Pint <0.26)
 - `string` form
 
 Runtime loading of available backends/parsers is handled via configuration.
 Dependency policy:
 - hard runtime dependency: `pint`;
 - optional runtime dependencies: `openmm.unit`, `unyt`, `astropy.units`,
-  `physipy`, `quantities`.
+  `physipy`, `quantities`, `openff.units`.
 
 Objects supported in practice:
 - quantities from all listed backends;
 - unit objects from backends that expose distinct unit types (`pint`,
-  `openmm.unit`, `unyt`, `astropy.units`);
+  `openmm.unit`, `unyt`, `astropy.units`, `openff.units`);
 - unit-like scalar objects for backends where unit/quantity share the same type
   (`physipy`, `quantities`).
 
 String parser support:
-- parser-capable: `pint`, `astropy.units`;
+- parser-capable: `pint`, `astropy.units`, `openff.units`;
 - explicit parser-not-supported errors: `openmm.unit`, `unyt`, `physipy`,
   `quantities`.
 

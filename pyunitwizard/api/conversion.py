@@ -101,7 +101,7 @@ def convert(
     to_unit : str, optional
         Target unit. When provided, the quantity is converted to this unit before
         returning.
-    to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "string", "record"}, optional
+    to_form : {"unyt", "pint", "openmm.unit", "astropy.units", "openff.units", "string", "record"}, optional
         Target backend form. If omitted, the input form is preserved. ``"record"`` is
         the inert interchange form (:class:`pyunitwizard.record.QuantityRecord`).
     parser : {"pint", "openmm.unit", "astropy.units"}, optional
@@ -133,6 +133,10 @@ def convert(
         from ..forms import api_pint
 
         quantity_or_unit = api_pint.normalize_registry(quantity_or_unit)
+    elif form_in == "openff.units":
+        from ..forms import api_openff_units
+
+        quantity_or_unit = api_openff_units.normalize_registry(quantity_or_unit)
 
     # --- High Performance Fast Path ---
     if form_in != "string" and to_unit is None and to_form is None and to_type == "quantity":

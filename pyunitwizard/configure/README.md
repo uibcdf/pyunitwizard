@@ -4,6 +4,12 @@ This note explains how to extend the configuration layer that wires third-party
 unit libraries into PyUnitWizard.
 
 ## Adding support for a new unit library
+
+`openff.units` is an optional supported form/parser backed by conda-forge
+openff-units 0.4.0, Python 3.12–3.14 and Pint <0.26. It is appended to the
+supported inventory without changing automatic backend probe order. Explicit
+loading checks version/installation before DepDigest discovery and registry
+dispatch. Its tests include provider absence and actual Python 3.11 diagnostics.
 1. Register the backend in `pyunitwizard/configure/configure.py`:
    - Append the canonical name to the `libraries` list so discovery helpers
      expose it.

@@ -75,3 +75,12 @@ surface (#90) for Sabueso's stated scalar uncertainty. Its separate
 qrec/0.3, bundle/0.3 and the primary quantity APIs are unchanged. Keep it
 provisional in 1.0 scope and explicitly name it in release notes. It does not
 admit arrays, live arithmetic, error propagation or statistical estimation.
+
+## Optional OpenFF exception — 2026-10-05
+
+Admit `openff.units` as an optional compatible target/parser of the existing
+API (#86). Reuse definition verification, native OpenMM operations and the
+existing Pint bridge. The bounded val/unit import/export tools stay explicit;
+raw dictionaries are not automatically quantities and existing record formats
+are unchanged. Optional installed/matrix qualification and Python 3.11 absence
+diagnostics are named in the RC checklist; baseline dependencies stay unchanged.

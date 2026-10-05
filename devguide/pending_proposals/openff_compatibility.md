@@ -6,8 +6,8 @@ opened: 2026-10-04
 closed:
 verification: inspected
 area: [forms, interoperability]
-guard:
-normative:
+guard: tests/forms/test_api_openff_units.py::test_altered_foreign_openff_definitions_are_refused
+normative: devguide/api_freeze_pre_1.0_decision.md
 blocked_by: []
 supersedes: []
 ---

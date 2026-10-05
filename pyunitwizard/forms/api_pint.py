@@ -7,7 +7,7 @@ try:
 except ImportError:
     raise LibraryNotFoundError(library="pint")
 
-from typing import Any, Dict, Union
+from typing import Any, Dict, Optional, Union
 
 from pyunitwizard._private.backend_settings import resolve_pint_cache_folder
 from pyunitwizard._private.quantity_or_unit import ArrayLike
@@ -112,27 +112,54 @@ def is_unit(quantity_or_unit: Any) -> bool:
     return isinstance(quantity_or_unit, pint.Unit)
 
 
-def normalize_registry(quantity_or_unit: Union[pint.Quantity, pint.Unit]) -> Union[pint.Quantity, pint.Unit]:
+def normalize_registry(
+    quantity_or_unit: Union[pint.Quantity, pint.Unit], *, registry: Optional[pint.UnitRegistry] = None
+) -> Union[pint.Quantity, pint.Unit]:
     """Rebuild a foreign Pint object after checking its unit definition.
 
     The comparison uses base-unit names, dimensionality, and the conversions
     of zero and one unit. This catches both changed scales and affine offsets.
     Differences within 1e-12 relative tolerance are accepted.
+    ``registry`` selects an explicit destination; the default is this adapter's
+    shared registry. Optional Pint-based forms reuse the same definition checks.
+
+    Parameters
+    ----------
+    quantity_or_unit : pint.Quantity or pint.Unit
+        Source object, possibly owned by another registry.
+    registry : pint.UnitRegistry, optional
+        Destination; defaults to PyUnitWizard's dedicated registry.
+
+    Returns
+    -------
+    pint.Quantity or pint.Unit
+        Object rebuilt with the destination's verified unit definition.
+
+    Raises
+    ------
+    ValueError
+        For missing units or disagreement in dimensions, base units, scale or
+        affine offset. Relative tolerance is 1e-12.
+
+    Examples
+    --------
+    >>> normalize_registry(pint.UnitRegistry().Quantity(3, 'nanometer'))
     """
 
-    if quantity_or_unit._REGISTRY is ureg:
+    destination = ureg if registry is None else registry
+    if quantity_or_unit._REGISTRY is destination:
         return quantity_or_unit
 
     source_unit = quantity_or_unit.units if is_quantity(quantity_or_unit) else quantity_or_unit
     unit_name = str(source_unit)
     try:
-        target_unit = ureg.Unit(unit_name)
+        target_unit = destination.Unit(unit_name)
         source_zero = quantity_or_unit._REGISTRY.Quantity(0, source_unit).to_base_units()
         source_one = quantity_or_unit._REGISTRY.Quantity(1, source_unit).to_base_units()
-        target_zero = ureg.Quantity(0, target_unit).to_base_units()
-        target_one = ureg.Quantity(1, target_unit).to_base_units()
+        target_zero = destination.Quantity(0, target_unit).to_base_units()
+        target_one = destination.Quantity(1, target_unit).to_base_units()
     except Exception as exc:
-        raise ValueError(f"Cannot verify Pint unit {unit_name!r} in PyUnitWizard's registry.") from exc
+        raise ValueError(f"Cannot verify Pint unit {unit_name!r} in the destination registry.") from exc
 
     same_definition = (
         source_unit.dimensionality == target_unit.dimensionality
@@ -146,11 +173,11 @@ def normalize_registry(quantity_or_unit: Union[pint.Quantity, pint.Unit]) -> Uni
         )
     )
     if not same_definition:
-        raise ValueError(f"Pint unit {unit_name!r} has a different definition in PyUnitWizard's registry.")
+        raise ValueError(f"Pint unit {unit_name!r} has a different definition in the destination registry.")
 
     if is_unit(quantity_or_unit):
         return target_unit
-    return ureg.Quantity(quantity_or_unit.magnitude, target_unit)
+    return destination.Quantity(quantity_or_unit.magnitude, target_unit)
 
 
 _dimensions_translator = {
@@ -383,6 +410,20 @@ def unit_to_string(unit_or_item) -> str:
 
 
 ## To openmm.unit
+
+
+def quantity_to_openff_units(quantity: pint.Quantity) -> Any:
+    """Translate through the shared definition verifier to the OpenFF registry."""
+    from .api_openff_units import quantity_to_openff_units as translate
+
+    return translate(quantity)
+
+
+def unit_to_openff_units(unit: pint.Unit) -> Any:
+    """Verify and rebuild a Pint unit in the optional OpenFF registry."""
+    from .api_openff_units import unit_to_openff_units as translate
+
+    return translate(unit)
 
 
 def quantity_to_openmm_unit(quantity: pint.Quantity):

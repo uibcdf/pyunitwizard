@@ -59,6 +59,7 @@ _forms_apis_modules = {
     "astropy.units": "api_astropy_unit",
     "physipy": "api_physipy",
     "quantities": "api_quantities",
+    "openff.units": "api_openff_units",
 }
 
 

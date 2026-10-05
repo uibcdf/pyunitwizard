@@ -57,3 +57,12 @@ fails at the same external upload step. Coverage upload remains unresolved;
 full scientific matrix, release gates and policy pass. The API/format stay provisional through the named RC checklist
 exception. Sabueso adoption, source text/precision and migration stay with
 its owner; closing this provider issue does not claim consumer adoption.
+
+## Checkpoint clarification — 2026-10-05
+
+Coverage-upload recovery remains separately owned by #107. Updating the
+uploader and normally installing its official CLI reach ingestion but that
+service also fails (37270848222). The exact runtime's full scientific matrix,
+release gates and installed-file tests above qualify the delivered statement
+representation; they do not turn the failed aggregate CI green. Closing #90
+does not close #107 or qualify a public package release.
