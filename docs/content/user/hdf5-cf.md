@@ -111,3 +111,17 @@ The physical-unit rules and these temperature distinctions come from the
 [CF conventions](https://cfconventions.org/cf-conventions/cf-conventions.html#units).
 The provider's [public Unit operations](https://cf-units.readthedocs.io/en/stable/unit.html)
 own UDUNITS parsing and conversions.
+
+Temperature readers must pass the matching `units_metadata` expectation to
+`hdf5.read`, too. Missing or different expectations are refused, and a declared
+difference cannot target an absolute Celsius unit. For example:
+
+```python
+saved = hdf5.read(file['temperature'], units_metadata='temperature: difference')
+converted = cf.parse_quantity(saved.values, 'K', unit='delta_degree_Celsius',
+                              units_metadata='temperature: difference', form='pint')
+```
+
+The binding's temperature expectation remains caller context. It is not added
+to the unchanged qrec/0.3 schema; use the explicit CF tool for temperature
+conversion when the computing unit itself is ambiguous, such as Kelvin.

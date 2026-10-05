@@ -124,6 +124,7 @@ def read(
     unit: Optional[str] = None,
     dimensionality: Optional[Dict[str, int]] = None,
     kind: Optional[str] = None,
+    units_metadata: Optional[str] = None,
 ) -> QuantityRecord:
     """Verify a complete HDF5 snapshot and its reader expectations.
 
@@ -140,6 +141,11 @@ def read(
         Expected dimensions in PyUnitWizard notation.
     kind : str, optional
         Expected quantity kind identifier.
+    units_metadata : str, optional
+        Required reader expectation for temperature: on_scale or difference.
+        A missing or different expectation is refused. Returned records retain
+        their original computing-unit contract; this expectation belongs to
+        the binding and is not silently added to qrec/0.3.
 
     Returns
     -------
@@ -170,6 +176,8 @@ def read(
         if node["format"] != FORMAT or _digest(node) != digest:
             raise RecordError(reason="HDF5 binding metadata was changed outside the codec")
         metadata = node["units_metadata"]
+        if metadata != units_metadata:
+            raise RecordError(reason="reader temperature semantics disagree with the HDF5 binding")
         attributes = {"units", "pyunitwizard"} | ({"units_metadata"} if metadata is not None else set())
         if set(group.attrs) != attributes or _text(group.attrs["units"]) != node["units"]:
             raise RecordError(reason="HDF5 CF attributes are missing or conflict with the binding seal")
@@ -189,9 +197,11 @@ def read(
         # algorithm or permissive fallback reinterprets the original record.
         envelope["values"] = np.asarray(values)
         record = QuantityRecord.from_dict(envelope)
-        from pyunitwizard.dialects.cf import validate_unit
+        from pyunitwizard.dialects.cf import parse_quantity, validate_unit
 
         validate_unit(record.unit, node["units"], units_metadata=metadata)
+        if unit is not None:
+            parse_quantity(0.0, node["units"], unit=unit, units_metadata=metadata, form="pint")
         record.to_quantity(field=field, unit=unit, dimensionality=dimensionality, kind=kind, form="pint")
         return record
     except (ModuleNotFoundError, RecordError):

@@ -32,7 +32,7 @@ def test_scalar_array_dtype_affine_and_nonfinite_round_trip(tmp_path, values, un
     source = QuantityRecord.from_quantity(puw.quantity(values, unit, form="pint"), field="sample")
     with h5py.File(tmp_path / "record.h5", "w") as file:
         group = hdf5.write(file, "sample", source, cf_unit=spelling, units_metadata=metadata)
-        result = hdf5.read(group, field="sample", unit=unit)
+        result = hdf5.read(group, field="sample", unit=unit, units_metadata=metadata)
         assert result.digest == source.digest
         assert result.values.dtype == source.values.dtype
         assert result.values.shape == source.values.shape
@@ -41,7 +41,7 @@ def test_scalar_array_dtype_affine_and_nonfinite_round_trip(tmp_path, values, un
         assert group.attrs["units"] == spelling
         assert np.array_equal(group["values"][()], source.values, equal_nan=True)
     with h5py.File(tmp_path / "record.h5") as file:
-        assert hdf5.read(file["sample"], field="sample").digest == source.digest
+        assert hdf5.read(file["sample"], field="sample", units_metadata=metadata).digest == source.digest
 
 
 @pytest.mark.parametrize(
@@ -165,3 +165,19 @@ def test_published_h5msm_coordinates_keep_dtype_values_and_unit_under_another_po
             assert result.values.dtype == np.float32
             assert np.array_equal(result.values, values)
             assert np.allclose(result.to_quantity(unit="angstrom", form="pint").magnitude, values * 10)
+
+
+def test_temperature_reader_must_declare_the_expected_semantics(tmp_path):
+    record = QuantityRecord.from_quantity(puw.quantity(25.0, "kelvin", form="pint"), field="temperature")
+    with h5py.File(tmp_path / "temperature.h5", "w") as file:
+        group = hdf5.write(file, "temperature", record, cf_unit="K", units_metadata="temperature: difference")
+        with pytest.raises(RecordError):
+            hdf5.read(group)
+        with pytest.raises(RecordError):
+            hdf5.read(group, units_metadata="temperature: on_scale")
+        with pytest.raises(RecordError):
+            hdf5.read(group, units_metadata="temperature: difference", unit="degree_Celsius")
+        assert (
+            hdf5.read(group, units_metadata="temperature: difference", unit="delta_degree_Celsius").digest
+            == record.digest
+        )

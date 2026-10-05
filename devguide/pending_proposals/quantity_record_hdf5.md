@@ -40,3 +40,15 @@ Creation must refuse overwrites and leave no published group on validation
 failure. This is a snapshot reader/writer, not append support (#105), a
 streaming verifier, a transaction across files or a MolSysMT codec migration.
 Measure an identified published H5MSM array and the full-read seal cost.
+
+## Reader-temperature hardening — 2026-10-05
+
+The first optional matrix passes at 381ca5a, but review identifies a remaining
+reader handshake ambiguity: both Kelvin points and differences otherwise return
+the same computing unit. Add a failing expectation test before strengthening
+`read`: require matching explicit `units_metadata` for temperature and validate
+any requested unit through the public CF import operation. A declared difference
+cannot target an absolute Celsius unit. Keep the qrec schema unchanged and
+require callers to retain this binding context for subsequent conversion.
+Qualification must retain the initial producer identity and execute the adjusted
+reader's installed/optional gates on its own source rather than relabel old results.
