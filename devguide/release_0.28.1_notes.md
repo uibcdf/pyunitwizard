@@ -26,3 +26,19 @@ admission is claimed.
 
 The exact source, immutable Conda file, executed gates and public verification
 are tracked in [uibcdf/pyunitwizard#112](https://github.com/uibcdf/pyunitwizard/issues/112).
+
+## Publication identity
+
+Tag 0.28.1 targets `25a4bc2468da4ef3af2a638c0bf068becf2acfb4`.
+The public noarch archive is `pyunitwizard-0.28.1-py_0.tar.bz2`, SHA-256
+`d4654faf93ed4181bf331f7d382379e78f02784f71f678ad19d0ac43d8062cc6`.
+Producer 37307676226, installed qualification 37308199459 and promotion
+37309227696 preserve those bytes. All 30 installed cells pass, including eight
+prepared-attribution cells on public Ackredit 0.10.1. Independent verification
+confirms the public main label and solver index; a fresh public-only installation
+executes record/storage success/refusal checks and 43 attribution guards.
+
+See the [pre-tag decision](https://github.com/uibcdf/pyunitwizard/issues/112#issuecomment-5994351044)
+and archived `devguide/completed_proposals/release_0.28.1.md` for the executed
+scope and limits. Complete receipts and installed dependency closures are
+retained under `devguide/evidence/`.
