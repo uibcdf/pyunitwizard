@@ -1,10 +1,10 @@
 ---
 summary: Bind a scalar measurement to its stated uncertainty without statistical inference.
 issue: uibcdf/pyunitwizard#90
-status: active
+status: resolved
 opened: 2026-10-04
-closed:
-verification: inspected
+closed: 2026-10-04
+verification: measured
 area: [serialization, interoperability]
 guard: tests/test_measurement_record.py::test_sabueso_statement_round_trip_under_another_policy
 normative: devguide/api_freeze_pre_1.0_decision.md
@@ -40,3 +40,20 @@ backend round trips, lazy imports, existing frozen vectors, full suite, docs and
 installed-file evidence. Admit this named experimental exception in the RC scope
 and retain the 1.0 release decision as provisional. Arrays and general statistical
 computation require separately justified future work.
+
+## Resolution — 2026-10-04
+
+Implemented at `cda2108aba41abdd6336a1837ba7b40fc89a7070`. The named guard
+preserves all three ± meanings and converts the original Sabueso example
+under a different session policy without changing the seal. All 47 statement
+cases pass, including CI metadata, tampering, exact scalar dtype, affine
+spread/bounds and existing backend exports with explicit units. Linux/macOS
+Python 3.11–3.14 and release gates pass at the exact runtime source.
+An installed wheel outside checkout passes the same 47 cases; all shipped
+package files match. See `devguide/evidence/stated_uncertainty_2026-10-04.json`.
+
+The initial CI job passed tests and failed Codecov TLS upload; same-head retry
+fails at the same external upload step. Coverage upload remains unresolved;
+full scientific matrix, release gates and policy pass. The API/format stay provisional through the named RC checklist
+exception. Sabueso adoption, source text/precision and migration stay with
+its owner; closing this provider issue does not claim consumer adoption.

@@ -97,10 +97,11 @@ jobs:
         cat ./coverage.xml
 
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v7.1.1
       with:
         verbose: true
-        file: ./coverage.xml
+        files: ./coverage.xml
+        fail_ci_if_error: true
         flags: unittests
         name: codecov-ubuntu-latest-py3.14
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -108,4 +109,6 @@ jobs:
     - name: Upload test results to Codecov
       uses: codecov/test-results-action@v1
       with:
+        files: ./junit.xml
+        fail_ci_if_error: true
         token: ${{ secrets.CODECOV_TOKEN }}

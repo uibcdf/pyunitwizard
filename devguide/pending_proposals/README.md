@@ -7,7 +7,7 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 ### Active (1)
 
-- [`stated_uncertainty.md`](stated_uncertainty.md) — [#90](https://github.com/uibcdf/pyunitwizard/issues/90) — Bind a scalar measurement to its stated uncertainty without statistical inference. *(inspected)*
+- [`openff_compatibility.md`](openff_compatibility.md) — [#86](https://github.com/uibcdf/pyunitwizard/issues/86) — Optional OpenFF registry interoperability with verified unit definitions. *(inspected)*
 
 ### Partial (1)
 
