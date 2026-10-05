@@ -94,3 +94,16 @@ def test_promotion_workflow_checks_exact_release_and_file_identity():
     )
     assert "always()" in workflow
     assert "steps.public.outputs['evidence-path']" in workflow
+
+
+def test_installed_prepared_profile_requires_public_provider_and_real_guards():
+    workflow = (ROOT / ".github/workflows/test_staged_conda_package.yaml").read_text(encoding="utf-8")
+
+    assert "profile: [baseline, storage, openff, prepared]" in workflow
+    assert "uibcdf::ackredit=0.10.1=py_0" in workflow
+    assert "Verify public attribution provider and prepared APIs" in workflow
+    assert "test_backend_declarations.py" in workflow
+    assert "test_function_citation_provider.py" in workflow
+    assert "test_warmed_prepared_conversion_does_not_detach_declarations_again" in workflow
+    assert "--junitxml=installed-contracts.xml" in workflow
+    assert "case.find('skipped') is None" in workflow

@@ -1,7 +1,7 @@
-version = "0.28.0"
+version = "0.28.1"
 route = "staged"
-build_number = 1
-reason = "New provisional MeasurementRecord, optional OpenFF/CF/HDF5 boundaries, ArgDigest configuration normalization and record hardening require qualification of the exact installed Conda file before public visibility; see uibcdf/pyunitwizard#110."
+build_number = 0
+reason = "Qualify the #111 prepared-attribution optimization in the exact installed Conda file with public Ackredit 0.10.1, retaining the 0.9 fallback and baseline/storage/OpenFF profiles; see uibcdf/pyunitwizard#112."
 decision_by = "Diego Prada (PyUnitWizard maintainer), authorized 2026-10-05"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
