@@ -11,16 +11,19 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `frontend_transparent_mode_contract.md`: contract for transparent frontend integrations (`numpy`/`pandas`/`matplotlib`).
 - `api_freeze_pre_1.0_decision.md`: explicit decision record for no planned breaking API changes before `1.0.0`.
 - `serialization_contract_draft.md`: draft canonical serialization contract for post-`1.0.0` promotion.
-- `compatibility_matrix.md`: minimum supported sibling-library versions during RC.
+- `compatibility_matrix.md`: current required sibling floors and optional provider qualification.
+- `release_0.28.1_notes.md`: published patch scope, source/file identity and installed qualification.
+- `completed_proposals/release_0.28.1.md`: executed publication route and retained evidence.
+- `completed_proposals/backend_declaration_plans.md`: completed #111 optimization and measurement limits.
 - `release_0.21.x_rc_checklist.md`: completed historical RC checklist for consolidation before `1.0.0`.
-- `release_0.21.x_notes_draft.md`: draft release notes for RC scope, risks, compatibility, and migration guidance.
-- `docs_api_alignment_0.21.x.md`: evidence that user/API docs match shipped behavior in the active RC line.
-- `stability_monitoring_0.21.x.md`: CI matrix and release-gates incident ledger for RC stability tracking.
-- `ecosystem_validation_0.21.x.md`: integration smoke and sibling-repo validation evidence for RC.
-- `rc_close_readiness_0.21.x.md`: closure evidence for RC go/no-go items before release-owner approval.
+- `release_0.21.x_notes_draft.md`: historical RC release notes and migration scope.
+- `docs_api_alignment_0.21.x.md`: historical RC user/API alignment evidence.
+- `stability_monitoring_0.21.x.md`: historical RC matrix and release-gate incident ledger.
+- `ecosystem_validation_0.21.x.md`: historical RC integration and sibling evidence.
+- `rc_close_readiness_0.21.x.md`: historical RC go/no-go closure evidence.
 - `release_1.0.0_checklist.md`: release gates and go/no-go checklist.
 - `molsyssuite_collective_alignment.md`: PyUnitWizard alignment map against `../molsyssuite/devguide/collective_v1_checklist.md`.
-- `collective_evidence_pack.md`: handoff-ready evidence pack for cross-repo RC closure.
+- `collective_evidence_pack.md`: historical March 2026 cross-repo RC evidence pack.
 - `dependency_declaration_placement.md`: why backend dependencies are declared
   in `_depdigest.py` and enforced in `load_library()`, not on `convert()`.
 - `performance_baseline_0.24.x.json`: baseline snapshot after the post-RC
@@ -35,7 +38,10 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Current hardening line: `0.25.x`.
+- Latest public release: [`0.28.1`](release_0.28.1_notes.md), published on
+  2026-10-05 through GitHub and the public `uibcdf` Conda channel.
+- Current pre-`1.0.0` line: `0.28.x`. Published provisional capabilities are
+  separate from stable-contract admission and member source adoption.
 - Completed release-candidate line: `0.21.x`.
 - Latest maintenance tag in RC line: `0.21.1`.
 - RC consolidation closure checkpoint tag: `0.21.0`.
@@ -43,18 +49,45 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Current head relative to tag: run `git describe --tags --always` (post-tag hardening in `main`).
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
-- Publicly supported Python versions: `3.11`, `3.12`, and `3.13` (daily
-  operation in `3.13`). Python `3.14` is an authorized transition under
-  `uibcdf/pyunitwizard#78`, not yet a public support claim; its local Linux
-  source suite passed 528 tests on 2026-09-22.
-- Supported platforms: Linux and macOS. Windows support is deferred until a
+- Publicly supported Python versions: `3.11`–`3.14`; routine CI uses `3.14`.
+  The qualified baseline, CF/HDF5 and prepared-attribution installed profiles
+  cover Linux and macOS arm64 on all four minors. OpenFF 0.4.0 covers
+  Python `3.12`–`3.14` with Pint `>=0.24,<0.26`.
+- Supported platforms: Linux and macOS arm64. Windows support is deferred until a
   concrete ecosystem requirement appears.
 - Historical local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).
-- Current local coverage snapshot (2026-03-04): `94%` total.
+- Historical local coverage snapshot (2026-03-04): `94%` total.
 - Shared collective E2E module established: `tests/e2e/test_collective_error_path.py`.
 - Supported runtime backends:
   `pint` (hard), `openmm.unit` (soft), `unyt` (soft), `astropy.units` (soft),
-  `physipy` (soft), `quantities` (soft), plus `string` form.
+  `physipy` (soft), `quantities` (soft), `openff.units` (soft, bounded above),
+  plus `string` and the provisional inert `record` form (QuantityRecord).
+
+## Resume after 0.28.1
+
+Publication #112 and attribution optimization #111 are closed. Their archived
+records retain original source, producer, digest, native gates and public
+observations. All 30 installed cells passed; public prepared attribution uses
+Ackredit 0.10.1 while retaining the optional >=0.9.0 fallback. Codecov #107 is
+closed after actual coverage and test-result uploads recovered.
+
+There are no queued defect reports. Remaining work is evaluated through its
+owning issue and acceptance conditions:
+
+- #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
+  the OpenFF and physical CF/HDF5 slices are delivered.
+- #102–#106: tagged layouts, Arrow/Parquet, Zarr, verified append and a translation
+  hub; the [pending proposal index](pending_proposals/README.md) links each record.
+- #44 and #52: deferred forallpeople and Pydantic integration decisions.
+- [#87](https://github.com/uibcdf/pyunitwizard/issues/87): later re-evaluation of
+  a live native form, conditional on real consumers and measured need. Its issue
+  is the decision record; it has no queued implementation document.
+
+Select the next item from measured consumer demand. QuantityRecord, bundles,
+MeasurementRecord, optional attribution and record/storage bindings remain
+provisional. [The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh
+candidate evidence, explicit scope/admission decisions and release-owner approval;
+publishing 0.28.1 does not satisfy that final go/no-go.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

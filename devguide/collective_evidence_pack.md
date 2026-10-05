@@ -1,5 +1,11 @@
 # Collective Evidence Pack
 
+Status clarification — 2026-10-05: this is the historical March 2026 / 0.21.x
+RC snapshot. Its counts and member observations are retained as recorded.
+Current PyUnitWizard release evidence is linked from
+[`README.md`](README.md) and [`release_0.28.1_notes.md`](release_0.28.1_notes.md);
+it does not establish fresh source adoption in other members.
+
 This file is the PyUnitWizard-side collective evidence record for cross-repo
 validation with:
 - `../smonitor`

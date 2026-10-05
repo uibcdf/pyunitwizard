@@ -61,7 +61,9 @@ expansion. #85 remains partial after the delivered slices close.
 Each implemented slice has its own owning issue, tests, documentation, optional
 installed/matrix evidence and versioned provisional contract. Closing a child
 neither closes this inventory nor qualifies a new public PyUnitWizard release.
-Coverage upload debt remains #107. MolSysMT adoption of the provider tools is
+Coverage incident #107 is closed after actual uploads recovered during the
+0.28.0/0.28.1 publication route. Each future candidate retains its own required
+ingestion evidence. MolSysMT adoption of the provider tools is
 separate from their qualification in PyUnitWizard; no consumer source is changed
 by the local #101/#108 work.
 

@@ -1,5 +1,10 @@
 # Alignment with `molsyssuite` Collective V1 Checklist
 
+Status clarification — 2026-10-05: the RC observations below are the historical
+2026-03-04 snapshot. Current local release qualification is recorded in
+[`completed_proposals/release_0.28.1.md`](completed_proposals/release_0.28.1.md).
+Publication and member source adoption remain separate claims.
+
 This document maps the PyUnitWizard status against:
 `../molsyssuite/devguide/collective_v1_checklist.md`.
 

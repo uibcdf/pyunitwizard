@@ -2,9 +2,16 @@
 
 Use this checklist as a hard release gate. All items must be complete before creating the final `1.0.0` tag.
 
-## Evidence index (current RC line)
+## Evidence index
 
-Use these documents as the primary evidence sources while closing each section:
+Current published checkpoint: `0.28.1` (2026-10-05). Its source/installed/public
+receipts are in `completed_proposals/release_0.28.1.md` and
+`evidence/release_0.28.1_2026-10-05.json`; current floors are in
+`compatibility_matrix.md`. These establish that release's scope and do not
+qualify a future 1.0 candidate or admit provisional contracts.
+
+Retain these historical RC records and maintained contracts as context while
+collecting fresh candidate evidence for each section:
 - `devguide/stability_monitoring_0.21.x.md`
 - `devguide/ecosystem_validation_0.21.x.md`
 - `devguide/docs_api_alignment_0.21.x.md`
@@ -16,7 +23,7 @@ Use these documents as the primary evidence sources while closing each section:
 ## Standard commands for verification
 
 - Local full suite:
-  - `pytest -q tests --ignore=tests/test_import.py`
+  - `pytest --receptor=ci -q tests`
 - Docs build:
   - `make -C docs html`
 - RC release gates (GitHub):
@@ -27,7 +34,7 @@ Use these documents as the primary evidence sources while closing each section:
 ## 1. Quality gates
 
 - [ ] `pytest` full suite is green locally and in CI.
-- [ ] Linux and macOS CI matrices are green for Python `3.11`, `3.12`, `3.13`.
+- [ ] Linux and macOS arm64 CI matrices are green for Python `3.11`–`3.14`.
 - [ ] Coverage trend is stable or improving in critical API modules.
 - [ ] No flaky tests in release-critical paths.
 - [ ] `.github/workflows/release_gates.yaml` (manual `workflow_dispatch`) is green for the candidate commit.
@@ -90,5 +97,8 @@ Use these documents as the primary evidence sources while closing each section:
   supported optional Linux/macOS Python 3.11–3.14 matrix before making claims.
 - [ ] State physical-unit/temperature scope and the absence of calendar,
   streaming/append, whole-CF-dataset and H5MSM consumer-migration qualification.
-- [ ] Do not treat this development qualification as public artifact release
-  evidence or clear the independently tracked Codecov upload debt (#107).
+- [ ] Development qualification and public artifact evidence retain their own
+  candidate/file identities. The 0.28.0/0.28.1 records supply public evidence
+  for those releases; the 1.0 candidate needs its own mandatory executed gates.
+  Codecov #107 is closed after actual uploads recovered; verify current required
+  uploads rather than carrying that historical incident as open debt.

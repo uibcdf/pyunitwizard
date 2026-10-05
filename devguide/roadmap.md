@@ -1,7 +1,24 @@
 # Roadmap to 1.0.0
 
-This roadmap defines the stabilization path from the `0.19.x` historical
-checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
+This roadmap retains the historical stabilization stages and records the
+current published `0.28.x` baseline before a separately approved `1.0.0` release.
+
+## Current checkpoint — 2026-10-05
+
+[`0.28.1`](release_0.28.1_notes.md) is public. Its
+[publication record](completed_proposals/release_0.28.1.md) retains the exact
+source/file, all mandatory source gates, 30 installed cells and independent
+public verification. #111 is delivered; no queued defect report remains.
+
+The future backlog is #85 (remaining interoperability boundaries), #102–#106
+(independent record extensions), #44/#52 (deferred integrations), and #87
+(conditional later re-evaluation of a live form). Start from a measured consumer
+and each issue's acceptance criteria; see [the pending index](pending_proposals/README.md).
+
+Keep the published record, measurement, optional attribution and storage surfaces
+provisional until separately admitted. The current supported baseline is
+Linux/macOS arm64 with Python 3.11–3.14; OpenFF has its narrower Python
+3.12–3.14/Pint <0.26 profile. No `1.0.0` tag is approved by this checkpoint.
 
 ## Release stages
 
@@ -12,7 +29,8 @@ checkpoint through `0.20.x`/`0.21.x` to a stable `1.0.0` release.
 5. `0.21.x` - Release candidate consolidation window
 6. `0.22.x` - Ecosystem performance integration
 7. `0.23.x` - Lazy-loading and API hardening
-8. `1.0.0` - Stable release
+8. `0.24.x`–`0.28.x` - Further hardening, qualified interchange and optional providers
+9. `1.0.0` - Stable release, subject to scope decisions and final approval
 
 ## 0.17.x - Hardening and correctness
 
@@ -129,12 +147,12 @@ Current checkpoint:
   - fixed recursion in `forms/api_quantities.py` when converting unit-like inputs,
   - aligned CI coverage environment with optional `physipy` and `quantities` backends.
 
-## 0.22.x and 0.23.x post-RC hardening (current track)
+## 0.22.x and 0.23.x post-RC hardening (historical track)
 
 - `0.22.x` added ecosystem fast tracks and extraction-oriented performance work.
 - `0.23.x` introduced PEP 562 API loading, on-demand backend adapters,
   conversion-factor caching, and additional validation/extraction helpers.
-- Current work remains pre-`1.0.0` and must preserve the frozen core contracts
+- Subsequent work remains pre-`1.0.0` and must preserve the frozen core contracts
   while closing measured correctness, documentation, and performance gaps.
 
 ## 1.0.0 - Stable release
