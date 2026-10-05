@@ -154,9 +154,12 @@ values = QuantityRecordBundle.from_dict(data).to_quantities(
 - `to_dict(encoding="base64")` writes the values' little-endian bytes (about 1.33 times
   their raw size), holds any value exactly, and is faster for large arrays.
 
-Bindings for HDF5 (with a CF-compatible `units` attribute), Arrow and Zarr, and a layout
-for collections that mix units, are planned; see
-[uibcdf/pyunitwizard#82](https://github.com/uibcdf/pyunitwizard/issues/82).
+Both encodings preserve empty multidimensional arrays with their dtype and shape.
+
+The optional provisional [HDF5 binding and CF unit tools](hdf5-cf.md) store
+numeric values with verified metadata and an explicitly negotiated CF label.
+Arrow (#103), Zarr (#104), tagged layouts (#102) and verified appends (#105)
+remain independent proposals.
 
 ## Not a passport
 

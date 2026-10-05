@@ -84,3 +84,15 @@ existing Pint bridge. The bounded val/unit import/export tools stay explicit;
 raw dictionaries are not automatically quantities and existing record formats
 are unchanged. Optional installed/matrix qualification and Python 3.11 absence
 diagnostics are named in the RC checklist; baseline dependencies stay unchanged.
+
+## Bounded CF and HDF5 exception — 2026-10-05
+
+Admit explicit optional `pyunitwizard.dialects.cf` operations (#108 under #85)
+and the provisional `pyunitwizard.storage.hdf5` snapshot binding (#101) for
+H5MSM-derived physical quantities. Keep these outside core forms and session
+parser selection. The distinct `qrec-hdf5/0.1` binding seals CF presentation
+metadata around an unchanged qrec/0.3 envelope. Temperature semantics are
+explicit; unsupported calendar, logarithmic and arbitrary-transform cases are
+refused. This does not admit automatic dialect guessing, streaming/append
+support, a MolSysMT format migration or stable schema promotion. Name the
+optional installed/matrix evidence and this provisional status in release notes.

@@ -1,0 +1,43 @@
+name: CF and HDF5 interoperability
+
+on:
+  workflow_dispatch:
+
+jobs:
+  storage:
+    name: Storage on ${{ matrix.os }}, Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ['3.11', '3.12', '3.13', '3.14']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: mamba-org/setup-micromamba@v3.2.1
+        with:
+          environment-file: devtools/conda-envs/storage_interop_env.yaml
+          environment-name: storage
+          create-args: python=${{ matrix.python }}
+          cache-downloads: true
+      - name: Install consumer
+        shell: bash -l {0}
+        run: python -m pip install . --no-deps
+      - name: Run full suite with optional providers
+        shell: bash -l {0}
+        run: python -m pytest --receptor=ci -q tests
+      - name: Test installed consumer outside checkout
+        shell: bash -l {0}
+        run: |
+          mkdir -p "$RUNNER_TEMP/storage-installed-tests/tests/storage" "$RUNNER_TEMP/storage-installed-tests/tests/dialects" "$RUNNER_TEMP/storage-installed-tests/tests/data"
+          cp tests/storage/test_hdf5.py "$RUNNER_TEMP/storage-installed-tests/tests/storage/"
+          cp tests/dialects/test_cf.py "$RUNNER_TEMP/storage-installed-tests/tests/dialects/"
+          cp tests/data/h5msm_quantity_boundary.json "$RUNNER_TEMP/storage-installed-tests/tests/data/"
+          cp tests/test_storage_optional.py tests/test_quantity_record_empty.py "$RUNNER_TEMP/storage-installed-tests/tests/"
+          cd "$RUNNER_TEMP/storage-installed-tests"
+          python -m pip check
+          python -c 'import pyunitwizard, cf_units, h5py; print(pyunitwizard.__file__); print(pyunitwizard.__version__, cf_units.__version__, h5py.__version__)'
+          python -m pytest --receptor=ci -q tests

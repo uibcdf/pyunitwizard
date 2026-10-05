@@ -132,3 +132,14 @@ with puw.attribution():
 the application's Ackredit session. Ordinary conversions outside it do not load
 the provider or pay active tracking cost. Scientific exceptions propagate and
 the enclosing choice is restored on exit.
+
+## Optional CF/HDF5 tools
+
+`pyunitwizard.dialects.cf` verifies explicitly negotiated CF physical unit labels
+and imports values through actual UDUNITS. `pyunitwizard.storage.hdf5` stores a
+sealed QuantityRecord snapshot beside numeric values and verified CF metadata.
+Install optional `cf-units=3.3.1` and `h5py=3.16.0` from conda-forge.
+Temperature requires explicit on-scale/difference semantics. These tools and
+`qrec-hdf5/0.1` are provisional; existing qrec formats and core forms are unchanged.
+See the user guide `docs/content/user/hdf5-cf.md`; guards live in
+`tests/dialects/test_cf.py` and `tests/storage/test_hdf5.py`.

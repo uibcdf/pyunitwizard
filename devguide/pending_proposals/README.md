@@ -5,13 +5,17 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Open (8)
+### Active (2)
+
+- [`cf_unit_dialect.md`](cf_unit_dialect.md) — [#108](https://github.com/uibcdf/pyunitwizard/issues/108) — Bounded CF/UDUNITS unit dialect for verified HDF5 quantities. *(inspected)*
+- [`quantity_record_hdf5.md`](quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(inspected)*
+
+### Open (7)
 
 - [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*
 - [`pydantic_integration.md`](pydantic_integration.md) — [#52](https://github.com/uibcdf/pyunitwizard/issues/52) — Define whether PyUnitWizard needs a Pydantic integration contract. *(asserted)*
 - [`quantity_record_append.md`](quantity_record_append.md) — [#105](https://github.com/uibcdf/pyunitwizard/issues/105) — Define verified append operations for block-based QuantityRecords. *(inspected)*
 - [`quantity_record_arrow.md`](quantity_record_arrow.md) — [#103](https://github.com/uibcdf/pyunitwizard/issues/103) — Evaluate an optional Arrow and Parquet binding for QuantityRecord. *(inspected)*
-- [`quantity_record_hdf5.md`](quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(inspected)*
 - [`quantity_record_hub.md`](quantity_record_hub.md) — [#106](https://github.com/uibcdf/pyunitwizard/issues/106) — Evaluate QuantityRecord as a backend translation hub. *(inspected)*
 - [`quantity_record_tagged.md`](quantity_record_tagged.md) — [#102](https://github.com/uibcdf/pyunitwizard/issues/102) — Specify and evaluate a tagged layout within QuantityRecord. *(inspected)*
 - [`quantity_record_zarr.md`](quantity_record_zarr.md) — [#104](https://github.com/uibcdf/pyunitwizard/issues/104) — Evaluate an optional Zarr binding for QuantityRecord. *(inspected)*

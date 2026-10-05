@@ -78,6 +78,7 @@ configuration.md
 quantity-records.md
 quantity-records-why.md
 openff.md
+hdf5-cf.md
 integrating-your-library.md
 troubleshooting.md
 production-checklist.md

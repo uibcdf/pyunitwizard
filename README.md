@@ -206,3 +206,7 @@ PyUnitWizard is part of the current UIBCDF interoperability stack:
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Optional [CF unit tools and verified HDF5 snapshots](docs/content/user/hdf5-cf.md)
+use actual UDUNITS and h5py with explicit unit and temperature contracts. The
+`qrec-hdf5/0.1` binding is provisional and preserves existing QuantityRecord seals.

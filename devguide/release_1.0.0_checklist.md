@@ -81,3 +81,14 @@ Use these documents as the primary evidence sources while closing each section:
 - [ ] No high-severity open issues.
 - [ ] All checklist items completed and reviewed.
 - [ ] Release owner approves `1.0.0` tag creation.
+
+## Optional CF/HDF5 scope (#108/#101)
+
+- [ ] Keep `pyunitwizard.dialects.cf`, `pyunitwizard.storage.hdf5` and
+  `qrec-hdf5/0.1` explicitly provisional in release notes; qrec/0.3 stays unchanged.
+- [ ] Retain actual cf-units/UDUNITS + h5py installed qualification and the
+  supported optional Linux/macOS Python 3.11–3.14 matrix before making claims.
+- [ ] State physical-unit/temperature scope and the absence of calendar,
+  streaming/append, whole-CF-dataset and H5MSM consumer-migration qualification.
+- [ ] Do not treat this development qualification as public artifact release
+  evidence or clear the independently tracked Codecov upload debt (#107).
