@@ -1,5 +1,5 @@
 ---
-summary: CI coverage upload fails TLS after tests pass with the old Codecov action.
+summary: CI coverage uploads fail at Codecov download and ingestion endpoints.
 issue: uibcdf/pyunitwizard#107
 status: active
 opened: 2026-10-04
@@ -52,3 +52,14 @@ style pass; no successful coverage upload or aggregate green CI is claimed.
 Keep #107 active until the service recovers and exact-head coverage/test-result
 uploads execute successfully. Do not keep changing unrelated scientific code
 or suppress upload errors to manufacture a green result.
+
+## Interoperability checkpoint — 2026-10-05
+
+At `778964021d07169f7327c674cadfbc4c2b6a23ac`, routine CI 37272521807
+passes 753 tests with 14 skips and style checks, then fails coverage ingestion
+after retries. OpenFF six-cell matrix 37272537988 passes full suites and
+installed outside-checkout guards; the original runtime source's eight-cell
+baseline matrix and release gates also pass. Those scientific results neither
+clear this upload debt nor qualify public publication. Coverage and test-result
+uploads must execute successfully on the exact recovery candidate before #107
+can close. Keep the existing service-recovery route and fail-on-upload handling.

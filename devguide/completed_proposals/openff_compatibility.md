@@ -1,10 +1,10 @@
 ---
 summary: Optional OpenFF registry interoperability with verified unit definitions.
 issue: uibcdf/pyunitwizard#86
-status: active
+status: resolved
 opened: 2026-10-04
-closed:
-verification: inspected
+closed: 2026-10-05
+verification: measured
 area: [forms, interoperability]
 guard: tests/forms/test_api_openff_units.py::test_altered_foreign_openff_definitions_are_refused
 normative: devguide/api_freeze_pre_1.0_decision.md
@@ -61,3 +61,50 @@ executable does not include checkout root for imports of the repository's
 installed canaries remain in an independent temporary directory. No scientific
 assertion is waived. Qualified runtime source and later workflow recovery retain
 their separate identities. Coverage ingestion remains independently #107.
+
+## Resolution — 2026-10-05
+
+The optional `openff.units` form is implemented at runtime source
+`e7ecdb86dc11082bbc3766dbfbc979210f8e44db`. Its adapter remains lazy;
+PyUnitWizard's baseline runtime requirements and Python 3.11 support are retained.
+The supported OpenFF 0.4.0 distribution is conda-forge, with Python 3.12–3.14
+and Pint >=0.24,<0.26. Documentation names this bounded optional installation
+rather than a broken PyPI extra.
+
+The existing reusable Pint registry verifier now accepts an explicit destination
+registry. OpenFF adapters reuse its dimensions, base names, scale and affine-offset
+checks before conversion and same-form fast paths. The named guard rejects a
+foreign OpenFF registry that doubles nanometer, including record conversion;
+companion cases reject changed Pint definitions on entering OpenFF. Actual-provider
+cases cover scalar/n-D/dtype/compound/affine round trips, array strings, registry
+arithmetic, native OpenMM/Vec3 parity and the explicit unsealed val/unit boundary.
+Raw nodes require finite values and reader expectations before conversion to a
+field-bound sealed record; qrec/0.3 and qrec-bundle/0.3 remain unchanged.
+
+Baseline matrix 37271569329 passes all eight Linux/macOS Python 3.11–3.14
+cells with 753 passed/14 skips each. Release gates 37271572072 pass four
+full suites with those counts, four 16-case smokes, packaging and docs. These
+retain the original runtime source identity.
+
+Workflow-only recovery source `778964021d07169f7327c674cadfbc4c2b6a23ac`
+passes optional matrix 37272537988: all six Linux/macOS Python 3.12–3.14
+cells execute 773 passed/14 skips with actual OpenFF 0.4.0/Pint 0.25.3.
+Each normally installed consumer then passes 22 copied guards outside checkout,
+with site-packages origin, versions and successful pip check recorded. No assertion
+or scientific scope was removed to recover the collection failure.
+
+The original runtime wheel `pyunitwizard-0.27.0+70.ge7ecdb8-py3-none-any.whl`
+retains SHA-256 `92f52fd8c5de1fbd7787180983c33535809e2fabe6c5ad78fe33141b411d39df`.
+In a fresh actual Conda solve it passes 22 outside-checkout guards and pip check;
+all 81 shipped package files are byte-identical to the original wheel. Hosted
+recovery consumers have their distinct producer/version identities. Receipt:
+`devguide/evidence/openff_interop_2026-10-05.json`.
+
+Routine recovery CI 37272521807 executes 753 passed/14 skips and style checks,
+but coverage ingestion still fails after retries. Policy 37272522434 passes.
+Missing successful coverage/test-result upload evidence remains owned by #107;
+recover it by executing and inspecting exact-head CI after service recovery.
+This closure resolves the bounded interoperability implementation. It does not
+claim aggregate CI green, Windows qualification, optional Ackredit observer
+coverage, a new public release, or adoption by a consumer. Other formats and
+unit dialects remain independently owned by #85.

@@ -7,6 +7,6 @@ report front matter and regenerate this index; do not edit the generated block.
 
 ### Active (1)
 
-- [`codecov_tls_upload.md`](codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage upload fails TLS after tests pass with the old Codecov action. *(medium, reproduced)*
+- [`codecov_tls_upload.md`](codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage uploads fail at Codecov download and ingestion endpoints. *(medium, reproduced)*
 
 <!-- /generated -->

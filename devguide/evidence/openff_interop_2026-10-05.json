@@ -1,0 +1,159 @@
+{
+  "date": "2026-10-05",
+  "issue": "uibcdf/pyunitwizard#86",
+  "decision": "Bounded optional OpenFF 0.4.0 bridge implemented; existing provisional qrec formats unchanged; no new public release.",
+  "runtime_sha": "e7ecdb86dc11082bbc3766dbfbc979210f8e44db",
+  "workflow_recovery_sha": "778964021d07169f7327c674cadfbc4c2b6a23ac",
+  "guard": "tests/forms/test_api_openff_units.py::test_altered_foreign_openff_definitions_are_refused",
+  "test_first": "Actual OpenFF environment collection failed on absent adapter before implementation; real-provider regression cases implemented to green.",
+  "supported_optional_scope": {
+    "openff_units": "0.4.0",
+    "python": [
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "pint": ">=0.24,<0.26",
+    "platforms": [
+      "Linux",
+      "macOS"
+    ],
+    "distribution": "conda-forge; sole PyPI 0.3.2 upload yanked; no pip extra"
+  },
+  "local": {
+    "python": "3.14.7",
+    "openff_units": "0.4.0",
+    "pint": "0.25.3",
+    "argdigest": "0.14.0",
+    "ackredit": "0.9.0",
+    "optional_full_suite": {
+      "passed": 775,
+      "skipped": 12
+    },
+    "baseline_without_openff": {
+      "passed": 755,
+      "skipped": 13
+    },
+    "scoped_guards_after_final_source_edit": {
+      "passed": 25
+    },
+    "ruff": "check and format --check passed",
+    "docs": "HTML passed; four existing heading warnings"
+  },
+  "installed": {
+    "producer_sha": "e7ecdb86dc11082bbc3766dbfbc979210f8e44db",
+    "wheel": "pyunitwizard-0.27.0+70.ge7ecdb8-py3-none-any.whl",
+    "sha256": "92f52fd8c5de1fbd7787180983c33535809e2fabe6c5ad78fe33141b411d39df",
+    "installation": "Normally installed exact-source wheel into fresh actual Conda solve from devtools/conda-envs/openff_env.yaml; no manually mapped provider files. Copied guards run from /tmp/puw86-installed-tests outside checkout.",
+    "origin": "/tmp/puw86-env/lib/python3.14/site-packages/pyunitwizard/__init__.py",
+    "pip_check": "passed",
+    "byte_identical_package_files": 81,
+    "tests": {
+      "passed": 22
+    },
+    "providers": [
+      {
+        "file": "openff-units-0.4.0-pyhac95a24_1.conda",
+        "sha256": "e97c98923c85855386d583997a598d91c6c7445e5dac6b3af826341188395538"
+      },
+      {
+        "file": "openff-utilities-0.1.18-pyh5ded981_0.conda",
+        "sha256": "341cbbc8684e99d9f7a3d9ae52c9d6fea8899fa36bb6f569747a8e0921a32262"
+      }
+    ]
+  },
+  "hosted": {
+    "baseline_full_matrix": {
+      "id": 37271569329,
+      "head_sha": "e7ecdb86dc11082bbc3766dbfbc979210f8e44db",
+      "conclusion": "success",
+      "cells": 8,
+      "python": [
+        "3.11",
+        "3.12",
+        "3.13",
+        "3.14"
+      ],
+      "platforms": [
+        "Linux",
+        "macOS"
+      ],
+      "per_cell": {
+        "passed": 753,
+        "skipped": 14
+      }
+    },
+    "release_gates": {
+      "id": 37271572072,
+      "head_sha": "e7ecdb86dc11082bbc3766dbfbc979210f8e44db",
+      "conclusion": "success",
+      "full_suite_cells": 4,
+      "per_cell": {
+        "passed": 753,
+        "skipped": 14
+      },
+      "smoke_per_cell": {
+        "passed": 16
+      },
+      "packaging_docs": "passed"
+    },
+    "initial_optional_matrix": {
+      "id": 37271566721,
+      "head_sha": "e7ecdb86dc11082bbc3766dbfbc979210f8e44db",
+      "conclusion": "failure",
+      "cause": "All six cells failed collection because standalone pytest omitted checkout root for tests helper imports. Installed guards did not execute."
+    },
+    "optional_matrix": {
+      "id": 37272537988,
+      "head_sha": "778964021d07169f7327c674cadfbc4c2b6a23ac",
+      "conclusion": "success",
+      "cells": 6,
+      "python": [
+        "3.12",
+        "3.13",
+        "3.14"
+      ],
+      "platforms": [
+        "Linux",
+        "macOS"
+      ],
+      "openff_units": "0.4.0",
+      "pint": "0.25.3",
+      "per_cell": {
+        "passed": 773,
+        "skipped": 14
+      },
+      "installed_outside_checkout_per_cell": {
+        "passed": 22,
+        "pip_check": "passed",
+        "origin": "site-packages; versions printed in each native log",
+        "version": "0.27.0+71.g7789640"
+      }
+    },
+    "routine_ci": {
+      "id": 37272521807,
+      "head_sha": "778964021d07169f7327c674cadfbc4c2b6a23ac",
+      "conclusion": "failure",
+      "tests": {
+        "passed": 753,
+        "skipped": 14
+      },
+      "limitation": "Tests and style pass; coverage ingestion fails after retries at ingest.codecov.io. No successful upload or aggregate green claim.",
+      "owner": "uibcdf/pyunitwizard#107"
+    },
+    "policy": {
+      "id": 37272522434,
+      "head_sha": "778964021d07169f7327c674cadfbc4c2b6a23ac",
+      "conclusion": "success"
+    },
+    "inspection": "GH Run Receptor plus native logs for all full/installed counts and origins"
+  },
+  "applicability": "Recovery changes pytest invocation and guidance only; runtime code, scientific assertions, metadata and dependency inputs remain unchanged. Original local wheel producer and digest retained; hosted recovery builds have distinct identities.",
+  "untested_scope": [
+    "Windows OpenFF integration",
+    "unsupported Python/Pint combinations beyond actionable diagnostics",
+    "optional Ackredit observer suite skipped by provider conditions",
+    "new public PyUnitWizard publication and consumer adoption"
+  ],
+  "recovery_route": "Keep #107 active; after external service recovery inspect an unskipped exact-head CI with both coverage and test-result uploads successfully executed. No upload suppression or public publication waiver."
+}
