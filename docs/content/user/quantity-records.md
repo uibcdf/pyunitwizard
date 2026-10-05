@@ -22,6 +22,58 @@ have separate proposals (#101–#106). Their tracking does not add those feature
 to the current format.
 ```
 
+## Stated scalar uncertainty
+
+The provisional `MeasurementRecord` envelope binds a finite scalar value to a
+source-stated uncertainty. It stores the association, meaning, optional confidence
+fraction and replicate count with the existing sealed quantity bundle. Its
+separate format is `qrec-measurement/0.1`; existing qrec/0.3 bytes are unchanged.
+
+```python
+import pyunitwizard as puw
+from pyunitwizard.measurement import MeasurementRecord
+
+statement = MeasurementRecord.from_quantity(
+    puw.quantity(12.0, "nM", form="pint"),
+    kind="sd",
+    half_width=puw.quantity(3.0, "nM", form="pint"),
+    n=3,
+    field="ic50",
+)
+stored = statement.to_dict()
+back = MeasurementRecord.from_dict(stored)
+quantities = back.to_quantities(field="ic50", kind="sd", unit="uM", form="pint")
+# value: 0.012 uM; half_width: 0.003 uM; meaning remains SD, n=3
+
+interval = MeasurementRecord.from_quantity(
+    puw.quantity(10.0, "uM", form="pint"),
+    kind="ci",
+    lower=puw.quantity(8.0, "uM", form="pint"),
+    upper=puw.quantity(12.0, "uM", form="pint"),
+    level=0.95,
+)
+```
+
+Kinds are `sd`, `sem`, `unspecified` (a bare “±”) and `ci`. Omitted `level` or
+`n` stays unknown. The envelope refuses negative half-widths, unordered bounds,
+wrong dimensions, nonfinite values and arrays; it does not broadcast a scalar
+spread over an array. It checks the reader's field, kind and dimensionality.
+Changing the quantities or association metadata outside the codec fails on read.
+An estimator need not lie inside a separately stated confidence interval.
+
+For temperature spreads, supply `delta_degC`, `delta_degF` or kelvin, rather
+than an absolute Celsius/Fahrenheit quantity. A 20 °C value with a 3 Δ°C SD
+becomes 293.15 K with a 3 K SD, or 68 °F with a 5.4 Δ°F SD. Interval bounds
+are absolute quantities, so their conversion includes the offset. Backend
+spellings remain subject to existing adapters: to export concentrations to
+unyt or Astropy, negotiate `unit="mole/liter"` rather than the Pint-only
+`nanomolar` spelling. Unsupported conversions raise `RecordError`.
+
+This records a statement; it does not propagate errors, infer a distribution,
+derive SEM from SD and `n`, or estimate confidence intervals. Source text,
+stated precision, classification and migration of existing consumer schemas
+remain consumer-owned. See [#90](https://github.com/uibcdf/pyunitwizard/issues/90).
+
 ## Writing and reading
 
 ```python

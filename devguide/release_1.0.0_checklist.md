@@ -44,6 +44,9 @@ Use these documents as the primary evidence sources while closing each section:
   Scope decision 2026-10-04: retain the API and `qrec/0.3` / `qrec-bundle/0.3`
   as provisional; final release notes must carry that status. MVP/design issue
   closure does not satisfy the release gate. Independent extensions are #101–#106.
+- [ ] State the provisional status of `MeasurementRecord` and
+  `qrec-measurement/0.1` (#90) in final release notes. The bounded scalar-statement
+  exception is admitted on 2026-10-04; future stable admission is a separate review.
 
 ## 3. Diagnostics and observability
 

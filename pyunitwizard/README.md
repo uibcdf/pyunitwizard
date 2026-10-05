@@ -76,6 +76,16 @@ scale and affine offset with relative tolerance `1e-12`; missing or different
 definitions raise `ValueError`. This permits ordinary arithmetic with
 PyUnitWizard-created Pint quantities after conversion.
 
+## Stated scalar uncertainty
+
+`pyunitwizard.measurement.MeasurementRecord` is a provisional inert envelope
+for a scalar value and its source-stated SD, SEM, unspecified ± half-width or
+confidence interval. It binds the association and optional level/replicate count
+to a QuantityRecordBundle under `qrec-measurement/0.1`, preserving existing
+record formats. It performs no statistical inference or uncertainty arithmetic.
+Reader expectations and affine difference-unit conversion are tested in
+`tests/test_measurement_record.py`. Importing the module loads no unit backend.
+
 ## Array string form
 
 When `convert(..., to_form="string")` receives an array quantity, the API

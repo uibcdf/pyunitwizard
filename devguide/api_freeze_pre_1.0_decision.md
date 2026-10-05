@@ -66,3 +66,12 @@ Zarr (#104), appended blocks (#105) and translation-hub evaluation (#106) have
 independent owners and acceptance criteria. Unit dialects remain #85, OpenFF
 remains #86, and live computation remains deferred under #87. New layouts and
 bindings must not silently reinterpret the existing format identifier.
+
+## Stated scalar uncertainty exception — 2026-10-04
+
+Admit the bounded experimental `pyunitwizard.measurement.MeasurementRecord`
+surface (#90) for Sabueso's stated scalar uncertainty. Its separate
+`qrec-measurement/0.1` envelope reuses the existing bundle and canonical seal;
+qrec/0.3, bundle/0.3 and the primary quantity APIs are unchanged. Keep it
+provisional in 1.0 scope and explicitly name it in release notes. It does not
+admit arrays, live arithmetic, error propagation or statistical estimation.
