@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (29)
+### Resolved (30)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -12,6 +12,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`array_string_form_does_not_roundtrip.md`](../solved_bugs/array_string_form_does_not_roundtrip.md) — [#81](https://github.com/uibcdf/pyunitwizard/issues/81) — Array quantities emitted comma-free NumPy text that PyUnitWizard could not parse. *(high, reproduced)*
 - [`astropy_parser_rejects_bare_unit_construction.md`](../solved_bugs/astropy_parser_rejects_bare_unit_construction.md) — [#96](https://github.com/uibcdf/pyunitwizard/issues/96) — Astropy parser rejects bare unit strings during quantity construction. *(high, reproduced)*
 - [`automatic_parser_selects_backend_without_parser.md`](../solved_bugs/automatic_parser_selects_backend_without_parser.md) — [#95](https://github.com/uibcdf/pyunitwizard/issues/95) — Automatic parser selection retains a backend without string parsing. *(high, reproduced)*
+- [`backend_declaration_plans.md`](../completed_proposals/backend_declaration_plans.md) — [#111](https://github.com/uibcdf/pyunitwizard/issues/111) — Reuse immutable backend declarations after validating their current values. *(reproduced)*
 - [`cf_unit_dialect.md`](../completed_proposals/cf_unit_dialect.md) — [#108](https://github.com/uibcdf/pyunitwizard/issues/108) — Bounded CF/UDUNITS unit dialect for verified HDF5 quantities. *(measured)*
 - [`codecov_tls_upload.md`](../solved_bugs/codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage uploads fail at Codecov download and ingestion endpoints. *(medium, reproduced)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*

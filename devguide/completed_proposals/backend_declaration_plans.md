@@ -1,12 +1,12 @@
 ---
 summary: Reuse immutable backend declarations after validating their current values.
 issue: uibcdf/pyunitwizard#111
-status: active
+status: resolved
 opened: 2026-10-05
-closed:
+closed: 2026-10-05
 verification: reproduced
 area: [attribution, performance]
-guard:
+guard: tests/integration/test_backend_attribution.py::test_warmed_prepared_conversion_does_not_detach_declarations_again
 normative:
 blocked_by: []
 supersedes: []
@@ -118,3 +118,27 @@ Ruff and HTML documentation checks pass; the four unchanged H2-heading warnings
 in docs/index.md.rst remain visible. The report/proof is
 `devguide/evidence/backend_declaration_plans_2026-10-05.json`. Final exact-head
 CI remains required before closing this active record.
+
+## Resolved outcome — 2026-10-05
+
+Runtime implementation 8cd205fa8b5e2dc132bd76e7b32f7ee754d56f6a passes exact-head CI
+37296253240 and policy 37296254271. Independent native verification confirms
+tests/style, both actual Codecov uploads, conformance, lint and formatting
+steps executed successfully. Final public-provider source suite passes 837
+with 17 explicit skips: eleven observer, five prepared-credit and one deliberate
+strict-JSON case. Prepared source/installed checks execute the APIs claimed by
+this optimization rather than treating those skips as evidence.
+
+The durable guard refuses repeated detachment during warmed real Pint/unyt
+conversions and checks that reused captures retain their items and uses. The
+value-invalidation, immutability, version/conflict, absent-provider and saved-reader
+guards complement it. Raw samples, profiling, installed payload comparison,
+provider source identities and executed gate facts are retained in the linked
+receipt. Administrative closeout retains these results while code/scientific
+inputs remain unchanged; its applicable pushed-head checks are inspected too.
+
+This resolves the producer-owned cost in #111. It does not reopen #94, change
+the public provider floor, qualify Ackredit writer commit bcbb6d8, stabilize
+provisional APIs, or publish another PyUnitWizard version. The existing 0.28.0
+release and original archive remain immutable. Future hosted/platform matrices
+follow the repository recovery schedule; no new installed matrix is claimed.

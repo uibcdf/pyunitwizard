@@ -1848,5 +1848,49 @@
     "Cold imports/activation/first-use planning and non-pilot backends are outside measured scope.",
     "Public 0.9.0 keeps the original portable credit route; its unavailable provisional APIs remain explicit skips.",
     "This source fix does not publish an artifact, change dependency floors, qualify another hosted installed matrix, or change the existing 0.28.0 tag/archive."
+  ],
+  "runtime_sha": "8cd205fa8b5e2dc132bd76e7b32f7ee754d56f6a",
+  "native_runtime_gates": [
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 37296253240,
+      "run_attempt": 1,
+      "candidate_sha": "8cd205fa8b5e2dc132bd76e7b32f7ee754d56f6a",
+      "workflow": ".github/workflows/CI.yaml",
+      "jobs": [
+        {
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "job_id": 111718061586,
+          "required_steps": [
+            "Run tests",
+            "Check code style",
+            "Upload coverage reports to Codecov",
+            "Upload test results to Codecov"
+          ]
+        }
+      ],
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 37296254271,
+      "run_attempt": 1,
+      "candidate_sha": "8cd205fa8b5e2dc132bd76e7b32f7ee754d56f6a",
+      "workflow": ".github/workflows/molsyssuite-policy.yml",
+      "jobs": [
+        {
+          "name": "policy / conformance",
+          "job_id": 111718064533,
+          "required_steps": [
+            "Check repository conformance",
+            "Check Python lint and imports",
+            "Check Python formatting"
+          ]
+        }
+      ],
+      "exact_jobs": true
+    }
   ]
 }
