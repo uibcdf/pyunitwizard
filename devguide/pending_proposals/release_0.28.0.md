@@ -125,6 +125,17 @@ head, plus the binding and original producer receipts. The original exact-source
 gates remain attached to the original candidate. Publish its tag only after this
 bounded manual qualification succeeds; the correction is not a waiver.
 
+Recovery run 37286049851 passes all 23 native jobs at qualifier
+`4a7c5d035c4defbe797b1cd4ff860dc2c1ecce6b`, retaining the original candidate/file
+binding and 22 Conda/pip closures. Archive inspection independently confirms the
+digest, 84 unchanged runtime files, generated version, metadata and required
+resources; negative inspections reject missing resources and stale versions.
+Closure inspection then finds the unqualified Pytest Receptor test-tool spec
+selected `1.1.0-py_1` from staging. All required runtime siblings and optional
+scientific providers are public, but the final qualification must also pin the
+test tool to `uibcdf::pytest-receptor=1.1.0` and rerun. Keep the successful earlier
+science and actual staging tool identity as history; do not relabel its inputs.
+
 ## Acceptance and recovery
 
 - Exact-source required gates and all declared installed profiles pass.
