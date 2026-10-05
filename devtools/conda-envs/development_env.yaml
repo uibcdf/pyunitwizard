@@ -4,6 +4,7 @@ channels:
 dependencies:
 - python=3.14
 - pint
+- openff-units =0.4.0
 - pip
 - pytest
 - pytest-receptor =1.1.0
@@ -30,5 +31,6 @@ dependencies:
 - argdigest =0.14.0
 - ackredit =0.9.0=py_0
 - pip:
+  - codecov-cli ==11.3.1
   - physipy
   - quantities

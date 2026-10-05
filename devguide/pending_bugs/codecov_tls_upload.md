@@ -34,3 +34,13 @@ Source — [official action migration and release](https://github.com/codecov/co
 Offline YAML parsing and existing workflow/reporting checks precede push;
 the executed exact-head coverage and test-result steps provide the regression
 evidence. No mirror test of the chosen action version substitutes for execution.
+
+## Follow-up diagnosis — 2026-10-05
+
+Current action v7.1.1 still encounters TLS alert 40 downloading the CLI from
+cli.codecov.io (run 37269791533). The missing signature is consequential to
+that failed download, not a reason to disable validation. Use the official
+PyPI Codecov CLI 11.3.1 in an isolated venv and the documented action `binary`
+input, retaining normal package installation and upload error handling. This
+uses the provider's supported alternate distribution; no insecure TLS or
+unchecked CDN binary is accepted. Executed upload results remain required.

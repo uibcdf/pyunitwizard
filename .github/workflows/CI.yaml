@@ -96,9 +96,17 @@ jobs:
       run: |
         cat ./coverage.xml
 
+    - name: Install isolated Codecov CLI
+      # The official PyPI CLI avoids the cli.codecov.io TLS outage (#107).
+      shell: bash -l {0}
+      run: |
+        python -m venv "$RUNNER_TEMP/codecov-cli"
+        "$RUNNER_TEMP/codecov-cli/bin/python" -m pip install codecov-cli==11.3.1
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v7.1.1
       with:
+        binary: ${{ runner.temp }}/codecov-cli/bin/codecovcli
         verbose: true
         files: ./coverage.xml
         fail_ci_if_error: true
@@ -109,6 +117,7 @@ jobs:
     - name: Upload test results to Codecov
       uses: codecov/test-results-action@v1
       with:
+        binary: ${{ runner.temp }}/codecov-cli/bin/codecovcli
         files: ./junit.xml
         fail_ci_if_error: true
         token: ${{ secrets.CODECOV_TOKEN }}
