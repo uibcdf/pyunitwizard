@@ -1,5 +1,6 @@
 version = "0.28.0"
 route = "staged"
+build_number = 1
 reason = "New provisional MeasurementRecord, optional OpenFF/CF/HDF5 boundaries, ArgDigest configuration normalization and record hardening require qualification of the exact installed Conda file before public visibility; see uibcdf/pyunitwizard#110."
 decision_by = "Diego Prada (PyUnitWizard maintainer), authorized 2026-10-05"
 required_workflows = [

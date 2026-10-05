@@ -3,6 +3,7 @@ channels:
 - conda-forge
 - nodefaults
 dependencies:
+- numpy
 - python >=3.12,<3.15
 - openff-units =0.4.0
 - pint >=0.24,<0.26

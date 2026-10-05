@@ -28,7 +28,7 @@ candidate. Run the full Linux/macOS baseline matrix, release contracts/package/d
 suite policy, six OpenFF cells and eight CF/HDF5 cells at that exact candidate.
 Inspect native jobs and scientific steps as well as aggregate conclusions.
 
-Build one noarch `pyunitwizard-0.28.0-py_0.tar.bz2` file from the immutable SHA,
+Build one final noarch `pyunitwizard-0.28.0-py_1.tar.bz2` file from the immutable SHA,
 using an ephemeral build-local version tag, never an early public tag. Verify
 producer receipts and its SHA-256. Test that exact installed archive outside
 the checkout in baseline (eight), storage (eight) and OpenFF (six) cells, with
@@ -75,6 +75,32 @@ The central release/distribution/publication contracts were read at MolSysSuite
 `04480983260804113022bc20c214875a5eb5611e`. The unchanged local producer/promotion
 route is retained; changed installed qualification expands its scientific scope.
 Use the shared pinned independent public verifier for the final poststate.
+
+## Pre-publication correction — 2026-10-05
+
+Initial candidate `8fbcaa8703069c2c91cef45c9a6871238b1c214e` passed source matrices
+37280526908 (baseline), 37280534128 (OpenFF), 37280537579 (storage), release gates
+37280530465 and policy 37280479219. Its routine CI 37280478449 failed only Codecov
+coverage ingestion. Staging producer 37282788783 successfully uploaded build
+`py_0`. Preserve that file and original producer evidence; it is not the final
+publication candidate and must not be overwritten or promoted.
+
+The central administrative publisher audit then identified missing pinned
+independent public verification and failure-path receipt retention in the
+promotion workflow. The corrected workflow calls the shared verifier at
+MolSysSuite `04480983260804113022bc20c214875a5eb5611e` and retains its evidence and
+the promotion receipt with `always()`. The audit passes after this correction.
+An early dependency-contract review also adds explicit NumPy and preserves the
+SMonitor >=0.16.0 / DepDigest >=0.11.0 floors in seven runtime environments.
+Build/setup environments are classified as tools-only; the Conda recipe's run
+closure already agrees with project metadata. Negative preflight observations
+reject a missing recipe dependency, a stale environment floor and an ArgDigest
+source identity below the public floor. No required sibling source install is
+claimed.
+
+The corrected candidate requires fresh consuming source gates and a new archive
+coordinate, `py_1`. Record both histories and qualify only the final installed
+bytes. These administrative checks do not qualify science or waive #107.
 
 ## Acceptance and recovery
 

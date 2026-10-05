@@ -110,12 +110,25 @@ jobs:
           to-label: main
           token: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}
 
-      - name: Retain the promotion receipt
+      - name: Verify public registry and solver index independently
+        id: public
+        uses: uibcdf/molsyssuite/.github/actions/verify-public-conda@04480983260804113022bc20c214875a5eb5611e
+        with:
+          owner: uibcdf
+          package: pyunitwizard
+          version: ${{ inputs.version }}
+          subdir: noarch
+          filename: pyunitwizard-${{ inputs.version }}-py_${{ inputs.build_number }}.tar.bz2
+          sha256: ${{ inputs.sha256 }}
+
+      - name: Retain the promotion and independent verification receipts
+        if: ${{ always() && (steps.promotion.outputs.receipt != '' || steps.public.outputs['evidence-path'] != '') }}
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: pyunitwizard-conda-promotion-${{ inputs.version }}-py_${{ inputs.build_number }}
           path: |
             ${{ steps.promotion.outputs.receipt }}
+            ${{ steps.public.outputs['evidence-path'] }}
             ${{ runner.temp }}/pyunitwizard-conda-route.json
           if-no-files-found: error
           retention-days: 30

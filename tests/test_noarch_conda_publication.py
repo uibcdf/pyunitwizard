@@ -89,3 +89,8 @@ def test_promotion_workflow_checks_exact_release_and_file_identity():
     assert 'record.get("sha256") == expected' in workflow
     assert 'record["channel"] != "https://conda.anaconda.org/uibcdf/noarch"' in workflow
     assert "ANACONDA_UIBCDF_TOKEN" in workflow
+    assert (
+        "uibcdf/molsyssuite/.github/actions/verify-public-conda@04480983260804113022bc20c214875a5eb5611e" in workflow
+    )
+    assert "always()" in workflow
+    assert "steps.public.outputs['evidence-path']" in workflow
