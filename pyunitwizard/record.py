@@ -102,7 +102,7 @@ def _little_endian(values: np.ndarray) -> memoryview:
         values = np.where(np.isnan(values), np.array(np.nan, dtype=dtype), values)
     if values.dtype != dtype or not values.flags.c_contiguous:
         values = np.ascontiguousarray(values, dtype=dtype)
-    return memoryview(values).cast("B")
+    return memoryview(values.reshape(-1)).cast("B")
 
 
 def _digest(*parts: Any) -> str:
