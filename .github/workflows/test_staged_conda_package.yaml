@@ -62,7 +62,7 @@ jobs:
           echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
 
   install:
-    name: Install ${{ matrix.os }} / Python ${{ matrix.python }}
+    name: Install ${{ matrix.profile }} / ${{ matrix.os }} / Python ${{ matrix.python }}
     needs: verify-producer
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
@@ -71,6 +71,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python: ["3.11", "3.12", "3.13", "3.14"]
+        profile: [baseline, storage, openff]
+        exclude:
+          - {profile: openff, python: "3.11"}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -99,6 +102,11 @@ jobs:
             uibcdf/label/staging::pyunitwizard=${{ inputs.version }}=py_${{ inputs.build_number }}
             uibcdf::depdigest=0.11.0=py_2
             uibcdf::smonitor=0.16.0=py_1
+            uibcdf::argdigest=0.14.0=py_0
+            uibcdf::ackredit=0.9.0=py_0
+            pytest pytest-receptor=1.1.0 openmm unyt astropy
+            ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0' || '' }}
+            ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.24,<0.26' || '' }}
       - name: Verify installed artifact and smoke test outside the source checkout
         shell: bash -l {0}
         env:
@@ -113,3 +121,36 @@ jobs:
           python "$checker" installed --prefix "$CONDA_PREFIX" \
             --sha256 "$EXPECTED_SHA256" --version "$CANDIDATE_VERSION" \
             --build-number "$BUILD_NUMBER" --python-version "$PYTHON_VERSION"
+      - name: Test the installed record and integration contracts
+        shell: bash -l {0}
+        env:
+          PROFILE: ${{ matrix.profile }}
+        run: |
+          set -euo pipefail
+          target="$RUNNER_TEMP/installed-contracts"
+          mkdir -p "$target/tests/pint" "$target/tests/integration" "$target/tests/forms" "$target/tests/storage" "$target/tests/dialects"
+          cp tests/test_quantity_record.py tests/test_quantity_record_empty.py tests/test_measurement_record.py tests/test_configure.py tests/test_openff_optional.py tests/test_storage_optional.py "$target/tests/"
+          cp -r tests/quantity_record_vectors tests/data "$target/tests/"
+          cp tests/pint/test_foreign_registry.py tests/pint/test_string_array_roundtrip.py "$target/tests/pint/"
+          cp tests/integration/test_backend_attribution.py "$target/tests/integration/"
+          if [[ "$PROFILE" == storage ]]; then
+            cp tests/storage/test_hdf5.py "$target/tests/storage/"
+            cp tests/dialects/test_cf.py "$target/tests/dialects/"
+          elif [[ "$PROFILE" == openff ]]; then
+            cp tests/forms/test_api_openff_units.py "$target/tests/forms/"
+          fi
+          cd "$target"
+          python -c 'import pathlib, sys, pyunitwizard; assert pathlib.Path(pyunitwizard.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve()); print(pyunitwizard.__version__)'
+          python -m pytest --receptor=ci -q tests
+      - name: Retain the installed dependency closure
+        if: success()
+        shell: bash -l {0}
+        run: micromamba list --json > "$RUNNER_TEMP/installed-closure.json"
+      - name: Upload installed dependency evidence
+        if: success()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: closure-${{ matrix.profile }}-${{ matrix.os }}-py${{ matrix.python }}
+          path: ${{ runner.temp }}/installed-closure.json
+          if-no-files-found: error
+          retention-days: 30

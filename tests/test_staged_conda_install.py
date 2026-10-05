@@ -124,6 +124,7 @@ def _installed_records(tmp_path: Path) -> None:
         ),
         ("smonitor", "0.16.0", "py_1", verifier.PUBLIC_CHANNEL, "c" * 64),
         ("depdigest", "0.11.0", "py_2", verifier.PUBLIC_CHANNEL, "d" * 64),
+        ("argdigest", "0.14.0", "py_0", verifier.PUBLIC_CHANNEL, "e" * 64),
     ]
     for name, version, build, channel, sha256 in records:
         filename = f"{name}-{version}-{build}.tar.bz2"
@@ -180,6 +181,11 @@ def test_installed_gate_accepts_exact_stage_and_public_dependencies(tmp_path, mo
             "url",
             f"{verifier.STAGING_CHANNEL}/depdigest-0.11.0-py_2.tar.bz2",
         ),
+        (
+            "argdigest",
+            "url",
+            f"{verifier.STAGING_CHANNEL}/argdigest-0.14.0-py_0.tar.bz2",
+        ),
     ],
 )
 def test_installed_gate_rejects_wrong_digest_or_channel(tmp_path, monkeypatch, record, field, bad_value):
@@ -189,7 +195,18 @@ def test_installed_gate_rejects_wrong_digest_or_channel(tmp_path, monkeypatch, r
     data[field] = bad_value
     path.write_text(json.dumps(data), encoding="utf-8")
     monkeypatch.setattr(sys, "prefix", str(tmp_path))
-    with pytest.raises(ValueError):
+    monkeypatch.setattr(verifier.importlib.metadata, "version", lambda _: VERSION)
+    monkeypatch.setitem(
+        sys.modules,
+        "pyunitwizard",
+        SimpleNamespace(
+            __version__=VERSION,
+            __file__=tmp_path / "pyunitwizard" / "__init__.py",
+            quantity=lambda value, unit: (value, unit),
+            get_value=lambda quantity: quantity[0],
+        ),
+    )
+    with pytest.raises(ValueError, match="digest mismatch|Wrong package URL|Dependency not from public channel"):
         verifier.verify_installed(
             tmp_path,
             DIGEST,

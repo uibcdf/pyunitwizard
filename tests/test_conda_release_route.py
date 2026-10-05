@@ -29,6 +29,8 @@ def test_committed_release_plan_names_a_version_route_and_all_exact_gates():
         ".github/workflows/CI_full_matrix.yaml",
         ".github/workflows/release_gates.yaml",
         ".github/workflows/molsyssuite-policy.yml",
+        ".github/workflows/openff_interop.yaml",
+        ".github/workflows/storage_interop.yaml",
     ]
 
 

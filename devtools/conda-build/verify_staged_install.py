@@ -13,6 +13,7 @@ PACKAGE = "pyunitwizard"
 PUBLIC_DEPENDENCIES = (
     ("smonitor", "0.16.0", "py_1"),
     ("depdigest", "0.11.0", "py_2"),
+    ("argdigest", "0.14.0", "py_0"),
 )
 STAGING_CHANNEL = "https://conda.anaconda.org/uibcdf/label/staging/noarch"
 PUBLIC_CHANNEL = "https://conda.anaconda.org/uibcdf/noarch"

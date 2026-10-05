@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`release_0.28.0.md`](release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
+
 ### Partial (1)
 
 - [`interop_unit_dialects.md`](interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*
