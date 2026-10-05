@@ -10,7 +10,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `minimum_quantity_protocol_contract.md`: minimum backend-agnostic quantity contract for pre-`1.0.0` hardening.
 - `frontend_transparent_mode_contract.md`: contract for transparent frontend integrations (`numpy`/`pandas`/`matplotlib`).
 - `api_freeze_pre_1.0_decision.md`: explicit decision record for no planned breaking API changes before `1.0.0`.
-- `serialization_contract_draft.md`: draft canonical serialization contract for post-`1.0.0` promotion.
+- `serialization_contract_draft.md`: historical draft superseded by provisional QuantityRecord.
 - `compatibility_matrix.md`: current required sibling floors and optional provider qualification.
 - `release_0.28.1_notes.md`: published patch scope, source/file identity and installed qualification.
 - `completed_proposals/release_0.28.1.md`: executed publication route and retained evidence.
