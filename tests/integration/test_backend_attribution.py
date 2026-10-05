@@ -3,6 +3,7 @@
 import json
 import subprocess
 import sys
+from copy import deepcopy
 
 import numpy as np
 import pytest
@@ -218,6 +219,83 @@ def test_normal_operations_do_not_load_provider_or_credit(monkeypatch):
     q = puw.quantity(2.0, "meter", form="pint")
     assert puw.get_value(puw.convert(q, to_unit="centimeter")) == 200.0
     assert calls == []
+
+
+@pytest.mark.parametrize("library", ["pint", "unyt"])
+def test_warmed_prepared_conversion_does_not_detach_declarations_again(provider, monkeypatch, library):
+    if not callable(getattr(provider, "prepare_credit", None)):
+        pytest.skip("requires the provisional Ackredit prepared-credit API")
+    from pyunitwizard import _ackredit
+    from pyunitwizard._private import backend_references
+
+    _setup()
+    _ackredit._PREPARED.clear()
+    q = puw.quantity(2.0, "meter", form=library)
+    target = q._REGISTRY.centimeter if library == "pint" else sys.modules["unyt"].Unit("cm")
+    with provider.capture("warm") as warm:
+        puw.convert(q, to_unit=target, to_form=library)
+
+    def unnecessary_copy(_):
+        pytest.fail("warmed prepared conversion detached its declarations again")
+
+    monkeypatch.setattr(backend_references, "records", unnecessary_copy)
+    with provider.capture("reused") as reused:
+        result = puw.convert(q, to_unit=target, to_form=library)
+    assert puw.get_value(result) == 200.0
+    assert reused.attribution.to_dict()["items"] == warm.attribution.to_dict()["items"]
+    assert reused.attribution.to_dict()["uses"] == warm.attribution.to_dict()["uses"]
+
+
+@pytest.mark.parametrize("library", ["pint", "unyt"])
+def test_prepared_version_change_reaches_new_capture_without_rewriting_original(provider, monkeypatch, library):
+    if not callable(getattr(provider, "prepare_credit", None)):
+        pytest.skip("requires the provisional Ackredit prepared-credit API")
+    _setup()
+    module = sys.modules[library]
+    original_version = module.__version__
+    q = puw.quantity(2.0, "meter", form=library)
+    target = q._REGISTRY.centimeter if library == "pint" else module.Unit("cm")
+    with provider.capture("original") as first:
+        puw.convert(q, to_unit=target, to_form=library)
+    original = first.attribution.to_dict()
+    monkeypatch.setattr(module, "__version__", original_version + "+issue111")
+    with provider.capture("updated") as second:
+        result = puw.convert(q, to_unit=target, to_form=library)
+    assert puw.get_value(result) == 200.0
+    assert first.attribution.to_dict() == original
+    for capture, version in [(first, original_version), (second, module.__version__)]:
+        data = capture.attribution.to_dict()
+        assert {use["context"]["version"] for use in data["uses"]} == {version}
+        software = next(item for item in data["items"] if item["type"] == "software")
+        assert software["version"] == version
+        assert software["id"] == f"software:{library}:{version}"
+        if library == "unyt":
+            assert next(item for item in data["items"] if item["type"] == "article")["doi"] == "10.21105/joss.00809"
+
+
+def test_nested_metadata_edit_still_reports_provider_conflict_and_preserves_science(provider, monkeypatch):
+    if not callable(getattr(provider, "prepare_credit", None)):
+        pytest.skip("requires the provisional Ackredit prepared-credit API")
+    from pyunitwizard._private import backend_references
+    from pyunitwizard._private.smonitor.warnings import AckreditTrackingWarning
+
+    _setup()
+    monkeypatch.setattr(sys.modules["pint"], "__version__", sys.modules["pint"].__version__ + "+metadata111")
+    monkeypatch.setitem(backend_references._SOFTWARE, "pint", deepcopy(backend_references._SOFTWARE["pint"]))
+    q = puw.quantity(2.0, "meter", form="pint")
+    with provider.capture("original") as first:
+        puw.convert(q, to_unit=q._REGISTRY.centimeter)
+    original = first.attribution.to_dict()
+    try:
+        backend_references._SOFTWARE["pint"]["authors"].append("Test-only metadata change")
+        with provider.capture("changed") as changed, pytest.warns(AckreditTrackingWarning) as diagnostics:
+            result = puw.convert(q, to_unit=q._REGISTRY.centimeter)
+        assert puw.get_value(result) == 200.0
+        assert diagnostics[0].message.code == "PUW-WARN-ACK-001"
+        assert changed.attribution.to_dict()["items"] == []
+        assert first.attribution.to_dict() == original
+    finally:
+        provider.register_item(**original["items"][0])
 
 
 def test_nested_optin_restores_parent_and_then_normal_operation(provider):

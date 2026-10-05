@@ -36,3 +36,13 @@ tool retains all seven samples per case and reports whether function
 observation is available. Public 0.9.0 measures the portable backend paths;
 development providers exposing the observer also measure function attribution.
 Timing does not include imports, activation or first registration.
+
+The prepared-provider path reuses immutable backend declaration plans only
+while software versions and bibliographic values still match. Nested metadata
+edits invalidate the plan; every completed credit continues to call the
+provider, including its registry conflict checks and independent captures.
+Public 0.9.0 retains the portable registration/tracking path. Compare paired
+normally installed producer wheels with identical scientific/provider inputs
+and retain raw samples; a source profile locates allocations but does not
+establish timing improvement. This optimization does not change the optional
+provider minimum or promote the provisional APIs.

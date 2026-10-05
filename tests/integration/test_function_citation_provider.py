@@ -277,12 +277,16 @@ def test_saved_own_reference_survives_reader_without_producer(provider, tmp_path
     path = tmp_path / "result.json"
     path.write_text(json.dumps(run.attribution.to_dict()))
     script = """
-import importlib.abc, json, pathlib, sys
+import importlib.abc, json, pathlib, socket, sys
 class NoProducer(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         if fullname.split('.')[0] in {'pyunitwizard', 'pint', 'unyt'}:
             raise ModuleNotFoundError('producer unavailable', name=fullname)
 sys.meta_path.insert(0, NoProducer())
+def no_network(*args, **kwargs):
+    raise AssertionError('saved attribution must not access the network')
+socket.socket.connect = no_network
+socket.create_connection = no_network
 import ackredit
 data = json.loads(pathlib.Path(sys.argv[1]).read_text())
 saved = ackredit.Attribution.from_dict(data)

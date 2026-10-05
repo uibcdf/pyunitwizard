@@ -38,21 +38,23 @@ def _credit(libraries, operation):
         provider = backend()
         if provider is None:
             return
-        from ._private.backend_references import records
+        from ._private.backend_references import plan, records
 
         with provider.scope(operation):
             for library in libraries:
-                declarations = records(library)
                 prepare = getattr(provider, "prepare_credit", None)
                 if callable(prepare):
                     # Values, not mutable identities, select a privately detached
                     # fixed-use plan. Each credit still writes to the current
                     # session/captures and refuses replaced provider metadata.
                     cache = _PREPARED.setdefault(provider, {})
+                    current = plan(library)
+                    if current is None:
+                        continue
                     previous = cache.get((operation, library))
-                    if previous is None or previous[0] != declarations:
+                    if previous is None or previous[0] is not current:
                         credits = []
-                        for declaration in declarations:
+                        for declaration in current.records():
                             record = declaration["record"]
                             provider.register_item(**record)
                             credits.append(
@@ -63,12 +65,12 @@ def _credit(libraries, operation):
                                     context=declaration["context"],
                                 )
                             )
-                        cache[(operation, library)] = declarations, credits
+                        cache[(operation, library)] = current, credits
                     for credit in cache[(operation, library)][1]:
                         credit()
                     continue
                 # Public Ackredit 0.9.0 retains its existing portable boundary.
-                for declaration in declarations:
+                for declaration in records(library):
                     record = declaration["record"]
                     provider.register_item(**record)
                     provider.track_item(
