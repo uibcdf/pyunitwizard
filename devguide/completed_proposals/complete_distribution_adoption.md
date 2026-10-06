@@ -1,9 +1,9 @@
 ---
 summary: Complete distribution adoption using the general shared route contract.
 issue: uibcdf/pyunitwizard#114
-status: active
+status: resolved
 opened: 2026-10-06
-closed:
+closed: 2026-10-06
 verification: measured
 area: [governance, distribution, compatibility]
 guard: tests/test_dependency_routes.py
@@ -73,7 +73,27 @@ exact-file qualification. Forty focused owner tests pass on the same interpreter
 `pytest --receptor=llm`. Ruff 0.16.5, the shared repository-conformance check,
 generated indexes and whitespace checks pass. The integrated default invocation
 verifies all 22 routes and actual installed public bounds. Owner native CI/final
-identities follow publication.
+identities are verified below.
+
+### Hosted qualification and resolution
+
+Implementation **d128b37b4339d3b8520678cc9d8924f902d14a7b** is published
+on main. GH Run Receptor full native captures independently confirm ordinary CI
+[37497852682](https://github.com/uibcdf/pyunitwizard/actions/runs/37497852682)
+and common policy
+[37497853464](https://github.com/uibcdf/pyunitwizard/actions/runs/37497853464)
+complete successfully at that exact source. Logs demonstrate the default
+22-route installed-bounds audit, source checks and existing suite selection:
+**785 passed / 19 skipped** on Linux/Python 3.14. The skip count remains visible;
+this is not a new full cross-platform or optional-backend qualification. Coverage
+upload is queued successfully; downstream processing is a separate observation.
+The policy executes repository conformance, lint/import and formatting checks.
+This meets the owner adoption acceptance criteria; future candidates retain
+independent full source, installed-file and promotion gates.
+
+This report is archived with its maintained guard module. The original release
+receipt remains unchanged; central adoption records reference this source review
+and the original public artifact separately.
 
 ## What was refuted
 
