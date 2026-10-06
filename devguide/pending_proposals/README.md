@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`complete_distribution_adoption.md`](complete_distribution_adoption.md) — [#114](https://github.com/uibcdf/pyunitwizard/issues/114) — Complete distribution adoption using the general shared route contract. *(measured)*
+
 ### Partial (1)
 
 - [`interop_unit_dialects.md`](interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*

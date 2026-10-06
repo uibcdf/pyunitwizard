@@ -19,6 +19,9 @@ dependencies:
 - smonitor >=0.16.0
 - argdigest =0.14.0
 - ackredit =0.9.0=py_0
+- pyyaml >=6,<7
+- jinja2 >=3,<4
+- packaging >=24
 - pip:
   - physipy
   - quantities

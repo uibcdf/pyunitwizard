@@ -10,3 +10,44 @@ required_workflows = [
   ".github/workflows/openff_interop.yaml",
   ".github/workflows/storage_interop.yaml",
 ]
+
+# Exact native profiles retain all original source gates; backlog-only runs cannot qualify.
+
+[gate_jobs.".github/workflows/CI_full_matrix.yaml"]
+"Full test on ubuntu-latest, Python 3.11" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on ubuntu-latest, Python 3.12" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on ubuntu-latest, Python 3.13" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on ubuntu-latest, Python 3.14" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on macos-latest, Python 3.11" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on macos-latest, Python 3.12" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on macos-latest, Python 3.13" = ["Check dependency contract", "Test import module", "Run tests"]
+"Full test on macos-latest, Python 3.14" = ["Check dependency contract", "Test import module", "Run tests"]
+
+[gate_jobs.".github/workflows/release_gates.yaml"]
+"Tests and Contracts (Python 3.11)" = ["Check dependency contract", "Run API contract and integration smoke", "Run full test suite"]
+"Tests and Contracts (Python 3.12)" = ["Check dependency contract", "Run API contract and integration smoke", "Run full test suite"]
+"Tests and Contracts (Python 3.13)" = ["Check dependency contract", "Run API contract and integration smoke", "Run full test suite"]
+"Tests and Contracts (Python 3.14)" = ["Check dependency contract", "Run API contract and integration smoke", "Run full test suite"]
+"Packaging Smoke (Python 3.13)" = ["Check dependency contract", "Build artifacts", "Install wheel and import"]
+"Docs Build (Python 3.13)" = ["Check dependency contract", "Build docs"]
+
+[gate_jobs.".github/workflows/molsyssuite-policy.yml"]
+"policy / conformance" = ["Check repository conformance", "Check Python lint and imports", "Check Python formatting"]
+
+[gate_jobs.".github/workflows/openff_interop.yaml"]
+"OpenFF on ubuntu-latest, Python 3.12" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+"OpenFF on ubuntu-latest, Python 3.13" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+"OpenFF on ubuntu-latest, Python 3.14" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+"OpenFF on macos-latest, Python 3.12" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+"OpenFF on macos-latest, Python 3.13" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+"OpenFF on macos-latest, Python 3.14" = ["Check dependency contract", "Run full suite with optional backend", "Test installed consumer outside checkout"]
+
+[gate_jobs.".github/workflows/storage_interop.yaml"]
+"Storage on ubuntu-latest, Python 3.11" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on ubuntu-latest, Python 3.12" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on ubuntu-latest, Python 3.13" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on ubuntu-latest, Python 3.14" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on macos-latest, Python 3.11" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on macos-latest, Python 3.12" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on macos-latest, Python 3.13" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]
+"Storage on macos-latest, Python 3.14" = ["Check dependency contract", "Run full suite with optional providers", "Test installed consumer outside checkout"]

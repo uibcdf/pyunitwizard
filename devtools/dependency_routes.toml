@@ -1,0 +1,141 @@
+schema = "molsyssuite.dependency-routes@2"
+reason = "General-purpose contract review under uibcdf/pyunitwizard#114 and uibcdf/molsyssuite#45"
+source_routes = []
+source_reason = "Required providers resolve from public Conda in the owner routes; no required source checkout"
+
+[[recipes]]
+path = "devtools/conda-build/meta.yaml"
+kind = "noarch-dependencies"
+plan = "devtools/conda-build/release_plan.toml"
+environment_from_plan = { PYUNITWIZARD_CONDA_BUILD_NUMBER = "build_number" }
+reason = "Local noarch publisher; dependency audit preserves separate owner version/resources/exact-file/public guards"
+
+[[environments]]
+path = "devtools/conda-envs/build_env.yaml"
+kind = "build-only"
+reason = "Bootstrap tools only; consumer runtime is supplied by the recipe or later resolved environment"
+
+[[environments]]
+path = "devtools/conda-envs/development_env.yaml"
+kind = "runtime"
+purpose = "development"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/docs_env.yaml"
+kind = "runtime"
+purpose = "documentation"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/openff_env.yaml"
+kind = "runtime"
+purpose = "optional-runtime"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/production_env.yaml"
+kind = "runtime"
+purpose = "production"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/release_gates_env.yaml"
+kind = "runtime"
+purpose = "test"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/setup_env.yaml"
+kind = "build-only"
+reason = "Bootstrap tools only; consumer runtime is supplied by the recipe or later resolved environment"
+
+[[environments]]
+path = "devtools/conda-envs/storage_interop_env.yaml"
+kind = "runtime"
+purpose = "optional-runtime"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[environments]]
+path = "devtools/conda-envs/test_env.yaml"
+kind = "runtime"
+purpose = "test"
+channel_priority = "strict"
+narrowing_reason = "Retain the owner-qualified provider/interpreter/optional-backend selection in uibcdf/pyunitwizard#112"
+reason = "Source runtime installs all public required dependencies; optional providers do not replace them"
+
+[[workflows]]
+path = ".github/workflows/CI.yaml"
+sha256 = "bda7d90f2da91589bc5e7757886cf9ccfd9a8ef2c98666f87dc9cdf90aadab1b"
+reason = "Baseline source tests use the test environment with strict priority and no-deps consumer installation"
+
+[[workflows]]
+path = ".github/workflows/CI_full_matrix.yaml"
+sha256 = "a28f30935046fb9959dcf3dac57e9fee47a5d0a99fb2c9314e4f92e78aca05de"
+reason = "Full source matrix uses the reviewed test environment; scheduled debt monitor does not install runtime"
+
+[[workflows]]
+path = ".github/workflows/build_and_upload_conda_packages.yaml"
+sha256 = "d7cfc1333480a07cbd6a0757ab51b7ababa5a38421f2282ae9c8adc3aec483f6"
+reason = "Bootstrap build environment and local exact-source staged/direct publisher; runtime comes from the recipe"
+
+[[workflows]]
+path = ".github/workflows/install_macos_latest.yaml"
+sha256 = "90c188f310653ca79e0663e3887c3ab697aa08bf3d78e996d91add9a296ec652"
+reason = "Public Conda package resolves its dependency closure with strict channels; historical smoke covers Python 3.11-3.13"
+
+[[workflows]]
+path = ".github/workflows/install_ubuntu_latest.yaml"
+sha256 = "c8877f6c52863c87302ef96bca4beec4621b2f5f6426babc8b3c5a33156388d4"
+reason = "Public Conda package resolves its dependency closure with strict channels; historical smoke covers Python 3.11-3.13"
+
+[[workflows]]
+path = ".github/workflows/molsyssuite-policy.yml"
+sha256 = "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd"
+reason = "Pinned reusable governance call; does not install the scientific runtime"
+
+[[workflows]]
+path = ".github/workflows/openff_interop.yaml"
+sha256 = "57cad863e7ad2bdc586e11b1b48d63b611d737fefbe3336bd22c5f56f7eadea5"
+reason = "Source optional OpenFF profile uses its narrower provider/Python environment; explicit strict priority selected in the maintained workflow"
+
+[[workflows]]
+path = ".github/workflows/promote_conda_package.yaml"
+sha256 = "45e9859cd3fd331c26412fcf0fac9d84ebd2e1de9decd0621ab4e3decd2f31f0"
+reason = "Exact-file promotion and public poststate; bootstrap environment is not a consumer runtime environment"
+
+[[workflows]]
+path = ".github/workflows/release_gates.yaml"
+sha256 = "886e88251aa3c278849110f053fdf7e1f0642e41a3bf72fbb06243a5f5d3f208"
+reason = "Test/packaging/documentation gates use the reviewed release or documentation environments"
+
+[[workflows]]
+path = ".github/workflows/sphinx_docs_to_gh_pages.yaml"
+sha256 = "532da0344e9aa1b8695dbbc91ef551388d2a149ac531cfba39fb551ec0ab7ddd"
+reason = "Documentation environment installs the consumer without resolving extra source dependencies"
+
+[[workflows]]
+path = ".github/workflows/storage_interop.yaml"
+sha256 = "aeae64461798e85dbdae7d21e9fa60bb7675234f2e0cfe32a610c9e01c738449"
+reason = "Source optional storage profile uses its reviewed environment; explicit strict priority selected in the maintained workflow"
+
+[[workflows]]
+path = ".github/workflows/test_staged_conda_package.yaml"
+sha256 = "9c28a58cdb4cf0d974daecd102417a162024f7e22486733a128177b8ddbe1c94"
+reason = "Artifact qualification uses exact staged archive, checked public dependencies and separate reviewed flexible staging provenance"
+
+[shared_tool]
+commit = "20628bd5dba6d759669b0d444fe657eb1edad33f"
+reason = "Accepted general provider under uibcdf/molsyssuite#45 with 364 hosted guards and 74 focused local guards"

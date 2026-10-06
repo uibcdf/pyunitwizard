@@ -40,3 +40,33 @@ Before claiming public Python 3.14 support, also check clean installation
 from each claimed distribution channel, update the README and user
 documentation, and request central `admitted` state under
 `uibcdf/molsyssuite#29`. Staging and source tests alone are not publication.
+
+## Maintained dependency contract
+
+`devtools/dependency_routes.toml` inventories every recipe, environment and
+workflow using the general MolSysSuite `@2` contract, pinned to
+`20628bd5dba6d759669b0d444fe657eb1edad33f`. Public requirements remain in
+`pyproject.toml`; test/development/backend selections preserve compatible bounds
+with review reasons. Run in the resolved runtime environment:
+
+```bash
+python devtools/check_dependency_routes.py --suite-root /path/to/pinned/molsyssuite
+```
+
+The checked provider must have that exact commit and unchanged tools. Default
+invocation reviews all 22 routes and actual installed public floors/ceilings;
+science selections, transitive closure and artifact identity remain separate.
+The source workflows run this command before tests/builds. Do not refresh workflow
+hashes automatically: review changed installation paths before recording hashes.
+
+Publication bootstrap instead supplies `--candidate-sha FULL_SHA --output PATH`.
+It checks declarations at that source and delegates native evidence acquisition
+to the same pinned provider. The local plan retains the five original workflows
+and requires all 29 source job profiles, with executed default dependency checks.
+A backlog-only/skipped matrix cannot qualify. The publisher retains the candidate
+receipt before any build/upload; it does not rerun science inside bootstrap.
+This route does not authorize rebuilding or replacing the existing 0.28.1 file.
+
+The reporting/guard record is uibcdf/pyunitwizard#114. Generic range/recipe/source
+negatives are provider-owned; `tests/test_dependency_routes.py` protects this
+member's identity, invocation, native profile and publication ordering.

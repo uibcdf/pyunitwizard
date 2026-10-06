@@ -21,3 +21,6 @@ dependencies:
 - smonitor >=0.16.0
 - depdigest >=0.11.0
 - argdigest >=0.14.0
+- pyyaml >=6,<7
+- jinja2 >=3,<4
+- packaging >=24

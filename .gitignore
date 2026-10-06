@@ -120,3 +120,6 @@ docs/jupyter_execute/
 # In this library
 pyunitwizard/_version.py
 
+
+# Separately pinned shared tooling; never part of product lint or distributions.
+.governance-tools/

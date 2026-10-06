@@ -65,6 +65,13 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
+    - name: Check out reviewed dependency tools
+      uses: actions/checkout@v6
+      with:
+        repository: uibcdf/molsyssuite
+        ref: 20628bd5dba6d759669b0d444fe657eb1edad33f
+        path: .governance-tools
+        persist-credentials: false
 
     - name: Additional info about the build
       shell: bash
@@ -97,6 +104,9 @@ jobs:
         micromamba info
         micromamba list
 
+    - name: Check dependency contract
+      shell: bash -l {0}
+      run: python devtools/check_dependency_routes.py --suite-root .governance-tools
     - name: Install package
       shell: bash -l {0}
       run: |

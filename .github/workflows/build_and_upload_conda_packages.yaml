@@ -71,6 +71,34 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Check out reviewed dependency tools
+        uses: actions/checkout@v6
+        with:
+          repository: uibcdf/molsyssuite
+          ref: 20628bd5dba6d759669b0d444fe657eb1edad33f
+          path: .governance-tools
+          persist-credentials: false
+
+      - name: Install dependency-tool parser requirements
+        run: python -m pip install "PyYAML==6.0.3" "Jinja2>=3,<4" "packaging>=24"
+
+      - name: Check candidate dependency contract and executed source gates
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python devtools/check_dependency_routes.py --suite-root .governance-tools \
+            --candidate-sha "$(git rev-parse HEAD)" \
+            --output "$RUNNER_TEMP/dependency-candidate.json"
+
+      - name: Retain exact candidate dependency evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/dependency-candidate.json
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Read the committed release route
         id: plan
         shell: bash
