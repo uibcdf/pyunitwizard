@@ -86,3 +86,21 @@ failure mechanisms. The actual eight race repetitions remain green. Sources
 exist through both import threads; parent cleanup follows child completion or
 termination; failures remain visible and caller evidence survives. Record exact
 native CI and remove the clean task clone/fixtures after final qualification.
+
+## Fetched-base integration checkpoint — 2026-10-07
+
+The first isolated clone copied primary local main at 2ab37a525ce99728ad8aee846b4a4f7acc4f1b65.
+Fetching the real remote exposed three already published governance commits,
+ending at e128e3e2a96e3676d08838158c8d3fd784fcde83. The non-fast-forward push
+was rejected; no remote rewrite occurred. Integrate the local repair onto that
+fetched base and regenerate the generated archive index to preserve both records.
+The original concurrency test bytes are identical in both bases (SHA-256
+88326f9e20359ac166a72596988030bdd430488606c7e9d6f2ab03eae9731a13),
+so its before/after lifecycle and eight race results remain applicable.
+
+The integration rerun passes nine reporting and nine dependency-route tests,
+plus whole-repository Ruff. The owner's actual preflight rejects an unpinned
+current central checkout, as required; retrying with its unchanged exact provider
+20628bd5dba6d759669b0d444fe657eb1edad33f verifies all 22 declared-and-installed
+public-bound routes. No weakening of that provider pin or runtime checks.
+Final native gates must qualify the resulting integrated head.
