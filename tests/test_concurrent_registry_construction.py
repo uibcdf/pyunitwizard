@@ -8,20 +8,22 @@ configured, reading `dict_translate_quantity['string']` before `'pint'` is in it
 The reproduction runs in a subprocess because it needs a cold interpreter: once this
 process has imported and configured PyUnitWizard there is no half-built state left to race
 against. Two synthetic packages stand in for the real clients, so the test depends on
-nothing outside this repository.
+nothing outside this repository. The parent owns their directory through child
+completion, failure or timeout, then removes it (uibcdf/pyunitwizard#115).
 """
 
 import subprocess
 import sys
+import tempfile
 import textwrap
 
 import pytest
 
 RACE = textwrap.dedent(
     """
-    import sys, threading, pathlib, tempfile
+    import sys, threading, pathlib
 
-    root = pathlib.Path(tempfile.mkdtemp())
+    root = pathlib.Path(sys.argv[1])
     for name in ("client_one", "client_two"):
         pkg = root / name
         pkg.mkdir()
@@ -67,5 +69,12 @@ RACE = textwrap.dedent(
 @pytest.mark.parametrize("attempt", range(8))
 def test_two_threads_may_configure_at_once(attempt):
     """Repeated because it is a race: one clean pass proves nothing on its own."""
-    done = subprocess.run([sys.executable, "-c", RACE], capture_output=True, text=True, timeout=300)
-    assert done.returncode == 0, f"concurrent configuration raised: {done.stdout.strip() or done.stderr.strip()}"
+    # Parent ownership also covers subprocess.run killing/reaping a timed-out child.
+    with tempfile.TemporaryDirectory(prefix="pyunitwizard-concurrent-clients-") as root:
+        done = subprocess.run(
+            [sys.executable, "-c", RACE, root],
+            capture_output=True,
+            text=True,
+            timeout=300,
+        )
+        assert done.returncode == 0, f"concurrent configuration raised: {done.stdout.strip() or done.stderr.strip()}"
