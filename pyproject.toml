@@ -72,7 +72,9 @@ include = ["pyunitwizard*"]
 # Ref https://setuptools.pypa.io/en/latest/userguide/datafiles.html#package-data
 [tool.setuptools.package-data]
 pyunitwizard = [
-    "py.typed"
+    "py.typed",
+    "vocabularies/*.json",
+    "vocabularies/NOTICE.md",
 ]
 
 [tool.ruff]

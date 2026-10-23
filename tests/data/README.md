@@ -19,3 +19,12 @@ The H5MSM coordinate fixture and TopoMT record fixture retain their own original
 repository/path/commit/hash provenance inside their JSON files. Tiling a retained
 coordinate frame in a benchmark is synthetic stress data, not additional
 observed simulation frames. Provider tests do not establish consumer migration.
+
+`gaia_proper_motion.json` retains six actual Gaia DR2 proper-motion pairs from
+the official Astropy HD 219829 tutorial. The JSON names the immutable repository
+commit, original ECSV file SHA-256/Git blob, source IDs, original `mas / yr` unit
+and extraction boundary. `astropy_coordinates_LICENSE.txt` retains that source
+repository's BSD-3-Clause license. The pairs are observed catalogue values, not
+synthetic astronomy data. Tests explicitly convert to radians/second and create
+a new ASDF snapshot; Gaia did not publish that generated archive. Coordinate
+frames, uncertainty and epoch propagation are not inferred by these fixtures.
