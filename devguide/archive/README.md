@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (33)
+### Resolved (36)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -17,10 +17,12 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`codecov_tls_upload.md`](../solved_bugs/codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage uploads fail at Codecov download and ingestion endpoints. *(medium, reproduced)*
 - [`complete_distribution_adoption.md`](../completed_proposals/complete_distribution_adoption.md) — [#114](https://github.com/uibcdf/pyunitwizard/issues/114) — Complete distribution adoption using the general shared route contract. *(measured)*
 - [`concurrent_client_fixture_ownership.md`](../solved_bugs/concurrent_client_fixture_ownership.md) — [#115](https://github.com/uibcdf/pyunitwizard/issues/115) — Remove parent-owned synthetic client packages after concurrent child success, failure and timeout. *(medium, reproduced)*
+- [`conda_build_failure_propagation.md`](../solved_bugs/conda_build_failure_propagation.md) — [#117](https://github.com/uibcdf/pyunitwizard/issues/117) — Stop Conda build installation after a failed prerequisite. *(medium, reproduced)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
+- [`notebook_cli_failure_status.md`](../solved_bugs/notebook_cli_failure_status.md) — [#118](https://github.com/uibcdf/pyunitwizard/issues/118) — Report failed notebook execution through the docs CLI exit status. *(medium, reproduced)*
 - [`openff_compatibility.md`](../completed_proposals/openff_compatibility.md) — [#86](https://github.com/uibcdf/pyunitwizard/issues/86) — Optional OpenFF registry interoperability with verified unit definitions. *(measured)*
 - [`optional_backend_audit_boundary.md`](../completed_proposals/optional_backend_audit_boundary.md) — [#93](https://github.com/uibcdf/pyunitwizard/issues/93) — Document exact-file optional-import audit exceptions with startup guards. *(measured)*
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
@@ -35,6 +37,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*
+- [`resource_lifecycle_review.md`](../completed_proposals/resource_lifecycle_review.md) — [#116](https://github.com/uibcdf/pyunitwizard/issues/116) — Review remaining component tool and temporary-resource ownership. *(inspected)*
 - [`showcase_offers_unavailable_pypi_install.md`](../solved_bugs/showcase_offers_unavailable_pypi_install.md) — [#76](https://github.com/uibcdf/pyunitwizard/issues/76) — The showcase notebook offered a PyPI installation route that cannot resolve PyUnitWizard. *(medium, inspected)*
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*
 - [`stated_uncertainty.md`](../completed_proposals/stated_uncertainty.md) — [#90](https://github.com/uibcdf/pyunitwizard/issues/90) — Bind a scalar measurement to its stated uncertainty without statistical inference. *(measured)*

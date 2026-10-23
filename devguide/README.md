@@ -29,6 +29,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `performance_baseline_0.24.x.json`: baseline snapshot after the post-RC
   performance work, in both telemetry modes.
 - `reporting_protocol.md`: issue-backed lifecycle for durable bugs and proposals.
+- `resource_lifecycle_review.md`: owner dispositions for temporary resources,
+  development tools, caller evidence and retained workspace outputs (#116).
 - `pending_bugs/`: active defect reports.
 - `pending_proposals/`: active, deferred, or implementation-pending technical proposals.
 - `archive/`: generated index of resolved and historical reports.

@@ -1,0 +1,514 @@
+{
+  "schema": "pyunitwizard.resource-review@1",
+  "date": "2026-10-22",
+  "owner_issue": "uibcdf/pyunitwizard#116",
+  "coordination": "uibcdf/molsyssuite#104",
+  "inspection_baseline": "a2d7e38f6d8dc8f4072cc19b09a8cacddf77899a",
+  "normative": "devguide/resource_lifecycle_review.md",
+  "source_sha256": {
+    "devtools/benchmark_backend_attribution.py": "48164e1523625a3b1fbfc1b51d756a12ea85f956b34fedd5a18d0761b7519df2",
+    "devtools/check_dependency_routes.py": "db3a174cc400f7e1db9b020ad616bdbf459b0adfce09f424edc293394c59a3fe",
+    "devtools/ci_backlog.py": "cab042ac40e91007b8b0970cc0e61d4e66fe41f779f0245892fddc6f4afc30a0",
+    "devtools/devguide_index.py": "a3781ba4280c79b57873febe32ec2b35c963e7e9589481fa169ea5a952cff854",
+    "devtools/devguide_reports.py": "a77f39d28fb91f7cebd7d6c83cb06c891e526bc722b4ad10bfae7689d08116e6",
+    "devtools/generate_quantity_record_vectors.py": "080b12dedd36c7acc75e8a443a882a559e857d404e371dd6111ea249a3037783",
+    "devtools/conda-build/build.sh": "dcf742bf2f3a7b63de115512792bb85d58ae9f4ef891a78eaf2266ce2c6a53b6",
+    "devtools/conda-build/freeze_project_version.py": "76f599925f6cab35c8d5d07f3c192423f8e1810addecd8192e638ebda8d0f170",
+    "devtools/conda-build/release_route.py": "083dc014baabd55299cbbcccca5cb9bbf3385a6c4be25983b9657502bd5daca4",
+    "devtools/conda-build/verify_staged_install.py": "1f99ce7fe8247c3fb726124cb3a010b11523879d63431ffeb2f3227e2848f92c",
+    "docs/clean_api.py": "5ce84582af12d4591145579fa1ff1462e09ef4a2f6fce920afefefed202107f4",
+    "docs/execute_notebooks.py": "1221e6b7ddf147419b15606f7639ade13c9cf7dcf7177b53ed6276e4cfcf75be",
+    "docs/Makefile": "8bc0e7abcd66a84b2caa41d0fd5f519891acdc21174659c1b3616c2e6adcc9c6",
+    "docs/make.bat": "b5a8b428ea1dfe255a1ee12f8416dffebdb5d8014bd7634643280514394d57ff",
+    "tests/test_concurrent_registry_resources.py": "f3588e4ec41d0f32e1c5379b34f56812c8ebf1adc764b8420a2579a0324d612c",
+    "tests/test_concurrent_registry_construction.py": "f1586423dbf29752d4bbe49599a3d964b4dcc1fee22bde70cfaa0888e1b169ef",
+    "tests/integration/test_function_citation_provider.py": "95b2850668f4b137b5421a4fa71aaceb1ef4a9e20b380d0342ab12cdb0f5b136",
+    "tests/pint/test_registry_cache.py": "1ab4af598ccab1052abed3c1174cb9794acdcd5a33ec127acc0c9004db5e829d",
+    "tests/test_conda_build_failures.py": "1bbe7b50fe2730db29316374fb8c6cddbcdb0c6a1f136743a12a56817ad6560f",
+    "tests/test_notebook_cli.py": "2b38fa2e8065c1ed16b2dcb20d8ae0364bb59e033b2c7feee4f6aa02ac152deb",
+    "tests/test_docs_resource_ownership.py": "c2541fc668af69412bd0fab5b5079bd3319f63dfcb15043e406c2a70f5575734",
+    "tests/test_workflow_contracts.py": "6c748079bbfdddae1d2cddd2c7d06ac4d527cc4b1e3f3d974ad45151c485f54b",
+    ".github/workflows/CI.yaml": "bda7d90f2da91589bc5e7757886cf9ccfd9a8ef2c98666f87dc9cdf90aadab1b",
+    ".github/workflows/CI_full_matrix.yaml": "a28f30935046fb9959dcf3dac57e9fee47a5d0a99fb2c9314e4f92e78aca05de",
+    ".github/workflows/build_and_upload_conda_packages.yaml": "d7cfc1333480a07cbd6a0757ab51b7ababa5a38421f2282ae9c8adc3aec483f6",
+    ".github/workflows/install_macos_latest.yaml": "1331d446f1c39fbf9fd3100697e9d90162b47e7af59a5a5b63217f427f829426",
+    ".github/workflows/install_ubuntu_latest.yaml": "e4b7c384f89baec8c396292d137f33416b90c5f53f4e362f6463e637e8f33874",
+    ".github/workflows/molsyssuite-policy.yml": "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd",
+    ".github/workflows/openff_interop.yaml": "57cad863e7ad2bdc586e11b1b48d63b611d737fefbe3336bd22c5f56f7eadea5",
+    ".github/workflows/promote_conda_package.yaml": "45e9859cd3fd331c26412fcf0fac9d84ebd2e1de9decd0621ab4e3decd2f31f0",
+    ".github/workflows/release_gates.yaml": "886e88251aa3c278849110f053fdf7e1f0642e41a3bf72fbb06243a5f5d3f208",
+    ".github/workflows/sphinx_docs_to_gh_pages.yaml": "532da0344e9aa1b8695dbbc91ef551388d2a149ac531cfba39fb551ec0ab7ddd",
+    ".github/workflows/storage_interop.yaml": "aeae64461798e85dbdae7d21e9fa60bb7675234f2e0cfe32a610c9e01c738449",
+    ".github/workflows/test_staged_conda_package.yaml": "9c28a58cdb4cf0d974daecd102417a162024f7e22486733a128177b8ddbe1c94"
+  },
+  "python": "3.14.7",
+  "environment": "molsyssuite@uibcdf_3.14",
+  "environment_mutated": false,
+  "pip_check": {
+    "exit": 1,
+    "known_conflicts": 7,
+    "owner": "uibcdf/molsyssuite#82",
+    "interpretation": "Existing shared-environment conflicts; not a successful dependency qualification"
+  },
+  "test_first": {
+    "conda_build": {
+      "before": {
+        "failed": 2,
+        "passed": 1
+      },
+      "after": {
+        "passed": 3
+      },
+      "issue": "uibcdf/pyunitwizard#117"
+    },
+    "notebook_cli": {
+      "before": {
+        "failed": 2,
+        "passed": 1
+      },
+      "expanded_after": {
+        "passed": 6
+      },
+      "issue": "uibcdf/pyunitwizard#118"
+    },
+    "public_python_matrix": {
+      "before": {
+        "failed": 2,
+        "passed": 1
+      },
+      "after": {
+        "passed": 3
+      },
+      "issue": "uibcdf/pyunitwizard#44"
+    }
+  },
+  "original_notebook_probe": {
+    "actual_cli": "docs/execute_notebooks.py",
+    "child_exit": 7,
+    "cli_exit": 0,
+    "failure_visible_in_log": true,
+    "success_marker_exists": false,
+    "source_notebook_unchanged": true,
+    "actual_notebook_execution": false
+  },
+  "selected_tests": {
+    "passed": 50,
+    "junit_sha256": "c37c596470fb717d9892f114a6ecfef14249864d22c25a8b92df5a60e0adccc0",
+    "cases": [
+      {
+        "classname": "tests.test_conda_build_failures",
+        "name": "test_build_preserves_prerequisite_and_installer_failures[invalid-version-0-1-False]",
+        "time": "0.169",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_conda_build_failures",
+        "name": "test_build_preserves_prerequisite_and_installer_failures[0.28.1-19-19-True]",
+        "time": "0.194",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_conda_build_failures",
+        "name": "test_build_preserves_prerequisite_and_installer_failures[0.28.1-0-0-True]",
+        "time": "0.186",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_conda_version_identity",
+        "name": "test_freezer_writes_one_exact_version_source",
+        "time": "0.003",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_conda_version_identity",
+        "name": "test_freezer_rejects_an_untrusted_version",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_conda_version_identity",
+        "name": "test_conda_build_freezes_and_checks_the_exact_version",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_owned_clients_removed_after_child_outcome[success]",
+        "time": "0.074",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_owned_clients_removed_after_child_outcome[failure]",
+        "time": "0.070",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_owned_clients_removed_after_child_outcome[timeout]",
+        "time": "1.006",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_removal_error_visible_after_child_finished[success]",
+        "time": "0.078",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_removal_error_visible_after_child_finished[failure]",
+        "time": "0.067",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_resources",
+        "name": "test_parent_cleans_after_process_cannot_start",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[0]",
+        "time": "0.762",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[1]",
+        "time": "0.766",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[2]",
+        "time": "0.770",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[3]",
+        "time": "0.773",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[4]",
+        "time": "0.799",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[5]",
+        "time": "0.774",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[6]",
+        "time": "0.762",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_concurrent_registry_construction",
+        "name": "test_two_threads_may_configure_at_once[7]",
+        "time": "0.754",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_all_managed_reports_have_valid_lifecycle_metadata",
+        "time": "0.096",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_generated_queue_and_archive_indexes_are_current",
+        "time": "0.150",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_pre_adoption_archive_is_explicit_and_immutable_by_default",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_report_validator_rejects_wrong_ownership_and_invalid_closed_state",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_protocol_routes_shared_work_and_defines_archive_semantics",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_suite_owned_configuration_proposal_left_no_local_active_copy",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_pytest_guard_rejects_a_missing_file",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_pytest_guard_rejects_a_missing_node_and_parameter_id",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_reporting_protocol",
+        "name": "test_pytest_guard_accepts_a_module_function_and_class_method",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_inventory_keeps_general_purposes_and_preserves_scientific_bounds",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_provider_identity_and_modified_tools_are_refused",
+        "time": "0.029",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_native_candidate_profile_requires_all_workflows_and_jobs",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_source_workflows_execute_default_qualification_before_tests_or_builds",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_candidate_qualification_precedes_all_publication_actions",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_helper_cannot_report_an_offline_review_as_installed_qualification",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_native_candidate_source_is_bound_before_any_gate_query",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_default_invocation_preserves_provider_failure_exit",
+        "time": "0.003",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_dependency_routes",
+        "name": "test_native_failure_cannot_qualify_a_candidate",
+        "time": "0.002",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_workflow_contracts",
+        "name": "test_public_installation_workflows_cover_supported_python_minors[ubuntu]",
+        "time": "0.007",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_workflow_contracts",
+        "name": "test_public_installation_workflows_cover_supported_python_minors[macos]",
+        "time": "0.006",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_workflow_contracts",
+        "name": "test_scheduled_full_matrix_failures_are_reported_and_recovered",
+        "time": "0.001",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[files-names0]",
+        "time": "0.143",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[files-names1]",
+        "time": "0.136",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[files-names2]",
+        "time": "0.184",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[directory-names0]",
+        "time": "0.140",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[directory-names1]",
+        "time": "0.141",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_notebook_cli",
+        "name": "test_batch_exit_preserves_logs_and_processes_every_notebook[directory-names2]",
+        "time": "0.191",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_docs_resource_ownership",
+        "name": "test_cleaner_removes_generated_tree_and_preserves_authored_pages",
+        "time": "0.004",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_docs_resource_ownership",
+        "name": "test_cleaner_propagates_removal_failure",
+        "time": "0.003",
+        "outcome": "passed"
+      },
+      {
+        "classname": "tests.test_docs_resource_ownership",
+        "name": "test_cleaner_missing_generated_root_is_a_noop",
+        "time": "0.002",
+        "outcome": "passed"
+      }
+    ],
+    "scope": "Actual script/CLI/cleaner and child lifetimes, controlled installer/Jupyter, existing eight real registry race repetitions, reporting/dependency/matrix guards"
+  },
+  "checks": {
+    "ruff_check": "passed whole repository",
+    "ruff_format_check": "211 files already formatted",
+    "bash_syntax": "passed build.sh",
+    "reporting_after_new_records": "9 passed",
+    "docs": {
+      "command": "make html in an owned copy of maintained docs",
+      "exit": 0,
+      "warnings": [
+        "Document headings start at H2, not H1 [myst.header]",
+        "Document headings start at H2, not H1 [myst.header]",
+        "Document headings start at H2, not H1 [myst.header]",
+        "Document headings start at H2, not H1 [myst.header]"
+      ],
+      "log_sha256": "97e85d1261f0e60eeadf0f3942a6fd09d829c29798da95655fdd367c384ae8d9",
+      "real_notebook_execution": false,
+      "primary_generated_docs_changed": false
+    }
+  },
+  "historical_paths": [
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    },
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115-after",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    },
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115-before",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    },
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115-integration",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    },
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115-provider",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    },
+    {
+      "path": "/tmp/molsyssuite104-pyunitwizard115-report",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false,
+      "owner": "uibcdf/pyunitwizard#115"
+    }
+  ],
+  "historical_interpretation": "Six explicit owner paths absent; no deletion/actor attribution, no global inventory claim",
+  "retained_primary_outputs": [
+    ".pytest_cache",
+    "build",
+    "docs/__pycache__",
+    "docs/_build",
+    "docs/api/users/autosummary",
+    "docs/jupyter_execute",
+    "pyunitwizard.egg-info"
+  ],
+  "primary_retention": {
+    "owner": "maintainer/caller",
+    "purpose": "ordinary source/docs work and failure inspection",
+    "review": "next affected build or 2026-11-05",
+    "deleted_by_this_review": false
+  },
+  "git_worktrees": [
+    "worktree /home/diego/repos@uibcdf/pyunitwizard",
+    "HEAD a2d7e38f6d8dc8f4072cc19b09a8cacddf77899a",
+    "branch refs/heads/main",
+    "",
+    "worktree /tmp/ackredit-performance-puw28",
+    "HEAD 2d12b37ac8b20566afc82cb51eb67e98d762bc47",
+    "detached",
+    "prunable gitdir file points to non-existent location",
+    "",
+    "worktree /tmp/ackredit102-producer-source",
+    "HEAD 0e422d06b0af56e4dd2b43cafd00f059221eb405",
+    "detached",
+    "prunable gitdir file points to non-existent location",
+    "",
+    "worktree /tmp/opencastp-guide-sources/pyunitwizard",
+    "HEAD 2ffe1885675f47c76af03c08e51bc889a5e99a05",
+    "detached",
+    "prunable gitdir file points to non-existent location",
+    "",
+    "worktree /tmp/pyunitwizard-function-provider",
+    "HEAD 33fec8a627505a4f5426babe87e8e85438105041",
+    "branch refs/heads/feat/function-citation-provider",
+    "prunable gitdir file points to non-existent location",
+    ""
+  ],
+  "worktree_disposition": "Four absent target registrations retained as owner-managed provenance; no branches or registrations removed",
+  "task_retirement": {
+    "root": "/tmp/pyunitwizard-116-20261022-ppx489gr",
+    "owner": "current PyUnitWizard #116 task under Diego Prada",
+    "retain_until": "exported durable evidence and exact-head applicable CI inspection",
+    "final_observation": "record final explicit-path retirement and any failure in issue #116"
+  },
+  "limits": [
+    "No scientific notebook execution, Conda build/upload/promotion or new artifact qualification",
+    "Hosted workspace/tool review is source inspection, not actual runner retirement",
+    "No universal platform/tool compliance or real OS permission-failure claim",
+    "No optional provider/full-science qualification from these focused local tests",
+    "Guide synchronization and client adoption remain separate; no canonical/client guide is changed"
+  ]
+}
