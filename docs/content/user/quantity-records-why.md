@@ -63,7 +63,7 @@ that must say what it expects, and no default when something is missing.**
 | Reader states its expectations | Field, unit, dimensionality, kind | Not formalized elsewhere | **better** |
 | A record copied into another field | Refused | Not detected elsewhere | **better** |
 | Unit renamed and then resealed | Caught: name and SI description must agree | QUDT holds both, but does not check one against the other | **better** |
-| Quantity kinds (Hz vs Bq, J vs N·m) | Optional `kind`, with QUDT or UO identifiers | QUDT, CF `standard_name` | equal (reused) |
+| Quantity kinds (Hz vs Bq, J vs N·m) | Optional `kind`, with explicit QUDT quantity-kind or consumer identifiers; UO identifiers denote units/categories | QUDT, CF `standard_name` | explicit consumer meaning |
 | Readable without the library | A reference reader in the Python standard library, and published test vectors | CF needs UDUNITS; ASDF needs its library | **better** |
 | Portable across languages | Canonical binary encoding of the manifest; strict JSON (no NaN) | CF and ASDF, within their ecosystems | equal |
 | Many units across backends | pint, openmm.unit, astropy.units, unyt… through PyUnitWizard | OpenFF: pint; ASDF: astropy | **better** |
@@ -74,7 +74,8 @@ that must say what it expects, and no default when something is missing.**
 
 Our reading: QuantityRecord wins exactly in the gap nobody covered (integrity, handshake,
 no defaults) and loses in maturity and convenience. It does not compete with the
-standards. It reuses them: QUDT and UO for kinds, QUDT's semantics for the SI description,
+standards. It reuses them: QUDT for quantity kinds, UO for unit/category identifiers,
+QUDT's semantics for the SI description,
 and CF for containers (a planned HDF5 binding writes CF's `units` attribute too).
 
 ## What it makes possible

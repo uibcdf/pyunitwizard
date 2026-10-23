@@ -66,6 +66,25 @@ provisional until the 1.0 checklist promotes it.
    pyunitwizard.QuantityRecord
    pyunitwizard.QuantityRecordBundle
 
+Optional Unit Dialects and ASDF (provisional)
+---------------------------------------------
+
+See :doc:`../../content/user/unit-dialects` for explicit provider requirements,
+bounded semantics and scientific consumer responsibilities.
+
+.. autosummary::
+   :toctree: autosummary
+
+   pyunitwizard.dialects.ucum.validate_unit
+   pyunitwizard.dialects.ucum.parse_quantity
+   pyunitwizard.dialects.vocabulary.catalog
+   pyunitwizard.dialects.vocabulary.annotate
+   pyunitwizard.dialects.vocabulary.validate_annotation
+   pyunitwizard.storage.asdf.to_tree
+   pyunitwizard.storage.asdf.from_tree
+   pyunitwizard.storage.asdf.write
+   pyunitwizard.storage.asdf.read
+
 Standardization and Context
 ---------------------------
 

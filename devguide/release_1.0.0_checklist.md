@@ -118,6 +118,19 @@ collecting fresh candidate evidence for each section:
 - [ ] Follow the central release/package notice policy delivered under
   MolSysSuite #129: open/update a version-specific issue for each actual release
   or package event, including an explicit pending/unpublished package state.
+
+## Bounded UCUM/ASDF/vocabulary inventory (#85)
+
+- [ ] Keep #125/#126/#127 tools and `qrec-asdf/0.1` /
+  `qrec-vocabulary/0.1` provisional and name their bounded exclusions in notes.
+- [ ] Identify exact source/installed Linux/macOS Python 3.11–3.14 evidence for
+  ucumvert 0.3.2, asdf 6.0.0 and asdf-astropy 0.11.0; required provider guards
+  must execute, and vocabulary resources must come from the installed artifact.
+- [ ] Retain actual ChEMBL/Gaia provenance, attribution and ontology extraction
+  inputs. UO unit IRIs remain separate from QUDT kinds; reviewed local alignments
+  do not become upstream exactMatch assertions or automatic kind inference.
+- [ ] Future CF calendar coordinates, complete clinical/astronomy schemas,
+  unknown vocabulary expansion and consumer migrations need their own contracts.
   Following the maintainer's 2026-10-23 request, announce availability once the
   package and GitHub Release are verified; reuse that version's notice and retain
   links, scope and installed evidence. Pre-rollout impact notices stay separate.

@@ -80,6 +80,7 @@ quantity-records-why.md
 openff.md
 hdf5-cf.md
 record-extensions.md
+unit-dialects.md
 integrating-your-library.md
 troubleshooting.md
 production-checklist.md

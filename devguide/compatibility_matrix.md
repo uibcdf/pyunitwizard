@@ -17,6 +17,12 @@ Ackredit `0.10.1`; it does not raise the fallback floor. OpenFF `0.4.0` is
 qualified on Python `3.12`–`3.14` with Pint `>=0.24,<0.26`; CF/HDF5 uses
 cf-units `3.3.1` and h5py `3.16.0`. These optional interfaces remain provisional.
 
+The 0.29.0 candidate (#128) additionally qualifies Zarr `3.1.6`, PyArrow
+`25.0.0`, ucumvert `0.3.2` (Pint >=0.25), asdf `6.0.0` and asdf-astropy
+`0.11.0` on Linux/macOS Python 3.11–3.14. These source and installed gates are
+pending until their own receipts are recorded. The offline QUDT/UO resource is
+part of the required artifact; runtime use does not require RDF/UCUM/Astropy.
+
 ## Policy
 
 - Floors and optional qualification versions are separate from preferred pins.

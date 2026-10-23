@@ -57,7 +57,8 @@ def test_staged_artifact_profile_executes_new_storage_and_codec_guards():
     ):
         assert module in script
     assert "tests/storage/test_*.py" in script
-    assert "import zarr, pyarrow" in script
+    assert "zarr, pyarrow" in script
+    assert "ucumvert" in script and "asdf_astropy" in script
     assert "Storage guard skipped" in script
 
 

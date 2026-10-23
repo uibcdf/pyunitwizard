@@ -84,8 +84,10 @@ Canonical client-guide delivery is a separate handoff to
 [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
 Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
-- #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
-  the OpenFF and physical CF/HDF5 slices are delivered.
+- #85: bounded UCUM #125, ASDF #126 and QUDT/UO #127 completion is being
+  qualified for 0.29.0 under #128. OpenFF and physical CF/HDF5 are delivered;
+  future calendar coordinates and whole clinical/astronomy schemas require
+  independently justified consumers rather than an unbounded umbrella claim.
 - #44 and #52: deferred forallpeople and Pydantic integration decisions.
 - [#87](https://github.com/uibcdf/pyunitwizard/issues/87): later re-evaluation of
   a live native form, conditional on real consumers and measured need. Its issue
@@ -117,9 +119,10 @@ names, prefixes and compound units enter unyt with reversible quantity/unit
 translations and isolated definitions. The October 22 backlog review found no
 additional open defect at that checkpoint. On October 23 the maintainer selected
 the four record extensions below and both existing-consumer workload families.
-Their source qualification is separate from preparing the 0.28.2 release candidate
-and its exact installed artifact under the publication policy. That release has not
-been prepared or published by this source work. The staged artifact's baseline
+The maintainer subsequently selected completion of #85 and 0.29.0 instead of the
+uncreated 0.28.2. Record-extension source qualification remains separate from the
+0.29.0 candidate and its exact installed artifact under #128. That release is
+being prepared and has not yet been published. The staged artifact's baseline
 and storage profiles now include the new codec/storage guards, including an
 explicit refusal of skipped required storage tests. After actual package and
 GitHub Release publication, open the requested MolSysSuite availability issue.

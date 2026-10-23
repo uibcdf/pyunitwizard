@@ -144,12 +144,18 @@ jobs:
             uibcdf::argdigest=0.14.0=py_0
             ${{ matrix.profile == 'prepared' && 'uibcdf::ackredit=0.10.1=py_0' || 'uibcdf::ackredit=0.9.0=py_0' }}
             pip pytest uibcdf::pytest-receptor=1.1.0 openmm unyt astropy
-            ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0 zarr=3.1.6 pyarrow=25.0.0' || '' }}
+            ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0 zarr=3.1.6 pyarrow=25.0.0 asdf=6.0.0 asdf-astropy=0.11.0' || '' }}
             ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.24,<0.26' || '' }}
       - name: Install third-party test backends
         shell: bash -l {0}
+        env:
+          PROFILE: ${{ matrix.profile }}
         run: |
+          set -euo pipefail
           python -m pip install physipy quantities
+          if [[ "$PROFILE" == storage ]]; then
+            python -m pip install 'ucumvert==0.3.2'
+          fi
           python -m pip check
       - name: Verify public attribution provider and prepared APIs
         shell: bash -l {0}
@@ -198,12 +204,13 @@ jobs:
           mkdir -p "$target/tests/pint" "$target/tests/integration" "$target/tests/forms" "$target/tests/storage" "$target/tests/dialects"
           cp tests/test_quantity_record.py tests/test_quantity_record_empty.py tests/test_measurement_record.py tests/test_configure.py tests/test_openff_optional.py tests/test_storage_optional.py tests/test_backend_declarations.py "$target/tests/"
           cp tests/test_record_arrays.py tests/test_record_tagged.py tests/test_record_append.py "$target/tests/"
+          cp tests/dialects/test_vocabulary.py "$target/tests/dialects/"
           cp -r tests/quantity_record_vectors tests/data "$target/tests/"
           cp tests/pint/test_foreign_registry.py tests/pint/test_string_array_roundtrip.py "$target/tests/pint/"
           cp tests/integration/test_backend_attribution.py "$target/tests/integration/"
           if [[ "$PROFILE" == storage ]]; then
             cp tests/storage/test_*.py "$target/tests/storage/"
-            cp tests/dialects/test_cf.py "$target/tests/dialects/"
+            cp tests/dialects/test_cf.py tests/dialects/test_ucum.py "$target/tests/dialects/"
             cp tests/test_record_extensions_consumer.py "$target/tests/"
           elif [[ "$PROFILE" == openff ]]; then
             cp tests/forms/test_api_openff_units.py "$target/tests/forms/"
@@ -213,14 +220,15 @@ jobs:
           cd "$target"
           python -c 'import pathlib, sys, pyunitwizard; assert pathlib.Path(pyunitwizard.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve()); print(pyunitwizard.__version__)'
           if [[ "$PROFILE" == storage ]]; then
-            python -c 'import zarr, pyarrow; assert zarr.__version__ == "3.1.6"; assert pyarrow.__version__ == "25.0.0"'
+            python -c 'import importlib.metadata as m, zarr, pyarrow, ucumvert, asdf, asdf_astropy; assert zarr.__version__ == "3.1.6"; assert pyarrow.__version__ == "25.0.0"; assert m.version("ucumvert") == "0.3.2"; assert m.version("asdf") == "6.0.0"; assert m.version("asdf-astropy") == "0.11.0"; print("UCUM/ASDF providers:", m.version("ucumvert"), m.version("asdf"), m.version("asdf-astropy"))'
           fi
           python -m pytest --receptor=ci -q tests -k 'not normally_installed_consumer_outside_checkout' --junitxml=installed-contracts.xml
           if [[ "$PROFILE" == storage ]]; then
             python - <<'PY'
           import xml.etree.ElementTree as ET
           cases = list(ET.parse('installed-contracts.xml').iter('testcase'))
-          required = ('test_zarr', 'test_arrow', 'test_record_arrays', 'test_record_tagged',
+          required = ('test_cf', 'test_ucum', 'test_vocabulary', 'test_asdf', 'test_hdf5',
+                      'test_zarr', 'test_arrow', 'test_record_arrays', 'test_record_tagged',
                       'test_record_append', 'test_record_extensions_consumer')
           for module in required:
               selected = [case for case in cases if case.get('classname', '').endswith(module)]

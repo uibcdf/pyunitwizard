@@ -128,12 +128,12 @@ reason = "Documentation environment installs the consumer without resolving extr
 
 [[workflows]]
 path = ".github/workflows/storage_interop.yaml"
-sha256 = "3f4491486a0e7f03b053094ce0073cada47b9e4ab1f7290e3d2bc674e8c28669"
+sha256 = "ae43037bf280bada8b9f97ad58d8259c39e7f46720ab7d8d1a5e6fd1c4a3a2ba"
 reason = "Source optional storage profile uses its reviewed environment; explicit strict priority selected in the maintained workflow"
 
 [[workflows]]
 path = ".github/workflows/test_staged_conda_package.yaml"
-sha256 = "c77a4474a0a2a2e515603be44463b625638830314dbbdb50466451f8839e40c6"
+sha256 = "4c11d1443dcfac445b40483b39912124c58d968132115723e5d2c1bdd0e45e8e"
 reason = "Artifact qualification uses exact staged archive, checked public dependencies and separate reviewed flexible staging provenance"
 
 [shared_tool]

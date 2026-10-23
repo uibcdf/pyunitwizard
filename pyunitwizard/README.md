@@ -170,3 +170,14 @@ Temperature requires explicit on-scale/difference semantics. These tools and
 `qrec-hdf5/0.1` are provisional; existing qrec formats and core forms are unchanged.
 See the user guide `docs/content/user/hdf5-cf.md`; guards live in
 `tests/dialects/test_cf.py` and `tests/storage/test_hdf5.py`.
+
+## Optional UCUM, ASDF and vocabulary tools
+
+`dialects.ucum` validates explicit case-sensitive UCUM output codes and imports
+values through actual ucumvert 0.3.2. `storage.asdf` binds native Astropy quantities
+to sealed homogeneous multiplicative snapshots using asdf 6.0.0/asdf-astropy
+0.11.0. `dialects.vocabulary` validates explicit QUDT/UO annotations against an
+offline attributed three-meaning catalogue, without inferring scientific kinds.
+All remain provisional, outside computing forms and session parser selection;
+qrec/0.3 bytes are unchanged. See `docs/content/user/unit-dialects.md` for explicit
+contracts, provider requirements, real consumer inputs and excluded scope.

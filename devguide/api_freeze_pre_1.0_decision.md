@@ -113,3 +113,21 @@ schema adoption, remote storage, verified column projection, disk/in-place
 append, mixed-kind computation and stable promotion remain separate decisions.
 Require actual optional-provider/installed evidence for each advertised scope;
 local source tests do not qualify a public artifact.
+
+## Maintainer-selected bounded dialect inventory — 2026-10-23
+
+Admit the provisional #85 completion slices owned by #125 (explicit physical
+UCUM parsing/verified code emission), #126 (native ASDF homogeneous
+multiplicative snapshots) and #127 (bounded explicit QUDT/UO annotations).
+Contracts live in `docs/content/user/unit-dialects.md`; new binding identifiers
+are `qrec-asdf/0.1` and `qrec-vocabulary/0.1`. Existing record bytes, core forms
+and parser/default policies are unchanged. Source and installed optional
+qualification are mandatory for advertised provider/platform versions.
+
+The consumer chooses scientific kinds; UO unit IRIs are not kinds. Local
+QUDT/UO alignments are explicitly reviewed correspondences, not upstream
+exactMatch assertions. Unknown/unmeasured vocabulary expansions, whole clinical
+or astronomy schemas, ASDF unsealed migration and CF calendar/time-origin
+coordinates remain outside the bounded inventory; future independently
+justified consumers need their own issue and contract. Keep these exclusions
+and provisional status explicit in 0.29.0 and eventual 1.0 notes.

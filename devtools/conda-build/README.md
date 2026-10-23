@@ -29,8 +29,10 @@ All profiles install the same Conda archive; optional providers come from the
 public channels. The gate retains each resolved dependency closure.
 Baseline installed contracts include typed-array restoration, tagged layouts
 and immutable append. The storage profile also installs Zarr 3.1.6/PyArrow
-25.0.0 alongside CF/HDF5, tests all storage modules and both consumer fixtures,
-and rejects skipped required storage/codec guards in the installed JUnit report.
+25.0.0 alongside CF/HDF5, asdf 6.0.0/asdf-astropy 0.11.0 and ucumvert 0.3.2.
+It tests all storage/dialect modules and real molecular, biomedical and astronomy
+fixtures, and rejects skipped required guards in the installed JUnit report.
+All profiles test the packaged offline QUDT/UO catalogue and its explicit kinds.
 Do not publish a stable GitHub Release until every cell passes.
 
 For a staged release, the release event verifies the plan and does not

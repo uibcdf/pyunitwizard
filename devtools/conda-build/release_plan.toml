@@ -1,8 +1,8 @@
-version = "0.28.1"
+version = "0.29.0"
 route = "staged"
 build_number = 0
-reason = "Qualify the #111 prepared-attribution optimization in the exact installed Conda file with public Ackredit 0.10.1, retaining the 0.9 fallback and baseline/storage/OpenFF profiles; see uibcdf/pyunitwizard#112."
-decision_by = "Diego Prada (PyUnitWizard maintainer), authorized 2026-10-05"
+reason = "Qualify the #85 UCUM/ASDF/vocabulary slices and #102/#103/#104/#105 record extensions in one immutable installed Conda file, retaining all baseline/storage/OpenFF/prepared profiles; see uibcdf/pyunitwizard#128."
+decision_by = "Diego Prada (PyUnitWizard maintainer), authorized 2026-10-23"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
   ".github/workflows/release_gates.yaml",

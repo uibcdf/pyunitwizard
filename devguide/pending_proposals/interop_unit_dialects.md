@@ -39,22 +39,32 @@ establish a common quantity kind or equal numeric scale/offset.
   logarithmic and unknown units, whole-CF-dataset conformance and kind inference.
   Temperature readers/writers must both declare on-scale/difference semantics.
 
-## Remaining independently justified work
+## Completion work in progress — 2026-10-23
 
-UCUM needs a measured clinical/biomedical exchange case and case-sensitive parser
-and emitter conformance before implementation. Codes must not be treated as Pint
-aliases (for instance, M has different semantics).
+The maintainer selected completion of the bounded inventory and publication of
+0.29.0 instead of the uncreated 0.28.2. Independently owned slices are now:
 
-ASDF needs an actual astronomy archival quantity/array and installed
-asdf-astropy interoperability evidence. Existing HDF5 work does not qualify ASDF.
+- UCUM #125: actual case-sensitive ucumvert 0.3.2, the observed 343-row
+  Sabueso/ChEMBL concentration/percentage boundary, and explicitly qualified
+  physical atoms. Unchecked beta-provider aliases are refused; a reproducing
+  guard catches its angular-minute/time-minute mismatch.
+- ASDF #126: actual asdf 6.0.0/asdf-astropy 0.11.0 native quantities bound to
+  sealed homogeneous multiplicative snapshots, using six real Gaia proper-motion
+  pairs from the official Astropy tutorial and retained source provenance.
+- QUDT/UO #127: explicit kinds and unit IRIs for hertz, becquerel and radians per
+  second; pinned original authoritative vocabularies, reviewed local alignments
+  and Gaia's kind-sensitive angular-rate workflow. UO unit IRIs are not kinds.
 
-QUDT/OBO annotations need an authoritative vocabulary mapping and an actual
-kind-sensitive workflow, such as frequency versus radioactivity. Dimensional
-parity alone cannot choose an identifier or semantic equivalence.
+Local implementation is present; source/installed optional matrix qualification
+remains pending. This inventory stays partial until those slices qualify.
+The maintained contract is `docs/content/user/unit-dialects.md`.
 
-Further CF scope, including calendar/time-origin coordinates, needs a separate
-consumer and acceptance contract. Molecular time intervals do not justify that
-expansion. #85 remains partial after the delivered slices close.
+Completion is bounded to the identified consumers. Further CF calendar/time-origin
+coordinates, complete clinical/astronomy schemas and other ontology entries are
+outside this inventory's acceptance contract; a future measured consumer needs
+its own issue and acceptance criteria. Molecular time intervals do not justify
+calendar semantics. This boundary is recorded in the 2026-10-23 API admission
+addendum rather than claiming unimplemented standards conformance.
 
 ## Acceptance and limitations
 
@@ -71,5 +81,4 @@ The delivered CF/HDF5 slice is qualified at final runtime
 `d4c6089be2f4b8d4c975f31238209ce7348ee4c0`; its receipt is
 `devguide/evidence/cf_hdf5_interop_2026-10-05.json`. Final archived records are
 `devguide/completed_proposals/cf_unit_dialect.md` and
-`devguide/completed_proposals/quantity_record_hdf5.md`. This inventory remains
-partial for the independently justified work above.
+`devguide/completed_proposals/quantity_record_hdf5.md`. The 2026-10-23 completion slices above retain their own qualification evidence.
