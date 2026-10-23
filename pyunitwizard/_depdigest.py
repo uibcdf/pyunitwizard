@@ -1,6 +1,9 @@
 # DepDigest configuration for PyUnitWizard
 
 LIBRARIES = {
+    "asdf": {"type": "soft", "pypi": "asdf", "conda": "asdf"},
+    "asdf_astropy": {"type": "soft", "pypi": "asdf-astropy", "conda": "asdf-astropy"},
+    "ucumvert": {"type": "soft", "pypi": "ucumvert", "conda": None},
     "zarr": {"type": "soft", "pypi": "zarr", "conda": "zarr"},
     "pyarrow": {"type": "soft", "pypi": "pyarrow", "conda": "pyarrow"},
     "cf_units": {"type": "soft", "pypi": "cf-units", "conda": "cf-units"},

@@ -20,6 +20,9 @@ dependencies:
 - openmm
 - unyt
 - astropy
+- asdf =6.0.0
+- asdf-astropy =0.11.0
+- rdflib =7.6.0
 - sphinx
 - pydata-sphinx-theme
 - sphinxcontrib-bibtex
@@ -38,6 +41,7 @@ dependencies:
 - jinja2 >=3,<4
 - packaging >=24
 - pip:
+  - ucumvert ==0.3.2
   - codecov-cli ==11.3.1
   - physipy
   - quantities

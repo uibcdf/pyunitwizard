@@ -14,8 +14,9 @@ import numpy as np
 
 from pyunitwizard._private.exceptions import RecordError
 
+from ._physical import reference as _reference
+
 __all__ = ["validate_unit", "parse_quantity"]
-_METADATA = {"temperature: on_scale", "temperature: difference"}
 _TOKEN = re.compile(r"[A-Za-z_]+(?:[+-]?\d+)?|\*\*|[*/.^()]|[+-]?\d+|\S")
 
 
@@ -47,42 +48,6 @@ def _parse(spelling, provider):
     if parsed.is_unknown() or parsed.is_no_unit() or parsed.is_time_reference():
         raise RecordError(reason="unknown, no-unit and calendar/reference-time units are outside this dialect")
     return parsed
-
-
-def _reference(unit, metadata):
-    from pyunitwizard.forms.api_pint import normalize_registry, ureg
-    from pyunitwizard.record import QuantityRecord
-
-    try:
-        if not isinstance(unit, str):
-            unit = normalize_registry(unit)
-        quantity = ureg.Quantity(np.array([0.0, 1.0, 2.0]), unit)
-        record = QuantityRecord.from_quantity(quantity)
-        exponents = record.si["exponents"]
-        # The SI descriptor is owned by the existing codec, not a dialect alias table.
-        base = " ".join(f"{name}^{exponent}" for name, exponent in exponents.items()) or "1"
-        if any(not float(exponent).is_integer() for exponent in exponents.values()):
-            raise RecordError(reason="fractional powers are outside the bounded CF unit dialect")
-        temperature = "K" in exponents
-        if temperature:
-            if metadata not in _METADATA:
-                raise RecordError(reason="temperature requires explicit on_scale or difference units_metadata")
-            if metadata == "temperature: on_scale" and exponents != {"K": 1}:
-                raise RecordError(reason="compound on-scale temperatures cannot be converted from units alone")
-            if metadata == "temperature: on_scale" and str(quantity.units).startswith("delta_"):
-                raise RecordError(reason="an on-scale temperature cannot use a computing difference unit")
-        elif metadata is not None:
-            raise RecordError(reason="units_metadata is only valid for temperature units")
-        points = np.asarray(quantity.to_base_units().magnitude, dtype=float)
-        if not np.allclose(np.diff(points), record.si["factor"], rtol=1e-12, atol=0):
-            raise RecordError(reason="nonlinear computing units are outside the CF physical-unit dialect")
-        if metadata == "temperature: difference" and points[0] != 0:
-            raise RecordError(reason="a temperature difference requires a computing difference unit")
-        return quantity, base, points
-    except RecordError:
-        raise
-    except Exception as exc:
-        raise RecordError(reason="invalid computing unit for the CF dialect") from exc
 
 
 def _converter(spelling, unit, metadata):

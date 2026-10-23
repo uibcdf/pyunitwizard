@@ -21,6 +21,9 @@ def test_depdigest_runtime_policy_has_expected_hard_and_soft_dependencies():
         "h5py",
         "zarr",
         "pyarrow",
+        "ucumvert",
+        "asdf",
+        "asdf_astropy",
     }
 
 
