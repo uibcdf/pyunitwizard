@@ -1,0 +1,324 @@
+{
+  "schema": "pyunitwizard.record-extensions-initial-installed@1",
+  "producer": "7605732461ccf74547e6fb7645cbe38e0c2bc778",
+  "scope": "Original source/wheel qualification; immutable original producer and per-cell wheel digests retained. Later shell hardening and explicit tagged-shape validation are separately tested; final exact-head receipts belong in the owning issue closeout. No public Conda file qualification.",
+  "native_gates": [
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 39993982540,
+      "run_attempt": 1,
+      "candidate_sha": "7605732461ccf74547e6fb7645cbe38e0c2bc778",
+      "workflow": ".github/workflows/CI.yaml",
+      "jobs": [
+        {
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "job_id": 120552627905,
+          "required_steps": [
+            "Check dependency contract",
+            "Install package",
+            "Test import module",
+            "Check code style",
+            "Run tests",
+            "Check coverage",
+            "Install isolated Codecov CLI",
+            "Upload coverage reports to Codecov",
+            "Upload test results to Codecov"
+          ]
+        }
+      ],
+      "event": "push",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 39993983037,
+      "run_attempt": 1,
+      "candidate_sha": "7605732461ccf74547e6fb7645cbe38e0c2bc778",
+      "workflow": ".github/workflows/molsyssuite-policy.yml",
+      "jobs": [
+        {
+          "name": "policy / conformance",
+          "job_id": 120552629436,
+          "required_steps": [
+            "Check repository conformance",
+            "Check Python lint and imports",
+            "Check Python formatting"
+          ]
+        }
+      ],
+      "event": "push",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 39994006616,
+      "run_attempt": 1,
+      "candidate_sha": "7605732461ccf74547e6fb7645cbe38e0c2bc778",
+      "workflow": ".github/workflows/storage_interop.yaml",
+      "jobs": [
+        {
+          "name": "Storage on ubuntu-latest, Python 3.11",
+          "job_id": 120552714343,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.12",
+          "job_id": 120552714016,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.13",
+          "job_id": 120552714601,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.14",
+          "job_id": 120552714394,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.11",
+          "job_id": 120552714371,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.12",
+          "job_id": 120552714342,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.13",
+          "job_id": 120552714660,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.14",
+          "job_id": 120552714561,
+          "required_steps": [
+            "Check dependency contract",
+            "Install consumer",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch",
+      "exact_jobs": true
+    }
+  ],
+  "original_probes": {
+    "schema": "pyunitwizard.original-installed-probes@1",
+    "producer": "7605732461ccf74547e6fb7645cbe38e0c2bc778",
+    "run_id": 39994006616,
+    "run_attempt": 1,
+    "scope": "Native logs independently verify actual successful dependency/import probes and 125 non-skipped installed tests in each original cell. Original producer/wheel identities retained after fail-fast shell correction; not a public Conda artifact qualification.",
+    "jobs": [
+      {
+        "name": "Storage on ubuntu-latest, Python 3.11",
+        "job_id": 120552714343,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:20:08.7994128Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:20:08.7992700Z /home/runner/micromamba/envs/storage/lib/python3.11/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:20:07.4734268Z PASS exit=0 | 994 passed, 19 skipped | 26.28s | 1 warnings",
+          "2026-10-23T17:20:11.3231364Z PASS exit=0 | 125 passed | 1.93s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "02b817f038e778a435e71d0b0b951c37c3d7df10e6860c403d16b1b1d1f54c30"
+          }
+        ]
+      },
+      {
+        "name": "Storage on ubuntu-latest, Python 3.12",
+        "job_id": 120552714016,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:20:02.1056642Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:20:02.1055979Z /home/runner/micromamba/envs/storage/lib/python3.12/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:20:00.9008030Z PASS exit=0 | 994 passed, 19 skipped | 26.82s | 1 warnings",
+          "2026-10-23T17:20:04.6473037Z PASS exit=0 | 125 passed | 1.97s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "e9b4cae7a6b6e66c0467326208b34b7c4716f02f1de6e36d788d03bd62a5f690"
+          }
+        ]
+      },
+      {
+        "name": "Storage on ubuntu-latest, Python 3.13",
+        "job_id": 120552714601,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:21:42.2210778Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:21:42.2210100Z /home/runner/micromamba/envs/storage/lib/python3.13/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:21:40.6418651Z PASS exit=0 | 994 passed, 19 skipped | 27.64s | 1 warnings",
+          "2026-10-23T17:21:44.7820131Z PASS exit=0 | 125 passed | 1.94s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "cb1021a67ff698372a6465d2aa0bd1ccf4dcd79c33961ca140cc6adf90fee29f"
+          }
+        ]
+      },
+      {
+        "name": "Storage on ubuntu-latest, Python 3.14",
+        "job_id": 120552714394,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:20:39.4303125Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:20:39.4302194Z /home/runner/micromamba/envs/storage/lib/python3.14/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:20:37.9694532Z PASS exit=0 | 994 passed, 19 skipped | 27.84s | 1 warnings",
+          "2026-10-23T17:20:42.0967305Z PASS exit=0 | 125 passed | 1.99s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "733e4bf3206756e737116604bd07e76df7de61dcf172915caf7fcecbf6f23ae9"
+          }
+        ]
+      },
+      {
+        "name": "Storage on macos-latest, Python 3.11",
+        "job_id": 120552714371,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:35:45.8181480Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:35:45.8179220Z /Users/runner/micromamba/envs/storage/lib/python3.11/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:35:43.5104090Z PASS exit=0 | 994 passed, 19 skipped | 44.67s | 1 warnings",
+          "2026-10-23T17:35:51.6880140Z PASS exit=0 | 125 passed | 4.56s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "baabc0f595df9b2f021ee5438812d06253e5c0cb456ade764ac80d79786f9f70"
+          }
+        ]
+      },
+      {
+        "name": "Storage on macos-latest, Python 3.12",
+        "job_id": 120552714342,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:33:24.6561610Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:33:24.6558140Z /Users/runner/micromamba/envs/storage/lib/python3.12/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:33:22.7165930Z PASS exit=0 | 994 passed, 19 skipped | 53.33s | 1 warnings",
+          "2026-10-23T17:33:28.1170210Z PASS exit=0 | 125 passed | 2.72s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "f48f5306e3c33380400b550a6c3214c49d7bf41eb3f65a2b2c767fcdae38023e"
+          }
+        ]
+      },
+      {
+        "name": "Storage on macos-latest, Python 3.13",
+        "job_id": 120552714660,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:38:26.5701650Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:38:26.5700420Z /Users/runner/micromamba/envs/storage/lib/python3.13/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:38:23.9837560Z PASS exit=0 | 994 passed, 19 skipped | 50.99s | 1 warnings",
+          "2026-10-23T17:38:29.8875920Z PASS exit=0 | 125 passed | 2.62s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "219ba1a2051eca6688112a1e3719b33bbe9df58a0152a28eda1163131fabaa58"
+          }
+        ]
+      },
+      {
+        "name": "Storage on macos-latest, Python 3.14",
+        "job_id": 120552714561,
+        "pip_check": true,
+        "installed_provider_lines": [
+          "2026-10-23T17:36:27.5835910Z 0.28.1+36.g7605732 3.3.1 3.16.0 3.1.6 25.0.0"
+        ],
+        "installed_origin_lines": [
+          "2026-10-23T17:36:27.5733560Z /Users/runner/micromamba/envs/storage/lib/python3.14/site-packages/pyunitwizard/__init__.py"
+        ],
+        "pytest_summaries": [
+          "2026-10-23T17:36:23.9227180Z PASS exit=0 | 994 passed, 19 skipped | 60.77s | 1 warnings",
+          "2026-10-23T17:36:32.1136440Z PASS exit=0 | 125 passed | 3.55s"
+        ],
+        "producer_wheels": [
+          {
+            "filename": "pyunitwizard-0.28.1+36.g7605732-py3-none-any.whl",
+            "sha256": "773a0a7b80dd44208475f3049bcf2188ca89a0a7d1645d7a51a5c9eb83b28bad"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 ---
 summary: Evaluate an optional Arrow and Parquet binding for QuantityRecord.
 issue: uibcdf/pyunitwizard#103
-status: active
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-23
 verification: measured
 area: [serialization, interoperability]
 guard: tests/storage/test_arrow.py
@@ -125,3 +125,41 @@ checks, installed origins, provider versions and non-skipped installed test
 results; a shell correction does not by itself invalidate those executed facts.
 New runtime codec/binding files and numerical measurement inputs are unchanged.
 No skipped, failed or unexecuted gate is being converted to success.
+
+## Resolution and qualification
+
+Implemented under the maintained provisional contract and durable module guard
+above. The original source 7605732461ccf74547e6fb7645cbe38e0c2bc778 passes
+CI 39993982540, policy 39993983037 and all eight source/installed storage cells
+in run 39994006616 (attempt 1). Each cell actually passes pip check, imports
+the selected public provider versions from the environment, and executes
+**125 installed tests without skips** outside checkout. Native jobs/steps,
+original installed origins, summaries and producer-wheel digests are retained
+in `devguide/evidence/record_extensions_initial_installed_2026-10-23.json`.
+This independent log evidence preserves real original results after the
+fail-fast shell correction; no failed/unexecuted probe is declared successful.
+
+Final local code also rejects negative/inferred tagged wire shapes even when
+a seal is recomputed. Its regression first fails and then passes. The hardened
+reader snapshot has separate fresh measurements in
+`devguide/evidence/record_extensions_final_2026-10-23.json`; preserve the
+original report as history. Final local suite: **975 passed, one expected
+strict-JSON/NaN skip and the existing main-module deprecation warning**,
+Python 3.14.7, 46.93 seconds. Ruff lint/format and report/diff checks pass.
+The owned Sphinx build is warning-free.
+
+The final source checkpoint executes CI/policy and the complete optional
+matrix again, including explicit fail-fast installed probes and the hardened
+wire-shape guard. Exact final producer/attempt receipts are exported in the
+owning GitHub issue before closure; no source/installed/public-file identity
+is silently substituted. The staged Conda route remains unexecuted until
+there is a separately owned exact candidate archive to qualify. Source/wheel
+success does not publish 0.28.2 or promote these provisional contracts.
+
+The concurrent central guide delivery 3763b047058f3de17eda70e8622d47cf85c7e9ac
+was merged without rewriting either branch. Its new MolSysSuite #129 notice
+policy is retained. No release/package event exists from these feature commits;
+issue #46 retains the advance provider/adoption handoff, while future actual
+publication requires its own version-specific central notice and availability
+update as requested by the maintainer. No client copy or dependency pin was
+changed in a consumer repository.

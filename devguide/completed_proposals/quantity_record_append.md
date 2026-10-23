@@ -1,26 +1,26 @@
 ---
-summary: Specify and evaluate a tagged layout within QuantityRecord.
-issue: uibcdf/pyunitwizard#102
-status: active
+summary: Define verified append operations for block-based QuantityRecords.
+issue: uibcdf/pyunitwizard#105
+status: resolved
 opened: 2026-10-04
-closed:
+closed: 2026-10-23
 verification: measured
 area: [serialization, interoperability]
-guard: tests/test_record_tagged.py
+guard: tests/test_record_append.py
 normative:
 blocked_by: []
 supersedes: []
 ---
 
-# Specify and evaluate a tagged layout within QuantityRecord
+# Define verified append operations for block-based QuantityRecords
 
-What — Track the deferred heterogeneous layout from #82/#83 as its own proposal.
+What — Track the deferred growing-record scope from #82 independently.
 
-How — Retain one QuantityRecord class with a local unit-descriptor table and explicit per-value or broadcast codes. Define the serialized layout before implementation; compatibility requires an explicit version decision, not reinterpretation of existing qrec/0.3 records.
+How — Define a reusable codec operation that converts incoming quantities to the negotiated unit, writes/seals new blocks and binds their order/shape to the top manifest. Retain immutable snapshots and reader expectations; storage binding behavior is separately owned.
 
-Why — The maintainer decided that homogeneous and tagged representations are layouts of one inert form. Normalized Sabueso columns are homogeneous, so mixed-unit implementation requires a measured consumer case.
+Why — The format describes blocks but the current writer produces a complete snapshot. Growing trajectories must not permit raw appends to bypass the seal.
 
-Acceptance — Identify an actual heterogeneous workload and measure alternatives; seal descriptors, codes, dtype/shape and values together; require an explicit target unit or split when reading to a computing backend; reject dimension/kind conflicts and altered codes. No implicit mixed-unit coercion or live arithmetic.
+Acceptance — Obtain a measured growing-data consumer; specify snapshot/atomic-failure behavior, exact dtype/unit conversion and shape constraints; refuse reordered, removed, truncated or raw-appended blocks; measure total and incremental costs. Do not mutate already published qrec/0.3 bytes or promise an HDF5/Zarr API from this issue.
 
 Origin — #82/#83 scope reconciliation; qrec/0.3 and the existing public API remain provisional.
 
@@ -80,18 +80,17 @@ owned separately. After the next package and GitHub Release are published and
 verified, the maintainer requests a separate MolSysSuite version-availability
 issue; the pre-rollout notice does not satisfy that future handoff.
 
-## #102 interpretation
+## #105 interpretation
 
-The existing heterogeneous query contains 343 observations and five explicit
-unit/kind descriptors (Ki, IC50, Inhibition, Kd, ED50), including nM and percent.
-Serialized tagged JSON is 3984 bytes versus 116990 bytes for
-individual records and 53868 for the per-observation bundle baseline.
-These are named baselines, not proof that no grouped alternative could be smaller.
-A single normalized computing array cannot preserve both concentration and
-percentage semantics. The new layout keeps original magnitudes/codes; incompatible
-dimensions or kinds require splitting, while compatible records require an
-explicit target unit. Empty-array/code shape and lossy mixed-dtype promotion
-have regression-first guards. Old qrec/0.3 vectors remain unchanged.
+For the tiled stress snapshot, adding one compatible coordinate frame takes
+0.634 ms versus 1.83 ms for concatenate-and-reseal.
+This reuses existing block hashes but still copies the full immutable array;
+no O(new values)-only memory or file-streaming claim is made. The real frame
+slice supplies the coordinate/units contract; repeated frames are synthetic.
+Tests cover explicit angstrom-to-nanometer conversion, exact dtype/trailing
+shape, source field/kind, integer precision/range, finite conversion overflow,
+affine values, empty initial arrays, immutable failure and raw append refusal.
+Scalar/tagged/file append remain outside this operation's contract.
 
 ## Exact-artifact route coverage
 
@@ -108,3 +107,41 @@ publication must still execute the updated route against the exact archive.
 The pinned shared provider verifies all 22 declared/installed dependency routes;
 workflow identities retain reviewed exact bytes. Runtime codec/binding files
 and measurement inputs are unchanged by this publication-route correction.
+
+## Resolution and qualification
+
+Implemented under the maintained provisional contract and durable module guard
+above. The original source 7605732461ccf74547e6fb7645cbe38e0c2bc778 passes
+CI 39993982540, policy 39993983037 and all eight source/installed storage cells
+in run 39994006616 (attempt 1). Each cell actually passes pip check, imports
+the selected public provider versions from the environment, and executes
+**125 installed tests without skips** outside checkout. Native jobs/steps,
+original installed origins, summaries and producer-wheel digests are retained
+in `devguide/evidence/record_extensions_initial_installed_2026-10-23.json`.
+This independent log evidence preserves real original results after the
+fail-fast shell correction; no failed/unexecuted probe is declared successful.
+
+Final local code also rejects negative/inferred tagged wire shapes even when
+a seal is recomputed. Its regression first fails and then passes. The hardened
+reader snapshot has separate fresh measurements in
+`devguide/evidence/record_extensions_final_2026-10-23.json`; preserve the
+original report as history. Final local suite: **975 passed, one expected
+strict-JSON/NaN skip and the existing main-module deprecation warning**,
+Python 3.14.7, 46.93 seconds. Ruff lint/format and report/diff checks pass.
+The owned Sphinx build is warning-free.
+
+The final source checkpoint executes CI/policy and the complete optional
+matrix again, including explicit fail-fast installed probes and the hardened
+wire-shape guard. Exact final producer/attempt receipts are exported in the
+owning GitHub issue before closure; no source/installed/public-file identity
+is silently substituted. The staged Conda route remains unexecuted until
+there is a separately owned exact candidate archive to qualify. Source/wheel
+success does not publish 0.28.2 or promote these provisional contracts.
+
+The concurrent central guide delivery 3763b047058f3de17eda70e8622d47cf85c7e9ac
+was merged without rewriting either branch. Its new MolSysSuite #129 notice
+policy is retained. No release/package event exists from these feature commits;
+issue #46 retains the advance provider/adoption handoff, while future actual
+publication requires its own version-specific central notice and availability
+update as requested by the maintainer. No client copy or dependency pin was
+changed in a consumer repository.

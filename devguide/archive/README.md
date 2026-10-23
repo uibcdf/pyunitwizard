@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (43)
+### Resolved (47)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -35,10 +35,14 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`python_314_support.md`](../completed_proposals/python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
 - [`quantity_interchange_design.md`](../completed_proposals/quantity_interchange_design.md) — [#83](https://github.com/uibcdf/pyunitwizard/issues/83) — Record the accepted design and bounded provisional QuantityRecord implementation. *(measured)*
 - [`quantity_record.md`](../completed_proposals/quantity_record.md) — [#82](https://github.com/uibcdf/pyunitwizard/issues/82) — QuantityRecord — an inert interchange form that never loses or misreads a unit (provisional MVP implemented). *(measured)*
+- [`quantity_record_append.md`](../completed_proposals/quantity_record_append.md) — [#105](https://github.com/uibcdf/pyunitwizard/issues/105) — Define verified append operations for block-based QuantityRecords. *(measured)*
+- [`quantity_record_arrow.md`](../completed_proposals/quantity_record_arrow.md) — [#103](https://github.com/uibcdf/pyunitwizard/issues/103) — Evaluate an optional Arrow and Parquet binding for QuantityRecord. *(measured)*
 - [`quantity_record_empty_base64.md`](../solved_bugs/quantity_record_empty_base64.md) — [#109](https://github.com/uibcdf/pyunitwizard/issues/109) — QuantityRecord base64 export fails for empty multidimensional arrays. *(medium, reproduced)*
 - [`quantity_record_hdf5.md`](../completed_proposals/quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(measured)*
 - [`quantity_record_hub.md`](../completed_proposals/quantity_record_hub.md) — [#106](https://github.com/uibcdf/pyunitwizard/issues/106) — Evaluate QuantityRecord as a backend translation hub. *(measured)*
+- [`quantity_record_tagged.md`](../completed_proposals/quantity_record_tagged.md) — [#102](https://github.com/uibcdf/pyunitwizard/issues/102) — Specify and evaluate a tagged layout within QuantityRecord. *(measured)*
 - [`quantity_record_values_mutable_behind_seal.md`](../solved_bugs/quantity_record_values_mutable_behind_seal.md) — [#100](https://github.com/uibcdf/pyunitwizard/issues/100) — Public record values can be made writable behind the integrity seal. *(high, reproduced)*
+- [`quantity_record_zarr.md`](../completed_proposals/quantity_record_zarr.md) — [#104](https://github.com/uibcdf/pyunitwizard/issues/104) — Evaluate an optional Zarr binding for QuantityRecord. *(measured)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*

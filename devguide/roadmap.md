@@ -25,8 +25,13 @@ names/prefixes entering unyt, including reversible unit-only translations.
 The October 22 review found no further open defect. On October 23 the maintainer
 selected #104, #102, #105 and #103, with molecular arrays and heterogeneous
 observations from existing consumers. Source implementation and measurements
-are delivered; qualify their optional source/installed matrix and archive the
-owning records before separate release preparation and exact-file qualification.
+are delivered with the optional source/installed matrix and archived owning
+records: [Zarr](completed_proposals/quantity_record_zarr.md),
+[tagged](completed_proposals/quantity_record_tagged.md),
+[append](completed_proposals/quantity_record_append.md), and
+[Arrow](completed_proposals/quantity_record_arrow.md). Keep final checkpoint
+receipts in the owning issues; release preparation and exact public-file
+qualification remain separate work.
 The public availability announcement belongs in a new MolSysSuite issue only
 after the next package and GitHub Release are published and verified. Consumer notice for
 the translator corrections is MolSysSuite #127; no new release has been prepared
