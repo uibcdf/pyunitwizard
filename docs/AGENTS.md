@@ -54,7 +54,7 @@ reStructuredText, and Jupyter notebooks. Key areas:
 
 ## Notebook Execution Workflow
 1. Activate the docs environment (see the docs dependency profile in
-   `devtools/requirements.yaml`) before running notebooks so Pint, OpenMM,
+   `devtools/conda-envs/docs_env.yaml`) before running notebooks so Pint, OpenMM,
    Astropy, Unyt, and Sphinx integrations resolve correctly.
 2. Execute updated notebooks with `python docs/execute_notebooks.py -r
    docs/content` (or target a narrower path). Use `--force` when you need to
@@ -67,10 +67,11 @@ reStructuredText, and Jupyter notebooks. Key areas:
 
 ## Building and Previewing
 - Use `make html` from inside `docs/` for local previews. The resulting site
-  lives in `_build/html`; open `index.html` in a browser to inspect the output.
-  Clean prior builds with `make clean` if assets look stale.
-- Alternatively, call `sphinx-build -M html . _build` when scripting builds
-  (mirrors the Makefile target).
+  lives in `_build/`; open `_build/index.html` to inspect the output.
+  Clean prior task-owned builds with `make clean` if assets look stale.
+- Alternatively, remove stale stubs with `python clean_api.py`, then call
+  `sphinx-build -M html . _build` when scripting builds. This mode writes to
+  `_build/html/`, matching the hosted action rather than the Makefile layout.
 - When the API reference changes, just rebuild: `make html` removes outdated
   autosummary directories and then regenerates them with autosummary enabled
   (the default). Use `make clean-api` to drop the stubs without rebuilding.
@@ -81,11 +82,11 @@ reStructuredText, and Jupyter notebooks. Key areas:
 ## Publishing
 - The docs site is hosted on GitHub Pages via the `gh-pages` branch and
   automatically built by the GitHub Action in workflow file: `.github/workflows/sphinx_docs_to_gh_pages.yaml`.
-- GitHub Pages deployments expect the HTML output under `_build/html`; push
-  updates with `git subtree push --prefix docs/_build/html origin gh-pages` if
-  you are maintaining the pages manually -though the Action should handle this
-  for you, unless it is explicitly disabled and you have specific orders to
-  do so from the maintainers.
+- The workflow runs on `release: released` and manual dispatch, not every
+  push to `main`. Authorized maintainers publish documentation updates with
+  `gh workflow run sphinx_docs_to_gh_pages.yaml --repo uibcdf/pyunitwizard --ref main`.
+  Verify the run's source commit, the source link in `gh-pages/README.md` and
+  actual served pages before reporting publication complete.
 
 ## Review Checklist for Docs Changes
 Before opening a PR that touches `docs/`:
@@ -95,7 +96,8 @@ Before opening a PR that touches `docs/`:
 3. Ensure no generated artifacts (`_build/`, `.nbconvert.log`, temporary autosummary directories) are staged.
 4. Update or add cross-references, navigation entries, and toctrees where
    relevant (e.g., `index.ipynb`, section `index.md` files).
-5. If you add dependencies or Sphinx extensions, sync
-   `devtools/requirements.yaml` via the broadcast workflow and mention the
-   requirement in the PR description.
+5. If you add dependencies or Sphinx extensions, update the owning
+   `devtools/conda-envs/docs_env.yaml` profile and mention the requirement in
+   the change description. Shared-policy or client-guide changes follow the
+   root MolSysSuite ownership and synchronization route.
 

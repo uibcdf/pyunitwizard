@@ -2,6 +2,8 @@
 :html_theme.sidebar_secondary.remove:
 ```
 
+# PyUnitWizard
+
 :::{figure} _static/logo.svg
 :width: 50%
 :align: center
@@ -17,7 +19,7 @@ A Python Units Wizard that streamlines work with physical quantities.
 ```{image} https://img.shields.io/badge/install%20with-conda-white.svg
 :target: https://anaconda.org/uibcdf/pyunitwizard
 ```
-```{image} https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-white.svg
+```{image} https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-white.svg
 :target: https://www.python.org/downloads/
 ```
 :::
@@ -25,7 +27,7 @@ A Python Units Wizard that streamlines work with physical quantities.
 ## Install it
 
 ```bash
-conda install -c uibcdf pyunitwizard
+conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.28.1'
 ```
 
 ## Use it

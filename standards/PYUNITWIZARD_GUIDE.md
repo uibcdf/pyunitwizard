@@ -10,8 +10,8 @@ Source of truth for integrating and using **PyUnitWizard** in this library.
 Metadata
 - Source repository: `pyunitwizard`
 - Source document: `standards/PYUNITWIZARD_GUIDE.md`
-- Source version: `pyunitwizard@bc69459`
-- Last synced: 2026-08-15
+- Source version: Git commit containing this canonical document; consumer copies must record the resolved commit and digest in their synchronization evidence.
+- Last revised: 2026-10-22 (dependency baseline correction; client delivery tracked in `uibcdf/molsyssuite#126`).
 
 ## What is PyUnitWizard
 
@@ -27,8 +27,15 @@ PyUnitWizard is a "Quantities and Units Assistant" designed to provide a unified
 
 PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 
-- **Hard Dependencies**: `numpy` and `pint`. These are always available.
-- **Soft Dependencies**: `unyt`, `openmm.unit`, `astropy.units`. These are optional and managed via `depdigest`.
+- **Hard Dependencies**: `numpy`, `pint`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in the current 0.28.x package metadata. These must be provisioned for normal use.
+- **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
+
+Baseline support is Python `>=3.11,<3.15` on Linux and macOS arm64. Optional
+provider profiles can have narrower limits; use the provider's maintained
+[compatibility matrix](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/compatibility_matrix.md)
+and exact release qualification record. This corrects the dependency inventory;
+it does not change the initialization or validation contracts below. MolSysSuite
+owns synchronization of this canonical guide to registered client copies.
 
 ## Minimum initialization (required pattern)
 

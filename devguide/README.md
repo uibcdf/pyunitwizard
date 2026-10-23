@@ -73,8 +73,13 @@ observations. All 30 installed cells passed; public prepared attribution uses
 Ackredit 0.10.1 while retaining the optional >=0.9.0 fallback. Codecov #107 is
 closed after actual coverage and test-result uploads recovered.
 
-There are no queued defect reports. Remaining work is evaluated through its
-owning issue and acceptance conditions:
+The October 22 resource/tooling review (#116–#118) is complete; its receipts are
+linked from [the resource review](resource_lifecycle_review.md). The current
+documentation refresh is tracked by #119 in the
+[defect index](pending_bugs/README.md), including explicit website publication.
+Canonical client-guide delivery is a separate handoff to
+[MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
+Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.

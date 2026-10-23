@@ -5,13 +5,13 @@ PyUnitWizard is integration infrastructure. Tests should prioritize behavioral c
 ## Minimum local test command
 
 ```bash
-conda run -n molsyssuite@uibcdf_3.13 pytest -q tests --ignore=tests/test_import.py
+conda run -n molsyssuite@uibcdf_3.14 python -m pytest --receptor=llm tests
 ```
 
 ## Coverage command
 
 ```bash
-pytest --cov=pyunitwizard --cov-report=term-missing
+python -m pytest --receptor=llm tests --cov=pyunitwizard --cov-report=term-missing
 ```
 
 ## Performance baseline command
@@ -21,6 +21,21 @@ python benchmarks/conversion_baseline.py
 ```
 
 Store RC snapshots under `devguide/` and compare candidate tags for regressions.
+Follow `benchmarks/README.md` for telemetry modes and provenance. A source
+benchmark does not qualify the installed public artifact.
+
+## Validation scope
+
+Keep `tests/test_import.py` in the full suite. The supported matrix covers
+Python 3.11–3.14 on Linux and macOS arm64; optional provider profiles may be
+narrower (see [Compatibility Matrix](compatibility-matrix.md)).
+
+External PRs and releases require their mandatory full gates. For authorized
+internal direct pushes, select checks appropriate to changed code, inputs,
+environment and scope under the
+[common checkpoint policy](https://github.com/uibcdf/pyunitwizard/blob/main/MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints).
+Record missing evidence and its owning issue; documentation or administrative
+checks do not clear scientific full-suite backlog.
 
 ## Release-critical areas
 

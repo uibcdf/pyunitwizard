@@ -1,6 +1,9 @@
 # Release and Versioning
 
 PyUnitWizard tags use numeric versions without `v` prefix.
+The public GitHub Release title is exactly `X.Y.Z`, matching its tag and
+package version. Put descriptions in the release body. See the accepted
+[release-title rule](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/release_titles.md).
 
 ## Release path to 1.0.0
 
@@ -19,11 +22,17 @@ Current policy:
 - `0.20.x` is interoperability expansion (NumPy/Pandas/Matplotlib hardening).
 - `0.21.x` is the completed RC consolidation line.
 - `0.22.x` and `0.23.x` contain post-RC performance and API hardening.
-- `1.0.0` is created after current hardening and the final release checklist are complete.
+- `0.24.x`–`0.28.x` continue hardening, qualified interchange and optional providers.
+- `0.28.1` is the current published checkpoint; its
+  [publication record](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/completed_proposals/release_0.28.1.md)
+  retains the exact source, artifact and qualification evidence.
+- `1.0.0` requires final scope approval and the final release checklist. The
+  record, measurement, optional attribution and storage surfaces remain
+  provisional until separately admitted.
 
 ## Pre-release checks
 
-1. `python -m pytest -q` passes.
+1. `python -m pytest --receptor=llm tests` passes.
 2. `make -C docs html` passes.
 3. `release_gates` workflow is green for candidate commit.
 4. The full Linux/macOS matrix and suite policy workflow are green at the
@@ -46,3 +55,8 @@ Current policy:
    only after the exact-commit gates pass.
 6. For a staged release, promote the verified file without rebuilding.
    Independently validate the public package and its installability.
+
+When creating the GitHub Release, set the title explicitly, for example
+`gh release create X.Y.Z --verify-tag --title X.Y.Z --notes-file RELEASE_NOTES`.
+Replace placeholders only after the exact-candidate gates above pass. Do not
+move an existing published tag or rebuild a previously qualified artifact.

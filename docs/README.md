@@ -32,18 +32,20 @@ The documentation toolchain is defined in `devtools/conda-envs/docs_env.yaml`.
 Create (or update) the environment before running any docs-specific tasks:
 
 ```bash
-cd devtools/conda-envs
-python create_conda_env.py -n pyunitwizard-docs -p 3.12 docs_env.yaml # adjust Python version as needed
+# Run from the repository root. Supported Python versions are 3.11–3.14.
+conda env create --name pyunitwizard-docs --file devtools/conda-envs/docs_env.yaml
 conda activate pyunitwizard-docs
+python -m pip install --no-deps --editable .
 ```
 
 
-Or if you already have the environment, is sufficient to pick up new dependencies if any were added:
+To update an existing environment after dependency changes:
 
 ```bash
+conda env update --name pyunitwizard-docs --file devtools/conda-envs/docs_env.yaml
 conda activate pyunitwizard-docs
-cd devtools/conda-envs
-python update_conda_env.py docs_env.yaml
+python -m pip install --no-deps --editable .
+python -m pip check
 ```
 
 ## Notebook Execution Workflow
@@ -94,10 +96,11 @@ python docs/clean_api.py
 Sphinx builds can be triggered with the provided Makefile or directly via `sphinx-build`.
 
 ```bash
-# Recommended: uses configuration from docs/Makefile
-(cd docs && make html)
+# Recommended: removes stale autosummary stubs and builds docs/_build/index.html
+make -C docs html
 
-# Equivalent explicit invocation
+# Alternative Sphinx make mode: builds docs/_build/html/index.html
+python docs/clean_api.py
 sphinx-build -M html docs docs/_build
 ```
 
@@ -108,22 +111,28 @@ Common targets include:
 - `make clean-api` – remove only the generated autosummary stubs.
 - `make html` – render the full site for local preview.
 
-Open `docs/_build/html/index.html` in your browser to inspect the result. Never commit the `_build/` directory.
+For `make -C docs html`, open `docs/_build/index.html`; for Sphinx `-M html`,
+open `docs/_build/html/index.html`. The hosted action uses the latter layout.
+Never commit the `_build/` directory. Cleanup targets apply to generated
+resources owned by the current task; preserve other callers' useful outputs.
 
 ## Publishing to GitHub Pages
 
-Documentation is published from the HTML output in `docs/_build/html`. The
-default workflow relies on GitHub Actions
-(`.github/workflows/sphinx_docs_to_gh_pages.yaml`), which automatically builds
-and deploys the site whenever the main branch is updated. Manual publishing is
-rarely needed, but when required:
+The workflow `.github/workflows/sphinx_docs_to_gh_pages.yaml` builds and
+publishes to `gh-pages` on a stable GitHub Release (`release: released`) or
+manual dispatch. A push to `main` alone does not publish documentation.
+After reviewing and pushing a documentation update, an authorized maintainer
+can dispatch it explicitly:
 
-1. Build the site locally (`make html`).
-2. Push the rendered site to the `gh-pages` branch, for example:
-   ```bash
-   git subtree push --prefix docs/_build/html origin gh-pages
-   ```
-   Ensure the CI workflow is disabled or coordinated with maintainers before manual pushes.
+```bash
+gh workflow run sphinx_docs_to_gh_pages.yaml --repo uibcdf/pyunitwizard --ref main
+```
+
+Inspect the run's source commit and successful build/deployment, then verify
+the updated pages at <https://www.uibcdf.org/pyunitwizard/>. The generated
+`gh-pages/README.md` records the source commit. A green build alone does not
+prove that GitHub Pages has finished serving the new content. Prefer this
+workflow to manually replacing the published branch.
 
 ## Version Control Expectations
 

@@ -3,12 +3,16 @@
 This roadmap retains the historical stabilization stages and records the
 current published `0.28.x` baseline before a separately approved `1.0.0` release.
 
-## Current checkpoint — 2026-10-05
+## Current checkpoint — 2026-10-22
 
 [`0.28.1`](release_0.28.1_notes.md) is public. Its
 [publication record](completed_proposals/release_0.28.1.md) retains the exact
 source/file, all mandatory source gates, 30 installed cells and independent
-public verification. #111 is delivered; no queued defect report remains.
+public verification. #111 is delivered. The resource/tooling review #116–#118 is
+complete; #119 tracks current documentation alignment and actual website
+publication. See [the defect index](pending_bugs/README.md) for its current
+state and [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126)
+for independent delivery of the corrected canonical guide to clients.
 
 The future backlog is #85 (remaining interoperability boundaries), #102–#106
 (independent record extensions), #44/#52 (deferred integrations), and #87

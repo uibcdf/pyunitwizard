@@ -1,6 +1,9 @@
 # Tags and Releases
 
-PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.18.1`).
+PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.28.1`).
+The public GitHub Release title/name must exactly match that version and tag;
+descriptions belong in the body. See
+[the release-title rule](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/release_titles.md).
 
 ## Baseline policy
 
@@ -9,7 +12,10 @@ PyUnitWizard uses numeric Git tags without `v` prefix (for example `0.18.1`).
 - `0.20.x` is the interoperability expansion line.
 - `0.21.x` is the completed RC consolidation line.
 - `0.22.x` and `0.23.x` are post-RC hardening lines before `1.0.0`.
-- `1.0.0` is the stable milestone.
+- `0.24.x`–`0.28.x` continue hardening and provisional optional interfaces;
+  `0.28.1` is the current published checkpoint.
+- `1.0.0` is a separately approved stable milestone, not a consequence of
+  completing the historical `0.21.x` RC checklist.
 - If a tag was created by mistake, do not rewrite history; continue with the
   next correct numeric tag.
 
@@ -22,12 +28,14 @@ staged installed-package tests are green at the same commit:
 git fetch origin
 git switch main
 git pull --ff-only origin main
-python -m pytest --receptor=llm -n 12 -q
+python -m pytest --receptor=llm tests
 make -C docs html
 # replace X.Y.Z with the next version
 git tag X.Y.Z
 git push origin main
 git push origin X.Y.Z
+# After verifying the exact tag/candidate gates and prepared release notes:
+gh release create X.Y.Z --verify-tag --title X.Y.Z --notes-file RELEASE_NOTES
 ```
 
 For a staged Conda route, publishing the GitHub Release verifies the

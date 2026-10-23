@@ -44,12 +44,11 @@ need justifies adding and maintaining that platform matrix.
 Install a published release from the `uibcdf` Conda channel:
 
 ```bash
-conda install -c uibcdf 'pyunitwizard>=0.26.0'
+conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.28.1'
 ```
 
-PyUnitWizard and its required SMonitor and DepDigest versions are not
-currently distributed on the public PyPI index. A source installation needs
-those dependencies from Conda first; see the
+For a source installation, provision the required NumPy, Pint, SMonitor,
+DepDigest and ArgDigest dependencies from Conda first; see the
 [installation guide](docs/content/about/installation.md).
 
 ## Quick start

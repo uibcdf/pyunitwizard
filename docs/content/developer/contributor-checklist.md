@@ -21,6 +21,8 @@ Use this checklist before opening a PR or preparing a release commit.
 
 ## Validation
 
-- [ ] `pytest -q` passes.
+- [ ] `python -m pytest --receptor=llm tests` passes for a PR or release;
+  authorized internal direct pushes record checks selected under the
+  [common checkpoint policy](https://github.com/uibcdf/pyunitwizard/blob/main/MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints).
 - [ ] `make -C docs html` passes.
 - [ ] Changes are committed in focused, coherent commits.

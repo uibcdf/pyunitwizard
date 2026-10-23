@@ -1,6 +1,16 @@
 # Development Environment
 
-Use conda environments from `devtools/conda-envs`.
+For routine Linux work, use the qualified `molsyssuite@uibcdf_3.14` Conda
+environment and install participating local clones with
+`python -m pip install --no-deps --editable PATH`. Follow the suite's
+[development workspace contract](https://github.com/uibcdf/molsyssuite/blob/main/devguide/development_workspace.md)
+for the canonical recipe, bootstrap and current eligibility. Check Python,
+editable import origins and `python -m pip check`; report existing environment
+conflicts separately from test results. The shared environment's outstanding
+dependency conflicts are tracked in
+[MolSysSuite #82](https://github.com/uibcdf/molsyssuite/issues/82).
+
+For a standalone environment, use the repository's Conda profiles below.
 
 ## Recommended environments
 
@@ -12,9 +22,12 @@ Use conda environments from `devtools/conda-envs`.
 ## Typical setup
 
 ```bash
-cd devtools/conda-envs
-python create_conda_env.py -n pyunitwizard-dev -p 3.14 development_env.yaml
+# From the repository root; this profile selects Python 3.14.
+conda env create --name pyunitwizard-dev --file devtools/conda-envs/development_env.yaml
 conda activate pyunitwizard-dev
+python -m pip install --no-deps --editable .
+python --version
+python -m pip check
 ```
 
 ## Local validation baseline
@@ -23,6 +36,9 @@ conda activate pyunitwizard-dev
 python -m pytest --receptor=llm tests
 make -C docs html
 ```
+
+The full supported matrix remains Python 3.11–3.14; a local Python 3.14 run
+does not qualify another interpreter, platform or installed release artifact.
 
 The development, test and release-gate profiles pin public Ackredit 0.9.0
 `py_0` to exercise the optional Pint/unyt attribution pilot. Ackredit remains

@@ -9,6 +9,23 @@ make -C docs html
 ```
 
 The generated site is written to `docs/_build/`.
+Open `docs/_build/index.html`. The alternative command
+`sphinx-build -M html docs docs/_build` writes to `docs/_build/html/`, as used
+by the hosted action; clean stale autosummary stubs first with
+`python docs/clean_api.py` when using that command directly.
+
+## Publication
+
+The documentation workflow runs on stable GitHub Releases and manual dispatch;
+pushing `main` alone does not publish the site. Authorized maintainers can run:
+
+```bash
+gh workflow run sphinx_docs_to_gh_pages.yaml --repo uibcdf/pyunitwizard --ref main
+```
+
+Check the exact source commit, successful deployment and updated served pages.
+See the [documentation contributor guide](https://github.com/uibcdf/pyunitwizard/blob/main/docs/README.md)
+for environment setup, output layouts and publication verification.
 
 ## Contribution expectations
 
