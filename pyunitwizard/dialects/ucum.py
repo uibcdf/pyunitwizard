@@ -7,7 +7,7 @@ canonicalize computing-unit names into guessed UCUM codes.
 from __future__ import annotations
 
 from functools import lru_cache
-from importlib.resources import as_file, files
+from importlib.resources import files
 from typing import Any, Optional
 from xml.etree import ElementTree
 
@@ -21,9 +21,7 @@ __all__ = ["validate_unit", "parse_quantity"]
 # Admission is deliberately narrower than the beta provider's complete grammar.
 # These SI atoms, litre/percent/time atoms and simple temperatures have explicit
 # independent conformance guards. Other provider mappings need qualification.
-_ATOMS = frozenset(
-    "m s g rad K C cd mol sr Hz Bq N Pa J W A V F Ohm S Wb Cel T H l L % min h d [degF] [degRe]".split()
-)
+_ATOMS = frozenset("m s g rad K C cd mol sr Hz Bq N Pa J W A V F Ohm S Wb Cel T H l L % min h d".split())
 
 
 @lru_cache(maxsize=1)
@@ -34,10 +32,16 @@ def _tools():
 
     resources = files("ucumvert")
     registry = pint.UnitRegistry()
-    # Supplying the registry explicitly avoids the transformer's default of
-    # changing Pint's application registry. Provider definitions stay isolated.
-    with as_file(resources.joinpath("pint_ucum_defs.txt")) as definitions:
-        registry.load_definitions(definitions)
+    # The provider's complete file contains arbitrary-unit aliases rejected by
+    # Pint 0.26 (e.g. i.U.). Load only its authored aliases for admitted atoms;
+    # all other admitted meanings already exist in Pint's dedicated registry.
+    # An explicit transformer registry also leaves the application registry alone.
+    for line in resources.joinpath("pint_ucum_defs.txt").read_text().splitlines():
+        if line.startswith("@alias "):
+            canonical, *aliases = [name.strip() for name in line.split("#", 1)[0][7:].split("=")]
+            admitted = [name for name in aliases if name in _ATOMS]
+            if admitted:
+                registry.define("@alias " + canonical + " = " + " = ".join(admitted))
     with resources.joinpath("vendor", "ucum-essence.xml").open("rb") as source:
         essence = ElementTree.parse(source).getroot()
     restricted = {
@@ -66,7 +70,7 @@ def _parse(code):
             if token.type in {"UNIT_METRIC", "UNIT_NON_METRIC"} and str(token) not in _ATOMS:
                 raise RecordError(reason="UCUM atom is outside the independently qualified physical subset")
             if token.type in {"UNIT_METRIC", "UNIT_NON_METRIC"} and str(token) in restricted:
-                if code not in {"Cel", "[degF]", "[degRe]"}:
+                if code != "Cel":
                     raise RecordError(reason="arbitrary, nonlinear and compound special UCUM units are unsupported")
         return transformer.transform(tree)
     except RecordError:

@@ -53,3 +53,17 @@ atom admission rule was added. Do not expose unchecked beta-provider atoms;
 qualify new atoms independently. Its default transformer also selects Pint's
 application registry; this adapter supplies an isolated dedicated registry
 explicitly and guards that global application definitions stay unchanged.
+
+Initial optional matrix run 40009082556 found the provider's complete definition
+file incompatible with Pint 0.26.2: the unrelated arbitrary-unit alias `i.U.` is
+rejected by the newer Pint parser. The adapter now admits only the provider's
+authored aliases for qualified atoms (Cel and Ohm), rather than loading its
+unqualified full unit vocabulary. Existing actual-provider conformance guards
+cover this route on Pint 0.25.3 and the current 0.26 line; new exact-head matrix
+evidence is required. No provider file or shared application registry is patched.
+
+The provider's bracketed Fahrenheit/Reaumur atoms also fail with the stricter
+Pint 0.26 parser. They are consistently excluded from this first contract on all
+versions; consumers convert explicitly to Celsius/Kelvin first. Admitted affine
+UCUM input is `Cel`, with explicit temperature semantics. This narrows an
+unpublished proposal; no previously published PyUnitWizard API is removed.

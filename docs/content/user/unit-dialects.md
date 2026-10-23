@@ -42,9 +42,11 @@ Target units must also be supported by the requested computing backend; for
 example, unyt concentrations can use `mole / liter` explicitly.
 
 Temperatures require `units_metadata="temperature: on_scale"` or
-`"temperature: difference"` at both ends, as in the CF tools. Simple `Cel`,
-`[degF]` and `[degRe]` support affine conversion; compound special units are
-refused. A difference needs a zero-offset computing difference unit, such as
+`"temperature: difference"` at both ends, as in the CF tools. Simple `Cel`
+supports affine conversion; other special temperatures and compound special
+units are refused. The provider's bracketed Fahrenheit/Reaumur atoms are not
+qualified across the supported Pint versions. Convert explicitly to Celsius or
+kelvin before UCUM exchange. A difference needs a zero-offset computing unit, such as
 `delta_degree_Celsius` or kelvin. Validation uses relative tolerance 1e-12.
 
 These are unit tools, not a FHIR resource writer or a clinical schema validator.

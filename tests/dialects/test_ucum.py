@@ -167,10 +167,16 @@ def test_every_admitted_multiplicative_atom_has_named_semantic_conformance(code,
 
 @pytest.mark.parametrize(
     "code,unit",
-    [("K", "kelvin"), ("Cel", "degree_Celsius"), ("[degF]", "degree_Fahrenheit"), ("[degRe]", "degree_Reaumur")],
+    [("K", "kelvin"), ("Cel", "degree_Celsius")],
 )
 def test_every_admitted_temperature_atom_has_affine_conformance(code, unit):
     assert ucum.validate_unit(unit, code, units_metadata="temperature: on_scale") == code
+
+
+@pytest.mark.parametrize("code", ["[degF]", "[degRe]"])
+def test_unqualified_bracket_temperature_atoms_are_refused_consistently(code):
+    with pytest.raises(RecordError):
+        ucum.parse_quantity(0, code, unit="kelvin", units_metadata="temperature: on_scale", form="pint")
 
 
 def test_finite_numeric_source_scale_cannot_underflow_to_a_zero_physical_unit():
