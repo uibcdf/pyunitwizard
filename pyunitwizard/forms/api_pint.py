@@ -484,8 +484,8 @@ def unit_to_openmm_unit(unit: pint.Unit):
 ## To Unyt
 
 
-def quantity_to_unyt(quantity: pint.Quantity):
-    """Transform a quantity from a pint quantity to a unyt quantity.
+def quantity_to_unyt(quantity: pint.Quantity) -> Any:
+    """Translate to unyt, including atomic-mass names and prefixes.
 
     Parameters
     -----------
@@ -495,14 +495,44 @@ def quantity_to_unyt(quantity: pint.Quantity):
     Returns
     -------
     unyt_array or unyt_quantity
-        The unyt quantity
+        Quantity with the source magnitude and equivalent unyt units.
+
+    Raises
+    ------
+    unyt.exceptions.UnitParseError
+        If a remaining source unit is unsupported by unyt.
+    pint.DimensionalityError
+        If an atomic-mass name has an incompatible source definition.
+
+    Examples
+    --------
+    >>> quantity_to_unyt(Q_(12.0, "dalton"))
+    unyt_quantity(12., 'dalton')
     """
-    from unyt import unyt_array
+    from unyt import Unit, UnitRegistry, dimensions, unyt_array
+    from unyt.unit_registry import default_unit_registry
 
-    return unyt_array.from_pint(quantity)
+    registry = quantity._REGISTRY
+    destination = None
+    for name in quantity._units:
+        bases = registry.parse_unit_name(name)
+        if any(base in {"dalton", "unified_atomic_mass_unit"} for _, base, _ in bases):
+            # Use Pint's definition and prefix scale, never its display symbol.
+            # Keep the name for reversible unit-only translation, and leave
+            # unyt's shared registry untouched.
+            if destination is None:
+                destination = UnitRegistry(
+                    lut=default_unit_registry.lut.copy(),
+                    add_default_symbols=False,
+                    unit_system=default_unit_registry.unit_system,
+                )
+            scale = registry.Quantity(1, name).to("amu").magnitude
+            destination.add(name, float(scale) * Unit("amu").base_value, dimensions.mass)
+
+    return unyt_array.from_pint(quantity, unit_registry=destination)
 
 
-def unit_to_unyt(unit: pint.Unit):
+def unit_to_unyt(unit: pint.Unit) -> Any:
     """Transform a unit from a pint unit to a unyt unit.
 
     Parameters
@@ -512,8 +542,8 @@ def unit_to_unyt(unit: pint.Unit):
 
     Returns
     -------
-    unyt_array or unyt_quantity
-        The unyt quantity
+    unyt.Unit
+        Equivalent unit, retaining atomic-mass prefix scales.
     """
 
     from .api_unyt import get_unit as get_unyt_unit

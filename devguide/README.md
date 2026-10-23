@@ -84,10 +84,6 @@ Canonical client-guide delivery is a separate handoff to
 [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
 Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
-- [#124](https://github.com/uibcdf/pyunitwizard/issues/124): Pint `dalton`
-  quantities cannot enter unyt through the current translator. This is a
-  reproduced next-patch candidate, separate from registry reuse; native unyt
-  `amu` input works in the #123 regression scope.
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.
 - #102–#105: tagged layouts, Arrow/Parquet, Zarr and verified append;
@@ -118,8 +114,14 @@ the older conversion baseline now records the actual executing Python version,
 including its patch number. Historical snapshots are preserved.
 [#123](solved_bugs/unyt_remaining_registry_allocations.md) is also resolved:
 remaining unyt dimensionality and OpenMM paths reuse the existing shared registry.
-Review #124 before preparing the next patch; 0.28.2 has not been published by
-this work. MolSysSuite #127 retains the separate consumer-impact route.
+[#124](solved_bugs/pint_unyt_atomic_mass_names.md) is resolved: Pint atomic-mass
+names, prefixes and compound units enter unyt with reversible quantity/unit
+translations and isolated definitions. The October 22 backlog review found no
+additional open defect or currently justified feature for this patch; the
+remaining proposals retain the conditions listed above. Next, prepare and qualify
+the 0.28.2 release candidate and its exact installed artifact under the publication
+policy. That release has not been prepared or published by this source work.
+MolSysSuite #127 retains the separate consumer-impact route.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

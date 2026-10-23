@@ -19,8 +19,12 @@ retain direct/live Pint translation, with #120/#122 translator fixes in source.
 They are not part of the existing 0.28.1 public artifact. The
 [#121 provenance correction](solved_bugs/conversion_baseline_runtime_provenance.md)
 is complete. [#123](solved_bugs/unyt_remaining_registry_allocations.md) removes
-the remaining unyt registry allocations. #124 tracks the separately reproduced
-Pint-dalton→unyt failure as a bounded pre-0.28.2 candidate. Consumer notice for
+the remaining unyt registry allocations.
+[#124](solved_bugs/pint_unyt_atomic_mass_names.md) corrects Pint atomic-mass
+names/prefixes entering unyt, including reversible unit-only translations.
+The current backlog review finds no further open defect or feature whose
+acceptance conditions justify adding it before 0.28.2. Next is separate release
+preparation and exact-source/installed-file qualification. Consumer notice for
 the translator corrections is MolSysSuite #127; no new release has been prepared
 or published by this work.
 

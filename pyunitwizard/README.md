@@ -74,6 +74,12 @@ than passing display symbols between libraries. In particular, OpenMM's `A`
 means angstrom and must remain a length; unyt reserves `A` for ampere. This
 also preserves compound length/time units and actual electrical-current inputs.
 
+Pint-to-unyt atomic masses retain canonical names and prefix scales in a
+conversion-local unyt registry. `dalton`/`Da`, `amu`, their prefixes and compound
+units support quantity and unit round trips without changing either shared
+registry. Native backend atomic-mass constants and the existing OpenMM mass
+convention are preserved; this does not align the providers' CODATA revisions.
+
 The unyt-to-Astropy and unyt-to-OpenMM translators, and the unyt dimensionality
 adapter, reuse the shared Pint registry through `quantity_to_pint`. These
 operations do not construct a fresh registry for each call. The public
