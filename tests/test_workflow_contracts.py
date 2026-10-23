@@ -1,3 +1,5 @@
+import hashlib
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -12,6 +14,12 @@ def test_public_installation_workflows_cover_supported_python_minors(platform):
     workflow = yaml.safe_load(path.read_text())
     cells = workflow["jobs"]["test"]["strategy"]["matrix"]["cfg"]
     assert {cell["python-version"] for cell in cells} == {"3.11", "3.12", "3.13", "3.14"}
+    inventory = tomllib.loads((REPOSITORY_ROOT / "devtools/dependency_routes.toml").read_text())
+    reviewed = {item["path"]: item for item in inventory["workflows"]}
+    assert (
+        reviewed[path.relative_to(REPOSITORY_ROOT).as_posix()]["sha256"]
+        == hashlib.sha256(path.read_bytes()).hexdigest()
+    )
 
 
 def test_scheduled_full_matrix_failures_are_reported_and_recovered():

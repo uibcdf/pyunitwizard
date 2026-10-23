@@ -93,13 +93,13 @@ reason = "Bootstrap build environment and local exact-source staged/direct publi
 
 [[workflows]]
 path = ".github/workflows/install_macos_latest.yaml"
-sha256 = "90c188f310653ca79e0663e3887c3ab697aa08bf3d78e996d91add9a296ec652"
-reason = "Public Conda package resolves its dependency closure with strict channels; historical smoke covers Python 3.11-3.13"
+sha256 = "1331d446f1c39fbf9fd3100697e9d90162b47e7af59a5a5b63217f427f829426"
+reason = "Reviewed under #44: public Conda import smoke covers Python 3.11-3.14; strict public channels and package dependency resolution are unchanged"
 
 [[workflows]]
 path = ".github/workflows/install_ubuntu_latest.yaml"
-sha256 = "c8877f6c52863c87302ef96bca4beec4621b2f5f6426babc8b3c5a33156388d4"
-reason = "Public Conda package resolves its dependency closure with strict channels; historical smoke covers Python 3.11-3.13"
+sha256 = "e4b7c384f89baec8c396292d137f33416b90c5f53f4e362f6463e637e8f33874"
+reason = "Reviewed under #44: public Conda import smoke covers Python 3.11-3.14; strict public channels and package dependency resolution are unchanged"
 
 [[workflows]]
 path = ".github/workflows/molsyssuite-policy.yml"

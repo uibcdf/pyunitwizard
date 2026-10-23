@@ -60,3 +60,21 @@ are retained in `devguide/evidence/resource_lifecycle_2026-10-22.json`.
 Any future implementation limitation uses the bounded owner-exception route.
 Send this local disposition back to MolSysSuite #104; it remains the shared
 coordination owner. No previously published artifact or archived receipt moves.
+
+## Validation recovery — 2026-10-22
+
+The first exact-head CI (39881889105 at 212534b) fails before scientific tests:
+the two changed installation workflows still have their previous reviewed hashes
+in `dependency_routes.toml`. Keep that run failed. Re-review confirms that only
+the additional Python 3.14 cells changed; public strict channels and package
+resolution are unchanged. Renew both inventory hashes and review reasons, and
+add a local assertion binding each installation workflow to its reviewed digest.
+That assertion fails twice before the correction and passes after it.
+
+The unchanged pinned provider `20628bd5dba6d759669b0d444fe657eb1edad33f`, in a
+task-owned ordinary clone, verifies all 22 declared-and-installed public-bound
+routes. Twenty-one selected workflow/dependency/reporting tests pass. This
+administrative result does not clear the earlier unexecuted scientific CI;
+the corrected head must execute its own ordinary CI. The eight public-install
+smokes at original workflow head 212534b pass and retain their original identity;
+the two workflow byte digests are unchanged by the inventory repair.
