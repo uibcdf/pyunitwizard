@@ -84,10 +84,10 @@ Canonical client-guide delivery is a separate handoff to
 [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
 Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
-- [#123](https://github.com/uibcdf/pyunitwizard/issues/123): remove remaining
-  per-call Pint registry allocations in unyt dimensionality and OpenMM translation;
-  the public dimensionality cache limits repeated work. This is a bounded
-  candidate for the next patch, with constructor-count evidence in the issue.
+- [#124](https://github.com/uibcdf/pyunitwizard/issues/124): Pint `dalton`
+  quantities cannot enter unyt through the current translator. This is a
+  reproduced next-patch candidate, separate from registry reuse; native unyt
+  `amu` input works in the #123 regression scope.
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.
 - #102–#105: tagged layouts, Arrow/Parquet, Zarr and verified append;
@@ -115,8 +115,11 @@ and source-adoption coordination belong to
 
 [#121](solved_bugs/conversion_baseline_runtime_provenance.md) is resolved:
 the older conversion baseline now records the actual executing Python version,
-including its patch number. Historical snapshots are preserved. Review #123
-before preparing the next patch; 0.28.2 has not been published by this work.
+including its patch number. Historical snapshots are preserved.
+[#123](solved_bugs/unyt_remaining_registry_allocations.md) is also resolved:
+remaining unyt dimensionality and OpenMM paths reuse the existing shared registry.
+Review #124 before preparing the next patch; 0.28.2 has not been published by
+this work. MolSysSuite #127 retains the separate consumer-impact route.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

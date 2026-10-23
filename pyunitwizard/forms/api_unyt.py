@@ -73,8 +73,8 @@ def dimensionality(quantity_or_unit: Union[unyt_array, unyt_quantity, unyt_unit]
 
     Parameters
     -----------
-    quantity_or_unit : pint.Quantity or pint.Unit
-        A quanitity or a unit
+    quantity_or_unit : unyt.unyt_array, unyt.unyt_quantity or unyt.Unit
+        A quantity or a unit.
 
     Returns
     -------
@@ -92,7 +92,7 @@ def dimensionality(quantity_or_unit: Union[unyt_array, unyt_quantity, unyt_unit]
         temp_quantity = 1 * quantity_or_unit
     else:
         temp_quantity = quantity_or_unit
-    temp_quantity = temp_quantity.to_pint()
+    temp_quantity = quantity_to_pint(temp_quantity)
 
     return dimensionality_pint(temp_quantity)
 
@@ -368,10 +368,9 @@ def quantity_to_openmm_unit(quantity: Union[unyt_array, unyt_quantity]):
     openmm.unit.Quantity
         The quantity.
     """
-    # Convert to pint quantity first and then to openmm. Temporary solution
     from .api_pint import quantity_to_openmm_unit as pint_quantity_to_openmm
 
-    return pint_quantity_to_openmm(quantity.to_pint())
+    return pint_quantity_to_openmm(quantity_to_pint(quantity))
 
 
 def unit_to_openmm_unit(unit: unyt_unit):

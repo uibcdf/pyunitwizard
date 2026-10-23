@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (41)
+### Resolved (42)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -47,6 +47,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`stated_uncertainty.md`](../completed_proposals/stated_uncertainty.md) — [#90](https://github.com/uibcdf/pyunitwizard/issues/90) — Bind a scalar measurement to its stated uncertainty without statistical inference. *(measured)*
 - [`string_vector_unit_detection.md`](../solved_bugs/string_vector_unit_detection.md) — [#80](https://github.com/uibcdf/pyunitwizard/issues/80) — Classify vector quantity strings without ambiguous array truth values. *(medium, reproduced)*
 - [`unyt_astropy_registry_allocation.md`](../solved_bugs/unyt_astropy_registry_allocation.md) — [#122](https://github.com/uibcdf/pyunitwizard/issues/122) — Reuse the shared Pint registry in unyt-to-Astropy translation. *(medium, measured)*
+- [`unyt_remaining_registry_allocations.md`](../solved_bugs/unyt_remaining_registry_allocations.md) — [#123](https://github.com/uibcdf/pyunitwizard/issues/123) — Reuse the shared registry in remaining unyt dimensionality and OpenMM paths. *(medium, reproduced)*
 
 ### Legacy pre-adoption records (5)
 

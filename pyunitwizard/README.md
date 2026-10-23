@@ -74,9 +74,11 @@ than passing display symbols between libraries. In particular, OpenMM's `A`
 means angstrom and must remain a length; unyt reserves `A` for ampere. This
 also preserves compound length/time units and actual electrical-current inputs.
 
-The unyt-to-Astropy translator also reuses the shared Pint registry through
-`quantity_to_pint`. Repeated conversions do not construct a fresh registry for
-each array; numerical translation and dtype/shape contracts remain unchanged.
+The unyt-to-Astropy and unyt-to-OpenMM translators, and the unyt dimensionality
+adapter, reuse the shared Pint registry through `quantity_to_pint`. These
+operations do not construct a fresh registry for each call. The public
+dimensionality cache remains in place; numerical translation, dtype/shape and
+the molecular mass convention are preserved.
 
 The optional `openff.units` form uses the actual OpenFF registry and shared
 Pint definition verification, with native OpenMM parity and explicit unsealed
