@@ -1,14 +1,14 @@
 ---
 summary: Refresh developer documentation against the current supported baseline.
 issue: uibcdf/pyunitwizard#119
-status: active
+status: resolved
 opened: 2026-10-22
-closed:
+closed: 2026-10-22
 severity: low
 verification: inspected
 area: [documentation]
 guard:
-normative:
+normative: docs/README.md
 blocked_by: []
 supersedes: []
 ---
@@ -85,4 +85,38 @@ documented Conda profile paths exist and the floors agree with project metadata.
 `python -m pytest --receptor=llm tests/test_reporting_protocol.py` passes all
 nine tests; index and diff checks pass. No scientific code or workflow changed;
 these documentation checks do not requalify another platform or public artifact.
-Deployment and fresh public-page verification remain required before closure.
+
+## Published verification — 2026-10-22 (local date)
+
+Source `4bdb51410be05a12b10067908e73a08c3097a6e9` is pushed to main.
+Native exact-source verification confirms policy run
+[39884265899](https://github.com/uibcdf/pyunitwizard/actions/runs/39884265899)
+and documentation run
+[39884282450](https://github.com/uibcdf/pyunitwizard/actions/runs/39884282450),
+both successful on attempt 1 with the required job/steps executed. The hosted
+Sphinx log also reports a successful warning-free build. The ordinary CI workflow
+filters this Markdown/docs-only change by design; no skip marker was used.
+
+The generated gh-pages source link names that exact source commit. Pages deployment
+[39884399430](https://github.com/uibcdf/pyunitwizard/actions/runs/39884399430)
+passes at HTML commit `361196598cf216d8cefc9ab3d9f6205cf58956ce`.
+Eleven fresh HTTPS responses from `www.uibcdf.org/pyunitwizard/` return 200 and
+contain the expected floors, commands, release titles, homepage Python 3.14 badge
+and depth-correct author links. Cloudflare email protection transforms the
+`pyunitwizard.git@0.28.1` fragment in transit; its encoded value decodes to the
+published command and the page loads its decoder. The initial plain-HTML
+comparison failed on this transformation; it was not silently treated as a pass.
+One separate HTTP probe returned 403; the subsequent complete eleven-page
+verification succeeded. Observation timestamps and raw response digests are in
+[the verification receipt](../evidence/documentation_refresh_2026-10-22.json).
+
+The normative guard is the corrected setup/build/publication procedure in
+`docs/README.md`, supported by the successful rendered-content and link checks.
+No artificial pytest assertion of prose was added. Existing reporting tests
+validate record addressability/lifecycle rather than documentation semantics.
+
+The guide handoff includes the exact source and SHA-256 in
+[MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126#issuecomment-6355196617).
+No client copies were modified or qualified here. That central delivery remains
+open independently of local documentation closure. No release tag, package
+artifact or scientific behavior changed; 0.28.1 keeps its original identity.

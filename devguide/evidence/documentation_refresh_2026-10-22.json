@@ -1,0 +1,440 @@
+{
+  "schema": "pyunitwizard.documentation-refresh@1",
+  "issue": "uibcdf/pyunitwizard#119",
+  "local_date": "2026-10-22",
+  "published_source_sha": "4bdb51410be05a12b10067908e73a08c3097a6e9",
+  "gh_pages_sha": "361196598cf216d8cefc9ab3d9f6205cf58956ce",
+  "source_binding_readme": "#GitHub Pages\n\nLast update of sphinx html documentation from [4bdb514](https://github.com/uibcdf/pyunitwizard/tree/4bdb51410be05a12b10067908e73a08c3097a6e9)\n",
+  "local_validation": {
+    "issue": "uibcdf/pyunitwizard#119",
+    "date": "2026-10-22",
+    "python": "3.14.7",
+    "sphinx": "9.1.0",
+    "local_pages": [
+      {
+        "page": "content/developer/compatibility-matrix.html",
+        "expected_fragments": [
+          "0.14.0",
+          "0.11.0",
+          "0.16.0",
+          "0.10.1"
+        ],
+        "local_link_targets_checked": 40
+      },
+      {
+        "page": "content/developer/development-environment.html",
+        "expected_fragments": [
+          "molsyssuite@uibcdf_3.14",
+          "conda env create",
+          "--editable"
+        ],
+        "local_link_targets_checked": 40
+      },
+      {
+        "page": "content/developer/devtools.html",
+        "expected_fragments": [
+          "test_env.yaml",
+          "Python 3.14"
+        ],
+        "local_link_targets_checked": 41
+      },
+      {
+        "page": "content/developer/testing-and-coverage.html",
+        "expected_fragments": [
+          "molsyssuite@uibcdf_3.14",
+          "--receptor=llm"
+        ],
+        "local_link_targets_checked": 41
+      },
+      {
+        "page": "content/about/installation.html",
+        "expected_fragments": [
+          "argdigest>=0.14.0",
+          "@0.28.1"
+        ],
+        "local_link_targets_checked": 20
+      },
+      {
+        "page": "content/developer/documentation/sphinx.html",
+        "expected_fragments": [
+          "does not publish",
+          "gh workflow run"
+        ],
+        "local_link_targets_checked": 41
+      },
+      {
+        "page": "content/developer/release-and-versioning.html",
+        "expected_fragments": [
+          "--title X.Y.Z",
+          "0.28.1"
+        ],
+        "local_link_targets_checked": 40
+      },
+      {
+        "page": "content/developer/tags_and_releases.html",
+        "expected_fragments": [
+          "--title X.Y.Z",
+          "0.28.1"
+        ],
+        "local_link_targets_checked": 40
+      },
+      {
+        "page": "content/developer/contributing-workflow.html",
+        "expected_fragments": [
+          "--receptor=llm"
+        ],
+        "local_link_targets_checked": 41
+      },
+      {
+        "page": "content/developer/contributor-checklist.html",
+        "expected_fragments": [
+          "--receptor=llm"
+        ],
+        "local_link_targets_checked": 40
+      },
+      {
+        "page": "index.html",
+        "expected_fragments": [
+          "PyUnitWizard",
+          "pyunitwizard>=0.28.1"
+        ],
+        "local_link_targets_checked": 15
+      }
+    ],
+    "make_build": {
+      "status": "success",
+      "warnings": 0,
+      "layout": "_build/index.html"
+    },
+    "sphinx_make_mode": {
+      "status": "success",
+      "warnings_as_errors": true,
+      "layout": "html/index.html"
+    },
+    "reporting_protocol_tests": {
+      "passed": 9
+    },
+    "source_files": {
+      "docs/AGENTS.md": "c30567e46a59f0a57e16a4ee9a5c38c5a97e59c14c7a667582cc998ebe12963e",
+      "docs/README.md": "0e78160385d4f918d6c121f12f45144cdfa22ec15e61f6a7d25f5613d54a5cff",
+      "docs/_templates/copyright.html": "300b72066772c7b0cbe8815b6dfea02bc701d8d8b8ed5739b5c7fac08efa4eb1",
+      "docs/content/about/installation.md": "4e7e021dd33bd527b7db32b4de6e3599f98c448d509beb3d8b078978513ff68a",
+      "docs/content/developer/compatibility-matrix.md": "cb33ba65abd320d52f961d0532241330a9008d2e9c3aff191b36c4a288bc967d",
+      "docs/content/developer/contributing-workflow.md": "139453a7d2868d0599ee84dbbe5603226b92d50406063dd05c16cabe5299c8fc",
+      "docs/content/developer/contributor-checklist.md": "b8ba45761bfb04af10f101dcdddf70e43af7bbafe15e0e5d2e4ffb456179e2c4",
+      "docs/content/developer/development-environment.md": "74686f30dd4a74591dae7f32f15a2038c885af9916f4418a8093401c0ab6811a",
+      "docs/content/developer/devtools.md": "86672e9942949eb672806a79d05f477caea5a4023418d537463df53dd4a1518e",
+      "docs/content/developer/documentation/sphinx.md": "900c23fee5455907157d7d6dfd3117d55f8bc9eb748e4763b41f7dc6ad9466ca",
+      "docs/content/developer/release-and-versioning.md": "0b65558d25174e9d453e94119c71031a6a65b67b1c4eef7c3ca43d5ff4d2586a",
+      "docs/content/developer/tags_and_releases.md": "ba790137d7b84db42b9c0b91d199e36eebf655af1d44c86727be93faa17bb70e",
+      "docs/content/developer/testing-and-coverage.md": "c7da944a4e4b9e69928bb8bc2dba59cf7f05d576fd213fcd0aad8b7695d58999",
+      "docs/index.md": "6fae59157075a4c51ae2dd2494265b8dc2c1686497a3b01fce36c2dfa55928c1",
+      "standards/PYUNITWIZARD_GUIDE.md": "b7eb20dbe5518f61d2c9c9f72c31f4134bfac09fc2b8015e76b59fb31b015d01"
+    },
+    "scope": "Documentation only. No scientific suite, other platform or public artifact requalification claimed."
+  },
+  "exact_source_gates": [
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 39884265899,
+      "run_attempt": 1,
+      "candidate_sha": "4bdb51410be05a12b10067908e73a08c3097a6e9",
+      "workflow": ".github/workflows/molsyssuite-policy.yml",
+      "jobs": [
+        {
+          "name": "policy / conformance",
+          "job_id": 120188648194,
+          "required_steps": [
+            "Check repository conformance",
+            "Check Python lint and imports",
+            "Check Python formatting"
+          ]
+        }
+      ],
+      "event": "push",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 39884282450,
+      "run_attempt": 1,
+      "candidate_sha": "4bdb51410be05a12b10067908e73a08c3097a6e9",
+      "workflow": ".github/workflows/sphinx_docs_to_gh_pages.yaml",
+      "jobs": [
+        {
+          "name": "Sphinx docs to gh-pages",
+          "job_id": 120188715232,
+          "required_steps": [
+            "Installing the library",
+            "Test import module",
+            "Running the Sphinx to gh-pages Action"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch",
+      "exact_jobs": true
+    }
+  ],
+  "native_pages_deployment": {
+    "schema": "molsyssuite.native-gate@1",
+    "state": "verified",
+    "run_id": 39884399430,
+    "run_attempt": 1,
+    "candidate_sha": "361196598cf216d8cefc9ab3d9f6205cf58956ce",
+    "workflow": "dynamic/pages/pages-build-deployment",
+    "jobs": [
+      {
+        "name": "build",
+        "job_id": 120189072614,
+        "required_steps": [
+          "Checkout",
+          "Upload artifact"
+        ]
+      },
+      {
+        "name": "report-build-status",
+        "job_id": 120189114804,
+        "required_steps": [
+          "Report Build Status"
+        ]
+      },
+      {
+        "name": "deploy",
+        "job_id": 120189114874,
+        "required_steps": [
+          "Deploy to GitHub Pages"
+        ]
+      }
+    ],
+    "event": "dynamic",
+    "exact_jobs": true
+  },
+  "public_pages": [
+    {
+      "page": "content/developer/compatibility-matrix.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/compatibility-matrix.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "61e963783b8f49691d45206465d6f00b6e2642c69bc150667c795868a600d0fe",
+      "expected_fragments": [
+        "0.14.0",
+        "0.11.0",
+        "0.16.0",
+        "0.10.1"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/development-environment.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/development-environment.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "356b42a3f54e6434ef6f2cbc6d0b227db9a64b08c03b551efb72b880bbeca425",
+      "expected_fragments": [
+        "molsyssuite@uibcdf_3.14",
+        "conda env create",
+        "--editable"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/devtools.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/devtools.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "43410aaab16aba32a1f5c2bf429566c67a93a3f5e6497067fbf0967cb2c47e1a",
+      "expected_fragments": [
+        "test_env.yaml",
+        "Python 3.14"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/testing-and-coverage.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/testing-and-coverage.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "cf2a7df63ff7e6ad1409ade3de962bf6c27b3234e5c84d75d3bc2599bce4603b",
+      "expected_fragments": [
+        "molsyssuite@uibcdf_3.14",
+        "--receptor=llm"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/about/installation.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/about/installation.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "9154f48b356eed2e9f624b5d1167b8488dccf1dad5150398dea2ab48f85a233c",
+      "expected_fragments": [
+        "argdigest>=0.14.0",
+        "@0.28.1"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 1,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/documentation/sphinx.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/documentation/sphinx.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "148f6eeee9ee0d251db85cf8a744ba53bd954ed2ecdf2ec0224c5d0054fc4a58",
+      "expected_fragments": [
+        "does not publish",
+        "gh workflow run"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/release-and-versioning.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/release-and-versioning.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "5702d4f1752bf6eefbe7d80027358d55f3d8bb3a8181abfb33d2cf340fca059a",
+      "expected_fragments": [
+        "--title X.Y.Z",
+        "0.28.1"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/tags_and_releases.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/tags_and_releases.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "73429d0ecd6a2fa22def28f72888d7a108c169528c1ccc2b3c32017b66aa3c30",
+      "expected_fragments": [
+        "--title X.Y.Z",
+        "0.28.1"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "page": "content/developer/contributing-workflow.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/contributing-workflow.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "17c7dde3e7f3ff212cafae5690654327058311f6ba4472eaec7214d74196de5c",
+      "expected_fragments": [
+        "--receptor=llm"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "MISS"
+      }
+    },
+    {
+      "page": "content/developer/contributor-checklist.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/content/developer/contributor-checklist.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "a185225254a59dd640b5ccb92d5a5c52365a0c916b1e7dec49ce50b9f06c5781",
+      "expected_fragments": [
+        "--receptor=llm"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "MISS"
+      }
+    },
+    {
+      "page": "index.html",
+      "url": "https://www.uibcdf.org/pyunitwizard/index.html",
+      "status": 200,
+      "observed_at_utc": "2026-10-23T01:33:18.275831+00:00",
+      "sha256": "3ed994e88801fa529b566760824439fc62d526f62af05984ab986acc987a13c5",
+      "expected_fragments": [
+        "PyUnitWizard",
+        "pyunitwizard>=0.28.1"
+      ],
+      "footer_target_verified": true,
+      "cdn_email_protection_decoded": 0,
+      "response_headers": {
+        "Date": "Fri, 23 Oct 2026 01:33:18 GMT",
+        "Last-Modified": "Fri, 23 Oct 2026 01:30:58 GMT",
+        "ETag": null,
+        "X-Cache": "MISS"
+      }
+    }
+  ],
+  "guide_delivery": {
+    "owner_issue": "uibcdf/molsyssuite#126",
+    "notice": "https://github.com/uibcdf/molsyssuite/issues/126#issuecomment-6355196617",
+    "canonical_source_sha": "4bdb51410be05a12b10067908e73a08c3097a6e9",
+    "canonical_sha256": "b7eb20dbe5518f61d2c9c9f72c31f4134bfac09fc2b8015e76b59fb31b015d01",
+    "client_copies_modified": false,
+    "delivery_state": "pending_central_owner"
+  },
+  "scope_limits": [
+    "No runtime, dependency declaration, workflow, tag or package artifact changed.",
+    "Ordinary CI paths-ignore filters Markdown and docs. Prior df7a307 science evidence retains its original identity and unchanged applicability.",
+    "No client runtime adoption or installed-artifact requalification claimed. Shared environment conflicts stay owned by uibcdf/molsyssuite#82.",
+    "Cloudflare email protection required decoding one URL fragment for plain-HTML comparison. Initial comparison failed; subsequent complete verification passed. One intervening probe returned HTTP 403."
+  ]
+}
