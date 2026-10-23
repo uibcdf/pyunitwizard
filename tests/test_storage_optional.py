@@ -11,7 +11,7 @@ def test_optional_storage_modules_do_not_import_providers():
         [
             sys.executable,
             "-c",
-            "import sys; import pyunitwizard.dialects.cf; import pyunitwizard.storage.hdf5; import pyunitwizard.storage.zarr; import pyunitwizard.storage.arrow; assert not {'cf_units', 'h5py', 'zarr', 'pyarrow'} & set(sys.modules)",
+            "import sys; import pyunitwizard.dialects.cf; import pyunitwizard.dialects.ucum; import pyunitwizard.dialects.vocabulary; import pyunitwizard.storage.hdf5; import pyunitwizard.storage.zarr; import pyunitwizard.storage.arrow; import pyunitwizard.storage.asdf; assert not {'cf_units', 'h5py', 'zarr', 'pyarrow', 'ucumvert', 'lark', 'rdflib', 'asdf', 'asdf_astropy', 'astropy.units'} & set(sys.modules)",
         ],
         capture_output=True,
         text=True,
@@ -27,6 +27,27 @@ def test_missing_cf_provider_has_an_installation_diagnostic(monkeypatch):
     monkeypatch.setattr(depdigest, "is_installed", lambda library: False)
     with pytest.raises(ModuleNotFoundError, match="cf-units"):
         cf.validate_unit("meter", "m")
+
+
+def test_missing_ucum_provider_has_an_installation_diagnostic(monkeypatch):
+    import depdigest
+
+    from pyunitwizard.dialects import ucum
+
+    monkeypatch.setattr(depdigest, "is_installed", lambda library: False)
+    with pytest.raises(ModuleNotFoundError, match="ucumvert"):
+        ucum.validate_unit("meter", "m")
+
+
+@pytest.mark.parametrize("missing", ["asdf", "asdf_astropy", "astropy.units"])
+def test_missing_asdf_provider_has_an_installation_diagnostic(monkeypatch, missing):
+    import depdigest
+
+    from pyunitwizard.storage import asdf
+
+    monkeypatch.setattr(depdigest, "is_installed", lambda library: library != missing)
+    with pytest.raises(ModuleNotFoundError, match="ASDF"):
+        asdf.read(None, unit="meter")
 
 
 def test_missing_hdf5_provider_has_an_installation_diagnostic(monkeypatch):
@@ -51,7 +72,7 @@ def test_missing_storage_provider_has_an_installation_diagnostic(monkeypatch, na
         module.read(None, unit="nm")
 
 
-@pytest.mark.parametrize("name,provider", [("zarr", "zarr"), ("arrow", "pyarrow")])
+@pytest.mark.parametrize("name,provider", [("zarr", "zarr"), ("arrow", "pyarrow"), ("asdf", "asdf")])
 def test_transitive_provider_failure_is_not_reported_as_absence(monkeypatch, name, provider):
     import builtins
     import importlib
