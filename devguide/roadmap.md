@@ -11,10 +11,15 @@ source/file, all mandatory source gates, 30 installed cells and independent
 public verification. #111 is delivered. The resource/tooling review #116–#118 is
 complete. The [#119 archive](solved_bugs/documentation_baseline_refresh.md)
 retains current documentation alignment and actual website verification.
-No queued local defect remains. See [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126)
+See [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126)
 for independent delivery of the corrected canonical guide to clients.
 
-The future backlog is #85 (remaining interoperability boundaries), #102–#106
+The [#106 evaluation](completed_proposals/quantity_record_hub.md) is complete:
+retain direct/live Pint translation, with #120/#122 translator fixes in source.
+They are not part of the existing 0.28.1 public artifact. #121 tracks a separately
+identified performance-tool provenance bug. Consumer notice is MolSysSuite #127.
+
+The future backlog is #85 (remaining interoperability boundaries), #102–#105
 (independent record extensions), #44/#52 (deferred integrations), and #87
 (conditional later re-evaluation of a live form). Start from a measured consumer
 and each issue's acceptance criteria; see [the pending index](pending_proposals/README.md).

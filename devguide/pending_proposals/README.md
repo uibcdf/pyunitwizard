@@ -5,10 +5,6 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Active (1)
-
-- [`quantity_record_hub.md`](quantity_record_hub.md) — [#106](https://github.com/uibcdf/pyunitwizard/issues/106) — Evaluate QuantityRecord as a backend translation hub. *(inspected)*
-
 ### Partial (1)
 
 - [`interop_unit_dialects.md`](interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*

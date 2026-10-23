@@ -15,6 +15,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `release_0.28.1_notes.md`: published patch scope, source/file identity and installed qualification.
 - `completed_proposals/release_0.28.1.md`: executed publication route and retained evidence.
 - `completed_proposals/backend_declaration_plans.md`: completed #111 optimization and measurement limits.
+- `completed_proposals/quantity_record_hub.md`: completed #106 evaluation,
+  live-translation decision and before/after measurements.
 - `release_0.21.x_rc_checklist.md`: completed historical RC checklist for consolidation before `1.0.0`.
 - `release_0.21.x_notes_draft.md`: historical RC release notes and migration scope.
 - `docs_api_alignment_0.21.x.md`: historical RC user/API alignment evidence.
@@ -82,10 +84,13 @@ Canonical client-guide delivery is a separate handoff to
 [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
 Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
+- #121: a newly identified maintenance bug in the older conversion-baseline
+  tool's literal Python-version provenance. The #106 tool records the actual runtime.
+
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.
-- #102–#106: tagged layouts, Arrow/Parquet, Zarr, verified append and a translation
-  hub; the [pending proposal index](pending_proposals/README.md) links each record.
+- #102–#105: tagged layouts, Arrow/Parquet, Zarr and verified append;
+  the [pending proposal index](pending_proposals/README.md) links each record.
 - #44 and #52: deferred forallpeople and Pydantic integration decisions.
 - [#87](https://github.com/uibcdf/pyunitwizard/issues/87): later re-evaluation of
   a live native form, conditional on real consumers and measured need. Its issue
@@ -96,6 +101,16 @@ MeasurementRecord, optional attribution and record/storage bindings remain
 provisional. [The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh
 candidate evidence, explicit scope/admission decisions and release-owner approval;
 publishing 0.28.1 does not satisfy that final go/no-go.
+
+The #106 evaluation is complete: retain direct/live Pint translation rather
+than constructing sealed records as a universal intermediate. It delivered
+`devtools/benchmark_record_translation.py` and found two owner-local corrections:
+[#120](solved_bugs/openmm_unyt_symbol_collision.md) preserves OpenMM angstrom
+meaning in unyt, and [#122](solved_bugs/unyt_astropy_registry_allocation.md)
+reuses the shared registry for unyt-to-Astropy. These source changes are later
+than published 0.28.1; no new package release is implied. Consumer impact notice
+and source-adoption coordination belong to
+[MolSysSuite #127](https://github.com/uibcdf/molsyssuite/issues/127).
 
 ## 0.19.x checkpoint summary (historical baseline)
 
