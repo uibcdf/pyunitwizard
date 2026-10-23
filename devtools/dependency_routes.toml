@@ -118,7 +118,7 @@ reason = "Exact-file promotion and public poststate; bootstrap environment is no
 
 [[workflows]]
 path = ".github/workflows/release_gates.yaml"
-sha256 = "886e88251aa3c278849110f053fdf7e1f0642e41a3bf72fbb06243a5f5d3f208"
+sha256 = "fc1ff7bd9566dd21a5448399d4302bd6e46936907ff01f5c024c6c702da1db1e"
 reason = "Test/packaging/documentation gates use the reviewed release or documentation environments"
 
 [[workflows]]

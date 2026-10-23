@@ -8,6 +8,7 @@ import tomllib
 from pathlib import Path
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location(
@@ -77,6 +78,20 @@ def test_source_workflows_execute_default_qualification_before_tests_or_builds()
     for filename, marker in before.items():
         text = (ROOT / ".github/workflows" / filename).read_text()
         assert text.index("- name: Check dependency contract") < text.index(marker)
+        workflow = yaml.safe_load(text)
+        for job in workflow["jobs"].values():
+            names = [step.get("name") for step in job.get("steps", [])]
+            for boundary in (
+                "Run tests",
+                "Run full test suite",
+                "Run full suite with optional backend",
+                "Run full suite with optional providers",
+                "Build artifacts",
+                "Build docs",
+            ):
+                if boundary in names:
+                    assert names.count("Check dependency contract") == 1, job.get("name")
+                    assert names.index("Check dependency contract") < names.index(boundary), job.get("name")
         assert "--declared-only" not in text
         assert "20628bd5dba6d759669b0d444fe657eb1edad33f" in text
     for filename in ("openff_interop.yaml", "storage_interop.yaml"):

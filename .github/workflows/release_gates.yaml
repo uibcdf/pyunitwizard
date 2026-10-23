@@ -101,6 +101,10 @@ jobs:
           create-args: >-
             python=3.13
 
+      - name: Check dependency contract
+        shell: bash -l {0}
+        run: python devtools/check_dependency_routes.py --suite-root .governance-tools
+
       - name: Build artifacts
         shell: bash -l {0}
         run: |

@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (48)
+### Resolved (49)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -47,6 +47,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*
+- [`release_packaging_dependency_gate.md`](../solved_bugs/release_packaging_dependency_gate.md) — [#130](https://github.com/uibcdf/pyunitwizard/issues/130) — Execute the packaging job's declared dependency gate before building artifacts. *(medium, reproduced)*
 - [`resource_lifecycle_review.md`](../completed_proposals/resource_lifecycle_review.md) — [#116](https://github.com/uibcdf/pyunitwizard/issues/116) — Review remaining component tool and temporary-resource ownership. *(inspected)*
 - [`showcase_offers_unavailable_pypi_install.md`](../solved_bugs/showcase_offers_unavailable_pypi_install.md) — [#76](https://github.com/uibcdf/pyunitwizard/issues/76) — The showcase notebook offered a PyPI installation route that cannot resolve PyUnitWizard. *(medium, inspected)*
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*
