@@ -4,9 +4,9 @@ Use this checklist as a hard release gate. All items must be complete before cre
 
 ## Evidence index
 
-Current published checkpoint: `0.28.1` (2026-10-05). Its source/installed/public
-receipts are in `completed_proposals/release_0.28.1.md` and
-`evidence/release_0.28.1_2026-10-05.json`; current floors are in
+Current published checkpoint: `0.29.0` (2026-10-23). Its source/installed/public
+receipts are in `completed_proposals/release_0.29.0.md` and
+`evidence/release_0.29.0_2026-10-23.json`; current floors are in
 `compatibility_matrix.md`. These establish that release's scope and do not
 qualify a future 1.0 candidate or admit provisional contracts.
 
@@ -134,3 +134,13 @@ collecting fresh candidate evidence for each section:
   Following the maintainer's 2026-10-23 request, announce availability once the
   package and GitHub Release are verified; reuse that version's notice and retain
   links, scope and installed evidence. Pre-rollout impact notices stay separate.
+
+
+## 0.29.0 checkpoint — 2026-10-23
+
+The bounded #85 inventory and #102–#105 extensions are delivered and qualified
+in public 0.29.0. The original source, separate qualifier and immutable file
+have distinct retained receipts. MolSysSuite #132 owns availability and guide
+coordination. The unchecked gates above remain obligations for the future
+1.0 candidate; this checkpoint neither admits provisional contracts as stable
+nor qualifies migrations in consuming repositories.

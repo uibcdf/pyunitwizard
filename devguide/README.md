@@ -12,8 +12,9 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - `api_freeze_pre_1.0_decision.md`: explicit decision record for no planned breaking API changes before `1.0.0`.
 - `serialization_contract_draft.md`: historical draft superseded by provisional QuantityRecord.
 - `compatibility_matrix.md`: current required sibling floors and optional provider qualification.
-- `release_0.28.1_notes.md`: published patch scope, source/file identity and installed qualification.
-- `completed_proposals/release_0.28.1.md`: executed publication route and retained evidence.
+- `release_0.29.0_notes.md`: published additive scope, exact source/file identity and limits.
+- `completed_proposals/release_0.29.0.md`: executed source/installed/public publication route.
+- `release_0.28.1_notes.md` and `completed_proposals/release_0.28.1.md`: immutable prior patch history.
 - `completed_proposals/backend_declaration_plans.md`: completed #111 optimization and measurement limits.
 - `completed_proposals/quantity_record_hub.md`: completed #106 evaluation,
   live-translation decision and before/after measurements.
@@ -42,9 +43,9 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Latest public release: [`0.28.1`](release_0.28.1_notes.md), published on
-  2026-10-05 through GitHub and the public `uibcdf` Conda channel.
-- Current pre-`1.0.0` line: `0.28.x`. Published provisional capabilities are
+- Latest public release: [`0.29.0`](release_0.29.0_notes.md), published on
+  2026-10-23 through GitHub and the public `uibcdf` Conda channel.
+- Current pre-`1.0.0` line: `0.29.x`. Published provisional capabilities are
   separate from stable-contract admission and member source adoption.
 - Completed release-candidate line: `0.21.x`.
 - Latest maintenance tag in RC line: `0.21.1`.
@@ -54,7 +55,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Latest stabilized tags before RC: `0.18.2`, `0.18.3`, `0.18.4`.
 - Stable target: `1.0.0`.
 - Publicly supported Python versions: `3.11`–`3.14`; routine CI uses `3.14`.
-  The qualified baseline, CF/HDF5 and prepared-attribution installed profiles
+  The qualified baseline, storage/dialect and prepared-attribution installed profiles
   cover Linux and macOS arm64 on all four minors. OpenFF 0.4.0 covers
   Python `3.12`–`3.14` with Pint `>=0.24,<0.26`.
 - Supported platforms: Linux and macOS arm64. Windows support is deferred until a
@@ -67,78 +68,56 @@ This directory contains operational guidance for maintaining and releasing PyUni
   `physipy` (soft), `quantities` (soft), `openff.units` (soft, bounded above),
   plus `string` and the provisional inert `record` form (QuantityRecord).
 
-## Resume after 0.28.1
+## Resume after 0.29.0
 
-Publication #112 and attribution optimization #111 are closed. Their archived
-records retain original source, producer, digest, native gates and public
-observations. All 30 installed cells passed; public prepared attribution uses
-Ackredit 0.10.1 while retaining the optional >=0.9.0 fallback. Codecov #107 is
-closed after actual coverage and test-result uploads recovered.
+[Publication #128](completed_proposals/release_0.29.0.md) is complete. The
+canonical tag and stable GitHub Release identify original source
+`cfe067bcc4545c60aaca4c6950f6d84075ee6c36`. The exact Conda file, original
+producer, separate infrastructure qualifier, all 29 required source jobs,
+30 installed cells, public main/index/install observations and served docs
+are retained in `evidence/release_0.29.0_2026-10-23.json` and the linked
+source/installed closure receipts. Previous release receipts retain their own
+identities. This release replaces the uncreated 0.28.2 plan.
 
-The October 22 resource/tooling review (#116–#118) is complete; its receipts are
-linked from [the resource review](resource_lifecycle_review.md). The current
-documentation refresh #119 is complete, including explicit website publication;
-its [archived record](solved_bugs/documentation_baseline_refresh.md) retains
-the source, deployment and fresh public-page verification.
-Canonical client-guide delivery is a separate handoff to
-[MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
-Remaining feature work is evaluated through its owning issue and acceptance conditions:
+The bounded [#85 inventory](completed_proposals/interop_unit_dialects.md) is
+complete: OpenFF and physical CF/HDF5 plus actual-provider UCUM #125, native
+ASDF #126 and offline QUDT/UO annotation #127. Its maintained contract is
+`docs/content/user/unit-dialects.md`. Future calendar coordinates, full
+clinical/astronomy schemas and unmeasured vocabulary expansion need independently
+justified consumers and separate contracts.
 
-- #85: bounded UCUM #125, ASDF #126 and QUDT/UO #127 completion is being
-  qualified for 0.29.0 under #128. OpenFF and physical CF/HDF5 are delivered;
-  future calendar coordinates and whole clinical/astronomy schemas require
-  independently justified consumers rather than an unbounded umbrella claim.
-- #44 and #52: deferred forallpeople and Pydantic integration decisions.
-- [#87](https://github.com/uibcdf/pyunitwizard/issues/87): later re-evaluation of
-  a live native form, conditional on real consumers and measured need. Its issue
-  is the decision record; it has no queued implementation document.
-
-Select the next item from measured consumer demand. QuantityRecord, bundles,
-MeasurementRecord, optional attribution and record/storage bindings remain
-provisional. [The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh
-candidate evidence, explicit scope/admission decisions and release-owner approval;
-publishing 0.28.1 does not satisfy that final go/no-go.
-
-The #106 evaluation is complete: retain direct/live Pint translation rather
-than constructing sealed records as a universal intermediate. It delivered
-`devtools/benchmark_record_translation.py` and found two owner-local corrections:
-[#120](solved_bugs/openmm_unyt_symbol_collision.md) preserves OpenMM angstrom
-meaning in unyt, and [#122](solved_bugs/unyt_astropy_registry_allocation.md)
-reuses the shared registry for unyt-to-Astropy. These source changes are later
-than published 0.28.1; no new package release is implied. Consumer impact notice
-and source-adoption coordination belong to
-[MolSysSuite #127](https://github.com/uibcdf/molsyssuite/issues/127).
-
-[#121](solved_bugs/conversion_baseline_runtime_provenance.md) is resolved:
-the older conversion baseline now records the actual executing Python version,
-including its patch number. Historical snapshots are preserved.
-[#123](solved_bugs/unyt_remaining_registry_allocations.md) is also resolved:
-remaining unyt dimensionality and OpenMM paths reuse the existing shared registry.
-[#124](solved_bugs/pint_unyt_atomic_mass_names.md) is resolved: Pint atomic-mass
-names, prefixes and compound units enter unyt with reversible quantity/unit
-translations and isolated definitions. The October 22 backlog review found no
-additional open defect at that checkpoint. On October 23 the maintainer selected
-the four record extensions below and both existing-consumer workload families.
-The maintainer subsequently selected completion of #85 and 0.29.0 instead of the
-uncreated 0.28.2. Record-extension source qualification remains separate from the
-0.29.0 candidate and its exact installed artifact under #128. That release is
-being prepared and has not yet been published. The staged artifact's baseline
-and storage profiles now include the new codec/storage guards, including an
-explicit refusal of skipped required storage tests. After actual package and
-GitHub Release publication, open the requested MolSysSuite availability issue.
-MolSysSuite #127 retains the separate consumer-impact route.
-
-The selected record extensions are implemented with consumer-derived
-measurements and source/installed qualification:
+The release also delivers the qualified record extensions:
 [#104 Zarr](completed_proposals/quantity_record_zarr.md),
 [#102 tagged layout](completed_proposals/quantity_record_tagged.md),
 [#105 immutable append](completed_proposals/quantity_record_append.md), and
 [#103 Arrow/Parquet](completed_proposals/quantity_record_arrow.md).
-Their maintained contract is `docs/content/user/record-extensions.md`.
-Original native receipts retain their producer and per-cell wheel identities;
-final checkpoint receipts belong to the owning issues. The exact public Conda
-file and release still need separate qualification before publication.
-MolSysSuite #46 owns the record-extension consumer/adoption handoff.
+Their maintained contract is `docs/content/user/record-extensions.md`; original
+measurements and per-cell wheel identities remain separate from this Conda file.
+Conversion fixes #120/#122/#123/#124 and benchmark provenance #121 are included.
+The #106 decision still retains direct/live Pint translation rather than sealed
+records as a universal computation intermediate.
+
+The optional Ackredit floor remains 0.9.0; the separate prepared profile qualifies
+public 0.10.1. All required storage/dialect and prepared modules executed without
+skips in their respective eight-cell installed profiles. Whole-run JUnit evidence
+retains intentional strict-JSON/NaN and unavailable prepared-API classifications
+elsewhere. Qualification fixes #129/#130/#131 and prior coverage incident #107
+are resolved; their archives retain the actual failures and recovery evidence.
+The #116–#119 tooling/resource/documentation review remains complete.
+
+[MolSysSuite #132](https://github.com/uibcdf/molsyssuite/issues/132) owns this
+version's availability notice and guide/pin handoff. The canonical guide is
+`standards/PYUNITWIZARD_GUIDE.md`; MolSysSuite owns synchronizing client copies.
+Advance consumer-impact/adoption work remains separately linked from suite
+#46 and #127. Provider publication does not establish client source adoption.
+
+Remaining feature decisions are #44 (forallpeople), #52 (Pydantic) and
+[#87](https://github.com/uibcdf/pyunitwizard/issues/87) (a possible live native
+form). Revisit them only with real consumer demand and measured need; #87 has
+no queued implementation document. QuantityRecord, bundles, measurement,
+attribution and all new record/storage/dialect surfaces remain **provisional**.
+[The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh candidate
+evidence, explicit admission/scope decisions and release-owner approval.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

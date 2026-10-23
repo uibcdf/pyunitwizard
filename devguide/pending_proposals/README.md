@@ -5,10 +5,6 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Active (1)
-
-- [`release_0.29.0.md`](release_0.29.0.md) — [#128](https://github.com/uibcdf/pyunitwizard/issues/128) — Qualify and publish 0.29.0 as the next additive interoperability checkpoint. *(inspected)*
-
 ### Open (2)
 
 - [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*

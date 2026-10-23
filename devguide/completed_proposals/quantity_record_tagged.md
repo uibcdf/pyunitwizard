@@ -146,3 +146,15 @@ issue #46 retains the advance provider/adoption handoff, while future actual
 publication requires its own version-specific central notice and availability
 update as requested by the maintainer. No client copy or dependency pin was
 changed in a consumer repository.
+
+
+## Public delivery addendum — 2026-10-23
+
+The separately qualified public checkpoint is now **0.29.0**, replacing the
+uncreated 0.28.2 plan. Original source and benchmark/wheel identities above
+remain historical evidence. Exact-file Conda qualification and public outcomes
+are retained in `devguide/completed_proposals/release_0.29.0.md` and
+`devguide/evidence/release_0.29.0_2026-10-23.json`. MolSysSuite #132 owns this
+version's availability and canonical-guide handoff; suite #46 retains the
+separate consumer/adoption route. No client migration or stable API admission
+is implied by publication.
