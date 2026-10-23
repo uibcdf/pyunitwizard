@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (47)
+### Resolved (48)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -29,6 +29,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`openmm_unyt_symbol_collision.md`](../solved_bugs/openmm_unyt_symbol_collision.md) — [#120](https://github.com/uibcdf/pyunitwizard/issues/120) — Preserve OpenMM unit meaning when translating angstrom to unyt. *(high, reproduced)*
 - [`optional_backend_audit_boundary.md`](../completed_proposals/optional_backend_audit_boundary.md) — [#93](https://github.com/uibcdf/pyunitwizard/issues/93) — Document exact-file optional-import audit exceptions with startup guards. *(measured)*
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
+- [`parse_string_test_policy.md`](../solved_bugs/parse_string_test_policy.md) — [#129](https://github.com/uibcdf/pyunitwizard/issues/129) — Scope the parse-to-string test's Pint policy instead of inheriting ambient state. *(low, reproduced)*
 - [`pilot_optional_backend_attribution.md`](../completed_proposals/pilot_optional_backend_attribution.md) — [#92](https://github.com/uibcdf/pyunitwizard/issues/92) — Pilot optional attribution of executed third-party software and its articles. *(measured)*
 - [`pint_unyt_atomic_mass_names.md`](../solved_bugs/pint_unyt_atomic_mass_names.md) — [#124](https://github.com/uibcdf/pyunitwizard/issues/124) — Translate Pint atomic-mass names and prefixes to reversible unyt units. *(medium, reproduced)*
 - [`pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md`](../solved_bugs/pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md) — [#91](https://github.com/uibcdf/pyunitwizard/issues/91) — PR CI can be skipped and direct-push debt is unchecked *(high, measured)*

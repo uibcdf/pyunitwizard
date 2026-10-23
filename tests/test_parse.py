@@ -59,18 +59,18 @@ def test_parse_to_pint_is_stable_even_if_default_parser_is_astropy():
 
 
 def test_parse_to_string():
+    with loaded_libraries(["pint"]):
+        quantity = _parse_with_pint("5 meters")
+        assert quantity.magnitude == 5
+        assert str(quantity.units) == "meter"
 
-    quantity = _parse_with_pint("5 meters")
-    assert quantity.magnitude == 5
-    assert str(quantity.units) == "meter"
+        quantity = parse("5 meter", to_form="string")
+        assert isinstance(quantity, str)
+        assert quantity == "5 meter"
 
-    quantity = parse("5 meter", to_form="string")
-    assert isinstance(quantity, str)
-    assert quantity == "5 meter"
-
-    quantity = parse("[2, 5, 7] joules", to_form="string")
-    assert isinstance(quantity, str)
-    assert quantity == "[2 5 7] joule"
+        quantity = parse("[2, 5, 7] joules", to_form="string")
+        assert isinstance(quantity, str)
+        assert quantity == "[2 5 7] joule"
 
 
 def test_parse_to_openmm_scalar():
