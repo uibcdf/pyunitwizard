@@ -128,7 +128,7 @@ reason = "Documentation environment installs the consumer without resolving extr
 
 [[workflows]]
 path = ".github/workflows/storage_interop.yaml"
-sha256 = "c956ca7a00e3c2915f164f30391178a03210a237c4d4b19d04f871e0c1c81a0b"
+sha256 = "3f4491486a0e7f03b053094ce0073cada47b9e4ab1f7290e3d2bc674e8c28669"
 reason = "Source optional storage profile uses its reviewed environment; explicit strict priority selected in the maintained workflow"
 
 [[workflows]]

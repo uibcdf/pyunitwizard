@@ -108,3 +108,20 @@ publication must still execute the updated route against the exact archive.
 The pinned shared provider verifies all 22 declared/installed dependency routes;
 workflow identities retain reviewed exact bytes. Runtime codec/binding files
 and measurement inputs are unchanged by this publication-route correction.
+
+## Installed probe failure propagation
+
+Review of the optional source-installed step found that its custom Bash shell
+could continue after a failed dependency/import probe. A regression executes
+the actual workflow commands with an owned shim: pip check exits 42, pytest
+would succeed, and the old step incorrectly exits zero. Adding explicit
+`set -euo pipefail` makes it stop at 42 before pytest. The updated workflow's
+exact bytes are reviewed in the dependency inventory; 14 workflow/dependency
+checks and all 22 pinned dependency routes pass.
+
+The original optional run retains producer source 7605732 and its original
+workflow bytes. Native job logs independently verify actual successful pip
+checks, installed origins, provider versions and non-skipped installed test
+results; a shell correction does not by itself invalidate those executed facts.
+New runtime codec/binding files and numerical measurement inputs are unchanged.
+No skipped, failed or unexecuted gate is being converted to success.

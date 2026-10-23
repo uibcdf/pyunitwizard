@@ -47,6 +47,7 @@ jobs:
       - name: Test installed consumer outside checkout
         shell: bash -l {0}
         run: |
+          set -euo pipefail
           mkdir -p "$RUNNER_TEMP/storage-installed-tests/tests/storage" "$RUNNER_TEMP/storage-installed-tests/tests/dialects" "$RUNNER_TEMP/storage-installed-tests/tests/data"
           cp tests/storage/test_*.py "$RUNNER_TEMP/storage-installed-tests/tests/storage/"
           cp tests/dialects/test_cf.py "$RUNNER_TEMP/storage-installed-tests/tests/dialects/"

@@ -1,4 +1,6 @@
 import hashlib
+import os
+import subprocess
 import tomllib
 from pathlib import Path
 
@@ -57,3 +59,29 @@ def test_staged_artifact_profile_executes_new_storage_and_codec_guards():
     assert "tests/storage/test_*.py" in script
     assert "import zarr, pyarrow" in script
     assert "Storage guard skipped" in script
+
+
+def test_optional_installed_checks_stop_when_dependency_probe_fails(tmp_path):
+    workflow = yaml.safe_load((REPOSITORY_ROOT / ".github/workflows/storage_interop.yaml").read_text())
+    script = next(
+        step["run"]
+        for step in workflow["jobs"]["storage"]["steps"]
+        if step.get("name") == "Test installed consumer outside checkout"
+    )
+    tools = tmp_path / "bin"
+    tools.mkdir()
+    log = tmp_path / "commands.txt"
+    shim = tools / "python"
+    shim.write_text(
+        f'#!/bin/sh\nprintf "%s\\n" "$*" >> "{log}"\nif [ "$1 $2 $3" = "-m pip check" ]; then exit 42; fi\nexit 0\n'
+    )
+    shim.chmod(0o755)
+    result = subprocess.run(
+        ["bash", "-c", script],
+        cwd=REPOSITORY_ROOT,
+        env={**os.environ, "RUNNER_TEMP": str(tmp_path), "PATH": str(tools) + os.pathsep + os.environ["PATH"]},
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 42
+    assert "-m pytest" not in log.read_text()
