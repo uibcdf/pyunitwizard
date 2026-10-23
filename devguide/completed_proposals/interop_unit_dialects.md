@@ -1,12 +1,12 @@
 ---
 summary: Coordinate optional interoperability forms and physical-unit dialects.
 issue: uibcdf/pyunitwizard#85
-status: partial
+status: resolved
 opened: 2026-09-24
-closed:
+closed: 2026-10-23
 verification: inspected
 area: [forms, units, interoperability]
-guard:
+guard: tests/test_workflow_contracts.py::test_staged_artifact_profile_executes_new_storage_and_codec_guards
 normative: devguide/api_freeze_pre_1.0_decision.md
 blocked_by: []
 supersedes: []
@@ -39,7 +39,7 @@ establish a common quantity kind or equal numeric scale/offset.
   logarithmic and unknown units, whole-CF-dataset conformance and kind inference.
   Temperature readers/writers must both declare on-scale/difference semantics.
 
-## Completion work in progress — 2026-10-23
+## Maintainer-selected completion — 2026-10-23
 
 The maintainer selected completion of the bounded inventory and publication of
 0.29.0 instead of the uncreated 0.28.2. Independently owned slices are now:
@@ -55,8 +55,8 @@ The maintainer selected completion of the bounded inventory and publication of
   second; pinned original authoritative vocabularies, reviewed local alignments
   and Gaia's kind-sensitive angular-rate workflow. UO unit IRIs are not kinds.
 
-Local implementation is present; source/installed optional matrix qualification
-remains pending. This inventory stays partial until those slices qualify.
+The implementation and its source/original-file qualification are complete,
+as recorded in the dated outcome below. This closes the bounded inventory.
 The maintained contract is `docs/content/user/unit-dialects.md`.
 
 Completion is bounded to the identified consumers. Further CF calendar/time-origin
@@ -82,3 +82,40 @@ The delivered CF/HDF5 slice is qualified at final runtime
 `devguide/evidence/cf_hdf5_interop_2026-10-05.json`. Final archived records are
 `devguide/completed_proposals/cf_unit_dialect.md` and
 `devguide/completed_proposals/quantity_record_hdf5.md`. The 2026-10-23 completion slices above retain their own qualification evidence.
+
+
+## Qualified outcome — 2026-10-23
+
+Source `cfe067bcc4545c60aaca4c6950f6d84075ee6c36` passed all 29 mandatory
+source jobs and routine CI, including actual Codecov coverage/test-result uploads.
+The eight source storage/dialect wheel probes executed 247 cases each without
+skips on Linux/macOS arm64, Python 3.11–3.14. Actual providers are ucumvert
+0.3.2, asdf 6.0.0 and asdf-astropy 0.11.0; Pint 0.25.3 and 0.26.2 are covered.
+
+Original producer 40014661788, attempt 1, built only
+`pyunitwizard-0.29.0-py_0.tar.bz2` (94,325 bytes), SHA-256
+`9169cd302dbda415ebc441ef6f5077dcde834d435626fcf80c179a9013657f34`.
+All 30 exact-file installed cells and the producer verifier passed run
+40018157605, attempt 1, at qualifier
+`821231dbf188656b6872b5f6866b20e9114c87fb`. Its owner binding explicitly
+retains the original source/file identity; #131 corrected only the qualifier's
+Astropy dependency selection. The archive was not rebuilt.
+
+Every required storage/dialect/record-extension module executed without skips
+in all eight storage cells; every prepared-attribution module executed without
+skips in all eight prepared cells. Whole-run counts retain the intentional
+strict-JSON/NaN skip and unavailable prepared-API skips in fallback profiles.
+The copied installed lane excludes its nested source-wheel builder because it
+qualifies the original Conda file; source suites separately execute that builder.
+
+Native receipts and actual source-wheel facts are retained in
+`devguide/evidence/release_0.29.0_source.json` and
+`devguide/evidence/unit_dialects_source_installed_2026-10-23.json`.
+Archive bytes/resources, original-source binding, all 30 dependency closures and
+individual case classifications are retained in `devguide/evidence/` as
+`release_0.29.0_staged_bytes.json`, `release_0.29.0_installed.json` and
+`release_0.29.0_installed_closures.json`. These qualify the implemented boundary;
+publication/public-index observations remain separately owned by #128. All
+provisional limits and consumer-owned scientific meanings above remain.
+
+The selected guard retains the complete installed storage/dialect inventory and explicit skip rejection. Runtime meaning and actual provider qualification belong to the child guards and retained native evidence; this completes only the measured bounded inventory, not every possible standard.

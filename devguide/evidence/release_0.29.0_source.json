@@ -1,0 +1,349 @@
+{
+  "schema": "pyunitwizard.release-source@1",
+  "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+  "provider_commit": "20628bd5dba6d759669b0d444fe657eb1edad33f",
+  "gates": [
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012906161,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/CI_full_matrix.yaml",
+      "jobs": [
+        {
+          "name": "Full test on ubuntu-latest, Python 3.11",
+          "job_id": 120617544866,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.12",
+          "job_id": 120617545475,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.13",
+          "job_id": 120617545249,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on ubuntu-latest, Python 3.14",
+          "job_id": 120617545391,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.11",
+          "job_id": 120617545239,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.12",
+          "job_id": 120617545241,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.13",
+          "job_id": 120617545361,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        },
+        {
+          "name": "Full test on macos-latest, Python 3.14",
+          "job_id": 120617545262,
+          "required_steps": [
+            "Check dependency contract",
+            "Test import module",
+            "Run tests"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch"
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012910575,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/release_gates.yaml",
+      "jobs": [
+        {
+          "name": "Tests and Contracts (Python 3.11)",
+          "job_id": 120617552254,
+          "required_steps": [
+            "Check dependency contract",
+            "Run API contract and integration smoke",
+            "Run full test suite"
+          ]
+        },
+        {
+          "name": "Tests and Contracts (Python 3.12)",
+          "job_id": 120617552305,
+          "required_steps": [
+            "Check dependency contract",
+            "Run API contract and integration smoke",
+            "Run full test suite"
+          ]
+        },
+        {
+          "name": "Tests and Contracts (Python 3.13)",
+          "job_id": 120617552353,
+          "required_steps": [
+            "Check dependency contract",
+            "Run API contract and integration smoke",
+            "Run full test suite"
+          ]
+        },
+        {
+          "name": "Tests and Contracts (Python 3.14)",
+          "job_id": 120617552091,
+          "required_steps": [
+            "Check dependency contract",
+            "Run API contract and integration smoke",
+            "Run full test suite"
+          ]
+        },
+        {
+          "name": "Packaging Smoke (Python 3.13)",
+          "job_id": 120617552303,
+          "required_steps": [
+            "Check dependency contract",
+            "Build artifacts",
+            "Install wheel and import"
+          ]
+        },
+        {
+          "name": "Docs Build (Python 3.13)",
+          "job_id": 120617551869,
+          "required_steps": [
+            "Check dependency contract",
+            "Build docs"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012906852,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/molsyssuite-policy.yml",
+      "jobs": [
+        {
+          "name": "policy / conformance",
+          "job_id": 120617529385,
+          "required_steps": [
+            "Check repository conformance",
+            "Check Python lint and imports",
+            "Check Python formatting"
+          ]
+        }
+      ],
+      "event": "push",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012914877,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/openff_interop.yaml",
+      "jobs": [
+        {
+          "name": "OpenFF on ubuntu-latest, Python 3.12",
+          "job_id": 120617577212,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "OpenFF on ubuntu-latest, Python 3.13",
+          "job_id": 120617577180,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "OpenFF on ubuntu-latest, Python 3.14",
+          "job_id": 120617576827,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "OpenFF on macos-latest, Python 3.12",
+          "job_id": 120617577075,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "OpenFF on macos-latest, Python 3.13",
+          "job_id": 120617577101,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "OpenFF on macos-latest, Python 3.14",
+          "job_id": 120617577129,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional backend",
+            "Test installed consumer outside checkout"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012919156,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/storage_interop.yaml",
+      "jobs": [
+        {
+          "name": "Storage on ubuntu-latest, Python 3.11",
+          "job_id": 120617579776,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.12",
+          "job_id": 120617580084,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.13",
+          "job_id": 120617580023,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on ubuntu-latest, Python 3.14",
+          "job_id": 120617579916,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.11",
+          "job_id": 120617579895,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.12",
+          "job_id": 120617579541,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.13",
+          "job_id": 120617579774,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        },
+        {
+          "name": "Storage on macos-latest, Python 3.14",
+          "job_id": 120617579746,
+          "required_steps": [
+            "Check dependency contract",
+            "Run full suite with optional providers",
+            "Test installed consumer outside checkout"
+          ]
+        }
+      ],
+      "event": "workflow_dispatch",
+      "exact_jobs": true
+    },
+    {
+      "schema": "molsyssuite.native-gate@1",
+      "state": "verified",
+      "run_id": 40012906172,
+      "run_attempt": 1,
+      "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+      "workflow": ".github/workflows/CI.yaml",
+      "jobs": [
+        {
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "job_id": 120617527713,
+          "required_steps": [
+            "Check dependency contract",
+            "Check code style",
+            "Run tests",
+            "Upload coverage reports to Codecov",
+            "Upload test results to Codecov"
+          ]
+        }
+      ],
+      "event": "push",
+      "exact_jobs": true
+    }
+  ]
+}

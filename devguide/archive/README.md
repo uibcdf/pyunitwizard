@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (49)
+### Resolved (54)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -24,6 +24,8 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
+- [`installed_astropy_optional_closure.md`](../solved_bugs/installed_astropy_optional_closure.md) — [#131](https://github.com/uibcdf/pyunitwizard/issues/131) — Qualify the original staged artifact without unrelated Astropy recommended extras. *(medium, reproduced)*
+- [`interop_unit_dialects.md`](../completed_proposals/interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*
 - [`notebook_cli_failure_status.md`](../solved_bugs/notebook_cli_failure_status.md) — [#118](https://github.com/uibcdf/pyunitwizard/issues/118) — Report failed notebook execution through the docs CLI exit status. *(medium, reproduced)*
 - [`openff_compatibility.md`](../completed_proposals/openff_compatibility.md) — [#86](https://github.com/uibcdf/pyunitwizard/issues/86) — Optional OpenFF registry interoperability with verified unit definitions. *(measured)*
 - [`openmm_unyt_symbol_collision.md`](../solved_bugs/openmm_unyt_symbol_collision.md) — [#120](https://github.com/uibcdf/pyunitwizard/issues/120) — Preserve OpenMM unit meaning when translating angstrom to unyt. *(high, reproduced)*
@@ -38,12 +40,14 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`quantity_record.md`](../completed_proposals/quantity_record.md) — [#82](https://github.com/uibcdf/pyunitwizard/issues/82) — QuantityRecord — an inert interchange form that never loses or misreads a unit (provisional MVP implemented). *(measured)*
 - [`quantity_record_append.md`](../completed_proposals/quantity_record_append.md) — [#105](https://github.com/uibcdf/pyunitwizard/issues/105) — Define verified append operations for block-based QuantityRecords. *(measured)*
 - [`quantity_record_arrow.md`](../completed_proposals/quantity_record_arrow.md) — [#103](https://github.com/uibcdf/pyunitwizard/issues/103) — Evaluate an optional Arrow and Parquet binding for QuantityRecord. *(measured)*
+- [`quantity_record_asdf.md`](../completed_proposals/quantity_record_asdf.md) — [#126](https://github.com/uibcdf/pyunitwizard/issues/126) — Bind native Astropy quantities to complete sealed ASDF snapshots. *(measured)*
 - [`quantity_record_empty_base64.md`](../solved_bugs/quantity_record_empty_base64.md) — [#109](https://github.com/uibcdf/pyunitwizard/issues/109) — QuantityRecord base64 export fails for empty multidimensional arrays. *(medium, reproduced)*
 - [`quantity_record_hdf5.md`](../completed_proposals/quantity_record_hdf5.md) — [#101](https://github.com/uibcdf/pyunitwizard/issues/101) — QuantityRecord HDF5 binding with explicit units and integrity checks. *(measured)*
 - [`quantity_record_hub.md`](../completed_proposals/quantity_record_hub.md) — [#106](https://github.com/uibcdf/pyunitwizard/issues/106) — Evaluate QuantityRecord as a backend translation hub. *(measured)*
 - [`quantity_record_tagged.md`](../completed_proposals/quantity_record_tagged.md) — [#102](https://github.com/uibcdf/pyunitwizard/issues/102) — Specify and evaluate a tagged layout within QuantityRecord. *(measured)*
 - [`quantity_record_values_mutable_behind_seal.md`](../solved_bugs/quantity_record_values_mutable_behind_seal.md) — [#100](https://github.com/uibcdf/pyunitwizard/issues/100) — Public record values can be made writable behind the integrity seal. *(high, reproduced)*
 - [`quantity_record_zarr.md`](../completed_proposals/quantity_record_zarr.md) — [#104](https://github.com/uibcdf/pyunitwizard/issues/104) — Evaluate an optional Zarr binding for QuantityRecord. *(measured)*
+- [`quantity_vocabulary_annotations.md`](../completed_proposals/quantity_vocabulary_annotations.md) — [#127](https://github.com/uibcdf/pyunitwizard/issues/127) — Validate explicit QUDT and UO unit annotations without kind inference. *(measured)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
 - [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*
@@ -53,6 +57,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`smonitor_profile_messages_are_empty_until_014_is_distributed.md`](../solved_bugs/smonitor_profile_messages_are_empty_until_014_is_distributed.md) — [#71](https://github.com/uibcdf/pyunitwizard/issues/71) — QA and agent catalog messages remain empty until SMonitor 0.14 is distributed. *(medium, reproduced)*
 - [`stated_uncertainty.md`](../completed_proposals/stated_uncertainty.md) — [#90](https://github.com/uibcdf/pyunitwizard/issues/90) — Bind a scalar measurement to its stated uncertainty without statistical inference. *(measured)*
 - [`string_vector_unit_detection.md`](../solved_bugs/string_vector_unit_detection.md) — [#80](https://github.com/uibcdf/pyunitwizard/issues/80) — Classify vector quantity strings without ambiguous array truth values. *(medium, reproduced)*
+- [`ucum_unit_dialect.md`](../completed_proposals/ucum_unit_dialect.md) — [#125](https://github.com/uibcdf/pyunitwizard/issues/125) — Verify explicit case-sensitive UCUM codes at biomedical exchange boundaries. *(inspected)*
 - [`unyt_astropy_registry_allocation.md`](../solved_bugs/unyt_astropy_registry_allocation.md) — [#122](https://github.com/uibcdf/pyunitwizard/issues/122) — Reuse the shared Pint registry in unyt-to-Astropy translation. *(medium, measured)*
 - [`unyt_remaining_registry_allocations.md`](../solved_bugs/unyt_remaining_registry_allocations.md) — [#123](https://github.com/uibcdf/pyunitwizard/issues/123) — Reuse the shared registry in remaining unyt dimensionality and OpenMM paths. *(medium, reproduced)*
 

@@ -1,0 +1,160 @@
+{
+  "schema": "pyunitwizard.dialects-installed-source@1",
+  "candidate_sha": "cfe067bcc4545c60aaca4c6950f6d84075ee6c36",
+  "run_id": 40012919156,
+  "run_attempt": 1,
+  "cells": [
+    {
+      "name": "Storage on macos-latest, Python 3.12",
+      "job_id": 120617579541,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "caf8433ee92401a4630b85878a5e22ec509fd8238df06d5ee60c40ddb1f82dd7"
+      },
+      "source_result": "1119 passed, 19 skipped | 38.18s | 1 warnings",
+      "installed_result": "247 passed | 3.85s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.12.15"
+      ],
+      "runner_image": "macos-26-arm64"
+    },
+    {
+      "name": "Storage on macos-latest, Python 3.14",
+      "job_id": 120617579746,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "c57c53874fdec37d8f84e10ebb69bd03f3b6afdd0a5377049e27de5b88f586ef"
+      },
+      "source_result": "1119 passed, 19 skipped | 58.78s | 1 warnings",
+      "installed_result": "247 passed | 4.82s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.14.9"
+      ],
+      "runner_image": "macos-26-arm64"
+    },
+    {
+      "name": "Storage on macos-latest, Python 3.13",
+      "job_id": 120617579774,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "9198069dffabb2bba7458b2e0326ec916020c8e85512bd7b8171667d162149b0"
+      },
+      "source_result": "1119 passed, 19 skipped | 35.47s | 1 warnings",
+      "installed_result": "247 passed | 3.69s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.13.17"
+      ],
+      "runner_image": "macos-26-arm64"
+    },
+    {
+      "name": "Storage on ubuntu-latest, Python 3.11",
+      "job_id": 120617579776,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "6398a2d0d6a06a47486723d8b9c7d5b4301c91357fe6511ee56ab885baaef8d8"
+      },
+      "source_result": "1119 passed, 19 skipped | 27.11s | 1 warnings",
+      "installed_result": "247 passed | 4.35s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.25.3"
+      ],
+      "python": [
+        "3.11.17"
+      ],
+      "runner_image": "ubuntu-24.04"
+    },
+    {
+      "name": "Storage on macos-latest, Python 3.11",
+      "job_id": 120617579895,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "e47289cd8b4a7ff65363bbd51ab683a6466c78d2a58910501d37eeada96098d3"
+      },
+      "source_result": "1119 passed, 19 skipped | 42.93s | 1 warnings",
+      "installed_result": "247 passed | 4.14s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.25.3"
+      ],
+      "python": [
+        "3.11.17"
+      ],
+      "runner_image": "macos-26-arm64"
+    },
+    {
+      "name": "Storage on ubuntu-latest, Python 3.14",
+      "job_id": 120617579916,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "6c682cbf97d311e929d947de76b88d9554ef6af7469feeca5171ffb7b1d74bb2"
+      },
+      "source_result": "1119 passed, 19 skipped | 29.60s | 1 warnings",
+      "installed_result": "247 passed | 4.56s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.14.9"
+      ],
+      "runner_image": "ubuntu-24.04"
+    },
+    {
+      "name": "Storage on ubuntu-latest, Python 3.13",
+      "job_id": 120617580023,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "4578b85e1b18e60e10dc5ed969a2eb82c417d4c202aae06f47f244b7b566d5f8"
+      },
+      "source_result": "1119 passed, 19 skipped | 20.22s | 1 warnings",
+      "installed_result": "247 passed | 3.13s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.13.17"
+      ],
+      "runner_image": "ubuntu-24.04"
+    },
+    {
+      "name": "Storage on ubuntu-latest, Python 3.12",
+      "job_id": 120617580084,
+      "wheel": {
+        "filename": "pyunitwizard-0.28.1+49.gcfe067b-py3-none-any.whl",
+        "sha256": "be1365ce75accab49ea5d20fe58499ddb163ed997d0daf49e85e9da6abd8df81"
+      },
+      "source_result": "1119 passed, 19 skipped | 27.55s | 1 warnings",
+      "installed_result": "247 passed | 4.63s",
+      "pip_check": "No broken requirements found.",
+      "providers": "0.3.2 6.0.0 0.11.0",
+      "pint": [
+        "0.26.2"
+      ],
+      "python": [
+        "3.12.15"
+      ],
+      "runner_image": "ubuntu-24.04"
+    }
+  ]
+}
