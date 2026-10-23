@@ -1,0 +1,6 @@
+﻿pyunitwizard.storage.asdf.write
+===============================
+
+.. currentmodule:: pyunitwizard.storage.asdf
+
+.. autofunction:: write

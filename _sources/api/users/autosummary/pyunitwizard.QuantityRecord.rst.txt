@@ -1,0 +1,47 @@
+﻿pyunitwizard.QuantityRecord
+===========================
+
+.. currentmodule:: pyunitwizard
+
+.. autoclass:: QuantityRecord
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QuantityRecord.__init__
+      ~QuantityRecord.append
+      ~QuantityRecord.from_array
+      ~QuantityRecord.from_dict
+      ~QuantityRecord.from_quantity
+      ~QuantityRecord.from_tagged
+      ~QuantityRecord.select
+      ~QuantityRecord.split
+      ~QuantityRecord.to_dict
+      ~QuantityRecord.to_metadata
+      ~QuantityRecord.to_quantity
+      ~QuantityRecord.validate_metadata
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QuantityRecord.codes
+      ~QuantityRecord.descriptors
+      ~QuantityRecord.digest
+      ~QuantityRecord.field
+      ~QuantityRecord.kind
+      ~QuantityRecord.layout
+      ~QuantityRecord.si
+      ~QuantityRecord.unit
+      ~QuantityRecord.values
+   
+   

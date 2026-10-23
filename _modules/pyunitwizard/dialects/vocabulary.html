@@ -1,0 +1,643 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>pyunitwizard.dialects.vocabulary – PyUnitWizard 0.29.0</title>
+  
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3c29d883" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3c29d883" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+    <script src="../../../_static/documentation_options.js?v=fcb1757e"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nglview-js-widgets@3.1.0/dist/index.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyunitwizard/dialects/vocabulary';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.29.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt="PyUnitWizard 0.29.0 documentation - Home"/>
+    <img src="../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="PyUnitWizard 0.29.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/about/index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/showcase/index.html">
+    Showcase
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/user/index.html">
+    User
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../content/developer/index.html">
+    Developer
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/index.html">
+    API Documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/uibcdf/pyunitwizard" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyunitwizard.dialects.vocabulary</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyunitwizard.dialects.vocabulary</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Bounded explicit QUDT/UO annotations bound to existing sealed records.</span>
+
+<span class="sd">Only hertz, becquerel and radians per second are admitted. Identifiers and</span>
+<span class="sd">quantity kinds are never inferred from dimensions. UO identifiers denote units;</span>
+<span class="sd">the reviewed local alignment does not turn them into quantity-kind identifiers.</span>
+<span class="sd">"""</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Mapping</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyunitwizard.record</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantityRecord</span><span class="p">,</span> <span class="n">RecordError</span><span class="p">,</span> <span class="n">metadata_digest</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"FORMAT"</span><span class="p">,</span> <span class="s2">"catalog"</span><span class="p">,</span> <span class="s2">"annotate"</span><span class="p">,</span> <span class="s2">"validate_annotation"</span><span class="p">]</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s2">"qrec-vocabulary/0.1"</span>
+
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_catalog</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">files</span><span class="p">(</span><span class="s2">"pyunitwizard.vocabularies"</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">"physical_units.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">"format"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"pyunitwizard-vocabulary/0.1"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"unsupported installed physical-unit catalogue"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">metadata_digest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="catalog">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.dialects.vocabulary.catalog.html#pyunitwizard.dialects.vocabulary.catalog">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">catalog</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Return the detached authoritative subset and reviewed-alignment provenance.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Pinned QUDT/UO facts, source commits/digests, attribution and license.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    RecordError</span>
+<span class="sd">        If the installed catalogue format is unsupported.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; catalog()['sources']['qudt']['release']</span>
+<span class="sd">    '3.5.3'</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">_catalog</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="annotate">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.dialects.vocabulary.annotate.html#pyunitwizard.dialects.vocabulary.annotate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">annotate</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="n">QuantityRecord</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">unit_iri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kind_iri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Bind explicit unit/kind identifiers to an already kind-tagged record.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    record : QuantityRecord</span>
+<span class="sd">        Homogeneous record whose existing ``kind`` equals ``kind_iri`` and</span>
+<span class="sd">        whose named unit matches the bounded catalogue exactly after codec</span>
+<span class="sd">        canonicalization. Convert explicitly before annotating other scales</span>
+<span class="sd">        or unnamed SI expressions. Values and the original seal stay unchanged.</span>
+<span class="sd">    unit_iri : str</span>
+<span class="sd">        Registered QUDT unit or OBO UO unit IRI.</span>
+<span class="sd">    kind_iri : str</span>
+<span class="sd">        Registered QUDT quantity-kind IRI, explicitly selected by the consumer.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        Provisional sealed annotation sidecar bound to the original record</span>
+<span class="sd">        digest and the installed catalogue. Retain it alongside that record.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    RecordError</span>
+<span class="sd">        For missing/unknown kinds or units, mismatched named meanings or SI</span>
+<span class="sd">        definitions, or unsupported layout. This is not semantic inference or</span>
+<span class="sd">        proof that a consumer assigned its scientific kind correctly.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; note = annotate(record, unit_iri='http://qudt.org/vocab/unit/HZ',</span>
+<span class="sd">    ...                 kind_iri='http://qudt.org/vocab/quantitykind/Frequency')</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">QuantityRecord</span><span class="p">)</span> <span class="ow">or</span> <span class="n">record</span><span class="o">.</span><span class="n">layout</span> <span class="o">!=</span> <span class="s2">"homogeneous"</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"vocabulary annotation requires a homogeneous QuantityRecord"</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">catalog_digest</span> <span class="o">=</span> <span class="n">_catalog</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unit_iri</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">unit_iri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"units"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"unit IRI is outside the bounded vocabulary catalogue"</span><span class="p">)</span>
+    <span class="n">entry</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"units"</span><span class="p">][</span><span class="n">unit_iri</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kind_iri</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">kind_iri</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"kinds"</span><span class="p">]</span> <span class="ow">or</span> <span class="n">record</span><span class="o">.</span><span class="n">kind</span> <span class="o">!=</span> <span class="n">kind_iri</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"explicit record kind, quantity-kind IRI and published unit semantics disagree"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"computing_unit"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span>
+            <span class="n">reason</span><span class="o">=</span><span class="s2">"named computing unit does not match the vocabulary meaning; convert explicitly first"</span>
+        <span class="p">)</span>
+    <span class="n">actual</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">si</span><span class="p">,</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"si"</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">actual</span><span class="p">[</span><span class="s2">"exponents"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">[</span><span class="s2">"exponents"</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">actual</span><span class="p">[</span><span class="s2">"factor"</span><span class="p">],</span> <span class="n">actual</span><span class="p">[</span><span class="s2">"offset"</span><span class="p">]],</span> <span class="p">[</span><span class="n">expected</span><span class="p">[</span><span class="s2">"factor"</span><span class="p">],</span> <span class="n">expected</span><span class="p">[</span><span class="s2">"offset"</span><span class="p">]],</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"computing unit disagrees with the authoritative SI definition"</span><span class="p">)</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"format"</span><span class="p">:</span> <span class="n">FORMAT</span><span class="p">,</span>
+        <span class="s2">"record_digest"</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">digest</span><span class="p">,</span>
+        <span class="s2">"catalog_digest"</span><span class="p">:</span> <span class="n">catalog_digest</span><span class="p">,</span>
+        <span class="s2">"unit_iri"</span><span class="p">:</span> <span class="n">unit_iri</span><span class="p">,</span>
+        <span class="s2">"kind_iri"</span><span class="p">:</span> <span class="n">kind_iri</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">node</span><span class="p">[</span><span class="s2">"digest"</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_digest</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">node</span></div>
+
+
+
+<div class="viewcode-block" id="validate_annotation">
+<a class="viewcode-back" href="../../../api/users/autosummary/pyunitwizard.dialects.vocabulary.validate_annotation.html#pyunitwizard.dialects.vocabulary.validate_annotation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_annotation</span><span class="p">(</span>
+    <span class="n">record</span><span class="p">:</span> <span class="n">QuantityRecord</span><span class="p">,</span>
+    <span class="n">annotation</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">unit_iri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">kind_iri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Check a complete annotation against its record, catalogue and reader intent.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    record : QuantityRecord</span>
+<span class="sd">        Independently verified source snapshot.</span>
+<span class="sd">    annotation : mapping</span>
+<span class="sd">        Complete sidecar previously produced by ``annotate``.</span>
+<span class="sd">    unit_iri, kind_iri : str</span>
+<span class="sd">        Required identifiers expected by the receiving consumer.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    RecordError</span>
+<span class="sd">        For disagreement, corruption, unsupported format/catalogue or changed</span>
+<span class="sd">        record identity. The digest establishes integrity, not authentication.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; validate_annotation(record, note, unit_iri=note['unit_iri'],</span>
+<span class="sd">    ...                     kind_iri='http://qudt.org/vocab/quantitykind/Frequency')</span>
+<span class="sd">    """</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">annotate</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">unit_iri</span><span class="o">=</span><span class="n">unit_iri</span><span class="p">,</span> <span class="n">kind_iri</span><span class="o">=</span><span class="n">kind_iri</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RecordError</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">"vocabulary annotation disagrees with its record, catalogue or receiver expectations"</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><div>
+	&copy; 2026, <a href="../../../content/about/who.html">Liliana M. Moreno Vargas, Diego Prada Gracia
+		and contributors</a> | <a href="https://www.uibcdf.org/">UIBCDF Lab</a> 
+	at the <a href="http://himfg.com.mx">Federico Gómez Children’s Hospital of Mexico</a><br />
+	<a href="https://github.com/uibcdf/pyunitwizard">PyUnitWizard is an open source project</a> shared
+	under <a href="https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE">an MIT license</a>
+</div></div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.2.0
+     | 
+    Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.23.0
+    <br/>
+  </p>
+
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><a href= "mailto:uibcdf@gmail.com">Contact us</a><br /></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.load\_library
+====================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: load_library

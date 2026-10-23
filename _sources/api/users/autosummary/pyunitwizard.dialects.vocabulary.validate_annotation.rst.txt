@@ -1,0 +1,6 @@
+﻿pyunitwizard.dialects.vocabulary.validate\_annotation
+=====================================================
+
+.. currentmodule:: pyunitwizard.dialects.vocabulary
+
+.. autofunction:: validate_annotation

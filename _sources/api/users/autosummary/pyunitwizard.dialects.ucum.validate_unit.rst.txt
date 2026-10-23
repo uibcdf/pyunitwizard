@@ -1,0 +1,6 @@
+﻿pyunitwizard.dialects.ucum.validate\_unit
+=========================================
+
+.. currentmodule:: pyunitwizard.dialects.ucum
+
+.. autofunction:: validate_unit

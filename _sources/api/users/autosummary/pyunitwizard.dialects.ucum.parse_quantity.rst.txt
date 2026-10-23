@@ -1,0 +1,6 @@
+﻿pyunitwizard.dialects.ucum.parse\_quantity
+==========================================
+
+.. currentmodule:: pyunitwizard.dialects.ucum
+
+.. autofunction:: parse_quantity

@@ -1,0 +1,6 @@
+﻿pyunitwizard.are\_equal
+=======================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: are_equal

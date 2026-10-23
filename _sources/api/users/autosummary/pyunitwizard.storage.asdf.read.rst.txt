@@ -1,0 +1,6 @@
+﻿pyunitwizard.storage.asdf.read
+==============================
+
+.. currentmodule:: pyunitwizard.storage.asdf
+
+.. autofunction:: read

@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.set\_default\_parser
+===========================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: set_default_parser

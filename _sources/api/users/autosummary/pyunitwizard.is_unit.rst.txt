@@ -1,0 +1,6 @@
+﻿pyunitwizard.is\_unit
+=====================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: is_unit
