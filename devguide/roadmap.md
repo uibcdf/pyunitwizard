@@ -3,7 +3,7 @@
 This roadmap retains the historical stabilization stages and records the
 current published `0.28.x` baseline before a separately approved `1.0.0` release.
 
-## Current checkpoint — 2026-10-22
+## Current checkpoint — 2026-10-23
 
 [`0.28.1`](release_0.28.1_notes.md) is public. Its
 [publication record](completed_proposals/release_0.28.1.md) retains the exact
@@ -22,14 +22,18 @@ is complete. [#123](solved_bugs/unyt_remaining_registry_allocations.md) removes
 the remaining unyt registry allocations.
 [#124](solved_bugs/pint_unyt_atomic_mass_names.md) corrects Pint atomic-mass
 names/prefixes entering unyt, including reversible unit-only translations.
-The current backlog review finds no further open defect or feature whose
-acceptance conditions justify adding it before 0.28.2. Next is separate release
-preparation and exact-source/installed-file qualification. Consumer notice for
+The October 22 review found no further open defect. On October 23 the maintainer
+selected #104, #102, #105 and #103, with molecular arrays and heterogeneous
+observations from existing consumers. Source implementation and measurements
+are delivered; qualify their optional source/installed matrix and archive the
+owning records before separate release preparation and exact-file qualification.
+The public availability announcement belongs in a new MolSysSuite issue only
+after the next package and GitHub Release are published and verified. Consumer notice for
 the translator corrections is MolSysSuite #127; no new release has been prepared
 or published by this work.
 
-The future backlog is #85 (remaining interoperability boundaries), #102–#105
-(independent record extensions), #44/#52 (deferred integrations), and #87
+The future backlog is #85 (remaining interoperability boundaries), #44/#52
+(deferred integrations), and #87
 (conditional later re-evaluation of a live form). Start from a measured consumer
 and each issue's acceptance criteria; see [the pending index](pending_proposals/README.md).
 

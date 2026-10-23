@@ -91,3 +91,19 @@ Tests cover explicit angstrom-to-nanometer conversion, exact dtype/trailing
 shape, source field/kind, integer precision/range, finite conversion overflow,
 affine values, empty initial arrays, immutable failure and raw append refusal.
 Scalar/tagged/file append remain outside this operation's contract.
+
+## Exact-artifact route coverage
+
+The publication review also found the staged Conda storage profile still
+selected only CF/HDF5. Its setup now includes Zarr 3.1.6 and PyArrow 25.0.0;
+all profiles execute the new core codec guards, and storage executes all
+bindings plus both consumer fixtures. The actual staged XML check rejects
+missing/skipped required module guards. A regression first fails against the
+old profile; 28 workflow/release-route/dependency checks pass after correction.
+The actual XML-check code extracted from the workflow accepts a real 52-test
+source JUnit run. This verifies the checker, not a staged Conda file. Future
+publication must still execute the updated route against the exact archive.
+
+The pinned shared provider verifies all 22 declared/installed dependency routes;
+workflow identities retain reviewed exact bytes. Runtime codec/binding files
+and measurement inputs are unchanged by this publication-route correction.

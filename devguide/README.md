@@ -86,8 +86,11 @@ Remaining feature work is evaluated through its owning issue and acceptance cond
 
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.
-- #102–#105: tagged layouts, Arrow/Parquet, Zarr and verified append;
-  the [pending proposal index](pending_proposals/README.md) links each record.
+- #104, #102, #105 and #103: the maintainer selected these extensions on
+  October 23. The implementation and consumer-derived measurements are in
+  source; optional source/installed qualification and closure are tracked in
+  the [owning proposal records](pending_proposals/README.md). Their maintained
+  contract is `docs/content/user/record-extensions.md`.
 - #44 and #52: deferred forallpeople and Pydantic integration decisions.
 - [#87](https://github.com/uibcdf/pyunitwizard/issues/87): later re-evaluation of
   a live native form, conditional on real consumers and measured need. Its issue
@@ -117,10 +120,14 @@ remaining unyt dimensionality and OpenMM paths reuse the existing shared registr
 [#124](solved_bugs/pint_unyt_atomic_mass_names.md) is resolved: Pint atomic-mass
 names, prefixes and compound units enter unyt with reversible quantity/unit
 translations and isolated definitions. The October 22 backlog review found no
-additional open defect or currently justified feature for this patch; the
-remaining proposals retain the conditions listed above. Next, prepare and qualify
-the 0.28.2 release candidate and its exact installed artifact under the publication
-policy. That release has not been prepared or published by this source work.
+additional open defect at that checkpoint. On October 23 the maintainer selected
+the four record extensions above and both existing-consumer workload families.
+Complete their qualification before preparing the 0.28.2 release candidate and
+its exact installed artifact under the publication policy. That release has not
+been prepared or published by this source work. The staged artifact's baseline
+and storage profiles now include the new codec/storage guards, including an
+explicit refusal of skipped required storage tests. After actual package and
+GitHub Release publication, open the requested MolSysSuite availability issue.
 MolSysSuite #127 retains the separate consumer-impact route.
 
 ## 0.19.x checkpoint summary (historical baseline)

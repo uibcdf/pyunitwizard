@@ -23,10 +23,14 @@ Then dispatch `.github/workflows/test_staged_conda_package.yaml` with the
 same coordinates and successful staging run ID. The gate checks artifact
 digest, source channel, public dependency provenance, package version, and
 record, configuration and attribution contracts outside the source checkout.
-Baseline and CF/HDF5 profiles cover clean Linux/macOS environments for Python
+Baseline and storage profiles cover clean Linux/macOS environments for Python
 3.11–3.14; OpenFF covers 3.12–3.14 with its published provider/Pint constraints.
 All profiles install the same Conda archive; optional providers come from the
 public channels. The gate retains each resolved dependency closure.
+Baseline installed contracts include typed-array restoration, tagged layouts
+and immutable append. The storage profile also installs Zarr 3.1.6/PyArrow
+25.0.0 alongside CF/HDF5, tests all storage modules and both consumer fixtures,
+and rejects skipped required storage/codec guards in the installed JUnit report.
 Do not publish a stable GitHub Release until every cell passes.
 
 For a staged release, the release event verifies the plan and does not
