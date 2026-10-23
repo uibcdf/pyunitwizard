@@ -69,6 +69,11 @@ replacing process-global behavior.
 
 ## Quantities from another Pint registry
 
+OpenMM-to-unyt quantities and units reuse the semantic Pint translation rather
+than passing display symbols between libraries. In particular, OpenMM's `A`
+means angstrom and must remain a length; unyt reserves `A` for ampere. This
+also preserves compound length/time units and actual electrical-current inputs.
+
 The optional `openff.units` form uses the actual OpenFF registry and shared
 Pint definition verification, with native OpenMM parity and explicit unsealed
 val/unit import/export in `forms/api_openff_units.py`. Install conda-forge

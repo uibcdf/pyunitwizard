@@ -412,12 +412,11 @@ def quantity_to_unyt(quantity: openmm_unit.Quantity):
     unyt_array or unyt_quantity
         The quantity.
     """
-    from .api_unyt import make_quantity as make_unyt_quantity
+    from .api_pint import quantity_to_unyt as pint_to_unyt
 
-    value = get_value(quantity)
-    unit_name = get_unit(quantity).get_symbol()
-
-    return make_unyt_quantity(value, unit_name)
+    # Display symbols are not a shared vocabulary: OpenMM's A is angstrom,
+    # whereas unyt's A is ampere. Reuse the semantic translation through Pint.
+    return pint_to_unyt(quantity_to_pint(quantity))
 
 
 def unit_to_unyt(unit: openmm_unit.Unit):

@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (37)
+### Resolved (38)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -25,6 +25,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
 - [`notebook_cli_failure_status.md`](../solved_bugs/notebook_cli_failure_status.md) — [#118](https://github.com/uibcdf/pyunitwizard/issues/118) — Report failed notebook execution through the docs CLI exit status. *(medium, reproduced)*
 - [`openff_compatibility.md`](../completed_proposals/openff_compatibility.md) — [#86](https://github.com/uibcdf/pyunitwizard/issues/86) — Optional OpenFF registry interoperability with verified unit definitions. *(measured)*
+- [`openmm_unyt_symbol_collision.md`](../solved_bugs/openmm_unyt_symbol_collision.md) — [#120](https://github.com/uibcdf/pyunitwizard/issues/120) — Preserve OpenMM unit meaning when translating angstrom to unyt. *(high, reproduced)*
 - [`optional_backend_audit_boundary.md`](../completed_proposals/optional_backend_audit_boundary.md) — [#93](https://github.com/uibcdf/pyunitwizard/issues/93) — Document exact-file optional-import audit exceptions with startup guards. *(measured)*
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
 - [`pilot_optional_backend_attribution.md`](../completed_proposals/pilot_optional_backend_attribution.md) — [#92](https://github.com/uibcdf/pyunitwizard/issues/92) — Pilot optional attribution of executed third-party software and its articles. *(measured)*
