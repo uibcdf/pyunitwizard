@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import platform
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from statistics import median
@@ -96,7 +97,7 @@ def run_baseline(iterations: int = 5000, repeats: int = 5) -> Dict[str, object]:
 
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "python": "3.13",
+        "python": platform.python_version(),
         "iterations": iterations,
         "repeats": repeats,
         # Read from installed distribution metadata. For a development

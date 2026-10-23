@@ -84,9 +84,10 @@ Canonical client-guide delivery is a separate handoff to
 [MolSysSuite #126](https://github.com/uibcdf/molsyssuite/issues/126).
 Remaining feature work is evaluated through its owning issue and acceptance conditions:
 
-- #121: a newly identified maintenance bug in the older conversion-baseline
-  tool's literal Python-version provenance. The #106 tool records the actual runtime.
-
+- [#123](https://github.com/uibcdf/pyunitwizard/issues/123): remove remaining
+  per-call Pint registry allocations in unyt dimensionality and OpenMM translation;
+  the public dimensionality cache limits repeated work. This is a bounded
+  candidate for the next patch, with constructor-count evidence in the issue.
 - #85: remaining independently justified ASDF, UCUM, QUDT and wider CF boundaries;
   the OpenFF and physical CF/HDF5 slices are delivered.
 - #102–#105: tagged layouts, Arrow/Parquet, Zarr and verified append;
@@ -111,6 +112,11 @@ reuses the shared registry for unyt-to-Astropy. These source changes are later
 than published 0.28.1; no new package release is implied. Consumer impact notice
 and source-adoption coordination belong to
 [MolSysSuite #127](https://github.com/uibcdf/molsyssuite/issues/127).
+
+[#121](solved_bugs/conversion_baseline_runtime_provenance.md) is resolved:
+the older conversion baseline now records the actual executing Python version,
+including its patch number. Historical snapshots are preserved. Review #123
+before preparing the next patch; 0.28.2 has not been published by this work.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

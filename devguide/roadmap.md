@@ -16,8 +16,11 @@ for independent delivery of the corrected canonical guide to clients.
 
 The [#106 evaluation](completed_proposals/quantity_record_hub.md) is complete:
 retain direct/live Pint translation, with #120/#122 translator fixes in source.
-They are not part of the existing 0.28.1 public artifact. #121 tracks a separately
-identified performance-tool provenance bug. Consumer notice is MolSysSuite #127.
+They are not part of the existing 0.28.1 public artifact. The
+[#121 provenance correction](solved_bugs/conversion_baseline_runtime_provenance.md)
+is complete. #123 tracks remaining unyt registry allocations as a bounded
+pre-0.28.2 candidate. Consumer notice for #120/#122 is MolSysSuite #127;
+no new release has been prepared or published by this review.
 
 The future backlog is #85 (remaining interoperability boundaries), #102–#105
 (independent record extensions), #44/#52 (deferred integrations), and #87

@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (40)
+### Resolved (41)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -19,6 +19,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`concurrent_client_fixture_ownership.md`](../solved_bugs/concurrent_client_fixture_ownership.md) — [#115](https://github.com/uibcdf/pyunitwizard/issues/115) — Remove parent-owned synthetic client packages after concurrent child success, failure and timeout. *(medium, reproduced)*
 - [`conda_build_failure_propagation.md`](../solved_bugs/conda_build_failure_propagation.md) — [#117](https://github.com/uibcdf/pyunitwizard/issues/117) — Stop Conda build installation after a failed prerequisite. *(medium, reproduced)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
+- [`conversion_baseline_runtime_provenance.md`](../solved_bugs/conversion_baseline_runtime_provenance.md) — [#121](https://github.com/uibcdf/pyunitwizard/issues/121) — Report the actual Python runtime in conversion baseline measurements. *(low, reproduced)*
 - [`documentation_baseline_refresh.md`](../solved_bugs/documentation_baseline_refresh.md) — [#119](https://github.com/uibcdf/pyunitwizard/issues/119) — Refresh developer documentation against the current supported baseline. *(low, inspected)*
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*

@@ -31,6 +31,10 @@ compared between candidate tags. When quoting these numbers as provenance,
 record `git describe --tags --always` alongside the `versions` block: that
 block reports installed distribution metadata, which in a development checkout
 reflects the last install rather than the working tree.
+The `python` field records the actual executing interpreter's full version
+(for example `3.14.7`), rather than a fixed support-baseline label. This applies
+to newly generated measurements; historical snapshots keep their original bytes
+and provenance, including any uncertainty about their interpreter.
 
 ## Record translation evaluation
 
