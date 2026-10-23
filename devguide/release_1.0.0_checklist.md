@@ -115,7 +115,9 @@ collecting fresh candidate evidence for each section:
   total values, Arrow nulls are refused and Parquet reads complete files.
 - [ ] Qualify the exact required public artifact; source tests do not establish
   installed-public dependency closure or migration in consumer repositories.
-- [ ] Following the maintainer's 2026-10-23 request, after the next package and
-  GitHub Release are actually published and verified, open an issue in
-  `uibcdf/molsyssuite` announcing the available version, links, scope and
-  installed evidence. This is separate from pre-rollout impact notices.
+- [ ] Follow the central release/package notice policy delivered under
+  MolSysSuite #129: open/update a version-specific issue for each actual release
+  or package event, including an explicit pending/unpublished package state.
+  Following the maintainer's 2026-10-23 request, announce availability once the
+  package and GitHub Release are verified; reuse that version's notice and retain
+  links, scope and installed evidence. Pre-rollout impact notices stay separate.

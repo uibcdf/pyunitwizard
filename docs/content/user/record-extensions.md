@@ -102,6 +102,8 @@ round-trip casting exactly; unsafe integer-to-float promotion is refused.
 The seal binds manifest, descriptor table, numeric bytes and code bytes. JSON
 codes follow the value shape; base64 encodes numeric values as in homogeneous
 records. Descriptors are detached copies, and values/codes have immutable backing.
+Wire shapes contain explicit nonnegative integer sizes; inferred negative sizes
+are refused even when an external writer recomputes the seal.
 Existing homogeneous writers still emit exactly `qrec/0.3`. Older readers may
 refuse the new identifier; they must not reinterpret it as the older format.
 

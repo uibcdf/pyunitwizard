@@ -66,6 +66,8 @@ def restore(cls, data):
     try:
         manifest = copy.deepcopy(data["manifest"])
         descriptors = manifest["descriptors"]
+        if not isinstance(manifest["shape"], list) or any(type(n) is not int or n < 0 for n in manifest["shape"]):
+            raise ValueError("tagged shape must contain explicit nonnegative integer sizes")
         if (
             manifest["layout"] != "tagged"
             or manifest["dtype"] not in DTYPES

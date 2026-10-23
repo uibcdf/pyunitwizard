@@ -101,3 +101,14 @@ def test_empty_multidimensional_tagged_payload_keeps_code_shape():
     restored = QuantityRecord.from_dict(source.to_dict())
     assert restored.codes.shape == (1, 0, 3)
     assert restored.values.dtype == np.dtype("float32")
+
+
+def test_tagged_wire_shape_must_be_explicit_even_with_a_recomputed_seal():
+    from pyunitwizard.record import _digest
+
+    source = QuantityRecord.from_tagged([puw.quantity(1, "nm", form="pint"), puw.quantity(2, "nm", form="pint")])
+    data = source.to_dict()
+    data["manifest"]["shape"] = [-1]
+    data["digest"] = _digest(data["manifest"], data["block_digests"][0].encode("ascii"))
+    with pytest.raises(RecordError):
+        QuantityRecord.from_dict(data)
