@@ -35,6 +35,22 @@ fixtures, and rejects skipped required guards in the installed JUnit report.
 All profiles test the packaged offline QUDT/UO catalogue and its explicit kinds.
 Do not publish a stable GitHub Release until every cell passes.
 
+Installed quantity qualification selects conda-forge `astropy-base`, the Astropy
+Python implementation without the recommended remote-storage/Jupyter extras.
+All unit/provider tests and pip checks remain mandatory. Development retains
+its existing recommended frontend tools separately. This selection is tracked
+in #131 after the full metapackage exposed an unrelated s3fs/aiobotocore closure
+inconsistency; it does not qualify all of Astropy's recommended integrations.
+
+If an existing artifact needs an infrastructure-only qualification correction,
+keep its original source, producer, filename and digest. The existing
+`installed-source-binding` receipt records the separate qualifier SHA,
+run/attempt, original source/file, profiles and platforms. Verify native jobs at
+the qualifier SHA and independently verify that binding and original producer;
+tests and the installed checker still come from the original candidate checkout.
+Every required installed cell must execute. A workflow correction neither
+authorizes rebuilding the file nor waives its original source gates.
+
 For a staged release, the release event verifies the plan and does not
 rebuild. Dispatch `.github/workflows/promote_conda_package.yaml` only after
 the stable GitHub Release exists, using the independently verified digest.

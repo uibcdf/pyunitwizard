@@ -143,7 +143,7 @@ jobs:
             uibcdf::smonitor=0.16.0=py_1
             uibcdf::argdigest=0.14.0=py_0
             ${{ matrix.profile == 'prepared' && 'uibcdf::ackredit=0.10.1=py_0' || 'uibcdf::ackredit=0.9.0=py_0' }}
-            pip pytest uibcdf::pytest-receptor=1.1.0 openmm unyt astropy
+            pip pytest uibcdf::pytest-receptor=1.1.0 openmm unyt astropy-base
             ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0 zarr=3.1.6 pyarrow=25.0.0 asdf=6.0.0 asdf-astropy=0.11.0' || '' }}
             ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.24,<0.26' || '' }}
       - name: Install third-party test backends

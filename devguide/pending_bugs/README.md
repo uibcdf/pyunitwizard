@@ -5,6 +5,8 @@ report front matter and regenerate this index; do not edit the generated block.
 
 <!-- generated: devguide_index -->
 
-*No entries.*
+### Active (1)
+
+- [`installed_astropy_optional_closure.md`](installed_astropy_optional_closure.md) — [#131](https://github.com/uibcdf/pyunitwizard/issues/131) — Qualify the original staged artifact without unrelated Astropy recommended extras. *(medium, reproduced)*
 
 <!-- /generated -->
