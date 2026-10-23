@@ -5,6 +5,7 @@ import os
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 
 GREEN = "\033[32m"
 RED = "\033[31m"
@@ -70,12 +71,13 @@ def execute_notebook(notebook_path: Path, force: bool = False) -> bool:
         return True
 
 
-def main(force=False, notebook: Path = None, recursive: bool = False):
+def main(force: bool = False, notebook: Optional[Path] = None, recursive: bool = False) -> bool:
+    """Execute the selection and report success after processing every notebook."""
 
     if notebook is not None:
         if not notebook.exists():
             print(f"{RED}✘{RESET} {notebook} does not exist.")
-            return
+            return False
         if notebook.is_file():
             nb_list = [notebook]
         elif notebook.is_dir():
@@ -91,8 +93,11 @@ def main(force=False, notebook: Path = None, recursive: bool = False):
 
     nb_list = [nb for nb in nb_list if ".ipynb_checkpoints" not in nb.parts]
 
+    success = True
     for nb_path in nb_list:
-        execute_notebook(nb_path, force)
+        if not execute_notebook(nb_path, force):
+            success = False
+    return success
 
 
 if __name__ == "__main__":
@@ -128,15 +133,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    success = True
     if args.notebook:
         for nb in map(Path, args.notebook):
             if nb.is_file():
-                main(force=args.force, notebook=nb, recursive=args.recursive)
+                if not main(force=args.force, notebook=nb, recursive=args.recursive):
+                    success = False
             elif nb.is_dir():
-                main(force=args.force, notebook=nb, recursive=args.recursive)
+                if not main(force=args.force, notebook=nb, recursive=args.recursive):
+                    success = False
             else:
                 print(f"{RED}✘{RESET} File not found or not a notebook: {nb}")
+                success = False
     else:
-        main(force=args.force, recursive=args.recursive)
+        success = main(force=args.force, recursive=args.recursive)
 
-        args = parser.parse_args()
+    raise SystemExit(0 if success else 1)

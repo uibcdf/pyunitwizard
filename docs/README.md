@@ -63,6 +63,11 @@ python docs/execute_notebooks.py -r docs/content --force
 python docs/execute_notebooks.py docs/content/.../tutorial1.ipynb
 ```
 
+The command exits nonzero if any requested notebook fails or a supplied path
+does not exist. It still processes the remaining notebooks, retains each
+execution log and removes a failed notebook's success timestamp. Notebooks and
+their useful logs remain caller-owned; inspect the failures before cleanup.
+
 After every run:
 
 1. Inspect `.nbconvert.log` files for errors. Fix issues and rerun as needed.
