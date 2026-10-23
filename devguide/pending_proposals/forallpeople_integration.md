@@ -55,7 +55,8 @@ make environment selection part of PyUnitWizard's process-global unit policy.
 2. A compatibility matrix states the behavior for quantities, units, arrays,
    dimensionality, dimensionless results and environment-dependent representation.
 3. Round-trip tests cover at least one existing backend in both directions.
-4. Python 3.11--3.13 support and optional installation are demonstrated.
+4. Python 3.11--3.14 support and optional installation are demonstrated, including
+   executed Python 3.14 compatibility tests before claiming support for this form.
 5. Maintainers accept the ongoing backend and upstream-version support cost.
 6. The proposal is then accepted for implementation or closed as unnecessary.
 
@@ -63,3 +64,10 @@ make environment selection part of PyUnitWizard's process-global unit policy.
 
 Defer implementation until after 1.0 and until criterion 1 exists. The current evidence
 supports removing `needs-triage`; it does not support adding `forallpeople` now.
+
+## Support-baseline clarification — 2026-10-22
+
+The maintainer confirmed that future qualification must include Python 3.14,
+matching PyUnitWizard's current >=3.11,<3.15 baseline. This corrects the earlier
+acceptance range; it does not claim that a forallpeople adapter or its optional
+installation has been implemented or qualified.
