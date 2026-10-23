@@ -26,7 +26,7 @@ def test_real_coordinates_compare_complete_routes(source_form, target_form):
     assert report["input"]["shape"] == [72, 3]
     for mode in ("telemetry_enabled", "telemetry_disabled"):
         paths = report["results"][mode]
-        assert set(paths) == {"direct", "via_record", "read_existing", "read_wire"}
+        assert set(paths) == {"direct", "via_pint", "via_record", "read_existing", "read_wire"}
         for result in paths.values():
             assert len(result["samples_seconds"]) == 2
             assert result["parity"]["shape"] == [72, 3]

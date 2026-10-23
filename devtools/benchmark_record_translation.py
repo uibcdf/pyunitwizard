@@ -72,7 +72,7 @@ def compare_translation(
     iterations: int = 100,
     repeats: int = 7,
 ) -> Dict[str, Any]:
-    """Measure four conversion cost scopes after checking their numerical parity.
+    """Measure five conversion cost scopes after checking their numerical parity.
 
     Parameters
     ----------
@@ -89,7 +89,8 @@ def compare_translation(
     -------
     dict
         Input description, parity and raw seconds per operation in both telemetry
-        modes. ``via_record`` pays construction; ``read_existing`` starts after
+        modes. ``via_pint`` is a live bridge control without a record;
+        ``via_record`` pays construction; ``read_existing`` starts after
         verification; ``read_wire`` includes base64 decoding and seal checks.
 
     Raises
@@ -123,6 +124,9 @@ def compare_translation(
             expectations = {"field": field, "kind": kind, "form": target_form, "unit": target_unit}
             paths = {
                 "direct": lambda: puw.convert(quantity, to_form=target_form, to_unit=target_unit),
+                "via_pint": lambda: puw.convert(
+                    puw.convert(quantity, to_form="pint", to_unit=target_unit), to_form=target_form
+                ),
                 "via_record": lambda: QuantityRecord.from_quantity(quantity, field=field, kind=kind).to_quantity(
                     **expectations
                 ),

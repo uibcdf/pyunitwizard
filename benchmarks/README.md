@@ -45,7 +45,8 @@ python devtools/benchmark_record_translation.py --iterations 100 --repeats 7 > c
 python devtools/benchmark_record_translation.py --tile 1000 --iterations 20 --repeats 7 > comparison-large.json
 ```
 
-The four cost scopes are distinct: `direct` translates a live quantity;
+The five cost scopes are distinct: `direct` translates a live quantity;
+`via_pint` uses an explicit live Pint bridge without constructing a record;
 `via_record` constructs and seals a new record before reading it; `read_existing`
 starts with an already validated immutable record; `read_wire` decodes and
 verifies a prepared base64 representation before reading. Wire encoding, imports
