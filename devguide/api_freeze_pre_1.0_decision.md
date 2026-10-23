@@ -96,3 +96,20 @@ explicit; unsupported calendar, logarithmic and arbitrary-transform cases are
 refused. This does not admit automatic dialect guessing, streaming/append
 support, a MolSysMT format migration or stable schema promotion. Name the
 optional installed/matrix evidence and this provisional status in release notes.
+
+## Maintainer-selected record extensions — 2026-10-23
+
+Admit the bounded provisional operations selected by the maintainer in #104,
+#102, #105 and #103: homogeneous Zarr snapshots/first-axis partial reads,
+the tagged layout on the existing QuantityRecord class, homogeneous immutable
+append, and complete Arrow/Parquet bindings. Their maintained contract is
+`docs/content/user/record-extensions.md`; source workloads and measurements are
+retained with the owning records. Existing public API parameters, homogeneous
+qrec/0.3 and bundle bytes remain unchanged. New tagged/Zarr/Arrow identifiers
+are explicit and are not interpreted by old readers as old formats.
+
+Keep these surfaces provisional in the release checklist and notes. Consumer
+schema adoption, remote storage, verified column projection, disk/in-place
+append, mixed-kind computation and stable promotion remain separate decisions.
+Require actual optional-provider/installed evidence for each advertised scope;
+local source tests do not qualify a public artifact.

@@ -102,3 +102,20 @@ collecting fresh candidate evidence for each section:
   for those releases; the 1.0 candidate needs its own mandatory executed gates.
   Codecov #107 is closed after actual uploads recovered; verify current required
   uploads rather than carrying that historical incident as open debt.
+
+## Provisional record extensions (#104/#102/#105/#103)
+
+- [ ] State the provisional tagged layout, immutable append and Zarr/Arrow
+  bindings in release notes. Keep qrec/0.3 and bundle bytes compatible.
+- [ ] Identify the optional source/installed Linux/macOS arm64 Python 3.11–3.14
+  matrix, including real consumer fixtures, lazy/absence/transitive-failure
+  guards and the explicit reader unit/kind handshakes.
+- [ ] Retain benchmark scope: tiled coordinates are synthetic, partial Zarr
+  verification covers selected chunk contents, immutable append still copies
+  total values, Arrow nulls are refused and Parquet reads complete files.
+- [ ] Qualify the exact required public artifact; source tests do not establish
+  installed-public dependency closure or migration in consumer repositories.
+- [ ] Following the maintainer's 2026-10-23 request, after the next package and
+  GitHub Release are actually published and verified, open an issue in
+  `uibcdf/molsyssuite` announcing the available version, links, scope and
+  installed evidence. This is separate from pre-rollout impact notices.

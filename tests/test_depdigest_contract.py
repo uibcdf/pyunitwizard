@@ -19,6 +19,8 @@ def test_depdigest_runtime_policy_has_expected_hard_and_soft_dependencies():
         "openff.units",
         "cf_units",
         "h5py",
+        "zarr",
+        "pyarrow",
     }
 
 

@@ -158,8 +158,10 @@ Both encodings preserve empty multidimensional arrays with their dtype and shape
 
 The optional provisional [HDF5 binding and CF unit tools](hdf5-cf.md) store
 numeric values with verified metadata and an explicitly negotiated CF label.
-Arrow (#103), Zarr (#104), tagged layouts (#102) and verified appends (#105)
-remain independent proposals.
+The provisional [storage and layout extensions](record-extensions.md) implement
+Zarr snapshots (#104), a tagged layout (#102), immutable verified append (#105),
+and Arrow/Parquet (#103). Existing homogeneous qrec/0.3 bytes stay unchanged;
+the extensions have separate explicit formats and bounded contracts.
 
 ## Not a passport
 

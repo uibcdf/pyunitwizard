@@ -1,6 +1,8 @@
 # DepDigest configuration for PyUnitWizard
 
 LIBRARIES = {
+    "zarr": {"type": "soft", "pypi": "zarr", "conda": "zarr"},
+    "pyarrow": {"type": "soft", "pypi": "pyarrow", "conda": "pyarrow"},
     "cf_units": {"type": "soft", "pypi": "cf-units", "conda": "cf-units"},
     "h5py": {"type": "soft", "pypi": "h5py", "conda": "h5py"},
     "argdigest": {"type": "hard", "pypi": "argdigest", "conda": "argdigest"},

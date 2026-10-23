@@ -101,6 +101,16 @@ scale and affine offset with relative tolerance `1e-12`; missing or different
 definitions raise `ValueError`. This permits ordinary arithmetic with
 PyUnitWizard-created Pint quantities after conversion.
 
+## Provisional record extensions
+
+`QuantityRecord` also supports a tagged inert layout (`qrec-tagged/0.1`), explicit
+descriptor-based splitting, and homogeneous immutable append. Existing qrec/0.3
+bytes remain unchanged. Optional `storage.zarr` provides verified snapshots and
+first-axis partial reads; `storage.arrow` provides complete Arrow/Parquet records.
+They reuse the codec's typed-array/metadata operations and remain lazy optional
+providers. Contracts, failure behavior, consumer fixtures, qualified profile and
+limits are documented in `docs/content/user/record-extensions.md`.
+
 ## Stated scalar uncertainty
 
 `pyunitwizard.measurement.MeasurementRecord` is a provisional inert envelope

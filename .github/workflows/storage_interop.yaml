@@ -1,4 +1,4 @@
-name: CF and HDF5 interoperability
+name: Quantity storage interoperability
 
 on:
   workflow_dispatch:
@@ -48,11 +48,13 @@ jobs:
         shell: bash -l {0}
         run: |
           mkdir -p "$RUNNER_TEMP/storage-installed-tests/tests/storage" "$RUNNER_TEMP/storage-installed-tests/tests/dialects" "$RUNNER_TEMP/storage-installed-tests/tests/data"
-          cp tests/storage/test_hdf5.py "$RUNNER_TEMP/storage-installed-tests/tests/storage/"
+          cp tests/storage/test_*.py "$RUNNER_TEMP/storage-installed-tests/tests/storage/"
           cp tests/dialects/test_cf.py "$RUNNER_TEMP/storage-installed-tests/tests/dialects/"
           cp tests/data/h5msm_quantity_boundary.json "$RUNNER_TEMP/storage-installed-tests/tests/data/"
+          cp tests/data/sabueso_activity_quantities.json "$RUNNER_TEMP/storage-installed-tests/tests/data/"
           cp tests/test_storage_optional.py tests/test_quantity_record_empty.py "$RUNNER_TEMP/storage-installed-tests/tests/"
+          cp tests/test_record_arrays.py tests/test_record_tagged.py tests/test_record_append.py tests/test_record_extensions_consumer.py "$RUNNER_TEMP/storage-installed-tests/tests/"
           cd "$RUNNER_TEMP/storage-installed-tests"
           python -m pip check
-          python -c 'import pyunitwizard, cf_units, h5py; print(pyunitwizard.__file__); print(pyunitwizard.__version__, cf_units.__version__, h5py.__version__)'
+          python -c 'import pyunitwizard, cf_units, h5py, zarr, pyarrow; print(pyunitwizard.__file__); print(pyunitwizard.__version__, cf_units.__version__, h5py.__version__, zarr.__version__, pyarrow.__version__)'
           python -m pytest --receptor=ci -q tests
