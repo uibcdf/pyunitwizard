@@ -33,15 +33,24 @@ import hashlib
 import json
 import struct
 from functools import lru_cache
-from typing import Any, Dict, Mapping, Optional, Tuple
+from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
 from ._private.exceptions import RecordError
 
-__all__ = ["FORMAT", "BUNDLE_FORMAT", "QuantityRecord", "QuantityRecordBundle", "RecordError"]
+__all__ = [
+    "FORMAT",
+    "TAGGED_FORMAT",
+    "BUNDLE_FORMAT",
+    "QuantityRecord",
+    "QuantityRecordBundle",
+    "RecordError",
+    "metadata_digest",
+]
 
 FORMAT = "qrec/0.3"
+TAGGED_FORMAT = "qrec-tagged/0.1"
 BUNDLE_FORMAT = "qrec-bundle/0.3"
 #: Relative tolerance between a record's SI description and this reader's definition of the
 #: same unit. Definitions differ across CODATA revisions (dalton: ~1.4e-9 between 2018 and
@@ -110,6 +119,34 @@ def _digest(*parts: Any) -> str:
     for part in parts:
         h.update(part if isinstance(part, (bytes, memoryview)) else _canonical(part))
     return "blake2b-128:" + h.hexdigest()
+
+
+def metadata_digest(metadata: Mapping[str, Any]) -> str:
+    """Seal binding metadata with the codec's canonical byte representation.
+
+    Parameters
+    ----------
+    metadata : mapping
+        JSON-like finite metadata; key order does not affect the result.
+
+    Returns
+    -------
+    str
+        Canonical blake2b-128 integrity digest, not an authenticity signature.
+
+    Raises
+    ------
+    RecordError
+        For unsupported or non-finite metadata values.
+
+    Examples
+    --------
+    >>> metadata_digest({'format': 'example/1'}) == metadata_digest({'format': 'example/1'})
+    True
+    """
+    if not isinstance(metadata, Mapping):
+        raise RecordError(reason="binding metadata must be a mapping")
+    return _digest(dict(metadata))
 
 
 def _seal(manifest: Dict[str, Any], values: np.ndarray) -> Tuple[list, str]:
@@ -256,7 +293,7 @@ class QuantityRecord:
     >>> q = QuantityRecord.from_dict(data).to_quantity(field="ic50", unit="uM")
     """
 
-    __slots__ = ("_manifest", "_values", "_block_digests", "_digest")
+    __slots__ = ("_manifest", "_values", "_block_digests", "_digest", "_codes")
 
     def __init__(self) -> None:  # pragma: no cover - construction goes through classmethods
         raise TypeError("build a QuantityRecord with from_quantity() or from_dict()")
@@ -271,7 +308,42 @@ class QuantityRecord:
         record._values = values
         record._block_digests = list(block_digests)
         record._digest = digest
+        record._codes = None
         return record
+
+    @classmethod
+    def from_tagged(
+        cls, quantities: Sequence[Any], *, field: Optional[str] = None, kinds: Optional[Sequence[Optional[str]]] = None
+    ) -> "QuantityRecord":
+        """Seal equal-shaped quantities while retaining their individual units.
+
+        Parameters
+        ----------
+        quantities : sequence of quantities
+            Nonempty collection of scalars or equal-shaped arrays. Outer axis
+            identifies sources; descriptor codes broadcast over each source array.
+        field : str, optional
+            Application-owned field association.
+        kinds : sequence of str or None, optional
+            Explicit kind per source; no kind is inferred from dimensions.
+
+        Returns
+        -------
+        QuantityRecord
+            Provisional tagged layout with values, codes and a descriptor table.
+
+        Raises
+        ------
+        RecordError
+            For bare values, mismatched shapes or invalid kind associations.
+
+        Examples
+        --------
+        >>> record = QuantityRecord.from_tagged([puw.quantity(1, 'nm'), puw.quantity(20, 'angstrom')])
+        """
+        from ._tagged_record import build
+
+        return build(cls, quantities, field=field, kinds=kinds)
 
     @classmethod
     def from_quantity(
@@ -329,6 +401,10 @@ class QuantityRecord:
             raise RecordError(reason="no manifest; there is no default unit")
         manifest = copy.deepcopy(dict(data["manifest"]))
         field = manifest.get("field")
+        if manifest.get("format") == TAGGED_FORMAT:
+            from ._tagged_record import restore
+
+            return restore(cls, data)
         if manifest.get("format") != FORMAT:
             raise RecordError(reason=f"format {manifest.get('format')!r} is not {FORMAT!r}", field=field)
         for key in ("unit", "si", "dtype", "shape", "blocks"):
@@ -357,12 +433,218 @@ class QuantityRecord:
             cannot hold. ``"base64"`` writes the little-endian bytes (about 1.33 times their
             raw size) and holds any value exactly.
         """
-        return {
+        result = {
             "manifest": copy.deepcopy(self._manifest),
             "values": _encode(self._values, encoding, self.field),
             "block_digests": list(self._block_digests),
             "digest": self._digest,
         }
+        if self.layout == "tagged":
+            result["codes"] = self.codes.tolist()
+        return result
+
+    def to_metadata(self) -> Dict[str, Any]:
+        """Return detached sealed metadata without encoding the numeric payload.
+
+        Returns
+        -------
+        dict
+            Manifest, block digests and root digest; use with ``from_array``.
+
+        Examples
+        --------
+        >>> restored = QuantityRecord.from_array(record.values, metadata=record.to_metadata())
+        """
+        result = {
+            "manifest": copy.deepcopy(self._manifest),
+            "block_digests": list(self._block_digests),
+            "digest": self._digest,
+        }
+        if self.layout == "tagged":
+            result["codes"] = self.codes.tolist()
+        return result
+
+    @classmethod
+    def validate_metadata(cls, metadata: Mapping[str, Any]) -> None:
+        """Check homogeneous unit metadata and its binding to block digests.
+
+        Parameters
+        ----------
+        metadata : mapping
+            Homogeneous sealed metadata, without numeric values.
+
+        Returns
+        -------
+        None
+            Metadata is structurally valid. Numeric payload integrity still
+            requires ``from_array``; this operation never certifies unread data.
+
+        Raises
+        ------
+        RecordError
+            For an unsupported format, malformed shape/blocks or inconsistent seal/unit.
+
+        Examples
+        --------
+        >>> QuantityRecord.validate_metadata(record.to_metadata())
+        """
+        try:
+            m = metadata["manifest"]
+            if m["format"] != FORMAT or m["dtype"] not in DTYPES:
+                raise ValueError("homogeneous metadata required")
+            for key in ("shape", "blocks"):
+                if not isinstance(m[key], list) or any(type(n) is not int or n < 0 for n in m[key]):
+                    raise ValueError("shape/block sizes")
+            if sum(m["blocks"]) != int(np.prod(m["shape"], dtype=object)):
+                raise ValueError("block coverage")
+            blocks = metadata["block_digests"]
+            if len(blocks) != len(m["blocks"]):
+                raise ValueError("block inventory")
+            if _digest(m, *[item.encode("ascii") for item in blocks]) != metadata["digest"]:
+                raise ValueError("metadata seal")
+            _cross_check(m, m.get("field"))
+        except RecordError:
+            raise
+        except Exception as exc:
+            raise RecordError(reason=f"invalid homogeneous metadata: {exc}") from exc
+
+    @classmethod
+    def from_array(cls, values: np.ndarray, *, metadata: Mapping[str, Any]) -> "QuantityRecord":
+        """Restore a typed payload only when its existing codec seal verifies.
+
+        Parameters
+        ----------
+        values : numpy.ndarray
+            Exact stored dtype and shape, without coercion.
+        metadata : mapping
+            Sealed metadata stored together with this payload.
+
+        Returns
+        -------
+        QuantityRecord
+            Detached immutable verified snapshot.
+
+        Raises
+        ------
+        RecordError
+            For a changed payload, missing metadata or incompatible dtype/shape.
+
+        Examples
+        --------
+        >>> restored = QuantityRecord.from_array(record.values, metadata=record.to_metadata())
+        """
+        try:
+            manifest = metadata["manifest"]
+            if not isinstance(values, np.ndarray) or values.dtype.name != manifest["dtype"]:
+                raise ValueError("dtype")
+            if list(values.shape) != manifest["shape"]:
+                raise ValueError("shape")
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RecordError(reason="typed values do not match sealed metadata") from exc
+        return cls.from_dict({**metadata, "values": values})
+
+    def select(self, selection: slice) -> "QuantityRecord":
+        """Seal an independent contiguous first-axis subset.
+
+        Parameters
+        ----------
+        selection : slice
+            First-axis selection with unit stride; empty subsets are allowed.
+
+        Returns
+        -------
+        QuantityRecord
+            New snapshot retaining field, unit and kind.
+
+        Raises
+        ------
+        RecordError
+            For a scalar record or a non-contiguous selection.
+
+        Examples
+        --------
+        >>> subset = record.select(slice(0, 10))
+        """
+        if not self.values.ndim or not isinstance(selection, slice) or selection.step not in (None, 1):
+            raise RecordError(reason="selection requires a non-scalar and a unit-stride slice", field=self.field)
+        values = self.values[selection]
+        manifest = copy.deepcopy(self._manifest)
+        if self.layout == "tagged":
+            from ._tagged_record import seal
+
+            manifest["shape"] = list(values.shape)
+            return seal(type(self), manifest, values, self.codes[selection])
+        manifest.update(shape=list(values.shape), blocks=[int(values.size)])
+        blocks, digest = _seal(manifest, values)
+        return self._new(manifest, values, blocks, digest)
+
+    def append(self, quantity: Any) -> "QuantityRecord":
+        """Append first-axis rows as a new immutable homogeneous snapshot.
+
+        Parameters
+        ----------
+        quantity : quantity or homogeneous QuantityRecord
+            Equal trailing shape and source dtype. Units convert to this record's
+            unit. A record source must also have the same field and kind;
+            a computing quantity is explicitly bound to this receiver's context.
+
+        Returns
+        -------
+        QuantityRecord
+            Snapshot with an additional sealed block; the old snapshot is unchanged.
+            An empty append returns this snapshot. Existing block hashes are reused,
+            but concatenating immutable arrays still copies O(total values) bytes.
+
+        Raises
+        ------
+        RecordError
+            For scalars, tagged layouts, incompatible metadata, shapes/dtypes or
+            conversion requiring loss of an integer value or finite float overflow.
+
+        Examples
+        --------
+        >>> updated = coordinates.append(next_coordinate_frames)
+        """
+        if self.layout != "homogeneous" or not self.values.ndim:
+            raise RecordError(reason="append requires a non-scalar homogeneous record", field=self.field)
+        try:
+            if isinstance(quantity, QuantityRecord):
+                if quantity.layout != "homogeneous" or quantity.field != self.field or quantity.kind != self.kind:
+                    raise ValueError("source field, kind or layout")
+            source = _to_pint(quantity)
+            if np.asarray(source.magnitude).dtype != self.values.dtype:
+                raise ValueError("source dtype differs from the negotiated dtype")
+            with np.errstate(over="ignore", invalid="ignore"):
+                values = np.asarray(source.to(self.unit).magnitude)
+            if np.any(np.isfinite(source.magnitude) & ~np.isfinite(values)):
+                raise ValueError("unit conversion overflow")
+            if values.ndim != self.values.ndim or values.shape[1:] != self.values.shape[1:]:
+                raise ValueError("trailing shape")
+            if self.values.dtype.kind in "iu":
+                limits = np.iinfo(self.values.dtype)
+                if not np.all(np.isfinite(values)) or np.any(values < limits.min) or np.any(values > limits.max):
+                    raise ValueError("integer range")
+            with np.errstate(over="ignore", invalid="ignore"):
+                converted = values.astype(self.values.dtype)
+            if self.values.dtype.kind in "iu" and not np.array_equal(values, converted):
+                raise ValueError("unit conversion loses integer values")
+            if np.any(np.isfinite(values) & ~np.isfinite(converted)):
+                raise ValueError("unit conversion overflows the negotiated dtype")
+            if not values.shape[0]:
+                return self
+            manifest = copy.deepcopy(self._manifest)
+            combined = np.concatenate((self.values, converted), axis=0)
+            manifest["shape"] = list(combined.shape)
+            manifest["blocks"].append(int(converted.size))
+            index = len(self._block_digests)
+            block = _digest({"block": index, "dtype": manifest["dtype"]}, _little_endian(converted))
+            blocks = [*self._block_digests, block]
+            digest = _digest(manifest, *[item.encode("ascii") for item in blocks])
+            return self._new(manifest, combined, blocks, digest)
+        except RecordError:
+            raise
+        except Exception as exc:
+            raise RecordError(reason=f"append rejected: {exc}", field=self.field) from exc
 
     def to_quantity(
         self,
@@ -398,6 +680,11 @@ class QuantityRecord:
         from .api.conversion import convert
         from .api.validation import check
 
+        if self.layout == "tagged":
+            from ._tagged_record import to_quantity
+
+            return to_quantity(self, field=field, unit=unit, dimensionality=dimensionality, kind=kind, form=form)
+
         if field is not None and self.field != field:
             raise RecordError(reason=f"the record belongs to {self.field!r}, not {field!r}", field=field)
         if kind is not None and self.kind != kind:
@@ -423,11 +710,56 @@ class QuantityRecord:
         return self._manifest.get("field")
 
     @property
+    def layout(self) -> str:
+        """The explicit inert layout: homogeneous or tagged."""
+        return "tagged" if self._codes is not None else "homogeneous"
+
+    @property
+    def codes(self) -> np.ndarray:
+        """Read-only per-value descriptor codes; tagged layouts only."""
+        if self._codes is None:
+            raise RecordError(reason="homogeneous records have no descriptor codes", field=self.field)
+        return self._codes
+
+    @property
+    def descriptors(self) -> list:
+        """Detached local unit/kind descriptors for a tagged record."""
+        if self.layout != "tagged":
+            raise RecordError(reason="homogeneous records have a single unit", field=self.field)
+        return copy.deepcopy(self._manifest["descriptors"])
+
+    def split(self) -> Dict[int, "QuantityRecord"]:
+        """Return homogeneous flattened groups keyed by descriptor code.
+
+        Returns
+        -------
+        dict of int to QuantityRecord
+            Each group's values follow source C order. ``codes == key`` locates
+            their original positions; this method does not discard that map.
+
+        Raises
+        ------
+        RecordError
+            For a homogeneous source.
+
+        Examples
+        --------
+        >>> groups = tagged_record.split()
+        """
+        from ._tagged_record import split
+
+        return split(self)
+
+    @property
     def unit(self) -> str:
+        if self.layout == "tagged":
+            raise RecordError(reason="tagged records require an explicit target unit or split()", field=self.field)
         return self._manifest["unit"]
 
     @property
     def si(self) -> Dict[str, Any]:
+        if self.layout == "tagged":
+            raise RecordError(reason="tagged records have per-descriptor SI definitions", field=self.field)
         return copy.deepcopy(self._manifest["si"])
 
     @property
@@ -444,6 +776,8 @@ class QuantityRecord:
         return self._digest
 
     def __repr__(self) -> str:
+        if self.layout == "tagged":
+            return f"QuantityRecord(field={self.field!r}, layout='tagged', shape={self.values.shape})"
         return (
             f"QuantityRecord(field={self.field!r}, unit={self.unit!r}, "
             f"shape={tuple(self._values.shape)}, dtype={self._values.dtype.name})"
