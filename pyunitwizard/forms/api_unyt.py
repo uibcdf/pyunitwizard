@@ -413,7 +413,7 @@ def quantity_to_astropy_units(quantity: Union[unyt_array, unyt_quantity]):
 
     from .api_pint import quantity_to_astropy_units as pint_to_astropy_units
 
-    pint_quantity = quantity.to_pint()
+    pint_quantity = quantity_to_pint(quantity)
 
     return pint_to_astropy_units(pint_quantity)
 

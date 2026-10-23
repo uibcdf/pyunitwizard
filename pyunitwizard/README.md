@@ -74,6 +74,10 @@ than passing display symbols between libraries. In particular, OpenMM's `A`
 means angstrom and must remain a length; unyt reserves `A` for ampere. This
 also preserves compound length/time units and actual electrical-current inputs.
 
+The unyt-to-Astropy translator also reuses the shared Pint registry through
+`quantity_to_pint`. Repeated conversions do not construct a fresh registry for
+each array; numerical translation and dtype/shape contracts remain unchanged.
+
 The optional `openff.units` form uses the actual OpenFF registry and shared
 Pint definition verification, with native OpenMM parity and explicit unsealed
 val/unit import/export in `forms/api_openff_units.py`. Install conda-forge
