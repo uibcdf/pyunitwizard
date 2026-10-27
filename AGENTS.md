@@ -1,5 +1,21 @@
 # PyUnitWizard
 
+## Mandatory MolSysSuite instructions
+
+Read and follow `MOLSYSSUITE_GUIDE.md` before working in this repository.
+
+Within their stated scope, its common rules take precedence over this file
+and any nested `AGENTS.md`. Local instructions may refine them; deviations
+require the documented policy exception process.
+
+The synchronized guide is owned by `uibcdf/molsyssuite`. It includes the
+[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
+and [working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
+For work under `devguide/`, also read `devguide/AGENTS.md` and its local
+reporting protocol. Keep repository-specific instructions below.
+
+## Local working context
+
 *A Python Units Wizard that streamlines work with physical quantities.*
 
 ---
@@ -126,7 +142,9 @@ Additional `AGENTS.md` files may exist in submodules with specialized instructio
 
 ### 4.9 Security and Dependencies
 
-- Use only dependencies listed in `devtools/conda-envs/development_env.yaml`.  
+- Declare dependency additions in the package metadata and the appropriate
+  `devtools/conda-envs/` inputs. Routine shared-workspace use follows the common
+  eligibility/receiving route; a member YAML is not a mandatory separate daily environment.
 - Avoid deprecated or unmaintained packages.  
 - Regularly verify that dependencies are **available, necessary, and pertinent**.  
 - Check dependencies periodically using tools such as `safety` or `bandit`.  
@@ -204,7 +222,6 @@ These rules apply to automated agents (GitHub Actions, Copilot Agents, CI bots, 
 
 - Always wait for terminal commands to complete before proceeding.  
 - Do not modify code outside the assigned scope.  
-- Prefer proposing changes via PR rather than direct commits to `main`.  
 - Ask for clarification or open a draft PR if unsure.  
 - Never overwrite human work or documentation without explicit approval.  
 - When stuck, **ask a clarifying question**, propose a short plan, or open a draft PR with notes — do not push large speculative changes without confirmation.  
@@ -243,19 +260,11 @@ To be extended in future versions, it may include:
 - Automatic code style and dependency audits.  
 - Validation of cross-repo synchronization for shared components.  
 
-### 8.6 Safety and Permissions
+### 8.6 Authorization
 
-**Allowed without prompt:**  
-- Running linters, formatters, or test suites.  
-- Generating documentation locally.  
-- Checking dependency status.  
-
-**Ask before doing:**  
-- Committing code or modifying configuration.  
-- Running destructive commands (e.g., deleting branches or files).  
-- Editing documentation or CI pipelines.  
-- Updating build/test commands, contribution guidelines, or security considerations.  
-- Changing commit message conventions or PR workflows.  
+Use the common authorization and principal-maintainer contribution route. Existing
+explicit authorization within the same scope persists across commits and ordinary
+documentation/configuration edits; local workflow defaults add no approval round.
 
 ---
 
@@ -264,7 +273,7 @@ To be extended in future versions, it may include:
 - After any change, verify if documentation, examples, or tests must be updated.  
 - After any change, verify if any `AGENTS.md` or `README.md` need to be updated for consistency.  
 - Regularly review CI configurations for dependency or policy drift.  
-- Keep this file synchronized across UIBCDF projects when possible.  
+- Keep this file specific to this repository; synchronize only registered canonical guides through their official owner.
 
 ---
 
@@ -281,62 +290,8 @@ These guides are required reading for anyone developing this library. They descr
 - `PYTEST_RECEPTOR_GUIDE.md` — Required guide for compact, truth-preserving pytest output
   in local and hosted development.
 
-## Direct pushes and scoped local validation
+## Registered integration guides
 
-Follow [the common checkpoint policy](MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints)
-for authorized internal direct pushes by `dprada` and `LMMV`. Batch focused local
-commits when remote visibility is unnecessary; a permitted interim CI skip is
-conditional, never the default after every locally checked change. Retain local
-results while tested code, inputs, environment and scope remain applicable.
-Normally finish with an unskipped head and inspect its applicable CI, or explicitly
-execute and verify those exact-head gates manually. Record missing evidence,
-untested scope, owning issue and recovery route; administrative checks do not
-clear full-suite backlog. External PRs, admission and publication require all
-mandatory executed gates for the exact candidate and required installed file.
-An authorized manual qualification retains the original producer and artifact
-bytes/digest; a marker alone neither waives a gate nor disqualifies that evidence.
+Read the registered consumer guides when working on their respective boundaries:
 
-## Release and package-publication notices
-
-For every new component release, with or without a published package, and every
-new package version/build/distribution route, open or update a release-specific
-issue in `uibcdf/molsyssuite` as part of closeout. Include exact version/tag/source,
-actual package availability and verification evidence, and ecosystem follow-up.
-Follow [the notice policy](MOLSYSSUITE_GUIDE.md#release-and-package-publication-notices).
-
-## Public release titles
-
-When preparing, publishing or intentionally editing a public GitHub Release, use
-exactly `X.Y.Z` as its title/name, matching the canonical tag and package/project
-version. Put descriptions in the body/notes. Read
-[the local release-title guide](devguide/release_titles.md) and
-[the canonical rule](MOLSYSSUITE_GUIDE.md#github-release-titles).
-
-## Modular reusable tools
-
-Before adding a feature, inspect existing tools and identify the owning module or
-component. Implement or extend independently useful operations as documented reusable
-tools in that owner, with their own contracts and tests; have consumers call them.
-Keep task-specific decisions local and report missing sibling capabilities to the
-provider with linked consumer evidence. Follow
-[MOLSYSSUITE_GUIDE.md#modular-reusable-tools](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
-for applicability, compatibility, performance and tracked exceptions.
-
-## Durable working instructions
-
-Keep technical findings in owning issues, fixes, tests and maintained guidance.
-Place only accepted lasting contributor actions in root or appropriately scoped
-instructions, following
-[the common policy](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
-For work under `devguide/`, also read [devguide/AGENTS.md](devguide/AGENTS.md)
-and its local reporting protocol. Shared instruction proposals belong in
-`uibcdf/molsyssuite`; cross-MOLI contracts belong in `uibcdf/moli`.
-
-## Human-facing issue feedback
-
-Surface actionable suspected defects, inconsistencies, missing analyses and
-improvements, including uncertain or nonblocking findings. When working with a
-human, offer an owning issue at a natural pause; retain existing reporting
-authorization and respect declined/deferred disclosure. Follow
-[the accepted feedback route](MOLSYSSUITE_GUIDE.md#human-facing-issue-feedback)
-for ownership, uncertainty, privacy and exceptions.
+- `DEPDIGEST_GUIDE.md`
