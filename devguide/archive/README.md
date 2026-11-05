@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (59)
+### Resolved (60)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -52,6 +52,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`quantity_record_zarr.md`](../completed_proposals/quantity_record_zarr.md) — [#104](https://github.com/uibcdf/pyunitwizard/issues/104) — Evaluate an optional Zarr binding for QuantityRecord. *(measured)*
 - [`quantity_vocabulary_annotations.md`](../completed_proposals/quantity_vocabulary_annotations.md) — [#127](https://github.com/uibcdf/pyunitwizard/issues/127) — Validate explicit QUDT and UO unit annotations without kind inference. *(measured)*
 - [`receptor_misclassifies_composite_conda_publication.md`](../solved_bugs/receptor_misclassifies_composite_conda_publication.md) — [#73](https://github.com/uibcdf/pyunitwizard/issues/73) — Use the release profile for action-internal Conda publication. *(low, reproduced)*
+- [`record_handshake_test_policy.md`](../solved_bugs/record_handshake_test_policy.md) — [#139](https://github.com/uibcdf/pyunitwizard/issues/139) — Isolate the record dimension-handshake regression from session output defaults. *(low, reproduced)*
 - [`release_0.28.0.md`](../completed_proposals/release_0.28.0.md) — [#110](https://github.com/uibcdf/pyunitwizard/issues/110) — Qualify and publish 0.28.0 with the exact staged Conda artifact. *(inspected)*
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*
 - [`release_0.29.0.md`](../completed_proposals/release_0.29.0.md) — [#128](https://github.com/uibcdf/pyunitwizard/issues/128) — Qualify and publish 0.29.0 as the next additive interoperability checkpoint. *(inspected)*

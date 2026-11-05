@@ -197,12 +197,30 @@ def test_the_reader_must_name_the_field_it_expects():
         unbound.to_quantity(field="bioactivity.ic50")
 
 
-def test_the_reader_refuses_another_dimension():
-    with pytest.raises(RecordError, match="dimensionality"):
-        _record().to_quantity(dimensionality={"[L]": 1})
-    with pytest.raises(Exception):
-        _record().to_quantity(unit="nm")
-    _record().to_quantity(dimensionality=CONCENTRATION)
+@pytest.mark.parametrize("default_form", ["pint", "openmm.unit", "unyt", "astropy.units"])
+def test_the_reader_refuses_another_dimension(default_form):
+    pytest.importorskip(default_form)
+    with puw.context(default_form=default_form, default_parser="pint"):
+        with pytest.raises(RecordError, match="dimensionality"):
+            _record().to_quantity(dimensionality={"[L]": 1}, form="pint")
+        with pytest.raises(RecordError, match="cannot be read as"):
+            _record().to_quantity(unit="nm", form="pint")
+        result = _record().to_quantity(dimensionality=CONCENTRATION, form="pint")
+        assert puw.get_form(result) == "pint"
+        assert puw.get_form(puw.quantity(1, "nm")) == default_form
+
+
+@pytest.mark.parametrize("default_form", ["unyt", "astropy.units"])
+def test_concentration_reader_negotiates_a_supported_unit_with_the_session_default(default_form):
+    pytest.importorskip(default_form)
+    with puw.context(default_form=default_form, default_parser="pint"):
+        record = _record()
+        payload = record.to_dict()
+        result = record.to_quantity(field="bioactivity.ic50", dimensionality=CONCENTRATION, unit="mole/liter")
+        assert puw.get_form(result) == default_form
+        np.testing.assert_allclose(puw.get_value(result, to_unit="mole/liter"), record.values * 1e-9)
+        assert record.to_dict() == payload
+        assert puw.get_form(puw.quantity(1, "nm")) == default_form
 
 
 def test_the_kind_distinguishes_units_that_share_dimensions():

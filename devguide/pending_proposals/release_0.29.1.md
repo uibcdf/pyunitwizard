@@ -86,6 +86,23 @@ PyUnitWizard's prevalidation avoids it without depending on an upstream repair.
 The process-wide Astropy registry still needs external serialization for
 application-owned concurrent changes.
 
+## Candidate recovery — 2026-11-05
+
+The initial planned source `85c9bf8e398f03df6cc5490ea5e99ed1ff94cc08`
+passes ordinary CI and all six Release Gates jobs. Its full matrix nevertheless
+fails Linux/Python 3.12 in the record dimension-handshake regression: that test
+inherits a worker's unyt policy and requests the known unsupported `nanomolar`
+spelling. #139 reproduces the test under all four policies, corrects its explicit
+output contract and separately guards the supported `mole/liter` reader route.
+The correction changes tests and records only; public adapter behavior is
+unchanged. Its complete local twelve-worker suite passes 1,015 cases with eight
+skipped JUnit entries (three executed cases and five optional collection modules).
+
+The original failure and successful original-source jobs remain historical
+evidence. Select the corrected commit after publishing #139 and execute all
+five required source workflows at that new SHA before building the staging file.
+No retry at the rejected original source qualifies the corrected candidate.
+
 ## Acceptance criteria
 
 - All 29 required exact-candidate source jobs and their named steps execute
