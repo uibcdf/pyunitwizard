@@ -1,0 +1,74 @@
+{
+  "schema": "pyunitwizard.runtime-floor-review@1",
+  "issue": "uibcdf/pyunitwizard#134",
+  "reviewed_base": "d5edabb49abc43111a0df95e2303c8472e32e8f7",
+  "date": "2026-11-05",
+  "declared_floors": {
+    "numpy": "1.23.5",
+    "pint": "0.25"
+  },
+  "minimum_profile": {
+    "python": "3.11.18",
+    "numpy": "1.23.5",
+    "pint": "0.25",
+    "smonitor": "0.16.0",
+    "depdigest": "0.11.0",
+    "argdigest": "0.14.0",
+    "astropy": "6.1.7",
+    "unyt": "3.1.0",
+    "openmm": "8.6.1",
+    "pip_check": "No broken requirements found."
+  },
+  "profiles": [
+    {
+      "junit": "runtime-minimum-recovery.xml",
+      "sha256": "f71aebc3bb7be20038dde60dc0b02897897e2f246a5e4a7d8a1fdabe015099f8",
+      "passed": 181,
+      "failed": [],
+      "skipped": [
+        {
+          "module": "tests.test_quantity_record",
+          "case": "test_round_trip_is_exact[values1-nM-json]",
+          "reason": "strict JSON has no NaN; covered by test_json_refuses_non_finite_values"
+        }
+      ]
+    },
+    {
+      "junit": "pint024-py314.xml",
+      "sha256": "5eb0ef8ed80d3f58c3efb910eeba6d832e1630deea867d29eea55a5605d75edc",
+      "passed": 114,
+      "failed": [
+        {
+          "classname": "tests.test_quantity_record",
+          "name": "test_published_vectors_verify_and_are_reproduced_exactly",
+          "time": "1.320"
+        }
+      ],
+      "skipped": [
+        {
+          "module": "tests.test_quantity_record",
+          "case": "test_round_trip_is_exact[values1-nM-json]",
+          "reason": "strict JSON has no NaN; covered by test_json_refuses_non_finite_values"
+        }
+      ]
+    },
+    {
+      "junit": "pint025-py314.xml",
+      "sha256": "0cc1055a8ecc7f3d8d7f94629d9fb8842728d0e61e6bc46d62d9963ea42b2786",
+      "passed": 115,
+      "failed": [],
+      "skipped": [
+        {
+          "module": "tests.test_quantity_record",
+          "case": "test_round_trip_is_exact[values1-nM-json]",
+          "reason": "strict JSON has no NaN; covered by test_json_refuses_non_finite_values"
+        }
+      ]
+    }
+  ],
+  "scientific_boundary": "Pint 0.24.4 produces older CODATA dalton constants and fails exact reproduction of counts_int32_dalton.json; Pint 0.25 introduces CODATA-2022 and passes. Historical vectors are unchanged.",
+  "numpy_boundary": "Deliberately qualified final NumPy 1.23 maintenance baseline on oldest supported Python 3.11, using dtype/buffer/broadcast/record/measurement and same-dimension refusal operations. Not a claim that every earlier NumPy release is incorrect.",
+  "optional_review": "Lazy availability hints are not runtime version requirements or public extras. Optionality and exact qualification pins retained. OpenFF 0.4.0 provider bound Pint<0.26 retained; effective source profile >=0.25,<0.26. Ackredit portable fallback remains >=0.9.0, distinct from >=0.11.0 stable prepared providers. UCUM Pint>=0.25 covered by base.",
+  "preflight": "22 declared-and-installed-public-bounds dependency routes pass",
+  "scope": "Source/metadata adoption and selected local numerical qualification; no new public package or complete new minimum-provider OS/Python matrix."
+}

@@ -5,8 +5,15 @@ This matrix records the current 0.29.x sibling-library floors from
 historical contracts. Exact installed pins and dependency closures are retained
 in the [0.29.0 publication record](completed_proposals/release_0.29.0.md).
 
+Source follow-up after 0.29.0 (#134): NumPy/Pint now have explicit inclusive
+minimums below. These declarations do not rewrite published 0.29.0 metadata.
+The exact numerical-baseline and older-Pint refusal evidence is retained in
+`evidence/runtime_dependency_floors_2026-11-05.json`.
+
 | Component | Minimum Version | Current role |
 |---|---:|---|
+| `numpy` | `1.23.5` | dtype, immutable buffers, broadcasting, tagged/empty arrays and numerical record operations on the supported Python 3.11 baseline |
+| `pint` | `0.25` | registry translation and CODATA-2022 definitions required to reproduce published qrec vectors |
 | `argdigest` | `0.14.0` | required runtime dependency for owned argument validation and normalization |
 | `depdigest` | `0.11.0` | required runtime dependency for optional backend governance |
 | `smonitor` | `0.16.0` | required runtime dependency for diagnostics and catalog-backed signals |
@@ -14,7 +21,8 @@ in the [0.29.0 publication record](completed_proposals/release_0.29.0.md).
 
 The optional prepared-credit/observer profile additionally qualifies public
 Ackredit `0.10.1`; it does not raise the fallback floor. OpenFF `0.4.0` is
-qualified on Python `3.12`–`3.14` with Pint `>=0.24,<0.26`; CF/HDF5 uses
+qualified on Python `3.12`–`3.14`; current source uses Pint `>=0.25,<0.26`.
+The upper limit is OpenFF 0.4.0's provider restriction, not a general Pint cap. CF/HDF5 uses
 cf-units `3.3.1` and h5py `3.16.0`. These optional interfaces remain provisional.
 
 Published 0.29.0 (#128) additionally qualifies Zarr `3.1.6`, PyArrow

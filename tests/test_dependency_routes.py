@@ -28,7 +28,7 @@ def test_inventory_keeps_general_purposes_and_preserves_scientific_bounds():
     assert data["source_routes"] == []
     text = (ROOT / "devtools/conda-envs/openff_env.yaml").read_text()
     assert "python >=3.12,<3.15" in text
-    assert "pint >=0.24,<0.26" in text
+    assert "pint >=0.25,<0.26" in text
     assert "argdigest =0.14.0" in text
 
 

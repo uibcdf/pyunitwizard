@@ -145,7 +145,7 @@ jobs:
             ${{ matrix.profile == 'prepared' && 'uibcdf::ackredit=0.10.1=py_0' || 'uibcdf::ackredit=0.9.0=py_0' }}
             pip pytest uibcdf::pytest-receptor=1.1.0 openmm unyt astropy-base
             ${{ matrix.profile == 'storage' && 'cf-units=3.3.1 h5py=3.16.0 zarr=3.1.6 pyarrow=25.0.0 asdf=6.0.0 asdf-astropy=0.11.0' || '' }}
-            ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.24,<0.26' || '' }}
+            ${{ matrix.profile == 'openff' && 'openff-units=0.4.0 pint>=0.25,<0.26' || '' }}
       - name: Install third-party test backends
         shell: bash -l {0}
         env:

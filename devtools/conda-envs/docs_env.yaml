@@ -2,10 +2,10 @@ channels:
 - uibcdf
 - conda-forge
 dependencies:
-- numpy
+- numpy >=1.23.5
 - python >=3.11,<3.15
 - setuptools
-- pint
+- pint >=0.25
 - sphinx
 - pydata-sphinx-theme
 - sphinxcontrib-bibtex

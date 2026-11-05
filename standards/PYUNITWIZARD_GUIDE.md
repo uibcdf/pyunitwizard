@@ -27,10 +27,15 @@ PyUnitWizard is a "Quantities and Units Assistant" designed to provide a unified
 
 PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 
-- **Hard Dependencies**: `numpy`, `pint`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
+- **Hard Dependencies**: `numpy>=1.23.5`, `pint>=0.25`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
 - **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
 
 ### Source follow-up after 0.29.0
+
+Current source declares NumPy >=1.23.5 (Python 3.11 numerical baseline) and
+Pint >=0.25 (CODATA-2022 definitions required by published record vectors).
+These new source floors are owned by `uibcdf/pyunitwizard#134`; they do not
+rewrite the dependency metadata of the published 0.29.0 file.
 
 Current source supports native Astropy thermochemical `cal`, `calorie`, `kcal`
 and `kilocalorie` at construction, parsing and conversion boundaries, including

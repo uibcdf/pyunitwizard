@@ -25,8 +25,8 @@ classifiers = [
 requires-python = ">=3.11.0,<3.15.0"
 # Declare any run-time dependencies that should be installed with the package.
 dependencies = [
-    "numpy",
-    "pint",
+    "numpy>=1.23.5",
+    "pint>=0.25",
     "smonitor>=0.16.0",
     "depdigest>=0.11.0",
     "argdigest>=0.14.0",
