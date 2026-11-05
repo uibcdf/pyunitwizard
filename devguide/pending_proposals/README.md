@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`release_0.29.1.md`](release_0.29.1.md) — [#138](https://github.com/uibcdf/pyunitwizard/issues/138) — Prepare and qualify the 0.29.1 maintenance release. *(inspected)*
+
 ### Open (2)
 
 - [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*

@@ -5,6 +5,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Documents
 
 - `unreleased_notes.md`: source-only maintenance after 0.29.0 and remaining publication boundaries.
+- `release_0.29.1_notes.md` and `pending_proposals/release_0.29.1.md`: proposed maintenance release, staged route and pending qualification under #138.
 
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
@@ -129,8 +130,10 @@ and #136 (immutable Conda provider v2.3.0 adoption). Their owning archives and
 local scientific/minimum-provider/distribution/operation receipts are retained
 under `completed_proposals/` and `evidence/`; see `unreleased_notes.md`.
 These changes do not modify the existing public 0.29.0 artifact or establish
-new installed/platform/release qualification. A future candidate needs its own
-reviewed release plan, complete gates and public receiving observations.
+new installed/platform/release qualification. Preparation of 0.29.1 is active
+under [#138](pending_proposals/release_0.29.1.md), with draft release notes and
+a committed staged route. The exact candidate still needs complete source and
+installed gates before the final publication decision and public receiving.
 
 Astropy's alias-conflict context limitation is reported upstream as
 `astropy/astropy#20790` with explicit human authorization. The local adapter

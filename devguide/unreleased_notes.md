@@ -1,7 +1,9 @@
 # Unreleased source maintenance
 
-These changes follow published 0.29.0. No next version/tag, new Conda file,
-public installation or client migration is implied by their source delivery.
+These changes follow published 0.29.0 and are selected for the proposed 0.29.1
+maintenance release under #138. The version has not been published; candidate,
+installed-artifact and final publication decisions remain pending. See
+`release_0.29.1_notes.md` and `pending_proposals/release_0.29.1.md`.
 
 - #137: Astropy construction, scalar parsing, target units and cross-backend
   conversions accept native thermochemical cal/calorie/kcal/kilocalorie, including
@@ -36,6 +38,7 @@ controls exercise missing/skipped installed calorie cases. Minimum numerical,
 license/build and simulated provider-operation evidence has its own retained
 scope; none certifies a new full installed OS/Python matrix. The public 0.29.0
 release, original source, producer, bytes/digest and historical receipts remain.
-Before publication, choose a new release plan and execute every applicable exact
-candidate, installed-artifact and independent public gate. MolSysSuite owns
-canonical-guide distribution and consumer receiving under #127/#137/#162/#87.
+The committed staged release plan selects 0.29.1; execute every applicable exact
+candidate, installed-artifact and independent public gate before publication.
+MolSysSuite owns canonical-guide distribution and consumer receiving under
+#127/#137/#162/#87.
