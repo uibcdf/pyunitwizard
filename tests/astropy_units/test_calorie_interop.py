@@ -68,6 +68,8 @@ def test_conflicting_astropy_calorie_definition_is_not_overwritten():
             api_astropy_unit.string_to_unit("kcal/mol")
         assert u.Unit("kcal").to(u.J) == 1000
     with pytest.raises(ValueError):
+        u.Unit("kcal")
+    with pytest.raises(ValueError):
         api_astropy_unit.unit_to_pint(wrong / u.mol)
 
 

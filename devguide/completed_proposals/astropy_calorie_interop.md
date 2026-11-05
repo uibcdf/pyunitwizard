@@ -66,3 +66,24 @@ combinations. Other named-definition and registry-restoration guards protect
 against a misleading success at the same numeric dimensions. Publication and
 installed/consumer qualification remain separate: no tag, archive, public
 package or DockingMT source was changed by this implementation.
+
+
+## Registry-conflict correction — 2026-11-05
+
+The initial restoration guard covered parse/conversion failures but did not
+check the native registry after an alias-conflict context constructor failed.
+A strengthened guard reproduces leaked native state: Astropy 8.0.1 pushes its
+registry before validating enabled-unit aliases. If that validation raises,
+the caller never receives a context manager to unwind. A conflicting `kcal`
+can consequently remain enabled after the application's enclosing context.
+
+The adapter now checks all native calorie aliases against the application's
+existing definitions before invoking Astropy's context constructor. This uses
+public parsing and native unit equality, protects the application definition,
+and avoids relying on private registry restoration. The strengthened guard
+first fails and then passes; all 47 scientific/catalog cases pass again on
+Python 3.14.7/Astropy 8.0.1, and all 25 calorie cases pass on Python
+3.11.18/Astropy 6.1.7. Final source/CI evidence remains separately due after
+all maintenance reviews. The existing process-wide context limitation stays
+explicit. Provider disclosure outside UIBCDF requires the common prior human
+permission route; no external Astropy issue has been published here.

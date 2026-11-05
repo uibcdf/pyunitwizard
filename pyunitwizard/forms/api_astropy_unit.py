@@ -28,8 +28,20 @@ def _calorie_context(value):
     if isinstance(value, str) and _CALORIE_NAME.search(value):
         # Astropy's supported unit contexts are process-wide. Serialize our
         # writers and never permanently enable the entire imperial namespace.
-        with _CALORIE_LOCK, astropy_units.add_enabled_units([astropy_units.imperial.cal, astropy_units.imperial.kcal]):
-            yield
+        with _CALORIE_LOCK:
+            native_units = [astropy_units.imperial.cal, astropy_units.imperial.kcal]
+            # Astropy pushes a registry before validating aliases. Refuse a
+            # conflict first, so a failing context constructor cannot leak it.
+            for unit in native_units:
+                for name in unit.names:
+                    try:
+                        existing = astropy_units.Unit(name)
+                    except ValueError:
+                        continue
+                    if existing != unit:
+                        raise UnitDefinitionError(unit=name, form="astropy.units")
+            with astropy_units.add_enabled_units(native_units):
+                yield
     else:
         yield
 
