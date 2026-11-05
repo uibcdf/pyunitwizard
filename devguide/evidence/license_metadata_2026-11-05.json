@@ -1,0 +1,149 @@
+{
+  "schema": "pyunitwizard.license-metadata-review@1",
+  "issue": "uibcdf/pyunitwizard#135",
+  "date": "2026-11-05",
+  "reviewed_base": "74e1f970e3ac630912b50980f7b6627d65dfeeeb",
+  "license_expression": "MIT AND CC-BY-4.0",
+  "input_sha256": {
+    "pyproject.toml": "428129231e6607a3c28659a22600aea5387d2ab1d69907dd6c8f07db9703dc31",
+    "MANIFEST.in": "752c599d51202c96680d0f96639deee48367a2828de5b23c733a70f00411cd13",
+    "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+    "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+  },
+  "profiles": [
+    {
+      "profile": "license-modern-final",
+      "python": "3.14.7",
+      "versioningit": "3.3.0",
+      "artifacts": [
+        {
+          "role": "rebuilt-wheel",
+          "filename": "pyunitwizard-0+unknown-py3-none-any.whl",
+          "bytes": 136743,
+          "sha256": "e12a8b90a247d85d160648689142cae21230736c14f9faa0de17d3ef1abbe24b",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "generator": "setuptools (84.0.0)",
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          },
+          "catalog_sha256": "b6c43e943dffc4449ccba04b564c2d7ee9a53dba9ee4c3f7684380f61bc3f758"
+        },
+        {
+          "role": "sdist",
+          "filename": "pyunitwizard-0+unknown.tar.gz",
+          "bytes": 120748,
+          "sha256": "eaa4150ded50a901468de50256822232989c31ca7ce131a747aff6f4645a8739",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          }
+        },
+        {
+          "role": "source-wheel",
+          "filename": "pyunitwizard-0+unknown-py3-none-any.whl",
+          "bytes": 136743,
+          "sha256": "e12a8b90a247d85d160648689142cae21230736c14f9faa0de17d3ef1abbe24b",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "generator": "setuptools (84.0.0)",
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          },
+          "catalog_sha256": "b6c43e943dffc4449ccba04b564c2d7ee9a53dba9ee4c3f7684380f61bc3f758"
+        }
+      ],
+      "tests_passed": 2
+    },
+    {
+      "profile": "license-min-final",
+      "python": "3.11.18",
+      "versioningit": "3.0.0",
+      "artifacts": [
+        {
+          "role": "rebuilt-wheel",
+          "filename": "pyunitwizard-0+unknown-py3-none-any.whl",
+          "bytes": 136742,
+          "sha256": "dc7ad07481537fc83798128c99e2dc278d67a05c30d804a633b66ed06eaffe68",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "generator": "setuptools (77.0.3)",
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          },
+          "catalog_sha256": "b6c43e943dffc4449ccba04b564c2d7ee9a53dba9ee4c3f7684380f61bc3f758"
+        },
+        {
+          "role": "sdist",
+          "filename": "pyunitwizard-0+unknown.tar.gz",
+          "bytes": 120244,
+          "sha256": "1ec252f7dbb81e2c0b29339e6f5896da1cacc87f707996546e9573d3bf030ecc",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          }
+        },
+        {
+          "role": "source-wheel",
+          "filename": "pyunitwizard-0+unknown-py3-none-any.whl",
+          "bytes": 136742,
+          "sha256": "dc7ad07481537fc83798128c99e2dc278d67a05c30d804a633b66ed06eaffe68",
+          "metadata": {
+            "license_expression": "MIT AND CC-BY-4.0",
+            "license_files": [
+              "LICENSE",
+              "pyunitwizard/vocabularies/NOTICE.md"
+            ],
+            "version": "0+unknown"
+          },
+          "generator": "setuptools (77.0.3)",
+          "notice_sha256": {
+            "LICENSE": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+            "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6"
+          },
+          "catalog_sha256": "b6c43e943dffc4449ccba04b564c2d7ee9a53dba9ee4c3f7684380f61bc3f758"
+        }
+      ],
+      "tests_passed": 2
+    }
+  ],
+  "regression": "Before implementation both tests fail: pre-feature Setuptools remains admitted and actual wheel lacks License-Expression.",
+  "scope": "Actual source-wheel/sdist/rebuilt-wheel metadata/notice checks in detached copies of current package source. Version 0+unknown is the deliberate local non-VCS fixture identity, not a public candidate/release. Original qualified files/tags are untouched."
+}

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68.0", "versioningit>=3.0"]
+requires = ["setuptools>=77.0.3", "versioningit>=3.0"]
 build-backend = "setuptools.build_meta"
 
 # Self-descriptive entries which should always be present
@@ -12,10 +12,10 @@ readme = "README.md"
 authors = [
     { name = "UIBCDF Lab", email = "uibcdf@gmail.com" }
 ]
-license = { text = "MIT" }
+license = "MIT AND CC-BY-4.0"
+license-files = ["LICENSE", "pyunitwizard/vocabularies/NOTICE.md"]
 # See https://pypi.org/classifiers/
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",

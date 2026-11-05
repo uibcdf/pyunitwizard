@@ -204,7 +204,10 @@ PyUnitWizard is part of the current UIBCDF interoperability stack:
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+The implementation is MIT licensed. See [LICENSE](LICENSE).
+The bundled derived QUDT/UO unit catalogue retains its separate CC-BY-4.0
+license and [original attribution notice](pyunitwizard/vocabularies/NOTICE.md).
+Distribution metadata records both as `MIT AND CC-BY-4.0`.
 
 Optional [CF unit tools and verified HDF5 snapshots](docs/content/user/hdf5-cf.md)
 use actual UDUNITS and h5py with explicit unit and temperature contracts. The

@@ -34,4 +34,8 @@ replace domain models or simulation engines.
 
 ## License
 
-PyUnitWizard is distributed under the [MIT License](https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE).
+PyUnitWizard's implementation uses the
+[MIT License](https://github.com/uibcdf/pyunitwizard/blob/main/LICENSE).
+Its bundled derived QUDT/UO unit catalogue retains CC-BY-4.0 and the
+[original attribution notice](https://github.com/uibcdf/pyunitwizard/blob/main/pyunitwizard/vocabularies/NOTICE.md).
+Distribution metadata records these existing licenses as `MIT AND CC-BY-4.0`.

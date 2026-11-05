@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (57)
+### Resolved (58)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -27,6 +27,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
 - [`installed_astropy_optional_closure.md`](../solved_bugs/installed_astropy_optional_closure.md) — [#131](https://github.com/uibcdf/pyunitwizard/issues/131) — Qualify the original staged artifact without unrelated Astropy recommended extras. *(medium, reproduced)*
 - [`interop_unit_dialects.md`](../completed_proposals/interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*
+- [`license_metadata_review.md`](../completed_proposals/license_metadata_review.md) — [#135](https://github.com/uibcdf/pyunitwizard/issues/135) — Preserve MIT code and CC-BY vocabulary notices in modern distribution metadata. *(reproduced)*
 - [`notebook_cli_failure_status.md`](../solved_bugs/notebook_cli_failure_status.md) — [#118](https://github.com/uibcdf/pyunitwizard/issues/118) — Report failed notebook execution through the docs CLI exit status. *(medium, reproduced)*
 - [`openff_compatibility.md`](../completed_proposals/openff_compatibility.md) — [#86](https://github.com/uibcdf/pyunitwizard/issues/86) — Optional OpenFF registry interoperability with verified unit definitions. *(measured)*
 - [`openmm_unyt_symbol_collision.md`](../solved_bugs/openmm_unyt_symbol_collision.md) — [#120](https://github.com/uibcdf/pyunitwizard/issues/120) — Preserve OpenMM unit meaning when translating angstrom to unyt. *(high, reproduced)*

@@ -10,7 +10,7 @@ requirements:
   host:
   - python >=3.11,<3.15
   - pip
-  - setuptools >=68.0
+  - setuptools >=77.0.3
   - versioningit >=3.0
   run:
   - python >=3.11,<3.15
@@ -26,7 +26,10 @@ test:
   - python -c "import importlib.metadata as m; import os; import pyunitwizard as puw; assert m.version('pyunitwizard') == os.environ['PKG_VERSION']; assert puw.__version__ == os.environ['PKG_VERSION']; assert puw.get_value(puw.quantity(1.0, 'nm')) == 1.0"
 about:
   home: https://uibcdf.org
-  license: MIT License
+  license: MIT AND CC-BY-4.0
+  license_file:
+  - LICENSE
+  - pyunitwizard/vocabularies/NOTICE.md
   summary: ''
   description: 'This library provides some useful methods to work with quantities
 

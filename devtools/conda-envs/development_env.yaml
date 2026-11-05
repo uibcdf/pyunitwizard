@@ -11,6 +11,8 @@ dependencies:
 - pyarrow =25.0.0
 - openff-units =0.4.0
 - pip
+- setuptools >=77.0.3
+- versioningit >=3.0
 - pytest
 - pytest-receptor =1.1.0
 - pytest-cov
