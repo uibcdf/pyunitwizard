@@ -74,5 +74,13 @@
   "initial_full_attempt": "Six failures caused by absent physipy/quantities; recovery uses actual providers in an owned overlay. Shared environment dependency conflicts are independently tracked by MolSysSuite #82.",
   "ruff": "check and format check passed",
   "sphinx": "make html succeeds with zero warnings in an owned docs copy",
-  "scope": "Local source validation; no new public package, release, full installed platform matrix or DockingMT migration."
+  "scope": "Local source validation; no new public package, release, full installed platform matrix or DockingMT migration.",
+  "count_clarification": {
+    "date": "2026-11-05",
+    "earlier_full_source_skipped_field": "Compact executed-case count; preserve original field as history.",
+    "executed_case_skips": 3,
+    "optional_module_collection_skips": 5,
+    "total_skipped_junit_entries": 8,
+    "complete_inventory": "full_source.skips retains all eight entries."
+  }
 }

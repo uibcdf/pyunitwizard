@@ -12,7 +12,8 @@ Keep `--package-format 1` for the existing `.tar.bz2` coordinate and noarch
 receiving contract; no native platform conversion is requested. The obsolete
 `mambabuild: false` input is unnecessary. PyUnitWizard owns canonical GitHub
 Release creation, so the provider's optional release creator stays explicitly
-disabled (its title limitation is tracked in the provider's #53).
+disabled (its title limitation is tracked in
+`uibcdf/action-build-and-upload-conda-packages#53`).
 The reviewed operation fixtures simulate registry transports. This source
 adoption neither rebuilds a qualified file nor qualifies a new release;
 execute every candidate/installed/public gate below when preparing one.

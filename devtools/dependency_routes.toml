@@ -133,7 +133,7 @@ reason = "Source optional storage profile uses its reviewed environment; explici
 
 [[workflows]]
 path = ".github/workflows/test_staged_conda_package.yaml"
-sha256 = "61cf0721e6bd3baba1c439b9a0ecf0b734588823fa998d7f669d5096b838d70a"
+sha256 = "83e6662fb34a7575a163f91163c8506b9165159a7513672d19e991e878cd0ca0"
 reason = "Artifact qualification uses exact staged archive, checked public dependencies and separate reviewed flexible staging provenance"
 
 [shared_tool]

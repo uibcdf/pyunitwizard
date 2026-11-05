@@ -87,3 +87,31 @@ Python 3.14.7/Astropy 8.0.1, and all 25 calorie cases pass on Python
 all maintenance reviews. The existing process-wide context limitation stays
 explicit. Provider disclosure outside UIBCDF requires the common prior human
 permission route; no external Astropy issue has been published here.
+
+
+## Upstream handoff and future installed gate — 2026-11-05
+
+Diego explicitly authorized publication of the reviewed Astropy-only report.
+The report is published as https://github.com/astropy/astropy/issues/20790.
+The integration connector could not write outside its installation scope;
+authorized GitHub CLI publication succeeded. The local prevalidation remains
+until the provider's exception-restoration disposition is reviewed; no
+private-registry mutation or remote patch is introduced by this handoff.
+
+All future baseline/storage/OpenFF/prepared installed profiles now copy the
+calorie regression module from their exact candidate checkout. A mandatory
+JUnit guard refuses missing or skipped calorie cases in every profile; its
+positive, missing and skipped controls fail before implementation and pass
+afterwards. This qualifies the gate's control flow, not a new installed Conda
+file: all real candidate/scientific/installed/public gates remain required.
+
+
+## Skip-count clarification — 2026-11-05
+
+The earlier compact local summary counts three executed-case skips: the
+intentional strict-JSON/NaN case and two Zarr-dependent cases. Retained JUnit
+also contains five optional module-collection skips (CF, UCUM, ASDF, HDF5 and
+Zarr), giving eight skipped JUnit entries in total. Both classifications are
+retained; the compact count is not complete optional-provider coverage. None
+of the 25 calorie cases skips in either actual Astropy profile. This source
+review does not replace future full optional/installed release qualification.

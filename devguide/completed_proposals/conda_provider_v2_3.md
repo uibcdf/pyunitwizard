@@ -78,3 +78,14 @@ identities and verified scope are retained in
 floor and licensing adoption have their own #134/#135 records. Respond to
 MolSysSuite #87 with the final published consumer commit and actual gates;
 a future normal candidate still owns real archive/installed/public evidence.
+
+
+## Skip-count clarification — 2026-11-05
+
+The earlier compact local summary counts three executed-case skips: the
+intentional strict-JSON/NaN case and two Zarr-dependent cases. Retained JUnit
+also contains five optional module-collection skips (CF, UCUM, ASDF, HDF5 and
+Zarr), giving eight skipped JUnit entries in total. Both classifications are
+retained; the compact count is not complete optional-provider coverage. None
+of the 25 calorie cases skips in either actual Astropy profile. This source
+review does not replace future full optional/installed release qualification.

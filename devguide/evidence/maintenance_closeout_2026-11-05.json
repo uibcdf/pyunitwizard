@@ -1,0 +1,80 @@
+{
+  "schema": "pyunitwizard.maintenance-source-closeout@1",
+  "date": "2026-11-05",
+  "issues": [
+    "uibcdf/pyunitwizard#137",
+    "uibcdf/pyunitwizard#134",
+    "uibcdf/pyunitwizard#135",
+    "uibcdf/pyunitwizard#136"
+  ],
+  "input_sha256": {
+    ".github/workflows/test_staged_conda_package.yaml": "83e6662fb34a7575a163f91163c8506b9165159a7513672d19e991e878cd0ca0",
+    "tests/test_workflow_contracts.py": "e5456098f9b25a3248edfe6a28d5883bd8b50dc8381b256417d1a7986308c3a4"
+  },
+  "upstream_report": {
+    "url": "https://github.com/astropy/astropy/issues/20790",
+    "authorization": "Diego explicitly authorized publishing the prepared internal draft during this session; connector 403 was a scope limitation and authenticated GitHub CLI publication succeeded."
+  },
+  "inactive_provider_report": "uibcdf/action-build-and-upload-conda-packages#53",
+  "local_receipts": [
+    "astropy_calorie_interop_2026-11-05.json",
+    "astropy_conflict_recovery_2026-11-05.json",
+    "runtime_dependency_floors_2026-11-05.json",
+    "license_metadata_2026-11-05.json",
+    "conda_provider_adoption_2026-11-05.json"
+  ],
+  "tests": [
+    {
+      "junit": "final-source.xml",
+      "sha256": "1702a1045eb18a1a61f24596c342f5741aa66755d6e62edecfc92401dc00501a",
+      "passed": 1007,
+      "failed": [],
+      "skipped": [
+        {
+          "case": "tests.dialects.test_cf",
+          "reason": "collection skipped"
+        },
+        {
+          "case": "tests.dialects.test_ucum",
+          "reason": "collection skipped"
+        },
+        {
+          "case": "tests.storage.test_asdf",
+          "reason": "collection skipped"
+        },
+        {
+          "case": "tests.storage.test_hdf5",
+          "reason": "collection skipped"
+        },
+        {
+          "case": "tests.storage.test_zarr",
+          "reason": "collection skipped"
+        },
+        {
+          "case": "test_round_trip_is_exact[values1-nM-json]",
+          "reason": "strict JSON has no NaN; covered by test_json_refuses_non_finite_values"
+        },
+        {
+          "case": "test_measurement_comparison_preserves_input_and_records_raw_samples",
+          "reason": "could not import 'zarr': No module named 'zarr'"
+        },
+        {
+          "case": "test_existing_molecular_coordinates_zarr_and_append",
+          "reason": "could not import 'zarr': No module named 'zarr'"
+        }
+      ],
+      "executed_case_skips": 3,
+      "optional_module_collection_skips": 5,
+      "total_skipped_junit_entries": 8
+    },
+    {
+      "junit": "final-workflow-contracts.xml",
+      "sha256": "93d89421f47c4c1567b074f3832f2a9be4ead339ec60da5b0cf828235b58f8d8",
+      "passed": 34,
+      "failed": [],
+      "skipped": []
+    }
+  ],
+  "future_installed_gate": "Every baseline/storage/OpenFF/prepared profile copies exact-candidate calorie cases and rejects missing or skipped JUnit cases; real new-artifact matrix not executed by this source review.",
+  "public_state": "Existing 0.29.0 artifact/tag/source/producer/digest unchanged; no new version or package published."
+}

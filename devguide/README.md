@@ -4,6 +4,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Documents
 
+- `unreleased_notes.md`: source-only maintenance after 0.29.0 and remaining publication boundaries.
+
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
 - `interop_future_directions.md`: consolidated long-term interoperability ideas (conceptual, non-operational).
@@ -118,6 +120,27 @@ no queued implementation document. QuantityRecord, bundles, measurement,
 attribution and all new record/storage/dialect surfaces remain **provisional**.
 [The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh candidate
 evidence, explicit admission/scope decisions and release-owner approval.
+
+## Source maintenance after 0.29.0 — 2026-11-05
+
+The completed source reviews are #137 (native Astropy calories), #134
+(justified NumPy/Pint floors), #135 (SPDX and original distribution notices)
+and #136 (immutable Conda provider v2.3.0 adoption). Their owning archives and
+local scientific/minimum-provider/distribution/operation receipts are retained
+under `completed_proposals/` and `evidence/`; see `unreleased_notes.md`.
+These changes do not modify the existing public 0.29.0 artifact or establish
+new installed/platform/release qualification. A future candidate needs its own
+reviewed release plan, complete gates and public receiving observations.
+
+Astropy's alias-conflict context limitation is reported upstream as
+`astropy/astropy#20790` with explicit human authorization. The local adapter
+prevalidates aliases and retains its restoration guards. All future installed
+profiles copy and require the calorie module without skips. The inactive
+optional provider release-title path is reported separately at
+`uibcdf/action-build-and-upload-conda-packages#53`.
+MolSysSuite #127 retains the source/guide/consumer handoff; #137, #162 and #87
+there own the respective dependency, licensing and Conda adoption coordination.
+MolSysSuite #132 retains the completed historical 0.29.0 version notice.
 
 ## 0.19.x checkpoint summary (historical baseline)
 

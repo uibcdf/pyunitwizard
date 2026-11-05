@@ -1,7 +1,9 @@
 import hashlib
 import os
 import subprocess
+import sys
 import tomllib
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pytest
@@ -54,12 +56,35 @@ def test_staged_artifact_profile_executes_new_storage_and_codec_guards():
         "test_record_tagged.py",
         "test_record_append.py",
         "test_record_extensions_consumer.py",
+        "test_calorie_interop.py",
     ):
         assert module in script
     assert "tests/storage/test_*.py" in script
     assert "zarr, pyarrow" in script
     assert "ucumvert" in script and "asdf_astropy" in script
     assert "Storage guard skipped" in script
+
+
+@pytest.mark.parametrize("state", ["passed", "missing", "skipped"])
+def test_every_installed_profile_requires_executed_calorie_cases(tmp_path, state):
+    workflow = yaml.safe_load((REPOSITORY_ROOT / ".github/workflows/test_staged_conda_package.yaml").read_text())
+    job = next(job for job in workflow["jobs"].values() if "strategy" in job)
+    script = next(
+        step["run"]
+        for step in job["steps"]
+        if step.get("name") == "Test the installed record and integration contracts"
+    )
+    guard = script.split("python - <<'PY'\n", 1)[1].split("\nPY", 1)[0]
+    suite = ET.Element("testsuite")
+    if state != "missing":
+        case = ET.SubElement(suite, "testcase", classname="tests.astropy_units.test_calorie_interop", name="energy")
+        if state == "skipped":
+            ET.SubElement(case, "skipped", message="provider unavailable")
+    ET.ElementTree(suite).write(tmp_path / "installed-contracts.xml")
+    result = subprocess.run([sys.executable, "-c", guard], cwd=tmp_path, capture_output=True, text=True)
+    assert (result.returncode == 0) is (state == "passed"), result.stderr
+    if state != "passed":
+        assert "calorie" in result.stderr.lower()
 
 
 def test_optional_installed_checks_stop_when_dependency_probe_fails(tmp_path):

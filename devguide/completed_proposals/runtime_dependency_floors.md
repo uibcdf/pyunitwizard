@@ -87,3 +87,14 @@ added, no existing qualified file rebuilt and no optional engine made mandatory.
 `devguide/evidence/runtime_dependency_floors_2026-11-05.json` retains exact
 minimum/provider scopes, original failing control and individual JUnit digests.
 Future publication still needs its own exact candidate and installed matrix.
+
+
+## Skip-count clarification — 2026-11-05
+
+The earlier compact local summary counts three executed-case skips: the
+intentional strict-JSON/NaN case and two Zarr-dependent cases. Retained JUnit
+also contains five optional module-collection skips (CF, UCUM, ASDF, HDF5 and
+Zarr), giving eight skipped JUnit entries in total. Both classifications are
+retained; the compact count is not complete optional-provider coverage. None
+of the 25 calorie cases skips in either actual Astropy profile. This source
+review does not replace future full optional/installed release qualification.

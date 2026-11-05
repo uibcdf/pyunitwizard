@@ -202,6 +202,8 @@ jobs:
           set -euo pipefail
           target="$RUNNER_TEMP/installed-contracts"
           mkdir -p "$target/tests/pint" "$target/tests/integration" "$target/tests/forms" "$target/tests/storage" "$target/tests/dialects"
+          mkdir -p "$target/tests/astropy_units"
+          cp tests/astropy_units/test_calorie_interop.py "$target/tests/astropy_units/"
           cp tests/test_quantity_record.py tests/test_quantity_record_empty.py tests/test_measurement_record.py tests/test_configure.py tests/test_openff_optional.py tests/test_storage_optional.py tests/test_backend_declarations.py "$target/tests/"
           cp tests/test_record_arrays.py tests/test_record_tagged.py tests/test_record_append.py "$target/tests/"
           cp tests/dialects/test_vocabulary.py "$target/tests/dialects/"
@@ -223,6 +225,13 @@ jobs:
             python -c 'import importlib.metadata as m, zarr, pyarrow, ucumvert, asdf, asdf_astropy; assert zarr.__version__ == "3.1.6"; assert pyarrow.__version__ == "25.0.0"; assert m.version("ucumvert") == "0.3.2"; assert m.version("asdf") == "6.0.0"; assert m.version("asdf-astropy") == "0.11.0"; print("UCUM/ASDF providers:", m.version("ucumvert"), m.version("asdf"), m.version("asdf-astropy"))'
           fi
           python -m pytest --receptor=ci -q tests -k 'not normally_installed_consumer_outside_checkout' --junitxml=installed-contracts.xml
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          cases = list(ET.parse('installed-contracts.xml').iter('testcase'))
+          calorie = [case for case in cases if case.get('classname', '').endswith('test_calorie_interop')]
+          assert calorie, 'No installed calorie guards collected'
+          assert all(case.find('skipped') is None for case in calorie), 'Installed calorie guard skipped'
+          PY
           if [[ "$PROFILE" == storage ]]; then
             python - <<'PY'
           import xml.etree.ElementTree as ET
