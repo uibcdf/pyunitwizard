@@ -15,6 +15,7 @@ from pyunitwizard._private.exceptions import (
     NotImplementedMethodError,
     NotImplementedParserError,
     RecordError,
+    UnitDefinitionError,
 )
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,7 @@ EXCEPTION_CASES = [
     (NotImplementedMethodError, {}),
     (NotImplementedParserError, {"parser": "future-parser"}),
     (RecordError, {"reason": "digest mismatch", "field": "bioactivity.ic50"}),
+    (UnitDefinitionError, {"unit": "kcal", "form": "astropy.units"}),
 ]
 
 

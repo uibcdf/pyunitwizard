@@ -30,6 +30,17 @@ PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 - **Hard Dependencies**: `numpy`, `pint`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
 - **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
 
+### Source follow-up after 0.29.0
+
+Current source supports native Astropy thermochemical `cal`, `calorie`, `kcal`
+and `kilocalorie` at construction, parsing and conversion boundaries, including
+`kcal/mol` (4.184 joules per calorie). Applications keep their chosen form and
+parser; clients must not install their own calorie aliases. Conflicting named
+definitions are refused. Native Astropy unit activation is scoped and restored;
+its registry contexts remain process-wide. This correction is owned by
+`uibcdf/pyunitwizard#137` and is not yet delivered in a new public package.
+Receiving this guide alone does not update a client's installed provider.
+
 Baseline support is Python `>=3.11,<3.15` on Linux and macOS arm64. Optional
 provider profiles can have narrower limits; use the provider's maintained
 [compatibility matrix](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/compatibility_matrix.md)

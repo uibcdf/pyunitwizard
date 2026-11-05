@@ -1,6 +1,10 @@
+import re
+from contextlib import contextmanager
+from math import isclose
+from threading import RLock
 from typing import Any, Dict, Union
 
-from pyunitwizard._private.exceptions import LibraryNotFoundError
+from pyunitwizard._private.exceptions import LibraryNotFoundError, UnitDefinitionError
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 try:
@@ -13,6 +17,41 @@ AstropyUnitBase = astropy_units.UnitBase
 
 form_name = "astropy.units"
 parser = True
+
+_CALORIE_NAME = re.compile(r"(?<![A-Za-z_])(?:kilocalorie|calorie|kcal|cal)(?![A-Za-z_])")
+_CALORIE_LOCK = RLock()
+
+
+@contextmanager
+def _calorie_context(value):
+    """Enable only native caloric units for this parse, then restore Astropy."""
+    if isinstance(value, str) and _CALORIE_NAME.search(value):
+        # Astropy's supported unit contexts are process-wide. Serialize our
+        # writers and never permanently enable the entire imperial namespace.
+        with _CALORIE_LOCK, astropy_units.add_enabled_units([astropy_units.imperial.cal, astropy_units.imperial.kcal]):
+            yield
+    else:
+        yield
+
+
+def _check_calorie_definition(unit):
+    """Refuse a named calorie with a different physical meaning."""
+    meanings = {"cal": 4.184, "calorie": 4.184, "kcal": 4184.0, "kilocalorie": 4184.0}
+    for base in unit.bases:
+        name = base.to_string()
+        if name in meanings:
+            if not base.is_equivalent(astropy_units.J) or not isclose(
+                base.to(astropy_units.J), meanings[name], rel_tol=1e-12, abs_tol=0.0
+            ):
+                raise UnitDefinitionError(unit=name, form="astropy.units")
+
+
+def _parse_unit(unit):
+    with _calorie_context(unit):
+        result = astropy_units.Unit(unit)
+    _check_calorie_definition(result)
+    return result
+
 
 # is_form = {
 #    AstropyQuantity: form_name,
@@ -150,7 +189,7 @@ def make_quantity(value: Union[int, float, ArrayLike], unit: Union[str, AstropyU
     astropy.units.Quantity
         Constructed quantity.
     """
-    unit_obj = astropy_units.Unit(unit)
+    unit_obj = _parse_unit(unit)
     return astropy_units.Quantity(value, unit_obj)
 
 
@@ -219,7 +258,7 @@ def convert(quantity: AstropyQuantity, unit: Union[str, AstropyUnitBase]) -> Ast
     astropy.units.Quantity
         Converted quantity.
     """
-    unit_obj = astropy_units.Unit(unit)
+    unit_obj = _parse_unit(unit)
     return quantity.to(unit_obj)
 
 
@@ -239,7 +278,10 @@ def string_to_quantity(string: str) -> AstropyQuantity:
     astropy.units.Quantity
         Parsed quantity.
     """
-    return astropy_units.Quantity(string)
+    with _calorie_context(string):
+        result = astropy_units.Quantity(string)
+    _check_calorie_definition(result.unit)
+    return result
 
 
 def string_to_unit(string: str) -> AstropyUnitBase:
@@ -255,7 +297,7 @@ def string_to_unit(string: str) -> AstropyUnitBase:
     astropy.units.UnitBase
         Parsed unit.
     """
-    return astropy_units.Unit(string)
+    return _parse_unit(string)
 
 
 # To string
@@ -313,6 +355,7 @@ def quantity_to_pint(quantity: AstropyQuantity):
 
     value = get_value(quantity)
     unit = get_unit(quantity)
+    _check_calorie_definition(unit)
     # Astropy's canonical spelling is capitalized; Pint uses the lowercase name.
     unit_name = "angstrom" if unit == astropy_units.angstrom else unit_to_string(unit)
     return make_pint_quantity(value, unit_name)

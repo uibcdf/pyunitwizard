@@ -1,0 +1,78 @@
+{
+  "schema": "pyunitwizard.astropy-calorie-review@1",
+  "issue": "uibcdf/pyunitwizard#137",
+  "date": "2026-11-05",
+  "reviewed_base": "02d0015fa7d3149d92c0e632b8e584f6a47c37dc",
+  "source_sha256": {
+    "pyunitwizard/forms/api_astropy_unit.py": "f4b919993bbc7a79e1fc0c919ae57ef328228b1097d8b11569fbb9c0014f323c",
+    "pyunitwizard/forms/api_pint.py": "00820cd874b81f1dcbab5a6cea0e82f3a81be93a8fa3762517064a541385f635",
+    "pyunitwizard/_private/smonitor/catalog.py": "7dc5141d87b03b20429ac69c132d066c554dd0f60de10da837436803ee129071",
+    "pyunitwizard/_private/exceptions/unit_definition_error.py": "4b3d82366eeb145ed04144c1d51f9d5f910133baae86b68a6ead17a2e8b35644",
+    "tests/astropy_units/test_calorie_interop.py": "63a68824de2a41571ed7d81349647fc62c810cda7a44f94d9dd9e9c12b2ab256",
+    "tests/test_catalog_exception_contract.py": "5ce5c273adcc3752901d6e4610d6c3af9512955260075cff55e80727dce11207"
+  },
+  "python": "3.14.7",
+  "providers": {
+    "astropy": "8.0.1",
+    "pint": "0.25.3",
+    "unyt": "3.1.0",
+    "openmm": "8.6.1"
+  },
+  "overlay_providers": {
+    "physipy": "0.2.8",
+    "quantities": "0.16.4"
+  },
+  "regression": "Original caloric parsing and named-definition guards fail before implementation; modified-shared-Pint guard separately fails before physical verification. Inherited parser choice was made explicit in the 16-cell test.",
+  "targeted_scientific_and_catalog_passed": 47,
+  "full_source": {
+    "passed": 1004,
+    "skipped": 3,
+    "junit_sha256": "41ac48abc034caddd8de0fbbbb12a5ac1737561e42717fae3675f2d791cf127c",
+    "skips": [
+      {
+        "module": "",
+        "case": "tests.dialects.test_cf",
+        "reason": "collection skipped"
+      },
+      {
+        "module": "",
+        "case": "tests.dialects.test_ucum",
+        "reason": "collection skipped"
+      },
+      {
+        "module": "",
+        "case": "tests.storage.test_asdf",
+        "reason": "collection skipped"
+      },
+      {
+        "module": "",
+        "case": "tests.storage.test_hdf5",
+        "reason": "collection skipped"
+      },
+      {
+        "module": "",
+        "case": "tests.storage.test_zarr",
+        "reason": "collection skipped"
+      },
+      {
+        "module": "tests.test_quantity_record",
+        "case": "test_round_trip_is_exact[values1-nM-json]",
+        "reason": "strict JSON has no NaN; covered by test_json_refuses_non_finite_values"
+      },
+      {
+        "module": "tests.test_record_extension_benchmark",
+        "case": "test_measurement_comparison_preserves_input_and_records_raw_samples",
+        "reason": "could not import 'zarr': No module named 'zarr'"
+      },
+      {
+        "module": "tests.test_record_extensions_consumer",
+        "case": "test_existing_molecular_coordinates_zarr_and_append",
+        "reason": "could not import 'zarr': No module named 'zarr'"
+      }
+    ]
+  },
+  "initial_full_attempt": "Six failures caused by absent physipy/quantities; recovery uses actual providers in an owned overlay. Shared environment dependency conflicts are independently tracked by MolSysSuite #82.",
+  "ruff": "check and format check passed",
+  "sphinx": "make html succeeds with zero warnings in an owned docs copy",
+  "scope": "Local source validation; no new public package, release, full installed platform matrix or DockingMT migration."
+}

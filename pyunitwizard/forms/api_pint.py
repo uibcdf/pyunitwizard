@@ -1,6 +1,6 @@
 from math import isclose
 
-from pyunitwizard._private.exceptions import LibraryNotFoundError
+from pyunitwizard._private.exceptions import LibraryNotFoundError, UnitDefinitionError
 
 try:
     import pint
@@ -570,7 +570,20 @@ def quantity_to_astropy_units(quantity: pint.Quantity):
         Converted quantity in Astropy form.
     """
 
+    from .api_astropy_unit import _CALORIE_NAME
+    from .api_astropy_unit import _parse_unit as parse_astropy_unit
     from .api_astropy_unit import make_quantity as make_astropy_quantity
+
+    if _CALORIE_NAME.search(str(quantity.units)):
+        # Reuse the registry verifier before a named calorie crosses backends.
+        quantity = normalize_registry(quantity)
+        for name in quantity._units:
+            if _CALORIE_NAME.search(name):
+                expected = parse_astropy_unit(name).to("J")
+                source_zero = quantity._REGISTRY.Quantity(0, name).to("joule").magnitude
+                source_one = quantity._REGISTRY.Quantity(1, name).to("joule").magnitude
+                if not isclose(source_zero, 0.0, abs_tol=1e-12) or not isclose(source_one, expected, rel_tol=1e-12):
+                    raise UnitDefinitionError(unit=name, form="pint")
 
     value = get_value(quantity)
     unit_name = unit_to_string(get_unit(quantity))

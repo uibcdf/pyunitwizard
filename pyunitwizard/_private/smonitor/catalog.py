@@ -14,6 +14,12 @@ META = {
 
 CATALOG = {
     "exceptions": {
+        "UnitDefinitionError": {
+            "code": "PUW-ERR-UNIT-001",
+            "source": "pyunitwizard.error.unit_definition",
+            "category": "unit",
+            "level": "ERROR",
+        },
         "ArgumentError": {
             "code": "PUW-ERR-ARG-001",
             "source": "pyunitwizard.error.argument",
@@ -100,6 +106,13 @@ CATALOG = {
 }
 
 CODES = {
+    "PUW-ERR-UNIT-001": {
+        "title": "Incompatible named unit definition",
+        "user_message": "Unit '{unit}' in '{form}' has an incompatible physical definition.",
+        "user_hint": "Use the thermochemical calorie (4.184 joules) or convert explicitly to joules. Docs: {doc_url}",
+        "dev_message": "Named unit '{unit}' disagrees with the translator's physical meaning in '{form}'.",
+        "dev_hint": "Inspect source and destination unit definitions before translating. Docs: {doc_url}",
+    },
     "PUW-WARN-ACK-001": {
         "title": "Optional attribution failed",
         "user_message": "Optional citation tracking failed for '{operation}': {reason}.",
@@ -212,6 +225,7 @@ SIGNALS = {
     "pyunitwizard.error.not_implemented_method": {"extra_required": ["caller"]},
     "pyunitwizard.error.not_implemented_parser": {"extra_required": ["parser", "caller"]},
     "pyunitwizard.error.record": {"extra_required": ["reason", "field", "caller"]},
+    "pyunitwizard.error.unit_definition": {"extra_required": ["unit", "form", "caller"]},
     "pyunitwizard.error.no_standards": {"extra_required": ["caller"]},
     "pyunitwizard.debug.probe_miss": {"extra_required": ["value", "caller"]},
 }

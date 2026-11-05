@@ -11,6 +11,15 @@ In practical terms:
 - Pint is often the easiest baseline for deterministic parser/form behavior.
 - OpenMM, unyt, and Astropy are fully valid targets, but string parsing and
   representation conventions may differ from Pint-centric examples.
+- Astropy accepts thermochemical `cal`, `calorie`, `kcal` and `kilocalorie`,
+  including `kcal/mol`: one calorie is exactly 4.184 joules. For example,
+  `puw.get_value(puw.quantity(12.552, 'kJ/mol', form='astropy.units'),
+  to_unit='kcal/mol')` returns approximately 3. Unit objects and direct Astropy
+  defaults use the same definition. PyUnitWizard scopes native caloric-unit
+  activation to parsing and restores the Astropy registry after failures too.
+  Conflicting named definitions are refused. Native Astropy unit contexts are
+  process-wide; concurrent application-owned registry changes require external
+  serialization, as with Astropy's own unit contexts.
 - [OpenFF](openff.md) is an optional target with its own registry. Its official
   Conda 0.4.0 package needs Python 3.12–3.14 and Pint <0.26; crossings refuse
   definition disagreements and raw val/unit data is explicitly unsealed.

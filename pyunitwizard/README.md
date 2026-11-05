@@ -17,6 +17,13 @@ unset until a parser-capable backend is loaded; loading OpenMM or another
 non-parser backend first must not prevent a later Pint request from parsing
 strings. Explicit parser choices remain unchanged by subsequent backend loads.
 
+The Astropy adapter supports native thermochemical `cal`, `calorie`, `kcal`
+and `kilocalorie` units, including compounds such as `kcal/mol`. It enables
+only these native units during parsing and restores Astropy's registry after
+success or failure. Adapter-owned registry writers are serialized; Astropy's
+native unit contexts remain process-wide. Conflicting named calorie definitions
+are refused before cross-backend translation.
+
 ## Layout highlights
 
 - `api/` — Home of the top-level quantity/unit helpers (`convert`, `get_value`, `is_quantity`, etc.) grouped by concern (`conversion`, `construction`, `introspection`, `comparison`, etc.). Touch these modules when you add or modify high-level operations exposed to users.
