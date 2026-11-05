@@ -1,9 +1,12 @@
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 RECIPE = ROOT / "devtools" / "conda-build" / "meta.yaml"
 WORKFLOW = ROOT / ".github" / "workflows" / "build_and_upload_conda_packages.yaml"
 PROMOTION_WORKFLOW = ROOT / ".github" / "workflows" / "promote_conda_package.yaml"
+PROVIDER = "87c70b1443d5f22d738ee3ddf812bdbe0152f6c2"
 
 
 def test_recipe_declares_one_supported_noarch_python_artifact():
@@ -60,7 +63,7 @@ def test_noarch_workflow_has_one_job_and_retains_producer_evidence():
     workflow = WORKFLOW.read_text(encoding="utf-8")
 
     assert "matrix:" not in workflow
-    assert "@v2.1.0" in workflow
+    assert "@" + PROVIDER in workflow
     assert "--python" not in workflow
     assert "platform_linux-64: false" in workflow
     assert "platform_win-64: false" in workflow
@@ -81,7 +84,7 @@ def test_promotion_workflow_checks_exact_release_and_file_identity():
         "uibcdf/pyunitwizard/$RELEASE_VERSION/noarch/pyunitwizard-$RELEASE_VERSION-py_$BUILD_NUMBER.tar.bz2"
         in workflow
     )
-    assert "action-build-and-upload-conda-packages/promote@v2.2.2" in workflow
+    assert "action-build-and-upload-conda-packages/promote@" + PROVIDER in workflow
     assert "--route staged" in workflow
     assert "expected-sha256: ${{ inputs.sha256 }}" in workflow
     assert "from-label: staging" in workflow
@@ -94,6 +97,24 @@ def test_promotion_workflow_checks_exact_release_and_file_identity():
     )
     assert "always()" in workflow
     assert "steps.public.outputs['evidence-path']" in workflow
+
+
+def test_owned_publisher_keeps_noarch_format_and_disables_optional_release_creation():
+    workflow = yaml.safe_load(WORKFLOW.read_text())
+    steps = workflow["jobs"]["conda_deployment_with_new_tag"]["steps"]
+    builds = [step for step in steps if step.get("id") in ("conda_staging", "conda_release")]
+    assert len(builds) == 2
+    assert {step["with"]["label"] for step in builds} == {"staging", "main"}
+    for step in builds:
+        inputs = step["with"]
+        assert step["uses"] == "uibcdf/action-build-and-upload-conda-packages@" + PROVIDER
+        assert inputs["conda_build_args"] == "--package-format 1"
+        assert inputs["github_release"] is False
+        assert "mambabuild" not in inputs
+        assert "conda_convert_args" not in inputs
+        for platform in ("linux-64", "osx-64", "osx-arm64", "win-64"):
+            assert inputs["platform_" + platform] is False
+        assert "overwrite" not in inputs and "anaconda_upload_args" not in inputs
 
 
 def test_installed_prepared_profile_requires_public_provider_and_real_guards():

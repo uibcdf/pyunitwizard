@@ -6,6 +6,17 @@ the repository's dynamic `versioningit` configuration remains unchanged.
 The build workflow accepts either a reviewed direct release or an immutable
 staging candidate, as selected in `release_plan.toml`.
 
+The owned build/upload and exact-file promotion operations use provider v2.3.0
+at immutable `87c70b1443d5f22d738ee3ddf812bdbe0152f6c2` (#136).
+Keep `--package-format 1` for the existing `.tar.bz2` coordinate and noarch
+receiving contract; no native platform conversion is requested. The obsolete
+`mambabuild: false` input is unnecessary. PyUnitWizard owns canonical GitHub
+Release creation, so the provider's optional release creator stays explicitly
+disabled (its title limitation is tracked in the provider's #53).
+The reviewed operation fixtures simulate registry transports. This source
+adoption neither rebuilds a qualified file nor qualifies a new release;
+execute every candidate/installed/public gate below when preparing one.
+
 Before a release, update the plan to the proposed three-part version and
 record the route, reason, reviewer, and required exact-commit workflows.
 The full Linux/macOS matrix, release gates, and suite policy check are

@@ -88,7 +88,7 @@ reason = "Full source matrix uses the reviewed test environment; scheduled debt 
 
 [[workflows]]
 path = ".github/workflows/build_and_upload_conda_packages.yaml"
-sha256 = "d7cfc1333480a07cbd6a0757ab51b7ababa5a38421f2282ae9c8adc3aec483f6"
+sha256 = "a7d4af3b37a394326c4e0e9404c85e1c81fab4de4d22f2e71acbcc00d96b334b"
 reason = "Bootstrap build environment and local exact-source staged/direct publisher; runtime comes from the recipe"
 
 [[workflows]]
@@ -113,7 +113,7 @@ reason = "Source optional OpenFF profile uses its narrower provider/Python envir
 
 [[workflows]]
 path = ".github/workflows/promote_conda_package.yaml"
-sha256 = "45e9859cd3fd331c26412fcf0fac9d84ebd2e1de9decd0621ab4e3decd2f31f0"
+sha256 = "e420292ceb2e7a625b78bc7fa2da5d90a47fea621d18dcf43d09c398e0cdab18"
 reason = "Exact-file promotion and public poststate; bootstrap environment is not a consumer runtime environment"
 
 [[workflows]]
