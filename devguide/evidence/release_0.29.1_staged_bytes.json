@@ -1,0 +1,64 @@
+{
+  "schema": "pyunitwizard.staged-archive-inspection@1",
+  "version": "0.29.1",
+  "build": "py_0",
+  "source": "ab92f1e645dfdd291f76785795b0d15b6a8c1257",
+  "producer_run": 42125299597,
+  "producer_attempt": 1,
+  "filename": "pyunitwizard-0.29.1-py_0.tar.bz2",
+  "bytes": 96418,
+  "sha256": "5bdf9b137c8862f99fc26e6ea5aa6e2ecea5a46ee1dc5e71127565411fedbe27",
+  "source_channel": "uibcdf/label/staging",
+  "registry_labels": [
+    "staging"
+  ],
+  "index": {
+    "arch": null,
+    "build": "py_0",
+    "build_number": 0,
+    "depends": [
+      "argdigest >=0.14.0",
+      "depdigest >=0.11.0",
+      "numpy >=1.23.5",
+      "pint >=0.25",
+      "python >=3.11,<3.15",
+      "smonitor >=0.16.0"
+    ],
+    "license": "MIT AND CC-BY-4.0",
+    "name": "pyunitwizard",
+    "noarch": "python",
+    "platform": null,
+    "subdir": "noarch",
+    "timestamp": 1793920291751,
+    "version": "0.29.1"
+  },
+  "license_expression": "MIT AND CC-BY-4.0",
+  "license_files": {
+    "LICENSE": {
+      "sha256": "8f342ee3237544c1aa150c3367a11eb7640d21560109601a43c8d86fe787e8a2",
+      "conda_license_paths": [
+        "info/licenses/LICENSE"
+      ]
+    },
+    "pyunitwizard/vocabularies/NOTICE.md": {
+      "sha256": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6",
+      "conda_license_paths": [
+        "info/licenses/pyunitwizard/vocabularies/NOTICE.md"
+      ]
+    }
+  },
+  "resources_sha256": {
+    "pyunitwizard/vocabularies/NOTICE.md": "ea9dfa68b9404070f047556f6579b8ed169d91dc6a3defbc5abdd414b28a81a6",
+    "pyunitwizard/vocabularies/physical_units.json": "b6c43e943dffc4449ccba04b564c2d7ee9a53dba9ee4c3f7684380f61bc3f758"
+  },
+  "source_python_files_verified": 92,
+  "requires_python": "<3.15.0,>=3.11.0",
+  "requires_dist": [
+    "numpy>=1.23.5",
+    "pint>=0.25",
+    "smonitor>=0.16.0",
+    "depdigest>=0.11.0",
+    "argdigest>=0.14.0"
+  ],
+  "scope": "Exact staging archive/metadata/source/license inspection; installed/native/public-main qualification remains separate"
+}

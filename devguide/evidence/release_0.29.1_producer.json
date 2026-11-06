@@ -1,0 +1,25 @@
+{
+  "events": [
+    {
+      "artifact": "pyunitwizard-0.29.1-py_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "noarch",
+      "sha256": "5bdf9b137c8862f99fc26e6ea5aa6e2ecea5a46ee1dc5e71127565411fedbe27",
+      "upload": "success"
+    }
+  ],
+  "producer": {
+    "ref": "87c70b1443d5f22d738ee3ddf812bdbe0152f6c2",
+    "repository": "uibcdf/action-build-and-upload-conda-packages"
+  },
+  "schema": "gh-run-receptor.events@1",
+  "subject": {
+    "head_sha": "ab92f1e645dfdd291f76785795b0d15b6a8c1257",
+    "job_key": "conda_deployment_with_new_tag",
+    "matrix_index": null,
+    "repository": "uibcdf/pyunitwizard",
+    "run_attempt": 1,
+    "run_id": 42125299597
+  }
+}

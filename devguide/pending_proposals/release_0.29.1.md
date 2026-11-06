@@ -4,7 +4,7 @@ issue: uibcdf/pyunitwizard#138
 status: active
 opened: 2026-11-05
 closed:
-verification: inspected
+verification: measured
 area: [release, packaging, documentation]
 guard:
 normative: devtools/conda-build/README.md
@@ -124,7 +124,7 @@ No retry at the rejected original source qualifies the corrected candidate.
 
 ## Dependencies and risks
 
-GitHub runner availability is currently delaying source qualification. Do not
+GitHub runner availability is currently delaying installed qualification. Do not
 weaken matrices or infer passing results from queue state. Optional-provider
 resolution, scientific behavior and new provider operations need actual native
 evidence; their previous bounded source checks are not package qualification.
@@ -132,3 +132,35 @@ MolSysSuite owns canonical-guide synchronization and consumer receiving through
 #127 and the existing floor/license/provider rollouts. Client copies are not
 edited here. The shared environment's unrelated dependency conflicts stay with
 MolSysSuite #82; clean candidate prefixes have their own required closures.
+
+## Qualified source and staging checkpoint — 2026-11-05
+
+The corrected source is `ab92f1e645dfdd291f76785795b0d15b6a8c1257`.
+All 29 mandatory native source profiles and their required steps passed at
+that SHA, together with ordinary CI and both coverage-upload steps. The shared
+preflight verifies the original candidate's 22 acquisition routes. Retained
+semantic source proof is in `devguide/evidence/release_0.29.1_source.json`.
+
+Producer 42125299597/1 built and uploaded exactly one noarch file:
+`pyunitwizard-0.29.1-py_0.tar.bz2`, 96,418 bytes, SHA-256
+`5bdf9b137c8862f99fc26e6ea5aa6e2ecea5a46ee1dc5e71127565411fedbe27`.
+Its producer event, reviewed route and independent downloaded-byte inspection
+are retained in `devguide/evidence/release_0.29.1_{producer,route,staged_bytes}.json`.
+Registry labels contain staging only. Actual metadata, both original license
+payloads, notice/catalogue resources and 92 tracked Python source files match
+the original candidate; generated `_version.py` is intentionally separate.
+
+Installed qualification 42129616605/1 binds the same source and file. Its
+producer-binding job passed; all 30 expected profiles are registered. Eight
+installed profiles have passed at this checkpoint, including macOS arm64 and
+Python 3.14, while 22 remain queued. No installed failure has been observed.
+These partial results do not authorize publication.
+
+The two CLI dispatch requests that returned HTTP 500 created no matching runs.
+A direct REST dispatch with string-valued inputs created exactly one matching
+installed run; no candidate-source change or duplicated qualification was
+needed. The CLI/backend failure mechanism remains unconfirmed.
+
+Operational archival and evidence commits on main are separate from the
+qualified source. Preserve `ab92f1e` as the eventual 0.29.1 tag target and the
+same staged bytes; do not rebuild to incorporate those operational records.

@@ -1,0 +1,31 @@
+{
+  "candidate_sha": "ab92f1e645dfdd291f76785795b0d15b6a8c1257",
+  "checked_at": "2026-11-05T23:09:48.723167+00:00",
+  "decision_by": "Diego Prada (PyUnitWizard maintainer), preparation authorized 2026-11-05; final publication decision pending",
+  "gates": [
+    {
+      "run_id": 42112262781,
+      "workflow": ".github/workflows/CI_full_matrix.yaml"
+    },
+    {
+      "run_id": 42112279815,
+      "workflow": ".github/workflows/release_gates.yaml"
+    },
+    {
+      "run_id": 42112229284,
+      "workflow": ".github/workflows/molsyssuite-policy.yml"
+    },
+    {
+      "run_id": 42112292554,
+      "workflow": ".github/workflows/openff_interop.yaml"
+    },
+    {
+      "run_id": 42112305747,
+      "workflow": ".github/workflows/storage_interop.yaml"
+    }
+  ],
+  "reason": "Qualify the #137 Astropy calorie/registry correction, #134 numerical floors, #135 PEP 639 license/build contract and #136 Conda provider adoption in one immutable installed file, retaining all baseline/storage/OpenFF/prepared profiles; see uibcdf/pyunitwizard#138.",
+  "route": "staged",
+  "schema": "pyunitwizard.conda-route@1",
+  "version": "0.29.1"
+}
