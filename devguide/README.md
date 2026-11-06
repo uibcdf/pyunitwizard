@@ -5,6 +5,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 ## Documents
 
 - `unreleased_notes.md`: source-only maintenance after 0.29.0 and remaining publication boundaries.
+- `zenodo_archival.md`: required public-record verification, fixed-cutoff recovery and the first 0.29.1 manual probe.
 - `release_0.29.1_notes.md` and `pending_proposals/release_0.29.1.md`: proposed maintenance release, staged route and pending qualification under #138.
 
 - `smonitor.md`: diagnostics and instrumentation rules.

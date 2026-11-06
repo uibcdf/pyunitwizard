@@ -116,6 +116,11 @@ No retry at the rejected original source qualifies the corrected candidate.
 - After an authorized publication, independently verify unchanged promoted
   bytes, public solver-index receiving and served documentation; deliver the
   version-specific MolSysSuite notice before closing this release issue.
+- Complete #140's default-branch archival caller before publication, then
+  manually probe the exact 0.29.1 tag and retain its actual semantic state.
+  Its original source predates that caller; the fixed-cutoff schedule provides
+  ongoing recovery without rebuilding or retagging the Conda file. Only a
+  verified public record permits a version DOI/archive claim.
 
 ## Dependencies and risks
 

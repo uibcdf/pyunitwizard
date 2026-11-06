@@ -29,3 +29,6 @@ workflows:
   - match:
       path: .github/workflows/sphinx_docs_to_gh_pages.yaml
     profile: docs
+  - match:
+      path: .github/workflows/zenodo_archival.yaml
+    profile: generic

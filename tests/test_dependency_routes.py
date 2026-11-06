@@ -24,7 +24,7 @@ def test_inventory_keeps_general_purposes_and_preserves_scientific_bounds():
     assert data["shared_tool"]["commit"] == "20628bd5dba6d759669b0d444fe657eb1edad33f"
     assert len(data["recipes"]) == 1
     assert len(data["environments"]) == 9
-    assert len(data["workflows"]) == 12
+    assert len(data["workflows"]) == 13
     assert data["source_routes"] == []
     text = (ROOT / "devtools/conda-envs/openff_env.yaml").read_text()
     assert "python >=3.12,<3.15" in text

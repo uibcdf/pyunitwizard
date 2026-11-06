@@ -1,0 +1,46 @@
+{
+  "schema": "pyunitwizard.zenodo-adoption-local@1",
+  "date": "2026-11-05",
+  "issue": "uibcdf/pyunitwizard#140",
+  "provider_commit": "20628bd5dba6d759669b0d444fe657eb1edad33f",
+  "caller_sha256": "ce907454e2e336c6710884806abc22842f6cbbc2720aba6ac9c49d892bf1b2f0",
+  "tests": [
+    {
+      "junit": "zenodo-caller-red.xml",
+      "sha256": "3d1f80940ca7e90099ea3e4930dd62591e9494ce59dd30dc5da77e5b339c122f",
+      "passed": 0,
+      "failed": [
+        "test_archival_recovery_keeps_a_fixed_cutoff_and_exact_tag_routes",
+        "test_archival_caller_uses_read_only_immutable_shared_verifier"
+      ],
+      "skipped": [],
+      "errors": []
+    },
+    {
+      "junit": "zenodo-caller-green.xml",
+      "sha256": "2a583333ce8e0a7c90461a78a64fb41d404c3df72aa4d4b15ea13bb5d71e2c27",
+      "passed": 2,
+      "failed": [],
+      "skipped": [],
+      "errors": []
+    },
+    {
+      "junit": "zenodo-adoption-controls-final.xml",
+      "sha256": "18ae9bb67ee609d13a77dfc1414c321d55159a9d87639900cba2183ac32afbbc",
+      "passed": 21,
+      "failed": [],
+      "skipped": [],
+      "errors": []
+    }
+  ],
+  "current_main_dependency_routes": 23,
+  "original_conda_candidate_source": "ab92f1e645dfdd291f76785795b0d15b6a8c1257",
+  "original_conda_candidate_dependency_routes": 22,
+  "previous_release_probe": "zenodo_0.29.0_2026-11-05.json",
+  "hook_observation": {
+    "scope": "Presence/activity projection only; no configuration retained",
+    "production_release_hooks": 1,
+    "active": true
+  },
+  "scope": "Default-branch read-only archival operations only; does not replace source/producer/installed/public checks or rebuild the qualified Conda file. Hosted exact-tag positive control remains pending."
+}

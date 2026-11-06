@@ -136,6 +136,11 @@ path = ".github/workflows/test_staged_conda_package.yaml"
 sha256 = "83e6662fb34a7575a163f91163c8506b9165159a7513672d19e991e878cd0ca0"
 reason = "Artifact qualification uses exact staged archive, checked public dependencies and separate reviewed flexible staging provenance"
 
+[[workflows]]
+path = ".github/workflows/zenodo_archival.yaml"
+sha256 = "ce907454e2e336c6710884806abc22842f6cbbc2720aba6ac9c49d892bf1b2f0"
+reason = "Reviewed pinned archival caller under #140; bounded public metadata reads only, no scientific runtime installation or package mutation"
+
 [shared_tool]
 commit = "20628bd5dba6d759669b0d444fe657eb1edad33f"
 reason = "Accepted general provider under uibcdf/molsyssuite#45 with 364 hosted guards and 74 focused local guards"

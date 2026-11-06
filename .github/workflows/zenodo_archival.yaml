@@ -1,0 +1,25 @@
+name: Verify Zenodo release archival
+
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Exact public tag; leave empty to scan releases since adoption
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    uses: uibcdf/molsyssuite/.github/workflows/verify-zenodo-releases.yaml@20628bd5dba6d759669b0d444fe657eb1edad33f
+    with:
+      concept-doi: "10.5281/zenodo.8088374"
+      since: "2026-11-05T00:00:00Z"
+      tag: ${{ github.event.release.tag_name || inputs.tag || '' }}
