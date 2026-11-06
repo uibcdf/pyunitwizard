@@ -1,0 +1,6 @@
+﻿pyunitwizard.check
+==================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: check

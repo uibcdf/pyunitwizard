@@ -1,0 +1,6 @@
+﻿pyunitwizard.storage.asdf.from\_tree
+====================================
+
+.. currentmodule:: pyunitwizard.storage.asdf
+
+.. autofunction:: from_tree

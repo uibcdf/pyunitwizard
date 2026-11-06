@@ -1,0 +1,6 @@
+﻿pyunitwizard.standardize
+========================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: standardize

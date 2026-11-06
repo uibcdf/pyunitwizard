@@ -1,0 +1,6 @@
+﻿pyunitwizard.dialects.vocabulary.catalog
+========================================
+
+.. currentmodule:: pyunitwizard.dialects.vocabulary
+
+.. autofunction:: catalog

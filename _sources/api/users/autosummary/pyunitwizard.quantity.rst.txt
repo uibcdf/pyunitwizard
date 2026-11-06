@@ -1,0 +1,6 @@
+﻿pyunitwizard.quantity
+=====================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: quantity

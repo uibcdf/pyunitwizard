@@ -1,0 +1,6 @@
+﻿pyunitwizard.configure.get\_libraries\_supported
+================================================
+
+.. currentmodule:: pyunitwizard.configure
+
+.. autofunction:: get_libraries_supported
