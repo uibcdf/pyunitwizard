@@ -164,3 +164,36 @@ needed. The CLI/backend failure mechanism remains unconfirmed.
 Operational archival and evidence commits on main are separate from the
 qualified source. Preserve `ab92f1e` as the eventual 0.29.1 tag target and the
 same staged bytes; do not rebuild to incorporate those operational records.
+
+
+## Installed qualification complete — 2026-11-06 UTC
+
+Installed run 42129616605/1 completed successfully at source/qualifier
+`ab92f1e645dfdd291f76785795b0d15b6a8c1257`. All 30 expected profiles execute:
+8 baseline, 8 storage, 6 OpenFF and 8 prepared across Linux/macOS arm64 and
+the declared Python minors. Every native job and all 240 required steps pass.
+Downloaded Conda/pip closures, actual Python architecture/version and JUnit
+reports were independently audited against the original binding and digest.
+
+There are 10,100 passing JUnit entries, including 750 unskipped calorie cases,
+120 policy-handshake cases and 60 explicit concentration-reader cases.
+Every required profile-specific storage, OpenFF and prepared-attribution guard
+executes without skips. Separately classified skips are the intentional strict
+JSON/NaN case (30 entries) and provisional prepared-credit cases under the
+intentionally older Ackredit profiles (110 entries); the prepared profiles
+execute those required attribution guards using Ackredit 0.10.1.
+Safe per-cell job IDs, closure/JUnit hashes, provider versions and results are
+retained in `devguide/evidence/release_0.29.1_installed.json`.
+
+The original file remains staging-only with unchanged size and SHA-256.
+#140 is resolved with actual hosted verification of existing 0.29.0 archival;
+its independently bounded recovery is ready for the first manual 0.29.1 probe
+following a future public Release. Documentation-head CI 42139187015/1 and
+policy 42139187246/1 pass. These operational commits remain separate from the
+qualified source and do not move its eventual tag target.
+
+Preparation is complete. The concrete decision is in
+`devguide/release_0.29.1_publication_decision.md`; final public tag/Release,
+exact-file promotion, public receiving, served documentation, canonical-guide
+update and central version notice remain pending the maintainer's decision.
+The issue remains active until those publication outcomes are verified.

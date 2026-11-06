@@ -2,8 +2,8 @@
 
 Draft maintenance-release notes. Preparation is tracked in
 [release #138](https://github.com/uibcdf/pyunitwizard/issues/138); this version
-has not been published. Candidate source, archive and installed qualification
-remain pending.
+has not been published. Its exact source, original staging archive and all 30
+installed profiles are qualified; the final publication decision remains pending.
 
 - Astropy quantities, target units, parsing and cross-backend conversion support
   thermochemical cal/calorie/kcal/kilocalorie, including kcal/mol. In all sixteen
@@ -28,9 +28,9 @@ remain pending.
   tests, exact source/file/digest checks and installed/public gates (#136).
 
 The existing Linux/macOS arm64 and Python 3.11–3.14 support targets and optional
-profile ranges are retained. Their qualification for this release requires its
-actual candidate evidence. The new installed gate rejects absent or skipped
-calorie regressions in every profile.
+profile ranges are retained. All 29 required source jobs and all 30 installed profiles have passed for
+the original candidate and file. The installed gate executes all 25 calorie
+regressions in every profile. Public-channel receiving follows publication.
 
 This release plan introduces no new record format or stable API admission.
 Existing qrec/bundle contracts and provisional record/storage/dialect/attribution

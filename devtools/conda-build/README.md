@@ -88,8 +88,11 @@ python devtools/check_dependency_routes.py --suite-root /path/to/pinned/molsyssu
 ```
 
 The checked provider must have that exact commit and unchanged tools. Default
-invocation reviews all 22 routes and actual installed public floors/ceilings;
-science selections, transitive closure and artifact identity remain separate.
+invocation reviews all 23 current-main routes and actual installed public
+floors/ceilings;
+the original 0.29.1 candidate retains its separately qualified 22-route receipt,
+before the tooling-only Zenodo caller was added.
+Science selections, transitive closure and artifact identity remain separate.
 The source workflows run this command before tests/builds. Do not refresh workflow
 hashes automatically: review changed installation paths before recording hashes.
 

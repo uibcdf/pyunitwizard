@@ -133,8 +133,10 @@ under `completed_proposals/` and `evidence/`; see `unreleased_notes.md`.
 These changes do not modify the existing public 0.29.0 artifact or establish
 new installed/platform/release qualification. Preparation of 0.29.1 is active
 under [#138](pending_proposals/release_0.29.1.md), with draft release notes and
-a committed staged route. The exact candidate still needs complete source and
-installed gates before the final publication decision and public receiving.
+a committed staged route. All 29 source jobs and all 30 installed profiles now
+pass for original source `ab92f1e` and the unchanged staged file. The
+[publication decision](release_0.29.1_publication_decision.md) retains exact
+receipts and the remaining final decision/public-receiving steps.
 
 Astropy's alias-conflict context limitation is reported upstream as
 `astropy/astropy#20790` with explicit human authorization. The local adapter
