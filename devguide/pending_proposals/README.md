@@ -5,10 +5,9 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
 - [`release_0.29.1.md`](release_0.29.1.md) — [#138](https://github.com/uibcdf/pyunitwizard/issues/138) — Prepare and qualify the 0.29.1 maintenance release. *(measured)*
-- [`zenodo_release_verification.md`](zenodo_release_verification.md) — [#140](https://github.com/uibcdf/pyunitwizard/issues/140) — Adopt resumable Zenodo verification before the next public release. *(measured)*
 
 ### Open (2)
 

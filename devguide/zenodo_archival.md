@@ -71,3 +71,12 @@ not proof of future ingestion. This baseline makes no 0.29.1 archival claim.
 Before closing a future release, retain its exact semantic probe and notify
 MolSysSuite with actual coverage. The suite owns its collective inventory;
 this repository does not edit sibling receipts or citation metadata.
+
+
+Hosted positive control 42134178934/1 also verifies that exact 0.29.0 source
+snapshot through the common caller at operational source `a5fe517`. Its native
+probe and evidence-upload steps succeeded. The safe semantic receipt and run
+binding are retained in
+`evidence/zenodo_hosted_adoption_2026-11-06.json`; the completed adoption record
+is `completed_proposals/zenodo_release_verification.md`. This does not substitute
+for the exact 0.29.1 probe after a future authorized publication.

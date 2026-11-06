@@ -1,12 +1,12 @@
 ---
 summary: Adopt resumable Zenodo verification before the next public release.
 issue: uibcdf/pyunitwizard#140
-status: active
+status: resolved
 opened: 2026-11-05
-closed:
+closed: 2026-11-06
 verification: measured
 area: [release, governance, documentation]
-guard:
+guard: tests/test_zenodo_release_verification.py::test_archival_recovery_keeps_a_fixed_cutoff_and_exact_tag_routes
 normative: devguide/zenodo_archival.md
 blocked_by: []
 supersedes: []
@@ -58,3 +58,24 @@ configuration pass. Sanitized evidence is retained in
 `devguide/evidence/zenodo_adoption_local_2026-11-05.json` and the separate
 public 0.29.0 probe; no hook configuration is retained. A hosted exact-tag
 positive control remains due before resolving this operational adoption.
+
+
+## Hosted adoption outcome — 2026-11-06 UTC
+
+Run 42134178934/1 at operational source
+`a5fe517a65fb4aad5ba3b11eb866478ba5167afa` completed successfully. Native
+job 127618017294 executed the public probe and retained its sanitized evidence.
+The downloaded semantic receipt explicitly reports `verified` for exact tag
+0.29.0, record 23604831 and the same source ZIP inventory/checksum as the
+independent local probe. It is retained with source, run, attempt and provider
+identity in `devguide/evidence/zenodo_hosted_adoption_2026-11-06.json`.
+The default-branch caller's actual delegation is therefore exercised; this
+resolves adoption without claiming 0.29.1 publication or archival.
+
+The regression guard checks the fixed adoption cutoff, six-hour schedule,
+manual historical route and release exact-tag routing. Its companion protects
+the immutable shared provider and read-only delegation. These assertions keep
+pending releases discoverable without replacing the original 72-hour clock.
+Operational-source CI 42134151368/1 and policy 42134152000/1 also completed
+successfully. The 0.29.1 file/source and its still-running installed matrix
+remain independently owned by #138.

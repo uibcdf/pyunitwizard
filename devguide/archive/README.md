@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (60)
+### Resolved (61)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -66,6 +66,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`ucum_unit_dialect.md`](../completed_proposals/ucum_unit_dialect.md) — [#125](https://github.com/uibcdf/pyunitwizard/issues/125) — Verify explicit case-sensitive UCUM codes at biomedical exchange boundaries. *(inspected)*
 - [`unyt_astropy_registry_allocation.md`](../solved_bugs/unyt_astropy_registry_allocation.md) — [#122](https://github.com/uibcdf/pyunitwizard/issues/122) — Reuse the shared Pint registry in unyt-to-Astropy translation. *(medium, measured)*
 - [`unyt_remaining_registry_allocations.md`](../solved_bugs/unyt_remaining_registry_allocations.md) — [#123](https://github.com/uibcdf/pyunitwizard/issues/123) — Reuse the shared registry in remaining unyt dimensionality and OpenMM paths. *(medium, reproduced)*
+- [`zenodo_release_verification.md`](../completed_proposals/zenodo_release_verification.md) — [#140](https://github.com/uibcdf/pyunitwizard/issues/140) — Adopt resumable Zenodo verification before the next public release. *(measured)*
 
 ### Legacy pre-adoption records (5)
 
