@@ -1,8 +1,10 @@
-# Proposed 0.29.1 publication decision
+# Approved 0.29.1 publication decision
 
 Owned by [release #138](https://github.com/uibcdf/pyunitwizard/issues/138).
-Preparation is complete. Public publication awaits the maintainer's final
-decision; no tag, stable Release or main-label promotion is claimed here.
+The maintainer explicitly approved publication on 2026-11-06 UTC. The stable
+tag/Release and exact-file promotion are complete; the proposal and execution
+sequence below retain the reviewed identities. Published receipts are in
+`evidence/release_0.29.1_2026-11-06.json`.
 
 ## Exact identity
 
@@ -14,7 +16,7 @@ decision; no tag, stable Release or main-label promotion is claimed here.
 | File | `pyunitwizard-0.29.1-py_0.tar.bz2` |
 | Size | 96,418 bytes |
 | SHA-256 | `5bdf9b137c8862f99fc26e6ea5aa6e2ecea5a46ee1dc5e71127565411fedbe27` |
-| Current channel | `uibcdf/label/staging`, staging label only |
+| Qualified staging channel | `uibcdf/label/staging`, staging only before promotion |
 | Producer | [42125299597/1](https://github.com/uibcdf/pyunitwizard/actions/runs/42125299597) |
 | Installed qualifier and source | [42129616605/1](https://github.com/uibcdf/pyunitwizard/actions/runs/42129616605), original source above |
 
@@ -59,13 +61,13 @@ calorie/registry correction, justified NumPy/Pint floors, existing license
 metadata and immutable Conda-provider adoption. They introduce no new stable
 quantity-record/storage/dialect/attribution API or format admission.
 
-## Requested final decision and execution
+## Approved final decision and execution
 
-Approve the stable `0.29.1` tag and GitHub Release at the exact original source
+The maintainer approved the stable `0.29.1` tag and GitHub Release at the exact original source
 above, followed by promotion of the already qualified file by its exact digest.
 Preserve published 0.29.0 and all historical source/producer identities.
 
-After approval:
+Reviewed execution sequence (completed):
 
 1. Recheck the exact coordinates, then create tag and Release titled `0.29.1`
    using the prepared notes. Verify the staged release event does not rebuild.
@@ -89,3 +91,18 @@ The current preparation closeout changes documentation/evidence only. Its local
 reporting and release-contract checks apply to those inputs; native checkpoints
 on that documentation head remain operational evidence, separate from the
 already qualified original source and installed file.
+
+
+## Executed outcome — 2026-11-06 UTC
+
+Release 436100116 and annotated tag 9209062767b4d50431c28e99db8c5d9402d723a1
+identify original source ab92f1e. Promotion 42162820178/1 preserves the file
+and digest; independent main-label and solver-index verification passes.
+The staged release event 42162787779/1 verifies its decision and skips both
+build branches. Public-only Linux/Python 3.14.10 receiving passes 132 selected
+cases with one intentional strict-JSON skip and clean pip requirements.
+Documentation 42162787792/1 and Pages 42162885745/1 publish actual 0.29.1 pages.
+Zenodo probe 42162823352/1 independently verifies source record 23995546,
+version DOI 10.5281/zenodo.23995546; it makes no Conda coverage claim.
+Canonical guide commit de0969242d094f687ff047d08ac950031c882da8 and its digest
+are delivered through MolSysSuite #172. Consumer receiving remains suite-owned.

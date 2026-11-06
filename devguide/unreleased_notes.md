@@ -1,9 +1,9 @@
-# Unreleased source maintenance
+# Source maintenance delivered in 0.29.1
 
-These changes follow published 0.29.0 and are selected for the proposed 0.29.1
-maintenance release under #138. The version has not been published; candidate,
-installed-artifact and final publication decisions remain pending. See
-`release_0.29.1_notes.md` and `pending_proposals/release_0.29.1.md`.
+These changes follow published 0.29.0 and were delivered in public 0.29.1 on
+2026-11-06 UTC under #138. This file preserves the bounded source measurements;
+complete executed source, installed-file and public publication evidence is in
+`release_0.29.1_notes.md` and `completed_proposals/release_0.29.1.md`.
 
 - #137: Astropy construction, scalar parsing, target units and cross-backend
   conversions accept native thermochemical cal/calorie/kcal/kilocalorie, including
@@ -43,7 +43,9 @@ controls exercise missing/skipped installed calorie cases. Minimum numerical,
 license/build and simulated provider-operation evidence has its own retained
 scope; none certifies a new full installed OS/Python matrix. The public 0.29.0
 release, original source, producer, bytes/digest and historical receipts remain.
-The committed staged release plan selects 0.29.1; execute every applicable exact
-candidate, installed-artifact and independent public gate before publication.
+The committed staged route published 0.29.1 with all 29 exact-source jobs,
+30 installed cells and independent public-file receiving gates passed. See
+`evidence/release_0.29.1_2026-11-06.json`; the historical local controls above
+retain their narrower scopes.
 MolSysSuite owns canonical-guide distribution and consumer receiving under
-#127/#137/#162/#87.
+#172 and the earlier #127/#137/#162/#87 source handoffs.

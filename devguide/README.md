@@ -4,9 +4,9 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Documents
 
-- `unreleased_notes.md`: source-only maintenance after 0.29.0 and remaining publication boundaries.
+- `unreleased_notes.md`: historical bounded source measurements now delivered in 0.29.1.
 - `zenodo_archival.md`: required public-record verification, fixed-cutoff recovery and the first 0.29.1 manual probe.
-- `release_0.29.1_notes.md` and `pending_proposals/release_0.29.1.md`: proposed maintenance release, staged route and pending qualification under #138.
+- `release_0.29.1_notes.md` and `completed_proposals/release_0.29.1.md`: published maintenance release and complete source/installed/public evidence under #138.
 
 - `smonitor.md`: diagnostics and instrumentation rules.
 - `roadmap.md`: staged path from pre-`1.0.0` lines to stable `1.0.0`.
@@ -47,8 +47,8 @@ This directory contains operational guidance for maintaining and releasing PyUni
 
 ## Current baseline
 
-- Latest public release: [`0.29.0`](release_0.29.0_notes.md), published on
-  2026-10-23 through GitHub and the public `uibcdf` Conda channel.
+- Latest public release: [`0.29.1`](release_0.29.1_notes.md), published on
+  2026-11-06 UTC through GitHub and the public `uibcdf` Conda channel.
 - Current pre-`1.0.0` line: `0.29.x`. Published provisional capabilities are
   separate from stable-contract admission and member source adoption.
 - Completed release-candidate line: `0.21.x`.
@@ -61,7 +61,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
 - Publicly supported Python versions: `3.11`–`3.14`; routine CI uses `3.14`.
   The qualified baseline, storage/dialect and prepared-attribution installed profiles
   cover Linux and macOS arm64 on all four minors. OpenFF 0.4.0 covers
-  Python `3.12`–`3.14` with Pint `>=0.24,<0.26`.
+  Python `3.12`–`3.14` with Pint `>=0.25,<0.26`.
 - Supported platforms: Linux and macOS arm64. Windows support is deferred until a
   concrete ecosystem requirement appears.
 - Historical local test snapshot (2026-03-04): `391 passed` (`pytest --import-mode=importlib -q --cov=pyunitwizard --cov-config=.coveragerc --cov-report=term-missing`).
@@ -72,7 +72,7 @@ This directory contains operational guidance for maintaining and releasing PyUni
   `physipy` (soft), `quantities` (soft), `openff.units` (soft, bounded above),
   plus `string` and the provisional inert `record` form (QuantityRecord).
 
-## Resume after 0.29.0
+## Historical 0.29.0 checkpoint
 
 [Publication #128](completed_proposals/release_0.29.0.md) is complete. The
 canonical tag and stable GitHub Release identify original source
@@ -123,20 +123,23 @@ attribution and all new record/storage/dialect surfaces remain **provisional**.
 [The 1.0 checklist](release_1.0.0_checklist.md) still requires fresh candidate
 evidence, explicit admission/scope decisions and release-owner approval.
 
-## Source maintenance after 0.29.0 — 2026-11-05
+## Resume after 0.29.1 — 2026-11-06 UTC
 
 The completed source reviews are #137 (native Astropy calories), #134
 (justified NumPy/Pint floors), #135 (SPDX and original distribution notices)
 and #136 (immutable Conda provider v2.3.0 adoption). Their owning archives and
 local scientific/minimum-provider/distribution/operation receipts are retained
 under `completed_proposals/` and `evidence/`; see `unreleased_notes.md`.
-These changes do not modify the existing public 0.29.0 artifact or establish
-new installed/platform/release qualification. Preparation of 0.29.1 is active
-under [#138](pending_proposals/release_0.29.1.md), with draft release notes and
-a committed staged route. All 29 source jobs and all 30 installed profiles now
-pass for original source `ab92f1e` and the unchanged staged file. The
-[publication decision](release_0.29.1_publication_decision.md) retains exact
-receipts and the remaining final decision/public-receiving steps.
+Published 0.29.1 is complete under [#138](completed_proposals/release_0.29.1.md).
+All 29 source jobs and all 30 installed profiles pass for original source
+`ab92f1e` and the unchanged file. Exact-file promotion, independent public
+main/index receiving, clean public installation and served docs are verified.
+Zenodo verifies the version-specific source snapshot; the
+[publication decision](release_0.29.1_publication_decision.md) retains the
+authorization and exact identities. MolSysSuite #172 owns the publication
+notice and canonical-guide/client receiving handoff. No client adoption is
+claimed; the provisional API/format limits and deferred feature decisions above
+remain. Historical 0.29.0 files and receipts are unchanged.
 
 Astropy's alias-conflict context limitation is reported upstream as
 `astropy/astropy#20790` with explicit human authorization. The local adapter

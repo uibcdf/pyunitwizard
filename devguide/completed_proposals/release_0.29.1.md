@@ -1,12 +1,12 @@
 ---
-summary: Prepare and qualify the 0.29.1 maintenance release.
+summary: Qualify and publish the 0.29.1 maintenance release.
 issue: uibcdf/pyunitwizard#138
-status: active
+status: resolved
 opened: 2026-11-05
-closed:
+closed: 2026-11-06
 verification: measured
 area: [release, packaging, documentation]
-guard:
+guard: tests/test_noarch_conda_publication.py::test_promotion_workflow_checks_exact_release_and_file_identity
 normative: devtools/conda-build/README.md
 blocked_by: []
 supersedes: []
@@ -197,3 +197,44 @@ Preparation is complete. The concrete decision is in
 exact-file promotion, public receiving, served documentation, canonical-guide
 update and central version notice remain pending the maintainer's decision.
 The issue remains active until those publication outcomes are verified.
+
+
+## Published outcome — 2026-11-06 UTC
+
+Diego explicitly approved final publication and clean upstream-main closeout.
+Stable Release 0.29.1 (436100116) and the dereferenced annotated tag retain
+original source `ab92f1e645dfdd291f76785795b0d15b6a8c1257`. Producer, original
+96,418-byte archive and SHA-256 remain unchanged. Release event 42162787779/1
+verifies the staged decision and skips both build/upload branches. Promotion
+42162820178/1 succeeds; the pinned public verifier independently confirms
+main label and solver index. Public receiving from a fresh Linux/Python 3.14.10
+prefix passes 132 selected guards with one intentional strict-JSON/NaN skip,
+clean pip requirements, exact file/version/origin/resources and all 25 calorie
+cases. Its freely resolved dependency closure is retained separately from the
+30-cell pinned qualification.
+
+Documentation publication 42162787792/1 and Pages deployment 42162885745/1
+succeed at the original release source. Fresh served pages show 0.29.1 and
+expected content. Exact-tag Zenodo probe 42162823352/1 explicitly verifies
+record 23995546, version DOI 10.5281/zenodo.23995546 and one 3,091,218-byte
+source ZIP (md5:a24d8034c8dac15ea633b1da7934b49c). Archival coverage is the
+source snapshot only, not the Conda file.
+
+The complete safe publication receipt is
+`devguide/evidence/release_0.29.1_2026-11-06.json`; full sanitized Conda/pip
+closures and JUnit classifications for all 30 cells are retained in
+`release_0.29.1_installed_closures.json`, with the public closure separately.
+The durable guard protects the original published source/tag identity and
+exact-file/digest/public-verification ordering; it complements actual native
+science and does not replace those measured results.
+
+Canonical `standards/PYUNITWIZARD_GUIDE.md` is updated in
+`de0969242d094f687ff047d08ac950031c882da8`, SHA-256
+`1c2c00b7ebafd7c611311fe634e4ac81b4ce30b84ae2a4eccfb0939cc675fb8b`.
+[MolSysSuite #172](https://github.com/uibcdf/molsyssuite/issues/172) is the
+version-specific release/package and guide handoff. Suite receiving owners
+synchronize all client copies; no client installed adoption is implied.
+Published 0.29.0 history, deferred feature scope and provisional contracts
+remain. Task-owned installation/cache/raw captures are reviewed for cleanup
+once their safe semantic evidence is committed; shared workspace and unrelated
+caller pytest resources are preserved.

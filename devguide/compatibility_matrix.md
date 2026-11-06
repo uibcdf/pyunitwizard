@@ -3,10 +3,10 @@
 This matrix records the current 0.29.x sibling-library floors from
 `pyproject.toml` and the Conda recipe. Earlier release lines retain their own
 historical contracts. Exact installed pins and dependency closures are retained
-in the [0.29.0 publication record](completed_proposals/release_0.29.0.md).
+in the [0.29.1 publication record](completed_proposals/release_0.29.1.md).
 
-Source follow-up after 0.29.0 (#134): NumPy/Pint now have explicit inclusive
-minimums below. These declarations do not rewrite published 0.29.0 metadata.
+Published 0.29.1 (#134/#138) delivers the explicit inclusive NumPy/Pint
+minimums below. Published 0.29.0 metadata is preserved.
 The exact numerical-baseline and older-Pint refusal evidence is retained in
 `evidence/runtime_dependency_floors_2026-11-05.json`.
 
@@ -21,14 +21,14 @@ The exact numerical-baseline and older-Pint refusal evidence is retained in
 
 The optional prepared-credit/observer profile additionally qualifies public
 Ackredit `0.10.1`; it does not raise the fallback floor. OpenFF `0.4.0` is
-qualified on Python `3.12`–`3.14`; current source uses Pint `>=0.25,<0.26`.
+qualified on Python `3.12`–`3.14`; published 0.29.1 uses Pint `>=0.25,<0.26`.
 The upper limit is OpenFF 0.4.0's provider restriction, not a general Pint cap. CF/HDF5 uses
 cf-units `3.3.1` and h5py `3.16.0`. These optional interfaces remain provisional.
 
-Published 0.29.0 (#128) additionally qualifies Zarr `3.1.6`, PyArrow
+Published 0.29.1 (#138) additionally qualifies Zarr `3.1.6`, PyArrow
 `25.0.0`, ucumvert `0.3.2` (Pint >=0.25), asdf `6.0.0` and asdf-astropy
 `0.11.0` on Linux/macOS Python 3.11–3.14. Exact-source and original-file installed receipts are retained in
-`evidence/release_0.29.0_source.json` and `evidence/release_0.29.0_installed.json`;
+`evidence/release_0.29.1_source.json` and `evidence/release_0.29.1_installed.json`;
 all dependency closures and case classifications are retained alongside them. The offline QUDT/UO resource is
 part of the required artifact; runtime use does not require RDF/UCUM/Astropy.
 
