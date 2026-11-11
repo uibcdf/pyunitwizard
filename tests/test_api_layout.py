@@ -1,6 +1,8 @@
 import importlib
+import inspect
 import sys
 import warnings
+from pathlib import Path
 
 import pyunitwizard as puw
 
@@ -77,3 +79,14 @@ def test_main_unknown_attribute_raises_attribute_error():
         pass
     else:
         raise AssertionError("Expected AttributeError for unknown pyunitwizard.main attribute")
+
+
+def test_main_compatibility_module_exposes_its_creator_origin(monkeypatch):
+    main = puw._create_main_compat_module()
+    monkeypatch.setitem(sys.modules, "pyunitwizard.main", main)
+    assert Path(inspect.getsourcefile(main)).resolve() == Path(puw.__file__).resolve()
+    spec = importlib.util.find_spec("pyunitwizard.main")
+    assert spec.name == "pyunitwizard.main"
+    assert Path(spec.origin).resolve() == Path(puw.__file__).resolve()
+    assert spec.parent == "pyunitwizard"
+    assert spec.has_location

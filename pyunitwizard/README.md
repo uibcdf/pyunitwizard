@@ -10,6 +10,11 @@ Importing `pyunitwizard` triggers `pyunitwizard.__init__`, which:
 3. Lazily re-exports the user-facing helpers from `api/` plus configuration utilities from `configure`, so most consumers only need `import pyunitwizard as puw`.
 4. Registers `pyunitwizard.main` as a compatibility module for legacy imports.
 
+The virtual `pyunitwizard.main` compatibility module identifies this initializer
+as its creator through `__file__` and its module spec. Source introspection and
+installed-origin checks can resolve that creator while public exports remain
+lazy and retain their one-time deprecation warning (issue #146).
+
 Because initialization happens at import time, edits to any of the modules below must preserve idempotence and backward compatibility.
 
 The default form follows the first backend request. The default parser stays
