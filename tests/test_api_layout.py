@@ -1,8 +1,9 @@
 import importlib
-import inspect
+import subprocess
 import sys
 import warnings
-from pathlib import Path
+
+import pytest
 
 import pyunitwizard as puw
 
@@ -81,12 +82,50 @@ def test_main_unknown_attribute_raises_attribute_error():
         raise AssertionError("Expected AttributeError for unknown pyunitwizard.main attribute")
 
 
-def test_main_compatibility_module_exposes_its_creator_origin(monkeypatch):
-    main = puw._create_main_compat_module()
-    monkeypatch.setitem(sys.modules, "pyunitwizard.main", main)
-    assert Path(inspect.getsourcefile(main)).resolve() == Path(puw.__file__).resolve()
-    spec = importlib.util.find_spec("pyunitwizard.main")
-    assert spec.name == "pyunitwizard.main"
-    assert Path(spec.origin).resolve() == Path(puw.__file__).resolve()
-    assert spec.parent == "pyunitwizard"
+@pytest.mark.parametrize("state", ["cold", "application_policy"])
+def test_main_compatibility_module_exposes_its_creator_origin(state):
+    code = """
+import importlib
+import importlib.util
+import inspect
+from pathlib import Path
+import sys
+import warnings
+
+import pyunitwizard as puw
+
+main = sys.modules['pyunitwizard.main']
+assert not puw.configure.get_libraries_loaded()
+if sys.argv[1] == 'application_policy':
+    puw.configure.set_default_form('pint')
+    puw.configure.set_default_parser('pint')
+    puw.configure.set_standard_units(['angstrom', 'fs'], provenance='application')
+    assert puw.configure.has_active_policy()
+before = puw.configure.report()
+backend_modules = {name for name in sys.modules if name.startswith('pyunitwizard.forms.api_')}
+
+with warnings.catch_warnings(record=True) as captured:
+    warnings.simplefilter('always', DeprecationWarning)
+    assert importlib.import_module('pyunitwizard.main') is main
+    creator = Path(puw.__file__).resolve()
+    assert Path(main.__file__).resolve() == creator
+    assert Path(inspect.getsourcefile(main)).resolve() == creator
+    assert '_create_main_compat_module' in inspect.getsource(main)
+    spec = importlib.util.find_spec('pyunitwizard.main')
+    assert spec is main.__spec__
+    assert spec.name == 'pyunitwizard.main'
+    assert Path(spec.origin).resolve() == creator
+    assert main.__package__ == spec.parent == 'pyunitwizard'
     assert spec.has_location
+    assert spec.loader is main.__loader__ is None
+
+assert not captured, [str(item.message) for item in captured]
+assert puw.configure.report() == before
+assert {name for name in sys.modules if name.startswith('pyunitwizard.forms.api_')} == backend_modules
+"""
+    completed = subprocess.run(
+        [sys.executable, "-c", code, state],
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr

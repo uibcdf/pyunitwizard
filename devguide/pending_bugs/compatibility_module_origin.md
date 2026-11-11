@@ -52,6 +52,26 @@ future DockingMT receiving. Full routine-Python qualification is required before
 opening the requested PR; merge acceptance and consumer pin/receiving remain
 owner actions. No version, package publication or dependency floor is changed.
 
+## Provider review
+
+The review retained the virtual alias and its creator metadata. A local
+before/after wheel check reproduced the actual pinned SDK rejection on the
+original implementation and passed with the proposed metadata. Additional
+controls reject an outside file, a symlink resolving outside the prefix and
+an origin inside the declared source checkout. This focused receiving uses
+an isolated prefix with borrowed runtime dependencies.
+
+The durable regression now checks the module registered during import in a
+fresh interpreter. It covers cold start and an active application policy,
+checks the creator file, spec, package parent and absent loader, and verifies
+that introspection preserves the policy, loaded backend modules and warning
+state. Both scenarios fail against the original initializer and when only
+the package-parent assignment is removed. They pass with the candidate.
+
+The strengthened branch passes the complete local Python 3.14 suite with
+1,064 passing cases and eight recorded skips, including five optional
+module collections. Ruff, the report index and Sphinx HTML build pass.
+
 ## Acceptance criteria
 
 The metadata regression and existing API tests pass; the actual common checker
