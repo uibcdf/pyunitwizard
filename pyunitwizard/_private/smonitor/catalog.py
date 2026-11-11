@@ -14,6 +14,12 @@ META = {
 
 CATALOG = {
     "exceptions": {
+        "UnsupportedRepresentationError": {
+            "code": "PUW-ERR-REP-001",
+            "source": "pyunitwizard.error.unsupported_representation",
+            "category": "representation",
+            "level": "ERROR",
+        },
         "UnitDefinitionError": {
             "code": "PUW-ERR-UNIT-001",
             "source": "pyunitwizard.error.unit_definition",
@@ -106,6 +112,13 @@ CATALOG = {
 }
 
 CODES = {
+    "PUW-ERR-REP-001": {
+        "title": "Unsupported quantity representation",
+        "user_message": "Form '{form}' cannot {operation} a NumPy object array of rows.",
+        "user_hint": "Use flat numeric values with a unit and CSR offsets, or process numeric rows individually. Docs: {doc_url}",
+        "dev_message": "Form '{form}' cannot {operation} magnitudes stored as object arrays of rows in '{caller}'.",
+        "dev_hint": "Use a flat numeric magnitude with CSR offsets or per-row quantities. Docs: {doc_url}",
+    },
     "PUW-ERR-UNIT-001": {
         "title": "Incompatible named unit definition",
         "user_message": "Unit '{unit}' in '{form}' has an incompatible physical definition.",
@@ -207,6 +220,7 @@ CODES = {
 }
 
 SIGNALS = {
+    "pyunitwizard.error.unsupported_representation": {"extra_required": ["form", "operation", "caller"]},
     "pyunitwizard.warning.ackredit_tracking": {"extra_required": ["operation", "reason"]},
     "pyunitwizard.error.argument": {"extra_required": ["argument", "value", "caller"]},
     "pyunitwizard.error.constant_not_found": {"extra_required": ["constant", "caller"]},

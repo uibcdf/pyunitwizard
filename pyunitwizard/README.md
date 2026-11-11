@@ -128,6 +128,17 @@ representable integer scalars. Registry identity is checked before foreign
 quantities are normalized. An active Pint context uses native conversion so
 its scale overrides apply.
 
+## NumPy object arrays of rows
+
+Direct factory construction from NumPy object arrays of numeric row arrays
+retains the row buffers in Pint, OpenMM, unyt and OpenFF. Pint, OpenMM and
+OpenFF support unit scaling; populated unyt row containers cannot be scaled
+natively. Astropy refuses this representation. Unsupported operations raise
+the public TypeError subtype `UnsupportedRepresentationError`, with code
+`PUW-ERR-REP-001` and flat/CSR or per-row guidance. Dense object arrays of
+scalar numbers retain native behavior. The qualified shapes, ownership
+contract and limits are documented in `docs/content/user/backend-coverage.md`.
+
 ## Provisional record extensions
 
 `QuantityRecord` also supports a tagged inert layout (`qrec-tagged/0.1`), explicit

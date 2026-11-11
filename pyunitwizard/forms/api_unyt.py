@@ -1,6 +1,11 @@
 from typing import Any, Dict, Union
 
-from pyunitwizard._private.exceptions import LibraryNotFoundError, LibraryWithoutParserError
+from pyunitwizard._private.exceptions import (
+    LibraryNotFoundError,
+    LibraryWithoutParserError,
+    UnsupportedRepresentationError,
+)
+from pyunitwizard._private.object_rows import is_object_row_array
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 try:
@@ -225,8 +230,18 @@ def convert(quantity: Union[unyt_array, unyt_quantity], unit_name: str) -> Union
     -------
     unyt_array or unyt_quantity
         The converted quantity.
+
+    Raises
+    ------
+    UnsupportedRepresentationError
+        Native unyt conversion refuses an object array of numeric rows.
     """
-    return quantity.to(unit_name)
+    try:
+        return quantity.to(unit_name)
+    except (TypeError, ValueError) as exc:
+        if is_object_row_array(quantity.value):
+            raise UnsupportedRepresentationError(form=form_name, operation="convert") from exc
+        raise
 
 
 ## Parser

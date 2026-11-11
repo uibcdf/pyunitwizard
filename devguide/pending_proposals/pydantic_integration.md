@@ -57,3 +57,12 @@ making Pydantic a mandatory runtime dependency.
 4. A maintainer accepts ownership and reproducible behavior tests are designed.
 5. The proposal is then accepted into an implementation plan or withdrawn with the
    evidence recorded here and on `uibcdf/pyunitwizard#52`.
+
+## Release triage — 2026-11-11
+
+The 0.29.4 audit re-read the owning issue and acceptance criteria and searched
+the current MolSysMT, MolSysViewer and Sabueso Python package sources for
+`forallpeople` and `pydantic`. Neither term occurs in those package sources.
+No new issue supplies an object-interchange or model-validation contract.
+This bounded inspection does not rule out external demand; the existing
+consumer-contract requirement remains unmet and implementation stays deferred.

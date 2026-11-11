@@ -206,6 +206,7 @@ jobs:
           cp tests/astropy_units/test_calorie_interop.py "$target/tests/astropy_units/"
           cp tests/test_quantity_record.py tests/test_quantity_record_empty.py tests/test_measurement_record.py tests/test_configure.py tests/test_openff_optional.py tests/test_storage_optional.py tests/test_backend_declarations.py "$target/tests/"
           cp tests/test_conversion_branches.py tests/test_introspection_probe.py tests/test_api_layout.py "$target/tests/"
+          cp tests/test_ragged_quantities.py "$target/tests/"
           cp tests/test_record_arrays.py tests/test_record_tagged.py tests/test_record_append.py "$target/tests/"
           cp tests/dialects/test_vocabulary.py "$target/tests/dialects/"
           cp -r tests/quantity_record_vectors tests/data "$target/tests/"
@@ -227,6 +228,7 @@ jobs:
           fi
           python -m pytest --receptor=ci -q tests -k 'not normally_installed_consumer_outside_checkout' --junitxml=installed-contracts.xml
           python - <<'PY'
+          import os
           import xml.etree.ElementTree as ET
           cases = list(ET.parse('installed-contracts.xml').iter('testcase'))
           calorie = [case for case in cases if case.get('classname', '').endswith('test_calorie_interop')]
@@ -237,6 +239,13 @@ jobs:
               'test_pint_string_unit_builds_only_the_requested_quantities',
               'test_filtered_probe_skips_payload_and_follows_live_debug_level',
               'test_main_compatibility_module_exposes_its_creator_origin',
+              'test_object_row_construction_retains_rows_and_policy',
+              'test_object_row_conversion_preserves_shape_input_and_policy',
+              'test_astropy_rejects_object_rows_with_actionable_diagnostic',
+              'test_unyt_row_conversion_has_actionable_diagnostic',
+              'test_translation_to_astropy_has_the_same_representation_diagnostic',
+              'test_object_rows_translate_between_compatible_containers',
+              *(('test_openff_object_rows_construct_and_convert',) if os.environ['PROFILE'] == 'openff' else ()),
           ):
               selected = [case for case in cases if case.get('name', '').split('[', 1)[0] == guard]
               assert selected, f'No installed cases collected for {guard}'

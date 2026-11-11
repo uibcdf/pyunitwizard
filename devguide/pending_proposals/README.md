@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`release_0.29.4.md`](release_0.29.4.md) — [#150](https://github.com/uibcdf/pyunitwizard/issues/150) — Qualify and publish the 0.29.4 object-row capability maintenance release. *(measured)*
+
 ### Open (2)
 
 - [`forallpeople_integration.md`](forallpeople_integration.md) — [#44](https://github.com/uibcdf/pyunitwizard/issues/44) — Decide whether forallpeople should become a supported quantity form. *(inspected)*

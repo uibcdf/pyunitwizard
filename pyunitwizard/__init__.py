@@ -43,6 +43,7 @@ def __print_version__() -> None:
 # Central lazy-loading registry mapping public API submodules and functions
 # to their respective internal import paths.
 _LAZY_ATTRIBUTES = {
+    "UnsupportedRepresentationError": ("._private.exceptions", "UnsupportedRepresentationError"),
     # Submodules
     "configure": ".configure",
     "constants": ".constants",

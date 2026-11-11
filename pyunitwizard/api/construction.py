@@ -11,6 +11,7 @@ from .._private.exceptions import (
 )
 from .._private.exceptions import (
     NotImplementedMethodError,
+    UnsupportedRepresentationError,
 )
 from .._private.forms import digest_form
 from .._private.quantity_or_unit import ArrayLike, QuantityLike, UnitLike
@@ -49,6 +50,23 @@ def quantity(
     -------
     QuantityLike
         The quantity.
+
+    Raises
+    ------
+    UnsupportedRepresentationError
+        The selected backend refuses a NumPy object array of numeric rows.
+
+    Notes
+    -----
+    Direct construction from an object array of numeric NumPy rows retains
+    the row buffers in Pint, OpenMM, unyt and OpenFF. Conversion capabilities
+    depend on the backend; Astropy refuses this representation. Use flat
+    numeric values and CSR offsets for portable variable-length data.
+
+    Examples
+    --------
+    >>> get_value(quantity(2.0, "nm", form="pint", parser="pint"))
+    2.0
     """
 
     from .conversion import convert
@@ -79,6 +97,8 @@ def quantity(
 
         try:
             output = dict_make_quantity[form](value, unit)
+        except UnsupportedRepresentationError:
+            raise
         except Exception as exc:
             raise NotImplementedMethodError() from exc
 

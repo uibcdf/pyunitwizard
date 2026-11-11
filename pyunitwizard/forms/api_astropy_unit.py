@@ -4,7 +4,8 @@ from math import isclose
 from threading import RLock
 from typing import Any, Dict, Union
 
-from pyunitwizard._private.exceptions import LibraryNotFoundError, UnitDefinitionError
+from pyunitwizard._private.exceptions import LibraryNotFoundError, UnitDefinitionError, UnsupportedRepresentationError
+from pyunitwizard._private.object_rows import is_object_row_array
 from pyunitwizard._private.quantity_or_unit import ArrayLike
 
 try:
@@ -200,9 +201,19 @@ def make_quantity(value: Union[int, float, ArrayLike], unit: Union[str, AstropyU
     -------
     astropy.units.Quantity
         Constructed quantity.
+
+    Raises
+    ------
+    UnsupportedRepresentationError
+        Astropy refuses an object array containing numeric row arrays.
     """
     unit_obj = _parse_unit(unit)
-    return astropy_units.Quantity(value, unit_obj)
+    try:
+        return astropy_units.Quantity(value, unit_obj)
+    except (TypeError, ValueError, IndexError) as exc:
+        if is_object_row_array(value):
+            raise UnsupportedRepresentationError(form=form_name, operation="construct") from exc
+        raise
 
 
 def get_value(quantity: AstropyQuantity) -> Union[int, float, ArrayLike]:

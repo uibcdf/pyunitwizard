@@ -72,14 +72,29 @@ _REQUIRED_INSTALLED_CASES = [
     ("tests.test_introspection_probe", "test_filtered_probe_skips_payload_and_follows_live_debug_level"),
     ("tests.test_api_layout", "test_main_compatibility_module_exposes_its_creator_origin[cold]"),
     ("tests.test_api_layout", "test_main_compatibility_module_exposes_its_creator_origin[application_policy]"),
+    ("tests.test_ragged_quantities", "test_object_row_construction_retains_rows_and_policy[nm-unequal-pint]"),
+    ("tests.test_ragged_quantities", "test_object_row_conversion_preserves_shape_input_and_policy[unequal-pint]"),
+    ("tests.test_ragged_quantities", "test_astropy_rejects_object_rows_with_actionable_diagnostic[unequal]"),
+    ("tests.test_ragged_quantities", "test_unyt_row_conversion_has_actionable_diagnostic[unequal]"),
+    (
+        "tests.test_ragged_quantities",
+        "test_translation_to_astropy_has_the_same_representation_diagnostic[unequal-pint]",
+    ),
+    ("tests.test_ragged_quantities", "test_object_rows_translate_between_compatible_containers[pint-pint]"),
 ]
 
 
 @pytest.mark.parametrize(
-    ("affected_case", "state"),
-    [(None, "passed")] + [(name, state) for _, name in _REQUIRED_INSTALLED_CASES for state in ("missing", "skipped")],
+    ("profile", "affected_case", "state"),
+    [("baseline", None, "passed")]
+    + [("baseline", name, state) for _, name in _REQUIRED_INSTALLED_CASES for state in ("missing", "skipped")]
+    + [
+        ("openff", "test_openff_object_rows_construct_and_convert", state)
+        for state in ("passed", "missing", "skipped")
+    ],
 )
-def test_every_installed_profile_requires_executed_cases(tmp_path, affected_case, state):
+def test_every_installed_profile_requires_executed_cases(tmp_path, monkeypatch, profile, affected_case, state):
+    monkeypatch.setenv("PROFILE", profile)
     workflow = yaml.safe_load((REPOSITORY_ROOT / ".github/workflows/test_staged_conda_package.yaml").read_text())
     job = next(job for job in workflow["jobs"].values() if "strategy" in job)
     script = next(
@@ -89,7 +104,9 @@ def test_every_installed_profile_requires_executed_cases(tmp_path, affected_case
     )
     guard = script.split("python - <<'PY'\n", 1)[1].split("\nPY", 1)[0]
     suite = ET.Element("testsuite")
-    for classname, name in _REQUIRED_INSTALLED_CASES:
+    for classname, name in _REQUIRED_INSTALLED_CASES + [
+        ("tests.test_ragged_quantities", "test_openff_object_rows_construct_and_convert")
+    ]:
         if state == "missing" and name == affected_case:
             continue
         case = ET.SubElement(suite, "testcase", classname=classname, name=name)

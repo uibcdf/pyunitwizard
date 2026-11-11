@@ -71,3 +71,12 @@ The maintainer confirmed that future qualification must include Python 3.14,
 matching PyUnitWizard's current >=3.11,<3.15 baseline. This corrects the earlier
 acceptance range; it does not claim that a forallpeople adapter or its optional
 installation has been implemented or qualified.
+
+## Release triage — 2026-11-11
+
+The 0.29.4 audit re-read the owning issue and acceptance criteria and searched
+the current MolSysMT, MolSysViewer and Sabueso Python package sources for
+`forallpeople` and `pydantic`. Neither term occurs in those package sources.
+No new issue supplies an object-interchange or model-validation contract.
+This bounded inspection does not rule out external demand; the existing
+consumer-contract requirement remains unmet and implementation stays deferred.

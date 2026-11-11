@@ -10,3 +10,4 @@ from .not_implemented_method_error import NotImplementedMethodError
 from .not_implemented_parser_error import NotImplementedParserError
 from .record_error import RecordError
 from .unit_definition_error import UnitDefinitionError
+from .unsupported_representation_error import UnsupportedRepresentationError
