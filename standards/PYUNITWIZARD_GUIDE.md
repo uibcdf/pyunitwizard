@@ -11,7 +11,7 @@ Metadata
 - Source repository: `pyunitwizard`
 - Source document: `standards/PYUNITWIZARD_GUIDE.md`
 - Source version: Git commit containing this canonical document; consumer copies must record the resolved commit and digest in their synchronization evidence.
-- Last revised: 2026-11-11 (UTC, public 0.29.3 and compatibility-module origin, `uibcdf/pyunitwizard#149`).
+- Last revised: 2026-11-11 (UTC, public 0.29.4 and object-row capabilities, `uibcdf/pyunitwizard#150`).
 
 ## What is PyUnitWizard
 
@@ -30,9 +30,9 @@ PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 - **Hard Dependencies**: `numpy>=1.23.5`, `pint>=0.25`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
 - **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
 
-### Published maintenance baseline: 0.29.3
+### Published maintenance baseline: 0.29.4
 
-Public Conda release [0.29.3](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.3)
+Public Conda release [0.29.4](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.4)
 retains NumPy >=1.23.5 (Python 3.11 numerical baseline) and Pint >=0.25
 (CODATA-2022 definitions required by published record vectors). These floors
 are owned by `uibcdf/pyunitwizard#134`; the published 0.29.0 file is unchanged.
@@ -69,6 +69,41 @@ provider profiles can have narrower limits; use the provider's maintained
 and exact release qualification record. This corrects the dependency inventory;
 it does not change the initialization or validation contracts below. MolSysSuite
 owns synchronization of this canonical guide to registered client copies.
+
+### NumPy object arrays of numeric rows (0.29.4)
+
+For variable-length numeric rows in a NumPy object array, use direct factory
+construction: `puw.quantity(rows, unit, form=...)`. With default
+`standardized=False`, Pint, OpenMM, unyt and optional OpenFF retain numeric
+row buffers. The quantity keeps their backing storage alive and shares edits
+to those rows. Copy numeric rows first if independent ownership is required.
+This guarantee does not cover native multiplication by a unit or
+allocation-free unit conversion.
+
+| Form | Construct/extract rows | Scale nm to angstrom |
+| --- | --- | --- |
+| `pint`, `openmm.unit`, `openff.units` | Supported | Supported |
+| `unyt` | Supported | Refused for populated outer containers |
+| `astropy.units` | Refused | No row quantity to convert |
+
+The core contract qualifies finite float64 rows of unequal/equal lengths,
+empty rows and empty outer shape `(1, 0)`. Unyt's empty outer shape can be
+scaled; populated outer containers with empty rows cannot. Optional OpenFF
+is qualified for unequal rows. Translation among Pint, OpenMM and unyt
+preserves row values and shape. Conversion leaves source rows and caller
+policy unchanged and follows backend arithmetic.
+
+Unsupported Astropy construction/translation and unyt row conversion raise
+`puw.UnsupportedRepresentationError`, a `TypeError` subtype with code
+`PUW-ERR-REP-001`, backend/operation and flat/CSR or per-row guidance.
+`get_value(..., to_unit=...)` has the same conversion limits. Dimension
+errors and dense object scalar behavior retain native diagnostics. Prefer
+one flat numeric quantity plus CSR offsets for portable variable-length
+data; the scientific schema and offsets belong to the consumer.
+QuantityRecord continues rejecting object arrays and does not add pickle
+persistence. Details and an executable example are maintained in the
+[backend contract](https://www.uibcdf.org/pyunitwizard/content/user/backend-coverage.html).
+The provider owns this contract under `uibcdf/pyunitwizard#148`.
 
 ## Minimum initialization (required pattern)
 

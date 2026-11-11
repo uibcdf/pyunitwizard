@@ -3,7 +3,7 @@
 This matrix records the current 0.29.x sibling-library floors from
 `pyproject.toml` and the Conda recipe. Earlier release lines retain their own
 historical contracts. Exact installed pins and dependency closures are retained
-in the [0.29.3 publication record](completed_proposals/release_0.29.3.md).
+in the [0.29.4 publication record](completed_proposals/release_0.29.4.md).
 
 Published 0.29.1 (#134/#138) delivers the explicit inclusive NumPy/Pint
 minimums below. Published 0.29.0 metadata is preserved.
@@ -25,10 +25,10 @@ qualified on Python `3.12`–`3.14` with Pint `>=0.25,<0.26`.
 The upper limit is OpenFF 0.4.0's provider restriction, not a general Pint cap. CF/HDF5 uses
 cf-units `3.3.1` and h5py `3.16.0`. These optional interfaces remain provisional.
 
-Published 0.29.3 (#149) qualifies Zarr `3.1.6`, PyArrow
+Published 0.29.4 (#150) qualifies Zarr `3.1.6`, PyArrow
 `25.0.0`, ucumvert `0.3.2` (Pint >=0.25), asdf `6.0.0` and asdf-astropy
 `0.11.0` on Linux/macOS Python 3.11–3.14. Exact-source and original-file installed receipts are retained in
-`evidence/release_0.29.3_source.json` and `evidence/release_0.29.3_installed.json`;
+`evidence/release_0.29.4_source.json` and `evidence/release_0.29.4_installed.json`;
 the resolved closures and test counts are retained alongside them. The offline QUDT/UO resource is
 part of the required artifact; runtime use does not require RDF/UCUM/Astropy.
 
