@@ -65,8 +65,19 @@ def test_staged_artifact_profile_executes_new_storage_and_codec_guards():
     assert "Storage guard skipped" in script
 
 
-@pytest.mark.parametrize("state", ["passed", "missing", "skipped"])
-def test_every_installed_profile_requires_executed_calorie_cases(tmp_path, state):
+_REQUIRED_INSTALLED_CASES = [
+    ("tests.astropy_units.test_calorie_interop", "calorie"),
+    ("tests.pint.test_length_rounding", "test_pint_length_boundaries_round_once[nm-nm-nm]"),
+    ("tests.test_conversion_branches", "test_pint_string_unit_builds_only_the_requested_quantities"),
+    ("tests.test_introspection_probe", "test_filtered_probe_skips_payload_and_follows_live_debug_level"),
+]
+
+
+@pytest.mark.parametrize(
+    ("affected_case", "state"),
+    [(None, "passed")] + [(name, state) for _, name in _REQUIRED_INSTALLED_CASES for state in ("missing", "skipped")],
+)
+def test_every_installed_profile_requires_executed_cases(tmp_path, affected_case, state):
     workflow = yaml.safe_load((REPOSITORY_ROOT / ".github/workflows/test_staged_conda_package.yaml").read_text())
     job = next(job for job in workflow["jobs"].values() if "strategy" in job)
     script = next(
@@ -76,15 +87,17 @@ def test_every_installed_profile_requires_executed_calorie_cases(tmp_path, state
     )
     guard = script.split("python - <<'PY'\n", 1)[1].split("\nPY", 1)[0]
     suite = ET.Element("testsuite")
-    if state != "missing":
-        case = ET.SubElement(suite, "testcase", classname="tests.astropy_units.test_calorie_interop", name="energy")
-        if state == "skipped":
+    for classname, name in _REQUIRED_INSTALLED_CASES:
+        if state == "missing" and name == affected_case:
+            continue
+        case = ET.SubElement(suite, "testcase", classname=classname, name=name)
+        if state == "skipped" and name == affected_case:
             ET.SubElement(case, "skipped", message="provider unavailable")
     ET.ElementTree(suite).write(tmp_path / "installed-contracts.xml")
     result = subprocess.run([sys.executable, "-c", guard], cwd=tmp_path, capture_output=True, text=True)
     assert (result.returncode == 0) is (state == "passed"), result.stderr
     if state != "passed":
-        assert "calorie" in result.stderr.lower()
+        assert affected_case.split("[", 1)[0] in result.stderr.lower()
 
 
 def test_optional_installed_checks_stop_when_dependency_probe_fails(tmp_path):
