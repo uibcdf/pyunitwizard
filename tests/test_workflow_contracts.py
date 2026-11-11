@@ -70,6 +70,8 @@ _REQUIRED_INSTALLED_CASES = [
     ("tests.pint.test_length_rounding", "test_pint_length_boundaries_round_once[nm-nm-nm]"),
     ("tests.test_conversion_branches", "test_pint_string_unit_builds_only_the_requested_quantities"),
     ("tests.test_introspection_probe", "test_filtered_probe_skips_payload_and_follows_live_debug_level"),
+    ("tests.test_api_layout", "test_main_compatibility_module_exposes_its_creator_origin[cold]"),
+    ("tests.test_api_layout", "test_main_compatibility_module_exposes_its_creator_origin[application_policy]"),
 ]
 
 

@@ -135,8 +135,10 @@ def test_staged_profiles_require_runtime_regressions():
 
     assert "tests/pint/test_length_rounding.py" in workflow
     assert "tests/test_conversion_branches.py tests/test_introspection_probe.py" in workflow
+    assert "tests/test_api_layout.py" in workflow
     assert "test_pint_length_boundaries_round_once" in workflow
     assert "test_pint_string_unit_builds_only_the_requested_quantities" in workflow
     assert "test_filtered_probe_skips_payload_and_follows_live_debug_level" in workflow
+    assert "test_main_compatibility_module_exposes_its_creator_origin" in workflow
     assert "No installed cases collected for {guard}" in workflow
     assert "Installed guard skipped: {guard}" in workflow

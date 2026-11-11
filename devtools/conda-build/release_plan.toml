@@ -1,8 +1,8 @@
-version = "0.29.2"
+version = "0.29.3"
 route = "staged"
 build_number = 0
-reason = "Qualify the #143 inclusive cutoff correction and #141/#142 runtime changes in one immutable installed file across the baseline, storage, OpenFF and prepared profiles; see uibcdf/pyunitwizard#145."
-decision_by = "Diego Prada (PyUnitWizard maintainer), continuation of release work authorized 2026-11-10"
+reason = "Qualify the #146 compatibility-module origin correction in one immutable installed file, including cold-start and active-policy metadata guards in every baseline, storage, OpenFF and prepared profile; see uibcdf/pyunitwizard#149."
+decision_by = "Diego Prada (PyUnitWizard maintainer), publication authorized 2026-11-11 UTC"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
   ".github/workflows/release_gates.yaml",

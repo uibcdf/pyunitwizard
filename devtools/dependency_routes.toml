@@ -133,8 +133,8 @@ reason = "Source optional storage profile uses its reviewed environment; explici
 
 [[workflows]]
 path = ".github/workflows/test_staged_conda_package.yaml"
-sha256 = "444b655a7261a1c2807020025346e969f8d044ade57b1f3aeb0d45ff60e90732"
-reason = "Artifact qualification uses the exact staged archive and checked public dependencies. The #145 review extends installed regressions for #141, #142 and #143 with the same installation and staging provenance."
+sha256 = "2d6cefccce53596170465a5f495cd0f631e848c946927ef5820558a4101ac8f0"
+reason = "The #149 review adds the #146 API-origin regressions to each exact-archive installed profile and requires both cold-start and active-policy cases. Installation inputs and staging provenance follow the reviewed route."
 
 [[workflows]]
 path = ".github/workflows/zenodo_archival.yaml"
