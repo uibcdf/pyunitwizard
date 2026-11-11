@@ -11,7 +11,7 @@ Metadata
 - Source repository: `pyunitwizard`
 - Source document: `standards/PYUNITWIZARD_GUIDE.md`
 - Source version: Git commit containing this canonical document; consumer copies must record the resolved commit and digest in their synchronization evidence.
-- Last revised: 2026-11-11 (UTC, public 0.29.2 and cutoff conversion, `uibcdf/pyunitwizard#145`).
+- Last revised: 2026-11-11 (UTC, public 0.29.3 and compatibility-module origin, `uibcdf/pyunitwizard#149`).
 
 ## What is PyUnitWizard
 
@@ -30,9 +30,9 @@ PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 - **Hard Dependencies**: `numpy>=1.23.5`, `pint>=0.25`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
 - **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
 
-### Published maintenance baseline: 0.29.2
+### Published maintenance baseline: 0.29.3
 
-Public Conda release [0.29.2](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.2)
+Public Conda release [0.29.3](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.3)
 retains NumPy >=1.23.5 (Python 3.11 numerical baseline) and Pint >=0.25
 (CODATA-2022 definitions required by published record vectors). These floors
 are owned by `uibcdf/pyunitwizard#134`; the published 0.29.0 file is unchanged.
@@ -47,6 +47,12 @@ definitions are refused. Native Astropy unit activation is scoped and restored;
 its registry contexts remain process-wide. This correction is owned by
 `uibcdf/pyunitwizard#137` and is delivered in the public 0.29.1 package.
 Receiving this guide alone does not update a client's installed provider.
+
+Release 0.29.3 identifies the initializer that creates the virtual
+`pyunitwizard.main` compatibility module through its file, spec and package
+metadata. Installed-origin checks and Python source introspection can resolve
+that creator. Legacy API access emits its existing one-time deprecation warning.
+This correction is tracked in `uibcdf/pyunitwizard#146`.
 
 Clients that compare inclusive distance cutoffs can use the existing
 `get_value(quantity, to_unit=...)` or `convert()` calls in 0.29.2.

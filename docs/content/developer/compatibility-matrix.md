@@ -1,6 +1,6 @@
 # Compatibility Matrix
 
-The 0.29.2 baseline supports Python `>=3.11,<3.15` on Linux and macOS arm64.
+The 0.29.3 baseline supports Python `>=3.11,<3.15` on Linux and macOS arm64.
 The dependency floors come from `pyproject.toml`.
 
 | Component | Minimum Version | Role |
@@ -19,7 +19,7 @@ is qualified on Python `3.12`–`3.14` with Pint `>=0.25,<0.26`; CF/HDF5 uses
 cf-units `3.3.1` and h5py `3.16.0`. These optional interfaces remain provisional.
 
 Exact installed pins, files and dependency closures belong to the
-[0.29.2 publication record](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/completed_proposals/release_0.29.2.md).
+[0.29.3 publication record](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/completed_proposals/release_0.29.3.md).
 
 ## Operational rules
 
