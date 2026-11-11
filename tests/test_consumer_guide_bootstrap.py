@@ -1,6 +1,5 @@
 """Exercise the canonical consumer example in independent interpreters."""
 
-import os
 import re
 import subprocess
 import sys
@@ -18,8 +17,13 @@ def test_consumer_guide_bootstrap_preserves_existing_registry_and_policy(initial
     script = """
 import sys
 import warnings
+from pathlib import Path
 
+import platformdirs
 import pyunitwizard as puw
+
+# Isolate the automatic cache on every supported platform.
+platformdirs.user_cache_path = lambda **kwargs: Path(sys.argv[3])
 
 state = sys.argv[1]
 registry = None
@@ -50,8 +54,7 @@ if state == 'application_policy':
     assert puw.get_standard_units(puw.quantity(2.0, 'nm')) == puw.unit('angstrom')
 """
     completed = subprocess.run(
-        [sys.executable, "-c", script, initial_state, snippet.group(1)],
-        env={**os.environ, "XDG_CACHE_HOME": str(tmp_path)},
+        [sys.executable, "-c", script, initial_state, snippet.group(1), str(tmp_path)],
         capture_output=True,
         text=True,
     )
