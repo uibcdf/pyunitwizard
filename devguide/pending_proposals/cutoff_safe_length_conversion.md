@@ -75,16 +75,36 @@ standards. In each policy the predecessor of 5 angstrom converts to
 At another boundary, 7 angstrom converts through OpenMM to
 `0.7000000000000001` nm. That includes a distance at the successor of
 `0.7` nm, while the requested single-rounding conversion returns `0.7` nm
-and excludes the same distance. A backend switch therefore provides an
-example-specific result with ordinary backend rounding.
+and excludes the same distance.
 
-## Proposed operation
+OpenMM groups powers of ten before materializing the floating-point factor.
+For angstrom and pm to nm it obtains `0.1` and `0.001`, respectively. Pint
+0.25.3 multiplies the source scale by the reciprocal of the target scale
+using binary64 intermediates and obtains `0.09999999999999999` and
+`0.0009999999999999998`. Multiplying those smaller factors by 5 and 500
+explains the original discrepancy. [OpenMM conversion source](https://github.com/openmm/openmm/blob/8.6.1/wrappers/python/openmm/unit/unit.py) and [Pint conversion source](https://github.com/hgrecco/pint/blob/0.25.3/pint/facets/plain/registry.py)
 
-Add an explicit mode to fixed-unit extraction, for example
-`get_value(quantity, to_unit=target, rounding="single")`. The name is a
-proposal for review under #143. Read the original magnitude and source unit
-before any rescaling, and return the correctly rounded binary64 magnitude in
-the explicit target unit, using round to nearest with ties to even.
+A separate probe derived all nine ratios from Pint 0.25.3's standard unit
+definitions using `UnitRegistry(non_int_type=Fraction)`. Multiplying binary64
+magnitudes by the ratios cast to float matched 26/27 reference bits. Using
+one multiply or divide by the exact integer matched 27/27, as did scaling
+the exact rational magnitudes and rounding once at the end.
+
+## Proposed conversion behavior
+
+The initial sketch exposed `rounding="single"` on `get_value`. The review
+favors improving ordinary unit conversion for scales whose exact definitions
+PyUnitWizard can establish. Callers already specify the destination through
+`get_value(quantity, to_unit=target)` or `convert(quantity, to_unit=target)`.
+Centralize the rule in their shared conversion path so that every caller of a
+qualified pair receives the same rounding. Start with the verified Pint
+length definitions needed by #666. Qualify each additional adapter before
+including it in that guarantee.
+
+Read the original magnitude and source unit before rescaling. For supported
+inputs, return the correctly rounded binary64 magnitude in the destination
+unit, using round to nearest with ties to even. Select the ordinary backend
+conversion when the exact path does not apply.
 
 - Start with finite scalar binary64 values and homogeneous float64 arrays.
   Accept integer scalars that are exactly representable in binary64 so
@@ -92,12 +112,10 @@ the explicit target unit, using round to nearest with ties to even.
   and the input quantity. Require an explicit target and use its unit
   identity independently of session standards.
 - Start with the exact multiplicative length definitions nm, angstrom and
-  pm. Accept aliases and native units only when the adapter can establish
-  the corresponding definition. A matching display name or approximate
-  registry match alone leaves the definition unverified. Report unsupported
-  units, registries and backends explicitly. Begin with the Pint route used
-  by #666 and qualify additional adapters against the same oracle before
-  claiming them.
+  pm. Establish eligibility from trusted unit definitions before a registry
+  translation can erase their origin. An approximate registry match or a
+  matching display name supplies insufficient evidence for this path.
+  Validate aliases and unit objects against their actual definitions.
 - For these three units the ratio is an exactly representable integer or its
   reciprocal. One binary64 multiply by that integer, or one divide by it,
   suffices. The reference prototype matches 405/405 array entries drawn from
@@ -105,10 +123,12 @@ the explicit target unit, using round to nearest with ties to even.
   used the declared ratios directly. Adapter identity checks still need
   implementation and qualification. A separate range probe produced 51/51
   finite matches and detected all three overflowing cases.
-- Define overflow as an explicit error. Use binary64 rounding for subnormals
-  and zero, including signed zero. Reject nonfinite input and combinations
-  that ask for policy standardization or a different output dtype in this
-  mode. Offset units and general compound scales require separate contracts.
+- Qualify range behavior, including overflow, subnormals and signed zero.
+  Review result dtype and backend return types against the existing API
+  contract before selecting eligible inputs. Offset units, arbitrary registry
+  definitions and general compound scales remain outside the new guarantee.
+  Check the effect on exact-output consumers such as record creation and
+  reference vectors before changing conversion dispatch.
 
 ## Comparison limits and consumer boundary
 
@@ -117,9 +137,11 @@ of the binary64 value `1.6` and `1.6` angstrom both round to `160.0` pm,
 although the former's exact converted value is below 160 pm. A requirement
 to preserve that physical inequality would call for exact comparison or an
 explicit downward-rounded cutoff against distances already in the target
-binary64 unit. Those are distinct contracts from the requested nearest-rounded
-magnitude. Coordinate conversion, geometry and periodic box arithmetic also
-have their own rounding.
+binary64 unit. If that contract is needed, place it at the common comparison
+boundary. A route that compares squared distances must define the cutoff in
+that representation as well. The nearest-rounded length conversion is the
+smaller provider change for the reported cases. Coordinate conversion,
+geometry and periodic box arithmetic also have their own rounding.
 
 MolSysMT's `digest_threshold` currently calls `standardize` after validating
 length. `get_contacts` then extracts the cutoff in nm for validation and in
@@ -130,7 +152,9 @@ including dense, cell-list and periodic behavior. [Consumer issue](https://githu
 
 ## Acceptance criteria
 
-- Agree the public mode and supported unit/backend identities with MolSysMT.
+- Agree the corrected ordinary conversion contract and supported unit/backend
+  identities with MolSysMT. Verify that the usual explicit-target call
+  receives the corrected conversion without an additional option.
 - Check all 27 destination bit patterns for scalars and homogeneous arrays
   with explicit targets under each non-default policy. Cover unsupported
   definitions, finite range extremes, signed zero and source/policy integrity.
