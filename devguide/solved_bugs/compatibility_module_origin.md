@@ -100,3 +100,12 @@ DockingMT #74 owns receiving that merged source in its installed and
 application-policy gates. MolSysSuite #184 tracks the consumer-impact
 coordination. The delivered test guards the actual registered alias's file,
 spec and package metadata and the preservation of policy and lazy backends.
+
+## Published delivery — 2026-11-11 UTC
+
+Version 0.29.3 delivers the correction in the public `uibcdf` Conda channel.
+All 30 installed profiles executed the cold-start and active-policy origin
+guards. Clean public receiving passed 42 tests, `pip check` and the actual
+SDK's positive and invalid-origin controls.
+[Release](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.3) ·
+[Publication record](../completed_proposals/release_0.29.3.md)

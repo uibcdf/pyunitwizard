@@ -5,6 +5,15 @@ current published `0.29.x` baseline before a separately approved `1.0.0` release
 
 ## Current checkpoint — 2026-11-11 UTC
 
+[0.29.3](release_0.29.3_notes.md) delivers the compatibility-module creator
+origin correction from #146 and PR #147. Its
+[publication record](completed_proposals/release_0.29.3.md) retains the
+source and installed-file evidence. MolSysSuite coordinates receiving and
+guide synchronization under
+[#185](https://github.com/uibcdf/molsyssuite/issues/185).
+
+## Earlier maintenance checkpoint — 0.29.2
+
 [0.29.2](release_0.29.2_notes.md) is public. Its
 [publication record](completed_proposals/release_0.29.2.md) links the source,
 Conda archive, 29 source jobs and 30 installed cells. The patch corrects Pint
