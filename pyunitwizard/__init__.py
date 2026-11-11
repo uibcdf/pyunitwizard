@@ -8,6 +8,7 @@ import importlib
 import sys
 import types
 import warnings
+from importlib.machinery import ModuleSpec
 
 try:
     from ._version import __version__
@@ -119,6 +120,11 @@ def _create_main_compat_module() -> types.ModuleType:
         Deprecated in favour of importing from :mod:`pyunitwizard` directly.
         """.strip(),
     )
+    # This virtual module is created here; preserve its real creator origin.
+    module.__file__ = __file__
+    module.__package__ = __name__
+    module.__spec__ = ModuleSpec(module.__name__, loader=None, origin=__file__)
+    module.__spec__.has_location = True
     warned = False
 
     def _emit_warning() -> None:
