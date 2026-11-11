@@ -11,7 +11,7 @@ Metadata
 - Source repository: `pyunitwizard`
 - Source document: `standards/PYUNITWIZARD_GUIDE.md`
 - Source version: Git commit containing this canonical document; consumer copies must record the resolved commit and digest in their synchronization evidence.
-- Last revised: 2026-11-10 (cache configuration after prior Pint use, `uibcdf/pyunitwizard#144`).
+- Last revised: 2026-11-11 (UTC, public 0.29.2 and cutoff conversion, `uibcdf/pyunitwizard#145`).
 
 ## What is PyUnitWizard
 
@@ -30,10 +30,10 @@ PyUnitWizard follows a strict separation between Hard and Soft dependencies:
 - **Hard Dependencies**: `numpy>=1.23.5`, `pint>=0.25`, `smonitor>=0.16.0`, `depdigest>=0.11.0` and `argdigest>=0.14.0`, as declared in package metadata. These must be provisioned for normal use.
 - **Soft Dependencies**: optional unit backends, including `unyt`, `openmm.unit` and `astropy.units`, are managed via `depdigest`. Ackredit attribution is also optional; guide delivery alone does not qualify a newer provider profile.
 
-### Published maintenance baseline: 0.29.1
+### Published maintenance baseline: 0.29.2
 
-Public Conda release [0.29.1](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.1)
-declares NumPy >=1.23.5 (Python 3.11 numerical baseline) and Pint >=0.25
+Public Conda release [0.29.2](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.2)
+retains NumPy >=1.23.5 (Python 3.11 numerical baseline) and Pint >=0.25
 (CODATA-2022 definitions required by published record vectors). These floors
 are owned by `uibcdf/pyunitwizard#134`; the published 0.29.0 file is unchanged.
 Clients requiring the following Astropy correction must receive PyUnitWizard
@@ -47,6 +47,15 @@ definitions are refused. Native Astropy unit activation is scoped and restored;
 its registry contexts remain process-wide. This correction is owned by
 `uibcdf/pyunitwizard#137` and is delivered in the public 0.29.1 package.
 Receiving this guide alone does not update a client's installed provider.
+
+Clients that compare inclusive distance cutoffs can use the existing
+`get_value(quantity, to_unit=...)` or `convert()` calls in 0.29.2.
+PyUnitWizard rounds once for verified nm, Å and pm in its Pint registry
+for binary64 scalars, float64 arrays and exactly representable integer scalars.
+For example, 5 Å and 500 pm both produce exactly 0.5 nm. Preserve the input
+cutoff until conversion to the unit of the comparison. Other backends, foreign
+Pint registries, active contexts and other unit definitions use their established
+conversion paths. This behavior is tracked in `uibcdf/pyunitwizard#143`.
 
 Baseline support is Python `>=3.11,<3.15` on Linux and macOS arm64. Optional
 provider profiles can have narrower limits; use the provider's maintained

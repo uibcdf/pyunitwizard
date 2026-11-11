@@ -44,7 +44,7 @@ need justifies adding and maintaining that platform matrix.
 Install a published release from the `uibcdf` Conda channel:
 
 ```bash
-conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.28.1'
+conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.29.2'
 ```
 
 For a source installation, provision the required NumPy, Pint, SMonitor,
