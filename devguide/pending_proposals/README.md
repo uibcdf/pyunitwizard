@@ -5,6 +5,10 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`release_0.29.2.md`](release_0.29.2.md) — [#145](https://github.com/uibcdf/pyunitwizard/issues/145) — Qualify and publish the 0.29.2 maintenance release. *(measured)*
+
 ### Partial (4)
 
 - [`consumer_guide_pint_cache_bootstrap.md`](consumer_guide_pint_cache_bootstrap.md) — [#144](https://github.com/uibcdf/pyunitwizard/issues/144) — Check whether Pint is loaded before configuring its registry cache. *(reproduced)*

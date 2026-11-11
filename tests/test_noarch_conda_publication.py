@@ -128,3 +128,15 @@ def test_installed_prepared_profile_requires_public_provider_and_real_guards():
     assert "test_warmed_prepared_conversion_does_not_detach_declarations_again" in workflow
     assert "--junitxml=installed-contracts.xml" in workflow
     assert "case.find('skipped') is None" in workflow
+
+
+def test_staged_profiles_require_runtime_regressions():
+    workflow = (ROOT / ".github/workflows/test_staged_conda_package.yaml").read_text(encoding="utf-8")
+
+    assert "tests/pint/test_length_rounding.py" in workflow
+    assert "tests/test_conversion_branches.py tests/test_introspection_probe.py" in workflow
+    assert "test_pint_length_boundaries_round_once" in workflow
+    assert "test_pint_string_unit_builds_only_the_requested_quantities" in workflow
+    assert "test_filtered_probe_skips_payload_and_follows_live_debug_level" in workflow
+    assert "No installed cases collected for {guard}" in workflow
+    assert "Installed guard skipped: {guard}" in workflow

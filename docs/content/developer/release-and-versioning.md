@@ -23,9 +23,8 @@ Current policy:
 - `0.21.x` is the completed RC consolidation line.
 - `0.22.x` and `0.23.x` contain post-RC performance and API hardening.
 - `0.24.x`–`0.28.x` continue hardening, qualified interchange and optional providers.
-- `0.28.1` is the current published checkpoint; its
-  [publication record](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/completed_proposals/release_0.28.1.md)
-  retains the exact source, artifact and qualification evidence.
+- The [compatibility matrix](https://github.com/uibcdf/pyunitwizard/blob/main/devguide/compatibility_matrix.md)
+  links the published maintenance checkpoint and its source, artifact and qualification evidence.
 - `1.0.0` requires final scope approval and the final release checklist. The
   record, measurement, optional attribution and storage surfaces remain
   provisional until separately admitted.

@@ -1,8 +1,8 @@
-version = "0.29.1"
+version = "0.29.2"
 route = "staged"
 build_number = 0
-reason = "Qualify the #137 Astropy calorie/registry correction, #134 numerical floors, #135 PEP 639 license/build contract and #136 Conda provider adoption in one immutable installed file, retaining all baseline/storage/OpenFF/prepared profiles; see uibcdf/pyunitwizard#138."
-decision_by = "Diego Prada (PyUnitWizard maintainer), preparation authorized 2026-11-05; final publication decision pending"
+reason = "Qualify the #143 inclusive cutoff correction and #141/#142 runtime changes in one immutable installed file across the baseline, storage, OpenFF and prepared profiles; see uibcdf/pyunitwizard#145."
+decision_by = "Diego Prada (PyUnitWizard maintainer), continuation of release work authorized 2026-11-10"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
   ".github/workflows/release_gates.yaml",
