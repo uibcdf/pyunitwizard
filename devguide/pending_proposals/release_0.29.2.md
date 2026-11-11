@@ -43,6 +43,20 @@ The preparation changes pass 113 focused tests, Ruff, the report index and
 the Sphinx HTML build. The pinned shared checker verifies all 23 dependency
 routes with declared and installed public bounds.
 
+The first candidate, `30325ca605a8d1eadd5433f0417923496a32d6e8`, failed hosted
+source tests because the synthetic installed JUnit sample contained only
+calorie cases. The new runtime assertions require the additional cases.
+The corrected sample exercises both the pass path and each missing or
+skipped required case. The installed workflow and release gates are unchanged.
+[Failed Release Gates run](https://github.com/uibcdf/pyunitwizard/actions/runs/42936793408)
+
+A local twelve-worker run also reproduced an order-dependent affine append
+test. The test constructs Pint quantities using Pint's `degC` spelling.
+It now selects the Pint parser explicitly, including when a previous test
+has selected Astropy. The full corrected local run passes 1,062 tests with
+the same eight recorded skips. The production append implementation is
+unchanged.
+
 Record the selected source, exact native runs, staging producer, file
 digest and installed results before publishing. Promote that file by its
 digest. Independently verify public main/index records, a clean public

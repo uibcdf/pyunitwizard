@@ -55,8 +55,10 @@ def test_append_failure_preserves_source(failure):
 
 
 def test_affine_append_and_raw_append_rejection():
-    record = QuantityRecord.from_quantity(puw.quantity(np.array([0.0], dtype=np.float64), "degC", form="pint"))
-    result = record.append(puw.quantity(np.array([298.15]), "K", form="pint"))
+    record = QuantityRecord.from_quantity(
+        puw.quantity(np.array([0.0], dtype=np.float64), "degC", form="pint", parser="pint")
+    )
+    result = record.append(puw.quantity(np.array([298.15]), "K", form="pint", parser="pint"))
     np.testing.assert_allclose(result.values, [0, 25])
     data = result.to_dict()
     data["values"].append(30)
