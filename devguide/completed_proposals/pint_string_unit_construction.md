@@ -1,9 +1,9 @@
 ---
 summary: Reuse resolved Pint unit definitions for string-unit construction.
 issue: uibcdf/pyunitwizard#142
-status: partial
+status: resolved
 opened: 2026-11-08
-closed:
+closed: 2026-11-11
 verification: measured
 area: [construction, conversion, performance]
 guard: tests/test_conversion_branches.py::test_pint_string_unit_builds_only_the_requested_quantities
@@ -65,3 +65,7 @@ The joint source run with #141, #143 and #144 passes 1,055 tests on Python
 module collections. The Pint 0.25 run passes all 71 selected conversion,
 registry and guide-bootstrap tests. Ruff, the report index and Sphinx HTML
 checks pass.
+
+The change shipped in 0.29.2. All 30 installed cells and the clean public
+installation executed the factory-count regression.
+[Publication record](release_0.29.2.md)

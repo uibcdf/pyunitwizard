@@ -1,0 +1,1148 @@
+{
+  "schema": "pyunitwizard.installed-qualification@1",
+  "state": "verified",
+  "source_binding": {
+    "schema": "pyunitwizard.installed-source@1",
+    "candidate_sha": "cf40c9fcdd4cd2d18df78a9d8fcef3b2d9516256",
+    "qualification_sha": "cf40c9fcdd4cd2d18df78a9d8fcef3b2d9516256",
+    "run_id": 42939335711,
+    "run_attempt": 1,
+    "filename": "pyunitwizard-0.29.2-py_0.tar.bz2",
+    "sha256": "bb28b9420760b557025163e11c934e096c7b98200cac720100a2db924e9ee617",
+    "profiles": {
+      "baseline": [
+        "3.11",
+        "3.12",
+        "3.13",
+        "3.14"
+      ],
+      "storage": [
+        "3.11",
+        "3.12",
+        "3.13",
+        "3.14"
+      ],
+      "openff": [
+        "3.12",
+        "3.13",
+        "3.14"
+      ],
+      "prepared": [
+        "3.11",
+        "3.12",
+        "3.13",
+        "3.14"
+      ]
+    },
+    "platforms": [
+      "ubuntu-latest",
+      "macos-latest"
+    ]
+  },
+  "native": {
+    "schema": "molsyssuite.native-gate@1",
+    "state": "verified",
+    "run_id": 42939335711,
+    "run_attempt": 1,
+    "candidate_sha": "cf40c9fcdd4cd2d18df78a9d8fcef3b2d9516256",
+    "workflow": ".github/workflows/test_staged_conda_package.yaml",
+    "jobs": [
+      {
+        "name": "Verify the immutable producer evidence",
+        "job_id": 130257148773,
+        "required_steps": [
+          "Confirm the verifier comes from the candidate commit",
+          "Download and verify the exact staging run receipts",
+          "Bind original artifact source to the qualification workflow",
+          "Retain original-source qualification binding"
+        ]
+      },
+      {
+        "name": "Install baseline / ubuntu-latest / Python 3.11",
+        "job_id": 130257227494,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / macos-latest / Python 3.11",
+        "job_id": 130257227418,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / ubuntu-latest / Python 3.12",
+        "job_id": 130257227403,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / macos-latest / Python 3.12",
+        "job_id": 130257227429,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / ubuntu-latest / Python 3.13",
+        "job_id": 130257227413,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / macos-latest / Python 3.13",
+        "job_id": 130257227547,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / ubuntu-latest / Python 3.14",
+        "job_id": 130257227426,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install baseline / macos-latest / Python 3.14",
+        "job_id": 130257227622,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / ubuntu-latest / Python 3.11",
+        "job_id": 130257227384,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / macos-latest / Python 3.11",
+        "job_id": 130257227401,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / ubuntu-latest / Python 3.12",
+        "job_id": 130257227427,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / macos-latest / Python 3.12",
+        "job_id": 130257227671,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / ubuntu-latest / Python 3.13",
+        "job_id": 130257227411,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / macos-latest / Python 3.13",
+        "job_id": 130257227431,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / ubuntu-latest / Python 3.14",
+        "job_id": 130257227441,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install storage / macos-latest / Python 3.14",
+        "job_id": 130257227584,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / ubuntu-latest / Python 3.11",
+        "job_id": 130257227455,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / macos-latest / Python 3.11",
+        "job_id": 130257227526,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / ubuntu-latest / Python 3.12",
+        "job_id": 130257227435,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / macos-latest / Python 3.12",
+        "job_id": 130257227436,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / ubuntu-latest / Python 3.13",
+        "job_id": 130257227409,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / macos-latest / Python 3.13",
+        "job_id": 130257227490,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / ubuntu-latest / Python 3.14",
+        "job_id": 130257227473,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install prepared / macos-latest / Python 3.14",
+        "job_id": 130257227683,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / ubuntu-latest / Python 3.12",
+        "job_id": 130257227385,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / macos-latest / Python 3.12",
+        "job_id": 130257227580,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / ubuntu-latest / Python 3.13",
+        "job_id": 130257227539,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / macos-latest / Python 3.13",
+        "job_id": 130257227502,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / ubuntu-latest / Python 3.14",
+        "job_id": 130257227412,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      },
+      {
+        "name": "Install openff / macos-latest / Python 3.14",
+        "job_id": 130257227675,
+        "required_steps": [
+          "Confirm the install smoke comes from the candidate commit",
+          "Create a clean environment from the exact staged build",
+          "Install third-party test backends",
+          "Verify public attribution provider and prepared APIs",
+          "Verify installed artifact and smoke test outside the source checkout",
+          "Test the installed record and integration contracts",
+          "Retain the installed dependency closure",
+          "Upload installed dependency evidence"
+        ]
+      }
+    ],
+    "event": "workflow_dispatch",
+    "exact_jobs": true
+  },
+  "cells": [
+    {
+      "artifact": "closure-baseline-ubuntu-latest-py3.11",
+      "profile": "baseline",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.11.18",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "1d33c2de22522722ad08d9429237b9c2ffdaaa4ee326a3392e1dd9dc34c1b029",
+        "pip-closure.json": "4a1260c060fccb70f547030cc669d64a4d70f910d3124d2a18498813f64bdc38",
+        "installed-contracts.xml": "73544c5e2e861cebcdb009a2715940bc071b2b5d60cd95c0f1194d5b549555d2"
+      }
+    },
+    {
+      "artifact": "closure-baseline-macos-latest-py3.11",
+      "profile": "baseline",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.11.18",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "12abc4f0165dcfc6a24e08b413f25beb6a28c86bbf1a5eb41477974fcc305647",
+        "pip-closure.json": "4a1260c060fccb70f547030cc669d64a4d70f910d3124d2a18498813f64bdc38",
+        "installed-contracts.xml": "56e5bf687896d961b85335b151f1355d111d7e7f41900b40faccc464b3c00e00"
+      }
+    },
+    {
+      "artifact": "closure-baseline-ubuntu-latest-py3.12",
+      "profile": "baseline",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.12.16",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "df77baab303f37798c88feb44205acabd8bc003ecb4abbf4eb7d6fe848f03b7a",
+        "pip-closure.json": "31cb88e290601e00e72b2216894e341b5873a91d4a0c42cb253f0d0ebdb61fbf",
+        "installed-contracts.xml": "a28c9ed916022bc17552d151156792143649a787f41da7b5ab956ddcf02f03f4"
+      }
+    },
+    {
+      "artifact": "closure-baseline-macos-latest-py3.12",
+      "profile": "baseline",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.12.16",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "7b86d032811d487b80c2ba4950d529de4a2d0eb67e02372a886fa39bfdbda249",
+        "pip-closure.json": "31cb88e290601e00e72b2216894e341b5873a91d4a0c42cb253f0d0ebdb61fbf",
+        "installed-contracts.xml": "49f4c24ff265963b815ee7b4e3ad41f911458a8ced5e36741eda476d6c28487f"
+      }
+    },
+    {
+      "artifact": "closure-baseline-ubuntu-latest-py3.13",
+      "profile": "baseline",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.13.18",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "1cfaf24508d991f7bfec4c5e96f59fa6836c9d34ea62df5d775435d468ec52a8",
+        "pip-closure.json": "85a58cf9d39469bf17ead85a4872a7b2dfdf7cf4803cdf48a7d897ea8c60aaba",
+        "installed-contracts.xml": "e3ee634bf57a73c8ef5d8d7aa59495cac988f760bc77dbc79e2e98e61edf3f26"
+      }
+    },
+    {
+      "artifact": "closure-baseline-macos-latest-py3.13",
+      "profile": "baseline",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.13.18",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "0cb635cba64cb859e05f3a4b008b4319e0b3b55c018bc857088ad9e31db96503",
+        "pip-closure.json": "85a58cf9d39469bf17ead85a4872a7b2dfdf7cf4803cdf48a7d897ea8c60aaba",
+        "installed-contracts.xml": "c4a74d02eaf7a520eb896dd589a7173d4cd0513ddf252a0b831dae7fe9b4e8a8"
+      }
+    },
+    {
+      "artifact": "closure-baseline-ubuntu-latest-py3.14",
+      "profile": "baseline",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.14.10",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "cdffd585d39d2659a5d9626b7f12c5c0dd069ae937e13f4553c2b1885a3ff144",
+        "pip-closure.json": "85a58cf9d39469bf17ead85a4872a7b2dfdf7cf4803cdf48a7d897ea8c60aaba",
+        "installed-contracts.xml": "f479690ff869d3112d43409831ce2e8a1e40678dc0c822b5090e24346c5cbe5a"
+      }
+    },
+    {
+      "artifact": "closure-baseline-macos-latest-py3.14",
+      "profile": "baseline",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.14.10",
+      "passed": 346,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "f2327df90e4b1f0e118c41ebaf767086052173e48b82b02c801776fd55ef77a2",
+        "pip-closure.json": "85a58cf9d39469bf17ead85a4872a7b2dfdf7cf4803cdf48a7d897ea8c60aaba",
+        "installed-contracts.xml": "79e2fab9bd5b6c99daee126d105603b0938fb41f835d4c46b78d25303b7b2c08"
+      }
+    },
+    {
+      "artifact": "closure-storage-ubuntu-latest-py3.11",
+      "profile": "storage",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.11.18",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "7c78572224ee0eeada3296d88742d9e665409f88bf45ed9e4ec0b781cf15435f",
+        "pip-closure.json": "92683488f3276cec060a5d7836e7e7853997bbaa5e9bbd78121dc8d446de47a7",
+        "installed-contracts.xml": "d26e137920e2f193c18f86230c4c82aefeb00303a6f1403e71d10c4feaf8920f"
+      }
+    },
+    {
+      "artifact": "closure-storage-macos-latest-py3.11",
+      "profile": "storage",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.11.18",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "566baf5fabeb3144f05d38514fca558c1a803b1f3f85ed8929ef6271ea906538",
+        "pip-closure.json": "92683488f3276cec060a5d7836e7e7853997bbaa5e9bbd78121dc8d446de47a7",
+        "installed-contracts.xml": "7aab9c07da1a10390fd13202d2159746550dd29e6c2afb07c23c7931f48b4435"
+      }
+    },
+    {
+      "artifact": "closure-storage-ubuntu-latest-py3.12",
+      "profile": "storage",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.12.16",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "ea20c56c4cdf221201284740866ca367a310f5eb3be56cf1c6d9ea046ecf79e2",
+        "pip-closure.json": "5db06487c623ab5fd972d45a7231ef1a29b7da12908af5001fd85eaa6cede500",
+        "installed-contracts.xml": "d01861111c1f639749fe88b8c6ae8d8120328331e0b342fb1a87682a3717f7f8"
+      }
+    },
+    {
+      "artifact": "closure-storage-macos-latest-py3.12",
+      "profile": "storage",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.12.16",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "67ff046eff5112f5d7e5c2595f7458ab9f5f396d609aeca768b423b685b62374",
+        "pip-closure.json": "5db06487c623ab5fd972d45a7231ef1a29b7da12908af5001fd85eaa6cede500",
+        "installed-contracts.xml": "42b4beb4c95611a05b46c2b4175a46aa871b45c69ca3145c767e1fb72c49fb83"
+      }
+    },
+    {
+      "artifact": "closure-storage-ubuntu-latest-py3.13",
+      "profile": "storage",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.13.18",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "feff76f8a9d2424cf75d6302422f80996be165989a3651a4ad4309de8e793880",
+        "pip-closure.json": "2e98205acd6faed27ddcc741245d0636d60190795a04b229ad13923b6895312a",
+        "installed-contracts.xml": "3511aaa7445d9b7c0d9026f0e605ad0517a1c896eff2616fb7a4e4124b551d86"
+      }
+    },
+    {
+      "artifact": "closure-storage-macos-latest-py3.13",
+      "profile": "storage",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.13.18",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "5c3c72e05e4bef7ea975677df3ad8f3aaa9be7738be0769dbd4c6962e218592c",
+        "pip-closure.json": "2e98205acd6faed27ddcc741245d0636d60190795a04b229ad13923b6895312a",
+        "installed-contracts.xml": "8329a0289b6234977454220a512eea740880530b5c6635d017a0095c48a9f840"
+      }
+    },
+    {
+      "artifact": "closure-storage-ubuntu-latest-py3.14",
+      "profile": "storage",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.14.10",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "06d770a4c09e272e99a742bcdd5cb920e233c465af294a039f431ded9ea3a7aa",
+        "pip-closure.json": "2e98205acd6faed27ddcc741245d0636d60190795a04b229ad13923b6895312a",
+        "installed-contracts.xml": "6b9d4f68b15ebc0b27cf87ffb5480bc11add0442f2e40a859d00a0482a1ebdb4"
+      }
+    },
+    {
+      "artifact": "closure-storage-macos-latest-py3.14",
+      "profile": "storage",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.14.10",
+      "passed": 536,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "2953a77b991b3ec3eb38c5cde7c401111ec372154b3a51108cf3a8670c9756f9",
+        "pip-closure.json": "2e98205acd6faed27ddcc741245d0636d60190795a04b229ad13923b6895312a",
+        "installed-contracts.xml": "7817362b643da0e266f3035d1610e0177fadb7b5948f6adca1fdc4b99e4c7ffc"
+      }
+    },
+    {
+      "artifact": "closure-prepared-ubuntu-latest-py3.11",
+      "profile": "prepared",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.11.18",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "dd9804fd36b0e4d839f52aa1247e8c6241c3954810d87d4c23bfdc73351cad2d",
+        "pip-closure.json": "5533291f8696e1fdd9f82d488b84c546f0ae5e0c4844cac660ea525c08223d0c",
+        "installed-contracts.xml": "3a7167606f00bcd1c6cac6ac61ebdc38ba1cd736b47c0c4d6485113b086171af"
+      }
+    },
+    {
+      "artifact": "closure-prepared-macos-latest-py3.11",
+      "profile": "prepared",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.11.18",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "3c126d17de299f6038c29369a01d30b467cbb035eb7fbb0273bef62c3ab98015",
+        "pip-closure.json": "5533291f8696e1fdd9f82d488b84c546f0ae5e0c4844cac660ea525c08223d0c",
+        "installed-contracts.xml": "3daddf762e8e83d4f925e33061a98b1f14b09d6bba582268a7fab978a203ce76"
+      }
+    },
+    {
+      "artifact": "closure-prepared-ubuntu-latest-py3.12",
+      "profile": "prepared",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.12.16",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "2ca6e28550b4e5a6002b5b5c3ad8798ae6766d4db638e3812fb6f4d8772d648d",
+        "pip-closure.json": "16ce353e2698ca2eee5e1ddb64ee6ff3dc42c38ea9cfb8eb932a2648eb6f800f",
+        "installed-contracts.xml": "d8a32b50afde237ae1edcf5efe64df327bc3d3ff2068a1fb594ef18326986255"
+      }
+    },
+    {
+      "artifact": "closure-prepared-macos-latest-py3.12",
+      "profile": "prepared",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.12.16",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "3b92c7f64d42553fb4d3b3fb6101c588feeb1aafb4a1dbaccc18cf6824ecb0ee",
+        "pip-closure.json": "16ce353e2698ca2eee5e1ddb64ee6ff3dc42c38ea9cfb8eb932a2648eb6f800f",
+        "installed-contracts.xml": "e7fc37aa3160622ce4237f250330a0410310abb5ede46f489727085ad75d2832"
+      }
+    },
+    {
+      "artifact": "closure-prepared-ubuntu-latest-py3.13",
+      "profile": "prepared",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.13.18",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "3c2ecac74f3df4e3fe10fb6f844778705983d305be07ea98c459bbb75008bba9",
+        "pip-closure.json": "e061bfb26495a5fa8cadd3e455efbcb6278b19f98f44dd13a2934fd5576e5434",
+        "installed-contracts.xml": "ee5c8f2e1a61a636e1f642561a665c91348e6e541d7282dd65be127c9de6794b"
+      }
+    },
+    {
+      "artifact": "closure-prepared-macos-latest-py3.13",
+      "profile": "prepared",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.13.18",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "6142b9711ddb5eaa282810b73831e9099b70978a97940d57e32599228696b293",
+        "pip-closure.json": "e061bfb26495a5fa8cadd3e455efbcb6278b19f98f44dd13a2934fd5576e5434",
+        "installed-contracts.xml": "f023eeef366680eaa05f867b2e573f5c0fb0639af17daf08520373b550da51b4"
+      }
+    },
+    {
+      "artifact": "closure-prepared-ubuntu-latest-py3.14",
+      "profile": "prepared",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.14.10",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "ca3e46f3fac2d3dacf91e46254ee348b85c7344ca1b555c9d168feb873916128",
+        "pip-closure.json": "e061bfb26495a5fa8cadd3e455efbcb6278b19f98f44dd13a2934fd5576e5434",
+        "installed-contracts.xml": "b755970b1b867eb32899f961d5bdcea8464c567a11f8b5444e3d8a1073b8e135"
+      }
+    },
+    {
+      "artifact": "closure-prepared-macos-latest-py3.14",
+      "profile": "prepared",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.14.10",
+      "passed": 361,
+      "skipped": {
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "33366b7492d50ed206dbe1a077ba91e187d0a5da97bd9f03017f479229669173",
+        "pip-closure.json": "e061bfb26495a5fa8cadd3e455efbcb6278b19f98f44dd13a2934fd5576e5434",
+        "installed-contracts.xml": "a14adc4d0b9052cdf572368aa1b6460b7dd6578109bc72359efe366d75a4ba81"
+      }
+    },
+    {
+      "artifact": "closure-openff-ubuntu-latest-py3.12",
+      "profile": "openff",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.12.16",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "15e0ef1bf48432d914003727a9fc30a569719af03400d923c58d052699b3010c",
+        "pip-closure.json": "ade6df794dae0adbb7cc288fd714c03c7f37007bd4e806658146aad0471f58f7",
+        "installed-contracts.xml": "44b546d53dc7ca8e8d8df378de02c7fcb6ac21332cb21042a85437075ad93632"
+      }
+    },
+    {
+      "artifact": "closure-openff-macos-latest-py3.12",
+      "profile": "openff",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.12.16",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "5c174e54848767062b0c4a0137dadefcdfc18198aae4f5fe4a4de7ecc0446ecc",
+        "pip-closure.json": "ade6df794dae0adbb7cc288fd714c03c7f37007bd4e806658146aad0471f58f7",
+        "installed-contracts.xml": "467e75703612b34b0cb9ae6fbe0fa22cf10ee936d94bf7a425a37e43da83fd6e"
+      }
+    },
+    {
+      "artifact": "closure-openff-ubuntu-latest-py3.13",
+      "profile": "openff",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.13.18",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "8258777f93b8a1ded11813d99efa513a97f22b464220ac13f12c4c8ff38fa4bb",
+        "pip-closure.json": "4a578015f3b3c6bdd5170df5499c838d1ffca695402f48f85e60e3ae7ce2daae",
+        "installed-contracts.xml": "548d479f31b23d1c2093eda32c1f8ea7505044968bee30e448ee38cc4251a3ea"
+      }
+    },
+    {
+      "artifact": "closure-openff-macos-latest-py3.13",
+      "profile": "openff",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.13.18",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "de2e7c7a10a7674a1d22f6a641005a473f5f42848d4f87ddfc0e5a4534d245ea",
+        "pip-closure.json": "4a578015f3b3c6bdd5170df5499c838d1ffca695402f48f85e60e3ae7ce2daae",
+        "installed-contracts.xml": "0acf2e78d27387d870530b08c96f643adc66992b1d5196120ee1cdb0914241f2"
+      }
+    },
+    {
+      "artifact": "closure-openff-ubuntu-latest-py3.14",
+      "profile": "openff",
+      "runner": "ubuntu-latest",
+      "architecture": "linux-64",
+      "python": "3.14.10",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "1a46041c3abeb0bd1be7e84ad631d165e7b6da43c55acb05ad5653b77e672a97",
+        "pip-closure.json": "4a578015f3b3c6bdd5170df5499c838d1ffca695402f48f85e60e3ae7ce2daae",
+        "installed-contracts.xml": "e6048139eaf31601abd37d11f1b38b2402920076cfa0292b31cb1cc3fe6956cd"
+      }
+    },
+    {
+      "artifact": "closure-openff-macos-latest-py3.14",
+      "profile": "openff",
+      "runner": "macos-latest",
+      "architecture": "osx-arm64",
+      "python": "3.14.10",
+      "passed": 366,
+      "skipped": {
+        "requires the provisional Ackredit prepared-credit API": 5,
+        "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 1
+      },
+      "guard_counts": {
+        "test_pint_length_boundaries_round_once": 27,
+        "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+        "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+      },
+      "evidence_sha256": {
+        "installed-closure.json": "3d8d6d0afc4453da7dab6b7bacd4af9a159c73d6922c5557f382358b00bc1b8f",
+        "pip-closure.json": "4a578015f3b3c6bdd5170df5499c838d1ffca695402f48f85e60e3ae7ce2daae",
+        "installed-contracts.xml": "49f6f33580f252a9bf70460cad1f74231e8f36e74b5d88ebb77eaaa50f0adba2"
+      }
+    }
+  ],
+  "passed": 12140,
+  "skipped": {
+    "requires the provisional Ackredit prepared-credit API": 110,
+    "strict JSON has no NaN; covered by test_json_refuses_non_finite_values": 30
+  },
+  "guarded_per_cell": {
+    "test_pint_length_boundaries_round_once": 27,
+    "test_pint_string_unit_builds_only_the_requested_quantities": 1,
+    "test_filtered_probe_skips_payload_and_follows_live_debug_level": 1
+  }
+}

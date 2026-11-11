@@ -1,9 +1,9 @@
 ---
 summary: Check whether Pint is loaded before configuring its registry cache.
 issue: uibcdf/pyunitwizard#144
-status: partial
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-11
 verification: reproduced
 area: [configuration, documentation]
 guard: tests/test_consumer_guide_bootstrap.py::test_consumer_guide_bootstrap_preserves_existing_registry_and_policy
@@ -30,6 +30,7 @@ The revised example passes cold start, prior Pint use without a policy and
 an active application policy. The checks cover registry identity, the cache
 setting, policy provenance and the named nanometer conversion.
 
-Publish the canonical revision before delivering its commit and content
-digest for MolSysSuite-owned client synchronization. The runtime warning
-continues to describe real late setter calls.
+The canonical revision is published at `30cfdba879ea651d86ecac187536a32ab3f01978`
+and delivered with 0.29.2. MolSysSuite owns client synchronization.
+The runtime warning continues to describe real late setter calls.
+[MolSysSuite #180](https://github.com/uibcdf/molsyssuite/issues/180)

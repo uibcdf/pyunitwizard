@@ -1,9 +1,9 @@
 ---
 summary: Qualify and publish the 0.29.2 maintenance release.
 issue: uibcdf/pyunitwizard#145
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-11
 verification: measured
 area: [release, packaging, documentation]
 guard: tests/test_noarch_conda_publication.py::test_staged_profiles_require_runtime_regressions
@@ -57,9 +57,37 @@ has selected Astropy. The full corrected local run passes 1,062 tests with
 the same eight recorded skips. The production append implementation is
 unchanged.
 
-Record the selected source, exact native runs, staging producer, file
-digest and installed results before publishing. Promote that file by its
-digest. Independently verify public main/index records, a clean public
-installation, served docs and source archival. Hand off the canonical
-guide commit and digest through the MolSysSuite release notice. MolSysSuite
-coordinates synchronization and receiving with consumer owners.
+## Publication outcome
+
+The stable tag and GitHub Release `0.29.2` identify
+`cf40c9fcdd4cd2d18df78a9d8fcef3b2d9516256`. All 29 source jobs and ordinary
+CI passed. The staging producer built one noarch file.
+[GitHub Release](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.2)
+
+The 30 installed cells passed with 12,140 passing entries and 140 expected
+skips for strict JSON NaN and the older Ackredit prepared API. Each cell
+executed all 27 boundary cases, the fresh-object construction regression and
+the live-level diagnostic regression. Promotion reused the 98,016-byte file
+with SHA-256 `bb28b9420760b557025163e11c934e096c7b98200cac720100a2db924e9ee617`.
+Public label and solver-index verification passed. A new public-only Linux
+Python 3.14.10 environment passed 35 tests and `pip check`.
+[Installed run](https://github.com/uibcdf/pyunitwizard/actions/runs/42939335711) ·
+[Promotion run](https://github.com/uibcdf/pyunitwizard/actions/runs/42940169699)
+
+The documentation build and Pages deployment passed. The public
+installation, compatibility and backend coverage pages serve 0.29.2 and
+the updated dependency and conversion guidance.
+[Pages deployment](https://github.com/uibcdf/pyunitwizard/actions/runs/42940959172)
+
+The canonical guide was published at `30cfdba879ea651d86ecac187536a32ab3f01978`.
+MolSysSuite received the exact revision and digest for its client
+synchronization. The source snapshot is verified on Zenodo.
+[MolSysSuite notice](https://github.com/uibcdf/molsyssuite/issues/180) ·
+[Zenodo version DOI](https://doi.org/10.5281/zenodo.24122890)
+
+The [publication receipt](../evidence/release_0.29.2_publication.json) links
+the artifact and closeout gates. The
+[source evidence](../evidence/release_0.29.2_source.json),
+[installed evidence](../evidence/release_0.29.2_installed.json) and
+[resolved closures](../evidence/release_0.29.2_installed_closures.json)
+retain the exact qualification scope.

@@ -1,9 +1,19 @@
 # Roadmap to 1.0.0
 
 This roadmap retains the historical stabilization stages and records the
-current published `0.28.x` baseline before a separately approved `1.0.0` release.
+current published `0.29.x` baseline before a separately approved `1.0.0` release.
 
-## Current checkpoint — 2026-10-23
+## Current checkpoint — 2026-11-11 UTC
+
+[0.29.2](release_0.29.2_notes.md) is public. Its
+[publication record](completed_proposals/release_0.29.2.md) links the source,
+Conda archive, 29 source jobs and 30 installed cells. The patch corrects Pint
+cutoff conversion, updates the initialization guide and reduces work in two
+existing runtime operations (#141–#144). MolSysSuite coordinates client
+receiving and guide synchronization under
+[#180](https://github.com/uibcdf/molsyssuite/issues/180).
+
+## Historical checkpoint — 2026-10-23
 
 [`0.28.1`](release_0.28.1_notes.md) is public. Its
 [publication record](completed_proposals/release_0.28.1.md) retains the exact

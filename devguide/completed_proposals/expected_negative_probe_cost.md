@@ -1,9 +1,9 @@
 ---
 summary: Avoid building filtered diagnostics for expected negative quantity probes.
 issue: uibcdf/pyunitwizard#141
-status: partial
+status: resolved
 opened: 2026-11-06
-closed:
+closed: 2026-11-11
 verification: measured
 area: [introspection, diagnostics, performance]
 guard: tests/test_introspection_probe.py::test_filtered_probe_skips_payload_and_follows_live_debug_level
@@ -42,3 +42,7 @@ timings per variant of 2,000 warmed negative probes at INFO give medians
 211.29 ms and 13.14 ms. Every result is false and no probe event reaches the
 buffer. Baseline source is `555e70c`. This measures the probe itself. A
 complete PharmacophoreMT performance comparison belongs to consumer receiving.
+
+The change shipped in 0.29.2. All 30 installed cells and the clean public
+installation executed the live-level regression.
+[Publication record](release_0.29.2.md)

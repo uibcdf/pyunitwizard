@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (62)
+### Resolved (67)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -21,8 +21,11 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`conda_build_failure_propagation.md`](../solved_bugs/conda_build_failure_propagation.md) — [#117](https://github.com/uibcdf/pyunitwizard/issues/117) — Stop Conda build installation after a failed prerequisite. *(medium, reproduced)*
 - [`conda_provider_v2_3.md`](../completed_proposals/conda_provider_v2_3.md) — [#136](https://github.com/uibcdf/pyunitwizard/issues/136) — Adopt the reviewed immutable Conda build/upload/promotion provider without changing publication scope. *(inspected)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
+- [`consumer_guide_pint_cache_bootstrap.md`](../completed_proposals/consumer_guide_pint_cache_bootstrap.md) — [#144](https://github.com/uibcdf/pyunitwizard/issues/144) — Check whether Pint is loaded before configuring its registry cache. *(reproduced)*
 - [`conversion_baseline_runtime_provenance.md`](../solved_bugs/conversion_baseline_runtime_provenance.md) — [#121](https://github.com/uibcdf/pyunitwizard/issues/121) — Report the actual Python runtime in conversion baseline measurements. *(low, reproduced)*
+- [`cutoff_safe_length_conversion.md`](../completed_proposals/cutoff_safe_length_conversion.md) — [#143](https://github.com/uibcdf/pyunitwizard/issues/143) — Define single-rounding length extraction for inclusive cutoffs. *(measured)*
 - [`documentation_baseline_refresh.md`](../solved_bugs/documentation_baseline_refresh.md) — [#119](https://github.com/uibcdf/pyunitwizard/issues/119) — Refresh developer documentation against the current supported baseline. *(low, inspected)*
+- [`expected_negative_probe_cost.md`](../completed_proposals/expected_negative_probe_cost.md) — [#141](https://github.com/uibcdf/pyunitwizard/issues/141) — Avoid building filtered diagnostics for expected negative quantity probes. *(measured)*
 - [`foreign_pint_registry_quantities.md`](../solved_bugs/foreign_pint_registry_quantities.md) — [#84](https://github.com/uibcdf/pyunitwizard/issues/84) — Pint quantities from another UnitRegistry were misclassified and could not enter the shared kernel. *(high, reproduced)*
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
@@ -36,6 +39,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`parse_non_string_input_before_parser_resolution.md`](../solved_bugs/parse_non_string_input_before_parser_resolution.md) — [#79](https://github.com/uibcdf/pyunitwizard/issues/79) — Validate non-string parse input before parser resolution. *(high, reproduced)*
 - [`parse_string_test_policy.md`](../solved_bugs/parse_string_test_policy.md) — [#129](https://github.com/uibcdf/pyunitwizard/issues/129) — Scope the parse-to-string test's Pint policy instead of inheriting ambient state. *(low, reproduced)*
 - [`pilot_optional_backend_attribution.md`](../completed_proposals/pilot_optional_backend_attribution.md) — [#92](https://github.com/uibcdf/pyunitwizard/issues/92) — Pilot optional attribution of executed third-party software and its articles. *(measured)*
+- [`pint_string_unit_construction.md`](../completed_proposals/pint_string_unit_construction.md) — [#142](https://github.com/uibcdf/pyunitwizard/issues/142) — Reuse resolved Pint unit definitions for string-unit construction. *(measured)*
 - [`pint_unyt_atomic_mass_names.md`](../solved_bugs/pint_unyt_atomic_mass_names.md) — [#124](https://github.com/uibcdf/pyunitwizard/issues/124) — Translate Pint atomic-mass names and prefixes to reversible unyt units. *(medium, reproduced)*
 - [`pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md`](../solved_bugs/pr_ci_can_be_skipped_and_direct_push_debt_is_unchecked.md) — [#91](https://github.com/uibcdf/pyunitwizard/issues/91) — PR CI can be skipped and direct-push debt is unchecked *(high, measured)*
 - [`python_314_support.md`](../completed_proposals/python_314_support.md) — [#78](https://github.com/uibcdf/pyunitwizard/issues/78) — Adopt Python 3.14 support with clean installed-package and release evidence. *(measured)*
@@ -57,6 +61,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`release_0.28.1.md`](../completed_proposals/release_0.28.1.md) — [#112](https://github.com/uibcdf/pyunitwizard/issues/112) — Qualify and publish the 0.28.1 declaration-plan optimization. *(inspected)*
 - [`release_0.29.0.md`](../completed_proposals/release_0.29.0.md) — [#128](https://github.com/uibcdf/pyunitwizard/issues/128) — Qualify and publish 0.29.0 as the next additive interoperability checkpoint. *(inspected)*
 - [`release_0.29.1.md`](../completed_proposals/release_0.29.1.md) — [#138](https://github.com/uibcdf/pyunitwizard/issues/138) — Qualify and publish the 0.29.1 maintenance release. *(measured)*
+- [`release_0.29.2.md`](../completed_proposals/release_0.29.2.md) — [#145](https://github.com/uibcdf/pyunitwizard/issues/145) — Qualify and publish the 0.29.2 maintenance release. *(measured)*
 - [`release_packaging_dependency_gate.md`](../solved_bugs/release_packaging_dependency_gate.md) — [#130](https://github.com/uibcdf/pyunitwizard/issues/130) — Execute the packaging job's declared dependency gate before building artifacts. *(medium, reproduced)*
 - [`resource_lifecycle_review.md`](../completed_proposals/resource_lifecycle_review.md) — [#116](https://github.com/uibcdf/pyunitwizard/issues/116) — Review remaining component tool and temporary-resource ownership. *(inspected)*
 - [`runtime_dependency_floors.md`](../completed_proposals/runtime_dependency_floors.md) — [#134](https://github.com/uibcdf/pyunitwizard/issues/134) — Ground required runtime floors in numerical and canonical-record contracts. *(reproduced)*

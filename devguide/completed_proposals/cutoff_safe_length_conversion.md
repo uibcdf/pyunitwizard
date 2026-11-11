@@ -1,9 +1,9 @@
 ---
 summary: Define single-rounding length extraction for inclusive cutoffs.
 issue: uibcdf/pyunitwizard#143
-status: partial
+status: resolved
 opened: 2026-11-09
-closed:
+closed: 2026-11-11
 verification: measured
 area: [core, interoperability]
 guard: tests/pint/test_length_rounding.py::test_pint_length_boundaries_round_once
@@ -201,3 +201,8 @@ can be received and qualified by the MolSysMT owner under #666. In general,
 preserving the original cutoff until the computation boundary also prevents
 additional rounding when the calculation unit differs from the session
 standard. [MolSysMT #666](https://github.com/uibcdf/molsysmt/issues/666)
+
+The conversion shipped in 0.29.2. Each of the 30 installed profiles executed
+all 27 boundary cases. A clean public installation also passed the cutoff
+suite. MolSysMT owns independent consumer receiving under #666.
+[Publication record](release_0.29.2.md)
