@@ -11,7 +11,7 @@ Metadata
 - Source repository: `pyunitwizard`
 - Source document: `standards/PYUNITWIZARD_GUIDE.md`
 - Source version: Git commit containing this canonical document; consumer copies must record the resolved commit and digest in their synchronization evidence.
-- Last revised: 2026-11-06 (published 0.29.1 baseline; client delivery tracked in `uibcdf/molsyssuite#172`).
+- Last revised: 2026-11-10 (cache configuration after prior Pint use, `uibcdf/pyunitwizard#144`).
 
 ## What is PyUnitWizard
 
@@ -72,7 +72,8 @@ import pyunitwizard as puw
 STANDARD_UNITS = ['nm', 'ps', 'K', 'mole', 'dalton', 'e', 'kJ/mol', 'radians']
 
 if not puw.configure.has_active_policy():
-    puw.configure.set_pint_registry_cache(True)
+    if 'pint' not in puw.configure.report()['loaded_libraries']:
+        puw.configure.set_pint_registry_cache(True)
     puw.configure.set_default_form('pint')
     puw.configure.set_default_parser('pint')
     puw.configure.set_standard_units(STANDARD_UNITS, provenance='mylib')
@@ -89,20 +90,14 @@ after importing your package gets `NoStandardsError`. The cost is paid once per
 process -- a second library declaring the same policy costs about 2 ms -- and
 it is a cost the session pays anyway at its first unit operation.
 
-Most of that cost is importing the backend, which is why declaring a policy is
-worth pairing with:
-
-```python
-puw.configure.set_pint_registry_cache(True)
-```
-
-It lets pint cache its parsed definitions on disk, taking registry construction
-from about 180 ms to about 17 ms. It must be called **before** anything loads
-the pint backend, so it belongs above the standard-unit call. PyUnitWizard
-leaves it off by default because writing to a user's filesystem is not
-something importing a units library should do uninvited; a suite may reasonably
-opt in on its users' behalf. A folder that cannot be written falls back to no
-cache rather than failing.
+Most of that cost is importing the backend. The example requests disk caching
+while Pint is still unloaded, taking registry construction from about 180 ms
+to about 17 ms with a warm cache. An application can already have used Pint
+without selecting standard units. In that case the example sets the policy
+with the existing registry and its current cache setting. PyUnitWizard leaves
+disk caching off by default because it writes to the user's filesystem. A
+folder that cannot be written falls back to building the registry without a
+cache.
 
 Three rules follow from this, and they are not stylistic:
 

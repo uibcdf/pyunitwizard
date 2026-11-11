@@ -5,8 +5,9 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Partial (1)
+### Partial (2)
 
+- [`consumer_guide_pint_cache_bootstrap.md`](consumer_guide_pint_cache_bootstrap.md) — [#144](https://github.com/uibcdf/pyunitwizard/issues/144) — Check whether Pint is loaded before configuring its registry cache. *(reproduced)*
 - [`cutoff_safe_length_conversion.md`](cutoff_safe_length_conversion.md) — [#143](https://github.com/uibcdf/pyunitwizard/issues/143) — Define single-rounding length extraction for inclusive cutoffs. *(measured)*
 
 ### Open (2)
