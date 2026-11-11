@@ -74,6 +74,10 @@ same exact unit keeps the original normalizer. Reusing that name for a different
 unit raises a catalog-backed `FastTrackConflictError` instead of silently
 replacing process-global behavior.
 
+Expected negative quantity and unit probes check the current SMonitor level
+before constructing their DEBUG event payload. Admitted probe diagnostics
+continue through the catalog with the requested capture policy.
+
 ## Quantities from another Pint registry
 
 OpenMM-to-unyt quantities and units reuse the semantic Pint translation rather
