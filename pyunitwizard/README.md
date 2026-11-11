@@ -108,6 +108,13 @@ scale and affine offset with relative tolerance `1e-12`; missing or different
 definitions raise `ValueError`. This permits ordinary arithmetic with
 PyUnitWizard-created Pint quantities after conversion.
 
+For verified nm, angstrom and pm definitions in the managed Pint registry,
+`convert()` and `get_value(..., to_unit=...)` scale the original binary64
+magnitude in one operation. This includes float64 arrays and exactly
+representable integer scalars. Registry identity is checked before foreign
+quantities are normalized. An active Pint context uses native conversion so
+its scale overrides apply.
+
 ## Provisional record extensions
 
 `QuantityRecord` also supports a tagged inert layout (`qrec-tagged/0.1`), explicit

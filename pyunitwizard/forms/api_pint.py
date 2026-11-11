@@ -1,4 +1,7 @@
 from math import isclose
+from typing import Any, Dict, Optional, Union
+
+import numpy as np
 
 from pyunitwizard._private.exceptions import LibraryNotFoundError, UnitDefinitionError
 
@@ -6,8 +9,6 @@ try:
     import pint
 except ImportError:
     raise LibraryNotFoundError(library="pint")
-
-from typing import Any, Dict, Optional, Union
 
 from pyunitwizard._private.backend_settings import resolve_pint_cache_folder
 from pyunitwizard._private.quantity_or_unit import ArrayLike
@@ -50,6 +51,28 @@ def _build_registry() -> "pint.UnitRegistry":
 ureg = _build_registry()
 Q_ = ureg.Quantity
 U_ = ureg.Unit
+
+
+def _verified_length_definitions() -> dict[str, tuple[Any, int]]:
+    """Retain the standard definitions so registry edits can disable the shortcut."""
+    definitions = {}
+    for name, exponent in (("nanometer", -9), ("angstrom", -10), ("picometer", -12)):
+        try:
+            ureg.Unit(name)  # Pint materializes prefixed definitions on demand.
+        except pint.UndefinedUnitError:
+            continue
+        definition = ureg._units[name]
+        if (
+            definition.reference == {"meter": 1}
+            and definition.converter.is_multiplicative
+            and definition.converter.scale == 10.0**exponent
+        ):
+            definitions[name] = (definition, exponent)
+    return definitions
+
+
+_METER_DEFINITION = ureg._units.get("meter")
+_LENGTH_DEFINITIONS = _verified_length_definitions()
 
 ##
 
@@ -320,7 +343,52 @@ def change_value(quantity: pint.Quantity, value: Union[int, float, ArrayLike]) -
     return make_quantity(value, get_unit(quantity))
 
 
-def convert(quantity: pint.Quantity, unit_name: str) -> pint.Quantity:
+def _length_exponent(unit: pint.Unit) -> int | None:
+    if not isinstance(unit, pint.Unit) or unit._REGISTRY is not ureg or len(unit._units) != 1:
+        return None
+    ((name, power),) = unit._units.items()
+    known = _LENGTH_DEFINITIONS.get(name)
+    if power != 1 or known is None:
+        return None
+    definition, exponent = known
+    # Pint can rematerialize a prefixed definition when resolving an alias.
+    return exponent if ureg._units.get(name) == definition else None
+
+
+def _convert_exact_length(quantity: pint.Quantity, target: str | pint.Unit) -> pint.Quantity | None:
+    """Scale verified lengths once in binary64, preserving native fallback cases."""
+    if type(quantity) is not Q_ or ureg._active_ctx or ureg._units.get("meter") is not _METER_DEFINITION:
+        return None
+    source_exponent = _length_exponent(quantity.units)
+    if source_exponent is None:
+        return None
+    target_unit = U_(target) if isinstance(target, str) else target
+    target_exponent = _length_exponent(target_unit)
+    if target_exponent is None or target_exponent == source_exponent:
+        return None
+
+    value = quantity.magnitude
+    if type(value) is np.ndarray:
+        if value.dtype.type is not np.float64:
+            return None
+    elif type(value) is int or isinstance(value, np.integer):
+        try:
+            scalar = float(value)
+        except OverflowError:
+            return None
+        if int(scalar) != int(value):
+            return None
+        value = scalar
+    elif type(value) not in (float, np.float64):
+        return None
+
+    exponent = source_exponent - target_exponent
+    # Divide by an exact integer instead of multiplying by a rounded reciprocal.
+    scaled = value * 10**exponent if exponent > 0 else value / 10**-exponent
+    return Q_(scaled, target_unit)
+
+
+def convert(quantity: pint.Quantity, unit_name: str | pint.Unit, *, _use_exact_lengths: bool = False) -> pint.Quantity:
     """Converts the quantity to a different unit.
 
     Parameters
@@ -328,7 +396,7 @@ def convert(quantity: pint.Quantity, unit_name: str) -> pint.Quantity:
     quantity : pint.Quantity
         A quanitity or a unit.
 
-    unit : str
+    unit_name : str or pint.Unit
         The unit to convert to.
 
     Returns
@@ -336,6 +404,10 @@ def convert(quantity: pint.Quantity, unit_name: str) -> pint.Quantity:
     pint.Quantity
         The converted quantity.
     """
+    if _use_exact_lengths:
+        exact = _convert_exact_length(quantity, unit_name)
+        if exact is not None:
+            return exact
     return quantity.to(unit_name)
 
 

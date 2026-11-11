@@ -31,6 +31,12 @@ _LOGGER = logging.getLogger(__name__)
 _REDUNDANT_CONVERSION_FALLBACK_EMITTED = False
 
 
+def _convert_to_unit(quantity, unit, form, *, native_pint):
+    if form == "pint" and native_pint:
+        return dict_convert[form](quantity, unit, _use_exact_lengths=True)
+    return dict_convert[form](quantity, unit)
+
+
 def _external_callsite() -> str:
     frame = inspect.currentframe()
     try:
@@ -119,6 +125,13 @@ def convert(
     BadCallError
         If `to_type` is not one of ``"quantity"``, ``"unit"``, or ``"value"``.
 
+    Notes
+    -----
+    Conversions within PyUnitWizard's Pint registry between verified standard
+    nanometer, angstrom and picometer units round once for binary64 magnitudes.
+    This applies to float64 arrays and to integer scalars exactly representable
+    in binary64. Other conversions use the selected backend's arithmetic.
+
     Examples
     --------
     >>> import pyunitwizard as puw
@@ -129,10 +142,17 @@ def convert(
     output = None
 
     form_in = get_form(quantity_or_unit)
+    native_pint = False
     if form_in == "pint":
         from ..forms import api_pint
 
-        quantity_or_unit = api_pint.normalize_registry(quantity_or_unit)
+        # Registry normalization can accept approximately matching definitions.
+        # Keep that provenance before it rebuilds a foreign quantity in our registry.
+        native_pint = quantity_or_unit._REGISTRY is api_pint.ureg
+        # The record adapter calls convert again with a Pint destination.
+        # Give that call the original registry so it can make the same choice.
+        if to_form != "record":
+            quantity_or_unit = api_pint.normalize_registry(quantity_or_unit)
     elif form_in == "openff.units":
         from ..forms import api_openff_units
 
@@ -203,7 +223,7 @@ def convert(
                 output = _parse(quantity_or_unit, parser=parser, to_form=parser)
 
             if to_unit is not None:
-                output = dict_convert[parser](output, to_unit)
+                output = _convert_to_unit(output, to_unit, parser, native_pint=parser == "pint")
             if to_type == "unit":
                 if not dict_is_unit[parser](output):
                     output = dict_get_unit[parser](output)
@@ -221,7 +241,7 @@ def convert(
                 output = _parse(quantity_or_unit, parser=parser, to_form=to_form)
 
             if to_unit is not None:
-                output = dict_convert[to_form](output, to_unit)
+                output = _convert_to_unit(output, to_unit, to_form, native_pint=parser == "pint")
             if to_type == "unit":
                 if not dict_is_unit[to_form](output):
                     output = dict_get_unit[to_form](output)
@@ -232,7 +252,7 @@ def convert(
             output = quantity_or_unit
 
             if to_unit is not None:
-                output = dict_convert[form_in](output, to_unit)
+                output = _convert_to_unit(output, to_unit, form_in, native_pint=native_pint)
 
             if to_type == "unit":
                 if not dict_is_unit[form_in](output):
@@ -267,7 +287,7 @@ def convert(
                 unit_form = target_unit_form or get_form(to_unit)
                 if unit_form != to_form:
                     to_unit = dict_translate_unit[unit_form][to_form](to_unit)
-                output = dict_convert[to_form](output, to_unit)
+                output = _convert_to_unit(output, to_unit, to_form, native_pint=native_pint and unit_form == "pint")
 
             if to_type == "unit":
                 if not dict_is_unit[to_form](output):
@@ -286,7 +306,9 @@ def conversion_factor(
 ) -> float:
     """Return the multiplicative factor converting magnitudes between two units.
 
-    The returned factor ``s`` satisfies ``value_in_to_unit = s * value_in_from_unit``.
+    The returned floating-point factor ``s`` approximates the scale in
+    ``value_in_to_unit = s * value_in_from_unit``. Multiplying by it can round
+    differently from converting the original magnitude with :func:`convert`.
     It is computed once per ``(from_unit, to_unit, parser, default_form)`` and cached,
     so repeated calls in hot loops avoid constructing a quantity on every conversion.
     This is the fast path for converting bare magnitudes; for full quantities (or

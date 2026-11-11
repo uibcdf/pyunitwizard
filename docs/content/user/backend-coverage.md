@@ -9,6 +9,14 @@ When evaluating or operating an integration, it helps to think in two layers:
 
 In practical terms:
 - Pint is often the easiest baseline for deterministic parser/form behavior.
+- For standard nm, angstrom and pm in PyUnitWizard's Pint registry,
+  `convert()` and `get_value(..., to_unit=...)` scale binary64 magnitudes with
+  one rounding. For example, `puw.get_value(puw.quantity(5, 'angstrom',
+  form='pint', parser='pint'), to_unit='nm')` gives `0.5`. This also applies
+  to float64 arrays and exactly representable integer scalars. An explicit
+  target is independent of session standards. Foreign registries, active
+  Pint contexts and other conversions use the corresponding backend
+  arithmetic. Adjacent input values can still round to the same output value.
 - OpenMM, unyt, and Astropy are fully valid targets, but string parsing and
   representation conventions may differ from Pint-centric examples.
 - Astropy accepts thermochemical `cal`, `calorie`, `kcal` and `kilocalorie`,

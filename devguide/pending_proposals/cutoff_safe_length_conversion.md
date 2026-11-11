@@ -1,12 +1,12 @@
 ---
 summary: Define single-rounding length extraction for inclusive cutoffs.
 issue: uibcdf/pyunitwizard#143
-status: open
+status: partial
 opened: 2026-11-09
 closed:
 verification: measured
 area: [core, interoperability]
-guard:
+guard: tests/pint/test_length_rounding.py::test_pint_length_boundaries_round_once
 normative:
 blocked_by: []
 supersedes: []
@@ -161,3 +161,43 @@ including dense, cell-list and periodic behavior. [Consumer issue](https://githu
 - Receive the operation at the native MolSysMT cutoff boundary, with the
   original predecessor, equality and successor controls in dense and
   cell-list routes, including periodic cases. Keep the inclusive predicate.
+
+## Source implementation and checks — 2026-11-10
+
+The existing `convert` and `get_value` calls now select single-rounding
+arithmetic for the verified nm, angstrom and pm definitions in PyUnitWizard's
+Pint registry. The adapter compares the current definitions with the standard
+definitions it checked at registry creation. A multiplication or division
+by an exact integer implements the conversion for binary64 values, float64
+arrays and exactly representable integer scalars. Pint contexts and other
+definitions use the native operation. The dispatcher checks source registry
+identity before normalization, including the conversion nested in record
+creation. This preserves the established handling of foreign quantities.
+
+The public regression failed before the change. It now matches each of the
+27 reference values for scalar and array input under each of the three
+length policies. It tests result bits, inclusive decisions and input/policy
+integrity. The additional cases cover aliases, integer and string inputs,
+float64 range edges, float32 behavior, approximate foreign registry matches
+and active Pint context overrides. A direct check against the pinned
+MolSysMT JSON produced 81/81 bit matches and decisions across the three
+standards. The minimum Pint 0.25 run passed all 36 selected tests.
+
+The complete serial run on Python 3.14.7, NumPy 2.4.6 and Pint 0.25.3 passed
+1,050 cases. JUnit records eight skips, including five at optional module
+collection. The run used temporary Physipy and Quantities installations
+and an offline wheelhouse for the installed-consumer build. A parallel
+attempt exposed two existing parser-state-dependent cases, reproduced
+against the pre-change source with unyt loaded first. The normal serial
+order passes those cases. The Sphinx HTML build and applicable Ruff checks
+pass.
+
+A downstream source smoke used the live MolSysMT checkout and its available
+native extension with the modified PyUnitWizard source. Public
+`get_contacts` returned the expected decision for all 108 combinations of
+the 27 vectors, dense or cell-list selection and vacuum or orthogonal
+periodic geometry. The periodic pair crossed a box face. The source result
+can be received and qualified by the MolSysMT owner under #666. In general,
+preserving the original cutoff until the computation boundary also prevents
+additional rounding when the calculation unit differs from the session
+standard. [MolSysMT #666](https://github.com/uibcdf/molsysmt/issues/666)
