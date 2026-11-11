@@ -5,6 +5,16 @@ current published `0.29.x` baseline before a separately approved `1.0.0` release
 
 ## Current checkpoint — 2026-11-11 UTC
 
+[0.29.4](release_0.29.4_notes.md) delivers the object-row capability and
+actionable backend diagnostic contract from #148. All 29 source jobs and
+30 installed cells pass; clean public receiving, served documentation and
+source archival are verified. The [publication record](completed_proposals/release_0.29.4.md)
+retains exact evidence. [MolSysSuite #187](https://github.com/uibcdf/molsyssuite/issues/187)
+owns guide synchronization and client receiving. Only conditional proposals
+#44, #52 and #87 remain; no open defect or PR was found before publication.
+
+## Earlier maintenance checkpoint — 0.29.3
+
 [0.29.3](release_0.29.3_notes.md) delivers the compatibility-module creator
 origin correction from #146 and PR #147. Its
 [publication record](completed_proposals/release_0.29.3.md) retains the
@@ -56,7 +66,7 @@ after the next package and GitHub Release are published and verified. Consumer n
 the translator corrections is MolSysSuite #127; no new release has been prepared
 or published by this work.
 
-The future backlog is #85 (remaining interoperability boundaries), #44/#52
+The open conditional proposals are #44/#52
 (deferred integrations), and #87
 (conditional later re-evaluation of a live form). Start from a measured consumer
 and each issue's acceptance criteria; see [the pending index](pending_proposals/README.md).

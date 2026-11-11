@@ -59,3 +59,12 @@ protecting the originally generic or incidental constructor diagnostic.
 native conversion restriction. Source policy remains intact and QuantityRecord
 continues rejecting object arrays. Release qualification is owned by #150;
 consumer receiving remains with MolSysMT #693 and MolSysSuite #186.
+
+## Public delivery — 2026-11-11
+
+Delivered in public 0.29.4 from original source
+`d9dd0261d7e1f43624f4dd9356830ab9b126bd14`, after all 29 source jobs
+and 30 installed cells passed. The actual public installation passes 126
+selected tests with both unsupported-backend guards and buffer-lifetime
+checks executed. See [the release record](release_0.29.4.md) for exact
+file/digest, optional-profile scope and consumer receiving ownership.

@@ -1,0 +1,1372 @@
+{
+  "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+  "executed_source_gates": [
+    {
+      "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+      "conclusion": "success",
+      "executed_jobs": {
+        "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+        "jobs": [
+          {
+            "job_id": 130373433780,
+            "name": "Full test on ubuntu-latest, Python 3.11",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433846,
+            "name": "Full test on ubuntu-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433721,
+            "name": "Full test on ubuntu-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433830,
+            "name": "Full test on ubuntu-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433676,
+            "name": "Full test on macos-latest, Python 3.11",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433461,
+            "name": "Full test on macos-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433705,
+            "name": "Full test on macos-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          },
+          {
+            "job_id": 130373433675,
+            "name": "Full test on macos-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Test import module",
+              "Run tests"
+            ]
+          }
+        ],
+        "run_attempt": 1,
+        "run_id": 42975468494,
+        "schema": "molsyssuite.native-gate@1",
+        "state": "verified",
+        "workflow": ".github/workflows/CI_full_matrix.yaml"
+      },
+      "run_id": 42975468494,
+      "workflow": ".github/workflows/CI_full_matrix.yaml"
+    },
+    {
+      "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+      "conclusion": "success",
+      "executed_jobs": {
+        "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+        "jobs": [
+          {
+            "job_id": 130373446321,
+            "name": "Tests and Contracts (Python 3.11)",
+            "required_steps": [
+              "Check dependency contract",
+              "Run API contract and integration smoke",
+              "Run full test suite"
+            ]
+          },
+          {
+            "job_id": 130373445641,
+            "name": "Tests and Contracts (Python 3.12)",
+            "required_steps": [
+              "Check dependency contract",
+              "Run API contract and integration smoke",
+              "Run full test suite"
+            ]
+          },
+          {
+            "job_id": 130373445826,
+            "name": "Tests and Contracts (Python 3.13)",
+            "required_steps": [
+              "Check dependency contract",
+              "Run API contract and integration smoke",
+              "Run full test suite"
+            ]
+          },
+          {
+            "job_id": 130373445669,
+            "name": "Tests and Contracts (Python 3.14)",
+            "required_steps": [
+              "Check dependency contract",
+              "Run API contract and integration smoke",
+              "Run full test suite"
+            ]
+          },
+          {
+            "job_id": 130373445372,
+            "name": "Packaging Smoke (Python 3.13)",
+            "required_steps": [
+              "Check dependency contract",
+              "Build artifacts",
+              "Install wheel and import"
+            ]
+          },
+          {
+            "job_id": 130373445697,
+            "name": "Docs Build (Python 3.13)",
+            "required_steps": [
+              "Check dependency contract",
+              "Build docs"
+            ]
+          }
+        ],
+        "run_attempt": 1,
+        "run_id": 42975472536,
+        "schema": "molsyssuite.native-gate@1",
+        "state": "verified",
+        "workflow": ".github/workflows/release_gates.yaml"
+      },
+      "run_id": 42975472536,
+      "workflow": ".github/workflows/release_gates.yaml"
+    },
+    {
+      "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+      "conclusion": "success",
+      "executed_jobs": {
+        "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+        "jobs": [
+          {
+            "job_id": 130373270022,
+            "name": "policy / conformance",
+            "required_steps": [
+              "Check repository conformance",
+              "Check Python lint and imports",
+              "Check Python formatting"
+            ]
+          }
+        ],
+        "run_attempt": 1,
+        "run_id": 42975418930,
+        "schema": "molsyssuite.native-gate@1",
+        "state": "verified",
+        "workflow": ".github/workflows/molsyssuite-policy.yml"
+      },
+      "run_id": 42975418930,
+      "workflow": ".github/workflows/molsyssuite-policy.yml"
+    },
+    {
+      "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+      "conclusion": "success",
+      "executed_jobs": {
+        "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+        "jobs": [
+          {
+            "job_id": 130373460732,
+            "name": "OpenFF on ubuntu-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373460706,
+            "name": "OpenFF on ubuntu-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373460343,
+            "name": "OpenFF on ubuntu-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373460654,
+            "name": "OpenFF on macos-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373460610,
+            "name": "OpenFF on macos-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373460794,
+            "name": "OpenFF on macos-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional backend",
+              "Test installed consumer outside checkout"
+            ]
+          }
+        ],
+        "run_attempt": 1,
+        "run_id": 42975477679,
+        "schema": "molsyssuite.native-gate@1",
+        "state": "verified",
+        "workflow": ".github/workflows/openff_interop.yaml"
+      },
+      "run_id": 42975477679,
+      "workflow": ".github/workflows/openff_interop.yaml"
+    },
+    {
+      "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+      "conclusion": "success",
+      "executed_jobs": {
+        "candidate_sha": "d9dd0261d7e1f43624f4dd9356830ab9b126bd14",
+        "jobs": [
+          {
+            "job_id": 130373472586,
+            "name": "Storage on ubuntu-latest, Python 3.11",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472406,
+            "name": "Storage on ubuntu-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472671,
+            "name": "Storage on ubuntu-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472868,
+            "name": "Storage on ubuntu-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472604,
+            "name": "Storage on macos-latest, Python 3.11",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472691,
+            "name": "Storage on macos-latest, Python 3.12",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472723,
+            "name": "Storage on macos-latest, Python 3.13",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          },
+          {
+            "job_id": 130373472644,
+            "name": "Storage on macos-latest, Python 3.14",
+            "required_steps": [
+              "Check dependency contract",
+              "Run full suite with optional providers",
+              "Test installed consumer outside checkout"
+            ]
+          }
+        ],
+        "run_attempt": 1,
+        "run_id": 42975481347,
+        "schema": "molsyssuite.native-gate@1",
+        "state": "verified",
+        "workflow": ".github/workflows/storage_interop.yaml"
+      },
+      "run_id": 42975481347,
+      "workflow": ".github/workflows/storage_interop.yaml"
+    }
+  ],
+  "installed_check_required": true,
+  "package": "pyunitwizard",
+  "proof_domain": "numeric-release-versions",
+  "provider_commit": "20628bd5dba6d759669b0d444fe657eb1edad33f",
+  "qualification": "declared-and-executed-candidate-public-bounds",
+  "routes": [
+    {
+      "kind": "noarch-dependencies",
+      "package": "pyunitwizard",
+      "path": "devtools/conda-build/meta.yaml",
+      "scope": "declared-noarch-dependencies"
+    },
+    {
+      "kind": "build-only",
+      "path": "devtools/conda-envs/build_env.yaml"
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [
+        "argdigest",
+        "python"
+      ],
+      "path": "devtools/conda-envs/development_env.yaml",
+      "purpose": "development",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python=3.14",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "cf-units =3.3.1",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "h5py =3.16.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "zarr =3.1.6",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pyarrow =25.0.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "openff-units =0.4.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pip",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "versioningit >=3.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-receptor =1.1.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pytest-cov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-xdist",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "ruff=0.16.5",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "codecov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy-base",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "asdf =6.0.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "asdf-astropy =0.11.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "rdflib =7.6.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "sphinx",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pydata-sphinx-theme",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinxcontrib-bibtex",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-remove-toctrees",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-copybutton",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-design",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-favicon",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "myst-nb",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jupyterlab",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "mamba",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest =0.14.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": "py_0",
+          "original": "ackredit =0.9.0=py_0",
+          "version_kind": "exact"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "ucumvert ==0.3.2",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "codecov-cli ==11.3.1",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "physipy",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "quantities",
+          "version_kind": "pep440"
+        }
+      ]
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [],
+      "path": "devtools/conda-envs/docs_env.yaml",
+      "purpose": "documentation",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python >=3.11,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pydata-sphinx-theme",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinxcontrib-bibtex",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-remove-toctrees",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-copybutton",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-design",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "sphinx-favicon",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "myst-nb",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jupyterlab",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest >=0.14.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        }
+      ]
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [
+        "argdigest",
+        "pint",
+        "python"
+      ],
+      "path": "devtools/conda-envs/openff_env.yaml",
+      "purpose": "optional-runtime",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python >=3.12,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openff-units =0.4.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25,<0.26",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pip",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "versioningit >=3.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-receptor =1.1.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pytest-cov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-xdist",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest =0.14.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": "py_0",
+          "original": "ackredit =0.9.0=py_0",
+          "version_kind": "exact"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "physipy",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "quantities",
+          "version_kind": "pep440"
+        }
+      ]
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [],
+      "path": "devtools/conda-envs/production_env.yaml",
+      "purpose": "production",
+      "selectors": [
+        {
+          "build": null,
+          "original": "python >=3.11,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest >=0.14.0",
+          "version_kind": "range"
+        }
+      ]
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [
+        "argdigest"
+      ],
+      "path": "devtools/conda-envs/release_gates_env.yaml",
+      "purpose": "test",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python >=3.11,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "versioningit >=3.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pip",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-receptor =1.1.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pytest-cov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-xdist",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "codecov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest =0.14.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": "py_0",
+          "original": "ackredit =0.9.0=py_0",
+          "version_kind": "exact"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "physipy",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "quantities",
+          "version_kind": "pep440"
+        }
+      ]
+    },
+    {
+      "kind": "build-only",
+      "path": "devtools/conda-envs/setup_env.yaml"
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [
+        "argdigest"
+      ],
+      "path": "devtools/conda-envs/storage_interop_env.yaml",
+      "purpose": "optional-runtime",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python >=3.11,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "cf-units =3.3.1",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "h5py =3.16.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "zarr =3.1.6",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pyarrow =25.0.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pip",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "versioningit >=3.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-receptor =1.1.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pytest-cov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-xdist",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "ruff",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "codecov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "asdf =6.0.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "asdf-astropy =0.11.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest =0.14.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": "py_0",
+          "original": "ackredit =0.9.0=py_0",
+          "version_kind": "exact"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "ucumvert ==0.3.2",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "physipy",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "quantities",
+          "version_kind": "pep440"
+        }
+      ]
+    },
+    {
+      "kind": "runtime",
+      "narrowed": [
+        "argdigest"
+      ],
+      "path": "devtools/conda-envs/test_env.yaml",
+      "purpose": "test",
+      "selectors": [
+        {
+          "build": null,
+          "original": "numpy >=1.23.5",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "python >=3.11,<3.15",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pint >=0.25",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pip",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "setuptools >=77.0.3",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "versioningit >=3.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-receptor =1.1.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": null,
+          "original": "pytest-cov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "pytest-xdist",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "ruff",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "codecov",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "openmm",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "unyt",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "astropy",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "depdigest >=0.11.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "smonitor >=0.16.0",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "argdigest =0.14.0",
+          "version_kind": "prefix"
+        },
+        {
+          "build": "py_0",
+          "original": "ackredit =0.9.0=py_0",
+          "version_kind": "exact"
+        },
+        {
+          "build": null,
+          "original": "pyyaml >=6,<7",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "jinja2 >=3,<4",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "packaging >=24",
+          "version_kind": "range"
+        },
+        {
+          "build": null,
+          "original": "physipy",
+          "version_kind": "pep440"
+        },
+        {
+          "build": null,
+          "original": "quantities",
+          "version_kind": "pep440"
+        }
+      ]
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/CI.yaml",
+      "sha256": "bda7d90f2da91589bc5e7757886cf9ccfd9a8ef2c98666f87dc9cdf90aadab1b"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/CI_full_matrix.yaml",
+      "sha256": "a28f30935046fb9959dcf3dac57e9fee47a5d0a99fb2c9314e4f92e78aca05de"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/build_and_upload_conda_packages.yaml",
+      "sha256": "a7d4af3b37a394326c4e0e9404c85e1c81fab4de4d22f2e71acbcc00d96b334b"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/install_macos_latest.yaml",
+      "sha256": "1331d446f1c39fbf9fd3100697e9d90162b47e7af59a5a5b63217f427f829426"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/install_ubuntu_latest.yaml",
+      "sha256": "e4b7c384f89baec8c396292d137f33416b90c5f53f4e362f6463e637e8f33874"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/molsyssuite-policy.yml",
+      "sha256": "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/openff_interop.yaml",
+      "sha256": "57cad863e7ad2bdc586e11b1b48d63b611d737fefbe3336bd22c5f56f7eadea5"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/promote_conda_package.yaml",
+      "sha256": "e420292ceb2e7a625b78bc7fa2da5d90a47fea621d18dcf43d09c398e0cdab18"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/release_gates.yaml",
+      "sha256": "fc1ff7bd9566dd21a5448399d4302bd6e46936907ff01f5c024c6c702da1db1e"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/sphinx_docs_to_gh_pages.yaml",
+      "sha256": "532da0344e9aa1b8695dbbc91ef551388d2a149ac531cfba39fb551ec0ab7ddd"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/storage_interop.yaml",
+      "sha256": "ae43037bf280bada8b9f97ad58d8259c39e7f46720ab7d8d1a5e6fd1c4a3a2ba"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/test_staged_conda_package.yaml",
+      "sha256": "a445b52d9ceb32566367b8183ec9429c6b24fa7e2ded9c6c6d779731005726f3"
+    },
+    {
+      "kind": "reviewed-workflow",
+      "path": ".github/workflows/zenodo_archival.yaml",
+      "sha256": "ce907454e2e336c6710884806abc22842f6cbbc2720aba6ac9c49d892bf1b2f0"
+    }
+  ],
+  "schema": "molsyssuite.dependency-routes@2",
+  "source_dependencies": []
+}
