@@ -69,6 +69,10 @@ form, these APIs preserve the original quantity object instead of extracting or
 converting its magnitude. Requests that change backend form still use the full
 conversion path.
 
+When a string unit is parsed and returned as Pint, `unit()` reuses its cached
+definition in a fresh unit object. `quantity(value, unit_string)` uses that
+resolution to construct the requested Pint quantity directly.
+
 Fast-track registration is idempotent: registering an existing name for the
 same exact unit keeps the original normalizer. Reusing that name for a different
 unit raises a catalog-backed `FastTrackConflictError` instead of silently

@@ -5,6 +5,7 @@ import smonitor
 
 import pyunitwizard as puw
 from pyunitwizard._private.exceptions import ArgumentError
+from pyunitwizard.forms import dict_make_quantity
 
 
 def _configure_pint():
@@ -148,6 +149,30 @@ def test_string_target_unit_reuses_the_resolved_target_form(monkeypatch):
 
     assert puw.get_value(quantity, to_unit="angstrom") == pytest.approx(10.0)
     assert calls == [quantity]
+
+
+def test_pint_string_unit_builds_only_the_requested_quantities(monkeypatch):
+    with puw.context(default_form="pint", default_parser="pint"):
+        first_unit = puw.unit("angstrom**2")
+        second_unit = puw.unit("angstrom**2")
+        assert first_unit == second_unit
+        assert first_unit is not second_unit
+
+        original = dict_make_quantity["pint"]
+        constructed = []
+
+        def observe_construction(value, unit):
+            constructed.append(value)
+            return original(value, unit)
+
+        monkeypatch.setitem(dict_make_quantity, "pint", observe_construction)
+        first = puw.quantity(2.25, "angstrom**2")
+        second = puw.quantity(2.25, "angstrom**2")
+
+        assert first is not second
+        assert first.units == second.units == first_unit
+        assert first.magnitude.hex() == second.magnitude.hex() == (2.25).hex()
+        assert constructed == [2.25, 2.25]
 
 
 def test_convert_redundant_passthrough_records_aggregated_counter():

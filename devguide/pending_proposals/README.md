@@ -5,11 +5,12 @@ Edit report front matter and regenerate this index; do not edit the generated bl
 
 <!-- generated: devguide_index -->
 
-### Partial (3)
+### Partial (4)
 
 - [`consumer_guide_pint_cache_bootstrap.md`](consumer_guide_pint_cache_bootstrap.md) — [#144](https://github.com/uibcdf/pyunitwizard/issues/144) — Check whether Pint is loaded before configuring its registry cache. *(reproduced)*
 - [`cutoff_safe_length_conversion.md`](cutoff_safe_length_conversion.md) — [#143](https://github.com/uibcdf/pyunitwizard/issues/143) — Define single-rounding length extraction for inclusive cutoffs. *(measured)*
 - [`expected_negative_probe_cost.md`](expected_negative_probe_cost.md) — [#141](https://github.com/uibcdf/pyunitwizard/issues/141) — Avoid building filtered diagnostics for expected negative quantity probes. *(measured)*
+- [`pint_string_unit_construction.md`](pint_string_unit_construction.md) — [#142](https://github.com/uibcdf/pyunitwizard/issues/142) — Reuse resolved Pint unit definitions for string-unit construction. *(measured)*
 
 ### Open (2)
 

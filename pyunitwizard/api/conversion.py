@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import inspect
 import logging
+from copy import copy
 from functools import lru_cache
 from typing import Any, Optional, Union
 
@@ -236,6 +237,10 @@ def convert(
         else:
             if to_type == "unit":
                 unit = _parse_unit_string(quantity_or_unit, parser=parser, to_form=to_form)
+                if to_form == parser == "pint" and to_unit is None:
+                    # A native unit needs no intermediate quantity of magnitude one.
+                    # Return a fresh wrapper around the cached unit definition.
+                    return copy(unit)
                 output = dict_make_quantity[to_form](1, unit)
             else:
                 output = _parse(quantity_or_unit, parser=parser, to_form=to_form)
