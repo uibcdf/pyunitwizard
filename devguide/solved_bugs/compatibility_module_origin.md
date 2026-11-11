@@ -1,9 +1,9 @@
 ---
 summary: Give the pyunitwizard.main compatibility module a verifiable provider origin.
 issue: uibcdf/pyunitwizard#146
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-11
 severity: medium
 verification: reproduced
 area: [core, interoperability, provenance]
@@ -80,3 +80,23 @@ required source checks pass before integration. After owner review/merge,
 archive this record and close #146 with the delivered commit/guard; DockingMT
 then receives the new exact provider reference under #74. Source delivery is
 separate from a public PyUnitWizard release or package.
+
+## Delivered source
+
+PR #147 was approved and merged on 2026-11-11 UTC at
+`f1b6464c460bcc185adbea821d8103b456c2bde5`. It retains the production correction
+and includes the strengthened regression in
+`64821e13e02701d2672dc9357d787380e0472f5b`.
+[Merged PR](https://github.com/uibcdf/pyunitwizard/pull/147)
+
+The actual pull-request CI passed 1,026 cases with 21 conditional skips
+and one expected deprecation warning. Dependency, import, coverage and
+upload steps passed. Policy and Codecov checks passed, and GitHub accepted
+the normal merge with its required checks.
+[CI 42967468755](https://github.com/uibcdf/pyunitwizard/actions/runs/42967468755) ·
+[Policy 42967469278](https://github.com/uibcdf/pyunitwizard/actions/runs/42967469278)
+
+DockingMT #74 owns receiving that merged source in its installed and
+application-policy gates. MolSysSuite #184 tracks the consumer-impact
+coordination. The delivered test guards the actual registered alias's file,
+spec and package metadata and the preservation of policy and lazy backends.

@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (67)
+### Resolved (68)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -16,6 +16,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`backend_declaration_plans.md`](../completed_proposals/backend_declaration_plans.md) — [#111](https://github.com/uibcdf/pyunitwizard/issues/111) — Reuse immutable backend declarations after validating their current values. *(reproduced)*
 - [`cf_unit_dialect.md`](../completed_proposals/cf_unit_dialect.md) — [#108](https://github.com/uibcdf/pyunitwizard/issues/108) — Bounded CF/UDUNITS unit dialect for verified HDF5 quantities. *(measured)*
 - [`codecov_tls_upload.md`](../solved_bugs/codecov_tls_upload.md) — [#107](https://github.com/uibcdf/pyunitwizard/issues/107) — CI coverage uploads fail at Codecov download and ingestion endpoints. *(medium, reproduced)*
+- [`compatibility_module_origin.md`](../solved_bugs/compatibility_module_origin.md) — [#146](https://github.com/uibcdf/pyunitwizard/issues/146) — Give the pyunitwizard.main compatibility module a verifiable provider origin. *(medium, reproduced)*
 - [`complete_distribution_adoption.md`](../completed_proposals/complete_distribution_adoption.md) — [#114](https://github.com/uibcdf/pyunitwizard/issues/114) — Complete distribution adoption using the general shared route contract. *(measured)*
 - [`concurrent_client_fixture_ownership.md`](../solved_bugs/concurrent_client_fixture_ownership.md) — [#115](https://github.com/uibcdf/pyunitwizard/issues/115) — Remove parent-owned synthetic client packages after concurrent child success, failure and timeout. *(medium, reproduced)*
 - [`conda_build_failure_propagation.md`](../solved_bugs/conda_build_failure_propagation.md) — [#117](https://github.com/uibcdf/pyunitwizard/issues/117) — Stop Conda build installation after a failed prerequisite. *(medium, reproduced)*
