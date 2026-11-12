@@ -1,7 +1,7 @@
 # Installation
 
 Published PyUnitWizard packages are available from the `uibcdf` Conda
-channel. The [0.29.4 release](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.4)
+channel. The [0.29.5 release](https://github.com/uibcdf/pyunitwizard/releases/tag/0.29.5)
 supports Python 3.11–3.14 on Linux and macOS
 Apple Silicon (arm64). Intel macOS is outside the supported matrix; see
 [the suite support decision](https://github.com/uibcdf/molsyssuite/issues/59)
@@ -11,7 +11,7 @@ Use the supported Conda route below to provision the required dependencies.
 ## Basic installation
 
 ```bash
-conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.29.4'
+conda install -c uibcdf -c conda-forge 'pyunitwizard>=0.29.5'
 ```
 
 For a source installation, first create a Conda environment with the required
@@ -27,7 +27,7 @@ Then install the released source tag without asking pip to resolve those
 Conda-provided dependencies from PyPI:
 
 ```bash
-python -m pip install --no-deps 'git+https://github.com/uibcdf/pyunitwizard.git@0.29.4'
+python -m pip install --no-deps 'git+https://github.com/uibcdf/pyunitwizard.git@0.29.5'
 ```
 
 ## Install from source
