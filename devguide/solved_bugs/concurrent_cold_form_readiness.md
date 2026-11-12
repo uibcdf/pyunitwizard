@@ -70,3 +70,13 @@ policy. All fifteen cases are mandatory in each future staged installed cell;
 missing/skipped parameter scenarios are rejected by workflow controls.
 Release #152 owns public qualification. MolSysSuite #193 owns advance impact
 coordination; OpenCASTp #13 retains consumer scientific receiving.
+
+## Public source delivery — 2026-11-12
+
+Delivered in stable source 0.29.5 at `1783fab011a99567f26e988479ee7dd74c494c6f`.
+The runtime correction is in the qualified public Conda archive; the source
+fixture correction remains test-only. All 29 source jobs and 30 installed
+cells pass, with every new cold-admission case executed. Clean public
+receiving passes 141 selected tests and actual SDK origin controls. See the
+[release record](../completed_proposals/release_0.29.5.md) for exact file/digest,
+qualified limits and MolSysSuite/OpenCASTp receiving ownership.

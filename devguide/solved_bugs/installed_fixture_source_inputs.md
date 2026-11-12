@@ -38,3 +38,13 @@ a new nonignored module and absence of Git administration, ignored private
 material and the nested temporary tree. The full installed-consumer smoke
 subsequently completes as part of the 1,165-pass local suite. No test is waived
 and no scientific runtime behavior is changed.
+
+## Public source delivery — 2026-11-12
+
+Delivered in stable source 0.29.5 at `1783fab011a99567f26e988479ee7dd74c494c6f`.
+The runtime correction is in the qualified public Conda archive; the source
+fixture correction remains test-only. All 29 source jobs and 30 installed
+cells pass, with every new cold-admission case executed. Clean public
+receiving passes 141 selected tests and actual SDK origin controls. See the
+[release record](../completed_proposals/release_0.29.5.md) for exact file/digest,
+qualified limits and MolSysSuite/OpenCASTp receiving ownership.

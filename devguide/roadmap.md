@@ -3,7 +3,17 @@
 This roadmap retains the historical stabilization stages and records the
 current published `0.29.x` baseline before a separately approved `1.0.0` release.
 
-## Current checkpoint — 2026-11-11 UTC
+## Current checkpoint — 2026-11-12 UTC
+
+[0.29.5](release_0.29.5_notes.md) delivers the concurrent first-use correction
+from #151 and the bounded source-fixture correction #153. All 29 source jobs
+and 30 installed cells pass; clean public receiving, served documentation and
+source archival are verified. The [publication record](completed_proposals/release_0.29.5.md)
+retains exact source/file and executed evidence.
+[MolSysSuite #194](https://github.com/uibcdf/molsyssuite/issues/194)
+owns guide synchronization and consumer receiving.
+
+## Earlier maintenance checkpoint — 0.29.4
 
 [0.29.4](release_0.29.4_notes.md) delivers the object-row capability and
 actionable backend diagnostic contract from #148. All 29 source jobs and
