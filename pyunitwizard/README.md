@@ -128,6 +128,17 @@ representable integer scalars. Registry identity is checked before foreign
 quantities are normalized. An active Pint context uses native conversion so
 its scale overrides apply.
 
+## Concurrent first use
+
+Cold form admission uses the existing reentrant registry lock. Concurrent
+public quantity/unit requests wait for backend registration and default-parser
+selection; same-thread recursive configuration remains permitted. The warm
+admission path avoids the lock when no initialization is active. Original
+backend failures propagate, and a later waiting reader can initialize normally.
+Fresh-process guards cover factory, explicit and configured Pint, OpenMM,
+unyt and Astropy. This does not make process-global unit-policy writers
+thread-local or qualify free-threaded Python.
+
 ## NumPy object arrays of rows
 
 Direct factory construction from NumPy object arrays of numeric row arrays

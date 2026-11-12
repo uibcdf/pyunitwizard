@@ -4,7 +4,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 
 <!-- generated: devguide_index -->
 
-### Resolved (71)
+### Resolved (73)
 
 - [`2026-09-25-python-ecosystem-policy-review.md`](../completed_proposals/2026-09-25-python-ecosystem-policy-review.md) — [#89](https://github.com/uibcdf/pyunitwizard/issues/89) — Review inherited Python ecosystem policy in PyUnitWizard. *(measured)*
 - [`adopt_molsyssuite_python_tooling_policy.md`](../completed_proposals/adopt_molsyssuite_python_tooling_policy.md) — [#74](https://github.com/uibcdf/pyunitwizard/issues/74) — Adopt the shared Python and Ruff development baseline. *(measured)*
@@ -19,6 +19,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`compatibility_module_origin.md`](../solved_bugs/compatibility_module_origin.md) — [#146](https://github.com/uibcdf/pyunitwizard/issues/146) — Give the pyunitwizard.main compatibility module a verifiable provider origin. *(medium, reproduced)*
 - [`complete_distribution_adoption.md`](../completed_proposals/complete_distribution_adoption.md) — [#114](https://github.com/uibcdf/pyunitwizard/issues/114) — Complete distribution adoption using the general shared route contract. *(measured)*
 - [`concurrent_client_fixture_ownership.md`](../solved_bugs/concurrent_client_fixture_ownership.md) — [#115](https://github.com/uibcdf/pyunitwizard/issues/115) — Remove parent-owned synthetic client packages after concurrent child success, failure and timeout. *(medium, reproduced)*
+- [`concurrent_cold_form_readiness.md`](../solved_bugs/concurrent_cold_form_readiness.md) — [#151](https://github.com/uibcdf/pyunitwizard/issues/151) — Wait for cold backend and parser initialization before admitting concurrent readers. *(medium, reproduced)*
 - [`conda_build_failure_propagation.md`](../solved_bugs/conda_build_failure_propagation.md) — [#117](https://github.com/uibcdf/pyunitwizard/issues/117) — Stop Conda build installation after a failed prerequisite. *(medium, reproduced)*
 - [`conda_provider_v2_3.md`](../completed_proposals/conda_provider_v2_3.md) — [#136](https://github.com/uibcdf/pyunitwizard/issues/136) — Adopt the reviewed immutable Conda build/upload/promotion provider without changing publication scope. *(inspected)*
 - [`configuration_input_normalization.md`](../solved_bugs/configuration_input_normalization.md) — [#98](https://github.com/uibcdf/pyunitwizard/issues/98) — Configuration normalization modifies caller inputs and policy before rejection. *(medium, reproduced)*
@@ -31,6 +32,7 @@ Combined index of managed resolved records and immutable pre-adoption proposals.
 - [`full_suite_profiles_missing_backends.md`](../solved_bugs/full_suite_profiles_missing_backends.md) — [#99](https://github.com/uibcdf/pyunitwizard/issues/99) — Full-suite release and development profiles omit supported backends. *(medium, reproduced)*
 - [`function_citation_provider.md`](../completed_proposals/function_citation_provider.md) — [#94](https://github.com/uibcdf/pyunitwizard/issues/94) — Pilot dependency-free function citation declarations for PyUnitWizard. *(measured)*
 - [`installed_astropy_optional_closure.md`](../solved_bugs/installed_astropy_optional_closure.md) — [#131](https://github.com/uibcdf/pyunitwizard/issues/131) — Qualify the original staged artifact without unrelated Astropy recommended extras. *(medium, reproduced)*
+- [`installed_fixture_source_inputs.md`](../solved_bugs/installed_fixture_source_inputs.md) — [#153](https://github.com/uibcdf/pyunitwizard/issues/153) — Bound installed-consumer source snapshots to current nonignored file inputs. *(low, reproduced)*
 - [`interop_unit_dialects.md`](../completed_proposals/interop_unit_dialects.md) — [#85](https://github.com/uibcdf/pyunitwizard/issues/85) — Coordinate optional interoperability forms and physical-unit dialects. *(inspected)*
 - [`license_metadata_review.md`](../completed_proposals/license_metadata_review.md) — [#135](https://github.com/uibcdf/pyunitwizard/issues/135) — Preserve MIT code and CC-BY vocabulary notices in modern distribution metadata. *(reproduced)*
 - [`notebook_cli_failure_status.md`](../solved_bugs/notebook_cli_failure_status.md) — [#118](https://github.com/uibcdf/pyunitwizard/issues/118) — Report failed notebook execution through the docs CLI exit status. *(medium, reproduced)*

@@ -47,6 +47,34 @@ Use the API reference while validating support details:
 - [Users API Reference](../../api/users/api_user.rst)
 - [Developers API Reference](../../api/developers/api_developers.rst)
 
+## Concurrent first use
+
+Concurrent first quantity/unit requests wait until the selected backend and
+its parser configuration are ready. Ordinary warm requests keep their existing
+admission path. Backend failures retain their diagnostics; another waiting
+request can initialize after a failed attempt. The qualified baseline is
+conventional-GIL Python 3.11–3.14 with factory defaults, explicit/configured
+Pint, and configured OpenMM, unyt and Astropy paths. This does not qualify
+free-threaded Python or make the shared application policy thread-local.
+
+Applications may prepare the units needed by their workload serially before
+starting worker threads, using the existing public API. For an application
+that chooses Pint for its output:
+
+```python
+import pyunitwizard as puw
+
+units = {name: puw.unit(name, form="pint", parser="pint")
+         for name in ("angstrom", "angstrom**2", "angstrom**3")}
+# Workers can construct fresh quantities with these unit objects.
+quantity = puw.quantity(2.0, units["angstrom"], form="pint")
+```
+
+Explicit form/parser parameters select these operations without replacing an
+existing application unit policy. Change process-global configuration before
+launching workers; concurrent first use does not provide independent per-thread
+configuration. Optional backends continue loading only when requested.
+
 ## NumPy object arrays of numeric rows
 
 Some neighbor-list APIs expose a NumPy `dtype=object` array with shape

@@ -203,11 +203,20 @@ assert ackredit.get_used_items() == {}
 def test_normally_installed_consumer_outside_checkout(observer, tmp_path):
     root = Path(__file__).resolve().parents[2]
     source = tmp_path / "producer-source"
-    shutil.copytree(
-        root,
-        source,
-        ignore=shutil.ignore_patterns(".git", "build", "dist", "*.egg-info", "__pycache__", ".pytest_cache"),
-    )
+    # A finite file list also works when the receiving directory is inside an
+    # ignored checkout directory: never traverse our output or shared tooling.
+    selected = subprocess.run(
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+        cwd=root,
+        capture_output=True,
+        check=True,
+    ).stdout
+    for relative in filter(None, selected.split(b"\0")):
+        path = Path(os.fsdecode(relative))
+        if (root / path).is_file():
+            destination = source / path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(root / path, destination)
     target = tmp_path / "installed"
     consumer = tmp_path / "consumer"
     consumer.mkdir()

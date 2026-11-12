@@ -40,16 +40,22 @@ def digest_form(form: str, load: bool = True) -> str:
     else:
         raise ValueError
 
-    # Dynamic on-demand lazy library loading with re-entrancy guard
+    # The registry lock makes the recursion flag belong to its owning thread.
+    # Other readers must wait even after registration publishes the backend:
+    # the enclosing configure call may still be choosing its default parser.
     if load and form_name is not None and form_name not in ("string", "record"):
-        if form_name not in kernel.loaded_libraries and not _LOADING:
-            _LOADING = True
-            try:
-                from pyunitwizard.configure import load_library
+        if form_name not in kernel.loaded_libraries or _LOADING:
+            from pyunitwizard.forms import _REGISTRY_LOCK
 
-                load_library(form_name)
-            finally:
-                _LOADING = False
+            with _REGISTRY_LOCK:
+                if form_name not in kernel.loaded_libraries and not _LOADING:
+                    _LOADING = True
+                    try:
+                        from pyunitwizard.configure import load_library
+
+                        load_library(form_name)
+                    finally:
+                        _LOADING = False
 
     return form_name
 
