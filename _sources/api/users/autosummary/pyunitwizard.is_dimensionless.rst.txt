@@ -1,0 +1,6 @@
+﻿pyunitwizard.is\_dimensionless
+==============================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: is_dimensionless

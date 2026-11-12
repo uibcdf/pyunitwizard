@@ -1,0 +1,6 @@
+﻿pyunitwizard.get\_standard\_units
+=================================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: get_standard_units

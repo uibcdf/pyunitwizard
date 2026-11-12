@@ -1,0 +1,6 @@
+﻿pyunitwizard.dialects.vocabulary.annotate
+=========================================
+
+.. currentmodule:: pyunitwizard.dialects.vocabulary
+
+.. autofunction:: annotate

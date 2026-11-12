@@ -1,0 +1,6 @@
+﻿pyunitwizard.are\_close
+=======================
+
+.. currentmodule:: pyunitwizard
+
+.. autofunction:: are_close
