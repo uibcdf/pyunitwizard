@@ -207,6 +207,7 @@ jobs:
           cp tests/test_quantity_record.py tests/test_quantity_record_empty.py tests/test_measurement_record.py tests/test_configure.py tests/test_openff_optional.py tests/test_storage_optional.py tests/test_backend_declarations.py "$target/tests/"
           cp tests/test_conversion_branches.py tests/test_introspection_probe.py tests/test_api_layout.py "$target/tests/"
           cp tests/test_ragged_quantities.py "$target/tests/"
+          cp tests/test_concurrent_first_use.py "$target/tests/"
           cp tests/test_record_arrays.py tests/test_record_tagged.py tests/test_record_append.py "$target/tests/"
           cp tests/dialects/test_vocabulary.py "$target/tests/dialects/"
           cp -r tests/quantity_record_vectors tests/data "$target/tests/"
@@ -245,6 +246,10 @@ jobs:
               'test_unyt_row_conversion_has_actionable_diagnostic',
               'test_translation_to_astropy_has_the_same_representation_diagnostic',
               'test_object_rows_translate_between_compatible_containers',
+              'test_concurrent_public_first_use_in_fresh_process',
+              'test_concurrent_reader_waits_until_backend_and_parser_ready',
+              'test_recursive_configuration_and_initialization_failure_remain_usable',
+              'test_waiting_reader_can_initialize_after_native_failure',
               *(('test_openff_object_rows_construct_and_convert',) if os.environ['PROFILE'] == 'openff' else ()),
           ):
               selected = [case for case in cases if case.get('name', '').split('[', 1)[0] == guard]
@@ -253,6 +258,16 @@ jobs:
           origin_guard = 'test_main_compatibility_module_exposes_its_creator_origin'
           for state in ('cold', 'application_policy'):
               assert any(case.get('name') == f'{origin_guard}[{state}]' for case in cases), f'Missing installed cases for {origin_guard}[{state}]'
+          cold_cases = {
+              'test_concurrent_public_first_use_in_fresh_process': (
+                  'factory', 'explicit_pint', 'configured_pint', 'context_pint', 'openmm.unit', 'unyt', 'astropy.units'),
+              'test_concurrent_reader_waits_until_backend_and_parser_ready': tuple(
+                  f'{stage}-{scenario}' for stage in ('unregistered', 'registered')
+                  for scenario in ('factory', 'configured_pint', 'openmm.unit')),
+          }
+          for guard, parameters in cold_cases.items():
+              for parameter in parameters:
+                  assert any(case.get('name') == f'{guard}[{parameter}]' for case in cases), f'Missing installed cases for {guard}[{parameter}]'
           PY
           if [[ "$PROFILE" == storage ]]; then
             python - <<'PY'

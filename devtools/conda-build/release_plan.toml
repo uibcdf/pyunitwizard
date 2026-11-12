@@ -1,8 +1,8 @@
-version = "0.29.4"
+version = "0.29.5"
 route = "staged"
 build_number = 0
-reason = "Qualify the #148 object-row construction, ownership, translation and backend diagnostic contract in one immutable installed file, retaining all prior runtime guards across baseline, storage, OpenFF and prepared profiles; see uibcdf/pyunitwizard#150."
-decision_by = "Diego Prada (PyUnitWizard maintainer), publication authorized 2026-11-11 UTC"
+reason = "Qualify #151 concurrent cold form/parser readiness and failure recovery in all exact-archive installed profiles, retaining all prior guards; #153 bounds the source fixture. See uibcdf/pyunitwizard#152."
+decision_by = "Diego Prada (PyUnitWizard maintainer), publication authorized 2026-11-12 UTC"
 required_workflows = [
   ".github/workflows/CI_full_matrix.yaml",
   ".github/workflows/release_gates.yaml",

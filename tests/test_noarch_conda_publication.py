@@ -137,6 +137,10 @@ def test_staged_profiles_require_runtime_regressions():
     assert "tests/test_conversion_branches.py tests/test_introspection_probe.py" in workflow
     assert "tests/test_api_layout.py" in workflow
     assert "tests/test_ragged_quantities.py" in workflow
+    assert "tests/test_concurrent_first_use.py" in workflow
+    assert "test_concurrent_public_first_use_in_fresh_process" in workflow
+    assert "test_concurrent_reader_waits_until_backend_and_parser_ready" in workflow
+    assert "test_waiting_reader_can_initialize_after_native_failure" in workflow
     assert "test_astropy_rejects_object_rows_with_actionable_diagnostic" in workflow
     assert "test_unyt_row_conversion_has_actionable_diagnostic" in workflow
     assert "test_openff_object_rows_construct_and_convert" in workflow

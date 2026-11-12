@@ -83,6 +83,33 @@ _REQUIRED_INSTALLED_CASES = [
     ("tests.test_ragged_quantities", "test_object_rows_translate_between_compatible_containers[pint-pint]"),
 ]
 
+_REQUIRED_INSTALLED_CASES += (
+    [
+        ("tests.test_concurrent_first_use", f"test_concurrent_public_first_use_in_fresh_process[{scenario}]")
+        for scenario in (
+            "factory",
+            "explicit_pint",
+            "configured_pint",
+            "context_pint",
+            "openmm.unit",
+            "unyt",
+            "astropy.units",
+        )
+    ]
+    + [
+        (
+            "tests.test_concurrent_first_use",
+            f"test_concurrent_reader_waits_until_backend_and_parser_ready[{stage}-{scenario}]",
+        )
+        for stage in ("unregistered", "registered")
+        for scenario in ("factory", "configured_pint", "openmm.unit")
+    ]
+    + [
+        ("tests.test_concurrent_first_use", "test_recursive_configuration_and_initialization_failure_remain_usable"),
+        ("tests.test_concurrent_first_use", "test_waiting_reader_can_initialize_after_native_failure"),
+    ]
+)
+
 
 @pytest.mark.parametrize(
     ("profile", "affected_case", "state"),

@@ -133,8 +133,8 @@ reason = "Source optional storage profile uses its reviewed environment; explici
 
 [[workflows]]
 path = ".github/workflows/test_staged_conda_package.yaml"
-sha256 = "a445b52d9ceb32566367b8183ec9429c6b24fa7e2ded9c6c6d779731005726f3"
-reason = "The #148 review adds object-row construction, scaling, translation and actionable diagnostics to every installed profile, and requires the OpenFF guard in its optional profile. Prior #146 guards, installation inputs and staging provenance remain qualified."
+sha256 = "d0504edaa2aecd87e653f8b054988a2e42a515e879398d5a2812df890e655407"
+reason = "The #151/#152 review requires all fifteen fresh-process concurrent first-use/readiness/failure controls in every installed profile. Existing #146/#148 guards and exact-file installation inputs/provenance remain qualified."
 
 [[workflows]]
 path = ".github/workflows/zenodo_archival.yaml"
